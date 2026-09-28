@@ -21,8 +21,10 @@
 - [x] **Iconify System Integration**: Replaced all emojis with sharp, scalable Lucide vector icons via Iconify across all components.
 - [x] **Ad-Free Homepage**: Removed all advertisements from the homepage; reserved ads strictly for upcoming tool pages.
 - [x] **Navbar Redesign & Fluid Layout**: Eliminated excessive side margins, spread navbar across full width with 3-column layout (left logo, center nav links, right controls), and removed external GitHub link.
+- [x] **Transparent Navbar & Glassmorphism Navigation Capsule**: Made the header transparent at top with blurred backdrop on scroll, and wrapped center navigation links in a floating frosted glass capsule (`.nav-glass-capsule`).
+- [x] **Glassmorphism Hero CTAs**: Styled hero primary and secondary buttons with frosted glass backdrop blur, subtle luminous borders, and refined hover lift.
 - [x] **Dark Mode Toggle**: Integrated lightweight, persistent light/dark mode theme switcher with system preference detection and ElevenLabs dark palette.
-- [x] **Interactive 3D Metaball Hero Simulation**: Integrated Three.js raymarched SDF metaball fluid simulation into the Hero section background with theme-reactive palettes (purple/violet in dark mode, ocean blue/cyan in light mode) and visibility throttling.
+- [x] **Interactive 3D Metaball Hero Simulation**: Integrated Three.js raymarched SDF metaball fluid simulation into the Hero section background with unified luminescent purple/violet theme reactive palettes for both light and dark modes, complete with visibility throttling.
 - [x] **Pre-Launch Removal**: Completely deleted temporary `pre-launch/` directory and updated sitemap.
 
 ---

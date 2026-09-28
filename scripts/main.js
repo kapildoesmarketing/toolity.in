@@ -59,5 +59,15 @@
         applyTheme(e.matches ? 'dark' : 'light');
       }
     });
+
+    // Handle transparent header frosted effect on scroll
+    const header = document.querySelector('.site-header');
+    const handleScroll = () => {
+      if (header) {
+        header.classList.toggle('scrolled', window.scrollY > 20);
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
   });
 })();

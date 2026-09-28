@@ -39,21 +39,21 @@ import * as THREE from "https://esm.sh/three@0.178.0";
     },
     light: {
       sphereCount: isMobile ? 4 : 7,
-      ambientIntensity: 0.18,
-      diffuseIntensity: 0.9,
-      specularIntensity: 1.8,
-      specularPower: 6,
-      fresnelPower: 1.1,
+      ambientIntensity: 0.14,
+      diffuseIntensity: 0.95,
+      specularIntensity: 2.0,
+      specularPower: 5,
+      fresnelPower: 1.0,
       backgroundColor: new THREE.Color(0xffffff),
-      sphereColor: new THREE.Color(0xf0f7ff),
-      lightColor: new THREE.Color(0x0284c7),
+      sphereColor: new THREE.Color(0xf6f2ff),
+      lightColor: new THREE.Color(0x7c3aed),
       lightPosition: new THREE.Vector3(0.8, 1.1, 0.9),
-      smoothness: 0.55,
-      contrast: 1.6,
+      smoothness: 0.60,
+      contrast: 1.7,
       fogDensity: 0.03,
-      cursorGlowIntensity: 0.45,
-      cursorGlowRadius: 1.6,
-      cursorGlowColor: new THREE.Color(0x38bdf8)
+      cursorGlowIntensity: 0.5,
+      cursorGlowRadius: 1.8,
+      cursorGlowColor: new THREE.Color(0x9333ea)
     }
   };
 
