@@ -17,7 +17,9 @@
 - [x] **SEO & Monetization Standards**: Added [`ads.txt`](ads.txt), [`robots.txt`](robots.txt), [`sitemap.xml`](sitemap.xml), and placeholder brand assets in [`assets/`](assets/).
 - [x] **Architecture Simplification**: Refactored repo into static multi-page architecture with clean foundational scripts and styles.
 - [x] **Agent Knowledge System**: Created [`rules.md`](rules.md), [`tasks.md`](tasks.md), [`memory.md`](memory.md), [`architecture.md`](architecture.md), and [`design.md`](design.md).
-- [x] **Production Homepage Launch**: Deployed official homepage to root [`index.html`](index.html) with ElevenLabs warm minimalist styling in [`styles/main.css`](styles/main.css) and live Adsterra ad slot.
+- [x] **Production Homepage Launch**: Deployed official homepage to root [`index.html`](index.html) with ElevenLabs warm minimalist styling in [`styles/main.css`](styles/main.css).
+- [x] **Iconify System Integration**: Replaced all emojis with sharp, scalable Lucide vector icons via Iconify across all components.
+- [x] **Ad-Free Homepage**: Removed all advertisements from the homepage; reserved ads strictly for upcoming tool pages.
 - [x] **Pre-Launch Removal**: Completely deleted temporary `pre-launch/` directory and updated sitemap.
 
 ---

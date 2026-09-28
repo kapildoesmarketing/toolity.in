@@ -23,11 +23,13 @@
 2. **Production Root Homepage**:
    - Root [`index.html`](index.html) is the official live homepage styled according to [`design.md`](design.md).
    - Temporary `pre-launch/` directory has been removed completely.
-3. **Design Standard**:
+3. **Design & Icon Standard**:
    - Strictly guided by [`design.md`](design.md) (ElevenLabs-inspired warm minimalist aesthetic).
    - Near-white canvas (`#ffffff`, `#f5f5f5`), warm stone accents (`#f5f2ef`), weight 300 display typography, and multi-layered sub-0.1 opacity shadows.
-4. **Ad Monetization**:
-   - Adsterra `300x250` banner ad active on the homepage within a dedicated partner spotlight card.
+   - **Iconify (`iconify-icon`) with Lucide vector icons** used everywhere instead of emojis.
+4. **Monetization Architecture**:
+   - **Homepage is 100% Ad-Free**: The homepage never contains any ad units.
+   - **Ads on Tool Pages Only**: Adsterra and other ad networks are placed exclusively on individual tool pages (`[category-name]/[tool-name].html`).
    - [`ads.txt`](ads.txt) is set up at the root with standard instructions ready for the publisher account ID.
 
 ---
