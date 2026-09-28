@@ -1,13 +1,13 @@
 /* Designed by Kapil Pidhwani: ElevenLabs-inspired Warm Minimalist Design System for Toolity.in */
 
 :root {
-  /* Core Color Palette */
+  /* Core Color Palette - Light Theme (ElevenLabs Minimalist) */
   --bg-canvas: #ffffff;
   --bg-secondary: #f5f5f5;
   --bg-warm-stone: #f5f2ef;
-  --bg-warm-stone-translucent: rgba(245, 242, 239, 0.8);
+  --bg-warm-stone-translucent: rgba(245, 242, 239, 0.85);
   --bg-card: #ffffff;
-  --bg-near-white: #f6f6f6;
+  --bg-header: rgba(255, 255, 255, 0.9);
 
   /* Typography Colors */
   --text-primary: #000000;
@@ -17,7 +17,7 @@
 
   /* Borders */
   --border-light: #e5e5e5;
-  --border-subtle: rgba(0, 0, 0, 0.05);
+  --border-subtle: rgba(0, 0, 0, 0.06);
   --border-input: #e0e0e0;
 
   /* Multi-Layer Shadow System (Sub-0.1 Opacity) */
@@ -48,6 +48,32 @@
   --header-height: 68px;
 }
 
+[data-theme="dark"] {
+  /* Dark Mode Luxury Palette */
+  --bg-canvas: #090a0c;
+  --bg-secondary: #121316;
+  --bg-warm-stone: #1a1c20;
+  --bg-warm-stone-translucent: rgba(26, 28, 32, 0.85);
+  --bg-card: #121316;
+  --bg-header: rgba(9, 10, 12, 0.9);
+
+  --text-primary: #f8fafc;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --text-inverse: #000000;
+
+  --border-light: #27272a;
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-input: #27272a;
+
+  --shadow-inset-border: rgba(255, 255, 255, 0.08) 0px 0px 0px 0.5px inset;
+  --shadow-outline-ring: rgba(255, 255, 255, 0.06) 0px 0px 0px 1px;
+  --shadow-soft-elevation: rgba(0, 0, 0, 0.3) 0px 4px 6px;
+  --shadow-card: rgba(255, 255, 255, 0.06) 0px 0px 0px 1px, rgba(0, 0, 0, 0.3) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 4px 12px;
+  --shadow-button-white: rgba(255, 255, 255, 0.15) 0px 0px 1px, rgba(0, 0, 0, 0.3) 0px 4px 4px;
+  --shadow-warm-lift: rgba(0, 0, 0, 0.4) 0px 6px 16px;
+}
+
 /* Reset & Box Sizing */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -68,6 +94,7 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 .container {
@@ -77,23 +104,47 @@ body {
   padding: 0 1.5rem;
 }
 
-/* Header & Navigation */
+/* Header & Navigation (Full-Width Spread with 3 Columns) */
 .site-header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--bg-header);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border-subtle);
   height: var(--header-height);
+  width: 100%;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
 }
 
-.nav-wrapper {
+.nav-container {
+  width: 100%;
+  padding: 0 clamp(1.25rem, 3.5vw, 3rem);
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 100%;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.nav-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 2;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 1;
 }
 
 .brand-link {
@@ -113,6 +164,14 @@ body {
   justify-content: center;
 }
 
+[data-theme="dark"] .brand-icon-bg {
+  fill: #ffffff;
+}
+
+[data-theme="dark"] .brand-icon-wrapper svg path {
+  fill: #000000;
+}
+
 .brand-name {
   font-size: 1.15rem;
   font-weight: 700;
@@ -128,7 +187,7 @@ body {
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 2rem;
   list-style: none;
 }
 
@@ -145,10 +204,30 @@ body {
   color: var(--text-primary);
 }
 
-.nav-actions {
+/* Theme Toggle Button */
+.btn-icon-pill {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-warm-stone-translucent);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-warm-lift);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-icon-pill:hover {
+  background: var(--bg-warm-stone);
+  transform: translateY(-1px);
+  color: var(--text-primary);
+}
+
+.btn-icon-pill:active {
+  transform: translateY(0);
 }
 
 /* Button System (ElevenLabs Pill Standard) */

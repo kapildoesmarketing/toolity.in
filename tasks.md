@@ -20,6 +20,8 @@
 - [x] **Production Homepage Launch**: Deployed official homepage to root [`index.html`](index.html) with ElevenLabs warm minimalist styling in [`styles/main.css`](styles/main.css).
 - [x] **Iconify System Integration**: Replaced all emojis with sharp, scalable Lucide vector icons via Iconify across all components.
 - [x] **Ad-Free Homepage**: Removed all advertisements from the homepage; reserved ads strictly for upcoming tool pages.
+- [x] **Navbar Redesign & Fluid Layout**: Eliminated excessive side margins, spread navbar across full width with 3-column layout (left logo, center nav links, right controls), and removed external GitHub link.
+- [x] **Dark Mode Toggle**: Integrated lightweight, persistent light/dark mode theme switcher with system preference detection and ElevenLabs dark palette.
 - [x] **Pre-Launch Removal**: Completely deleted temporary `pre-launch/` directory and updated sitemap.
 
 ---
