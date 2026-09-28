@@ -1,0 +1,9 @@
+# Toolity.in ads.txt
+# Authorized Digital Sellers file for advertising networks (Adsterra, Google AdSense, etc.)
+# Format: <Field #1 - Domain>, <Field #2 - Publisher ID>, <Field #3 - Account Type>, <Field #4 - Certification Authority ID>
+
+# Adsterra Placeholder (Replace with your publisher ID from Adsterra dashboard -> Websites -> Get ads.txt)
+# Example: adsterra.com, YOUR_PUBLISHER_ID, DIRECT
+
+# Google AdSense Placeholder (if used in future):
+# google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0

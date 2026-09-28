@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 40" fill="none">
+  <!-- Icon Mark -->
+  <rect x="2" y="2" width="36" height="36" rx="10" fill="url(#logo-grad)" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+  <path d="M21 7L11 19h10l-2 14 10-12H19l2-14z" fill="#ffffff"/>
+  
+  <!-- Typography -->
+  <text x="48" y="27" fill="#ffffff" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="22" font-weight="800" letter-spacing="-0.5">Toolity<tspan fill="#06b6d4">.in</tspan></text>
+  
+  <defs>
+    <linearGradient id="logo-grad" x1="2" y1="2" x2="38" y2="38" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6366f1"/>
+      <stop offset="1" stop-color="#8b5cf6"/>
+    </linearGradient>
+  </defs>
+</svg>
