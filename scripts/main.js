@@ -25,6 +25,10 @@
     if (themeIcon) {
       themeIcon.setAttribute('icon', theme === 'dark' ? 'lucide:sun' : 'lucide:moon');
     }
+
+    if (window.HeroMetaballs && typeof window.HeroMetaballs.setTheme === 'function') {
+      window.HeroMetaballs.setTheme(theme);
+    }
   }
 
   // Initial Theme Application before render to avoid flash

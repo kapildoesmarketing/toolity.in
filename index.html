@@ -66,9 +66,13 @@
   </header>
 
   <main>
-    <!-- Hero Section -->
+    <!-- Hero Section with Interactive 3D Metaball Fluid -->
     <section class="hero-section">
-      <div class="container">
+      <!-- 3D WebGL Canvas Layer -->
+      <div id="hero-metaballs" class="hero-canvas-bg" aria-hidden="true"></div>
+
+      <!-- Hero Foreground Content -->
+      <div class="container hero-content">
         <div class="hero-pill-badge">
           <span class="badge-dot"></span>
           <span>100% Client-Side • Privacy-First</span>
@@ -90,8 +94,8 @@
               <path d="m12 5 7 7-7 7"></path>
             </svg>
           </a>
-          <a href="https://github.com/kapildoesmarketing/toolity.in" target="_blank" rel="noopener noreferrer" class="btn-pill btn-warm-stone">
-            <span>Contribute on GitHub</span>
+          <a href="#features" class="btn-pill btn-warm-stone">
+            <span>Learn More</span>
           </a>
         </div>
       </div>
@@ -251,5 +255,6 @@
   </footer>
 
   <script src="scripts/main.js"></script>
+  <script type="module" src="scripts/hero-metaballs.js"></script>
 </body>
 </html>

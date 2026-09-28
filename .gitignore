@@ -6,4 +6,5 @@ dist/
 .env.local
 *.log
 .vscode/
+Hero Inspiration/
 
