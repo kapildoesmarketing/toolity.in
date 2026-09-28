@@ -21,10 +21,11 @@
 - [x] **Iconify System Integration**: Replaced all emojis with sharp, scalable Lucide vector icons via Iconify across all components.
 - [x] **Ad-Free Homepage**: Removed all advertisements from the homepage; reserved ads strictly for upcoming tool pages.
 - [x] **Navbar Redesign & Fluid Layout**: Eliminated excessive side margins, spread navbar across full width with 3-column layout (left logo, center nav links, right controls), and removed external GitHub link.
-- [x] **Transparent Navbar & Glassmorphism Navigation Capsule**: Made the header transparent at top with blurred backdrop on scroll, and wrapped center navigation links in a floating frosted glass capsule (`.nav-glass-capsule`).
+- [x] **Transparent Navbar Overlay & Glassmorphism Capsule**: Positioned header as a fixed overlay so the 3D fluid canvas extends directly behind the transparent navbar and glass capsule at y=0, transitioning to frosted glass upon scrolling.
+- [x] **Metaball Layout Optimization & Text Readability**: Re-engineered 3D metaball fluid to flank the left and right margins and corners, leaving the central hero column completely clear and readable for typography.
+- [x] **Softened Light Mode Lighting**: Softened shader ambient occlusion and shadow floor to produce luminous, translucent pastel violet shading in light mode without dark muddy shadows.
 - [x] **Glassmorphism Hero CTAs**: Styled hero primary and secondary buttons with frosted glass backdrop blur, subtle luminous borders, and refined hover lift.
 - [x] **Dark Mode Toggle**: Integrated lightweight, persistent light/dark mode theme switcher with system preference detection and ElevenLabs dark palette.
-- [x] **Interactive 3D Metaball Hero Simulation**: Integrated Three.js raymarched SDF metaball fluid simulation into the Hero section background with unified luminescent purple/violet theme reactive palettes for both light and dark modes, complete with visibility throttling.
 - [x] **Pre-Launch Removal**: Completely deleted temporary `pre-launch/` directory and updated sitemap.
 
 ---

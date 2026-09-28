@@ -106,15 +106,16 @@ body {
 
 /* Header & Navigation (Full-Width Spread with 3 Columns) */
 .site-header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  width: 100%;
   z-index: 100;
   background: transparent;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
   border-bottom: 1px solid transparent;
   height: var(--header-height);
-  width: 100%;
   transition: background-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
               border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
               backdrop-filter 0.25s cubic-bezier(0.16, 1, 0.3, 1),
@@ -381,11 +382,11 @@ body {
 /* Hero Section with 3D Metaball Fluid Canvas */
 .hero-section {
   position: relative;
-  min-height: clamp(540px, 78vh, 760px);
+  min-height: clamp(580px, 86vh, 820px);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 4rem 0 3rem;
+  padding: calc(var(--header-height) + 3.5rem) 0 4rem;
   overflow: hidden;
 }
 

@@ -17,10 +17,10 @@ import * as THREE from "https://esm.sh/three@0.178.0";
   const isLowPowerDevice = isMobile || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4);
   const pixelRatio = Math.min(window.devicePixelRatio || 1, isMobile ? 1.5 : 2);
 
-  // Theme Presets (Dark = Purple/Violet Holographic; Light = Ocean Cyan/Blue)
+  // Theme Presets (Dark = Purple/Violet Holographic; Light = Refined Soft Violet)
   const THEME_PRESETS = {
     dark: {
-      sphereCount: isMobile ? 4 : 7,
+      sphereCount: isMobile ? 4 : 6,
       ambientIntensity: 0.08,
       diffuseIntensity: 1.0,
       specularIntensity: 2.2,
@@ -38,22 +38,22 @@ import * as THREE from "https://esm.sh/three@0.178.0";
       cursorGlowColor: new THREE.Color(0xaa77ff)
     },
     light: {
-      sphereCount: isMobile ? 4 : 7,
-      ambientIntensity: 0.14,
-      diffuseIntensity: 0.95,
-      specularIntensity: 2.0,
-      specularPower: 5,
-      fresnelPower: 1.0,
+      sphereCount: isMobile ? 4 : 6,
+      ambientIntensity: 0.45,
+      diffuseIntensity: 0.65,
+      specularIntensity: 1.6,
+      specularPower: 6,
+      fresnelPower: 1.1,
       backgroundColor: new THREE.Color(0xffffff),
-      sphereColor: new THREE.Color(0xf6f2ff),
-      lightColor: new THREE.Color(0x7c3aed),
-      lightPosition: new THREE.Vector3(0.8, 1.1, 0.9),
+      sphereColor: new THREE.Color(0xfbf8ff),
+      lightColor: new THREE.Color(0x8b5cf6),
+      lightPosition: new THREE.Vector3(0.8, 1.2, 1.0),
       smoothness: 0.60,
-      contrast: 1.7,
-      fogDensity: 0.03,
-      cursorGlowIntensity: 0.5,
-      cursorGlowRadius: 1.8,
-      cursorGlowColor: new THREE.Color(0x9333ea)
+      contrast: 1.12,
+      fogDensity: 0.02,
+      cursorGlowIntensity: 0.35,
+      cursorGlowRadius: 1.6,
+      cursorGlowColor: new THREE.Color(0xa78bfa)
     }
   };
 
@@ -231,75 +231,59 @@ import * as THREE from "https://esm.sh/three@0.178.0";
         float sceneSDF(vec3 pos) {
           float result = MAX_DIST;
 
-          vec3 topLeftPos = screenToWorld(vec2(0.08, 0.92));
+          // Corner Anchors (Frame the top-left, bottom-right, and top-right)
+          vec3 topLeftPos = screenToWorld(vec2(0.06, 0.94));
           float topLeft = sdSphere(pos - topLeftPos, uFixedTopLeftRadius);
 
-          vec3 smallTopLeftPos = screenToWorld(vec2(0.25, 0.72));
+          vec3 smallTopLeftPos = screenToWorld(vec2(0.18, 0.78));
           float smallTopLeft = sdSphere(pos - smallTopLeftPos, uSmallTopLeftRadius);
 
-          vec3 bottomRightPos = screenToWorld(vec2(0.92, 0.08));
+          vec3 bottomRightPos = screenToWorld(vec2(0.94, 0.06));
           float bottomRight = sdSphere(pos - bottomRightPos, uFixedBottomRightRadius);
 
-          vec3 smallBottomRightPos = screenToWorld(vec2(0.72, 0.25));
+          vec3 smallBottomRightPos = screenToWorld(vec2(0.82, 0.22));
           float smallBottomRight = sdSphere(pos - smallBottomRightPos, uSmallBottomRightRadius);
+
+          vec3 topRightPos = screenToWorld(vec2(0.92, 0.92));
+          float topRight = sdSphere(pos - topRightPos, 0.45);
 
           float t = uTime * uAnimationSpeed;
 
-          float dynamicMovementScale = uMovementScale;
-          if (uMouseProximityEffect) {
-            float distToCenter = getDistanceToCenter(uMousePosition);
-            float mixFactor = smoothstep(0.0, 1.0, distToCenter);
-            dynamicMovementScale = mix(uMinMovementScale, uMaxMovementScale, mixFactor);
-          }
+          // Flanking centers (Left & Right margins to leave center text clean)
+          vec3 leftClusterCenter = screenToWorld(vec2(0.15, 0.50));
+          vec3 rightClusterCenter = screenToWorld(vec2(0.85, 0.50));
 
-          int maxIter = uIsMobile > 0.5 ? 4 : (uIsLowPower > 0.5 ? 5 : min(uSphereCount, 8));
-          for (int i = 0; i < 8; i++) {
+          int maxIter = uIsMobile > 0.5 ? 4 : (uIsLowPower > 0.5 ? 4 : min(uSphereCount, 6));
+          for (int i = 0; i < 6; i++) {
             if (i >= uSphereCount || i >= maxIter) break;
 
             float fi = float(i);
-            float speed = 0.4 + fi * 0.12;
-            float radius = 0.12 + mod(fi, 3.0) * 0.06;
-            float orbitRadius = (0.3 + mod(fi, 3.0) * 0.15) * dynamicMovementScale;
-            float phaseOffset = fi * PI * 0.35;
+            float speed = 0.42 + fi * 0.12;
+            float radius = 0.13 + mod(fi, 3.0) * 0.05;
 
-            float distToCursor = length(vec3(0.0) - uCursorSphere);
-            float proximityScale = 1.0 + (1.0 - smoothstep(0.0, 1.0, distToCursor)) * 0.5;
-            orbitRadius *= proximityScale;
+            // Split orbs: even indices on the left flank, odd indices on the right flank
+            bool isLeft = mod(fi, 2.0) < 1.0;
+            vec3 clusterCenter = isLeft ? leftClusterCenter : rightClusterCenter;
 
-            vec3 offset;
-            if (i == 0) {
-              offset = vec3(
-                sin(t * speed) * orbitRadius * 0.7,
-                sin(t * 0.5) * orbitRadius,
-                cos(t * speed * 0.7) * orbitRadius * 0.5
-              );
-            } else if (i == 1) {
-              offset = vec3(
-                sin(t * speed + PI) * orbitRadius * 0.5,
-                -sin(t * 0.5) * orbitRadius,
-                cos(t * speed * 0.7 + PI) * orbitRadius * 0.5
-              );
-            } else {
-              offset = vec3(
-                sin(t * speed + phaseOffset) * orbitRadius * 0.8,
-                cos(t * speed * 0.85 + phaseOffset * 1.3) * orbitRadius * 0.6,
-                sin(t * speed * 0.5 + phaseOffset) * 0.3
-              );
-            }
+            vec3 offset = clusterCenter + vec3(
+              sin(t * speed + fi * 1.5) * (0.26 + mod(fi, 2.0) * 0.14),
+              cos(t * (speed * 0.88) + fi * 1.8) * (0.34 + mod(fi, 2.0) * 0.16),
+              sin(t * 0.4 + fi * 2.0) * 0.2
+            );
 
             vec3 toCursor = uCursorSphere - offset;
             float cursorDist = length(toCursor);
             if (cursorDist < uMergeDistance && cursorDist > 0.0) {
-              float attraction = (1.0 - cursorDist / uMergeDistance) * 0.3;
+              float attraction = (1.0 - cursorDist / uMergeDistance) * 0.35;
               offset += normalize(toCursor) * attraction;
             }
 
             float movingSphere = sdSphere(pos - offset, radius);
 
-            float blend = 0.05;
+            float blend = 0.06;
             if (cursorDist < uMergeDistance) {
               float influence = 1.0 - (cursorDist / uMergeDistance);
-              blend = mix(0.05, uSmoothness, influence * influence * influence);
+              blend = mix(0.06, uSmoothness, influence * influence);
             }
 
             result = smin(result, movingSphere, blend);
@@ -308,9 +292,10 @@ import * as THREE from "https://esm.sh/three@0.178.0";
           float cursorBall = sdSphere(pos - uCursorSphere, uCursorRadius);
           float topLeftGroup = smin(topLeft, smallTopLeft, 0.4);
           float bottomRightGroup = smin(bottomRight, smallBottomRight, 0.4);
+          float cornerGroup = smin(topLeftGroup, bottomRightGroup, 0.3);
+          cornerGroup = smin(cornerGroup, topRight, 0.3);
 
-          result = smin(result, topLeftGroup, 0.3);
-          result = smin(result, bottomRightGroup, 0.3);
+          result = smin(result, cornerGroup, 0.35);
           result = smin(result, cursorBall, uSmoothness);
 
           return result;
@@ -396,28 +381,30 @@ import * as THREE from "https://esm.sh/three@0.178.0";
           vec3 viewDir = -rd;
           vec3 baseColor = uSphereColor;
           float ao = ambientOcclusion(p, normal);
+          float softAo = mix(0.65, 1.0, ao);
 
-          vec3 ambient = uLightColor * uAmbientIntensity * ao;
+          vec3 ambient = uLightColor * uAmbientIntensity * softAo;
           vec3 lightDir = normalize(uLightPosition);
           float diff = max(dot(normal, lightDir), 0.0);
-          float shadow = softShadow(p, lightDir, 0.01, 10.0, 20.0);
+          float rawShadow = softShadow(p, lightDir, 0.01, 10.0, 20.0);
+          float shadow = mix(0.45, 1.0, rawShadow);
           vec3 diffuse = uLightColor * diff * uDiffuseIntensity * shadow;
 
           vec3 reflectDir = reflect(-lightDir, normal);
           float spec = pow(max(dot(viewDir, reflectDir), 0.0), uSpecularPower);
           float fresnel = pow(1.0 - max(dot(viewDir, normal), 0.0), uFresnelPower);
           vec3 specular = uLightColor * spec * uSpecularIntensity * fresnel;
-          vec3 fresnelRim = uLightColor * fresnel * 0.4;
+          vec3 fresnelRim = uLightColor * fresnel * 0.35;
 
           float distToCursor = length(p - uCursorSphere);
           if (distToCursor < uCursorRadius + 0.4) {
             float highlight = 1.0 - smoothstep(0.0, uCursorRadius + 0.4, distToCursor);
-            specular += uLightColor * highlight * 0.2;
-            float glow = exp(-distToCursor * 3.0) * 0.15;
-            ambient += uLightColor * glow * 0.5;
+            specular += uLightColor * highlight * 0.25;
+            float glow = exp(-distToCursor * 3.0) * 0.2;
+            ambient += uLightColor * glow * 0.6;
           }
 
-          vec3 color = (baseColor + ambient + diffuse + specular + fresnelRim) * ao;
+          vec3 color = (baseColor + ambient + diffuse + specular + fresnelRim) * softAo;
           color = pow(color, vec3(uContrast * 0.9));
           color = color / (color + vec3(0.8));
 
@@ -487,10 +474,13 @@ import * as THREE from "https://esm.sh/three@0.178.0";
 
     let closestDistance = 1000.0;
     const fixedPositions = [
-      screenToWorldJS(0.08, 0.92),
-      screenToWorldJS(0.25, 0.72),
-      screenToWorldJS(0.92, 0.08),
-      screenToWorldJS(0.72, 0.25)
+      screenToWorldJS(0.06, 0.94),
+      screenToWorldJS(0.18, 0.78),
+      screenToWorldJS(0.94, 0.06),
+      screenToWorldJS(0.82, 0.22),
+      screenToWorldJS(0.92, 0.92),
+      screenToWorldJS(0.15, 0.50),
+      screenToWorldJS(0.85, 0.50)
     ];
 
     fixedPositions.forEach((pos) => {
