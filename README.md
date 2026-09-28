@@ -19,19 +19,15 @@ Toolity.in/
 │   │   └── logo.svg            # Brand Vector Logo placeholder (ready to replace)
 │   └── og-image.svg            # OpenGraph card placeholder (ready to replace)
 ├── styles/
-│   └── main.css                # Global design tokens, reset, typography & dark theme
+│   └── main.css                # ElevenLabs-inspired design system tokens & foundations
 ├── scripts/
 │   └── main.js                 # Global baseline script (clean for step-by-step building)
-├── pre-launch/                 # Standalone Coming Soon placeholder & Adsterra unit (live)
-│   ├── index.html
-│   ├── style.css
-│   └── script.js
 ├── ads.txt                     # Adsterra / publisher monetization authorization
 ├── robots.txt                  # Search engine crawler instructions
 ├── sitemap.xml                 # SEO sitemap index
 ├── CNAME                       # Custom domain binding (toolity.in)
 ├── .gitignore                  # Developer & system exclusions
-└── index.html                  # Root entry point (redirecting to /pre-launch/ during dev)
+└── index.html                  # Official Toolity.in production homepage
 ```
 
 ---

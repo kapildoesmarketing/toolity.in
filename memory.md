@@ -20,14 +20,14 @@
    - Each tool category has its own dedicated folder (e.g. `pdf-tools/`, `text-tools/`, `dev-tools/`).
    - Every individual tool is its own static `.html` file.
    - No single-page app (SPA) frameworks or runtime client-side page generation.
-2. **Current Root Routing**:
-   - Root [`index.html`](index.html) currently redirects to [`pre-launch/`](pre-launch/) using meta-refresh + JavaScript replacement.
-   - This keeps the live placeholder with the active Adsterra ad visible to domain visitors while the main platform is being built.
+2. **Production Root Homepage**:
+   - Root [`index.html`](index.html) is the official live homepage styled according to [`design.md`](design.md).
+   - Temporary `pre-launch/` directory has been removed completely.
 3. **Design Standard**:
    - Strictly guided by [`design.md`](design.md) (ElevenLabs-inspired warm minimalist aesthetic).
    - Near-white canvas (`#ffffff`, `#f5f5f5`), warm stone accents (`#f5f2ef`), weight 300 display typography, and multi-layered sub-0.1 opacity shadows.
 4. **Ad Monetization**:
-   - Adsterra `300x250` banner ad active on the pre-launch page.
+   - Adsterra `300x250` banner ad active on the homepage within a dedicated partner spotlight card.
    - [`ads.txt`](ads.txt) is set up at the root with standard instructions ready for the publisher account ID.
 
 ---
