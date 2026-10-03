@@ -34,8 +34,35 @@
    - **Homepage is 100% Ad-Free**: The homepage never contains any ad units.
    - **Ads on Tool Pages Only**: Adsterra banners are placed exclusively at the bottom of dedicated tool pages (`[category-name]/[tool-name]/index.html`).
    - **Polite Label**: Styled as `<span class="ad-label"><iconify-icon icon="lucide:heart"></iconify-icon> Sponsored • Supporting Toolity's Free Tools</span>`.
-   - **Local Development Policy**: In local copies, live ad scripts are commented out and displayed as clean dashed placeholder frames (`.ad-placeholder-frame`) to avoid accidental ad triggers on live dev servers. Live ad tags are strictly enabled before production pushes.
-   - [`ads.txt`](ads.txt) is set up at the root with standard instructions ready for the publisher account ID.
+   - **Local Development Policy**: Local page copies strictly maintain clean dashed placeholder frames (`.ad-placeholder-frame`) without running live ad scripts to prevent unintended impressions or console clutter during development.
+   - **Live Production Adsterra Snippets (Saved in Memory)**:
+     - **Desktop Banner (728×90)**:
+       ```html
+       <script>
+         atOptions = {
+           'key' : '173f3c31e644a6feb61843877787aa01',
+           'format' : 'iframe',
+           'height' : 90,
+           'width' : 728,
+           'params' : {}
+         };
+       </script>
+       <script src="https://www.highrevenueformat.com/173f3c31e644a6feb61843877787aa01/invoke.js"></script>
+       ```
+     - **Mobile Banner (320×50)**:
+       ```html
+       <script>
+         atOptions = {
+           'key' : 'd494b0cbcfa90ae4f358b33b28092221',
+           'format' : 'iframe',
+           'height' : 50,
+           'width' : 320,
+           'params' : {}
+         };
+       </script>
+       <script src="https://www.highrevenueformat.com/d494b0cbcfa90ae4f358b33b28092221/invoke.js"></script>
+       ```
+   - [`ads.txt`](ads.txt) is configured at the root with standard verification lines ready.
 6. **Platform, Legal & Supporting Pages**:
    - [`404.html`](404.html): Custom GitHub Pages 404 error fallback with mascot and navigation.
    - [`about/`](about/index.html): Mission, client-side zero-telemetry philosophy, and creator details.
