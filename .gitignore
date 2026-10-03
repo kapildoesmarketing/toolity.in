@@ -1,10 +1,36 @@
+# Operating System
 .DS_Store
+**/.DS_Store
 Thumbs.db
+
+# IDE & Editor
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Dependencies & Build
 node_modules/
 dist/
+build/
+.cache/
+
+# Environment
 .env
 .env.local
-*.log
-.vscode/
-Hero Inspiration/
+.env.*.local
 
+# Logs & Temporary Files
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+
+# Rough / Draft / Scratch / Inspiration Files
+sample.html
+sample.*
+*.sample.*
+scratch/
+Hero Inspiration/
+temp/

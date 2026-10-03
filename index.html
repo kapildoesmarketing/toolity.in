@@ -1,35 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Toolity.in — Simple, Powerful Web Utilities</title>
-  
+
   <!-- SEO & Metadata -->
-  <meta name="description" content="Toolity.in provides a curated suite of blazing-fast, privacy-first web utilities and micro-tools running 100% in your browser.">
-  <meta name="keywords" content="tools, online utilities, pdf tools, developer tools, text tools, image tools, privacy first">
+  <meta name="description"
+    content="Toolity.in provides a curated suite of blazing-fast, privacy-first web utilities and micro-tools running 100% in your browser.">
+  <meta name="keywords"
+    content="tools, online utilities, pdf tools, developer tools, text tools, image tools, privacy first">
   <meta name="author" content="Kapil Pidhwani">
-  
+
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://toolity.in/">
   <meta property="og:title" content="Toolity.in — Simple, Powerful Web Utilities">
-  <meta property="og:description" content="A curated suite of blazing-fast, privacy-first micro-tools and utilities that run 100% client-side.">
+  <meta property="og:description"
+    content="A curated suite of blazing-fast, privacy-first micro-tools and utilities that run 100% client-side.">
   <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+  <link rel="icon" type="image/webp" href="assets/Toolity.in Logo.webp">
 
   <!-- Google Fonts: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  
+
   <!-- Iconify Icon Component -->
   <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 
   <link rel="stylesheet" href="styles/main.css">
 </head>
+
 <body>
 
   <!-- Top Sticky Header -->
@@ -39,28 +44,33 @@
       <div class="nav-left">
         <a href="/" class="brand-link" aria-label="Toolity.in Home">
           <div class="brand-icon-wrapper">
-            <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
-              <rect width="32" height="32" rx="8" fill="#000000" class="brand-icon-bg" />
-              <path d="M17.5 4L7 17h10.5L14.5 28 25 15H14.5L17.5 4z" fill="#ffffff" />
-            </svg>
+            <img src="assets/Toolity.in Logo.webp" alt="Toolity.in Logo" class="brand-logo-img" width="32" height="32">
           </div>
           <span class="brand-name">Toolity<span class="brand-tld">.in</span></span>
         </a>
       </div>
 
-      <!-- Center: Navigation Pages (Glassmorphic Capsule) -->
+      <!-- Center: Navigation Pages (Capsule) -->
       <nav class="nav-center" aria-label="Main Navigation">
         <div class="nav-glass-capsule">
           <ul class="nav-links">
-            <li><a href="#categories" class="nav-link">Categories</a></li>
-            <li><a href="#features" class="nav-link">About</a></li>
+            <li><a href="/" class="nav-link active">Home</a></li>
+            <li><a href="dev/" class="nav-link">Dev</a></li>
+            <li><a href="text/" class="nav-link">Text</a></li>
+            <li><a href="math/" class="nav-link">Math</a></li>
+            <li><a href="design/" class="nav-link">Design</a></li>
+            <li><a href="utility/" class="nav-link">Utility</a></li>
+            <li><a href="convertors/" class="nav-link">Convertors</a></li>
+            <li><a href="formatters/" class="nav-link">Formatters</a></li>
+            <li><a href="others/" class="nav-link">Others</a></li>
           </ul>
         </div>
       </nav>
 
       <!-- Right: Dark Mode Toggle -->
       <div class="nav-right">
-        <button id="theme-toggle" class="btn-icon-pill" type="button" aria-label="Toggle light/dark theme" title="Toggle Theme">
+        <button id="theme-toggle" class="btn-icon-pill" type="button" aria-label="Toggle light/dark theme"
+          title="Toggle Theme">
           <iconify-icon id="theme-icon" icon="lucide:moon" width="18" height="18"></iconify-icon>
         </button>
       </div>
@@ -68,144 +78,230 @@
   </header>
 
   <main>
-    <!-- Hero Section with Interactive 3D Metaball Fluid -->
+    <!-- Hero Section -->
     <section class="hero-section">
-      <!-- 3D WebGL Canvas Layer -->
-      <div id="hero-metaballs" class="hero-canvas-bg" aria-hidden="true"></div>
+      <!-- Ambient Hero Wave Canvas (Breathe mode mathematical ribbons) -->
+      <canvas id="hero-waves-canvas" aria-hidden="true"></canvas>
 
       <!-- Hero Foreground Content -->
       <div class="container hero-content">
-        <div class="hero-pill-badge">
-          <span class="badge-dot"></span>
-          <span>100% Client-Side • Privacy-First</span>
-        </div>
-
         <h1 class="hero-title">
           Simple, powerful tools for everyday tasks.
         </h1>
 
         <p class="hero-subtitle">
-          A curated collection of blazing-fast micro-utilities designed to eliminate friction from your workflow without tracking or data collection.
+          A curated collection of blazing-fast micro-utilities designed to eliminate friction from your workflow without
+          tracking or data collection.
         </p>
 
-        <div class="hero-cta-group">
-          <a href="#categories" class="btn-pill btn-glass-primary">
-            <span>Explore Tools</span>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M5 12h14"></path>
-              <path d="m12 5 7 7-7 7"></path>
-            </svg>
-          </a>
-          <a href="#features" class="btn-pill btn-glass-secondary">
-            <span>Learn More</span>
-          </a>
+        <!-- Hero Minimalist Fast Search -->
+        <div class="hero-minimal-search" id="hero-search-container">
+          <div class="minimal-search-bar" role="search">
+            <input 
+              type="text" 
+              id="hero-search-input" 
+              class="minimal-search-input" 
+              placeholder="Search for a tool or category..." 
+              autocomplete="off" 
+              spellcheck="false"
+              aria-label="Search tools"
+            />
+            <div class="minimal-search-actions">
+              <button type="button" id="search-clear-btn" class="minimal-action-btn minimal-clear-btn" aria-label="Clear search" title="Clear search" style="display: none;">
+                <iconify-icon icon="lucide:x" width="16" height="16"></iconify-icon>
+              </button>
+              <button type="button" id="minimal-search-btn" class="minimal-action-btn minimal-submit-btn" aria-label="Search" title="Search">
+                <iconify-icon icon="lucide:search" width="19" height="19"></iconify-icon>
+              </button>
+            </div>
+          </div>
+
+          <!-- Minimalist Transparent Top 3 Results -->
+          <div id="hero-search-results" class="minimal-search-results" role="listbox" style="display: none;">
+            <!-- Populated dynamically via scripts/main.js -->
+          </div>
         </div>
       </div>
+
+      <!-- Circular Swipe Up / Scroll Indicator -->
+      <a href="#categories" class="hero-scroll-indicator" aria-label="Scroll to explore tools">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 5v14"></path>
+          <path d="m19 12-7 7-7-7"></path>
+        </svg>
+      </a>
     </section>
 
     <!-- Categories Section -->
     <section id="categories" class="section-wrapper section-wrapper-alt">
       <div class="container">
         <div class="section-header">
+          <span class="section-eyebrow">Workspaces</span>
           <h2 class="section-title">Explore by Category</h2>
           <p class="section-desc">Focused micro-utilities organized into clean workspaces.</p>
         </div>
 
-        <div class="category-grid">
-          <!-- PDF Tools -->
-          <div class="category-card">
-            <div class="category-card-top">
-              <div class="category-icon">
-                <iconify-icon icon="lucide:file-text" width="22" height="22"></iconify-icon>
+        <div id="category-cards">
+          <!-- 1. Dev Tools -->
+          <a href="dev/" class="category-glow-card">
+            <div class="glow-card-content">
+              <div class="glow-card-image">
+                <iconify-icon icon="lucide:code-2"></iconify-icon>
               </div>
-              <span class="category-badge">Coming Soon</span>
+              <div class="glow-card-info-wrapper">
+                <div class="glow-card-info">
+                  <div class="glow-card-mini-icon">
+                    <iconify-icon icon="lucide:code-2" width="18" height="18"></iconify-icon>
+                  </div>
+                  <div class="glow-card-title-group">
+                    <h3>Developer Tools</h3>
+                    <p>Formatters, validators, generators & debuggers.</p>
+                  </div>
+                </div>
+              </div>
             </div>
-            <h3 class="category-title">PDF Tools</h3>
-            <p class="category-description">Merge, split, compress, extract pages, and convert PDFs locally without uploading files to remote servers.</p>
-            <span class="category-card-link">
-              <span>View tools</span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14"></path>
-                <path d="m12 5 7 7-7 7"></path>
-              </svg>
-            </span>
-          </div>
+          </a>
 
-          <!-- Developer Tools -->
-          <div class="category-card">
-            <div class="category-card-top">
-              <div class="category-icon">
-                <iconify-icon icon="lucide:code-2" width="22" height="22"></iconify-icon>
+          <!-- 2. Text Tools -->
+          <a href="text/" class="category-glow-card">
+            <div class="glow-card-content">
+              <div class="glow-card-image">
+                <iconify-icon icon="lucide:type"></iconify-icon>
               </div>
-              <span class="category-badge">Coming Soon</span>
+              <div class="glow-card-info-wrapper">
+                <div class="glow-card-info">
+                  <div class="glow-card-mini-icon">
+                    <iconify-icon icon="lucide:type" width="18" height="18"></iconify-icon>
+                  </div>
+                  <div class="glow-card-title-group">
+                    <h3>Text & Content</h3>
+                    <p>Word counters, diff checkers & case converters.</p>
+                  </div>
+                </div>
+              </div>
             </div>
-            <h3 class="category-title">Developer Tools</h3>
-            <p class="category-description">JSON formatters, Base64 converters, UUID generators, hash checkers, and token encoders built for developers.</p>
-            <span class="category-card-link">
-              <span>View tools</span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14"></path>
-                <path d="m12 5 7 7-7 7"></path>
-              </svg>
-            </span>
-          </div>
+          </a>
 
-          <!-- Text Tools -->
-          <div class="category-card">
-            <div class="category-card-top">
-              <div class="category-icon">
-                <iconify-icon icon="lucide:type" width="22" height="22"></iconify-icon>
+          <!-- 3. Math Tools -->
+          <a href="math/" class="category-glow-card">
+            <div class="glow-card-content">
+              <div class="glow-card-image">
+                <iconify-icon icon="lucide:calculator"></iconify-icon>
               </div>
-              <span class="category-badge">Coming Soon</span>
+              <div class="glow-card-info-wrapper">
+                <div class="glow-card-info">
+                  <div class="glow-card-mini-icon">
+                    <iconify-icon icon="lucide:calculator" width="18" height="18"></iconify-icon>
+                  </div>
+                  <div class="glow-card-title-group">
+                    <h3>Math & Numeric</h3>
+                    <p>Calculators, percentages & aspect ratio solvers.</p>
+                  </div>
+                </div>
+              </div>
             </div>
-            <h3 class="category-title">Text & Content Tools</h3>
-            <p class="category-description">Word counters, diff checkers, case converters, slug generators, and typography cleaners for writers and editors.</p>
-            <span class="category-card-link">
-              <span>View tools</span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14"></path>
-                <path d="m12 5 7 7-7 7"></path>
-              </svg>
-            </span>
-          </div>
+          </a>
 
-          <!-- Image Tools -->
-          <div class="category-card">
-            <div class="category-card-top">
-              <div class="category-icon">
-                <iconify-icon icon="lucide:image" width="22" height="22"></iconify-icon>
+          <!-- 4. Design Tools -->
+          <a href="design/" class="category-glow-card">
+            <div class="glow-card-content">
+              <div class="glow-card-image">
+                <iconify-icon icon="lucide:palette"></iconify-icon>
               </div>
-              <span class="category-badge">Coming Soon</span>
+              <div class="glow-card-info-wrapper">
+                <div class="glow-card-info">
+                  <div class="glow-card-mini-icon">
+                    <iconify-icon icon="lucide:palette" width="18" height="18"></iconify-icon>
+                  </div>
+                  <div class="glow-card-title-group">
+                    <h3>Design & Color</h3>
+                    <p>WCAG contrast, glassmorphic CSS & palettes.</p>
+                  </div>
+                </div>
+              </div>
             </div>
-            <h3 class="category-title">Image Utilities</h3>
-            <p class="category-description">Compress WebP/PNG/JPEG, resize images, convert formats, and generate favicons directly in your browser.</p>
-            <span class="category-card-link">
-              <span>View tools</span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14"></path>
-                <path d="m12 5 7 7-7 7"></path>
-              </svg>
-            </span>
-          </div>
+          </a>
 
-          <!-- Converters & Calculators -->
-          <div class="category-card">
-            <div class="category-card-top">
-              <div class="category-icon">
-                <iconify-icon icon="lucide:arrow-left-right" width="22" height="22"></iconify-icon>
+          <!-- 5. Utility Tools -->
+          <a href="utility/" class="category-glow-card">
+            <div class="glow-card-content">
+              <div class="glow-card-image">
+                <iconify-icon icon="lucide:wrench"></iconify-icon>
               </div>
-              <span class="category-badge">Coming Soon</span>
+              <div class="glow-card-info-wrapper">
+                <div class="glow-card-info">
+                  <div class="glow-card-mini-icon">
+                    <iconify-icon icon="lucide:wrench" width="18" height="18"></iconify-icon>
+                  </div>
+                  <div class="glow-card-title-group">
+                    <h3>Utility & General</h3>
+                    <p>Timestamps, QR codes & password tools.</p>
+                  </div>
+                </div>
+              </div>
             </div>
-            <h3 class="category-title">Converters & Calculators</h3>
-            <p class="category-description">Unit converters, color format switchers, timestamp calculators, and date diff helpers with instant results.</p>
-            <span class="category-card-link">
-              <span>View tools</span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14"></path>
-                <path d="m12 5 7 7-7 7"></path>
-              </svg>
-            </span>
-          </div>
+          </a>
+
+          <!-- 6. Convertors -->
+          <a href="convertors/" class="category-glow-card">
+            <div class="glow-card-content">
+              <div class="glow-card-image">
+                <iconify-icon icon="lucide:arrow-left-right"></iconify-icon>
+              </div>
+              <div class="glow-card-info-wrapper">
+                <div class="glow-card-info">
+                  <div class="glow-card-mini-icon">
+                    <iconify-icon icon="lucide:arrow-left-right" width="18" height="18"></iconify-icon>
+                  </div>
+                  <div class="glow-card-title-group">
+                    <h3>Unit Convertors</h3>
+                    <p>Color formats, unit switchers & number bases.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+
+          <!-- 7. Formatters -->
+          <a href="formatters/" class="category-glow-card">
+            <div class="glow-card-content">
+              <div class="glow-card-image">
+                <iconify-icon icon="lucide:align-left"></iconify-icon>
+              </div>
+              <div class="glow-card-info-wrapper">
+                <div class="glow-card-info">
+                  <div class="glow-card-mini-icon">
+                    <iconify-icon icon="lucide:align-left" width="18" height="18"></iconify-icon>
+                  </div>
+                  <div class="glow-card-title-group">
+                    <h3>Code Formatters</h3>
+                    <p>SQL, HTML, XML & CSS syntax beautifiers.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+
+          <!-- 8. Others & Labs -->
+          <a href="others/" class="category-glow-card">
+            <div class="glow-card-content">
+              <div class="glow-card-image">
+                <iconify-icon icon="lucide:layers"></iconify-icon>
+              </div>
+              <div class="glow-card-info-wrapper">
+                <div class="glow-card-info">
+                  <div class="glow-card-mini-icon">
+                    <iconify-icon icon="lucide:layers" width="18" height="18"></iconify-icon>
+                  </div>
+                  <div class="glow-card-title-group">
+                    <h3>Others & Labs</h3>
+                    <p>Audio synthesizer, clipboard & EXIF tools.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
         </div>
       </div>
     </section>
@@ -213,50 +309,119 @@
     <!-- Features Banner -->
     <section id="features" class="section-wrapper">
       <div class="container">
+        <!-- Strategic Mascot Feature Showcase -->
+        <div class="editorial-brand-card">
+          <div class="editorial-brand-left">
+            <span class="editorial-brand-badge">Client-Side Architecture</span>
+            <h2 class="editorial-brand-title">Built for privacy. Engineered for instant execution.</h2>
+            <p class="editorial-brand-desc">Toolity runs entirely inside your browser using modern Web APIs. Your files, documents, and data never touch a remote server.</p>
+          </div>
+          <div class="editorial-mascot-wrapper">
+            <img src="assets/Toolity.in Happy.webp" alt="Toolity Fox Companion" class="editorial-mascot-img" width="110" height="110">
+          </div>
+        </div>
+
         <div class="features-banner">
           <div class="feature-col">
-            <span class="feature-col-icon">
-              <iconify-icon icon="lucide:shield-check" width="26" height="26"></iconify-icon>
-            </span>
+            <div class="feature-col-icon">
+              <iconify-icon icon="lucide:shield-check" width="22" height="22"></iconify-icon>
+            </div>
             <h3 class="feature-col-title">100% Client-Side Privacy</h3>
-            <p class="feature-col-desc">Files and inputs are processed exclusively in your browser sandbox using modern Web APIs. No telemetry.</p>
+            <p class="feature-col-desc">Files and inputs are processed exclusively in your browser sandbox using modern
+              Web APIs. No telemetry.</p>
           </div>
           <div class="feature-col">
-            <span class="feature-col-icon">
-              <iconify-icon icon="lucide:zap" width="26" height="26"></iconify-icon>
-            </span>
+            <div class="feature-col-icon">
+              <iconify-icon icon="lucide:zap" width="22" height="22"></iconify-icon>
+            </div>
             <h3 class="feature-col-title">Zero Bloat</h3>
-            <p class="feature-col-desc">Built with pure Vanilla HTML/CSS/JS without heavy runtime frameworks, ensuring instantaneous page loads.</p>
+            <p class="feature-col-desc">Built with pure Vanilla HTML/CSS/JS without heavy runtime frameworks, ensuring
+              instantaneous page loads.</p>
           </div>
           <div class="feature-col">
-            <span class="feature-col-icon">
-              <iconify-icon icon="lucide:target" width="26" height="26"></iconify-icon>
-            </span>
+            <div class="feature-col-icon">
+              <iconify-icon icon="lucide:target" width="22" height="22"></iconify-icon>
+            </div>
             <h3 class="feature-col-title">Single-Purpose Tools</h3>
-            <p class="feature-col-desc">Each tool has its own dedicated page focused solely on completing its task with zero distraction.</p>
+            <p class="feature-col-desc">Each tool has its own dedicated page focused solely on completing its task with
+              zero distraction.</p>
           </div>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- Site Footer -->
+  <!-- Global Multi-Column Footer -->
   <footer class="site-footer">
-    <div class="container footer-content">
-      <div class="footer-brand">
-        © 2026 Toolity.in
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Brand & Mission Column -->
+        <div class="footer-col footer-col-brand">
+          <a href="/" class="brand-link" aria-label="Toolity.in Home">
+            <div class="brand-icon-wrapper">
+              <img src="/assets/Toolity.in Logo.webp" alt="Toolity.in Logo" class="brand-logo-img" width="28" height="28">
+            </div>
+            <span class="brand-name">Toolity<span class="brand-tld">.in</span></span>
+          </a>
+          <p class="footer-brand-desc">
+            Simple, powerful tools for everyday tasks. Built with 100% client-side privacy, instant execution, and zero tracking.
+          </p>
+          <div class="footer-creator-badge">
+            <span>Created by</span>
+            <a href="https://github.com/kapildoesmarketing" target="_blank" rel="noopener noreferrer">Kapil Pidhwani</a>
+          </div>
+        </div>
+
+        <!-- Categories / Workspaces Column -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Workspaces</h4>
+          <ul class="footer-nav-list">
+            <li><a href="/dev/">Developer Tools</a></li>
+            <li><a href="/text/">Text Utilities</a></li>
+            <li><a href="/math/">Math & Numbers</a></li>
+            <li><a href="/design/">Design & Color</a></li>
+            <li><a href="/utility/">Everyday Utilities</a></li>
+            <li><a href="/convertors/">Convertors</a></li>
+            <li><a href="/formatters/">Formatters</a></li>
+            <li><a href="/others/">Other Tools</a></li>
+          </ul>
+        </div>
+
+        <!-- Resources & About Column -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Platform</h4>
+          <ul class="footer-nav-list">
+            <li><a href="/about/">About Toolity</a></li>
+            <li><a href="/utility/qr-code-generator/">QR Code Generator</a></li>
+            <li><a href="/credits/">Credits & Open Source</a></li>
+            <li><a href="https://github.com/kapildoesmarketing/toolity.in" target="_blank" rel="noopener noreferrer">GitHub Repository</a></li>
+          </ul>
+        </div>
+
+        <!-- Legal & Trust Column -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Trust & Legal</h4>
+          <ul class="footer-nav-list">
+            <li><a href="/privacy/">Privacy Policy</a></li>
+            <li><a href="/terms/">Terms of Service</a></li>
+            <li><a href="mailto:kapildoesmarketing@gmail.com">Contact Support</a></li>
+          </ul>
+        </div>
       </div>
-      <div class="footer-center">
-        Designed with precision by <strong>Kapil Pidhwani</strong>
-      </div>
-      <div class="footer-links">
-        <a href="https://github.com/kapildoesmarketing/toolity.in" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub</a>
-        <a href="#categories" class="footer-link">Tools</a>
+
+      <!-- Bottom Copyright Bar -->
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          © 2026 Toolity.in. All rights reserved.
+        </div>
+        <div class="footer-meta-note">
+          100% Client-Side • No Telemetry • Blazing Fast
+        </div>
       </div>
     </div>
   </footer>
 
   <script src="scripts/main.js"></script>
-  <script type="module" src="scripts/hero-metaballs.js"></script>
 </body>
+
 </html>
