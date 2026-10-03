@@ -103,6 +103,14 @@
 
     const REGISTRY = [
       {
+        id: 'video-to-gif',
+        title: 'Video to GIF Converter',
+        category: 'Convertors',
+        url: 'convertors/video-to-gif/',
+        icon: 'lucide:film',
+        tags: ['video', 'gif', 'mp4', 'webm', 'mov', 'convert', 'animation', 'trim', 'clip', 'maker', 'generator']
+      },
+      {
         id: 'qr-generator',
         title: 'QR Code Generator',
         category: 'Utility',
