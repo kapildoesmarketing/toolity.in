@@ -63,7 +63,11 @@
        <script src="https://www.highrevenueformat.com/d494b0cbcfa90ae4f358b33b28092221/invoke.js"></script>
        ```
    - [`ads.txt`](ads.txt) is configured at the root with standard verification lines ready.
-6. **Platform, Legal & Supporting Pages**:
+6. **Analytics & Tag Management (Google Tag Manager)**:
+   - **GTM Container ID**: `GTM-W5SC3TGR`
+   - **Head Placement**: Injected as high in `<head>` as possible across all pages.
+   - **Body Placement**: `<noscript>` fallback iframe injected immediately after opening `<body>` across all pages.
+7. **Platform, Legal & Supporting Pages**:
    - [`404.html`](404.html): Custom GitHub Pages 404 error fallback with mascot and navigation.
    - [`about/`](about/index.html): Mission, client-side zero-telemetry philosophy, and creator details.
    - [`privacy/`](privacy/index.html): Privacy Policy detailing client-side sandbox execution, local storage, and ad disclosures.
@@ -92,34 +96,44 @@
    - **Symmetrical Dual-Pane Balance**: Left (Source / Input) and Right (Output / Result) panes must maintain matching height bounds and visual weight across all lifecycle states (empty, active, processing, and complete).
    - **No Surprise Element Pop-Ins**: Avoid elements that suddenly appear and expand pane heights or push page content downward. Controls should be integrated seamlessly or smoothly transition without jarring layout jumps.
 
-3. **Progressive Disclosure**:
-   - **Collapsed Settings by Default**: Secondary options (framerate, scale, speed, color quality, indentation) belong inside a clean `<details class="tool-settings-accordion">` that is collapsed by default with an informative summary pill (e.g., `(10 FPS • 480px • 1.0x Speed • Balanced)`).
+3. **Progressive Disclosure & Settings Placement**:
+   - **Settings Always Below Input/Output Panes**: When a tool requires secondary options (framerate, scale, indentation), the `<details class="tool-settings-accordion">` must be positioned **below** the main dual-pane workspace window (never between the toolbar and workspace), allowing users to focus on inputs immediately.
+   - **Collapsed by Default**: Secondary options stay collapsed with an informative summary pill (e.g., `(10 FPS • 480px • 1.0x Speed)`). If a tool has no meaningful secondary settings, omit the accordion entirely.
 
-4. **Non-Disruptive Floating Toast Feedback**:
+4. **Ruthless Minimalism & Single Action Placement (No Fluff)**:
+   - **No Unnecessary Overhead**: Build tools that are minimalist, intuitive, and focused purely on core utility. Avoid speculative presets or esoteric encoding/protocol toggles that everyday users do not need unless explicitly requested.
+   - **No Duplicate Pane Buttons**: Universal actions (`Reset`, `Copy`, `Download`, `Test Link`) belong strictly on the top-right toolbar (`.tool-actions-toolbar`). Do not duplicate matching buttons at the bottom of the input or output panes.
+
+5. **Non-Disruptive Floating Toast Feedback**:
    - Status updates, file load notices, conversion progress, completion alerts, and clipboard copies should be delivered via floating toast notifications (`#tool-toast`) rather than inline alert banners that disrupt the workspace layout.
 
-5. **Quiet Trust over Repetitive Badges**:
+6. **Quiet Trust over Repetitive Badges**:
    - Avoid repetitive "100% Client-Side Private" badges in individual tool toolbars. Privacy and performance are established globally in the footer, about page, and architecture; individual tool headers must remain uncluttered and focused purely on functionality.
 
-6. **Client-Side Media & Video Transcoding Architecture**:
+7. **Client-Side Media & Video Transcoding Architecture**:
    - High-performance video format transcoding (MP4, WebM, MOV, MKV) executes entirely client-side using HTML5 Canvas capture streams combined with the Web Audio API and `MediaRecorder` encoders.
    - **Strict Even Dimensions**: Video encoders (H.264 and VP9) require even width and height values (`if (w % 2 !== 0) w--; if (h % 2 !== 0) h--;`) to avoid encoding crashes.
    - **Tool Family**: Includes Video Format Converter (`convertors/video-converter/`), Video to GIF Converter (`convertors/video-to-gif/`), and GIF to Video Converter (`convertors/gif-to-video/`).
 
-7. **Client-Side Image Transcoding Architecture**:
+8. **Client-Side Image Transcoding Architecture**:
    - High-speed image transcoding (PNG, JPG, WebP, AVIF, BMP, ICO) executes 100% in-browser via HTML5 Canvas `toBlob()`.
    - **Intelligent Target Auto-Selection**: Uploading PNG auto-defaults target to WebP, JPG auto-defaults to PNG, WebP auto-defaults to JPG.
-8. **Minimalist Orange Accent Bar Navigation Indicators**:
+
+9. **Minimalist Orange Accent Bar Navigation Indicators**:
    - Navigation links in `.nav-glass-capsule` avoid nested glass-on-glass containers and box-in-a-box fatigue.
    - Active state uses pure typographic hierarchy in brand warm orange (`#F4511E` in Light Mode, `#FF7A3D` in Dark Mode) anchored by a sleek 2.5px rounded bottom gradient indicator bar (`::after`), keeping the navigation bar weightless and modern.
 
-9. **Unified 4-Column Card Grids & Clean UX Tool Cards**:
-   - **Homepage Category Grid (`#category-cards`)**: 4-column responsive layout (`grid-template-columns: repeat(4, 1fr); gap: 12px;`) featuring spotlight glow, 250px height, upper watermark ghost icon (`5rem`), bottom info deck with mini-icon pill (`32px`), title, and count pill.
-   - **Category Hub Tool Cards (`.tools-grid`)**: Identical 4-column grid and `.category-glow-card` container with cursor spotlight tracking, but tailored for tool discovery with a clean 4-element UX hierarchy (no ghost icons, no clutter):
-     1. 40×40px Icon Badge (`.tool-card-icon-badge`)
-     2. High-contrast Title (`.tool-card-title`)
-     3. 2-to-3 line functional Description (`.tool-card-desc`)
-     4. Bottom Action link with animated hover arrow (`.tool-card-action`)
+10. **Unified 4-Column Card Grids & Clean UX Tool Cards**:
+    - **Homepage Category Grid (`#category-cards`)**: 4-column responsive layout (`grid-template-columns: repeat(4, 1fr); gap: 12px;`) featuring spotlight glow, 250px height, upper watermark ghost icon (`5rem`), bottom info deck with mini-icon pill (`32px`), title, and count pill.
+    - **Category Hub Tool Cards (`.tools-grid`)**: Identical 4-column grid and `.category-glow-card` container with cursor spotlight tracking, but tailored for tool discovery with a clean 4-element UX hierarchy (no ghost icons, no clutter):
+      1. 40×40px Icon Badge (`.tool-card-icon-badge`)
+      2. High-contrast Title (`.tool-card-title`)
+      3. 2-to-3 line functional Description (`.tool-card-desc`)
+      4. Bottom Action link with animated hover arrow (`.tool-card-action`)
+
+11. **Client-Side Mailto Link Creator & URL Encoder**:
+    - Streamlined, minimalist email link builder (`utility/mailto-generator/`) creating standard RFC 3986 URL-encoded links, HTML `<a href="mailto:...">` tags, and Markdown links directly in-browser.
+    - Features clean dual-pane layout: inputs on the left (To, CC, BCC, Subject, Body) and export format tabs with instant code output on the right, plus one-click "Test Link" on the top toolbar.
 
 
 

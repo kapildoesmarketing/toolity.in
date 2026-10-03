@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mailto Link Creator & Email HTML Tag Generator — Toolity.in</title>
+
+  <!-- SEO & Metadata -->
+  <meta name="description"
+    content="Free, instant Mailto Link Creator and HTML Email Tag Generator. Compose URL-encoded mailto links with Subject, CC, BCC, and Body, preview in real-time, and test in your email app.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/webp" href="../../assets/Toolity.in Logo.webp">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Iconify Icon Component -->
+  <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="../../styles/main.css">
+</head>
+
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W5SC3TGR"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <!-- Top Sticky Header -->
+  <header class="site-header scrolled">
+    <div class="nav-container">
+      <!-- Left: Brand Logo & Title -->
+      <div class="nav-left">
+        <a href="../../" class="brand-link" aria-label="Toolity.in Home">
+          <div class="brand-icon-wrapper">
+            <img src="../../assets/Toolity.in Logo.webp" alt="Toolity.in Logo" class="brand-logo-img" width="32" height="32">
+          </div>
+          <span class="brand-name">Toolity<span class="brand-tld">.in</span></span>
+        </a>
+      </div>
+
+      <!-- Center: Navigation Pages (Capsule) -->
+      <nav class="nav-center" aria-label="Main Navigation">
+        <div class="nav-glass-capsule">
+          <ul class="nav-links">
+            <li><a href="../../" class="nav-link">Home</a></li>
+            <li><a href="../../dev/" class="nav-link">Dev</a></li>
+            <li><a href="../../text/" class="nav-link">Text</a></li>
+            <li><a href="../../math/" class="nav-link">Math</a></li>
+            <li><a href="../../design/" class="nav-link">Design</a></li>
+            <li><a href="../../utility/" class="nav-link active">Utility</a></li>
+            <li><a href="../../convertors/" class="nav-link">Convertors</a></li>
+            <li><a href="../../formatters/" class="nav-link">Formatters</a></li>
+            <li><a href="../../others/" class="nav-link">Others</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Right: Dark Mode Toggle -->
+      <div class="nav-right">
+        <button id="theme-toggle" class="btn-icon-pill" type="button" aria-label="Toggle light/dark theme"
+          title="Toggle Theme">
+          <iconify-icon id="theme-icon" icon="lucide:moon" width="18" height="18"></iconify-icon>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Tool Page Content -->
+  <main>
+    <!-- Page Hero Header -->
+    <section class="page-hero">
+      <div class="container">
+        <!-- Breadcrumbs Navigation -->
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="../../" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="../../utility/" class="breadcrumb-link">Everyday Utilities</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Mailto Link Creator</span>
+        </nav>
+
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Everyday Utility</span>
+            <h1 class="page-title">Mailto Link Creator</h1>
+            <p class="page-desc">Generate customizable, URL-encoded mailto links, HTML anchor tags, and Markdown snippets with instant live preview.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tool Main Workspace Area -->
+    <section class="section-wrapper" style="border-top: none; padding-top: 3.5rem;">
+      <div class="container">
+
+        <div class="tool-workspace-card">
+
+          <!-- 1. Quick Actions Toolbar (Universal Actions on Right) -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge" id="mailto-mode-badge">RFC 3986 Standard</span>
+            </div>
+
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset-form" title="Reset all fields">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-top-copy">
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy Link</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-top-test" title="Open in your default email client">
+                <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
+                <span>Test Link</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2. Dual Split-Pane Grid -->
+          <div class="split-pane-grid">
+            
+            <!-- Left: Input Form Pane -->
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Email Parameters</span>
+                <span class="pane-badge" id="input-stats-badge">0 chars</span>
+              </div>
+              <div class="pane-content" style="min-height: 380px;">
+                <!-- Recipient (To) -->
+                <div class="form-group">
+                  <label class="form-label" for="email-to">
+                    <span>Recipient Email (To) <span style="color: var(--brand);">*</span></span>
+                    <span class="form-label-desc">Comma-separated for multiple</span>
+                  </label>
+                  <input type="text" id="email-to" class="input-clean" placeholder="support@toolity.in, team@example.com" spellcheck="false" autocomplete="email">
+                </div>
+
+                <!-- CC & BCC Row -->
+                <div class="form-row-2col">
+                  <div class="form-group">
+                    <label class="form-label" for="email-cc">
+                      <span>Carbon Copy (CC)</span>
+                    </label>
+                    <input type="text" id="email-cc" class="input-clean" placeholder="manager@example.com" spellcheck="false">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="email-bcc">
+                      <span>Blind Copy (BCC)</span>
+                    </label>
+                    <input type="text" id="email-bcc" class="input-clean" placeholder="archive@example.com" spellcheck="false">
+                  </div>
+                </div>
+
+                <!-- Subject Line -->
+                <div class="form-group">
+                  <label class="form-label" for="email-subject">
+                    <span>Subject Line</span>
+                  </label>
+                  <input type="text" id="email-subject" class="input-clean" placeholder="Inquiry regarding your services">
+                </div>
+
+                <!-- Email Body -->
+                <div class="form-group" style="flex: 1;">
+                  <label class="form-label" for="email-body">
+                    <span>Email Message Body</span>
+                    <span class="form-label-desc" id="body-char-count">0 chars</span>
+                  </label>
+                  <textarea id="email-body" class="textarea-clean" style="flex: 1; min-height: 120px;" placeholder="Hi Team,&#10;&#10;I wanted to inquire about...&#10;&#10;Best regards,&#10;Your Name"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Export Format Output Pane -->
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Generated Output</span>
+                <div class="segmented-group segmented-group-pill" id="seg-export-format">
+                  <button type="button" class="seg-pill active" data-format="raw">Mailto URL</button>
+                  <button type="button" class="seg-pill" data-format="html">HTML Tag</button>
+                  <button type="button" class="seg-pill" data-format="md">Markdown</button>
+                </div>
+              </div>
+              <div style="flex: 1; display: flex; flex-direction: column; background: var(--surface);">
+                <pre id="output-code" class="pane-output-preview" style="height: 100%; min-height: 380px; padding: 1.15rem 1.25rem; font-size: 0.86rem; border: none;"></pre>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- ==================================================================
+             EXACTLY 1 ADSTERRA BANNER SLOT (Positioned at bottom of tool)
+             ================================================================== -->
+        <div class="adsterra-single-slot">
+          <span class="ad-label">
+            <iconify-icon icon="lucide:heart" width="11" height="11"></iconify-icon>
+            Sponsored • Supporting Toolity's Free Tools
+          </span>
+          
+          <!-- Desktop Banner (728x90) -->
+          <div class="ad-slot-desktop">
+            <script type="text/javascript">
+              atOptions = {
+                'key' : '173f3c31e644a6feb61843877787aa01',
+                'format' : 'iframe',
+                'height' : 90,
+                'width' : 728,
+                'params' : {}
+              };
+            </script>
+            <script type="text/javascript" src="https://www.highrevenueformat.com/173f3c31e644a6feb61843877787aa01/invoke.js"></script>
+          </div>
+
+          <!-- Mobile Banner (320x50) -->
+          <div class="ad-slot-mobile">
+            <script type="text/javascript">
+              atOptions = {
+                'key' : 'd494b0cbcfa90ae4f358b33b28092221',
+                'format' : 'iframe',
+                'height' : 50,
+                'width' : 320,
+                'params' : {}
+              };
+            </script>
+            <script type="text/javascript" src="https://www.highrevenueformat.com/d494b0cbcfa90ae4f358b33b28092221/invoke.js"></script>
+          </div>
+        </div>
+
+        <!-- ==================================================================
+             3-STEP INSTRUCTION GUIDE
+             ================================================================== -->
+        <section class="guide-section">
+          <div class="section-header">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-title">Creating URL-Encoded Mailto Links</h2>
+            <p class="section-desc">Build pre-populated email links for websites, contact pages, and documentation in 3 simple steps.</p>
+          </div>
+
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Enter Email Parameters</h3>
+              <p class="step-desc">
+                Fill in recipient addresses (To, CC, BCC), email subject line, and draft pre-filled message body template.
+              </p>
+            </div>
+
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Choose Output Format</h3>
+              <p class="step-desc">
+                Select between a raw URL-encoded mailto protocol link, ready-to-paste HTML <code style="font-family:var(--font-mono); font-size:0.8rem;">&lt;a&gt;</code> anchor tag, or Markdown link.
+              </p>
+            </div>
+
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Test Link & Deploy</h3>
+              <p class="step-desc">
+                Click "Test Link" to verify in your default email client (Apple Mail, Outlook, Gmail), then copy the code directly to your website.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             MAINTENANCE-FREE CATEGORY WORKSPACE CTA CARD
+             ================================================================== -->
+        <section class="category-workspace-cta">
+          <div class="category-workspace-cta-left">
+            <span class="section-eyebrow">Utility Workspace</span>
+            <h2 class="category-workspace-cta-title">Explore All Utility Tools</h2>
+            <p class="category-workspace-cta-desc">
+              Discover our collection of fast client-side productivity utilities including QR code generators, Unix timestamp helpers, and browser sandbox tools.
+            </p>
+          </div>
+          <div class="category-workspace-cta-right">
+            <a href="../../utility/" class="btn-pill btn-primary-signal">
+              <span>Explore Utility Tools</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14"></path>
+                <path d="m12 5 7 7-7 7"></path>
+              </svg>
+            </a>
+          </div>
+        </section>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Reusable Toast Notification -->
+  <div id="tool-toast" class="tool-toast" role="status" aria-live="polite">
+    Copied to clipboard!
+  </div>
+
+  <!-- Global Multi-Column Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Brand & Mission Column -->
+        <div class="footer-col footer-col-brand">
+          <a href="../../" class="brand-link" aria-label="Toolity.in Home">
+            <div class="brand-icon-wrapper">
+              <img src="../../assets/Toolity.in Logo.webp" alt="Toolity.in Logo" class="brand-logo-img" width="28" height="28">
+            </div>
+            <span class="brand-name">Toolity<span class="brand-tld">.in</span></span>
+          </a>
+          <p class="footer-brand-desc">
+            Simple, powerful tools for everyday tasks. Built with 100% client-side privacy, instant execution, and zero tracking.
+          </p>
+          <div class="footer-creator-badge">
+            <span>Created by</span>
+            <a href="https://github.com/kapildoesmarketing" target="_blank" rel="noopener noreferrer">Kapil Pidhwani</a>
+          </div>
+        </div>
+
+        <!-- Workspaces Column -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Workspaces</h4>
+          <ul class="footer-nav-list">
+            <li><a href="../../dev/">Developer Tools</a></li>
+            <li><a href="../../text/">Text Utilities</a></li>
+            <li><a href="../../math/">Math & Numbers</a></li>
+            <li><a href="../../design/">Design & Color</a></li>
+            <li><a href="../../utility/">Everyday Utilities</a></li>
+            <li><a href="../../convertors/">Convertors</a></li>
+            <li><a href="../../formatters/">Formatters</a></li>
+            <li><a href="../../others/">Other Tools</a></li>
+          </ul>
+        </div>
+
+        <!-- Resources & About Column -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Platform</h4>
+          <ul class="footer-nav-list">
+            <li><a href="../../about/">About Toolity</a></li>
+            <li><a href="../../utility/qr-code-generator/">QR Generator</a></li>
+            <li><a href="../../utility/mailto-generator/">Mailto Creator</a></li>
+            <li><a href="../../convertors/video-to-gif/">Video to GIF</a></li>
+            <li><a href="../../convertors/image-converter/">Image Converter</a></li>
+            <li><a href="../../credits/">Credits & Open Source</a></li>
+          </ul>
+        </div>
+
+        <!-- Legal & Trust Column -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Trust & Legal</h4>
+          <ul class="footer-nav-list">
+            <li><a href="../../privacy/">Privacy Policy</a></li>
+            <li><a href="../../terms/">Terms of Service</a></li>
+            <li><a href="mailto:kapildoesmarketing@gmail.com">Contact Support</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Bottom Copyright Bar -->
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          © 2026 Toolity.in. All rights reserved.
+        </div>
+        <div class="footer-meta-note">
+          100% Client-Side • No Telemetry • Blazing Fast
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../scripts/main.js"></script>
+  <script>
+    /* Designed by Kapil Pidhwani: Streamlined Mailto Link Creator Core Logic */
+    document.addEventListener('DOMContentLoaded', () => {
+      // DOM Elements
+      const inputTo = document.getElementById('email-to');
+      const inputCc = document.getElementById('email-cc');
+      const inputBcc = document.getElementById('email-bcc');
+      const inputSubject = document.getElementById('email-subject');
+      const inputBody = document.getElementById('email-body');
+
+      const outputCode = document.getElementById('output-code');
+      const inputStatsBadge = document.getElementById('input-stats-badge');
+      const bodyCharCount = document.getElementById('body-char-count');
+
+      let currentFormat = 'raw'; // 'raw', 'html', 'md'
+
+      function showToast(msg) {
+        const toast = document.getElementById('tool-toast');
+        if (toast) {
+          toast.textContent = msg || 'Copied to clipboard!';
+          toast.classList.add('show');
+          setTimeout(() => toast.classList.remove('show'), 2000);
+        }
+      }
+
+      function buildMailtoURL() {
+        const to = inputTo.value.trim();
+        const cc = inputCc.value.trim();
+        const bcc = inputBcc.value.trim();
+        const subject = inputSubject.value.trim();
+        const body = inputBody.value;
+
+        let mailto = 'mailto:';
+        if (to) {
+          mailto += encodeURI(to);
+        }
+
+        const params = [];
+        if (cc) params.push(`cc=${encodeURIComponent(cc)}`);
+        if (bcc) params.push(`bcc=${encodeURIComponent(bcc)}`);
+        if (subject) params.push(`subject=${encodeURIComponent(subject)}`);
+        if (body) params.push(`body=${encodeURIComponent(body)}`);
+
+        if (params.length > 0) {
+          mailto += '?' + params.join('&');
+        }
+
+        return mailto;
+      }
+
+      function updateOutputs() {
+        const toVal = inputTo.value.trim();
+        const ccVal = inputCc.value.trim();
+        const bccVal = inputBcc.value.trim();
+        const subjectVal = inputSubject.value.trim();
+        const bodyVal = inputBody.value;
+
+        const mailtoUrl = buildMailtoURL();
+        const linkText = 'Send us an email';
+
+        let finalCode = '';
+        if (currentFormat === 'raw') {
+          finalCode = mailtoUrl;
+        } else if (currentFormat === 'html') {
+          finalCode = `<a href="${mailtoUrl}">${linkText}</a>`;
+        } else if (currentFormat === 'md') {
+          finalCode = `[${linkText}](${mailtoUrl})`;
+        }
+
+        outputCode.textContent = finalCode;
+
+        // Update stats
+        const totalChars = (toVal + ccVal + bccVal + subjectVal + bodyVal).length;
+        inputStatsBadge.textContent = `${totalChars} chars`;
+        bodyCharCount.textContent = `${bodyVal.length} chars`;
+      }
+
+      // Input Event Listeners
+      [inputTo, inputCc, inputBcc, inputSubject, inputBody].forEach(el => {
+        if (el) el.addEventListener('input', updateOutputs);
+      });
+
+      // Segmented Controls - Export Format
+      const formatSeg = document.getElementById('seg-export-format');
+      if (formatSeg) {
+        formatSeg.querySelectorAll('.seg-pill').forEach(btn => {
+          btn.addEventListener('click', () => {
+            formatSeg.querySelectorAll('.seg-pill').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentFormat = btn.dataset.format;
+            updateOutputs();
+          });
+        });
+      }
+
+      // Copy Action
+      function copyActiveCode() {
+        const code = outputCode.textContent;
+        if (!code || code === 'mailto:') {
+          return showToast('Nothing to copy yet');
+        }
+        navigator.clipboard.writeText(code).then(() => {
+          showToast('Copied to clipboard!');
+        }).catch(() => {
+          showToast('Failed to copy');
+        });
+      }
+
+      document.getElementById('btn-top-copy').addEventListener('click', copyActiveCode);
+
+      // Test Link Action (Opens in new tab)
+      function testMailtoLink() {
+        const mailto = buildMailtoURL();
+        if (!mailto || mailto === 'mailto:') {
+          return showToast('Please enter an email address first');
+        }
+        window.open(mailto, '_blank');
+        showToast('Opening email client in new tab...');
+      }
+
+      document.getElementById('btn-top-test').addEventListener('click', testMailtoLink);
+
+      // Reset Action
+      document.getElementById('btn-reset-form').addEventListener('click', () => {
+        inputTo.value = '';
+        inputCc.value = '';
+        inputBcc.value = '';
+        inputSubject.value = '';
+        inputBody.value = '';
+        updateOutputs();
+        showToast('Form reset');
+      });
+
+      // Initialize on load
+      inputTo.value = 'support@toolity.in';
+      inputSubject.value = 'Inquiry regarding Toolity';
+      inputBody.value = 'Hi Toolity Team,\n\nI wanted to reach out regarding...';
+      updateOutputs();
+    });
+  </script>
+</body>
+
+</html>

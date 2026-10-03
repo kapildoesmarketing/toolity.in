@@ -146,6 +146,14 @@
         tags: ['qr', 'code', 'barcode', 'generator', 'wifi', 'url', 'png', 'svg', 'vcard', 'text']
       },
       {
+        id: 'mailto-generator',
+        title: 'Mailto Link Creator',
+        category: 'Utility',
+        url: 'utility/mailto-generator/',
+        icon: 'lucide:mail',
+        tags: ['mailto', 'email', 'link', 'generator', 'creator', 'html', 'href', 'contact', 'composer', 'message', 'support']
+      },
+      {
         id: 'cat-dev',
         title: 'Developer Tools',
         category: 'Workspace',
@@ -630,6 +638,7 @@
           <div class="mobile-nav-footer-links">
             <a href="${rootPrefix}about/" class="mobile-nav-sublink">About</a>
             <a href="${rootPrefix}utility/qr-code-generator/" class="mobile-nav-sublink">QR Generator</a>
+            <a href="${rootPrefix}utility/mailto-generator/" class="mobile-nav-sublink">Mailto Creator</a>
             <a href="${rootPrefix}convertors/video-to-gif/" class="mobile-nav-sublink">Video to GIF</a>
             <a href="${rootPrefix}convertors/gif-to-video/" class="mobile-nav-sublink">GIF to Video</a>
             <a href="${rootPrefix}privacy/" class="mobile-nav-sublink">Privacy</a>
