@@ -32,7 +32,9 @@
    - Tools are indexed in a centralized registry in `scripts/main.js` with direct routing to tool pages (e.g. `utility/qr-code-generator/`).
 5. **Monetization Architecture**:
    - **Homepage is 100% Ad-Free**: The homepage never contains any ad units.
-   - **Ads on Tool Pages Only**: Adsterra and other ad networks are placed exclusively on individual tool pages (`[category-name]/[tool-name]/index.html`).
+   - **Ads on Tool Pages Only**: Adsterra banners are placed exclusively at the bottom of dedicated tool pages (`[category-name]/[tool-name]/index.html`).
+   - **Polite Label**: Styled as `<span class="ad-label"><iconify-icon icon="lucide:heart"></iconify-icon> Sponsored • Supporting Toolity's Free Tools</span>`.
+   - **Local Development Policy**: In local copies, live ad scripts are commented out and displayed as clean dashed placeholder frames (`.ad-placeholder-frame`) to avoid accidental ad triggers on live dev servers. Live ad tags are strictly enabled before production pushes.
    - [`ads.txt`](ads.txt) is set up at the root with standard instructions ready for the publisher account ID.
 6. **Platform, Legal & Supporting Pages**:
    - [`404.html`](404.html): Custom GitHub Pages 404 error fallback with mascot and navigation.
@@ -44,7 +46,30 @@
 
 ---
 
-## 3. Security & Information Boundary
+## 3. Security, Git & Deployment Rules
 
+- **Strict Git Push Policy**: Never push any changes to GitHub without the user's explicit request. Always test and verify locally first.
 - **No Secrets in Repo**: API keys, private tokens, passwords, and sensitive credentials must never be committed to code or written into markdown memory files.
 - **Privacy Assurance**: All tools are built for client-side local execution (Web APIs) so user data never touches external servers.
+
+---
+
+## 4. Design Psychology & UI/UX Principles (Toolity Design System)
+
+1. **Cognitive Load & Visual Calmness (Avoiding Box-in-a-Box Fatigue)**:
+   - **No Heavy Nested Cards**: Avoid placing boxed sub-cards inside other boxes or panes. Use clean whitespace and minimal borders instead of stacking multiple background containers.
+   - **No Redundant Duplicate Controls**: If an interactive dropzone is clickable and drag-and-drop enabled, never add a duplicate "Choose File" button below it. One clear affordance is superior to multiple competing buttons.
+   - **No Heavy Empty-State Clutter**: Do not display chunky multi-cell metric grids with dashes (`—`) before a tool is used. Display output specs cleanly in header badges or quiet single-line summaries upon completion.
+
+2. **Predictable Spatial Consistency (Zero Layout Shifts)**:
+   - **Symmetrical Dual-Pane Balance**: Left (Source / Input) and Right (Output / Result) panes must maintain matching height bounds and visual weight across all lifecycle states (empty, active, processing, and complete).
+   - **No Surprise Element Pop-Ins**: Avoid elements that suddenly appear and expand pane heights or push page content downward. Controls should be integrated seamlessly or smoothly transition without jarring layout jumps.
+
+3. **Progressive Disclosure**:
+   - **Collapsed Settings by Default**: Secondary options (framerate, scale, speed, color quality, indentation) belong inside a clean `<details class="tool-settings-accordion">` that is collapsed by default with an informative summary pill (e.g., `(10 FPS • 480px • 1.0x Speed • Balanced)`).
+
+4. **Non-Disruptive Floating Toast Feedback**:
+   - Status updates, file load notices, conversion progress, completion alerts, and clipboard copies should be delivered via floating toast notifications (`#tool-toast`) rather than inline alert banners that disrupt the workspace layout.
+
+5. **Quiet Trust over Repetitive Badges**:
+   - Avoid repetitive "100% Client-Side Private" badges in individual tool toolbars. Privacy and performance are established globally in the footer, about page, and architecture; individual tool headers must remain uncluttered and focused purely on functionality.

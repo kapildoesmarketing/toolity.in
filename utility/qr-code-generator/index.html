@@ -476,11 +476,20 @@
 
         <!-- ==================================================================
              EXACTLY 1 ADSTERRA BANNER SLOT (Positioned at bottom of tool)
+             [Live ad scripts commented out in local development environment]
              ================================================================== -->
         <div class="adsterra-single-slot">
-          <span class="ad-label">Advertisement</span>
+          <span class="ad-label">
+            <iconify-icon icon="lucide:heart" width="11" height="11"></iconify-icon>
+            Sponsored • Supporting Toolity's Free Tools
+          </span>
           
-          <!-- Desktop Banner (728x90) -->
+          <div class="ad-placeholder-frame">
+            <iconify-icon icon="lucide:sparkles" width="16" height="16"></iconify-icon>
+            <span>Adsterra High-Viewability Banner (728×90 Desktop / 320×50 Mobile)</span>
+          </div>
+
+          <!-- Production Scripts (Activated upon live GitHub push)
           <div class="ad-slot-desktop">
             <script>
               atOptions = {
@@ -493,8 +502,6 @@
             </script>
             <script src="https://www.highrevenueformat.com/173f3c31e644a6feb61843877787aa01/invoke.js"></script>
           </div>
-
-          <!-- Mobile Banner (320x50) -->
           <div class="ad-slot-mobile">
             <script>
               atOptions = {
@@ -507,6 +514,7 @@
             </script>
             <script src="https://www.highrevenueformat.com/d494b0cbcfa90ae4f358b33b28092221/invoke.js"></script>
           </div>
+          -->
         </div>
 
         <!-- ==================================================================
