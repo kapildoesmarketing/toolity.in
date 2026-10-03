@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GIF Speed Changer — Toolity.in</title>
+
+  <!-- SEO & Metadata -->
+  <meta name="description"
+    content="Free, fast, and 100% private GIF Speed Changer. Speed up or slow down animated GIFs directly in your browser with multi-worker acceleration, customizable speed presets from 0.1x to 5.0x, and zero server uploads.">
+  <meta name="keywords"
+    content="gif speed changer, speed up gif, slow down gif, gif fast forward, gif slow motion, change gif speed, adjust gif playback, client side gif editor, private gif tool">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/webp" href="../../assets/Toolity.in Logo.webp">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Iconify Icon Component -->
+  <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="../../styles/main.css">
+  <style>
+    /* Designed by Kapil Pidhwani: GIF Speed Changer Specific Ergonomics */
+    .gif-viewport-container {
+      position: relative;
+      width: 100%;
+      height: 280px;
+      background: var(--bg-surface-subtle);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.03);
+    }
+
+    .gif-display-element {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border-radius: var(--radius-sm);
+      display: none;
+    }
+
+    .gif-dropzone-box {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 1.5rem;
+      text-align: center;
+      transition: background var(--transition-fast), border-color var(--transition-fast);
+    }
+
+    .gif-dropzone-box.dragover {
+      background: rgba(244, 81, 30, 0.06);
+      outline: 2px dashed var(--brand-primary);
+      outline-offset: -8px;
+    }
+
+    .gif-dropzone-box:hover {
+      background: rgba(0, 0, 0, 0.02);
+    }
+
+    [data-theme="dark"] .gif-dropzone-box:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .dropzone-icon-circle {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.85rem;
+      color: var(--brand-primary);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .dropzone-main-text {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text-heading);
+      margin-bottom: 0.25rem;
+    }
+
+    .dropzone-sub-text {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .gif-meta-stats-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 0.85rem;
+      padding: 0.55rem 0.85rem;
+      background: var(--bg-surface-subtle);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+    }
+
+
+  </style>
+</head>
+
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W5SC3TGR"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <!-- Top Sticky Header -->
+  <header class="site-header scrolled">
+    <div class="nav-container">
+      <!-- Left: Brand Logo & Title -->
+      <div class="nav-left">
+        <a href="../../" class="brand-link" aria-label="Toolity.in Home">
+          <div class="brand-icon-wrapper">
+            <img src="../../assets/Toolity.in Logo.webp" alt="Toolity.in Logo" class="brand-logo-img" width="32" height="32">
+          </div>
+          <span class="brand-name">Toolity<span class="brand-tld">.in</span></span>
+        </a>
+      </div>
+
+      <!-- Center: Navigation Pages (Capsule) -->
+      <nav class="nav-center" aria-label="Main Navigation">
+        <div class="nav-glass-capsule">
+          <ul class="nav-links">
+            <li><a href="../../" class="nav-link">Home</a></li>
+            <li><a href="../../dev/" class="nav-link">Dev</a></li>
+            <li><a href="../../text/" class="nav-link">Text</a></li>
+            <li><a href="../../web/" class="nav-link">Web</a></li>
+            <li><a href="../../design/" class="nav-link">Design</a></li>
+            <li><a href="../../utility/" class="nav-link active">Utility</a></li>
+            <li><a href="../../convertors/" class="nav-link">Convertors</a></li>
+            <li><a href="../../formatters/" class="nav-link">Formatters</a></li>
+            <li><a href="../../others/" class="nav-link">Others</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Right: Dark Mode Toggle -->
+      <div class="nav-right">
+        <button id="theme-toggle" class="btn-icon-pill" type="button" aria-label="Toggle light/dark theme"
+          title="Toggle Theme">
+          <iconify-icon id="theme-icon" icon="lucide:moon" width="18" height="18"></iconify-icon>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Tool Page Content -->
+  <main>
+    <!-- Page Hero Header -->
+    <section class="page-hero">
+      <div class="container">
+        <!-- Breadcrumbs Navigation -->
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="../../" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="../../utility/" class="breadcrumb-link">Everyday Utilities</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">GIF Speed Changer</span>
+        </nav>
+
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Everyday Utility</span>
+            <h1 class="page-title">GIF Speed Changer</h1>
+            <p class="page-desc">
+              Speed up or slow down animated GIFs directly in your browser. Fine-tune playback speed from 0.1× to 5.0× with zero server uploads and 100% client-side privacy.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tool Main Workspace Area -->
+    <section class="section-wrapper" style="border-top: none; padding-top: 3.5rem;">
+      <div class="container">
+
+        <!-- Unified Tool Workspace Card -->
+        <div class="tool-workspace-card">
+
+          <!-- 1. Actions Toolbar (Top-Right Universal Pattern) -->
+          <div class="tool-actions-toolbar" style="justify-content: flex-end;">
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset-tool" title="Reset tool state">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-process-gif" title="Process and apply new speed" disabled>
+                <iconify-icon icon="lucide:play" width="14" height="14" id="btn-process-icon"></iconify-icon>
+                <span id="btn-process-label">Change Speed</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy-gif" title="Copy modified GIF to clipboard" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download-gif" title="Download modified GIF" disabled>
+                <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                <span>Download GIF</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2. Dual Split-Pane Input & Output Grid -->
+          <div class="split-pane-grid" style="margin-bottom: 1.25rem;">
+
+            <!-- Left: Original GIF Source Pane -->
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Original GIF</span>
+                <span class="pane-badge" id="src-gif-badge">No GIF loaded</span>
+              </div>
+
+              <div class="pane-content" style="display: flex; flex-direction: column; justify-content: space-between;">
+                <!-- Media Viewport Frame (280px) -->
+                <div class="gif-viewport-container" id="src-viewport-frame">
+                  <!-- Drag & Drop Zone -->
+                  <div id="gif-dropzone" class="gif-dropzone-box">
+                    <input type="file" id="gif-file-input" accept="image/gif" style="display: none;">
+                    <div class="dropzone-icon-circle">
+                      <iconify-icon icon="lucide:upload-cloud" width="22" height="22"></iconify-icon>
+                    </div>
+                    <div class="dropzone-main-text">Drop GIF here or click to browse</div>
+                    <div class="dropzone-sub-text">Supports animated GIF files up to 50MB</div>
+                  </div>
+
+                  <!-- Active Original GIF Preview Image -->
+                  <img id="src-gif-img" class="gif-display-element" alt="Original Animated GIF Preview">
+                </div>
+
+                <!-- Original GIF Stats Row -->
+                <div class="gif-meta-stats-row" id="src-stats-row">
+                  <span id="src-frames-stat">0 Frames</span>
+                  <span id="src-dims-stat">0 × 0 px</span>
+                  <span id="src-duration-stat">0.0s Duration</span>
+                  <span id="src-speed-stat" style="color: var(--brand-primary); font-weight: 600;">1.0× Native</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Modified Speed GIF Output Pane -->
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Speed Adjusted Preview</span>
+                <span class="pane-badge" id="result-gif-badge">Awaiting Input</span>
+              </div>
+
+              <div class="pane-content" style="display: flex; flex-direction: column; justify-content: space-between;">
+                <!-- Media Viewport Frame (280px) -->
+                <div class="gif-viewport-container" id="result-viewport-frame">
+                  <!-- Empty Placeholder -->
+                  <div id="result-empty-placeholder" class="media-empty-placeholder">
+                    <iconify-icon icon="lucide:sparkles" width="32" height="32"></iconify-icon>
+                    <p>Adjusted speed GIF will appear here</p>
+                  </div>
+
+                  <!-- Active Result GIF Preview Image -->
+                  <img id="result-gif-img" class="gif-display-element" alt="Adjusted Animated GIF Preview">
+                </div>
+
+                <!-- Slim Progress Bar & Status Output -->
+                <div style="margin-top: 0.85rem;">
+                  <div class="slim-progress-bar" id="slim-progress-bar" style="margin-bottom: 0.5rem;">
+                    <div class="slim-progress-fill" id="slim-progress-fill"></div>
+                  </div>
+                  <div class="gif-meta-stats-row" id="result-stats-row">
+                    <span id="result-size-stat">—</span>
+                    <span id="result-dims-stat">—</span>
+                    <span id="result-duration-stat">—</span>
+                    <span id="result-multiplier-stat" style="color: var(--brand-primary); font-weight: 600;">2.0× Speed</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 3. Controls & Options inside Accordion (Positioned Below Dual-Pane, Closed by Default) -->
+          <details class="tool-settings-accordion" style="margin-bottom: 0.25rem;">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="16" height="16"></iconify-icon>
+                <span>Playback Speed & Optimization Settings</span>
+                <span class="pane-badge" id="settings-summary-badge">(2.0× Speed • Original Dims • Balanced)</span>
+              </div>
+              <iconify-icon icon="lucide:chevron-down" class="tool-settings-chevron" width="16" height="16"></iconify-icon>
+            </summary>
+
+            <div class="tool-settings-panel">
+              <div class="settings-sections-wrapper">
+
+                <!-- Section 1: Playback Speed Control -->
+                <div class="settings-section-card">
+                  <div class="settings-section-header">
+                    <span>1. Playback Speed Multiplier</span>
+                  </div>
+                  <div class="settings-row-wrap">
+                    
+                    <!-- Quick Presets -->
+                    <div class="form-group" style="width: 100%;">
+                      <span class="form-label" style="font-size: 0.75rem;">Select Speed Multiplier</span>
+                      <div class="segmented-group segmented-group-pill" id="seg-speed-presets">
+                        <button type="button" class="seg-pill" data-val="0.25">0.25×</button>
+                        <button type="button" class="seg-pill" data-val="0.5">0.5×</button>
+                        <button type="button" class="seg-pill" data-val="0.75">0.75×</button>
+                        <button type="button" class="seg-pill" data-val="1.25">1.25×</button>
+                        <button type="button" class="seg-pill" data-val="1.5">1.5×</button>
+                        <button type="button" class="seg-pill active" data-val="2.0">2.0×</button>
+                        <button type="button" class="seg-pill" data-val="3.0">3.0×</button>
+                        <button type="button" class="seg-pill" data-val="4.0">4.0×</button>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <!-- Section 2: Scale & Color Quality Options -->
+                <div class="settings-section-card">
+                  <div class="settings-section-header">
+                    <span>2. Dimensions & Quality</span>
+                  </div>
+                  <div class="settings-row-wrap">
+                    
+                    <!-- Output Scale / Width -->
+                    <div class="form-group">
+                      <span class="form-label" style="font-size:0.75rem;">Resolution / Scale</span>
+                      <div class="segmented-group segmented-group-pill" id="seg-width">
+                        <button type="button" class="seg-pill active" data-val="original">100% Original</button>
+                        <button type="button" class="seg-pill" data-val="480">480px Max</button>
+                        <button type="button" class="seg-pill" data-val="320">320px Compact</button>
+                      </div>
+                    </div>
+
+                    <!-- Color Sampling Quality -->
+                    <div class="form-group">
+                      <span class="form-label" style="font-size:0.75rem;">Color Sampling Quality</span>
+                      <div class="segmented-group segmented-group-pill" id="seg-quality">
+                        <button type="button" class="seg-pill" data-val="1">High Quality</button>
+                        <button type="button" class="seg-pill active" data-val="5">Balanced</button>
+                        <button type="button" class="seg-pill" data-val="10">Fast</button>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+        <!-- ==================================================================
+             ADSTERRA ADVERTISING BANNER SLOT
+             ================================================================== -->
+        <section class="ad-slot-wrapper">
+          <div class="ad-slot-container">
+            <span class="ad-label">
+              <iconify-icon icon="lucide:heart"></iconify-icon>
+              Sponsored • Supporting Toolity's Free Tools
+            </span>
+            <div class="ad-banner-frame">
+              <!-- Desktop 728x90 Frame -->
+              <div class="ad-slot-desktop">
+                <script type="text/javascript">
+                  atOptions = {
+                    'key' : '173f3c31e644a6feb61843877787aa01',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                  };
+                </script>
+                <script type="text/javascript" src="https://www.highrevenueformat.com/173f3c31e644a6feb61843877787aa01/invoke.js"></script>
+              </div>
+              <!-- Mobile 320x50 Frame -->
+              <div class="ad-slot-mobile">
+                <script type="text/javascript">
+                  atOptions = {
+                    'key' : 'd494b0cbcfa90ae4f358b33b28092221',
+                    'format' : 'iframe',
+                    'height' : 50,
+                    'width' : 320,
+                    'params' : {}
+                  };
+                </script>
+                <script type="text/javascript" src="https://www.highrevenueformat.com/d494b0cbcfa90ae4f358b33b28092221/invoke.js"></script>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             HOW-TO GUIDE / 3-STEP SECTION
+             ================================================================== -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">Quick Tutorial</span>
+            <h2 class="section-heading-sm">How to Change GIF Playback Speed</h2>
+          </div>
+
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Upload Animated GIF</h3>
+              <p class="step-desc">
+                Drop your animated GIF into the upload zone or browse from your device. Frames and native durations are extracted instantly in your browser.
+              </p>
+            </div>
+
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Select Speed Multiplier</h3>
+              <p class="step-desc">
+                Choose a speed preset (e.g. 0.25× or 0.5× for slow motion, 2.0× or 4.0× for fast-forward) to instantly re-time playback.
+              </p>
+            </div>
+
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Process & Download</h3>
+              <p class="step-desc">
+                Click Change Speed to compile the re-timed GIF with multi-worker acceleration in browser memory. Preview live, copy, or download instantly.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             MAINTENANCE-FREE CATEGORY WORKSPACE CTA CARD
+             ================================================================== -->
+        <section class="category-workspace-cta">
+          <div class="category-workspace-cta-left">
+            <span class="section-eyebrow">Utility Workspace</span>
+            <h2 class="category-workspace-cta-title">Explore All Everyday Utility Tools</h2>
+            <p class="category-workspace-cta-desc">
+              Discover our full suite of client-side utilities including QR Code Generator, Mailto Link Creator, Password Generator, and format converters.
+            </p>
+          </div>
+          <div class="category-workspace-cta-right">
+            <a href="../../utility/" class="btn-pill btn-primary-signal">
+              <span>Explore Utility Tools</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14"></path>
+                <path d="m12 5 7 7-7 7"></path>
+              </svg>
+            </a>
+          </div>
+        </section>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Global Toast Notification -->
+  <div id="tool-toast" class="tool-toast" role="status" aria-live="polite">
+    Copied to clipboard!
+  </div>
+
+  <!-- Global Multi-Column Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Brand & Mission Column -->
+        <div class="footer-col footer-col-brand">
+          <a href="/" class="brand-link" aria-label="Toolity.in Home">
+            <div class="brand-icon-wrapper">
+              <img src="../../assets/Toolity.in Logo.webp" alt="Toolity.in Logo" class="brand-logo-img" width="28" height="28">
+            </div>
+            <span class="brand-name">Toolity<span class="brand-tld">.in</span></span>
+          </a>
+          <p class="footer-brand-desc">
+            Simple, powerful tools for everyday tasks. Built with 100% client-side privacy, instant execution, and zero tracking.
+          </p>
+          <div class="footer-creator-badge">
+            <span>Created by</span>
+            <a href="https://github.com/kapildoesmarketing" target="_blank" rel="noopener noreferrer">Kapil Pidhwani</a>
+          </div>
+        </div>
+
+        <!-- Categories / Workspaces Column -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Workspaces</h4>
+          <ul class="footer-nav-list">
+            <li><a href="../../dev/">Developer Tools</a></li>
+            <li><a href="../../text/">Text Utilities</a></li>
+            <li><a href="../../web/">Web Tools</a></li>
+            <li><a href="../../design/">Design & Color</a></li>
+            <li><a href="../../utility/">Everyday Utilities</a></li>
+            <li><a href="../../convertors/">Convertors</a></li>
+            <li><a href="../../formatters/">Formatters</a></li>
+            <li><a href="../../others/">Other Tools</a></li>
+          </ul>
+        </div>
+
+        <!-- Platform & Info Column -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Platform</h4>
+          <ul class="footer-nav-list">
+            <li><a href="../../about/">About Toolity</a></li>
+            <li><a href="../../utility/qr-code-generator/">QR Code Generator</a></li>
+            <li><a href="../../utility/mailto-generator/">Mailto Link Creator</a></li>
+            <li><a href="../../utility/gif-speed-changer/">GIF Speed Changer</a></li>
+            <li><a href="../../convertors/video-to-gif/">Video to GIF Converter</a></li>
+            <li><a href="../../convertors/image-converter/">Image Converter</a></li>
+            <li><a href="../../credits/">Credits & Attributions</a></li>
+          </ul>
+        </div>
+
+        <!-- Legal & Trust Column -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Trust & Legal</h4>
+          <ul class="footer-nav-list">
+            <li><a href="../../privacy/">Privacy Policy</a></li>
+            <li><a href="../../terms/">Terms of Service</a></li>
+            <li><a href="mailto:kapildoesmarketing@gmail.com">Contact Support</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Bottom Copyright Bar -->
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          © 2026 Toolity.in. All rights reserved.
+        </div>
+        <div class="footer-meta-note">
+          100% Client-Side • No Telemetry • Blazing Fast
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Main scripts -->
+  <script src="../../scripts/main.js"></script>
+
+  <!-- Multi-Worker GIF Engine (gifshot with CDN fallback) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gifshot/0.3.2/gifshot.min.js"></script>
+  <script>
+    if (typeof window.gifshot === 'undefined') {
+      document.write('<script src="https://cdn.jsdelivr.net/npm/gifshot@0.3.2/build/gifshot.min.js"><\/script>');
+    }
+  </script>
+
+  <!-- GIF Decoder Fallback (gifuct-js) -->
+  <script src="https://cdn.jsdelivr.net/npm/gifuct-js@2.1.2/dist/gifuct-js.min.js"></script>
+
+  <!-- GIF Speed Changer Tool Logic (Designed by Kapil Pidhwani) -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // DOM Elements - Left Pane (Source)
+      const dropzone = document.getElementById('gif-dropzone');
+      const fileInput = document.getElementById('gif-file-input');
+      const srcGifImg = document.getElementById('src-gif-img');
+      const srcGifBadge = document.getElementById('src-gif-badge');
+      const srcFramesStat = document.getElementById('src-frames-stat');
+      const srcDimsStat = document.getElementById('src-dims-stat');
+      const srcDurationStat = document.getElementById('src-duration-stat');
+      const srcSpeedStat = document.getElementById('src-speed-stat');
+
+      // DOM Elements - Right Pane (Output)
+      const resultPlaceholder = document.getElementById('result-empty-placeholder');
+      const resultGifImg = document.getElementById('result-gif-img');
+      const resultGifBadge = document.getElementById('result-gif-badge');
+      const slimProgressBar = document.getElementById('slim-progress-bar');
+      const slimProgressFill = document.getElementById('slim-progress-fill');
+      const resultSizeStat = document.getElementById('result-size-stat');
+      const resultDimsStat = document.getElementById('result-dims-stat');
+      const resultDurationStat = document.getElementById('result-duration-stat');
+      const resultMultiplierStat = document.getElementById('result-multiplier-stat');
+
+      // Top Toolbar Buttons
+      const btnReset = document.getElementById('btn-reset-tool');
+      const btnProcess = document.getElementById('btn-process-gif');
+      const btnProcessIcon = document.getElementById('btn-process-icon');
+      const btnProcessLabel = document.getElementById('btn-process-label');
+      const btnCopy = document.getElementById('btn-copy-gif');
+      const btnDownload = document.getElementById('btn-download-gif');
+      const toastEl = document.getElementById('tool-toast');
+
+      // Settings Controls
+      const settingsSummaryBadge = document.getElementById('settings-summary-badge');
+
+      // Internal State
+      let selectedSpeed = 2.0;
+      let selectedWidth = 'original';
+      let selectedQuality = 5;
+
+      let rawFile = null;
+      let rawArrayBuffer = null;
+      let srcObjectUrl = null;
+      let decodedFrames = []; // Array of { canvas, durationMs, width, height }
+      let originalTotalDurationMs = 0;
+      let naturalWidth = 0;
+      let naturalHeight = 0;
+
+      let generatedGifBlob = null;
+      let isProcessing = false;
+
+      function showToast(msg) {
+        if (!toastEl) return;
+        toastEl.textContent = msg;
+        toastEl.classList.add('show');
+        setTimeout(() => toastEl.classList.remove('show'), 2500);
+      }
+
+      function formatBytes(bytes) {
+        if (!bytes || bytes === 0) return '0 B';
+        const k = 1024;
+        const sizes = ['B', 'KB', 'MB', 'GB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+      }
+
+      function updateSettingsSummary() {
+        const wText = selectedWidth === 'original' ? 'Original Dims' : `${selectedWidth}px Max`;
+        const qText = selectedQuality === 1 ? 'High Quality' : selectedQuality === 5 ? 'Balanced' : 'Fast';
+        settingsSummaryBadge.textContent = `(${selectedSpeed.toFixed(2)}× Speed • ${wText} • ${qText})`;
+      }
+
+      // 1. Bind Speed Presets
+      const presetButtons = document.querySelectorAll('#seg-speed-presets .seg-pill');
+      presetButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          presetButtons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          selectedSpeed = parseFloat(btn.getAttribute('data-val'));
+          updateSettingsSummary();
+          updatePredictedStats();
+        });
+      });
+
+      // 3. Bind Segmented Control Options
+      function bindSegmentedGroup(containerId, callback) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        const buttons = container.querySelectorAll('.seg-pill');
+        buttons.forEach(btn => {
+          btn.addEventListener('click', () => {
+            buttons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            callback(btn.getAttribute('data-val'));
+            updateSettingsSummary();
+          });
+        });
+      }
+
+      bindSegmentedGroup('seg-width', val => { selectedWidth = val === 'original' ? 'original' : parseInt(val, 10); });
+      bindSegmentedGroup('seg-quality', val => { selectedQuality = parseInt(val, 10); });
+
+      function updatePredictedStats() {
+        if (decodedFrames.length > 0 && originalTotalDurationMs > 0) {
+          const newDurSec = (originalTotalDurationMs / 1000) / selectedSpeed;
+          resultDurationStat.textContent = `~${newDurSec.toFixed(2)}s Duration`;
+          resultMultiplierStat.textContent = `${selectedSpeed.toFixed(2)}× Speed`;
+        }
+      }
+
+      // 4. File Drag & Drop Handling
+      dropzone.addEventListener('click', () => fileInput.click());
+
+      ['dragenter', 'dragover'].forEach(ev => {
+        dropzone.addEventListener(ev, e => {
+          e.preventDefault();
+          dropzone.classList.add('dragover');
+        });
+      });
+
+      ['dragleave', 'drop'].forEach(ev => {
+        dropzone.addEventListener(ev, e => {
+          e.preventDefault();
+          dropzone.classList.remove('dragover');
+        });
+      });
+
+      dropzone.addEventListener('drop', e => {
+        const files = e.dataTransfer.files;
+        if (files && files.length > 0) {
+          handleGifFile(files[0]);
+        }
+      });
+
+      fileInput.addEventListener('change', e => {
+        if (e.target.files && e.target.files.length > 0) {
+          handleGifFile(e.target.files[0]);
+        }
+      });
+
+      async function handleGifFile(file) {
+        if (!file.type.includes('gif') && !file.name.toLowerCase().endsWith('.gif')) {
+          showToast('Please upload a valid animated GIF file (.gif)');
+          return;
+        }
+
+        rawFile = file;
+        srcGifBadge.textContent = 'Decoding GIF...';
+        showToast('Reading and decoding GIF frames in browser...');
+
+        if (srcObjectUrl) URL.revokeObjectURL(srcObjectUrl);
+        srcObjectUrl = URL.createObjectURL(file);
+
+        srcGifImg.src = srcObjectUrl;
+        dropzone.style.display = 'none';
+        srcGifImg.style.display = 'block';
+
+        try {
+          rawArrayBuffer = await file.arrayBuffer();
+          await decodeGifFrames(rawArrayBuffer);
+
+          srcGifBadge.textContent = `${formatBytes(file.size)} • ${decodedFrames.length} Frames`;
+          srcFramesStat.textContent = `${decodedFrames.length} Frames`;
+          srcDimsStat.textContent = `${naturalWidth} × ${naturalHeight} px`;
+          srcDurationStat.textContent = `${(originalTotalDurationMs / 1000).toFixed(2)}s Duration`;
+          srcSpeedStat.textContent = '1.0× Native';
+
+          btnProcess.disabled = false;
+          resultGifBadge.textContent = 'Ready to Process';
+          updatePredictedStats();
+
+          showToast(`GIF loaded: ${decodedFrames.length} frames, ${naturalWidth}×${naturalHeight}px`);
+        } catch (err) {
+          console.error('GIF decoding error:', err);
+          srcGifBadge.textContent = 'Decode Error';
+          showToast('Failed to decode GIF frames. File might be corrupted.');
+        }
+      }
+
+      /**
+       * Deisgned by Kapil Pidhwani: High-Performance Multi-API GIF Frame Decoder
+       * Utilizes native WebCodecs ImageDecoder with transparent fallback to gifuct-js.
+       */
+      async function decodeGifFrames(arrayBuffer) {
+        decodedFrames = [];
+        originalTotalDurationMs = 0;
+
+        if (typeof window.ImageDecoder !== 'undefined') {
+          try {
+            const decoder = new ImageDecoder({
+              data: arrayBuffer,
+              type: 'image/gif'
+            });
+
+            await decoder.tracks.ready;
+            const track = decoder.tracks.selectedTrack;
+            const frameCount = track.frameCount;
+
+            for (let i = 0; i < frameCount; i++) {
+              const result = await decoder.decode({ frameIndex: i });
+              const frame = result.image;
+              const w = frame.displayWidth;
+              const h = frame.displayHeight;
+
+              if (i === 0) {
+                naturalWidth = w;
+                naturalHeight = h;
+              }
+
+              const canvas = document.createElement('canvas');
+              canvas.width = w;
+              canvas.height = h;
+              const ctx = canvas.getContext('2d');
+              ctx.drawImage(frame, 0, 0);
+
+              const durationMs = (frame.duration || 100000) / 1000;
+              originalTotalDurationMs += durationMs;
+
+              decodedFrames.push({
+                canvas: canvas,
+                durationMs: durationMs,
+                width: w,
+                height: h
+              });
+
+              frame.close();
+            }
+
+            if (decodedFrames.length > 0) return;
+          } catch (e) {
+            console.warn('ImageDecoder failed, falling back to gifuct-js:', e);
+          }
+        }
+
+        // Fallback using gifuct-js
+        if (typeof window.gifuct !== 'undefined' || typeof window.GIF !== 'undefined') {
+          const parser = window.gifuct || window.GIF;
+          const parsedGif = parser.parseGIF(arrayBuffer);
+          const rawFrames = parser.decompressFrames(parsedGif, true);
+
+          if (!rawFrames || rawFrames.length === 0) {
+            throw new Error('No frames parsed by fallback decoder');
+          }
+
+          naturalWidth = parsedGif.lsd.width;
+          naturalHeight = parsedGif.lsd.height;
+
+          // Composite frames on a master canvas
+          const masterCanvas = document.createElement('canvas');
+          masterCanvas.width = naturalWidth;
+          masterCanvas.height = naturalHeight;
+          const masterCtx = masterCanvas.getContext('2d');
+
+          const tempCanvas = document.createElement('canvas');
+          const tempCtx = tempCanvas.getContext('2d');
+
+          for (let i = 0; i < rawFrames.length; i++) {
+            const f = rawFrames[i];
+            const dims = f.dims;
+            const delay = f.delay || 100;
+            originalTotalDurationMs += delay;
+
+            if (tempCanvas.width !== dims.width || tempCanvas.height !== dims.height) {
+              tempCanvas.width = dims.width;
+              tempCanvas.height = dims.height;
+            }
+
+            const imgData = new ImageData(f.patch, dims.width, dims.height);
+            tempCtx.putImageData(imgData, 0, 0);
+
+            // Handle disposal method before drawing
+            if (f.disposalType === 2) {
+              // Restore to background
+              masterCtx.clearRect(0, 0, naturalWidth, naturalHeight);
+            }
+
+            masterCtx.drawImage(tempCanvas, dims.left, dims.top);
+
+            const frameCanvas = document.createElement('canvas');
+            frameCanvas.width = naturalWidth;
+            frameCanvas.height = naturalHeight;
+            const fCtx = frameCanvas.getContext('2d');
+            fCtx.drawImage(masterCanvas, 0, 0);
+
+            decodedFrames.push({
+              canvas: frameCanvas,
+              durationMs: delay,
+              width: naturalWidth,
+              height: naturalHeight
+            });
+          }
+          return;
+        }
+
+        throw new Error('No compatible GIF decoder available');
+      }
+
+      // 5. Change Speed & Re-encode GIF
+      btnProcess.addEventListener('click', () => {
+        if (!rawFile || decodedFrames.length === 0 || isProcessing) return;
+
+        if (typeof window.gifshot === 'undefined') {
+          showToast('GIF engine is loading. Please wait a moment...');
+          return;
+        }
+
+        isProcessing = true;
+        btnProcess.disabled = true;
+        btnProcessIcon.setAttribute('icon', 'lucide:loader-2');
+        btnProcessLabel.textContent = 'Processing (0%)...';
+        slimProgressBar.classList.add('active');
+        slimProgressFill.style.width = '0%';
+        resultGifBadge.textContent = 'Compiling GIF...';
+
+        showToast(`Re-timing ${decodedFrames.length} frames at ${selectedSpeed.toFixed(2)}× speed...`);
+
+        // Compute target dimensions
+        let targetW = naturalWidth;
+        let targetH = naturalHeight;
+
+        if (selectedWidth !== 'original') {
+          const maxDim = selectedWidth;
+          if (naturalWidth > maxDim) {
+            const ratio = maxDim / naturalWidth;
+            targetW = Math.round(naturalWidth * ratio);
+            targetH = Math.round(naturalHeight * ratio);
+          }
+        }
+
+        // Even dimensions guarantee
+        if (targetW % 2 !== 0) targetW--;
+        if (targetH % 2 !== 0) targetH--;
+
+        // Calculate frame interval based on average original duration divided by speed multiplier
+        const avgDurationMs = originalTotalDurationMs / decodedFrames.length;
+        const newIntervalSec = Math.max(0.015, (avgDurationMs / 1000) / selectedSpeed);
+
+        // Convert frame canvases to resized data URLs or canvas elements
+        const frameImages = decodedFrames.map(f => {
+          if (f.width === targetW && f.height === targetH) {
+            return f.canvas;
+          }
+          const scaledCanvas = document.createElement('canvas');
+          scaledCanvas.width = targetW;
+          scaledCanvas.height = targetH;
+          const sCtx = scaledCanvas.getContext('2d');
+          sCtx.drawImage(f.canvas, 0, 0, targetW, targetH);
+          return scaledCanvas;
+        });
+
+        const numWorkers = Math.min(8, Math.max(2, navigator.hardwareConcurrency || 4));
+
+        gifshot.createGIF({
+          images: frameImages,
+          interval: newIntervalSec,
+          numFrames: frameImages.length,
+          gifWidth: targetW,
+          gifHeight: targetH,
+          sampleInterval: selectedQuality,
+          numWorkers: numWorkers,
+          progressCallback: function(progress) {
+            const percent = Math.min(99, Math.round(progress * 100));
+            slimProgressFill.style.width = `${percent}%`;
+            btnProcessLabel.textContent = `Processing (${percent}%)...`;
+          }
+        }, function(obj) {
+          if (!obj.error) {
+            fetch(obj.image)
+              .then(res => res.blob())
+              .then(blob => {
+                generatedGifBlob = blob;
+                const resultUrl = URL.createObjectURL(blob);
+
+                resultPlaceholder.style.display = 'none';
+                resultGifImg.src = resultUrl;
+                resultGifImg.style.display = 'block';
+
+                const totalDurSec = (originalTotalDurationMs / 1000) / selectedSpeed;
+                resultGifBadge.textContent = `${formatBytes(blob.size)} • ${selectedSpeed.toFixed(2)}×`;
+                resultSizeStat.textContent = formatBytes(blob.size);
+                resultDimsStat.textContent = `${targetW} × ${targetH} px`;
+                resultDurationStat.textContent = `${totalDurSec.toFixed(2)}s Duration`;
+                resultMultiplierStat.textContent = `${selectedSpeed.toFixed(2)}× Speed`;
+
+                slimProgressFill.style.width = '100%';
+                btnCopy.disabled = false;
+                btnDownload.disabled = false;
+                showToast(`Speed changed! New GIF: ${formatBytes(blob.size)} (${selectedSpeed.toFixed(2)}×)`);
+              })
+              .catch(err => {
+                console.error('Blob conversion error:', err);
+                resultGifBadge.textContent = 'Error';
+                showToast('Failed to generate preview image');
+              })
+              .finally(() => {
+                isProcessing = false;
+                btnProcess.disabled = false;
+                btnProcessIcon.setAttribute('icon', 'lucide:play');
+                btnProcessLabel.textContent = 'Change Speed';
+                setTimeout(() => {
+                  slimProgressBar.classList.remove('active');
+                }, 1000);
+              });
+          } else {
+            console.error('gifshot error:', obj.errorCode, obj.errorMsg);
+            resultGifBadge.textContent = 'Error';
+            showToast(`Conversion failed: ${obj.errorMsg || 'Unknown error'}`);
+            isProcessing = false;
+            btnProcess.disabled = false;
+            btnProcessIcon.setAttribute('icon', 'lucide:play');
+            btnProcessLabel.textContent = 'Change Speed';
+            slimProgressBar.classList.remove('active');
+          }
+        });
+      });
+
+      // 6. Download GIF Action
+      btnDownload.addEventListener('click', () => {
+        if (!generatedGifBlob) return;
+        const baseName = rawFile ? rawFile.name.replace(/\.gif$/i, '') : 'animated';
+        const filename = `${baseName}_${selectedSpeed.toFixed(2)}x.gif`;
+
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(generatedGifBlob);
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        showToast(`Downloading ${filename}`);
+      });
+
+      // 7. Copy GIF to Clipboard Action
+      btnCopy.addEventListener('click', async () => {
+        if (!generatedGifBlob) return;
+        try {
+          if (navigator.clipboard && window.ClipboardItem) {
+            const item = new ClipboardItem({ [generatedGifBlob.type || 'image/gif']: generatedGifBlob });
+            await navigator.clipboard.write([item]);
+            showToast('GIF copied to clipboard!');
+          } else {
+            showToast('Direct image clipboard copying not supported on this browser');
+          }
+        } catch (err) {
+          console.warn('Clipboard write error:', err);
+          showToast('Could not copy image directly. Use Download GIF button.');
+        }
+      });
+
+      // 8. Reset Tool Action
+      btnReset.addEventListener('click', () => {
+        if (isProcessing) return;
+
+        rawFile = null;
+        rawArrayBuffer = null;
+        decodedFrames = [];
+        originalTotalDurationMs = 0;
+        naturalWidth = 0;
+        naturalHeight = 0;
+        generatedGifBlob = null;
+        fileInput.value = '';
+
+        if (srcObjectUrl) {
+          URL.revokeObjectURL(srcObjectUrl);
+          srcObjectUrl = null;
+        }
+
+        srcGifImg.style.display = 'none';
+        srcGifImg.src = '';
+        dropzone.style.display = 'flex';
+        srcGifBadge.textContent = 'No GIF loaded';
+        srcFramesStat.textContent = '0 Frames';
+        srcDimsStat.textContent = '0 × 0 px';
+        srcDurationStat.textContent = '0.0s Duration';
+        srcSpeedStat.textContent = '1.0× Native';
+
+        resultGifImg.style.display = 'none';
+        resultGifImg.src = '';
+        resultPlaceholder.style.display = 'flex';
+        resultGifBadge.textContent = 'Awaiting Input';
+        resultSizeStat.textContent = '—';
+        resultDimsStat.textContent = '—';
+        resultDurationStat.textContent = '—';
+        resultMultiplierStat.textContent = `${selectedSpeed.toFixed(2)}× Speed`;
+
+        btnProcess.disabled = true;
+        btnCopy.disabled = true;
+        btnDownload.disabled = true;
+        slimProgressBar.classList.remove('active');
+        slimProgressFill.style.width = '0%';
+
+        showToast('Tool reset');
+      });
+
+      // Initial update
+      updateSettingsSummary();
+    });
+  </script>
+</body>
+
+</html>

@@ -32,6 +32,100 @@
   <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 
   <link rel="stylesheet" href="../../styles/main.css">
+  <style>
+    /* Designed by Kapil Pidhwani: Image Converter Tool-Specific Styles */
+    .media-canvas-viewport {
+      width: 100%;
+      height: 280px;
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .video-dropzone {
+      width: 100%;
+      height: 100%;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      background: var(--surface);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 1.5px dashed var(--border);
+      border-radius: calc(var(--radius-md) - 2px);
+      margin: 4px;
+      box-sizing: border-box;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+    }
+    .video-dropzone:hover, .video-dropzone.dragover {
+      border-color: var(--brand);
+      background: var(--brand-soft);
+    }
+    .video-drop-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--surface-elevated);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--brand);
+      margin-bottom: 0.75rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .video-drop-title {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 0.25rem;
+    }
+    .video-drop-subtitle {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+    .media-empty-placeholder {
+      text-align: center;
+      color: var(--text-muted);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .media-empty-placeholder iconify-icon {
+      margin-bottom: 0.6rem;
+      opacity: 0.4;
+    }
+    .media-empty-placeholder p {
+      font-size: 0.86rem;
+    }
+    .slim-progress-bar {
+      width: 100%;
+      height: 3px;
+      background: var(--border);
+      border-radius: var(--radius-pill);
+      overflow: hidden;
+      margin-top: 0.4rem;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+    .slim-progress-bar.active {
+      opacity: 1;
+    }
+    .slim-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--brand), var(--brand-gold));
+      transition: width 0.15s ease;
+    }
+  </style>
 </head>
 
 <body>
@@ -60,7 +154,7 @@
             <li><a href="../../" class="nav-link">Home</a></li>
             <li><a href="../../dev/" class="nav-link">Dev</a></li>
             <li><a href="../../text/" class="nav-link">Text</a></li>
-            <li><a href="../../math/" class="nav-link">Math</a></li>
+            <li><a href="../../web/" class="nav-link">Web</a></li>
             <li><a href="../../design/" class="nav-link">Design</a></li>
             <li><a href="../../utility/" class="nav-link">Utility</a></li>
             <li><a href="../../convertors/" class="nav-link active">Convertors</a></li>
@@ -396,7 +490,7 @@
           <ul class="footer-nav-list">
             <li><a href="../../dev/">Developer Tools</a></li>
             <li><a href="../../text/">Text Utilities</a></li>
-            <li><a href="../../math/">Math & Numbers</a></li>
+            <li><a href="../../web/">Web Tools</a></li>
             <li><a href="../../design/">Design & Color</a></li>
             <li><a href="../../utility/">Everyday Utilities</a></li>
             <li><a href="../../convertors/">Convertors</a></li>

@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouTube Thumbnail Downloader (HD, 4K, 1080p) — Toolity.in</title>
+
+  <!-- SEO & Metadata -->
+  <meta name="description" content="Free YouTube Thumbnail Downloader: Extract, preview, and download HD (1080p, 720p), HQ (480p), and SD thumbnails from any YouTube video or Shorts link in full quality. 100% free and client-side.">
+  <meta name="keywords" content="youtube thumbnail downloader, download youtube thumbnail, get youtube thumbnail, youtube shorts thumbnail, hd thumbnail download, youtube cover image, 1080p youtube thumbnail">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="YouTube Thumbnail Downloader — Toolity.in">
+  <meta property="og:description" content="Extract and download ultra-clear HD thumbnails from any YouTube video or Shorts link directly in your browser.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://toolity.in/web/youtube-thumbnail-downloader/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/webp" href="../../assets/Toolity.in Logo.webp">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Iconify Icon Component -->
+  <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <!-- Global Design System -->
+  <link rel="stylesheet" href="../../styles/main.css">
+
+  <!-- Tool Specific Self-Contained Styles -->
+  <style>
+    /* Tool-Specific Workspace Styles for YouTube Thumbnail Downloader */
+    .url-input-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      margin-bottom: 0.65rem;
+    }
+
+    .url-input-container .input-clean {
+      padding-right: 2.5rem;
+    }
+
+    .btn-input-clear {
+      position: absolute;
+      right: 0.65rem;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: none;
+      padding: 0.25rem;
+      border-radius: var(--radius-xs);
+      line-height: 1;
+      transition: color 0.15s ease;
+    }
+
+    .btn-input-clear:hover {
+      color: var(--text-primary);
+    }
+
+    .sample-chips-row {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.85rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .sample-label {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+    }
+
+    .btn-sample-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.25rem 0.65rem;
+      font-size: 0.76rem;
+      font-weight: 500;
+      border-radius: var(--radius-pill);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-sample-chip:hover {
+      border-color: var(--brand);
+      color: var(--brand);
+      background: var(--brand-soft);
+    }
+
+    /* Video Metadata Status Deck */
+    .video-info-deck {
+      padding: 0.65rem 0.85rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      font-size: 0.78rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .video-id-display {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--font-mono);
+      color: var(--text-secondary);
+    }
+
+    .video-id-val {
+      color: var(--brand);
+      font-weight: 600;
+      background: var(--brand-soft);
+      padding: 2px 6px;
+      border-radius: var(--radius-xs);
+    }
+
+    /* Quality Tier Selector Cards */
+    .quality-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.55rem;
+    }
+
+    @media (max-width: 540px) {
+      .quality-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .quality-card-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem 0.85rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      text-align: left;
+    }
+
+    .quality-card-btn:hover {
+      border-color: var(--brand);
+      background: var(--surface-elevated);
+    }
+
+    .quality-card-btn.active {
+      border-color: var(--brand);
+      background: var(--brand-soft);
+      box-shadow: 0 0 0 1px var(--brand);
+    }
+
+    .quality-top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .quality-title {
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .quality-tag-badge {
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 1px 5px;
+      border-radius: var(--radius-xs);
+      background: var(--brand);
+      color: #ffffff;
+      font-family: var(--font-mono);
+    }
+
+    .quality-tag-badge.subtle {
+      background: var(--border);
+      color: var(--text-secondary);
+    }
+
+    .quality-dimensions {
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+    /* Right Output Preview Viewport */
+    .preview-viewport-box {
+      width: 100%;
+      height: 290px;
+      background: #0d1117;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.35);
+    }
+
+    .preview-viewport-box.empty {
+      background: var(--surface);
+      box-shadow: none;
+    }
+
+    .preview-thumbnail-img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      display: block;
+    }
+
+    .empty-preview-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      color: var(--text-muted);
+      text-align: center;
+      padding: 1.5rem;
+    }
+
+    .empty-preview-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+    }
+
+    .preview-floating-pill {
+      position: absolute;
+      top: 0.65rem;
+      right: 0.65rem;
+      background: rgba(13, 13, 13, 0.8);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: #ffffff;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      display: none;
+      align-items: center;
+      gap: 0.35rem;
+      z-index: 5;
+    }
+
+
+
+    /* Formats Table Card */
+    .formats-table-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      margin-top: 1.5rem;
+      overflow-x: auto;
+    }
+
+    .formats-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.84rem;
+    }
+
+    .formats-table th {
+      padding: 0.65rem 0.85rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .formats-table td {
+      padding: 0.75rem 0.85rem;
+      border-bottom: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+    }
+
+    .formats-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .formats-table code {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      padding: 2px 6px;
+      border-radius: var(--radius-xs);
+      color: var(--text-primary);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W5SC3TGR"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <!-- Top Sticky Header -->
+  <header class="site-header scrolled">
+    <div class="nav-container">
+      <!-- Left: Brand Logo & Title -->
+      <div class="nav-left">
+        <a href="../../" class="brand-link" aria-label="Toolity.in Home">
+          <div class="brand-icon-wrapper">
+            <img src="../../assets/Toolity.in Logo.webp" alt="Toolity.in Logo" class="brand-logo-img" width="32" height="32">
+          </div>
+          <span class="brand-name">Toolity<span class="brand-tld">.in</span></span>
+        </a>
+      </div>
+
+      <!-- Center: Navigation Pages (Capsule) -->
+      <nav class="nav-center" aria-label="Main Navigation">
+        <div class="nav-glass-capsule">
+          <ul class="nav-links">
+            <li><a href="../../" class="nav-link">Home</a></li>
+            <li><a href="../../dev/" class="nav-link">Dev</a></li>
+            <li><a href="../../text/" class="nav-link">Text</a></li>
+            <li><a href="../../web/" class="nav-link active">Web</a></li>
+            <li><a href="../../design/" class="nav-link">Design</a></li>
+            <li><a href="../../utility/" class="nav-link">Utility</a></li>
+            <li><a href="../../convertors/" class="nav-link">Convertors</a></li>
+            <li><a href="../../formatters/" class="nav-link">Formatters</a></li>
+            <li><a href="../../others/" class="nav-link">Others</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Right: Dark Mode Toggle -->
+      <div class="nav-right">
+        <button id="theme-toggle" class="btn-icon-pill" type="button" aria-label="Toggle light/dark theme"
+          title="Toggle Theme">
+          <iconify-icon id="theme-icon" icon="lucide:moon" width="18" height="18"></iconify-icon>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Tool Page Content -->
+  <main>
+    <!-- Page Hero Header -->
+    <section class="page-hero">
+      <div class="container">
+        <!-- Breadcrumbs Navigation -->
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="../../" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="../../web/" class="breadcrumb-link">Web Tools</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">YouTube Thumbnail Downloader</span>
+        </nav>
+
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Webmaster Tool</span>
+            <h1 class="page-title">YouTube Thumbnail Downloader</h1>
+            <p class="page-desc">
+              Extract, preview, and download HD (1080p, 720p), HQ (480p), and SD thumbnails from any YouTube video or Shorts link in full quality.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tool Main Workspace Area -->
+    <section class="section-wrapper" style="border-top: none; padding-top: 3.5rem;">
+      <div class="container">
+
+        <div class="tool-workspace-card">
+
+          <!-- 1. Quick Actions Toolbar (Universal Actions on Right) -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge" id="top-status-badge">YouTube CDN Direct</span>
+            </div>
+
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset-workspace" title="Reset all fields">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-top-copy" title="Copy active thumbnail image URL">
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy Link</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-top-open" title="Open raw thumbnail in new tab">
+                <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
+                <span>Open Raw</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-top-download" title="Download active thumbnail image">
+                <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                <span>Download Image</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2. Dual Split-Pane Grid -->
+          <div class="split-pane-grid">
+            
+            <!-- Left: Video Input & Quality Settings Pane -->
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Video Source & Quality</span>
+                <span class="pane-badge" id="video-format-pill">Waiting for URL</span>
+              </div>
+
+              <div class="pane-content" style="min-height: 420px; display: flex; flex-direction: column;">
+                
+                <!-- URL Input Group -->
+                <div class="form-group">
+                  <label class="form-label" for="yt-url-input">
+                    <span>YouTube Video / Shorts Link <span style="color: var(--brand);">*</span></span>
+                    <button type="button" class="btn-sample-chip" id="btn-paste-clipboard" style="padding: 1px 6px; font-size: 0.72rem;">
+                      <iconify-icon icon="lucide:clipboard" width="12" height="12"></iconify-icon>
+                      <span>Paste</span>
+                    </button>
+                  </label>
+                  
+                  <div class="url-input-container">
+                    <input type="text" id="yt-url-input" class="input-clean" placeholder="e.g. https://youtu.be/... or watch?v=..." spellcheck="false" autocomplete="off">
+                    <button type="button" id="btn-clear-url" class="btn-input-clear" title="Clear input">
+                      <iconify-icon icon="lucide:x" width="15" height="15"></iconify-icon>
+                    </button>
+                  </div>
+
+                  <!-- Quick Sample Links -->
+                  <div class="sample-chips-row">
+                    <span class="sample-label">Try sample:</span>
+                    <button type="button" class="btn-sample-chip sample-chip" data-url="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Never Gonna Give You Up</button>
+                    <button type="button" class="btn-sample-chip sample-chip" data-url="https://www.youtube.com/shorts/30G2H3bYlHQ">Shorts Sample</button>
+                  </div>
+                </div>
+
+                <!-- Video ID Meta Deck -->
+                <div class="video-info-deck">
+                  <div class="video-id-display">
+                    <span>Video ID:</span>
+                    <span id="video-id-text" class="video-id-val">None</span>
+                  </div>
+                  <span id="video-type-text" style="color: var(--text-muted);">Paste a YouTube link above</span>
+                </div>
+
+                <!-- Quality Selection Section -->
+                <div class="form-group" style="margin-top: auto;">
+                  <label class="form-label">
+                    <span>Available Resolutions</span>
+                    <span class="form-label-desc">Select image quality</span>
+                  </label>
+
+                  <div class="quality-grid">
+                    <!-- 1. Maxres HD -->
+                    <button type="button" class="quality-card-btn active" data-quality="maxres">
+                      <div class="quality-top-row">
+                        <span class="quality-title">HD (1080p / 720p)</span>
+                        <span class="quality-tag-badge">Maxres</span>
+                      </div>
+                      <span class="quality-dimensions">1280 × 720 or 1920 × 1080</span>
+                    </button>
+
+                    <!-- 2. High Quality -->
+                    <button type="button" class="quality-card-btn" data-quality="hq">
+                      <div class="quality-top-row">
+                        <span class="quality-title">High Quality (480p)</span>
+                        <span class="quality-tag-badge subtle">HQ</span>
+                      </div>
+                      <span class="quality-dimensions">480 × 360 px</span>
+                    </button>
+
+                    <!-- 3. Standard Quality -->
+                    <button type="button" class="quality-card-btn" data-quality="sd">
+                      <div class="quality-top-row">
+                        <span class="quality-title">Standard (SD)</span>
+                        <span class="quality-tag-badge subtle">SD</span>
+                      </div>
+                      <span class="quality-dimensions">640 × 480 px</span>
+                    </button>
+
+                    <!-- 4. Medium Quality -->
+                    <button type="button" class="quality-card-btn" data-quality="mq">
+                      <div class="quality-top-row">
+                        <span class="quality-title">Medium Quality</span>
+                        <span class="quality-tag-badge subtle">MQ</span>
+                      </div>
+                      <span class="quality-dimensions">320 × 180 px</span>
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Right: Thumbnail Preview & Actions Pane -->
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Thumbnail Preview</span>
+                <span class="pane-badge" id="preview-res-badge">1280 × 720 px</span>
+              </div>
+
+              <div class="pane-content" style="min-height: 420px; display: flex; flex-direction: column;">
+                
+                <!-- Main Preview Box -->
+                <div class="preview-viewport-box empty" id="preview-viewport" style="flex: 1; height: 100%; min-height: 380px;">
+                  <div class="empty-preview-content" id="empty-state">
+                    <div class="empty-preview-icon">
+                      <iconify-icon icon="lucide:video" width="22" height="22"></iconify-icon>
+                    </div>
+                    <div>
+                      <div style="font-weight: 500; color: var(--text-primary); font-size: 0.88rem; margin-bottom: 2px;">No video loaded</div>
+                      <div style="font-size: 0.78rem;">Paste any YouTube video or Shorts link on the left to view artwork</div>
+                    </div>
+                  </div>
+
+                  <img id="thumbnail-preview-img" class="preview-thumbnail-img" alt="YouTube Thumbnail Preview" style="display: none;">
+                  <div id="badge-overlay" class="preview-floating-pill">
+                    <iconify-icon icon="lucide:check-circle" width="13" height="13" style="color: #10B981;"></iconify-icon>
+                    <span id="overlay-text">HD 1080p</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ==================================================================
+             ADSTERRA ADVERTISING BANNER SLOT
+             ================================================================== -->
+        <section class="ad-slot-wrapper">
+          <div class="ad-slot-container">
+            <span class="ad-label">
+              <iconify-icon icon="lucide:heart"></iconify-icon>
+              Sponsored • Supporting Toolity's Free Tools
+            </span>
+            <div class="ad-banner-frame">
+              <!-- Desktop 728x90 Frame -->
+              <div class="ad-slot-desktop">
+                <script type="text/javascript">
+                  atOptions = {
+                    'key' : '173f3c31e644a6feb61843877787aa01',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                  };
+                </script>
+                <script type="text/javascript" src="https://www.highrevenueformat.com/173f3c31e644a6feb61843877787aa01/invoke.js"></script>
+              </div>
+              <!-- Mobile 320x50 Frame -->
+              <div class="ad-slot-mobile">
+                <script type="text/javascript">
+                  atOptions = {
+                    'key' : 'd494b0cbcfa90ae4f358b33b28092221',
+                    'format' : 'iframe',
+                    'height' : 50,
+                    'width' : 320,
+                    'params' : {}
+                  };
+                </script>
+                <script type="text/javascript" src="https://www.highrevenueformat.com/d494b0cbcfa90ae4f358b33b28092221/invoke.js"></script>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             3-STEP INSTRUCTION GUIDE
+             ================================================================== -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Download YouTube Thumbnails</h2>
+          </div>
+
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Paste YouTube Link</h3>
+              <p class="step-desc">
+                Copy any video or Shorts URL from your browser or YouTube app and paste it into the input field above.
+              </p>
+            </div>
+
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Select Quality Tier</h3>
+              <p class="step-desc">
+                Choose your desired resolution from HD Maxres (1080p), High Quality (480p), Standard (SD), or Medium (MQ).
+              </p>
+            </div>
+
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Download or Copy</h3>
+              <p class="step-desc">
+                Click "Download Image" to save the high-res JPG directly to your device with zero server latency.
+              </p>
+            </div>
+          </div>
+
+          <!-- Supported URL Formats Table Card -->
+          <div class="formats-table-card">
+            <h3 style="font-size: 0.95rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.75rem;">Supported YouTube Link Formats</h3>
+            <table class="formats-table">
+              <thead>
+                <tr>
+                  <th>Format Type</th>
+                  <th>Example Input</th>
+                  <th>Resolution Available</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Standard Desktop Watch</strong></td>
+                  <td><code>https://www.youtube.com/watch?v=dQw4w9WgXcQ</code></td>
+                  <td>Up to 1080p (HD Maxres)</td>
+                </tr>
+                <tr>
+                  <td><strong>Shortened Link</strong></td>
+                  <td><code>https://youtu.be/dQw4w9WgXcQ</code></td>
+                  <td>Up to 1080p (HD Maxres)</td>
+                </tr>
+                <tr>
+                  <td><strong>YouTube Shorts</strong></td>
+                  <td><code>https://www.youtube.com/shorts/30G2H3bYlHQ</code></td>
+                  <td>High Quality (HQ 480p)</td>
+                </tr>
+                <tr>
+                  <td><strong>Embed & Legacy Links</strong></td>
+                  <td><code>https://www.youtube.com/embed/dQw4w9WgXcQ</code></td>
+                  <td>Up to 1080p (HD Maxres)</td>
+                </tr>
+                <tr>
+                  <td><strong>Raw 11-Digit Video ID</strong></td>
+                  <td><code>dQw4w9WgXcQ</code></td>
+                  <td>All Qualities</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             CATEGORY WORKSPACE CTA CARD
+             ================================================================== -->
+        <section class="category-workspace-cta">
+          <div class="category-workspace-cta-left">
+            <span class="section-eyebrow">Web Workspace</span>
+            <h2 class="category-workspace-cta-title">Explore All Web & URL Tools</h2>
+            <p class="category-workspace-cta-desc">
+              Discover our collection of client-side web utilities including URL parameter separators, query strippers, and link sanitizers.
+            </p>
+          </div>
+          <div class="category-workspace-cta-right">
+            <a href="../../web/" class="btn-pill btn-primary-signal">
+              <span>Explore Web Tools</span>
+              <iconify-icon icon="lucide:arrow-right" width="15" height="15"></iconify-icon>
+            </a>
+          </div>
+        </section>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Global Multi-Column Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Brand & Mission Column -->
+        <div class="footer-col footer-col-brand">
+          <a href="../../" class="brand-link" aria-label="Toolity.in Home">
+            <div class="brand-icon-wrapper">
+              <img src="../../assets/Toolity.in Logo.webp" alt="Toolity.in Logo" class="brand-logo-img" width="28" height="28">
+            </div>
+            <span class="brand-name">Toolity<span class="brand-tld">.in</span></span>
+          </a>
+          <p class="footer-mission">
+            Blazing fast, zero-install, privacy-first web utilities. Process media, generate codes, and format data 100% in your browser.
+          </p>
+          <div class="footer-creator">
+            <span>Created by</span>
+            <a href="https://github.com/kapildoesmarketing" target="_blank" rel="noopener noreferrer">Kapil Pidhwani</a>
+          </div>
+        </div>
+
+        <!-- Categories / Workspaces Column -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Workspaces</h4>
+          <ul class="footer-nav-list">
+            <li><a href="../../dev/">Developer Tools</a></li>
+            <li><a href="../../text/">Text Utilities</a></li>
+            <li><a href="../../web/">Web & Network</a></li>
+            <li><a href="../../design/">Design & Color</a></li>
+            <li><a href="../../utility/">Everyday Utilities</a></li>
+            <li><a href="../../convertors/">Convertors</a></li>
+            <li><a href="../../formatters/">Formatters</a></li>
+            <li><a href="../../others/">Other Tools</a></li>
+          </ul>
+        </div>
+
+        <!-- Resources & About Column -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Platform</h4>
+          <ul class="footer-nav-list">
+            <li><a href="../../about/">About Toolity</a></li>
+            <li><a href="../../privacy/">Privacy Policy</a></li>
+            <li><a href="../../terms/">Terms of Service</a></li>
+            <li><a href="../../credits/">Credits & Attributions</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Bottom Sub-Footer Bar -->
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2026 Toolity.in. All tools run 100% locally in your browser. No cookies, no tracking, zero server storage.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Toast Feedback Element -->
+  <div id="tool-toast" class="tool-toast">
+    <iconify-icon icon="lucide:check-circle"></iconify-icon>
+    <span id="toast-message">Copied to clipboard</span>
+  </div>
+
+  <!-- Global Site Script -->
+  <script src="../../scripts/main.js"></script>
+
+  <!-- Tool Specific Self-Contained JavaScript Logic -->
+  <script>
+    /* Designed by Kapil Pidhwani: Client-Side YouTube Thumbnail Downloader Engine */
+    document.addEventListener('DOMContentLoaded', () => {
+      // DOM Elements
+      const urlInput = document.getElementById('yt-url-input');
+      const clearInputBtn = document.getElementById('btn-clear-url');
+      const pasteBtn = document.getElementById('btn-paste-clipboard');
+      const videoIdText = document.getElementById('video-id-text');
+      const videoTypeText = document.getElementById('video-type-text');
+      const videoFormatPill = document.getElementById('video-format-pill');
+      const qualityCards = document.querySelectorAll('.quality-card-btn');
+      const sampleChips = document.querySelectorAll('.sample-chip');
+
+      // Preview Elements
+      const previewViewport = document.getElementById('preview-viewport');
+      const emptyState = document.getElementById('empty-state');
+      const previewImg = document.getElementById('thumbnail-preview-img');
+      const badgeOverlay = document.getElementById('badge-overlay');
+      const overlayText = document.getElementById('overlay-text');
+      const previewResBadge = document.getElementById('preview-res-badge');
+
+      // Action Buttons
+      const resetBtn = document.getElementById('btn-reset-workspace');
+      const topCopyBtn = document.getElementById('btn-top-copy');
+      const topOpenBtn = document.getElementById('btn-top-open');
+      const topDownloadBtn = document.getElementById('btn-top-download');
+      const toast = document.getElementById('tool-toast');
+      const toastMessage = document.getElementById('toast-message');
+
+      // State
+      let currentVideoId = null;
+      let currentQuality = 'maxres'; // 'maxres' | 'hq' | 'sd' | 'mq'
+      let activeThumbnailUrl = null;
+      let toastTimer = null;
+
+      /**
+       * Show floating toast notification
+       */
+      function showToast(msg) {
+        if (toastTimer) clearTimeout(toastTimer);
+        toastMessage.textContent = msg;
+        toast.classList.add('show');
+        toastTimer = setTimeout(() => {
+          toast.classList.remove('show');
+        }, 2500);
+      }
+
+      /**
+       * Robust YouTube Video ID & Format Extractor
+       */
+      function parseYouTubeUrl(input) {
+        if (!input) return null;
+        const str = input.trim();
+
+        // Direct 11-char ID check
+        if (/^[a-zA-Z0-9_-]{11}$/.test(str)) {
+          return { id: str, type: 'Direct ID' };
+        }
+
+        // Shorts URL
+        const shortsMatch = str.match(/(?:https?:\/\/)?(?:www\.)?youtube\.com\/shorts\/([a-zA-Z0-9_-]{11})/i);
+        if (shortsMatch && shortsMatch[1]) {
+          return { id: shortsMatch[1], type: 'YouTube Shorts' };
+        }
+
+        // youtu.be Short URL
+        const youtuBeMatch = str.match(/(?:https?:\/\/)?(?:www\.)?youtu\.be\/([a-zA-Z0-9_-]{11})/i);
+        if (youtuBeMatch && youtuBeMatch[1]) {
+          return { id: youtuBeMatch[1], type: 'Shortened Link' };
+        }
+
+        // Embed URL
+        const embedMatch = str.match(/(?:https?:\/\/)?(?:www\.)?youtube\.com\/(?:embed|v)\/([a-zA-Z0-9_-]{11})/i);
+        if (embedMatch && embedMatch[1]) {
+          return { id: embedMatch[1], type: 'Embedded Video' };
+        }
+
+        // Standard watch URL
+        const standardMatch = str.match(/(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?.*v=([a-zA-Z0-9_-]{11})/i);
+        if (standardMatch && standardMatch[1]) {
+          return { id: standardMatch[1], type: 'Standard Video' };
+        }
+
+        return null;
+      }
+
+      /**
+       * Quality filename mapping
+       */
+      const QUALITY_FILES = {
+        maxres: { file: 'maxresdefault.jpg', label: 'HD 1080p', res: '1280 × 720 px' },
+        hq: { file: 'hqdefault.jpg', label: 'HQ 480p', res: '480 × 360 px' },
+        sd: { file: 'sddefault.jpg', label: 'SD 480p', res: '640 × 480 px' },
+        mq: { file: 'mqdefault.jpg', label: 'MQ 360p', res: '320 × 180 px' }
+      };
+
+      /**
+       * Build YouTube CDN URL
+       */
+      function getCdnUrl(id, quality) {
+        const config = QUALITY_FILES[quality] || QUALITY_FILES.maxres;
+        return `https://img.youtube.com/vi/${id}/${config.file}`;
+      }
+
+      /**
+       * Update thumbnail preview
+       */
+      function updatePreview() {
+        if (!currentVideoId) {
+          // Clear preview to empty state
+          previewViewport.classList.add('empty');
+          emptyState.style.display = 'flex';
+          previewImg.style.display = 'none';
+          previewImg.src = '';
+          badgeOverlay.style.display = 'none';
+          previewResBadge.textContent = '1280 × 720 px';
+
+          videoIdText.textContent = 'None';
+          videoTypeText.textContent = 'Paste a YouTube link above';
+          videoFormatPill.textContent = 'Waiting for URL';
+          clearInputBtn.style.display = 'none';
+
+          // Disable buttons
+          paneDownloadBtn.disabled = true;
+          paneCopyBtn.disabled = true;
+          paneOpenBtn.style.pointerEvents = 'none';
+          paneOpenBtn.style.opacity = '0.5';
+          paneOpenBtn.href = '#';
+          activeThumbnailUrl = null;
+          return;
+        }
+
+        clearInputBtn.style.display = 'block';
+
+        const config = QUALITY_FILES[currentQuality] || QUALITY_FILES.maxres;
+        const targetUrl = getCdnUrl(currentVideoId, currentQuality);
+        activeThumbnailUrl = targetUrl;
+
+        // Verify image natural dimensions (Handling fallback if maxres is unavailable)
+        const tester = new Image();
+        tester.onload = () => {
+          // YouTube returns a 120x90 image if maxresdefault doesn't exist
+          if (currentQuality === 'maxres' && tester.naturalWidth <= 120) {
+            // Auto fallback to HQ
+            currentQuality = 'hq';
+            updateQualityCards();
+            showToast('HD (1080p) unavailable for this video. Showing HQ (480p).');
+            updatePreview();
+            return;
+          }
+
+          previewViewport.classList.remove('empty');
+          emptyState.style.display = 'none';
+          previewImg.src = targetUrl;
+          previewImg.style.display = 'block';
+
+          // Update badges
+          overlayText.textContent = config.label;
+          badgeOverlay.style.display = 'flex';
+          previewResBadge.textContent = `${tester.naturalWidth || 1280} × ${tester.naturalHeight || 720} px`;
+        };
+
+        tester.onerror = () => {
+          // Fallback to HQ if maxres errors out
+          if (currentQuality !== 'hq') {
+            currentQuality = 'hq';
+            updateQualityCards();
+            updatePreview();
+          }
+        };
+
+        tester.src = targetUrl;
+      }
+
+      /**
+       * Handle Input change
+       */
+      function handleInputChange() {
+        const val = urlInput.value;
+        const parsed = parseYouTubeUrl(val);
+
+        if (parsed) {
+          currentVideoId = parsed.id;
+          videoIdText.textContent = parsed.id;
+          videoTypeText.textContent = parsed.type;
+          videoFormatPill.textContent = parsed.type;
+        } else {
+          currentVideoId = null;
+        }
+
+        updatePreview();
+      }
+
+      /**
+       * Update quality card active states
+       */
+      function updateQualityCards() {
+        qualityCards.forEach(card => {
+          if (card.getAttribute('data-quality') === currentQuality) {
+            card.classList.add('active');
+          } else {
+            card.classList.remove('active');
+          }
+        });
+      }
+
+      /**
+       * Fetch image blob with CORS proxy fallback to enable client-side downloads
+       */
+      async function fetchImageBlob(url) {
+        // 1. Try global image cache/proxy (weserv.nl - Cloudflare edge, full CORS)
+        try {
+          const proxyUrl = `https://images.weserv.nl/?url=${encodeURIComponent(url)}`;
+          const res = await fetch(proxyUrl);
+          if (res.ok) {
+            const blob = await res.blob();
+            if (blob && blob.size > 0) return blob;
+          }
+        } catch (e) {
+          // Continue to proxy fallbacks
+        }
+
+        // 2. Try proxy: allorigins.win
+        try {
+          const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
+          const res = await fetch(proxyUrl);
+          if (res.ok) {
+            const blob = await res.blob();
+            if (blob && blob.size > 0) return blob;
+          }
+        } catch (e) {
+          // Continue to next proxy
+        }
+
+        // 3. Try direct fetch
+        try {
+          const res = await fetch(url);
+          if (res.ok) {
+            const blob = await res.blob();
+            if (blob && blob.size > 0) return blob;
+          }
+        } catch (e) {
+          // Continue
+        }
+
+        throw new Error('Could not fetch image blob');
+      }
+
+      /**
+       * Download Image Client-Side via Blob
+       */
+      async function downloadThumbnail() {
+        if (!activeThumbnailUrl || !currentVideoId) {
+          showToast('Please enter a valid YouTube video link first');
+          return;
+        }
+
+        showToast('Downloading thumbnail...');
+
+        try {
+          const blob = await fetchImageBlob(activeThumbnailUrl);
+          const blobUrl = URL.createObjectURL(blob);
+
+          const link = document.createElement('a');
+          link.href = blobUrl;
+          link.download = `youtube-thumbnail-${currentVideoId}-${currentQuality}.jpg`;
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
+
+          showToast('Thumbnail downloaded successfully!');
+        } catch (err) {
+          showToast('Download failed. You can use "Open Raw" to view.');
+        }
+      }
+
+      /**
+       * Copy Image URL
+       */
+      function copyThumbnailUrl() {
+        if (!activeThumbnailUrl) {
+          showToast('No active thumbnail to copy');
+          return;
+        }
+
+        navigator.clipboard.writeText(activeThumbnailUrl).then(() => {
+          showToast('Thumbnail CDN URL copied to clipboard!');
+        }).catch(() => {
+          showToast('Failed to copy URL');
+        });
+      }
+
+      // Event Listeners
+      urlInput.addEventListener('input', handleInputChange);
+      urlInput.addEventListener('paste', () => {
+        setTimeout(handleInputChange, 10);
+      });
+
+      clearInputBtn.addEventListener('click', () => {
+        urlInput.value = '';
+        handleInputChange();
+        urlInput.focus();
+      });
+
+      pasteBtn.addEventListener('click', async () => {
+        try {
+          const text = await navigator.clipboard.readText();
+          if (text) {
+            urlInput.value = text;
+            handleInputChange();
+            showToast('Link pasted from clipboard');
+          }
+        } catch (err) {
+          urlInput.focus();
+          showToast('Please press ⌘V or Ctrl+V to paste');
+        }
+      });
+
+      // Sample link chips
+      sampleChips.forEach(chip => {
+        chip.addEventListener('click', () => {
+          const url = chip.getAttribute('data-url');
+          if (url) {
+            urlInput.value = url;
+            handleInputChange();
+            showToast('Sample link loaded');
+          }
+        });
+      });
+
+      // Quality selector cards
+      qualityCards.forEach(card => {
+        card.addEventListener('click', () => {
+          const q = card.getAttribute('data-quality');
+          if (q && q !== currentQuality) {
+            currentQuality = q;
+            updateQualityCards();
+            updatePreview();
+          }
+        });
+      });
+
+      // Action toolbar bindings
+      resetBtn.addEventListener('click', () => {
+        urlInput.value = '';
+        currentQuality = 'maxres';
+        updateQualityCards();
+        handleInputChange();
+        showToast('Workspace reset');
+      });
+
+      topDownloadBtn.addEventListener('click', downloadThumbnail);
+      topCopyBtn.addEventListener('click', copyThumbnailUrl);
+      topOpenBtn.addEventListener('click', () => {
+        if (activeThumbnailUrl) {
+          window.open(activeThumbnailUrl, '_blank');
+        } else {
+          showToast('Please enter a valid YouTube video link first');
+        }
+      });
+
+      // Initial check in case URL is prefilled
+      handleInputChange();
+    });
+  </script>
+</body>
+
+</html>

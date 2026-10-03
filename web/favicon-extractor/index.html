@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website Favicon Extractor & Downloader (HD 256px, 128px) — Toolity.in</title>
+
+  <!-- SEO & Metadata -->
+  <meta name="description" content="Free Website Favicon Extractor: Grab, preview, and download high-resolution favicons (16px to 256px HD) from any website or domain using Google's Favicon Service. 100% free and client-side.">
+  <meta name="keywords" content="favicon extractor, website favicon downloader, get favicon from url, google favicon service, download favicon hd, favicon grabber, website icon download">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Website Favicon Extractor — Toolity.in">
+  <meta property="og:description" content="Extract and download ultra-clear HD favicons and touch icons from any domain directly in your browser.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://toolity.in/web/favicon-extractor/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/webp" href="../../assets/Toolity.in Logo.webp">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Iconify Icon Component -->
+  <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <!-- Global Design System -->
+  <link rel="stylesheet" href="../../styles/main.css">
+
+  <!-- Tool Specific Self-Contained Styles -->
+  <style>
+    /* Tool-Specific Workspace Styles for Website Favicon Extractor */
+    .url-input-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      margin-bottom: 0.65rem;
+    }
+
+    .url-input-container .input-clean {
+      padding-right: 2.5rem;
+    }
+
+    .btn-input-clear {
+      position: absolute;
+      right: 0.65rem;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: none;
+      padding: 0.25rem;
+      border-radius: var(--radius-xs);
+      line-height: 1;
+      transition: color 0.15s ease;
+    }
+
+    .btn-input-clear:hover {
+      color: var(--text-primary);
+    }
+
+    .sample-chips-row {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.85rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .sample-label {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+    }
+
+    .btn-sample-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.25rem 0.65rem;
+      font-size: 0.76rem;
+      font-weight: 500;
+      border-radius: var(--radius-pill);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-sample-chip:hover {
+      border-color: var(--brand);
+      color: var(--brand);
+      background: var(--brand-soft);
+    }
+
+    /* Domain Metadata Status Deck */
+    .domain-info-deck {
+      padding: 0.65rem 0.85rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      font-size: 0.78rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .domain-id-display {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--font-mono);
+      color: var(--text-secondary);
+    }
+
+    .domain-id-val {
+      color: var(--brand);
+      font-weight: 600;
+      background: var(--brand-soft);
+      padding: 2px 6px;
+      border-radius: var(--radius-xs);
+    }
+
+    /* Quality Tier Selector Cards */
+    .quality-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.55rem;
+    }
+
+    @media (max-width: 540px) {
+      .quality-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .quality-card-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem 0.85rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      text-align: left;
+    }
+
+    .quality-card-btn:hover {
+      border-color: var(--brand);
+      background: var(--surface-elevated);
+    }
+
+    .quality-card-btn.active {
+      border-color: var(--brand);
+      background: var(--brand-soft);
+      box-shadow: 0 0 0 1px var(--brand);
+    }
+
+    .quality-top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .quality-title {
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .quality-tag-badge {
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 1px 5px;
+      border-radius: var(--radius-xs);
+      background: var(--brand);
+      color: #ffffff;
+      font-family: var(--font-mono);
+    }
+
+    .quality-tag-badge.subtle {
+      background: var(--border);
+      color: var(--text-secondary);
+    }
+
+    .quality-dimensions {
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+    /* Right Output Preview Viewport */
+    .preview-viewport-box {
+      width: 100%;
+      height: 250px;
+      background: #0d1117;
+      background-image: 
+        linear-gradient(45deg, #161b22 25%, transparent 25%), 
+        linear-gradient(-45deg, #161b22 25%, transparent 25%), 
+        linear-gradient(45deg, transparent 75%, #161b22 75%), 
+        linear-gradient(-45deg, transparent 75%, #161b22 75%);
+      background-size: 16px 16px;
+      background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.35);
+    }
+
+    .preview-viewport-box.empty {
+      background: var(--surface);
+      box-shadow: none;
+    }
+
+    .preview-favicon-img {
+      max-width: 140px;
+      max-height: 140px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+      transition: transform 0.2s ease;
+    }
+
+    .empty-preview-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      color: var(--text-muted);
+      text-align: center;
+      padding: 1.5rem;
+    }
+
+    .empty-preview-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+    }
+
+    .preview-floating-pill {
+      position: absolute;
+      top: 0.65rem;
+      right: 0.65rem;
+      background: rgba(13, 13, 13, 0.8);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: #ffffff;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      display: none;
+      align-items: center;
+      gap: 0.35rem;
+      z-index: 5;
+    }
+
+    /* HTML Code Snippet Box */
+    .snippet-group {
+      margin-top: 0.75rem;
+    }
+
+    .snippet-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 0.6rem 0.85rem;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      overflow-x: auto;
+    }
+
+    .snippet-code {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      flex: 1;
+    }
+
+    .btn-snippet-copy {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      padding: 0.2rem;
+      border-radius: var(--radius-xs);
+      transition: color 0.15s ease;
+    }
+
+    .btn-snippet-copy:hover {
+      color: var(--brand);
+    }
+
+    /* Formats Table Card */
+    .formats-table-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      margin-top: 1.5rem;
+      overflow-x: auto;
+    }
+
+    .formats-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.84rem;
+    }
+
+    .formats-table th {
+      padding: 0.65rem 0.85rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .formats-table td {
+      padding: 0.75rem 0.85rem;
+      border-bottom: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+    }
+
+    .formats-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .formats-table code {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      padding: 2px 6px;
+      border-radius: var(--radius-xs);
+      color: var(--text-primary);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W5SC3TGR"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <!-- Top Sticky Header -->
+  <header class="site-header scrolled">
+    <div class="nav-container">
+      <!-- Left: Brand Logo & Title -->
+      <div class="nav-left">
+        <a href="../../" class="brand-link" aria-label="Toolity.in Home">
+          <div class="brand-icon-wrapper">
+            <img src="../../assets/Toolity.in Logo.webp" alt="Toolity.in Logo" class="brand-logo-img" width="32" height="32">
+          </div>
+          <span class="brand-name">Toolity<span class="brand-tld">.in</span></span>
+        </a>
+      </div>
+
+      <!-- Center: Navigation Pages (Capsule) -->
+      <nav class="nav-center" aria-label="Main Navigation">
+        <div class="nav-glass-capsule">
+          <ul class="nav-links">
+            <li><a href="../../" class="nav-link">Home</a></li>
+            <li><a href="../../dev/" class="nav-link">Dev</a></li>
+            <li><a href="../../text/" class="nav-link">Text</a></li>
+            <li><a href="../../web/" class="nav-link active">Web</a></li>
+            <li><a href="../../design/" class="nav-link">Design</a></li>
+            <li><a href="../../utility/" class="nav-link">Utility</a></li>
+            <li><a href="../../convertors/" class="nav-link">Convertors</a></li>
+            <li><a href="../../formatters/" class="nav-link">Formatters</a></li>
+            <li><a href="../../others/" class="nav-link">Others</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Right: Dark Mode Toggle -->
+      <div class="nav-right">
+        <button id="theme-toggle" class="btn-icon-pill" type="button" aria-label="Toggle light/dark theme"
+          title="Toggle Theme">
+          <iconify-icon id="theme-icon" icon="lucide:moon" width="18" height="18"></iconify-icon>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Tool Page Content -->
+  <main>
+    <!-- Page Hero Header -->
+    <section class="page-hero">
+      <div class="container">
+        <!-- Breadcrumbs Navigation -->
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="../../" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="../../web/" class="breadcrumb-link">Web Tools</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Website Favicon Extractor</span>
+        </nav>
+
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Webmaster Tool</span>
+            <h1 class="page-title">Website Favicon Extractor</h1>
+            <p class="page-desc">
+              Grab, preview, and download ultra-clear high-resolution favicons, touch icons, and app markers (16px to 256px HD) from any website using Google's Favicon Service.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tool Main Workspace Area -->
+    <section class="section-wrapper" style="border-top: none; padding-top: 3.5rem;">
+      <div class="container">
+
+        <div class="tool-workspace-card">
+
+          <!-- 1. Quick Actions Toolbar (Universal Actions on Right) -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge" id="top-status-badge">Google Shared Favicon CDN</span>
+            </div>
+
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset-workspace" title="Reset all fields">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-top-copy" title="Copy active favicon CDN URL">
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy Link</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-top-open" title="Open raw favicon in new tab">
+                <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
+                <span>Open Raw</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-top-download" title="Download active favicon image">
+                <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                <span>Download Favicon</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2. Dual Split-Pane Grid -->
+          <div class="split-pane-grid">
+            
+            <!-- Left: Domain Input & Resolution Selection Pane -->
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Domain Source & Quality</span>
+                <span class="pane-badge" id="domain-format-pill">Waiting for Domain</span>
+              </div>
+
+              <div class="pane-content" style="min-height: 420px; display: flex; flex-direction: column;">
+                
+                <!-- URL/Domain Input Group -->
+                <div class="form-group">
+                  <label class="form-label" for="domain-input">
+                    <span>Website Domain or Full URL <span style="color: var(--brand);">*</span></span>
+                    <button type="button" class="btn-sample-chip" id="btn-paste-clipboard" style="padding: 1px 6px; font-size: 0.72rem;">
+                      <iconify-icon icon="lucide:clipboard" width="12" height="12"></iconify-icon>
+                      <span>Paste</span>
+                    </button>
+                  </label>
+                  
+                  <div class="url-input-container">
+                    <input type="text" id="domain-input" class="input-clean" placeholder="e.g. apple.com, https://github.com, or stripe.com" spellcheck="false" autocomplete="off">
+                    <button type="button" id="btn-clear-domain" class="btn-input-clear" title="Clear input">
+                      <iconify-icon icon="lucide:x" width="15" height="15"></iconify-icon>
+                    </button>
+                  </div>
+
+                  <!-- Quick Sample Brands -->
+                  <div class="sample-chips-row">
+                    <span class="sample-label">Try sample:</span>
+                    <button type="button" class="btn-sample-chip sample-chip" data-domain="apple.com">Apple</button>
+                    <button type="button" class="btn-sample-chip sample-chip" data-domain="github.com">GitHub</button>
+                    <button type="button" class="btn-sample-chip sample-chip" data-domain="netflix.com">Netflix</button>
+                    <button type="button" class="btn-sample-chip sample-chip" data-domain="stripe.com">Stripe</button>
+                    <button type="button" class="btn-sample-chip sample-chip" data-domain="google.com">Google</button>
+                  </div>
+                </div>
+
+                <!-- Domain Meta Deck -->
+                <div class="domain-info-deck">
+                  <div class="domain-id-display">
+                    <span>Host:</span>
+                    <span id="domain-host-text" class="domain-id-val">None</span>
+                  </div>
+                  <span id="domain-status-text" style="color: var(--text-muted);">Enter domain or URL above</span>
+                </div>
+
+                <!-- Resolution Selection Section -->
+                <div class="form-group" style="margin-top: auto;">
+                  <label class="form-label">
+                    <span>Favicon Resolution</span>
+                    <span class="form-label-desc">Select pixel dimensions</span>
+                  </label>
+
+                  <div class="quality-grid">
+                    <!-- 1. 256px Ultra HD -->
+                    <button type="button" class="quality-card-btn active" data-size="256">
+                      <div class="quality-top-row">
+                        <span class="quality-title">Ultra HD (256px)</span>
+                        <span class="quality-tag-badge">HD</span>
+                      </div>
+                      <span class="quality-dimensions">256 × 256 px • App Icon</span>
+                    </button>
+
+                    <!-- 2. 128px High Res -->
+                    <button type="button" class="quality-card-btn" data-size="128">
+                      <div class="quality-top-row">
+                        <span class="quality-title">Touch Icon (128px)</span>
+                        <span class="quality-tag-badge subtle">Touch</span>
+                      </div>
+                      <span class="quality-dimensions">128 × 128 px • Mobile</span>
+                    </button>
+
+                    <!-- 3. 64px Retina -->
+                    <button type="button" class="quality-card-btn" data-size="64">
+                      <div class="quality-top-row">
+                        <span class="quality-title">Retina Tab (64px)</span>
+                        <span class="quality-tag-badge subtle">Retina</span>
+                      </div>
+                      <span class="quality-dimensions">64 × 64 px • HiDPI</span>
+                    </button>
+
+                    <!-- 4. 32px Standard -->
+                    <button type="button" class="quality-card-btn" data-size="32">
+                      <div class="quality-top-row">
+                        <span class="quality-title">Standard Tab (32px)</span>
+                        <span class="quality-tag-badge subtle">Tab</span>
+                      </div>
+                      <span class="quality-dimensions">32 × 32 px • Default</span>
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Right: Favicon Preview & Actions Pane -->
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Favicon Preview</span>
+                <span class="pane-badge" id="preview-res-badge">256 × 256 px</span>
+              </div>
+
+              <div class="pane-content" style="min-height: 420px; display: flex; flex-direction: column;">
+                
+                <!-- Main Preview Box -->
+                <div class="preview-viewport-box empty" id="preview-viewport" style="flex: 1; height: 100%; min-height: 280px;">
+                  <div class="empty-preview-content" id="empty-state">
+                    <div class="empty-preview-icon">
+                      <iconify-icon icon="lucide:globe" width="22" height="22"></iconify-icon>
+                    </div>
+                    <div>
+                      <div style="font-weight: 500; color: var(--text-primary); font-size: 0.88rem; margin-bottom: 2px;">No domain entered</div>
+                      <div style="font-size: 0.78rem;">Paste any website URL or domain on the left to extract its favicon</div>
+                    </div>
+                  </div>
+
+                  <img id="favicon-preview-img" class="preview-favicon-img" alt="Website Favicon Preview" style="display: none;">
+                  <div id="badge-overlay" class="preview-floating-pill">
+                    <iconify-icon icon="lucide:check-circle" width="13" height="13" style="color: #10B981;"></iconify-icon>
+                    <span id="overlay-text">256px HD</span>
+                  </div>
+                </div>
+
+                <!-- HTML Embed Snippet Code -->
+                <div class="snippet-group" id="snippet-group" style="display: none; margin-top: 1rem;">
+                  <label class="form-label" style="margin-bottom: 0.35rem;">
+                    <span>HTML Embed Snippet</span>
+                  </label>
+                  <div class="snippet-box">
+                    <code class="snippet-code" id="snippet-code-text">&lt;link rel="icon" type="image/png" sizes="256x256" href="..."&gt;</code>
+                    <button type="button" class="btn-snippet-copy" id="btn-copy-snippet" title="Copy HTML Snippet">
+                      <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ==================================================================
+             ADSTERRA ADVERTISING BANNER SLOT
+             ================================================================== -->
+        <section class="ad-slot-wrapper">
+          <div class="ad-slot-container">
+            <span class="ad-label">
+              <iconify-icon icon="lucide:heart"></iconify-icon>
+              Sponsored • Supporting Toolity's Free Tools
+            </span>
+            <div class="ad-banner-frame">
+              <!-- Desktop 728x90 Frame -->
+              <div class="ad-slot-desktop">
+                <script type="text/javascript">
+                  atOptions = {
+                    'key' : '173f3c31e644a6feb61843877787aa01',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                  };
+                </script>
+                <script type="text/javascript" src="https://www.highrevenueformat.com/173f3c31e644a6feb61843877787aa01/invoke.js"></script>
+              </div>
+              <!-- Mobile 320x50 Frame -->
+              <div class="ad-slot-mobile">
+                <script type="text/javascript">
+                  atOptions = {
+                    'key' : 'd494b0cbcfa90ae4f358b33b28092221',
+                    'format' : 'iframe',
+                    'height' : 50,
+                    'width' : 320,
+                    'params' : {}
+                  };
+                </script>
+                <script type="text/javascript" src="https://www.highrevenueformat.com/d494b0cbcfa90ae4f358b33b28092221/invoke.js"></script>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             3-STEP INSTRUCTION GUIDE
+             ================================================================== -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Extract & Download Website Favicons</h2>
+          </div>
+
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Enter Domain or URL</h3>
+              <p class="step-desc">
+                Paste any full website address (e.g. <code>https://github.com/profile</code>) or bare domain name (e.g. <code>apple.com</code>).
+              </p>
+            </div>
+
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Choose Pixel Resolution</h3>
+              <p class="step-desc">
+                Select your preferred size from Ultra HD (256px), Touch Icon (128px), Retina (64px), or Standard Tab (32px).
+              </p>
+            </div>
+
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Download or Copy HTML</h3>
+              <p class="step-desc">
+                Click <strong>Download PNG</strong> to save the transparent icon or copy the ready-to-use HTML <code>&lt;link rel="icon"&gt;</code> code snippet.
+              </p>
+            </div>
+          </div>
+
+          <!-- Supported Dimensions Table Card -->
+          <div class="formats-table-card">
+            <h3 style="font-size: 0.95rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.75rem;">Standard Favicon Resolutions & Use Cases</h3>
+            <table class="formats-table">
+              <thead>
+                <tr>
+                  <th>Resolution</th>
+                  <th>Use Case</th>
+                  <th>Recommended Format</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>256 × 256 px</strong></td>
+                  <td>PWA App Icon, Android Home Screen & Chrome Web Store</td>
+                  <td><code>PNG (Ultra HD)</code></td>
+                </tr>
+                <tr>
+                  <td><strong>128 × 128 px</strong></td>
+                  <td>iOS Apple Touch Icon & macOS Safari Pinned Tab</td>
+                  <td><code>PNG (Touch Icon)</code></td>
+                </tr>
+                <tr>
+                  <td><strong>64 × 64 px</strong></td>
+                  <td>High-DPI Retina Browser Tabs & Desktop Bookmarks</td>
+                  <td><code>PNG / ICO</code></td>
+                </tr>
+                <tr>
+                  <td><strong>32 × 32 px</strong></td>
+                  <td>Standard Browser Tab Icon</td>
+                  <td><code>PNG / ICO</code></td>
+                </tr>
+                <tr>
+                  <td><strong>16 × 16 px</strong></td>
+                  <td>Classic Address Bar & Bookmark Favicon</td>
+                  <td><code>PNG / ICO</code></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             CATEGORY WORKSPACE CTA CARD
+             ================================================================== -->
+        <section class="category-workspace-cta">
+          <div class="category-workspace-cta-left">
+            <span class="section-eyebrow">Web Workspace</span>
+            <h2 class="category-workspace-cta-title">Explore All Web & URL Tools</h2>
+            <p class="category-workspace-cta-desc">
+              Discover our collection of client-side web utilities including URL parameter separators, query strippers, link cleaners, and YouTube thumbnail downloaders.
+            </p>
+          </div>
+          <div class="category-workspace-cta-right">
+            <a href="../../web/" class="btn-pill btn-primary-signal">
+              <span>Explore Web Tools</span>
+              <iconify-icon icon="lucide:arrow-right" width="15" height="15"></iconify-icon>
+            </a>
+          </div>
+        </section>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Global Multi-Column Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Brand & Mission Column -->
+        <div class="footer-col footer-col-brand">
+          <a href="../../" class="brand-link" aria-label="Toolity.in Home">
+            <div class="brand-icon-wrapper">
+              <img src="../../assets/Toolity.in Logo.webp" alt="Toolity.in Logo" class="brand-logo-img" width="28" height="28">
+            </div>
+            <span class="brand-name">Toolity<span class="brand-tld">.in</span></span>
+          </a>
+          <p class="footer-mission">
+            Blazing fast, zero-install, privacy-first web utilities. Process media, generate codes, and format data 100% in your browser.
+          </p>
+          <div class="footer-creator">
+            <span>Created by</span>
+            <a href="https://github.com/kapildoesmarketing" target="_blank" rel="noopener noreferrer">Kapil Pidhwani</a>
+          </div>
+        </div>
+
+        <!-- Categories / Workspaces Column -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Workspaces</h4>
+          <ul class="footer-nav-list">
+            <li><a href="../../dev/">Developer Tools</a></li>
+            <li><a href="../../text/">Text Utilities</a></li>
+            <li><a href="../../web/">Web & Network</a></li>
+            <li><a href="../../design/">Design & Color</a></li>
+            <li><a href="../../utility/">Everyday Utilities</a></li>
+            <li><a href="../../convertors/">Convertors</a></li>
+            <li><a href="../../formatters/">Formatters</a></li>
+            <li><a href="../../others/">Other Tools</a></li>
+          </ul>
+        </div>
+
+        <!-- Resources & About Column -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Platform</h4>
+          <ul class="footer-nav-list">
+            <li><a href="../../about/">About Toolity</a></li>
+            <li><a href="../../privacy/">Privacy Policy</a></li>
+            <li><a href="../../terms/">Terms of Service</a></li>
+            <li><a href="../../credits/">Credits & Attributions</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Bottom Sub-Footer Bar -->
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2026 Toolity.in. All tools run 100% locally in your browser. No cookies, no tracking, zero server storage.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Toast Feedback Element -->
+  <div id="tool-toast" class="tool-toast">
+    <iconify-icon icon="lucide:check-circle"></iconify-icon>
+    <span id="toast-message">Copied to clipboard</span>
+  </div>
+
+  <!-- Global Site Script -->
+  <script src="../../scripts/main.js"></script>
+
+  <!-- Tool Specific Self-Contained JavaScript Logic -->
+  <script>
+    /* Designed by Kapil Pidhwani: Client-Side Website Favicon Extractor Engine */
+    document.addEventListener('DOMContentLoaded', () => {
+      // DOM Elements
+      const domainInput = document.getElementById('domain-input');
+      const clearDomainBtn = document.getElementById('btn-clear-domain');
+      const pasteBtn = document.getElementById('btn-paste-clipboard');
+      const domainHostText = document.getElementById('domain-host-text');
+      const domainStatusText = document.getElementById('domain-status-text');
+      const domainFormatPill = document.getElementById('domain-format-pill');
+      const qualityCards = document.querySelectorAll('.quality-card-btn');
+      const sampleChips = document.querySelectorAll('.sample-chip');
+
+      // Preview Elements
+      const previewViewport = document.getElementById('preview-viewport');
+      const emptyState = document.getElementById('empty-state');
+      const previewImg = document.getElementById('favicon-preview-img');
+      const badgeOverlay = document.getElementById('badge-overlay');
+      const overlayText = document.getElementById('overlay-text');
+      const previewResBadge = document.getElementById('preview-res-badge');
+      const snippetGroup = document.getElementById('snippet-group');
+      const snippetCodeText = document.getElementById('snippet-code-text');
+      const btnCopySnippet = document.getElementById('btn-copy-snippet');
+
+      // Action Buttons
+      const resetBtn = document.getElementById('btn-reset-workspace');
+      const topCopyBtn = document.getElementById('btn-top-copy');
+      const topOpenBtn = document.getElementById('btn-top-open');
+      const topDownloadBtn = document.getElementById('btn-top-download');
+      const toast = document.getElementById('tool-toast');
+      const toastMessage = document.getElementById('toast-message');
+
+      // State
+      let currentDomain = null;
+      let currentSize = '256'; // '256' | '128' | '64' | '32'
+      let activeFaviconUrl = null;
+      let toastTimer = null;
+
+      /**
+       * Show floating toast notification
+       */
+      function showToast(msg) {
+        if (toastTimer) clearTimeout(toastTimer);
+        toastMessage.textContent = msg;
+        toast.classList.add('show');
+        toastTimer = setTimeout(() => {
+          toast.classList.remove('show');
+        }, 2500);
+      }
+
+      /**
+       * Sanitize user input to pure clean domain hostname
+       */
+      function sanitizeDomain(input) {
+        if (!input) return null;
+        let str = input.trim().toLowerCase();
+
+        // Strip protocols and paths if pasted as full URL
+        try {
+          if (!str.startsWith('http://') && !str.startsWith('https://')) {
+            str = 'https://' + str;
+          }
+          const parsed = new URL(str);
+          let host = parsed.hostname;
+
+          // Strip standard www. prefix for cleaner domain fetching if preferred
+          if (host.startsWith('www.')) {
+            host = host.substring(4);
+          }
+
+          // Basic domain validity check (must contain at least one dot or be localhost)
+          if (host.includes('.') || host === 'localhost') {
+            return host;
+          }
+        } catch (e) {
+          // Fallback regex if URL parsing fails
+          const match = str.match(/^(?:https?:\/\/)?(?:www\.)?([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})(?:\/.*)?$/);
+          if (match && match[1]) {
+            return match[1];
+          }
+        }
+
+        return null;
+      }
+
+      /**
+       * Build Google Shared Favicon CDN URL
+       */
+      function getFaviconUrl(domain, size) {
+        return `https://www.google.com/s2/favicons?domain=${encodeURIComponent(domain)}&sz=${size}`;
+      }
+
+      /**
+       * Update Favicon Preview Viewport
+       */
+      function updatePreview() {
+        if (!currentDomain) {
+          // Empty State
+          previewViewport.classList.add('empty');
+          emptyState.style.display = 'flex';
+          previewImg.style.display = 'none';
+          previewImg.src = '';
+          badgeOverlay.style.display = 'none';
+          previewResBadge.textContent = `${currentSize} × ${currentSize} px`;
+          snippetGroup.style.display = 'none';
+
+          domainHostText.textContent = 'None';
+          domainStatusText.textContent = 'Enter domain or URL above';
+          domainFormatPill.textContent = 'Waiting for Domain';
+          clearDomainBtn.style.display = 'none';
+
+          // Disable toolbar actions
+          topDownloadBtn.disabled = true;
+          topCopyBtn.disabled = true;
+          topOpenBtn.style.pointerEvents = 'none';
+          topOpenBtn.style.opacity = '0.5';
+          activeFaviconUrl = null;
+          return;
+        }
+
+        clearDomainBtn.style.display = 'block';
+
+        const targetUrl = getFaviconUrl(currentDomain, currentSize);
+        activeFaviconUrl = targetUrl;
+
+        // Load image tester
+        const img = new Image();
+        img.onload = () => {
+          previewViewport.classList.remove('empty');
+          emptyState.style.display = 'none';
+          previewImg.src = targetUrl;
+          previewImg.style.display = 'block';
+
+          // Update badges
+          overlayText.textContent = `${currentSize}px HD`;
+          badgeOverlay.style.display = 'flex';
+          previewResBadge.textContent = `${currentSize} × ${currentSize} px`;
+
+          // Update HTML snippet
+          snippetCodeText.textContent = `<link rel="icon" type="image/png" sizes="${currentSize}x${currentSize}" href="${targetUrl}">`;
+          snippetGroup.style.display = 'block';
+
+          // Enable toolbar actions
+          topDownloadBtn.disabled = false;
+          topCopyBtn.disabled = false;
+          topOpenBtn.style.pointerEvents = 'auto';
+          topOpenBtn.style.opacity = '1';
+        };
+
+        img.onerror = () => {
+          showToast('Failed to load favicon from Google CDN');
+        };
+
+        img.src = targetUrl;
+      }
+
+      /**
+       * Handle Input change
+       */
+      function handleInputChange() {
+        const val = domainInput.value;
+        const sanitized = sanitizeDomain(val);
+
+        if (sanitized) {
+          currentDomain = sanitized;
+          domainHostText.textContent = sanitized;
+          domainStatusText.textContent = 'Active Domain';
+          domainFormatPill.textContent = 'Valid Host';
+        } else {
+          currentDomain = null;
+        }
+
+        updatePreview();
+      }
+
+      /**
+       * Update quality card active states
+       */
+      function updateQualityCards() {
+        qualityCards.forEach(card => {
+          if (card.getAttribute('data-size') === currentSize) {
+            card.classList.add('active');
+          } else {
+            card.classList.remove('active');
+          }
+        });
+      }
+
+      /**
+       * Fetch image blob with CORS proxy fallback to enable client-side downloads
+       */
+      async function fetchImageBlob(url) {
+        // 1. Try global image cache/proxy (weserv.nl - Cloudflare edge, full CORS)
+        try {
+          const proxyUrl = `https://images.weserv.nl/?url=${encodeURIComponent(url)}`;
+          const res = await fetch(proxyUrl);
+          if (res.ok) {
+            const blob = await res.blob();
+            if (blob && blob.size > 0) return blob;
+          }
+        } catch (e) {
+          // Continue to proxy fallbacks
+        }
+
+        // 2. Try proxy: allorigins.win
+        try {
+          const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
+          const res = await fetch(proxyUrl);
+          if (res.ok) {
+            const blob = await res.blob();
+            if (blob && blob.size > 0) return blob;
+          }
+        } catch (e) {
+          // Continue to next proxy
+        }
+
+        // 3. Try direct fetch
+        try {
+          const res = await fetch(url);
+          if (res.ok) {
+            const blob = await res.blob();
+            if (blob && blob.size > 0) return blob;
+          }
+        } catch (e) {
+          // Continue
+        }
+
+        throw new Error('Could not fetch image blob');
+      }
+
+      /**
+       * Download Favicon Client-Side via Blob
+       */
+      async function downloadFavicon() {
+        if (!activeFaviconUrl || !currentDomain) {
+          showToast('Please enter a valid website domain first');
+          return;
+        }
+
+        showToast('Downloading favicon...');
+
+        try {
+          const blob = await fetchImageBlob(activeFaviconUrl);
+          const blobUrl = URL.createObjectURL(blob);
+
+          const link = document.createElement('a');
+          link.href = blobUrl;
+          link.download = `favicon-${currentDomain}-${currentSize}px.png`;
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
+
+          showToast('Favicon downloaded successfully!');
+        } catch (err) {
+          showToast('Download failed. You can use "Open Raw" to view.');
+        }
+      }
+
+      /**
+       * Copy Favicon CDN URL
+       */
+      function copyFaviconUrl() {
+        if (!activeFaviconUrl) {
+          showToast('No active favicon to copy');
+          return;
+        }
+
+        navigator.clipboard.writeText(activeFaviconUrl).then(() => {
+          showToast('Favicon Google CDN URL copied!');
+        }).catch(() => {
+          showToast('Failed to copy URL');
+        });
+      }
+
+      /**
+       * Copy HTML Snippet
+       */
+      function copySnippet() {
+        if (!snippetCodeText.textContent) return;
+        navigator.clipboard.writeText(snippetCodeText.textContent).then(() => {
+          showToast('HTML <link> snippet copied to clipboard!');
+        }).catch(() => {
+          showToast('Failed to copy snippet');
+        });
+      }
+
+      // Event Listeners
+      domainInput.addEventListener('input', handleInputChange);
+      domainInput.addEventListener('paste', () => {
+        setTimeout(handleInputChange, 10);
+      });
+
+      clearDomainBtn.addEventListener('click', () => {
+        domainInput.value = '';
+        handleInputChange();
+        domainInput.focus();
+      });
+
+      pasteBtn.addEventListener('click', async () => {
+        try {
+          const text = await navigator.clipboard.readText();
+          if (text) {
+            domainInput.value = text;
+            handleInputChange();
+            showToast('Domain pasted from clipboard');
+          }
+        } catch (err) {
+          domainInput.focus();
+          showToast('Please press ⌘V or Ctrl+V to paste');
+        }
+      });
+
+      // Sample domain chips
+      sampleChips.forEach(chip => {
+        chip.addEventListener('click', () => {
+          const d = chip.getAttribute('data-domain');
+          if (d) {
+            domainInput.value = d;
+            handleInputChange();
+            showToast(`Loaded ${d}`);
+          }
+        });
+      });
+
+      // Resolution selector cards
+      qualityCards.forEach(card => {
+        card.addEventListener('click', () => {
+          const sz = card.getAttribute('data-size');
+          if (sz && sz !== currentSize) {
+            currentSize = sz;
+            updateQualityCards();
+            updatePreview();
+          }
+        });
+      });
+
+      // Action toolbar bindings
+      resetBtn.addEventListener('click', () => {
+        domainInput.value = '';
+        currentSize = '256';
+        updateQualityCards();
+        handleInputChange();
+        showToast('Workspace reset');
+      });
+
+      topDownloadBtn.addEventListener('click', downloadFavicon);
+      topCopyBtn.addEventListener('click', copyFaviconUrl);
+      topOpenBtn.addEventListener('click', () => {
+        if (activeFaviconUrl) {
+          window.open(activeFaviconUrl, '_blank', 'noopener,noreferrer');
+        } else {
+          showToast('Please enter a valid website domain first');
+        }
+      });
+      btnCopySnippet.addEventListener('click', copySnippet);
+
+      // Initial check in case domain is prefilled
+      handleInputChange();
+    });
+  </script>
+</body>
+
+</html>

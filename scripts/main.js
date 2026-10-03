@@ -154,6 +154,22 @@
         tags: ['mailto', 'email', 'link', 'generator', 'creator', 'html', 'href', 'contact', 'composer', 'message', 'support']
       },
       {
+        id: 'gif-speed-changer',
+        title: 'GIF Speed Changer',
+        category: 'Utility',
+        url: 'utility/gif-speed-changer/',
+        icon: 'lucide:gauge',
+        tags: ['gif', 'speed', 'changer', 'fast', 'slow', 'slowmo', 'hyper', 'fps', 'accelerate', 'playback', 'rate', 'multiplier', 'time', 'tempo']
+      },
+      {
+        id: 'whatsapp-link-creator',
+        title: 'WhatsApp Link Creator',
+        category: 'Utility',
+        url: 'utility/whatsapp-link-creator/',
+        icon: 'lucide:message-circle',
+        tags: ['whatsapp', 'wa.me', 'chat', 'link', 'generator', 'creator', 'message', 'click to chat', 'phone', 'contact', 'direct']
+      },
+      {
         id: 'cat-dev',
         title: 'Developer Tools',
         category: 'Workspace',
@@ -170,12 +186,36 @@
         tags: ['text', 'case', 'words', 'diff', 'markdown', 'slug', 'strings', 'count']
       },
       {
-        id: 'cat-math',
-        title: 'Math & Calculations',
+        id: 'cat-web',
+        title: 'Web Tools',
         category: 'Workspace',
-        url: 'math/',
-        icon: 'lucide:binary',
-        tags: ['math', 'calculate', 'percentage', 'statistics', 'formula', 'number']
+        url: 'web/',
+        icon: 'lucide:globe',
+        tags: ['web', 'url', 'cleaner', 'parameter', 'query', 'separator', 'link', 'http', 'dns']
+      },
+      {
+        id: 'url-parameter-separator',
+        title: 'URL Parameter Separator',
+        category: 'Web',
+        url: 'web/url-parameter-separator/',
+        icon: 'lucide:link-2',
+        tags: ['url', 'parameter', 'cleaner', 'query', 'separator', 'utm', 'tracking', 'strip', 'link', 'sanitize']
+      },
+      {
+        id: 'favicon-extractor',
+        title: 'Website Favicon Extractor',
+        category: 'Web',
+        url: 'web/favicon-extractor/',
+        icon: 'lucide:globe',
+        tags: ['favicon', 'extractor', 'downloader', 'google', 'icon', 'website', 'touch icon', 'apple', 'grabber', 'pwa']
+      },
+      {
+        id: 'youtube-thumbnail-downloader',
+        title: 'YouTube Thumbnail Downloader',
+        category: 'Web',
+        url: 'web/youtube-thumbnail-downloader/',
+        icon: 'lucide:youtube',
+        tags: ['youtube', 'thumbnail', 'downloader', 'hd', '1080p', 'image', 'cover', 'shorts', 'video', 'download']
       },
       {
         id: 'cat-design',
@@ -218,6 +258,153 @@
         tags: ['other', 'misc', 'experimental', 'niche', 'tools']
       }
     ];
+
+    /**
+     * Stemming, spelling normalization, and synonym expansion dictionary
+     */
+    const SYNONYM_MAP = {
+      'convertor': 'converter',
+      'convertors': 'converter',
+      'convert': 'converter',
+      'converting': 'converter',
+      'downloader': 'download',
+      'downloading': 'download',
+      'extractor': 'extract',
+      'extracting': 'extract',
+      'generator': 'generate',
+      'generating': 'generate',
+      'creator': 'create',
+      'creating': 'create',
+      'separator': 'separate',
+      'separating': 'separate',
+      'changer': 'change',
+      'changing': 'change',
+      'formatter': 'format',
+      'formatting': 'format',
+      'yt': 'youtube',
+      'wa': 'whatsapp',
+      'qr': 'qr code',
+      'pic': 'image',
+      'picture': 'image',
+      'photo': 'image',
+      'vid': 'video',
+      'icon': 'favicon',
+      'ico': 'favicon',
+      'cleaner': 'separator',
+      'params': 'parameter',
+      'utm': 'parameter'
+    };
+
+    function normalizeWord(word) {
+      const clean = word.toLowerCase().replace(/[^a-z0-9]/g, '');
+      return SYNONYM_MAP[clean] || clean;
+    }
+
+    /**
+     * Calculate Levenshtein Distance for typo tolerance (e.g. "convertr" -> "converter")
+     */
+    function levenshteinDistance(a, b) {
+      if (a.length === 0) return b.length;
+      if (b.length === 0) return a.length;
+      const matrix = [];
+      for (let i = 0; i <= b.length; i++) matrix[i] = [i];
+      for (let j = 0; j <= a.length; j++) matrix[0][j] = j;
+      for (let i = 1; i <= b.length; i++) {
+        for (let j = 1; j <= a.length; j++) {
+          if (b.charAt(i - 1) === a.charAt(j - 1)) {
+            matrix[i][j] = matrix[i - 1][j - 1];
+          } else {
+            matrix[i][j] = Math.min(
+              matrix[i - 1][j - 1] + 1,
+              matrix[i][j - 1] + 1,
+              matrix[i - 1][j] + 1
+            );
+          }
+        }
+      }
+      return matrix[b.length][a.length];
+    }
+
+    /**
+     * Check if token fuzzy matches any target word in target list
+     */
+    function fuzzyMatchToken(queryToken, targetWords) {
+      const normQuery = normalizeWord(queryToken);
+      if (!normQuery) return 0;
+
+      for (const target of targetWords) {
+        const normTarget = normalizeWord(target);
+        if (!normTarget) continue;
+
+        if (normTarget === normQuery) return 100;
+        if (normTarget.startsWith(normQuery) || normQuery.startsWith(normTarget)) return 80;
+        if (normTarget.includes(normQuery)) return 60;
+        
+        if (normQuery.length >= 4 && normTarget.length >= 4) {
+          const dist = levenshteinDistance(normQuery, normTarget);
+          if (dist === 1) return 50;
+          if (dist === 2 && normQuery.length >= 6) return 30;
+        }
+      }
+      return 0;
+    }
+
+    /**
+     * Calculate multi-token relevance score for a tool against a search query
+     */
+    function calculateRelevanceScore(item, rawQuery) {
+      const queryClean = rawQuery.toLowerCase().trim();
+      const rawTokens = queryClean.split(/\s+/).filter(Boolean);
+      if (rawTokens.length === 0) return 0;
+
+      const titleLower = item.title.toLowerCase();
+      const categoryLower = item.category.toLowerCase();
+      
+      if (titleLower === queryClean) return 1000;
+      if (titleLower.startsWith(queryClean)) return 800;
+
+      const titleWords = titleLower.split(/[\s\-_\/]+/).filter(Boolean);
+      const categoryWords = categoryLower.split(/[\s\-_\/]+/).filter(Boolean);
+      const tagWords = (item.tags || []).map(t => t.toLowerCase());
+
+      let totalTokenScore = 0;
+      let matchedTokensCount = 0;
+
+      for (const token of rawTokens) {
+        const titleScore = fuzzyMatchToken(token, titleWords);
+        if (titleScore > 0) {
+          totalTokenScore += titleScore * 2.5;
+          matchedTokensCount++;
+          continue;
+        }
+
+        const tagScore = fuzzyMatchToken(token, tagWords);
+        if (tagScore > 0) {
+          totalTokenScore += tagScore * 1.8;
+          matchedTokensCount++;
+          continue;
+        }
+
+        const catScore = fuzzyMatchToken(token, categoryWords);
+        if (catScore > 0) {
+          totalTokenScore += catScore * 1.2;
+          matchedTokensCount++;
+          continue;
+        }
+      }
+
+      if (rawTokens.length > 1 && matchedTokensCount === rawTokens.length) {
+        totalTokenScore += 200;
+      } else if (matchedTokensCount === 0) {
+        return 0;
+      }
+
+      if (!item.id.startsWith('cat-')) {
+        totalTokenScore += 15;
+      }
+
+      return totalTokenScore;
+    }
 
     let selectedIndex = -1;
     let currentResults = [];
@@ -293,12 +480,11 @@
         return;
       }
 
-      const results = REGISTRY.filter((item) => {
-        const titleMatch = item.title.toLowerCase().includes(query);
-        const categoryMatch = item.category.toLowerCase().includes(query);
-        const tagMatch = item.tags.some((tag) => tag.toLowerCase().includes(query));
-        return titleMatch || categoryMatch || tagMatch;
-      });
+      const results = REGISTRY
+        .map(item => ({ item, score: calculateRelevanceScore(item, query) }))
+        .filter(r => r.score > 0)
+        .sort((a, b) => b.score - a.score)
+        .map(r => r.item);
 
       // Show strictly top 3 results
       renderResults(results.slice(0, 3));
@@ -599,7 +785,7 @@
         { title: 'Home', href: rootPrefix === '' ? './' : rootPrefix, icon: 'lucide:home', key: 'home' },
         { title: 'Dev', href: `${rootPrefix}dev/`, icon: 'lucide:code-2', key: 'dev' },
         { title: 'Text', href: `${rootPrefix}text/`, icon: 'lucide:file-text', key: 'text' },
-        { title: 'Math', href: `${rootPrefix}math/`, icon: 'lucide:binary', key: 'math' },
+        { title: 'Web', href: `${rootPrefix}web/`, icon: 'lucide:globe', key: 'web' },
         { title: 'Design', href: `${rootPrefix}design/`, icon: 'lucide:palette', key: 'design' },
         { title: 'Utility', href: `${rootPrefix}utility/`, icon: 'lucide:wrench', key: 'utility' },
         { title: 'Convertors', href: `${rootPrefix}convertors/`, icon: 'lucide:arrow-left-right', key: 'convertors' },
@@ -637,8 +823,11 @@
           </div>
           <div class="mobile-nav-footer-links">
             <a href="${rootPrefix}about/" class="mobile-nav-sublink">About</a>
+            <a href="${rootPrefix}web/url-parameter-separator/" class="mobile-nav-sublink">URL Cleaner</a>
             <a href="${rootPrefix}utility/qr-code-generator/" class="mobile-nav-sublink">QR Generator</a>
             <a href="${rootPrefix}utility/mailto-generator/" class="mobile-nav-sublink">Mailto Creator</a>
+            <a href="${rootPrefix}utility/whatsapp-link-creator/" class="mobile-nav-sublink">WhatsApp Link</a>
+            <a href="${rootPrefix}utility/gif-speed-changer/" class="mobile-nav-sublink">GIF Speed</a>
             <a href="${rootPrefix}convertors/video-to-gif/" class="mobile-nav-sublink">Video to GIF</a>
             <a href="${rootPrefix}convertors/gif-to-video/" class="mobile-nav-sublink">GIF to Video</a>
             <a href="${rootPrefix}privacy/" class="mobile-nav-sublink">Privacy</a>

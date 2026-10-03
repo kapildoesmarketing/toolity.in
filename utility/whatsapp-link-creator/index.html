@@ -11,11 +11,13 @@
   <!-- End Google Tag Manager -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mailto Link Creator & Email HTML Tag Generator — Toolity.in</title>
+  <title>WhatsApp Link Creator & Click-to-Chat Generator — Toolity.in</title>
 
   <!-- SEO & Metadata -->
   <meta name="description"
-    content="Free, instant Mailto Link Creator and HTML Email Tag Generator. Compose URL-encoded mailto links with Subject, CC, BCC, and Body, preview in real-time, and test in your email app.">
+    content="Free, instant WhatsApp Link Creator and Click-to-Chat Generator. Create custom wa.me links with pre-filled messages, HTML chat buttons, and Markdown snippets with 100% client-side privacy.">
+  <meta name="keywords"
+    content="whatsapp link creator, wa.me link generator, whatsapp click to chat, whatsapp message link, create whatsapp link, free whatsapp link maker, client-side whatsapp generator">
   <meta name="author" content="Kapil Pidhwani">
 
   <!-- Favicon -->
@@ -30,6 +32,74 @@
   <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 
   <link rel="stylesheet" href="../../styles/main.css">
+  <style>
+    /* Designed by Kapil Pidhwani: WhatsApp Link Creator Ergonomics */
+    .input-clean,
+    .textarea-clean {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem 0.95rem;
+      font-family: var(--font-family);
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      box-sizing: border-box;
+    }
+
+    .input-clean:focus,
+    .textarea-clean:focus {
+      outline: none;
+      border-color: var(--brand);
+      box-shadow: 0 0 0 3px rgba(244, 81, 30, 0.12);
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      margin-bottom: 1.15rem;
+    }
+
+    .form-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .form-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .form-label-desc {
+      font-size: 0.74rem;
+      font-weight: 400;
+      color: var(--text-muted);
+    }
+
+    .pane-output-preview {
+      margin: 0;
+      font-family: var(--font-mono);
+      font-size: 0.86rem;
+      line-height: 1.6;
+      color: var(--text-primary);
+      white-space: pre-wrap;
+      word-break: break-all;
+      overflow-y: auto;
+      user-select: text;
+    }
+
+    .quick-helper-text {
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin-top: 0.25rem;
+    }
+  </style>
 </head>
 
 <body>
@@ -89,14 +159,14 @@
           <span class="breadcrumb-separator">/</span>
           <a href="../../utility/" class="breadcrumb-link">Everyday Utilities</a>
           <span class="breadcrumb-separator">/</span>
-          <span class="breadcrumb-current">Mailto Link Creator</span>
+          <span class="breadcrumb-current">WhatsApp Link Creator</span>
         </nav>
 
         <div class="page-title-row">
           <div class="page-header-content">
             <span class="section-eyebrow">Everyday Utility</span>
-            <h1 class="page-title">Mailto Link Creator</h1>
-            <p class="page-desc">Generate customizable, URL-encoded mailto links, HTML anchor tags, and Markdown snippets with instant live preview.</p>
+            <h1 class="page-title">WhatsApp Link Creator</h1>
+            <p class="page-desc">Generate customized, URL-encoded WhatsApp click-to-chat links, HTML buttons, and Markdown snippets with instant live preview.</p>
           </div>
         </div>
       </div>
@@ -111,7 +181,7 @@
           <!-- 1. Quick Actions Toolbar (Universal Actions on Right) -->
           <div class="tool-actions-toolbar">
             <div class="toolbar-group">
-              <span class="pane-badge" id="mailto-mode-badge">RFC 3986 Standard</span>
+              <span class="pane-badge" id="wa-mode-badge">wa.me Standard</span>
             </div>
 
             <div class="toolbar-group">
@@ -123,7 +193,7 @@
                 <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
                 <span>Copy Link</span>
               </button>
-              <button type="button" class="btn-toolbar-sm" id="btn-top-test" title="Open in your default email client">
+              <button type="button" class="btn-toolbar-sm" id="btn-top-test" title="Open chat link in a new tab">
                 <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
                 <span>Test Link</span>
               </button>
@@ -136,51 +206,30 @@
             <!-- Left: Input Form Pane -->
             <div class="tool-pane">
               <div class="pane-header">
-                <span>Email Parameters</span>
+                <span>Chat Parameters</span>
                 <span class="pane-badge" id="input-stats-badge">0 chars</span>
               </div>
               <div class="pane-content" style="min-height: 380px;">
-                <!-- Recipient (To) -->
+                
+                <!-- Phone Number with Country Code -->
                 <div class="form-group">
-                  <label class="form-label" for="email-to">
-                    <span>Recipient Email (To) <span style="color: var(--brand);">*</span></span>
-                    <span class="form-label-desc">Comma-separated for multiple</span>
+                  <label class="form-label" for="wa-phone">
+                    <span>Phone Number with Country Code <span style="color: var(--brand);">*</span></span>
                   </label>
-                  <input type="text" id="email-to" class="input-clean" placeholder="support@toolity.in, team@example.com" spellcheck="false" autocomplete="email">
+                  <input type="tel" id="wa-phone" class="input-clean" placeholder="e.g. +1 555 123 4567 or 919876543210" autocomplete="tel">
+                  <span class="quick-helper-text">Include country code (e.g. 1 for US/CA, 91 for India, 44 for UK). Spaces, plus (+) and dashes are automatically formatted.</span>
                 </div>
 
-                <!-- CC & BCC Row -->
-                <div class="form-row-2col">
-                  <div class="form-group">
-                    <label class="form-label" for="email-cc">
-                      <span>Carbon Copy (CC)</span>
-                    </label>
-                    <input type="text" id="email-cc" class="input-clean" placeholder="manager@example.com" spellcheck="false">
-                  </div>
-                  <div class="form-group">
-                    <label class="form-label" for="email-bcc">
-                      <span>Blind Copy (BCC)</span>
-                    </label>
-                    <input type="text" id="email-bcc" class="input-clean" placeholder="archive@example.com" spellcheck="false">
-                  </div>
-                </div>
-
-                <!-- Subject Line -->
-                <div class="form-group">
-                  <label class="form-label" for="email-subject">
-                    <span>Subject Line</span>
-                  </label>
-                  <input type="text" id="email-subject" class="input-clean" placeholder="Inquiry regarding your services">
-                </div>
-
-                <!-- Email Body -->
+                <!-- Pre-filled Message Body -->
                 <div class="form-group" style="flex: 1;">
-                  <label class="form-label" for="email-body">
-                    <span>Email Message Body</span>
-                    <span class="form-label-desc" id="body-char-count">0 chars</span>
+                  <label class="form-label" for="wa-message">
+                    <span>Pre-filled Message (Optional)</span>
+                    <span class="form-label-desc" id="message-char-count">0 chars</span>
                   </label>
-                  <textarea id="email-body" class="textarea-clean" style="flex: 1; min-height: 120px;" placeholder="Hi Team,&#10;&#10;I wanted to inquire about...&#10;&#10;Best regards,&#10;Your Name"></textarea>
+                  <textarea id="wa-message" class="textarea-clean" style="flex: 1; min-height: 160px;" placeholder="Hi there! I would like to inquire about..."></textarea>
+                  <span class="quick-helper-text">This message will be automatically filled into the user's WhatsApp chat bar when they click your link.</span>
                 </div>
+
               </div>
             </div>
 
@@ -189,8 +238,8 @@
               <div class="pane-header">
                 <span>Generated Output</span>
                 <div class="segmented-group segmented-group-pill" id="seg-export-format">
-                  <button type="button" class="seg-pill active" data-format="raw">Mailto URL</button>
-                  <button type="button" class="seg-pill" data-format="html">HTML Tag</button>
+                  <button type="button" class="seg-pill active" data-format="raw">Direct Link</button>
+                  <button type="button" class="seg-pill" data-format="html">HTML Button</button>
                   <button type="button" class="seg-pill" data-format="md">Markdown</button>
                 </div>
               </div>
@@ -206,73 +255,74 @@
         <!-- ==================================================================
              EXACTLY 1 ADSTERRA BANNER SLOT (Positioned at bottom of tool)
              ================================================================== -->
-        <div class="adsterra-single-slot">
-          <span class="ad-label">
-            <iconify-icon icon="lucide:heart" width="11" height="11"></iconify-icon>
-            Sponsored • Supporting Toolity's Free Tools
-          </span>
-          
-          <!-- Desktop Banner (728x90) -->
-          <div class="ad-slot-desktop">
-            <script type="text/javascript">
-              atOptions = {
-                'key' : '173f3c31e644a6feb61843877787aa01',
-                'format' : 'iframe',
-                'height' : 90,
-                'width' : 728,
-                'params' : {}
-              };
-            </script>
-            <script type="text/javascript" src="https://www.highrevenueformat.com/173f3c31e644a6feb61843877787aa01/invoke.js"></script>
+        <section class="ad-slot-wrapper">
+          <div class="ad-slot-container">
+            <span class="ad-label">
+              <iconify-icon icon="lucide:heart"></iconify-icon>
+              Sponsored • Supporting Toolity's Free Tools
+            </span>
+            <div class="ad-banner-frame">
+              <!-- Desktop 728x90 Frame -->
+              <div class="ad-slot-desktop">
+                <script type="text/javascript">
+                  atOptions = {
+                    'key' : '173f3c31e644a6feb61843877787aa01',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                  };
+                </script>
+                <script type="text/javascript" src="https://www.highrevenueformat.com/173f3c31e644a6feb61843877787aa01/invoke.js"></script>
+              </div>
+              <!-- Mobile 320x50 Frame -->
+              <div class="ad-slot-mobile">
+                <script type="text/javascript">
+                  atOptions = {
+                    'key' : 'd494b0cbcfa90ae4f358b33b28092221',
+                    'format' : 'iframe',
+                    'height' : 50,
+                    'width' : 320,
+                    'params' : {}
+                  };
+                </script>
+                <script type="text/javascript" src="https://www.highrevenueformat.com/d494b0cbcfa90ae4f358b33b28092221/invoke.js"></script>
+              </div>
+            </div>
           </div>
-
-          <!-- Mobile Banner (320x50) -->
-          <div class="ad-slot-mobile">
-            <script type="text/javascript">
-              atOptions = {
-                'key' : 'd494b0cbcfa90ae4f358b33b28092221',
-                'format' : 'iframe',
-                'height' : 50,
-                'width' : 320,
-                'params' : {}
-              };
-            </script>
-            <script type="text/javascript" src="https://www.highrevenueformat.com/d494b0cbcfa90ae4f358b33b28092221/invoke.js"></script>
-          </div>
-        </div>
+        </section>
 
         <!-- ==================================================================
              3-STEP INSTRUCTION GUIDE
              ================================================================== -->
         <section class="guide-section">
-          <div class="section-header">
+          <div class="section-header-compact">
             <span class="section-eyebrow">How It Works</span>
-            <h2 class="section-title">Creating URL-Encoded Mailto Links</h2>
-            <p class="section-desc">Build pre-populated email links for websites, contact pages, and documentation in 3 simple steps.</p>
+            <h2 class="section-heading-sm">Creating WhatsApp Click-to-Chat Links</h2>
           </div>
 
           <div class="guide-steps-grid">
             <div class="guide-step-card">
               <div class="step-num-badge">1</div>
-              <h3 class="step-title">Enter Email Parameters</h3>
+              <h3 class="step-title">Enter Phone Number</h3>
               <p class="step-desc">
-                Fill in recipient addresses (To, CC, BCC), email subject line, and draft pre-filled message body template.
+                Provide your WhatsApp phone number including country code. Any spaces, hyphens, brackets, or plus signs will be automatically cleaned.
               </p>
             </div>
 
             <div class="guide-step-card">
               <div class="step-num-badge">2</div>
-              <h3 class="step-title">Choose Output Format</h3>
+              <h3 class="step-title">Draft Pre-Filled Message</h3>
               <p class="step-desc">
-                Select between a raw URL-encoded mailto protocol link, ready-to-paste HTML <code style="font-family:var(--font-mono); font-size:0.8rem;">&lt;a&gt;</code> anchor tag, or Markdown link.
+                Optionally compose a pre-written greeting or customer inquiry message. It will be URL-encoded for seamless delivery on mobile and web.
               </p>
             </div>
 
             <div class="guide-step-card">
               <div class="step-num-badge">3</div>
-              <h3 class="step-title">Test Link & Deploy</h3>
+              <h3 class="step-title">Copy or Test Link</h3>
               <p class="step-desc">
-                Click "Test Link" to verify in your default email client (Apple Mail, Outlook, Gmail), then copy the code directly to your website.
+                Copy your direct wa.me link, embed an HTML button on your website, or test opening the link directly in your browser with one click.
               </p>
             </div>
           </div>
@@ -284,9 +334,9 @@
         <section class="category-workspace-cta">
           <div class="category-workspace-cta-left">
             <span class="section-eyebrow">Utility Workspace</span>
-            <h2 class="category-workspace-cta-title">Explore All Utility Tools</h2>
+            <h2 class="category-workspace-cta-title">Explore All Everyday Utility Tools</h2>
             <p class="category-workspace-cta-desc">
-              Discover our collection of fast client-side productivity utilities including QR code generators, Unix timestamp helpers, and browser sandbox tools.
+              Discover our collection of client-side utilities including QR Code Generator, Mailto Link Creator, GIF Speed Changer, and format converters.
             </p>
           </div>
           <div class="category-workspace-cta-right">
@@ -305,7 +355,7 @@
     </section>
   </main>
 
-  <!-- Reusable Toast Notification -->
+  <!-- Global Toast Notification -->
   <div id="tool-toast" class="tool-toast" role="status" aria-live="polite">
     Copied to clipboard!
   </div>
@@ -316,7 +366,7 @@
       <div class="footer-grid">
         <!-- Brand & Mission Column -->
         <div class="footer-col footer-col-brand">
-          <a href="../../" class="brand-link" aria-label="Toolity.in Home">
+          <a href="/" class="brand-link" aria-label="Toolity.in Home">
             <div class="brand-icon-wrapper">
               <img src="../../assets/Toolity.in Logo.webp" alt="Toolity.in Logo" class="brand-logo-img" width="28" height="28">
             </div>
@@ -331,7 +381,7 @@
           </div>
         </div>
 
-        <!-- Workspaces Column -->
+        <!-- Categories / Workspaces Column -->
         <div class="footer-col">
           <h4 class="footer-heading">Workspaces</h4>
           <ul class="footer-nav-list">
@@ -346,16 +396,17 @@
           </ul>
         </div>
 
-        <!-- Resources & About Column -->
+        <!-- Platform & Info Column -->
         <div class="footer-col">
           <h4 class="footer-heading">Platform</h4>
           <ul class="footer-nav-list">
             <li><a href="../../about/">About Toolity</a></li>
-            <li><a href="../../utility/qr-code-generator/">QR Generator</a></li>
-            <li><a href="../../utility/mailto-generator/">Mailto Creator</a></li>
-            <li><a href="../../convertors/video-to-gif/">Video to GIF</a></li>
-            <li><a href="../../convertors/image-converter/">Image Converter</a></li>
-            <li><a href="../../credits/">Credits & Open Source</a></li>
+            <li><a href="../../utility/qr-code-generator/">QR Code Generator</a></li>
+            <li><a href="../../utility/mailto-generator/">Mailto Link Creator</a></li>
+            <li><a href="../../utility/whatsapp-link-creator/">WhatsApp Link Creator</a></li>
+            <li><a href="../../utility/gif-speed-changer/">GIF Speed Changer</a></li>
+            <li><a href="../../convertors/video-to-gif/">Video to GIF Converter</a></li>
+            <li><a href="../../credits/">Credits & Attributions</a></li>
           </ul>
         </div>
 
@@ -382,145 +433,142 @@
     </div>
   </footer>
 
+  <!-- Main scripts -->
   <script src="../../scripts/main.js"></script>
+
+  <!-- WhatsApp Link Creator Logic (Designed by Kapil Pidhwani) -->
   <script>
-    /* Designed by Kapil Pidhwani: Streamlined Mailto Link Creator Core Logic */
     document.addEventListener('DOMContentLoaded', () => {
-      // DOM Elements
-      const inputTo = document.getElementById('email-to');
-      const inputCc = document.getElementById('email-cc');
-      const inputBcc = document.getElementById('email-bcc');
-      const inputSubject = document.getElementById('email-subject');
-      const inputBody = document.getElementById('email-body');
-
+      const phoneInput = document.getElementById('wa-phone');
+      const messageInput = document.getElementById('wa-message');
       const outputCode = document.getElementById('output-code');
+      const messageCharCount = document.getElementById('message-char-count');
       const inputStatsBadge = document.getElementById('input-stats-badge');
-      const bodyCharCount = document.getElementById('body-char-count');
+      const toastEl = document.getElementById('tool-toast');
 
-      let currentFormat = 'raw'; // 'raw', 'html', 'md'
+      const btnReset = document.getElementById('btn-reset-form');
+      const btnCopy = document.getElementById('btn-top-copy');
+      const btnTest = document.getElementById('btn-top-test');
+
+      let currentFormat = 'raw'; // 'raw' | 'html' | 'md'
 
       function showToast(msg) {
-        const toast = document.getElementById('tool-toast');
-        if (toast) {
-          toast.textContent = msg || 'Copied to clipboard!';
-          toast.classList.add('show');
-          setTimeout(() => toast.classList.remove('show'), 2000);
-        }
+        if (!toastEl) return;
+        toastEl.textContent = msg;
+        toastEl.classList.add('show');
+        setTimeout(() => toastEl.classList.remove('show'), 2000);
       }
 
-      function buildMailtoURL() {
-        const to = inputTo.value.trim();
-        const cc = inputCc.value.trim();
-        const bcc = inputBcc.value.trim();
-        const subject = inputSubject.value.trim();
-        const body = inputBody.value;
-
-        let mailto = 'mailto:';
-        if (to) {
-          mailto += encodeURI(to);
+      function sanitizePhoneNumber(phone) {
+        if (!phone) return '';
+        // Strip all non-digit characters (+, -, spaces, parentheses)
+        let cleaned = phone.replace(/\D/g, '');
+        // Remove leading 00 if present
+        if (cleaned.startsWith('00')) {
+          cleaned = cleaned.substring(2);
         }
-
-        const params = [];
-        if (cc) params.push(`cc=${encodeURIComponent(cc)}`);
-        if (bcc) params.push(`bcc=${encodeURIComponent(bcc)}`);
-        if (subject) params.push(`subject=${encodeURIComponent(subject)}`);
-        if (body) params.push(`body=${encodeURIComponent(body)}`);
-
-        if (params.length > 0) {
-          mailto += '?' + params.join('&');
-        }
-
-        return mailto;
+        return cleaned;
       }
 
-      function updateOutputs() {
-        const toVal = inputTo.value.trim();
-        const ccVal = inputCc.value.trim();
-        const bccVal = inputBcc.value.trim();
-        const subjectVal = inputSubject.value.trim();
-        const bodyVal = inputBody.value;
+      function generateWhatsAppLink() {
+        const rawPhone = phoneInput.value.trim();
+        const cleanPhone = sanitizePhoneNumber(rawPhone);
+        const rawMessage = messageInput.value;
 
-        const mailtoUrl = buildMailtoURL();
-        const linkText = 'Send us an email';
+        // Update char counter
+        messageCharCount.textContent = `${rawMessage.length} chars`;
+        inputStatsBadge.textContent = `${rawPhone.length + rawMessage.length} chars`;
 
-        let finalCode = '';
+        if (!cleanPhone && !rawMessage.trim()) {
+          outputCode.textContent = 'https://wa.me/15551234567?text=Hello%20there!';
+          return;
+        }
+
+        let link = 'https://wa.me/';
+        if (cleanPhone) {
+          link += cleanPhone;
+        }
+
+        if (rawMessage.trim()) {
+          const encodedMessage = encodeURIComponent(rawMessage);
+          link += `?text=${encodedMessage}`;
+        }
+
         if (currentFormat === 'raw') {
-          finalCode = mailtoUrl;
+          outputCode.textContent = link;
         } else if (currentFormat === 'html') {
-          finalCode = `<a href="${mailtoUrl}">${linkText}</a>`;
+          outputCode.textContent = `<a href="${link}" target="_blank" rel="noopener noreferrer">\n  Chat on WhatsApp\n</a>`;
         } else if (currentFormat === 'md') {
-          finalCode = `[${linkText}](${mailtoUrl})`;
+          outputCode.textContent = `[Chat on WhatsApp](${link})`;
         }
-
-        outputCode.textContent = finalCode;
-
-        // Update stats
-        const totalChars = (toVal + ccVal + bccVal + subjectVal + bodyVal).length;
-        inputStatsBadge.textContent = `${totalChars} chars`;
-        bodyCharCount.textContent = `${bodyVal.length} chars`;
       }
 
-      // Input Event Listeners
-      [inputTo, inputCc, inputBcc, inputSubject, inputBody].forEach(el => {
-        if (el) el.addEventListener('input', updateOutputs);
+      function getRawLink() {
+        const rawPhone = phoneInput.value.trim();
+        const cleanPhone = sanitizePhoneNumber(rawPhone);
+        const rawMessage = messageInput.value;
+
+        let link = 'https://wa.me/';
+        if (cleanPhone) {
+          link += cleanPhone;
+        }
+        if (rawMessage.trim()) {
+          link += `?text=${encodeURIComponent(rawMessage)}`;
+        }
+        return link;
+      }
+
+      // Format Switcher Tabs
+      const segButtons = document.querySelectorAll('#seg-export-format .seg-pill');
+      segButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          segButtons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentFormat = btn.getAttribute('data-format');
+          generateWhatsAppLink();
+        });
       });
 
-      // Segmented Controls - Export Format
-      const formatSeg = document.getElementById('seg-export-format');
-      if (formatSeg) {
-        formatSeg.querySelectorAll('.seg-pill').forEach(btn => {
-          btn.addEventListener('click', () => {
-            formatSeg.querySelectorAll('.seg-pill').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            currentFormat = btn.dataset.format;
-            updateOutputs();
-          });
-        });
-      }
-
-      // Copy Action
-      function copyActiveCode() {
-        const code = outputCode.textContent;
-        if (!code || code === 'mailto:') {
-          return showToast('Nothing to copy yet');
-        }
-        navigator.clipboard.writeText(code).then(() => {
-          showToast('Copied to clipboard!');
-        }).catch(() => {
-          showToast('Failed to copy');
-        });
-      }
-
-      document.getElementById('btn-top-copy').addEventListener('click', copyActiveCode);
-
-      // Test Link Action (Opens in new tab)
-      function testMailtoLink() {
-        const mailto = buildMailtoURL();
-        if (!mailto || mailto === 'mailto:') {
-          return showToast('Please enter an email address first');
-        }
-        window.open(mailto, '_blank');
-        showToast('Opening email client in new tab...');
-      }
-
-      document.getElementById('btn-top-test').addEventListener('click', testMailtoLink);
+      // Input Listeners
+      phoneInput.addEventListener('input', generateWhatsAppLink);
+      messageInput.addEventListener('input', generateWhatsAppLink);
 
       // Reset Action
-      document.getElementById('btn-reset-form').addEventListener('click', () => {
-        inputTo.value = '';
-        inputCc.value = '';
-        inputBcc.value = '';
-        inputSubject.value = '';
-        inputBody.value = '';
-        updateOutputs();
-        showToast('Form reset');
+      btnReset.addEventListener('click', () => {
+        phoneInput.value = '';
+        messageInput.value = '';
+        generateWhatsAppLink();
+        showToast('All fields cleared');
+        phoneInput.focus();
       });
 
-      // Initialize on load
-      inputTo.value = 'support@toolity.in';
-      inputSubject.value = 'Inquiry regarding Toolity';
-      inputBody.value = 'Hi Toolity Team,\n\nI wanted to reach out regarding...';
-      updateOutputs();
+      // Copy Action
+      btnCopy.addEventListener('click', async () => {
+        const textToCopy = outputCode.textContent;
+        if (!textToCopy) return;
+
+        try {
+          await navigator.clipboard.writeText(textToCopy);
+          showToast('Copied to clipboard!');
+        } catch (err) {
+          showToast('Failed to copy');
+        }
+      });
+
+      // Test Link Action (Open in new tab)
+      btnTest.addEventListener('click', () => {
+        const rawLink = getRawLink();
+        if (rawLink === 'https://wa.me/') {
+          showToast('Please enter a phone number or message first');
+          phoneInput.focus();
+          return;
+        }
+        window.open(rawLink, '_blank', 'noopener,noreferrer');
+        showToast('Opening WhatsApp in new tab...');
+      });
+
+      // Initial generation
+      generateWhatsAppLink();
     });
   </script>
 </body>
