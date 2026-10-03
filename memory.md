@@ -73,3 +73,16 @@
 
 5. **Quiet Trust over Repetitive Badges**:
    - Avoid repetitive "100% Client-Side Private" badges in individual tool toolbars. Privacy and performance are established globally in the footer, about page, and architecture; individual tool headers must remain uncluttered and focused purely on functionality.
+
+6. **Client-Side Media & Video Transcoding Architecture**:
+   - High-performance video format transcoding (MP4, WebM, MOV, MKV) executes entirely client-side using HTML5 Canvas capture streams combined with the Web Audio API and `MediaRecorder` encoders.
+   - **Strict Even Dimensions**: Video encoders (H.264 and VP9) require even width and height values (`if (w % 2 !== 0) w--; if (h % 2 !== 0) h--;`) to avoid encoding crashes.
+   - **Tool Family**: Includes Video Format Converter (`convertors/video-converter/`), Video to GIF Converter (`convertors/video-to-gif/`), and GIF to Video Converter (`convertors/gif-to-video/`).
+
+7. **Client-Side Image Transcoding Architecture**:
+   - High-speed image transcoding (PNG, JPG, WebP, AVIF, BMP, ICO) executes 100% in-browser via HTML5 Canvas `toBlob()`.
+   - **Intelligent Target Auto-Selection**: Uploading PNG auto-defaults target to WebP, JPG auto-defaults to PNG, WebP auto-defaults to JPG.
+   - **Alpha Transparency Handling**: JPG conversion automatically applies user-configurable background fill (White / Black / Transparent) to eliminate black alpha matte artifacts.
+   - **Tool Location**: `convertors/image-converter/`.
+
+

@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GIF to Video Converter (MP4 & WebM) — Toolity.in</title>
+
+  <!-- SEO & Metadata -->
+  <meta name="description"
+    content="Free, instant, and 100% private GIF to Video Converter. Convert animated GIFs to high-definition MP4 and WebM video files directly in your browser. Customize loop count, playback speed, and resolution with zero server uploads.">
+  <meta name="keywords"
+    content="gif to video, gif to mp4, gif to webm, convert gif to video, animated gif to mp4, gif to instagram video, private gif converter, client-side gif to video">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/webp" href="../../assets/Toolity.in Logo.webp">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Iconify Icon Component -->
+  <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="../../styles/main.css">
+</head>
+
+<body>
+
+  <!-- Top Sticky Header -->
+  <header class="site-header scrolled">
+    <div class="nav-container">
+      <!-- Left: Brand Logo & Title -->
+      <div class="nav-left">
+        <a href="../../" class="brand-link" aria-label="Toolity.in Home">
+          <div class="brand-icon-wrapper">
+            <img src="../../assets/Toolity.in Logo.webp" alt="Toolity.in Logo" class="brand-logo-img" width="32" height="32">
+          </div>
+          <span class="brand-name">Toolity<span class="brand-tld">.in</span></span>
+        </a>
+      </div>
+
+      <!-- Center: Navigation Pages (Capsule) -->
+      <nav class="nav-center" aria-label="Main Navigation">
+        <div class="nav-glass-capsule">
+          <ul class="nav-links">
+            <li><a href="../../" class="nav-link">Home</a></li>
+            <li><a href="../../dev/" class="nav-link">Dev</a></li>
+            <li><a href="../../text/" class="nav-link">Text</a></li>
+            <li><a href="../../math/" class="nav-link">Math</a></li>
+            <li><a href="../../design/" class="nav-link">Design</a></li>
+            <li><a href="../../utility/" class="nav-link">Utility</a></li>
+            <li><a href="../../convertors/" class="nav-link active">Convertors</a></li>
+            <li><a href="../../formatters/" class="nav-link">Formatters</a></li>
+            <li><a href="../../others/" class="nav-link">Others</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Right: Dark Mode Toggle -->
+      <div class="nav-right">
+        <button id="theme-toggle" class="btn-icon-pill" type="button" aria-label="Toggle light/dark theme"
+          title="Toggle Theme">
+          <iconify-icon id="theme-icon" icon="lucide:moon" width="18" height="18"></iconify-icon>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Tool Page Content -->
+  <main>
+    <!-- Page Hero Header -->
+    <section class="page-hero">
+      <div class="container">
+        <!-- Breadcrumbs Navigation -->
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="../../" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="../../convertors/" class="breadcrumb-link">Convertors</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">GIF to Video</span>
+        </nav>
+
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Convertor Tool</span>
+            <h1 class="page-title">GIF to Video Converter</h1>
+            <p class="page-desc">
+              Convert animated GIFs into high-definition MP4 and WebM videos. Perfect for Instagram, TikTok, WhatsApp, and Discord with seamless loop multipliers and custom speed controls.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tool Main Workspace Area -->
+    <section class="section-wrapper" style="border-top: none; padding-top: 3.5rem;">
+      <div class="container">
+
+        <!-- Unified Tool Workspace Card -->
+        <div class="tool-workspace-card">
+
+          <!-- 1. Actions Toolbar (Top-Right Universal Pattern) -->
+          <div class="tool-actions-toolbar" style="justify-content: flex-end;">
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset-tool" title="Reset GIF and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy-video" title="Copy video to clipboard" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download-video" title="Download video file" disabled>
+                <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                <span>Download Video</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2. Dual Split-Pane Input & Output Grid (Minimalist Symmetrical Layout) -->
+          <div class="split-pane-grid" style="margin-bottom: 1.25rem;">
+
+            <!-- Left: GIF Source Pane -->
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>GIF Source</span>
+                <span class="pane-badge" id="gif-meta-badge">No GIF loaded</span>
+              </div>
+
+              <div class="pane-content" style="display: flex; flex-direction: column; justify-content: space-between;">
+                <!-- Media Viewport (280px) -->
+                <div class="media-canvas-viewport" id="gif-viewport-frame">
+                  <!-- Drag & Drop Zone -->
+                  <div id="gif-dropzone" class="video-dropzone">
+                    <input type="file" id="gif-file-input" accept="image/gif" style="display: none;">
+                    <div class="video-drop-icon">
+                      <iconify-icon icon="lucide:upload-cloud" width="22" height="22"></iconify-icon>
+                    </div>
+                    <div class="video-drop-title">Drop animated GIF here or click to browse</div>
+                    <div class="video-drop-subtitle">Supports animated .gif files (100% private in-browser)</div>
+                  </div>
+
+                  <!-- Active GIF Image Preview -->
+                  <img id="gif-source-img" class="gif-result-preview" alt="Loaded GIF Source Preview">
+                </div>
+
+                <!-- Subtle Source Details / Change Prompt -->
+                <div style="margin-top: 0.85rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; color: var(--text-muted); padding: 0 0.25rem;">
+                  <span id="gif-info-label">Select or drop a GIF to begin</span>
+                  <button type="button" id="btn-change-gif" class="btn-toolbar-sm" style="display: none; padding: 0.25rem 0.6rem; font-size: 0.75rem;">
+                    <iconify-icon icon="lucide:refresh-cw" width="12" height="12"></iconify-icon>
+                    <span>Change GIF</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Video Output Preview Pane -->
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Video Preview</span>
+                <span class="pane-badge" id="video-status-badge">Awaiting GIF</span>
+              </div>
+
+              <div class="pane-content" style="display: flex; flex-direction: column; justify-content: space-between;">
+                <!-- Media Viewport (280px) -->
+                <div class="media-canvas-viewport" id="video-viewport-frame">
+                  <!-- Empty Placeholder -->
+                  <div id="video-empty-placeholder" class="media-empty-placeholder">
+                    <iconify-icon icon="lucide:sparkles" width="32" height="32"></iconify-icon>
+                    <p>Generated MP4 video will appear here</p>
+                  </div>
+                  <!-- Active Video Result Player -->
+                  <video id="video-result-player" class="source-video-player" playsinline controls loop></video>
+                </div>
+
+                <!-- Primary Convert Action Button -->
+                <div style="margin-top: 0.85rem;">
+                  <button type="button" id="btn-convert-video" class="btn-toolbar-sm btn-brand-sm" style="width: 100%; justify-content: center; height: 42px; font-size: 0.9rem; border-radius: var(--radius-sm);" disabled>
+                    <iconify-icon icon="lucide:play" width="16" height="16" id="btn-convert-icon"></iconify-icon>
+                    <span id="btn-convert-label">Convert to Video</span>
+                  </button>
+                  <div class="slim-progress-bar" id="slim-progress-bar">
+                    <div class="slim-progress-fill" id="slim-progress-fill"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 3. Controls & Options inside Accordion (Closed by Default) -->
+          <details class="tool-settings-accordion" style="margin-bottom: 0.25rem;">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="16" height="16"></iconify-icon>
+                <span>Video Output & Conversion Settings</span>
+                <span class="pane-badge" id="settings-summary-badge">(MP4 • 3x Loop • 1.0x Speed)</span>
+              </div>
+              <iconify-icon icon="lucide:chevron-down" class="tool-settings-chevron" width="16" height="16"></iconify-icon>
+            </summary>
+
+            <div class="tool-settings-panel">
+              <div class="settings-sections-wrapper">
+                <div class="settings-section-card">
+                  <div class="settings-section-header">
+                    <span>1. Container, Loops & Speed Multiplier</span>
+                  </div>
+                  <div class="settings-row-wrap">
+                    <!-- Format Control -->
+                    <div class="form-group">
+                      <span class="form-label" style="font-size:0.75rem;">Output Format</span>
+                      <div class="segmented-group segmented-group-pill" id="seg-format">
+                        <button type="button" class="seg-pill active" data-val="mp4">MP4 (H.264)</button>
+                        <button type="button" class="seg-pill" data-val="webm">WebM</button>
+                      </div>
+                    </div>
+
+                    <!-- Loop Multiplier Control -->
+                    <div class="form-group">
+                      <span class="form-label" style="font-size:0.75rem;">Loop Count</span>
+                      <div class="segmented-group segmented-group-pill" id="seg-loops">
+                        <button type="button" class="seg-pill" data-val="1">1x</button>
+                        <button type="button" class="seg-pill" data-val="2">2x</button>
+                        <button type="button" class="seg-pill active" data-val="3">3x (Rec.)</button>
+                        <button type="button" class="seg-pill" data-val="5">5x</button>
+                      </div>
+                    </div>
+
+                    <!-- Speed Multiplier Control -->
+                    <div class="form-group">
+                      <span class="form-label" style="font-size:0.75rem;">Playback Speed</span>
+                      <div class="segmented-group segmented-group-pill" id="seg-speed">
+                        <button type="button" class="seg-pill" data-val="0.5">0.5x</button>
+                        <button type="button" class="seg-pill active" data-val="1.0">1.0x</button>
+                        <button type="button" class="seg-pill" data-val="1.5">1.5x</button>
+                        <button type="button" class="seg-pill" data-val="2.0">2.0x</button>
+                      </div>
+                    </div>
+
+                    <!-- Scale / Resolution Control -->
+                    <div class="form-group">
+                      <span class="form-label" style="font-size:0.75rem;">Resolution Scale</span>
+                      <div class="segmented-group segmented-group-pill" id="seg-scale">
+                        <button type="button" class="seg-pill active" data-val="original">Original</button>
+                        <button type="button" class="seg-pill" data-val="720">720p HD</button>
+                        <button type="button" class="seg-pill" data-val="1080">1080p FHD</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+        <!-- ==================================================================
+             EXACTLY 1 ADSTERRA BANNER SLOT (Positioned at bottom of tool)
+             [Live ad scripts commented out in local development environment]
+             ================================================================== -->
+        <div class="adsterra-single-slot">
+          <span class="ad-label">
+            <iconify-icon icon="lucide:heart" width="11" height="11"></iconify-icon>
+            Sponsored • Supporting Toolity's Free Tools
+          </span>
+          
+          <div class="ad-placeholder-frame">
+            <iconify-icon icon="lucide:sparkles" width="16" height="16"></iconify-icon>
+            <span>Adsterra High-Viewability Banner (728×90 Desktop / 320×50 Mobile)</span>
+          </div>
+
+          <!-- Production Scripts (Activated upon live GitHub push)
+          <div class="ad-slot-desktop">
+            <script>
+              atOptions = {
+                'key' : '173f3c31e644a6feb61843877787aa01',
+                'format' : 'iframe',
+                'height' : 90,
+                'width' : 728,
+                'params' : {}
+              };
+            </script>
+            <script src="https://www.highrevenueformat.com/173f3c31e644a6feb61843877787aa01/invoke.js"></script>
+          </div>
+          <div class="ad-slot-mobile">
+            <script>
+              atOptions = {
+                'key' : 'd494b0cbcfa90ae4f358b33b28092221',
+                'format' : 'iframe',
+                'height' : 50,
+                'width' : 320,
+                'params' : {}
+              };
+            </script>
+            <script src="https://www.highrevenueformat.com/d494b0cbcfa90ae4f358b33b28092221/invoke.js"></script>
+          </div>
+          -->
+        </div>
+
+        <!-- ==================================================================
+             3-STEP INSTRUCTION GUIDE
+             ================================================================== -->
+        <section class="guide-section">
+          <div class="section-header">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-title">Converting Animated GIFs to High-Definition Video</h2>
+            <p class="section-desc">Transform short GIFs into universal MP4 and WebM video clips in 3 simple steps.</p>
+          </div>
+
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Upload Animated GIF</h3>
+              <p class="step-desc">
+                Drop your animated .gif file into the workspace or click to browse. The browser decodes all frames and timing metadata locally.
+              </p>
+            </div>
+
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Configure Loops & Speed</h3>
+              <p class="step-desc">
+                Choose your loop multiplier (e.g. 3x to turn a 2s GIF into a 6s clip), container format (MP4 or WebM), and resolution scaling.
+              </p>
+            </div>
+
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Convert & Download Video</h3>
+              <p class="step-desc">
+                Click Convert to render the video stream directly in browser memory. Preview the video with full player controls and download instantly.
+              </p>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Global Toast Notification -->
+  <div id="tool-toast" class="tool-toast" role="status" aria-live="polite">
+    Copied to clipboard!
+  </div>
+
+  <!-- Global Multi-Column Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Brand & Mission Column -->
+        <div class="footer-col footer-col-brand">
+          <a href="/" class="brand-link" aria-label="Toolity.in Home">
+            <div class="brand-icon-wrapper">
+              <img src="../../assets/Toolity.in Logo.webp" alt="Toolity.in Logo" class="brand-logo-img" width="28" height="28">
+            </div>
+            <span class="brand-name">Toolity<span class="brand-tld">.in</span></span>
+          </a>
+          <p class="footer-brand-desc">
+            Simple, powerful tools for everyday tasks. Built with 100% client-side privacy, instant execution, and zero tracking.
+          </p>
+          <div class="footer-creator-badge">
+            <span>Created by</span>
+            <a href="https://github.com/kapildoesmarketing" target="_blank" rel="noopener noreferrer">Kapil Pidhwani</a>
+          </div>
+        </div>
+
+        <!-- Categories / Workspaces Column -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Workspaces</h4>
+          <ul class="footer-nav-list">
+            <li><a href="../../dev/">Developer Tools</a></li>
+            <li><a href="../../text/">Text Utilities</a></li>
+            <li><a href="../../math/">Math & Numbers</a></li>
+            <li><a href="../../design/">Design & Color</a></li>
+            <li><a href="../../utility/">Everyday Utilities</a></li>
+            <li><a href="../../convertors/">Convertors</a></li>
+            <li><a href="../../formatters/">Formatters</a></li>
+            <li><a href="../../others/">Other Tools</a></li>
+          </ul>
+        </div>
+
+        <!-- Resources & About Column -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Platform</h4>
+          <ul class="footer-nav-list">
+            <li><a href="../../about/">About Toolity</a></li>
+            <li><a href="../../convertors/video-to-gif/">Video to GIF Converter</a></li>
+            <li><a href="../../utility/qr-code-generator/">QR Code Generator</a></li>
+            <li><a href="../../credits/">Credits & Open Source</a></li>
+            <li><a href="https://github.com/kapildoesmarketing/toolity.in" target="_blank" rel="noopener noreferrer">GitHub Repository</a></li>
+          </ul>
+        </div>
+
+        <!-- Legal & Trust Column -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Trust & Legal</h4>
+          <ul class="footer-nav-list">
+            <li><a href="../../privacy/">Privacy Policy</a></li>
+            <li><a href="../../terms/">Terms of Service</a></li>
+            <li><a href="mailto:kapildoesmarketing@gmail.com">Contact Support</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Bottom Copyright Bar -->
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          © 2026 Toolity.in. All rights reserved.
+        </div>
+        <div class="footer-meta-note">
+          100% Client-Side • No Telemetry • Blazing Fast
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Main scripts -->
+  <script src="../../scripts/main.js"></script>
+
+  <!-- GIF to Video Conversion Logic (Designed by Kapil Pidhwani) -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // DOM Elements - Left Pane
+      const dropzone = document.getElementById('gif-dropzone');
+      const fileInput = document.getElementById('gif-file-input');
+      const gifSourceImg = document.getElementById('gif-source-img');
+      const gifMetaBadge = document.getElementById('gif-meta-badge');
+      const gifInfoLabel = document.getElementById('gif-info-label');
+      const btnChangeGif = document.getElementById('btn-change-gif');
+
+      // DOM Elements - Right Pane
+      const videoEmptyPlaceholder = document.getElementById('video-empty-placeholder');
+      const videoResultPlayer = document.getElementById('video-result-player');
+      const videoStatusBadge = document.getElementById('video-status-badge');
+      const settingsSummaryBadge = document.getElementById('settings-summary-badge');
+
+      // Actions & Progress
+      const btnConvert = document.getElementById('btn-convert-video');
+      const btnConvertIcon = document.getElementById('btn-convert-icon');
+      const btnConvertLabel = document.getElementById('btn-convert-label');
+      const slimProgressBar = document.getElementById('slim-progress-bar');
+      const slimProgressFill = document.getElementById('slim-progress-fill');
+      const btnReset = document.getElementById('btn-reset-tool');
+      const btnCopy = document.getElementById('btn-copy-video');
+      const btnDownload = document.getElementById('btn-download-video');
+      const toastEl = document.getElementById('tool-toast');
+
+      // Settings State
+      let selectedFormat = 'mp4';
+      let selectedLoops = 3;
+      let selectedSpeed = 1.0;
+      let selectedScale = 'original';
+
+      let gifFile = null;
+      let gifUrl = null;
+      let decodedFrames = [];
+      let gifWidth = 0;
+      let gifHeight = 0;
+      let totalGifDurationSec = 0;
+      let generatedVideoBlob = null;
+      let isConverting = false;
+
+      function showToast(msg) {
+        if (!toastEl) return;
+        toastEl.textContent = msg;
+        toastEl.classList.add('show');
+        setTimeout(() => toastEl.classList.remove('show'), 2500);
+      }
+
+      function formatBytes(bytes) {
+        if (bytes === 0) return '0 B';
+        const k = 1024;
+        const sizes = ['B', 'KB', 'MB', 'GB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+      }
+
+      function updateSettingsSummary() {
+        const fmtText = selectedFormat.toUpperCase();
+        const scaleText = selectedScale === 'original' ? 'Original' : `${selectedScale}p`;
+        settingsSummaryBadge.textContent = `(${fmtText} • ${selectedLoops}x Loop • ${selectedSpeed}x Speed • ${scaleText})`;
+      }
+
+      function bindSegmentedPills(containerId, callback) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        const buttons = container.querySelectorAll('.seg-pill');
+        buttons.forEach((btn) => {
+          btn.addEventListener('click', () => {
+            buttons.forEach((b) => b.classList.remove('active'));
+            btn.classList.add('active');
+            callback(btn.getAttribute('data-val'));
+            updateSettingsSummary();
+          });
+        });
+      }
+
+      bindSegmentedPills('seg-format', (val) => { selectedFormat = val; });
+      bindSegmentedPills('seg-loops', (val) => { selectedLoops = parseInt(val, 10); });
+      bindSegmentedPills('seg-speed', (val) => { selectedSpeed = parseFloat(val); });
+      bindSegmentedPills('seg-scale', (val) => { selectedScale = val === 'original' ? 'original' : parseInt(val, 10); });
+
+      // File Selection & Drag-and-Drop
+      dropzone.addEventListener('click', () => fileInput.click());
+      btnChangeGif.addEventListener('click', () => fileInput.click());
+
+      ['dragenter', 'dragover'].forEach(eventName => {
+        dropzone.addEventListener(eventName, (e) => {
+          e.preventDefault();
+          dropzone.classList.add('dragover');
+        });
+      });
+
+      ['dragleave', 'drop'].forEach(eventName => {
+        dropzone.addEventListener(eventName, (e) => {
+          e.preventDefault();
+          dropzone.classList.remove('dragover');
+        });
+      });
+
+      dropzone.addEventListener('drop', (e) => {
+        const files = e.dataTransfer.files;
+        if (files && files.length > 0) {
+          handleGifFile(files[0]);
+        }
+      });
+
+      fileInput.addEventListener('change', (e) => {
+        if (e.target.files && e.target.files.length > 0) {
+          handleGifFile(e.target.files[0]);
+        }
+      });
+
+      // Pure Client-Side GIF Frame Decoding
+      async function decodeGif(file) {
+        // Method 1: WebCodecs ImageDecoder if supported
+        if ('ImageDecoder' in window) {
+          try {
+            const stream = file.stream();
+            const decoder = new ImageDecoder({ data: stream, type: 'image/gif' });
+            await decoder.tracks.ready;
+
+            const frameCount = decoder.tracks.selectedTrack.frameCount;
+            const frames = [];
+            let totalDurationMs = 0;
+
+            for (let i = 0; i < frameCount; i++) {
+              const frameResult = await decoder.decode({ frameIndex: i });
+              const videoFrame = frameResult.image;
+              const durationMs = (videoFrame.duration || 100000) / 1000; // microseconds to ms
+
+              const canvas = document.createElement('canvas');
+              canvas.width = videoFrame.displayWidth;
+              canvas.height = videoFrame.displayHeight;
+              const ctx = canvas.getContext('2d');
+              ctx.drawImage(videoFrame, 0, 0);
+              const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+              frames.push({
+                canvas: canvas,
+                durationMs: Math.max(20, durationMs)
+              });
+
+              totalDurationMs += durationMs;
+              videoFrame.close();
+            }
+
+            return {
+              frames,
+              width: frames[0].canvas.width,
+              height: frames[0].canvas.height,
+              durationSec: totalDurationMs / 1000
+            };
+          } catch (e) {
+            console.warn('ImageDecoder failed, falling back to Canvas frame extraction:', e);
+          }
+        }
+
+        // Fallback: Offscreen Canvas Animation Capture
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          img.onload = () => {
+            const w = img.naturalWidth || 480;
+            const h = img.naturalHeight || 360;
+            const c = document.createElement('canvas');
+            c.width = w;
+            c.height = h;
+            const ctx = c.getContext('2d');
+            ctx.drawImage(img, 0, 0);
+
+            // Create fallback single/interpolated frame set
+            resolve({
+              frames: [{ canvas: c, durationMs: 1000 }],
+              width: w,
+              height: h,
+              durationSec: 1.0
+            });
+          };
+          img.onerror = reject;
+          img.src = URL.createObjectURL(file);
+        });
+      }
+
+      async function handleGifFile(file) {
+        if (!file.type.includes('gif') && !file.name.toLowerCase().endsWith('.gif')) {
+          showToast('Please upload a valid animated .gif file');
+          return;
+        }
+
+        gifFile = file;
+        if (gifUrl) URL.revokeObjectURL(gifUrl);
+        gifUrl = URL.createObjectURL(file);
+
+        dropzone.style.display = 'none';
+        gifSourceImg.src = gifUrl;
+        gifSourceImg.style.display = 'block';
+        btnChangeGif.style.display = 'inline-flex';
+        gifMetaBadge.textContent = 'Analyzing frames...';
+        gifInfoLabel.textContent = 'Decoding GIF timing metadata...';
+
+        try {
+          const decoded = await decodeGif(file);
+          decodedFrames = decoded.frames;
+          gifWidth = decoded.width;
+          gifHeight = decoded.height;
+          totalGifDurationSec = decoded.durationSec;
+
+          const frameCount = decodedFrames.length;
+          gifMetaBadge.textContent = `${gifWidth}×${gifHeight} • ${frameCount} frames`;
+          gifInfoLabel.textContent = `${frameCount} frames (${totalGifDurationSec.toFixed(1)}s loop) • ${formatBytes(file.size)}`;
+
+          videoStatusBadge.textContent = 'Ready to Convert';
+          btnConvert.disabled = false;
+          showToast(`GIF loaded (${gifWidth}×${gifHeight} • ${frameCount} frames)`);
+        } catch (err) {
+          console.error('GIF parsing failed:', err);
+          gifMetaBadge.textContent = `${formatBytes(file.size)}`;
+          gifInfoLabel.textContent = `Loaded ${file.name}`;
+          btnConvert.disabled = false;
+          videoStatusBadge.textContent = 'Ready to Convert';
+        }
+      }
+
+      // Convert GIF Frames to Video Stream
+      btnConvert.addEventListener('click', async () => {
+        if (!gifFile || isConverting) return;
+
+        isConverting = true;
+        btnConvert.disabled = true;
+        btnConvertIcon.setAttribute('icon', 'lucide:loader-2');
+        btnConvertLabel.textContent = 'Encoding video stream...';
+        slimProgressBar.classList.add('active');
+        slimProgressFill.style.width = '0%';
+        videoStatusBadge.textContent = 'Encoding...';
+
+        showToast('Starting video encoding...');
+
+        try {
+          let targetW = gifWidth || 480;
+          let targetH = gifHeight || 360;
+
+          if (selectedScale !== 'original') {
+            const scale = selectedScale / Math.max(targetW, targetH);
+            targetW = Math.round(targetW * scale);
+            targetH = Math.round(targetH * scale);
+          }
+
+          // Video codecs strictly require even dimensions
+          if (targetW % 2 !== 0) targetW--;
+          if (targetH % 2 !== 0) targetH--;
+
+          const renderCanvas = document.createElement('canvas');
+          renderCanvas.width = targetW;
+          renderCanvas.height = targetH;
+          const ctx = renderCanvas.getContext('2d', { alpha: false });
+          ctx.fillStyle = '#FFFFFF';
+          ctx.fillRect(0, 0, targetW, targetH);
+
+          // Determine preferred MIME type supported by the browser
+          let mimeType = 'video/webm;codecs=vp9';
+          if (selectedFormat === 'mp4') {
+            if (MediaRecorder.isTypeSupported('video/mp4;codecs=avc1')) {
+              mimeType = 'video/mp4;codecs=avc1';
+            } else if (MediaRecorder.isTypeSupported('video/mp4')) {
+              mimeType = 'video/mp4';
+            } else {
+              mimeType = 'video/webm;codecs=vp9';
+            }
+          } else {
+            if (MediaRecorder.isTypeSupported('video/webm;codecs=vp9')) {
+              mimeType = 'video/webm;codecs=vp9';
+            } else if (MediaRecorder.isTypeSupported('video/webm')) {
+              mimeType = 'video/webm';
+            }
+          }
+
+          // Calculate average FPS from frames
+          const totalFramesPerLoop = decodedFrames.length > 0 ? decodedFrames.length : 30;
+          const streamFps = Math.min(60, Math.max(10, Math.round(totalFramesPerLoop / (totalGifDurationSec || 1.0))));
+          const stream = renderCanvas.captureStream(streamFps);
+          const recorder = new MediaRecorder(stream, {
+            mimeType: mimeType,
+            videoBitsPerSecond: 5000000 // 5 Mbps HD quality
+          });
+
+          const chunks = [];
+          recorder.ondataavailable = (e) => {
+            if (e.data && e.data.size > 0) chunks.push(e.data);
+          };
+
+          const encodingPromise = new Promise((resolve) => {
+            recorder.onstop = () => {
+              const videoBlob = new Blob(chunks, { type: mimeType.split(';')[0] });
+              resolve(videoBlob);
+            };
+          });
+
+          recorder.start();
+
+          // Render loop iterations
+          const loops = selectedLoops;
+          const speed = selectedSpeed;
+          const totalSteps = loops * totalFramesPerLoop;
+          let currentStep = 0;
+
+          for (let l = 0; l < loops; l++) {
+            for (let f = 0; f < decodedFrames.length; f++) {
+              const frame = decodedFrames[f];
+              ctx.drawImage(frame.canvas, 0, 0, targetW, targetH);
+
+              const duration = Math.max(20, frame.durationMs / speed);
+              await new Promise(r => setTimeout(r, duration));
+
+              currentStep++;
+              const percent = Math.min(98, Math.round((currentStep / totalSteps) * 100));
+              slimProgressFill.style.width = `${percent}%`;
+              btnConvertLabel.textContent = `Encoding (${percent}%)...`;
+            }
+          }
+
+          // Finalize stream recording
+          recorder.stop();
+          generatedVideoBlob = await encodingPromise;
+          const videoObjectUrl = URL.createObjectURL(generatedVideoBlob);
+
+          // Render in right pane video player
+          videoEmptyPlaceholder.style.display = 'none';
+          videoResultPlayer.src = videoObjectUrl;
+          videoResultPlayer.style.display = 'block';
+          videoResultPlayer.load();
+
+          const ext = mimeType.includes('mp4') ? 'MP4' : 'WebM';
+          videoStatusBadge.textContent = `${ext} • ${formatBytes(generatedVideoBlob.size)}`;
+          slimProgressFill.style.width = '100%';
+          btnCopy.disabled = false;
+          btnDownload.disabled = false;
+          showToast(`Video created successfully! (${formatBytes(generatedVideoBlob.size)})`);
+
+        } catch (err) {
+          console.error('Video conversion error:', err);
+          showToast('Could not convert GIF to video; please try WebM format');
+          videoStatusBadge.textContent = 'Error';
+        } finally {
+          isConverting = false;
+          btnConvert.disabled = false;
+          btnConvertIcon.setAttribute('icon', 'lucide:play');
+          btnConvertLabel.textContent = 'Convert to Video';
+          setTimeout(() => {
+            slimProgressBar.classList.remove('active');
+            slimProgressFill.style.width = '0%';
+          }, 1500);
+        }
+      });
+
+      // Download Video
+      btnDownload.addEventListener('click', () => {
+        if (!generatedVideoBlob) return;
+        const a = document.createElement('a');
+        const baseName = gifFile ? gifFile.name.replace(/\.[^/.]+$/, "") : "toolity-animation";
+        const ext = generatedVideoBlob.type.includes('mp4') ? 'mp4' : 'webm';
+        const filename = `${baseName}-${selectedLoops}x.${ext}`;
+        a.href = URL.createObjectURL(generatedVideoBlob);
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        showToast(`Downloaded ${filename}`);
+      });
+
+      // Copy Video to Clipboard
+      btnCopy.addEventListener('click', async () => {
+        if (!generatedVideoBlob) return;
+        try {
+          if (navigator.clipboard && window.ClipboardItem) {
+            const item = new ClipboardItem({ [generatedVideoBlob.type]: generatedVideoBlob });
+            await navigator.clipboard.write([item]);
+            showToast('Video copied to clipboard!');
+          } else {
+            showToast('Direct video copy not supported by your browser; click Download');
+          }
+        } catch (e) {
+          console.warn('Clipboard write video failed:', e);
+          showToast('Could not copy video directly; click Download instead');
+        }
+      });
+
+      // Reset Tool
+      btnReset.addEventListener('click', () => {
+        if (gifUrl) URL.revokeObjectURL(gifUrl);
+        gifFile = null;
+        gifUrl = null;
+        decodedFrames = [];
+        generatedVideoBlob = null;
+
+        fileInput.value = '';
+        gifSourceImg.src = '';
+        gifSourceImg.style.display = 'none';
+        dropzone.style.display = 'flex';
+        btnChangeGif.style.display = 'none';
+        gifMetaBadge.textContent = 'No GIF loaded';
+        gifInfoLabel.textContent = 'Select or drop a GIF to begin';
+
+        // Reset Output
+        videoResultPlayer.src = '';
+        videoResultPlayer.style.display = 'none';
+        videoEmptyPlaceholder.style.display = 'flex';
+        videoStatusBadge.textContent = 'Awaiting GIF';
+
+        btnConvert.disabled = true;
+        btnCopy.disabled = true;
+        btnDownload.disabled = true;
+        slimProgressBar.classList.remove('active');
+
+        showToast('Tool reset');
+      });
+    });
+  </script>
+</body>
+
+</html>

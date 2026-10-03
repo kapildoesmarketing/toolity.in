@@ -86,6 +86,9 @@
 
     // Initialize Hero Instant Search & Tool Finder
     initHeroSearch();
+
+    // Initialize Mobile Hamburger Menu & Frosted Navigation Drawer
+    initMobileNavigation();
   });
 
   /**
@@ -103,12 +106,36 @@
 
     const REGISTRY = [
       {
+        id: 'image-converter',
+        title: 'Image Format Converter',
+        category: 'Convertors',
+        url: 'convertors/image-converter/',
+        icon: 'lucide:image',
+        tags: ['image', 'photo', 'picture', 'converter', 'format', 'png', 'jpg', 'jpeg', 'webp', 'avif', 'bmp', 'ico', 'compress', 'scale', 'resize']
+      },
+      {
+        id: 'video-converter',
+        title: 'Video Format Converter',
+        category: 'Convertors',
+        url: 'convertors/video-converter/',
+        icon: 'lucide:refresh-cw',
+        tags: ['video', 'format', 'converter', 'transcode', 'mp4', 'webm', 'mov', 'mkv', 'avi', 'audio', 'extract', 'trim', 'compress', 'resolution', 'fps']
+      },
+      {
         id: 'video-to-gif',
         title: 'Video to GIF Converter',
         category: 'Convertors',
         url: 'convertors/video-to-gif/',
         icon: 'lucide:film',
         tags: ['video', 'gif', 'mp4', 'webm', 'mov', 'convert', 'animation', 'trim', 'clip', 'maker', 'generator']
+      },
+      {
+        id: 'gif-to-video',
+        title: 'GIF to Video Converter',
+        category: 'Convertors',
+        url: 'convertors/gif-to-video/',
+        icon: 'lucide:video',
+        tags: ['gif', 'video', 'mp4', 'webm', 'convert', 'animation', 'loop', 'instagram', 'tiktok', 'discord']
       },
       {
         id: 'qr-generator',
@@ -517,5 +544,154 @@
     }
 
     animId = requestAnimationFrame(render);
+  }
+
+  /**
+   * Designed by Kapil Pidhwani: Mobile Navigation & Frosted Drawer Controller
+   * Seamlessly provides a frosted slide-down category drawer for mobile devices across all pages.
+   */
+  function initMobileNavigation() {
+    const navRight = document.querySelector('.nav-right');
+    const header = document.querySelector('.site-header');
+    if (!navRight || !header) return;
+
+    // 1. Create or bind mobile menu toggle button in header
+    let toggleBtn = document.getElementById('mobile-menu-toggle');
+    if (!toggleBtn) {
+      toggleBtn = document.createElement('button');
+      toggleBtn.id = 'mobile-menu-toggle';
+      toggleBtn.className = 'btn-icon-pill';
+      toggleBtn.type = 'button';
+      toggleBtn.setAttribute('aria-label', 'Toggle mobile navigation menu');
+      toggleBtn.setAttribute('aria-expanded', 'false');
+      toggleBtn.innerHTML = '<iconify-icon id="mobile-menu-icon" icon="lucide:menu" width="18" height="18"></iconify-icon>';
+      navRight.appendChild(toggleBtn);
+    }
+
+    // 2. Create or bind mobile drawer
+    let drawer = document.getElementById('mobile-nav-drawer');
+    let backdrop = document.getElementById('mobile-nav-backdrop');
+
+    if (!drawer) {
+      // Find relative root path based on desktop links
+      const sampleLink = document.querySelector('.nav-links a');
+      let rootPrefix = '';
+      if (sampleLink) {
+        const href = sampleLink.getAttribute('href') || '';
+        if (href.startsWith('../../')) rootPrefix = '../../';
+        else if (href.startsWith('../')) rootPrefix = '../';
+        else if (href.startsWith('/')) rootPrefix = '/';
+      }
+
+      // Find active page
+      const activeLink = document.querySelector('.nav-links a.active');
+      const activeHref = activeLink ? (activeLink.getAttribute('href') || '') : '';
+
+      const categories = [
+        { title: 'Home', href: rootPrefix === '' ? './' : rootPrefix, icon: 'lucide:home', key: 'home' },
+        { title: 'Dev', href: `${rootPrefix}dev/`, icon: 'lucide:code-2', key: 'dev' },
+        { title: 'Text', href: `${rootPrefix}text/`, icon: 'lucide:file-text', key: 'text' },
+        { title: 'Math', href: `${rootPrefix}math/`, icon: 'lucide:binary', key: 'math' },
+        { title: 'Design', href: `${rootPrefix}design/`, icon: 'lucide:palette', key: 'design' },
+        { title: 'Utility', href: `${rootPrefix}utility/`, icon: 'lucide:wrench', key: 'utility' },
+        { title: 'Convertors', href: `${rootPrefix}convertors/`, icon: 'lucide:arrow-left-right', key: 'convertors' },
+        { title: 'Formatters', href: `${rootPrefix}formatters/`, icon: 'lucide:align-left', key: 'formatters' },
+        { title: 'Others', href: `${rootPrefix}others/`, icon: 'lucide:sparkles', key: 'others' }
+      ];
+
+      drawer = document.createElement('div');
+      drawer.id = 'mobile-nav-drawer';
+      drawer.className = 'mobile-nav-drawer';
+      drawer.setAttribute('role', 'dialog');
+      drawer.setAttribute('aria-label', 'Mobile Navigation');
+
+      let gridHtml = '';
+      categories.forEach(cat => {
+        let isActive = false;
+        if (activeHref.includes(cat.key)) {
+          isActive = true;
+        } else if (cat.key === 'home' && (activeHref === '/' || activeHref === './' || activeHref === '' || activeHref.endsWith('index.html') && !activeHref.includes('/'))) {
+          isActive = true;
+        }
+
+        gridHtml += `
+          <a href="${cat.href}" class="mobile-nav-link ${isActive ? 'active' : ''}">
+            <iconify-icon icon="${cat.icon}"></iconify-icon>
+            <span>${cat.title}</span>
+          </a>
+        `;
+      });
+
+      drawer.innerHTML = `
+        <div class="mobile-nav-content">
+          <div class="mobile-nav-grid">
+            ${gridHtml}
+          </div>
+          <div class="mobile-nav-footer-links">
+            <a href="${rootPrefix}about/" class="mobile-nav-sublink">About</a>
+            <a href="${rootPrefix}utility/qr-code-generator/" class="mobile-nav-sublink">QR Generator</a>
+            <a href="${rootPrefix}convertors/video-to-gif/" class="mobile-nav-sublink">Video to GIF</a>
+            <a href="${rootPrefix}convertors/gif-to-video/" class="mobile-nav-sublink">GIF to Video</a>
+            <a href="${rootPrefix}privacy/" class="mobile-nav-sublink">Privacy</a>
+            <a href="${rootPrefix}credits/" class="mobile-nav-sublink">Credits</a>
+          </div>
+        </div>
+      `;
+
+      header.after(drawer);
+
+      backdrop = document.createElement('div');
+      backdrop.id = 'mobile-nav-backdrop';
+      backdrop.className = 'mobile-nav-backdrop';
+      drawer.after(backdrop);
+    }
+
+    const menuIcon = document.getElementById('mobile-menu-icon');
+
+    function openMenu() {
+      drawer.classList.add('open');
+      backdrop.classList.add('open');
+      toggleBtn.setAttribute('aria-expanded', 'true');
+      if (menuIcon) menuIcon.setAttribute('icon', 'lucide:x');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+      drawer.classList.remove('open');
+      backdrop.classList.remove('open');
+      toggleBtn.setAttribute('aria-expanded', 'false');
+      if (menuIcon) menuIcon.setAttribute('icon', 'lucide:menu');
+      document.body.style.overflow = '';
+    }
+
+    function toggleMenu() {
+      if (drawer.classList.contains('open')) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    }
+
+    toggleBtn.addEventListener('click', toggleMenu);
+    backdrop.addEventListener('click', closeMenu);
+
+    // Close when clicking any nav link
+    drawer.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+
+    // Close on Escape key
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && drawer.classList.contains('open')) {
+        closeMenu();
+      }
+    });
+
+    // Close on resize to desktop width
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768 && drawer.classList.contains('open')) {
+        closeMenu();
+      }
+    });
   }
 })();

@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Format Converter (PNG, JPG, WebP, AVIF, BMP, ICO) — Toolity.in</title>
+
+  <!-- SEO & Metadata -->
+  <meta name="description"
+    content="Free, fast, and 100% private Image Format Converter. Convert images between PNG, JPG, WebP, AVIF, BMP, and ICO directly in your browser. Features custom compression quality, resolution scaling, transparency background fill, and zero server uploads.">
+  <meta name="keywords"
+    content="image converter, image format converter, png to jpg, jpg to png, png to webp, webp to jpg, avif converter, convert image online, client-side image converter, free image converter">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/webp" href="../../assets/Toolity.in Logo.webp">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Iconify Icon Component -->
+  <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="../../styles/main.css">
+</head>
+
+<body>
+
+  <!-- Top Sticky Header -->
+  <header class="site-header scrolled">
+    <div class="nav-container">
+      <!-- Left: Brand Logo & Title -->
+      <div class="nav-left">
+        <a href="../../" class="brand-link" aria-label="Toolity.in Home">
+          <div class="brand-icon-wrapper">
+            <img src="../../assets/Toolity.in Logo.webp" alt="Toolity.in Logo" class="brand-logo-img" width="32" height="32">
+          </div>
+          <span class="brand-name">Toolity<span class="brand-tld">.in</span></span>
+        </a>
+      </div>
+
+      <!-- Center: Navigation Pages (Capsule) -->
+      <nav class="nav-center" aria-label="Main Navigation">
+        <div class="nav-glass-capsule">
+          <ul class="nav-links">
+            <li><a href="../../" class="nav-link">Home</a></li>
+            <li><a href="../../dev/" class="nav-link">Dev</a></li>
+            <li><a href="../../text/" class="nav-link">Text</a></li>
+            <li><a href="../../math/" class="nav-link">Math</a></li>
+            <li><a href="../../design/" class="nav-link">Design</a></li>
+            <li><a href="../../utility/" class="nav-link">Utility</a></li>
+            <li><a href="../../convertors/" class="nav-link active">Convertors</a></li>
+            <li><a href="../../formatters/" class="nav-link">Formatters</a></li>
+            <li><a href="../../others/" class="nav-link">Others</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Right: Dark Mode Toggle -->
+      <div class="nav-right">
+        <button id="theme-toggle" class="btn-icon-pill" type="button" aria-label="Toggle light/dark theme"
+          title="Toggle Theme">
+          <iconify-icon id="theme-icon" icon="lucide:moon" width="18" height="18"></iconify-icon>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Tool Page Content -->
+  <main>
+    <!-- Page Hero Header -->
+    <section class="page-hero">
+      <div class="container">
+        <!-- Breadcrumbs Navigation -->
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="../../" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="../../convertors/" class="breadcrumb-link">Convertors</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Image Converter</span>
+        </nav>
+
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Convertor Tool</span>
+            <h1 class="page-title">Image Format Converter</h1>
+            <p class="page-desc">
+              Convert images instantly between PNG, JPG, WebP, AVIF, BMP, and ICO. Customize compression quality, scale dimensions, and apply background fills with 100% client-side privacy.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tool Main Workspace Area -->
+    <section class="section-wrapper" style="border-top: none; padding-top: 3.5rem;">
+      <div class="container">
+
+        <!-- Unified Tool Workspace Card -->
+        <div class="tool-workspace-card">
+
+          <!-- 1. Actions Toolbar (Top-Right Universal Pattern) -->
+          <div class="tool-actions-toolbar" style="justify-content: flex-end;">
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset-tool" title="Reset image and all settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy-img" title="Copy converted image to clipboard" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download-img" title="Download converted image file" disabled>
+                <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                <span>Download Image</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2. Dual Split-Pane Input & Output Grid (Minimalist Symmetrical Layout) -->
+          <div class="split-pane-grid" style="margin-bottom: 1.25rem;">
+
+            <!-- Left: Source Image Pane -->
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Source Image</span>
+                <span class="pane-badge" id="source-meta-badge">No image loaded</span>
+              </div>
+
+              <div class="pane-content" style="display: flex; flex-direction: column; justify-content: space-between;">
+                <!-- Media Viewport (280px) -->
+                <div class="media-canvas-viewport" id="source-viewport-frame">
+                  <!-- Drag & Drop Zone -->
+                  <div id="image-dropzone" class="video-dropzone">
+                    <input type="file" id="image-file-input" accept="image/png, image/jpeg, image/webp, image/avif, image/bmp, image/svg+xml, image/x-icon, image/*" style="display: none;">
+                    <div class="video-drop-icon">
+                      <iconify-icon icon="lucide:upload-cloud" width="22" height="22"></iconify-icon>
+                    </div>
+                    <div class="video-drop-title">Drop image here or click to browse</div>
+                    <div class="video-drop-subtitle">Supports PNG, JPG, WebP, AVIF, BMP, SVG, and ICO</div>
+                  </div>
+
+                  <!-- Active Image Preview -->
+                  <img id="source-img-element" alt="Source preview" style="width: 100%; height: 100%; max-height: 280px; object-fit: contain; display: none;">
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Converted Output Preview Pane -->
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Converted Output</span>
+                <span class="pane-badge" id="output-status-badge">Awaiting Image</span>
+              </div>
+
+              <div class="pane-content" style="display: flex; flex-direction: column; justify-content: space-between;">
+                <!-- Media Viewport (280px) -->
+                <div class="media-canvas-viewport" id="output-viewport-frame">
+                  <!-- Empty Placeholder -->
+                  <div id="output-empty-placeholder" class="media-empty-placeholder">
+                    <iconify-icon icon="lucide:sparkles" width="32" height="32"></iconify-icon>
+                    <p>Converted image output will appear here</p>
+                  </div>
+
+                  <!-- Converted Image Preview -->
+                  <img id="output-img-element" alt="Converted preview" style="width: 100%; height: 100%; max-height: 280px; object-fit: contain; display: none;">
+                </div>
+
+                <!-- Primary Convert Action Button -->
+                <div style="margin-top: 0.85rem;">
+                  <button type="button" id="btn-convert-action" class="btn-toolbar-sm btn-brand-sm" style="width: 100%; justify-content: center; height: 42px; font-size: 0.9rem; border-radius: var(--radius-sm);" disabled>
+                    <iconify-icon icon="lucide:refresh-cw" width="16" height="16" id="btn-convert-icon"></iconify-icon>
+                    <span id="btn-convert-label">Convert Image</span>
+                  </button>
+                  <div class="slim-progress-bar" id="slim-progress-bar">
+                    <div class="slim-progress-fill" id="slim-progress-fill"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 3. Controls & Options inside Accordion (Closed by Default) -->
+          <details class="tool-settings-accordion" style="margin-bottom: 0.25rem;">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="16" height="16"></iconify-icon>
+                <span>Format & Compression Settings</span>
+                <span class="pane-badge" id="settings-summary-badge">(WEBP • 90% Quality • Original Size • Transparent BG)</span>
+              </div>
+              <iconify-icon icon="lucide:chevron-down" class="tool-settings-chevron" width="16" height="16"></iconify-icon>
+            </summary>
+
+            <div class="tool-settings-panel">
+              <div class="settings-sections-wrapper">
+                <div class="settings-section-card">
+                  <div class="settings-section-header">
+                    <span>1. Target Format, Quality & Scaling</span>
+                  </div>
+                  <div class="settings-row-wrap">
+                    <!-- Format Control -->
+                    <div class="form-group">
+                      <span class="form-label" style="font-size:0.75rem;">Target Format</span>
+                      <div class="segmented-group segmented-group-pill" id="seg-format">
+                        <button type="button" class="seg-pill active" data-val="webp">WebP</button>
+                        <button type="button" class="seg-pill" data-val="png">PNG</button>
+                        <button type="button" class="seg-pill" data-val="jpg">JPG</button>
+                        <button type="button" class="seg-pill" data-val="avif">AVIF</button>
+                        <button type="button" class="seg-pill" data-val="bmp">BMP</button>
+                        <button type="button" class="seg-pill" data-val="ico">ICO</button>
+                      </div>
+                    </div>
+
+                    <!-- Quality Slider Control (JPG / WebP / AVIF) -->
+                    <div class="form-group" id="group-quality">
+                      <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                        <span class="form-label" style="font-size:0.75rem; margin-bottom: 0;">Compression Quality</span>
+                        <span class="pane-badge" id="quality-val-badge" style="font-size:0.7rem;">90%</span>
+                      </div>
+                      <input type="range" id="quality-slider" min="10" max="100" value="90" step="5" style="width: 100%; accent-color: var(--color-brand-primary);">
+                    </div>
+
+                    <!-- Resolution Scale Control -->
+                    <div class="form-group">
+                      <span class="form-label" style="font-size:0.75rem;">Scale Resolution</span>
+                      <div class="segmented-group segmented-group-pill" id="seg-scale">
+                        <button type="button" class="seg-pill active" data-val="1.0">Original</button>
+                        <button type="button" class="seg-pill" data-val="2.0">200%</button>
+                        <button type="button" class="seg-pill" data-val="0.75">75%</button>
+                        <button type="button" class="seg-pill" data-val="0.5">50%</button>
+                        <button type="button" class="seg-pill" data-val="0.25">25%</button>
+                      </div>
+                    </div>
+
+                    <!-- Background Fill (for transparency conversion) -->
+                    <div class="form-group">
+                      <span class="form-label" style="font-size:0.75rem;">Background Fill (Alpha)</span>
+                      <div class="segmented-group segmented-group-pill" id="seg-bg">
+                        <button type="button" class="seg-pill active" data-val="transparent">Transparent</button>
+                        <button type="button" class="seg-pill" data-val="white">White</button>
+                        <button type="button" class="seg-pill" data-val="black">Black</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+        <!-- ==================================================================
+             EXACTLY 1 ADSTERRA BANNER SLOT (Positioned at bottom of tool)
+             [Live ad scripts commented out in local development environment]
+             ================================================================== -->
+        <div class="adsterra-single-slot">
+          <span class="ad-label">
+            <iconify-icon icon="lucide:heart" width="11" height="11"></iconify-icon>
+            Sponsored • Supporting Toolity's Free Tools
+          </span>
+          
+          <div class="ad-placeholder-frame">
+            <iconify-icon icon="lucide:sparkles" width="16" height="16"></iconify-icon>
+            <span>Adsterra High-Viewability Banner (728×90 Desktop / 320×50 Mobile)</span>
+          </div>
+
+          <!--
+          <script type="text/javascript">
+            atOptions = {
+              'key': 'ADSTERRA_PUBLISHER_KEY_HERE',
+              'format': 'iframe',
+              'height': 90,
+              'width': 728,
+              'params': {}
+            };
+          </script>
+          <script type="text/javascript" src="//www.topcreativeformat.com/ADSTERRA_PUBLISHER_KEY_HERE/invoke.js"></script>
+          -->
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Global Floating Toast Notification -->
+  <div class="tool-toast" id="tool-toast" role="alert" aria-live="polite"></div>
+
+  <!-- Global Multi-Column Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Brand & Mission Column -->
+        <div class="footer-col footer-col-brand">
+          <a href="../../" class="brand-link" aria-label="Toolity.in Home">
+            <div class="brand-icon-wrapper">
+              <img src="../../assets/Toolity.in Logo.webp" alt="Toolity.in Logo" class="brand-logo-img" width="28" height="28">
+            </div>
+            <span class="brand-name">Toolity<span class="brand-tld">.in</span></span>
+          </a>
+          <p class="footer-brand-desc">
+            Simple, powerful tools for everyday tasks. Built with 100% client-side privacy, instant execution, and zero tracking.
+          </p>
+          <div class="footer-creator-badge">
+            <span>Created by</span>
+            <a href="https://kapil.eu.org" target="_blank" rel="noopener noreferrer">Kapil Pidhwani</a>
+          </div>
+        </div>
+
+        <!-- Workspaces & Catalog Column -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Workspaces</h4>
+          <ul class="footer-nav-list">
+            <li><a href="../../dev/">Developer Tools</a></li>
+            <li><a href="../../text/">Text Utilities</a></li>
+            <li><a href="../../math/">Math & Numbers</a></li>
+            <li><a href="../../design/">Design & Color</a></li>
+            <li><a href="../../utility/">Everyday Utilities</a></li>
+            <li><a href="../../convertors/">Convertors</a></li>
+            <li><a href="../../formatters/">Formatters</a></li>
+            <li><a href="../../others/">Other Tools</a></li>
+          </ul>
+        </div>
+
+        <!-- Resources & About Column -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Platform</h4>
+          <ul class="footer-nav-list">
+            <li><a href="../../about/">About Toolity</a></li>
+            <li><a href="../../convertors/video-converter/">Video Converter</a></li>
+            <li><a href="../../utility/qr-code-generator/">QR Code Generator</a></li>
+            <li><a href="../../credits/">Credits & Open Source</a></li>
+            <li><a href="https://github.com/kapildoesmarketing/toolity.in" target="_blank" rel="noopener noreferrer">GitHub Repository</a></li>
+          </ul>
+        </div>
+
+        <!-- Legal & Trust Column -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Trust & Legal</h4>
+          <ul class="footer-nav-list">
+            <li><a href="../../privacy/">Privacy Policy</a></li>
+            <li><a href="../../terms/">Terms of Service</a></li>
+            <li><a href="mailto:kapildoesmarketing@gmail.com">Contact Support</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Bottom Copyright Bar -->
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          © 2026 Toolity.in. All rights reserved.
+        </div>
+        <div class="footer-meta-note">
+          100% Client-Side • No Telemetry • Blazing Fast
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Main scripts -->
+  <script src="../../scripts/main.js"></script>
+
+  <!-- Image Format Converter Logic (Designed by Kapil Pidhwani) -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // DOM Elements
+      const dropzone = document.getElementById('image-dropzone');
+      const fileInput = document.getElementById('image-file-input');
+      const sourceImgElement = document.getElementById('source-img-element');
+      const sourceMetaBadge = document.getElementById('source-meta-badge');
+
+      const outputEmptyPlaceholder = document.getElementById('output-empty-placeholder');
+      const outputImgElement = document.getElementById('output-img-element');
+      const outputStatusBadge = document.getElementById('output-status-badge');
+      const settingsSummaryBadge = document.getElementById('settings-summary-badge');
+
+      const btnConvert = document.getElementById('btn-convert-action');
+      const btnConvertIcon = document.getElementById('btn-convert-icon');
+      const btnConvertLabel = document.getElementById('btn-convert-label');
+      const slimProgressBar = document.getElementById('slim-progress-bar');
+      const slimProgressFill = document.getElementById('slim-progress-fill');
+
+      const btnReset = document.getElementById('btn-reset-tool');
+      const btnCopy = document.getElementById('btn-copy-img');
+      const btnDownload = document.getElementById('btn-download-img');
+      const qualitySlider = document.getElementById('quality-slider');
+      const qualityValBadge = document.getElementById('quality-val-badge');
+      const groupQuality = document.getElementById('group-quality');
+      const toastEl = document.getElementById('tool-toast');
+
+      // State
+      let selectedFormat = 'webp';
+      let selectedQuality = 0.90;
+      let selectedScale = 1.0;
+      let selectedBg = 'transparent';
+
+      let imageFile = null;
+      let sourceImageUrl = null;
+      let outputUrl = null;
+      let generatedBlob = null;
+      let naturalWidth = 0;
+      let naturalHeight = 0;
+      let isConverting = false;
+
+      function showToast(msg) {
+        if (!toastEl) return;
+        toastEl.textContent = msg;
+        toastEl.classList.add('show');
+        setTimeout(() => toastEl.classList.remove('show'), 2500);
+      }
+
+      function formatBytes(bytes) {
+        if (bytes === 0) return '0 B';
+        const k = 1024;
+        const sizes = ['B', 'KB', 'MB', 'GB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+      }
+
+      function updateSettingsSummary() {
+        const fmtText = selectedFormat.toUpperCase();
+        const qualText = ['jpg', 'webp', 'avif'].includes(selectedFormat) ? `${Math.round(selectedQuality * 100)}% Quality` : 'Lossless';
+        const scaleText = selectedScale === 1.0 ? 'Original Size' : `${Math.round(selectedScale * 100)}% Scale`;
+        const bgText = selectedBg === 'transparent' ? 'Transparent BG' : `${selectedBg.charAt(0).toUpperCase() + selectedBg.slice(1)} BG`;
+        settingsSummaryBadge.textContent = `(${fmtText} • ${qualText} • ${scaleText} • ${bgText})`;
+
+        if (groupQuality) {
+          groupQuality.style.opacity = ['jpg', 'webp', 'avif'].includes(selectedFormat) ? '1' : '0.4';
+        }
+      }
+
+      function selectFormat(fmt) {
+        selectedFormat = fmt;
+        const container = document.getElementById('seg-format');
+        if (container) {
+          const buttons = container.querySelectorAll('.seg-pill');
+          buttons.forEach((b) => {
+            b.classList.toggle('active', b.getAttribute('data-val') === fmt);
+          });
+        }
+        updateSettingsSummary();
+      }
+
+      function bindSegmentedPills(containerId, callback) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        const buttons = container.querySelectorAll('.seg-pill');
+        buttons.forEach((btn) => {
+          btn.addEventListener('click', () => {
+            buttons.forEach((b) => b.classList.remove('active'));
+            btn.classList.add('active');
+            callback(btn.getAttribute('data-val'));
+            updateSettingsSummary();
+            if (imageFile) performImageConversion();
+          });
+        });
+      }
+
+      bindSegmentedPills('seg-format', (val) => { selectedFormat = val; });
+      bindSegmentedPills('seg-scale', (val) => { selectedScale = parseFloat(val); });
+      bindSegmentedPills('seg-bg', (val) => { selectedBg = val; });
+
+      qualitySlider.addEventListener('input', (e) => {
+        const val = parseInt(e.target.value, 10);
+        selectedQuality = val / 100;
+        qualityValBadge.textContent = `${val}%`;
+        updateSettingsSummary();
+      });
+
+      qualitySlider.addEventListener('change', () => {
+        if (imageFile) performImageConversion();
+      });
+
+      // Dropzone & File Input
+      dropzone.addEventListener('click', () => fileInput.click());
+      sourceImgElement.addEventListener('click', () => fileInput.click());
+
+      ['dragenter', 'dragover'].forEach(eventName => {
+        dropzone.addEventListener(eventName, (e) => {
+          e.preventDefault();
+          dropzone.classList.add('dragover');
+        });
+      });
+
+      ['dragleave', 'drop'].forEach(eventName => {
+        dropzone.addEventListener(eventName, (e) => {
+          e.preventDefault();
+          dropzone.classList.remove('dragover');
+        });
+      });
+
+      dropzone.addEventListener('drop', (e) => {
+        const files = e.dataTransfer.files;
+        if (files && files.length > 0) {
+          handleImageFile(files[0]);
+        }
+      });
+
+      fileInput.addEventListener('change', (e) => {
+        if (e.target.files && e.target.files.length > 0) {
+          handleImageFile(e.target.files[0]);
+        }
+      });
+
+      function handleImageFile(file) {
+        if (!file.type.startsWith('image/') && !file.name.match(/\.(png|jpg|jpeg|webp|avif|bmp|svg|ico)$/i)) {
+          showToast('Please select a valid image file');
+          return;
+        }
+
+        imageFile = file;
+        if (sourceImageUrl) URL.revokeObjectURL(sourceImageUrl);
+        if (outputUrl) {
+          URL.revokeObjectURL(outputUrl);
+          outputUrl = null;
+        }
+
+        sourceImageUrl = URL.createObjectURL(file);
+        sourceImgElement.src = sourceImageUrl;
+
+        sourceImgElement.onload = () => {
+          naturalWidth = sourceImgElement.naturalWidth || 800;
+          naturalHeight = sourceImgElement.naturalHeight || 600;
+
+          const rawExt = (file.name.split('.').pop() || '').toLowerCase();
+          sourceMetaBadge.textContent = `${naturalWidth}×${naturalHeight} • ${rawExt.toUpperCase()} • ${formatBytes(file.size)}`;
+
+          dropzone.style.display = 'none';
+          sourceImgElement.style.display = 'block';
+          sourceImgElement.style.cursor = 'pointer';
+          sourceImgElement.title = 'Click to change image';
+          btnConvert.disabled = false;
+
+          // Auto-select alternative target format for optimal UX
+          if (rawExt === 'png') {
+            selectFormat('webp');
+          } else if (rawExt === 'jpg' || rawExt === 'jpeg') {
+            selectFormat('png');
+          } else if (rawExt === 'webp') {
+            selectFormat('jpg');
+          } else {
+            selectFormat('png');
+          }
+
+          showToast(`Loaded ${file.name} (${naturalWidth}×${naturalHeight})`);
+          performImageConversion();
+        };
+      }
+
+      // Convert Image via Canvas
+      async function performImageConversion() {
+        if (!imageFile || isConverting) return;
+
+        isConverting = true;
+        btnConvert.disabled = true;
+        btnConvertIcon.setAttribute('icon', 'lucide:loader-2');
+        btnConvertLabel.textContent = 'Converting...';
+        slimProgressBar.classList.add('active');
+        slimProgressFill.style.width = '40%';
+        outputStatusBadge.textContent = 'Processing...';
+
+        try {
+          const targetW = Math.max(1, Math.round(naturalWidth * selectedScale));
+          const targetH = Math.max(1, Math.round(naturalHeight * selectedScale));
+
+          const canvas = document.createElement('canvas');
+          canvas.width = targetW;
+          canvas.height = targetH;
+          const ctx = canvas.getContext('2d');
+
+          // Handle background fill
+          if (selectedBg === 'white') {
+            ctx.fillStyle = '#FFFFFF';
+            ctx.fillRect(0, 0, targetW, targetH);
+          } else if (selectedBg === 'black') {
+            ctx.fillStyle = '#000000';
+            ctx.fillRect(0, 0, targetW, targetH);
+          } else if (selectedFormat === 'jpg') {
+            // JPG does not support alpha, default fill to white if transparent selected
+            ctx.fillStyle = '#FFFFFF';
+            ctx.fillRect(0, 0, targetW, targetH);
+          }
+
+          ctx.drawImage(sourceImgElement, 0, 0, targetW, targetH);
+          slimProgressFill.style.width = '80%';
+
+          // Determine target MIME
+          let mimeType = 'image/png';
+          if (selectedFormat === 'webp') mimeType = 'image/webp';
+          else if (selectedFormat === 'jpg') mimeType = 'image/jpeg';
+          else if (selectedFormat === 'avif') mimeType = 'image/avif';
+          else if (selectedFormat === 'bmp') mimeType = 'image/bmp';
+          else if (selectedFormat === 'ico') mimeType = 'image/x-icon';
+
+          generatedBlob = await new Promise((resolve) => {
+            canvas.toBlob((blob) => {
+              if (blob) {
+                resolve(blob);
+              } else {
+                // Fallback to PNG if browser doesn't support specific mimeType (e.g. AVIF/BMP)
+                canvas.toBlob((fallbackBlob) => resolve(fallbackBlob), 'image/png');
+              }
+            }, mimeType, selectedQuality);
+          });
+
+          if (outputUrl) URL.revokeObjectURL(outputUrl);
+          outputUrl = URL.createObjectURL(generatedBlob);
+
+          outputEmptyPlaceholder.style.display = 'none';
+          outputImgElement.src = outputUrl;
+          outputImgElement.style.display = 'block';
+
+          // Calculate file size difference percentage
+          const diff = ((generatedBlob.size - imageFile.size) / imageFile.size) * 100;
+          const diffText = diff < 0 ? ` (${Math.round(diff)}%)` : ` (+${Math.round(diff)}%)`;
+
+          outputStatusBadge.textContent = `${selectedFormat.toUpperCase()} • ${formatBytes(generatedBlob.size)}${diffText}`;
+          slimProgressFill.style.width = '100%';
+          btnCopy.disabled = false;
+          btnDownload.disabled = false;
+
+          showToast(`Converted to ${selectedFormat.toUpperCase()} • ${formatBytes(generatedBlob.size)}`);
+        } catch (err) {
+          console.error('Image conversion error:', err);
+          outputStatusBadge.textContent = 'Conversion Error';
+          showToast('Image conversion failed');
+        } finally {
+          isConverting = false;
+          btnConvert.disabled = false;
+          btnConvertIcon.setAttribute('icon', 'lucide:refresh-cw');
+          btnConvertLabel.textContent = 'Convert Image';
+          setTimeout(() => {
+            slimProgressBar.classList.remove('active');
+            slimProgressFill.style.width = '0%';
+          }, 600);
+        }
+      }
+
+      btnConvert.addEventListener('click', performImageConversion);
+
+      // Download Converted Image
+      btnDownload.addEventListener('click', () => {
+        if (!generatedBlob) return;
+        const a = document.createElement('a');
+        const baseName = imageFile ? imageFile.name.replace(/\.[^/.]+$/, "") : "toolity-image";
+        const ext = selectedFormat.toLowerCase();
+        const filename = `${baseName}.${ext}`;
+        a.href = URL.createObjectURL(generatedBlob);
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        showToast(`Downloaded ${filename}`);
+      });
+
+      // Copy Image to Clipboard
+      btnCopy.addEventListener('click', async () => {
+        if (!generatedBlob) return;
+        try {
+          if (navigator.clipboard && window.ClipboardItem) {
+            // Browsers universally support image/png in clipboard
+            if (generatedBlob.type === 'image/png') {
+              await navigator.clipboard.write([new ClipboardItem({ 'image/png': generatedBlob })]);
+            } else {
+              // Convert to PNG blob for clipboard compatibility
+              const canvas = document.createElement('canvas');
+              canvas.width = outputImgElement.naturalWidth || naturalWidth;
+              canvas.height = outputImgElement.naturalHeight || naturalHeight;
+              const ctx = canvas.getContext('2d');
+              ctx.drawImage(outputImgElement, 0, 0);
+              canvas.toBlob(async (pngBlob) => {
+                if (pngBlob) {
+                  await navigator.clipboard.write([new ClipboardItem({ 'image/png': pngBlob })]);
+                  showToast('Image copied to clipboard!');
+                }
+              }, 'image/png');
+              return;
+            }
+            showToast('Image copied to clipboard!');
+          } else {
+            showToast('Direct image copy not supported by browser; click Download');
+          }
+        } catch (e) {
+          console.warn('Clipboard write image failed:', e);
+          showToast('Could not copy image directly; click Download instead');
+        }
+      });
+
+      // Reset Tool
+      btnReset.addEventListener('click', () => {
+        if (sourceImageUrl) URL.revokeObjectURL(sourceImageUrl);
+        if (outputUrl) {
+          URL.revokeObjectURL(outputUrl);
+          outputUrl = null;
+        }
+
+        imageFile = null;
+        sourceImageUrl = null;
+        generatedBlob = null;
+
+        fileInput.value = '';
+        sourceImgElement.src = '';
+        sourceImgElement.style.display = 'none';
+        dropzone.style.display = 'flex';
+        sourceMetaBadge.textContent = 'No image loaded';
+
+        outputImgElement.src = '';
+        outputImgElement.style.display = 'none';
+        outputEmptyPlaceholder.style.display = 'flex';
+        outputStatusBadge.textContent = 'Awaiting Image';
+
+        btnConvert.disabled = true;
+        btnCopy.disabled = true;
+        btnDownload.disabled = true;
+        slimProgressBar.classList.remove('active');
+
+        showToast('Tool reset');
+      });
+    });
+  </script>
+</body>
+
+</html>

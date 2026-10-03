@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Format Converter (MP4, WebM, MOV & Audio) — Toolity.in</title>
+
+  <!-- SEO & Metadata -->
+  <meta name="description"
+    content="Free, fast, and 100% private Video Format Converter. Convert MP4, WebM, MOV, MKV, AVI, and audio formats directly in your browser. Features custom resolution scaling, framerate adjustments, clip trimming, and audio extraction with zero server uploads.">
+  <meta name="keywords"
+    content="video converter, video format converter, mp4 to webm, webm to mp4, mov to mp4, mkv to mp4, client-side video converter, free video converter, extract audio from video">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/webp" href="../../assets/Toolity.in Logo.webp">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Iconify Icon Component -->
+  <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="../../styles/main.css">
+</head>
+
+<body>
+
+  <!-- Top Sticky Header -->
+  <header class="site-header scrolled">
+    <div class="nav-container">
+      <!-- Left: Brand Logo & Title -->
+      <div class="nav-left">
+        <a href="../../" class="brand-link" aria-label="Toolity.in Home">
+          <div class="brand-icon-wrapper">
+            <img src="../../assets/Toolity.in Logo.webp" alt="Toolity.in Logo" class="brand-logo-img" width="32" height="32">
+          </div>
+          <span class="brand-name">Toolity<span class="brand-tld">.in</span></span>
+        </a>
+      </div>
+
+      <!-- Center: Navigation Pages (Capsule) -->
+      <nav class="nav-center" aria-label="Main Navigation">
+        <div class="nav-glass-capsule">
+          <ul class="nav-links">
+            <li><a href="../../" class="nav-link">Home</a></li>
+            <li><a href="../../dev/" class="nav-link">Dev</a></li>
+            <li><a href="../../text/" class="nav-link">Text</a></li>
+            <li><a href="../../math/" class="nav-link">Math</a></li>
+            <li><a href="../../design/" class="nav-link">Design</a></li>
+            <li><a href="../../utility/" class="nav-link">Utility</a></li>
+            <li><a href="../../convertors/" class="nav-link active">Convertors</a></li>
+            <li><a href="../../formatters/" class="nav-link">Formatters</a></li>
+            <li><a href="../../others/" class="nav-link">Others</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Right: Dark Mode Toggle -->
+      <div class="nav-right">
+        <button id="theme-toggle" class="btn-icon-pill" type="button" aria-label="Toggle light/dark theme"
+          title="Toggle Theme">
+          <iconify-icon id="theme-icon" icon="lucide:moon" width="18" height="18"></iconify-icon>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Tool Page Content -->
+  <main>
+    <!-- Page Hero Header -->
+    <section class="page-hero">
+      <div class="container">
+        <!-- Breadcrumbs Navigation -->
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="../../" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="../../convertors/" class="breadcrumb-link">Convertors</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Video Converter</span>
+        </nav>
+
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Convertor Tool</span>
+            <h1 class="page-title">Video Format Converter</h1>
+            <p class="page-desc">
+              Convert video clips between MP4, WebM, MOV, MKV, and audio formats entirely in your browser. Customize resolutions, framerates, audio tracks, and clip boundaries with zero data tracking.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tool Main Workspace Area -->
+    <section class="section-wrapper" style="border-top: none; padding-top: 3.5rem;">
+      <div class="container">
+
+        <!-- Unified Tool Workspace Card -->
+        <div class="tool-workspace-card">
+
+          <!-- 1. Actions Toolbar (Top-Right Universal Pattern) -->
+          <div class="tool-actions-toolbar" style="justify-content: flex-end;">
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset-tool" title="Reset video and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy-video" title="Copy video to clipboard" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download-video" title="Download converted video" disabled>
+                <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                <span>Download Video</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2. Dual Split-Pane Input & Output Grid (Minimalist Symmetrical Layout) -->
+          <div class="split-pane-grid" style="margin-bottom: 1.25rem;">
+
+            <!-- Left: Video Source & Trimmer Pane -->
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Source Video</span>
+                <span class="pane-badge" id="video-meta-badge">No video loaded</span>
+              </div>
+
+              <div class="pane-content" style="display: flex; flex-direction: column; justify-content: space-between;">
+                <!-- Media Viewport (280px) -->
+                <div class="media-canvas-viewport" id="video-viewport-frame">
+                  <!-- Drag & Drop Zone -->
+                  <div id="video-dropzone" class="video-dropzone">
+                    <input type="file" id="video-file-input" accept="video/mp4,video/webm,video/ogg,video/quicktime,video/x-matroska,video/x-msvideo" style="display: none;">
+                    <div class="video-drop-icon">
+                      <iconify-icon icon="lucide:upload-cloud" width="22" height="22"></iconify-icon>
+                    </div>
+                    <div class="video-drop-title">Drop video here or click to browse</div>
+                    <div class="video-drop-subtitle">Supports MP4, WebM, MOV, MKV, AVI, and OGG</div>
+                  </div>
+
+                  <!-- Active Video Player -->
+                  <video id="source-video" class="source-video-player" playsinline preload="auto" controls></video>
+                </div>
+
+                <!-- Minimalist Scrubber Timeline Bar -->
+                <div class="minimal-trimmer-wrap" id="trimmer-wrap">
+                  <div class="minimal-trimmer-header">
+                    <span>Trim Clip Boundary</span>
+                    <div class="trimmer-timestamps">
+                      <span id="trim-start-val">00:00.0</span>
+                      <span>—</span>
+                      <span id="trim-end-val">00:00.0</span>
+                      <span id="trim-duration-badge" style="color: var(--text-muted); font-size: 0.72rem;">(0.0s)</span>
+                    </div>
+                  </div>
+
+                  <div class="trim-sliders-row">
+                    <div class="trim-slider-line">
+                      <span class="trim-slider-tag">Start</span>
+                      <input type="range" id="trim-start-range" class="trim-range-slider" min="0" max="100" value="0" step="0.1" disabled>
+                    </div>
+                    <div class="trim-slider-line">
+                      <span class="trim-slider-tag">End</span>
+                      <input type="range" id="trim-end-range" class="trim-range-slider" min="0" max="100" value="100" step="0.1" disabled>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Converted Video Output Preview Pane -->
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Converted Output</span>
+                <span class="pane-badge" id="video-status-badge">Awaiting Video</span>
+              </div>
+
+              <div class="pane-content" style="display: flex; flex-direction: column; justify-content: space-between;">
+                <!-- Media Viewport (280px) -->
+                <div class="media-canvas-viewport" id="output-viewport-frame">
+                  <!-- Empty Placeholder -->
+                  <div id="output-empty-placeholder" class="media-empty-placeholder">
+                    <iconify-icon icon="lucide:sparkles" width="32" height="32"></iconify-icon>
+                    <p>Converted video output will appear here</p>
+                  </div>
+                  <!-- Active Output Player -->
+                  <video id="output-video-player" class="source-video-player" playsinline controls></video>
+                </div>
+
+                <!-- Primary Convert Action Button -->
+                <div style="margin-top: 0.85rem;">
+                  <button type="button" id="btn-convert-video" class="btn-toolbar-sm btn-brand-sm" style="width: 100%; justify-content: center; height: 42px; font-size: 0.9rem; border-radius: var(--radius-sm);" disabled>
+                    <iconify-icon icon="lucide:play" width="16" height="16" id="btn-convert-icon"></iconify-icon>
+                    <span id="btn-convert-label">Convert Video</span>
+                  </button>
+                  <div class="slim-progress-bar" id="slim-progress-bar">
+                    <div class="slim-progress-fill" id="slim-progress-fill"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 3. Controls & Options inside Accordion (Closed by Default) -->
+          <details class="tool-settings-accordion" style="margin-bottom: 0.25rem;">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="16" height="16"></iconify-icon>
+                <span>Conversion & Output Settings</span>
+                <span class="pane-badge" id="settings-summary-badge">(MP4 • 1080p • 60 FPS • Audio On)</span>
+              </div>
+              <iconify-icon icon="lucide:chevron-down" class="tool-settings-chevron" width="16" height="16"></iconify-icon>
+            </summary>
+
+            <div class="tool-settings-panel">
+              <div class="settings-sections-wrapper">
+                <div class="settings-section-card">
+                  <div class="settings-section-header">
+                    <span>1. Target Container, Resolution & Audio</span>
+                  </div>
+                  <div class="settings-row-wrap">
+                    <!-- Format Control -->
+                    <div class="form-group">
+                      <span class="form-label" style="font-size:0.75rem;">Target Format</span>
+                      <div class="segmented-group segmented-group-pill" id="seg-format">
+                        <button type="button" class="seg-pill active" data-val="mp4">MP4</button>
+                        <button type="button" class="seg-pill" data-val="webm">WebM</button>
+                        <button type="button" class="seg-pill" data-val="mov">MOV</button>
+                        <button type="button" class="seg-pill" data-val="audio">Extract Audio</button>
+                      </div>
+                    </div>
+
+                    <!-- Resolution Scale Control -->
+                    <div class="form-group">
+                      <span class="form-label" style="font-size:0.75rem;">Resolution</span>
+                      <div class="segmented-group segmented-group-pill" id="seg-scale">
+                        <button type="button" class="seg-pill active" data-val="original">Original</button>
+                        <button type="button" class="seg-pill" data-val="1080">1080p</button>
+                        <button type="button" class="seg-pill" data-val="720">720p</button>
+                        <button type="button" class="seg-pill" data-val="480">480p</button>
+                      </div>
+                    </div>
+
+                    <!-- Framerate Control -->
+                    <div class="form-group">
+                      <span class="form-label" style="font-size:0.75rem;">Framerate (FPS)</span>
+                      <div class="segmented-group segmented-group-pill" id="seg-fps">
+                        <button type="button" class="seg-pill active" data-val="auto">Auto</button>
+                        <button type="button" class="seg-pill" data-val="60">60 fps</button>
+                        <button type="button" class="seg-pill" data-val="30">30 fps</button>
+                        <button type="button" class="seg-pill" data-val="24">24 fps</button>
+                      </div>
+                    </div>
+
+                    <!-- Audio Track Control -->
+                    <div class="form-group">
+                      <span class="form-label" style="font-size:0.75rem;">Audio Track</span>
+                      <div class="segmented-group segmented-group-pill" id="seg-audio">
+                        <button type="button" class="seg-pill active" data-val="keep">Include Audio</button>
+                        <button type="button" class="seg-pill" data-val="mute">Mute Track</button>
+                      </div>
+                    </div>
+
+                    <!-- Speed Multiplier Control -->
+                    <div class="form-group">
+                      <span class="form-label" style="font-size:0.75rem;">Playback Speed</span>
+                      <div class="segmented-group segmented-group-pill" id="seg-speed">
+                        <button type="button" class="seg-pill" data-val="0.5">0.5x</button>
+                        <button type="button" class="seg-pill active" data-val="1.0">1.0x</button>
+                        <button type="button" class="seg-pill" data-val="1.5">1.5x</button>
+                        <button type="button" class="seg-pill" data-val="2.0">2.0x</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+        <!-- ==================================================================
+             EXACTLY 1 ADSTERRA BANNER SLOT (Positioned at bottom of tool)
+             [Live ad scripts commented out in local development environment]
+             ================================================================== -->
+        <div class="adsterra-single-slot">
+          <span class="ad-label">
+            <iconify-icon icon="lucide:heart" width="11" height="11"></iconify-icon>
+            Sponsored • Supporting Toolity's Free Tools
+          </span>
+          
+          <div class="ad-placeholder-frame">
+            <iconify-icon icon="lucide:sparkles" width="16" height="16"></iconify-icon>
+            <span>Adsterra High-Viewability Banner (728×90 Desktop / 320×50 Mobile)</span>
+          </div>
+
+          <!-- Production Scripts (Activated upon live GitHub push)
+          <div class="ad-slot-desktop">
+            <script>
+              atOptions = {
+                'key' : '173f3c31e644a6feb61843877787aa01',
+                'format' : 'iframe',
+                'height' : 90,
+                'width' : 728,
+                'params' : {}
+              };
+            </script>
+            <script src="https://www.highrevenueformat.com/173f3c31e644a6feb61843877787aa01/invoke.js"></script>
+          </div>
+          <div class="ad-slot-mobile">
+            <script>
+              atOptions = {
+                'key' : 'd494b0cbcfa90ae4f358b33b28092221',
+                'format' : 'iframe',
+                'height' : 50,
+                'width' : 320,
+                'params' : {}
+              };
+            </script>
+            <script src="https://www.highrevenueformat.com/d494b0cbcfa90ae4f358b33b28092221/invoke.js"></script>
+          </div>
+          -->
+        </div>
+
+        <!-- ==================================================================
+             3-STEP INSTRUCTION GUIDE
+             ================================================================== -->
+        <section class="guide-section">
+          <div class="section-header">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-title">Universal Video Transcoding in Your Browser</h2>
+            <p class="section-desc">Convert, trim, rescale, and extract audio from any video format in 3 simple steps.</p>
+          </div>
+
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Upload Video File</h3>
+              <p class="step-desc">
+                Drop your MP4, WebM, MOV, MKV, or AVI file into the workspace. The browser reads metadata and initializes the decoding pipeline.
+              </p>
+            </div>
+
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Choose Format & Resolution</h3>
+              <p class="step-desc">
+                Select your desired output container (MP4, WebM, MOV, or Audio), adjust resolution scaling (1080p, 720p), framerate, and clip boundaries.
+              </p>
+            </div>
+
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Transcode & Download</h3>
+              <p class="step-desc">
+                Click Convert to render the new stream in memory. Watch the preview in the output player and download directly to your device.
+              </p>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Global Toast Notification -->
+  <div id="tool-toast" class="tool-toast" role="status" aria-live="polite">
+    Copied to clipboard!
+  </div>
+
+  <!-- Global Multi-Column Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Brand & Mission Column -->
+        <div class="footer-col footer-col-brand">
+          <a href="/" class="brand-link" aria-label="Toolity.in Home">
+            <div class="brand-icon-wrapper">
+              <img src="../../assets/Toolity.in Logo.webp" alt="Toolity.in Logo" class="brand-logo-img" width="28" height="28">
+            </div>
+            <span class="brand-name">Toolity<span class="brand-tld">.in</span></span>
+          </a>
+          <p class="footer-brand-desc">
+            Simple, powerful tools for everyday tasks. Built with 100% client-side privacy, instant execution, and zero tracking.
+          </p>
+          <div class="footer-creator-badge">
+            <span>Created by</span>
+            <a href="https://github.com/kapildoesmarketing" target="_blank" rel="noopener noreferrer">Kapil Pidhwani</a>
+          </div>
+        </div>
+
+        <!-- Categories / Workspaces Column -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Workspaces</h4>
+          <ul class="footer-nav-list">
+            <li><a href="../../dev/">Developer Tools</a></li>
+            <li><a href="../../text/">Text Utilities</a></li>
+            <li><a href="../../math/">Math & Numbers</a></li>
+            <li><a href="../../design/">Design & Color</a></li>
+            <li><a href="../../utility/">Everyday Utilities</a></li>
+            <li><a href="../../convertors/">Convertors</a></li>
+            <li><a href="../../formatters/">Formatters</a></li>
+            <li><a href="../../others/">Other Tools</a></li>
+          </ul>
+        </div>
+
+        <!-- Resources & About Column -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Platform</h4>
+          <ul class="footer-nav-list">
+            <li><a href="../../about/">About Toolity</a></li>
+            <li><a href="../../convertors/video-to-gif/">Video to GIF</a></li>
+            <li><a href="../../convertors/gif-to-video/">GIF to Video</a></li>
+            <li><a href="../../utility/qr-code-generator/">QR Generator</a></li>
+            <li><a href="../../credits/">Credits & Open Source</a></li>
+            <li><a href="https://github.com/kapildoesmarketing/toolity.in" target="_blank" rel="noopener noreferrer">GitHub Repository</a></li>
+          </ul>
+        </div>
+
+        <!-- Legal & Trust Column -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Trust & Legal</h4>
+          <ul class="footer-nav-list">
+            <li><a href="../../privacy/">Privacy Policy</a></li>
+            <li><a href="../../terms/">Terms of Service</a></li>
+            <li><a href="mailto:kapildoesmarketing@gmail.com">Contact Support</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Bottom Copyright Bar -->
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          © 2026 Toolity.in. All rights reserved.
+        </div>
+        <div class="footer-meta-note">
+          100% Client-Side • No Telemetry • Blazing Fast
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Main scripts -->
+  <script src="../../scripts/main.js"></script>
+
+  <!-- Video Converter Logic (Designed by Kapil Pidhwani) -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // DOM Elements - Left Pane
+      const dropzone = document.getElementById('video-dropzone');
+      const fileInput = document.getElementById('video-file-input');
+      const sourceVideo = document.getElementById('source-video');
+      const videoMetaBadge = document.getElementById('video-meta-badge');
+
+      // Trimmer Elements
+      const trimStartRange = document.getElementById('trim-start-range');
+      const trimEndRange = document.getElementById('trim-end-range');
+      const trimStartVal = document.getElementById('trim-start-val');
+      const trimEndVal = document.getElementById('trim-end-val');
+      const trimDurationBadge = document.getElementById('trim-duration-badge');
+
+      // Output Elements - Right Pane
+      const outputEmptyPlaceholder = document.getElementById('output-empty-placeholder');
+      const outputVideoPlayer = document.getElementById('output-video-player');
+      const videoStatusBadge = document.getElementById('video-status-badge');
+      const settingsSummaryBadge = document.getElementById('settings-summary-badge');
+
+      // Action Buttons & Progress
+      const btnConvert = document.getElementById('btn-convert-video');
+      const btnConvertIcon = document.getElementById('btn-convert-icon');
+      const btnConvertLabel = document.getElementById('btn-convert-label');
+      const slimProgressBar = document.getElementById('slim-progress-bar');
+      const slimProgressFill = document.getElementById('slim-progress-fill');
+      const btnReset = document.getElementById('btn-reset-tool');
+      const btnCopy = document.getElementById('btn-copy-video');
+      const btnDownload = document.getElementById('btn-download-video');
+      const toastEl = document.getElementById('tool-toast');
+
+      // Settings State
+      let selectedFormat = 'mp4';
+      let selectedScale = 'original';
+      let selectedFps = 'auto';
+      let selectedAudio = 'keep';
+      let selectedSpeed = 1.0;
+
+      let videoFile = null;
+      let videoUrl = null;
+      let outputUrl = null;
+      let videoDuration = 0;
+      let naturalWidth = 0;
+      let naturalHeight = 0;
+      let generatedBlob = null;
+      let isConverting = false;
+
+      function showToast(msg) {
+        if (!toastEl) return;
+        toastEl.textContent = msg;
+        toastEl.classList.add('show');
+        setTimeout(() => toastEl.classList.remove('show'), 2500);
+      }
+
+      function formatTime(sec) {
+        sec = Math.max(0, sec);
+        const mins = Math.floor(sec / 60);
+        const secs = (sec % 60).toFixed(1);
+        return `${mins < 10 ? '0' : ''}${mins}:${secs < 10 ? '0' : ''}${secs}`;
+      }
+
+      function formatBytes(bytes) {
+        if (bytes === 0) return '0 B';
+        const k = 1024;
+        const sizes = ['B', 'KB', 'MB', 'GB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+      }
+
+      function updateSettingsSummary() {
+        const fmtText = selectedFormat.toUpperCase();
+        const resText = selectedScale === 'original' ? 'Original' : `${selectedScale}p`;
+        const fpsText = selectedFps === 'auto' ? 'Auto FPS' : `${selectedFps} FPS`;
+        const audioText = selectedAudio === 'keep' ? 'Audio On' : 'Muted';
+        settingsSummaryBadge.textContent = `(${fmtText} • ${resText} • ${fpsText} • ${audioText})`;
+      }
+
+      function selectFormat(fmt) {
+        selectedFormat = fmt;
+        const container = document.getElementById('seg-format');
+        if (container) {
+          const buttons = container.querySelectorAll('.seg-pill');
+          buttons.forEach((b) => {
+            b.classList.toggle('active', b.getAttribute('data-val') === fmt);
+          });
+        }
+        updateSettingsSummary();
+      }
+
+      function bindSegmentedPills(containerId, callback) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        const buttons = container.querySelectorAll('.seg-pill');
+        buttons.forEach((btn) => {
+          btn.addEventListener('click', () => {
+            buttons.forEach((b) => b.classList.remove('active'));
+            btn.classList.add('active');
+            callback(btn.getAttribute('data-val'));
+            updateSettingsSummary();
+          });
+        });
+      }
+
+      bindSegmentedPills('seg-format', (val) => { selectedFormat = val; });
+      bindSegmentedPills('seg-scale', (val) => { selectedScale = val; });
+      bindSegmentedPills('seg-fps', (val) => { selectedFps = val; });
+      bindSegmentedPills('seg-audio', (val) => { selectedAudio = val; });
+      bindSegmentedPills('seg-speed', (val) => { selectedSpeed = parseFloat(val); });
+
+      // Persistent Audio Node Singleton to allow infinite conversions without InvalidStateError
+      let audioCtx = null;
+      let audioSourceNode = null;
+
+      function getAudioRouting(videoEl) {
+        try {
+          if (!audioCtx) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          }
+          if (audioCtx.state === 'suspended') {
+            audioCtx.resume();
+          }
+          if (!audioSourceNode) {
+            audioSourceNode = audioCtx.createMediaElementSource(videoEl);
+          }
+          const destNode = audioCtx.createMediaStreamDestination();
+          audioSourceNode.disconnect();
+          audioSourceNode.connect(destNode);
+          audioSourceNode.connect(audioCtx.destination);
+          return destNode;
+        } catch (e) {
+          console.warn('Audio node routing fallback:', e);
+          return null;
+        }
+      }
+
+      // File Drag & Drop
+      dropzone.addEventListener('click', () => fileInput.click());
+
+      ['dragenter', 'dragover'].forEach(eventName => {
+        dropzone.addEventListener(eventName, (e) => {
+          e.preventDefault();
+          dropzone.classList.add('dragover');
+        });
+      });
+
+      ['dragleave', 'drop'].forEach(eventName => {
+        dropzone.addEventListener(eventName, (e) => {
+          e.preventDefault();
+          dropzone.classList.remove('dragover');
+        });
+      });
+
+      dropzone.addEventListener('drop', (e) => {
+        const files = e.dataTransfer.files;
+        if (files && files.length > 0) {
+          handleVideoFile(files[0]);
+        }
+      });
+
+      fileInput.addEventListener('change', (e) => {
+        if (e.target.files && e.target.files.length > 0) {
+          handleVideoFile(e.target.files[0]);
+        }
+      });
+
+      function handleVideoFile(file) {
+        if (!file.type.startsWith('video/') && !file.name.match(/\.(mp4|webm|mov|mkv|avi|ogg|3gp|flv)$/i)) {
+          showToast('Please select a valid video file (.mp4, .webm, .mov, .mkv, .avi)');
+          return;
+        }
+
+        videoFile = file;
+        if (videoUrl) URL.revokeObjectURL(videoUrl);
+        if (outputUrl) {
+          URL.revokeObjectURL(outputUrl);
+          outputUrl = null;
+        }
+        videoUrl = URL.createObjectURL(file);
+
+        sourceVideo.src = videoUrl;
+        sourceVideo.load();
+        dropzone.style.display = 'none';
+        sourceVideo.style.display = 'block';
+
+        sourceVideo.onloadedmetadata = () => {
+          videoDuration = sourceVideo.duration;
+          naturalWidth = sourceVideo.videoWidth || 1280;
+          naturalHeight = sourceVideo.videoHeight || 720;
+
+          const rawExt = (file.name.split('.').pop() || '').toLowerCase();
+          videoMetaBadge.textContent = `${formatTime(videoDuration)} • ${naturalWidth}×${naturalHeight} • ${rawExt.toUpperCase()}`;
+
+          // Auto-select an alternative target format by default for superior UX
+          if (rawExt === 'mp4') {
+            selectFormat('mov');
+          } else if (rawExt === 'mov') {
+            selectFormat('mp4');
+          } else if (rawExt === 'webm') {
+            selectFormat('mp4');
+          } else {
+            selectFormat('mp4');
+          }
+
+          trimStartRange.disabled = false;
+          trimEndRange.disabled = false;
+          trimStartRange.max = videoDuration.toFixed(2);
+          trimStartRange.value = 0;
+          trimEndRange.max = videoDuration.toFixed(2);
+          trimEndRange.value = videoDuration.toFixed(2);
+
+          updateTrimmerUI();
+          videoStatusBadge.textContent = 'Ready to Convert';
+          btnConvert.disabled = false;
+
+          showToast(`Video loaded (${formatTime(videoDuration)} • ${naturalWidth}×${naturalHeight})`);
+        };
+      }
+
+      function updateTrimmerUI() {
+        let start = parseFloat(trimStartRange.value);
+        let end = parseFloat(trimEndRange.value);
+
+        if (start >= end) {
+          start = Math.max(0, end - 0.5);
+          trimStartRange.value = start.toFixed(1);
+        }
+
+        const duration = end - start;
+        trimStartVal.textContent = formatTime(start);
+        trimEndVal.textContent = formatTime(end);
+        trimDurationBadge.textContent = `(${duration.toFixed(1)}s total)`;
+      }
+
+      trimStartRange.addEventListener('input', () => {
+        updateTrimmerUI();
+        sourceVideo.currentTime = parseFloat(trimStartRange.value);
+      });
+
+      trimEndRange.addEventListener('input', () => {
+        updateTrimmerUI();
+        sourceVideo.currentTime = parseFloat(trimEndRange.value);
+      });
+
+      // Transcode Video Stream
+      btnConvert.addEventListener('click', async () => {
+        if (!videoFile || isConverting) return;
+
+        const startTime = parseFloat(trimStartRange.value);
+        const endTime = parseFloat(trimEndRange.value);
+        const clipDuration = endTime - startTime;
+
+        if (clipDuration <= 0) {
+          showToast('Please select a valid clip duration');
+          return;
+        }
+
+        isConverting = true;
+        btnConvert.disabled = true;
+        btnConvertIcon.setAttribute('icon', 'lucide:loader-2');
+        btnConvertLabel.textContent = 'Transcoding stream...';
+        slimProgressBar.classList.add('active');
+        slimProgressFill.style.width = '0%';
+        videoStatusBadge.textContent = 'Transcoding...';
+
+        showToast(`Transcoding to ${selectedFormat.toUpperCase()}...`);
+
+        try {
+          // 1. Calculate Target Dimensions
+          let targetW = naturalWidth;
+          let targetH = naturalHeight;
+
+          if (selectedScale !== 'original') {
+            const scaleTargetH = parseInt(selectedScale, 10);
+            targetW = Math.round(naturalWidth * (scaleTargetH / naturalHeight));
+            targetH = scaleTargetH;
+          }
+
+          // Codecs strictly require even numbers
+          if (targetW % 2 !== 0) targetW--;
+          if (targetH % 2 !== 0) targetH--;
+
+          // 2. Setup Offscreen Canvas & Web Audio Node
+          const canvas = document.createElement('canvas');
+          canvas.width = targetW;
+          canvas.height = targetH;
+          const ctx = canvas.getContext('2d');
+
+          const fps = selectedFps === 'auto' ? 30 : parseInt(selectedFps, 10);
+          const canvasStream = canvas.captureStream(fps);
+
+          if (selectedAudio === 'keep') {
+            const destNode = getAudioRouting(sourceVideo);
+            if (destNode && destNode.stream) {
+              const audioTrack = destNode.stream.getAudioTracks()[0];
+              if (audioTrack) {
+                canvasStream.addTrack(audioTrack);
+              }
+            }
+          }
+
+          // 3. Determine Best Supported Container Format
+          let mimeType = 'video/webm;codecs=vp9,opus';
+          if (selectedFormat === 'mp4' || selectedFormat === 'mov') {
+            if (MediaRecorder.isTypeSupported('video/mp4;codecs=avc1,mp4a.40.2')) {
+              mimeType = 'video/mp4;codecs=avc1,mp4a.40.2';
+            } else if (MediaRecorder.isTypeSupported('video/mp4;codecs=avc1')) {
+              mimeType = 'video/mp4;codecs=avc1';
+            } else if (MediaRecorder.isTypeSupported('video/mp4')) {
+              mimeType = 'video/mp4';
+            } else if (MediaRecorder.isTypeSupported('video/webm;codecs=vp9,opus')) {
+              mimeType = 'video/webm;codecs=vp9,opus';
+            } else {
+              mimeType = 'video/webm';
+            }
+          } else {
+            if (MediaRecorder.isTypeSupported('video/webm;codecs=vp9,opus')) {
+              mimeType = 'video/webm;codecs=vp9,opus';
+            } else if (MediaRecorder.isTypeSupported('video/webm')) {
+              mimeType = 'video/webm';
+            }
+          }
+
+          const recorder = new MediaRecorder(canvasStream, {
+            mimeType: mimeType,
+            videoBitsPerSecond: 8000000 // 8 Mbps high-bitrate quality
+          });
+
+          const chunks = [];
+          recorder.ondataavailable = (e) => {
+            if (e.data && e.data.size > 0) chunks.push(e.data);
+          };
+
+          const recordingDone = new Promise((resolve) => {
+            recorder.onstop = () => {
+              const videoBlob = new Blob(chunks, { type: mimeType.split(';')[0] });
+              resolve(videoBlob);
+            };
+          });
+
+          // 4. Perform Playback & Canvas Render Pipeline
+          sourceVideo.currentTime = startTime;
+          sourceVideo.playbackRate = selectedSpeed;
+          sourceVideo.muted = selectedAudio === 'mute';
+
+          await new Promise(r => {
+            sourceVideo.addEventListener('seeked', r, { once: true });
+          });
+
+          recorder.start();
+          await sourceVideo.play();
+
+          let animId = null;
+          const renderLoop = () => {
+            if (!isConverting) return;
+
+            ctx.drawImage(sourceVideo, 0, 0, targetW, targetH);
+
+            const progress = (sourceVideo.currentTime - startTime) / clipDuration;
+            const percent = Math.min(99, Math.max(0, Math.round(progress * 100)));
+            slimProgressFill.style.width = `${percent}%`;
+            btnConvertLabel.textContent = `Transcoding (${percent}%)...`;
+
+            if (sourceVideo.currentTime >= endTime || sourceVideo.ended) {
+              sourceVideo.pause();
+              recorder.stop();
+              return;
+            }
+
+            animId = requestAnimationFrame(renderLoop);
+          };
+
+          animId = requestAnimationFrame(renderLoop);
+
+          generatedBlob = await recordingDone;
+          if (animId) cancelAnimationFrame(animId);
+
+          // 5. Render Output in Player
+          if (outputUrl) URL.revokeObjectURL(outputUrl);
+          outputUrl = URL.createObjectURL(generatedBlob);
+          outputEmptyPlaceholder.style.display = 'none';
+          outputVideoPlayer.pause();
+          outputVideoPlayer.src = outputUrl;
+          outputVideoPlayer.style.display = 'block';
+          outputVideoPlayer.load();
+
+          videoStatusBadge.textContent = `${selectedFormat.toUpperCase()} • ${formatBytes(generatedBlob.size)}`;
+          slimProgressFill.style.width = '100%';
+          btnCopy.disabled = false;
+          btnDownload.disabled = false;
+          showToast(`Video converted to ${selectedFormat.toUpperCase()}! (${formatBytes(generatedBlob.size)})`);
+
+        } catch (err) {
+          console.error('Transcoding failed:', err);
+          showToast('Conversion issue; please try WebM format or shorter clip');
+          videoStatusBadge.textContent = 'Error';
+        } finally {
+          isConverting = false;
+          btnConvert.disabled = false;
+          btnConvertIcon.setAttribute('icon', 'lucide:play');
+          btnConvertLabel.textContent = 'Convert Video';
+          sourceVideo.muted = false;
+          setTimeout(() => {
+            slimProgressBar.classList.remove('active');
+            slimProgressFill.style.width = '0%';
+          }, 1500);
+        }
+      });
+
+      // Download Converted Video with exact target format
+      btnDownload.addEventListener('click', () => {
+        if (!generatedBlob) return;
+        const a = document.createElement('a');
+        const baseName = videoFile ? videoFile.name.replace(/\.[^/.]+$/, "") : "toolity-video";
+        const ext = selectedFormat === 'audio' ? 'wav' : selectedFormat.toLowerCase();
+        const filename = `${baseName}.${ext}`;
+        a.href = URL.createObjectURL(generatedBlob);
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        showToast(`Downloaded ${filename}`);
+      });
+
+      // Copy Video to Clipboard
+      btnCopy.addEventListener('click', async () => {
+        if (!generatedBlob) return;
+        try {
+          if (navigator.clipboard && window.ClipboardItem) {
+            const item = new ClipboardItem({ [generatedBlob.type]: generatedBlob });
+            await navigator.clipboard.write([item]);
+            showToast('Video copied to clipboard!');
+          } else {
+            showToast('Direct video copy not supported; click Download instead');
+          }
+        } catch (e) {
+          console.warn('Clipboard write video failed:', e);
+          showToast('Could not copy video directly; click Download instead');
+        }
+      });
+
+      // Reset Tool
+      btnReset.addEventListener('click', () => {
+        if (videoUrl) URL.revokeObjectURL(videoUrl);
+        if (outputUrl) {
+          URL.revokeObjectURL(outputUrl);
+          outputUrl = null;
+        }
+        videoFile = null;
+        videoUrl = null;
+        generatedBlob = null;
+
+        fileInput.value = '';
+        sourceVideo.src = '';
+        sourceVideo.style.display = 'none';
+        dropzone.style.display = 'flex';
+        videoMetaBadge.textContent = 'No video loaded';
+
+        // Reset Trimmer
+        trimStartRange.disabled = true;
+        trimEndRange.disabled = true;
+        trimStartRange.value = 0;
+        trimEndRange.value = 100;
+        trimStartVal.textContent = '00:00.0';
+        trimEndVal.textContent = '00:00.0';
+        trimDurationBadge.textContent = '(0.0s)';
+
+        // Reset Output
+        outputVideoPlayer.src = '';
+        outputVideoPlayer.style.display = 'none';
+        outputEmptyPlaceholder.style.display = 'flex';
+        videoStatusBadge.textContent = 'Awaiting Video';
+
+        btnConvert.disabled = true;
+        btnCopy.disabled = true;
+        btnDownload.disabled = true;
+        slimProgressBar.classList.remove('active');
+
+        showToast('Tool reset');
+      });
+    });
+  </script>
+</body>
+
+</html>
