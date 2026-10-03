@@ -2324,12 +2324,7 @@ body {
 .adsterra-single-slot {
   width: 100%;
   max-width: 728px;
-  min-height: 90px;
-  margin: 1.75rem auto 2.5rem;
-  padding: 1rem;
-  background: var(--surface);
-  border: 1px dashed var(--border);
-  border-radius: var(--radius-md);
+  margin: 2rem auto 2.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -2343,15 +2338,34 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--text-muted);
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.5rem;
 }
 
-.ad-placeholder-content {
-  font-size: 0.84rem;
-  color: var(--text-muted);
+.ad-slot-desktop {
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 0.4rem;
+  min-height: 90px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.ad-slot-mobile {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  min-height: 50px;
+  width: 100%;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .ad-slot-desktop {
+    display: none !important;
+  }
+  .ad-slot-mobile {
+    display: flex !important;
+  }
 }
 
 /* Instruction Guide Cards (1-2-3 Visual Step Grid) */
