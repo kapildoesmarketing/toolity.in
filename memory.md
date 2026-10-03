@@ -196,6 +196,12 @@
       - **Relevance Scoring & Levenshtein Typo Tolerance**: Calculates weighted relevance scores across titles (2.5×), tags (1.8×), and categories (1.2×) with exact match boosts (+1000/800), multi-word conjunction bonuses (+200), single-character edit distance tolerance for words ≥4 chars, and prioritization of specific micro-tools over general workspace categories.
       - **Zero Layout Shifts**: Preserves 100% of the minimal underline search bar, background-free top-3 results display, keyboard arrow navigation, and instant launcher performance without external search libraries.
 
+21. **Card Sizing, Search Robustness & Universal Link Styling Standards**:
+    - **Category & Grid Tool Cards (`.category-glow-card`)**: Standardized to `height: 250px` matching homepage card metrics, with `padding: 1.15rem 1.15rem 1rem;`, `font-size: 0.98rem; line-height: 1.25;` on `.glow-card-title`, and constrained description margins (`margin: 0 0 0.5rem 0;`). This ensures tools with multi-line titles (such as "YouTube Thumbnail Downloader" or "URL Parameter Separator") never overflow or clip the bottom "Open →" button.
+    - **Search Ranking & Cache-Busting**: Search scoring prioritizes exact and prefix phrase queries with dominant base bonuses (`+2500` exact, `+1800` prefix, `+1400` substring), outranking scattered partial token sums. Search dropdown reopens smoothly on input focus/click. All HTML asset links use versioned query strings (e.g., `?v=2.2`) to prevent stale browser caching on live deployments.
+    - **Universal Link Reset & Footer Author Theme Inheritance**: Global `a, a:visited { color: inherit; text-decoration: none; }` prevents default browser blue (`#0000ee`) and purple (`#551a8b`) hyperlinks. Footer creator links explicitly enforce `.footer-creator a, .footer-creator a:visited { color: var(--text-primary) !important; }` with hover transitioning to `var(--brand)`.
+
+
 
 
 

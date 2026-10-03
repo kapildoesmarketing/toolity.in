@@ -360,14 +360,16 @@
       const titleLower = item.title.toLowerCase();
       const categoryLower = item.category.toLowerCase();
       
-      if (titleLower === queryClean) return 1000;
-      if (titleLower.startsWith(queryClean)) return 800;
+      let baseBonus = 0;
+      if (titleLower === queryClean) baseBonus = 2500;
+      else if (titleLower.startsWith(queryClean)) baseBonus = 1800;
+      else if (titleLower.includes(queryClean)) baseBonus = 1400;
 
       const titleWords = titleLower.split(/[\s\-_\/]+/).filter(Boolean);
       const categoryWords = categoryLower.split(/[\s\-_\/]+/).filter(Boolean);
       const tagWords = (item.tags || []).map(t => t.toLowerCase());
 
-      let totalTokenScore = 0;
+      let totalTokenScore = baseBonus;
       let matchedTokensCount = 0;
 
       for (const token of rawTokens) {
@@ -394,13 +396,13 @@
       }
 
       if (rawTokens.length > 1 && matchedTokensCount === rawTokens.length) {
-        totalTokenScore += 200;
-      } else if (matchedTokensCount === 0) {
+        totalTokenScore += 300;
+      } else if (matchedTokensCount === 0 && baseBonus === 0) {
         return 0;
       }
 
       if (!item.id.startsWith('cat-')) {
-        totalTokenScore += 15;
+        totalTokenScore += 25;
       }
 
       return totalTokenScore;
@@ -491,6 +493,16 @@
     }
 
     searchInput.addEventListener('input', handleSearch);
+    searchInput.addEventListener('focus', () => {
+      if (searchInput.value.trim().length > 0) {
+        handleSearch();
+      }
+    });
+    searchInput.addEventListener('click', () => {
+      if (searchInput.value.trim().length > 0) {
+        handleSearch();
+      }
+    });
 
     if (clearBtn) {
       clearBtn.addEventListener('click', () => {
