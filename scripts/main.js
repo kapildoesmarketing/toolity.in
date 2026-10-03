@@ -66,11 +66,11 @@
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
 
-    // Linear-inspired Spotlight Glow Cards mouse tracking
-    const categoryGrid = document.getElementById('category-cards');
-    if (categoryGrid) {
-      const cards = categoryGrid.getElementsByClassName('category-glow-card');
-      categoryGrid.addEventListener('mousemove', (e) => {
+    // Linear-inspired Spotlight Glow Cards mouse tracking (Homepage & Category Hubs)
+    const glowGrids = document.querySelectorAll('#category-cards, .tools-grid');
+    glowGrids.forEach((grid) => {
+      const cards = grid.querySelectorAll('.category-glow-card, .tool-card');
+      grid.addEventListener('mousemove', (e) => {
         for (const card of cards) {
           const rect = card.getBoundingClientRect();
           const x = e.clientX - rect.left;
@@ -79,7 +79,7 @@
           card.style.setProperty('--mouse-y', `${y}px`);
         }
       });
-    }
+    });
 
     // Initialize Hero Section Breathe Waves
     initHeroWaves();

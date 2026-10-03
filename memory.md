@@ -82,7 +82,21 @@
 7. **Client-Side Image Transcoding Architecture**:
    - High-speed image transcoding (PNG, JPG, WebP, AVIF, BMP, ICO) executes 100% in-browser via HTML5 Canvas `toBlob()`.
    - **Intelligent Target Auto-Selection**: Uploading PNG auto-defaults target to WebP, JPG auto-defaults to PNG, WebP auto-defaults to JPG.
-   - **Alpha Transparency Handling**: JPG conversion automatically applies user-configurable background fill (White / Black / Transparent) to eliminate black alpha matte artifacts.
-   - **Tool Location**: `convertors/image-converter/`.
+8. **Minimalist Orange Accent Bar Navigation Indicators**:
+   - Navigation links in `.nav-glass-capsule` avoid nested glass-on-glass containers and box-in-a-box fatigue.
+   - Active state uses pure typographic hierarchy in brand warm orange (`#F4511E` in Light Mode, `#FF7A3D` in Dark Mode) anchored by a sleek 2.5px rounded bottom gradient indicator bar (`::after`), keeping the navigation bar weightless and modern.
+
+9. **Unified 4-Column Card Grids & Clean UX Tool Cards**:
+   - **Homepage Category Grid (`#category-cards`)**: 4-column responsive layout (`grid-template-columns: repeat(4, 1fr); gap: 12px;`) featuring spotlight glow, 250px height, upper watermark ghost icon (`5rem`), bottom info deck with mini-icon pill (`32px`), title, and count pill.
+   - **Category Hub Tool Cards (`.tools-grid`)**: Identical 4-column grid and `.category-glow-card` container with cursor spotlight tracking, but tailored for tool discovery with a clean 4-element UX hierarchy (no ghost icons, no clutter):
+     1. 40×40px Icon Badge (`.tool-card-icon-badge`)
+     2. High-contrast Title (`.tool-card-title`)
+     3. 2-to-3 line functional Description (`.tool-card-desc`)
+     4. Bottom Action link with animated hover arrow (`.tool-card-action`)
+
+
+
+
+
 
 
