@@ -1,5 +1,5 @@
 /* Designed by Kapil Pidhwani: QR Code Generator — tool-only styles */
-.qr-color-row { display: flex; align-items: center; gap: 0.6rem; }
+.qr-color-row { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
 .qr-checkbox-group { justify-content: flex-end; padding-bottom: 0.35rem; }
 .qr-checkbox-group label { font-size: 0.82rem; }
 .qr-logo-group { flex: 1; min-width: 260px; }

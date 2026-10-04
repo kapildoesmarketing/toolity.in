@@ -62,6 +62,13 @@ const CHECKS = `(async () => {
   }
   const card = document.querySelector('.tool-workspace-card');
   if (card && r(card).top >= vh) f.push('tool card below fold (top ' + Math.round(r(card).top) + ')');
+  // Nothing inside the tool card may stick out of it horizontally (catches non-shrinking flex items)
+  if (card) {
+    const cb = r(card);
+    for (const el of card.querySelectorAll('.segmented-group, .toolbar-group, .tool-actions-toolbar, .tool-pane, .btn')) {
+      const b = r(el); if (b.width && (b.right > cb.right + 1 || b.left < cb.left - 1)) { f.push('overflows card: ' + (el.id || '.' + (el.className || '').toString().split(' ')[0]) + ' ' + Math.round(b.right - cb.right) + 'px [el ' + Math.round(b.left) + '-' + Math.round(b.right) + ', card ' + Math.round(cb.left) + '-' + Math.round(cb.right) + ', parent ' + Math.round(r(el.parentElement).left) + '-' + Math.round(r(el.parentElement).right) + '] (parent .' + el.parentElement.className.split(' ')[0] + ' ' + Math.round(r(el.parentElement).width) + 'px)'); break; }
+    }
+  }
   const links = [...document.querySelectorAll('footer a')].filter(vis);
   if (links.length) {
     scrollTo({ top: document.scrollingElement.scrollHeight, behavior: 'instant' });

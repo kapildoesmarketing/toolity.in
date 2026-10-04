@@ -1923,6 +1923,8 @@ body {
   align-items: center;
   gap: 0.5rem;
   flex-wrap: wrap;
+  min-width: 0;    /* let it shrink so a wide .segmented-group scrolls instead of overflowing */
+  max-width: 100%;
 }
 
 .btn-toolbar-sm {
@@ -2233,6 +2235,7 @@ body {
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   max-width: 100%;
+  min-width: 0;                  /* flex-item default min-width:auto would block shrinking */
   overflow-x: auto;              /* Designed by Kapil Pidhwani: native scroll, no mask/JS — */
   scroll-snap-type: x proximity; /* a half-visible last pill is the scroll affordance */
   scrollbar-width: none;
@@ -2407,6 +2410,12 @@ body {
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 1rem;
+}
+
+/* Row items never exceed the row: a wide .segmented-group inside scrolls instead of pushing out */
+.settings-row-wrap > * {
+  min-width: 0;
+  max-width: 100%;
 }
 
 /* Modern Color Swatch Pill & Palette */
