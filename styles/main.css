@@ -3616,3 +3616,12 @@ body {
 .stat-accent { color: var(--brand); font-weight: 600; }
 .flex-wrap { flex-wrap: wrap; }
 .mt-sm { margin-top: 0.5rem; }
+
+/* ---- Reference: shortcuts table + keyboard chips (notepad, json-visualizer) ---- */
+.shortcuts-table-wrapper { width: 100%; overflow-x: auto; margin-top: 1.25rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); }
+.shortcuts-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.86rem; }
+.shortcuts-table th, .shortcuts-table td { padding: 0.85rem 1.15rem; border-bottom: 1px solid var(--border); }
+.shortcuts-table th { background: var(--surface-elevated); font-weight: 600; color: var(--text-secondary); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; }
+.shortcuts-table tr:last-child td { border-bottom: none; }
+.kbd-chip { display: inline-block; padding: 0.15rem 0.45rem; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 0.75rem; font-weight: 600; color: var(--text-primary); background: var(--surface-elevated); border: 1px solid var(--border); border-radius: 4px; box-shadow: 0 1px 0 var(--border); }
+.icon-success { color: #10B981; }
