@@ -3615,3 +3615,4 @@ body {
 .trim-duration-badge { color: var(--text-muted); font-size: 0.72rem; }
 .stat-accent { color: var(--brand); font-weight: 600; }
 .flex-wrap { flex-wrap: wrap; }
+.mt-sm { margin-top: 0.5rem; }
