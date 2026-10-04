@@ -50,7 +50,7 @@
     formatters:   { label: 'Formatter Workspace',    title: 'Explore All Code Formatters',       cta: 'Explore Formatters',        desc: 'Beautify, minify and validate JSON, CSS, HTML and more — all processed locally in your browser.' },
     productivity: { label: 'Productivity Workspace', title: 'Explore All Productivity Tools',    cta: 'Explore Productivity Tools', desc: 'Distraction-free notepads, planners and everyday workflow boosters that keep your data on your device.' },
     web:          { label: 'Web Workspace',          title: 'Explore All Web & URL Tools',       cta: 'Explore Web Tools',         desc: 'URL cleaners, parameter inspectors, favicon extractors and thumbnail downloaders for webmasters and marketers.' },
-    fun:          { label: 'Fun Workspace',          title: 'Explore All Fun & Interactive Toys', cta: 'Explore Fun Tools',         desc: 'Playful visualizers and interactive web toys built with modern browser APIs.' },
+    fun:          { label: 'Fun & Games',            title: 'Explore All Games',                 cta: 'Play More Games',           desc: 'Quick browser games — classic arcade and puzzle titles that run instantly, no download or account.' },
     development:  { label: 'Developer Workspace',    title: 'Explore All Developer Tools',       cta: 'Explore Dev Tools',         desc: 'Encoders, validators, visualizers and debugging utilities that run 100% client-side.' },
     utilities:    { label: 'Utility Workspace',      title: 'Explore All Everyday Utility Tools', cta: 'Explore Utility Tools',     desc: 'QR code generators, link builders, speed changers and other micro-utilities for daily digital friction.' },
     experiments:  { label: 'Experiments Lab',        title: 'Explore All Experiments',           cta: 'Explore Experiments',       desc: 'Prototype demos and Web API labs — early ideas that may graduate into full tools.' }
@@ -320,6 +320,14 @@
         tags: ['web', 'url', 'cleaner', 'parameter', 'query', 'separator', 'link', 'http', 'dns', 'favicon', 'thumbnail']
       },
       {
+        id: 'pong',
+        title: 'Pong',
+        category: 'Fun',
+        url: 'fun/pong/',
+        icon: 'lucide:gamepad-2',
+        tags: ['pong', 'game', 'games', 'arcade', 'ping pong', 'paddle', 'retro', 'two player', '2 player', 'play', 'fun']
+      },
+      {
         id: 'photo-booth',
         title: 'Photo Booth',
         category: 'Experiments',
@@ -353,7 +361,7 @@
       },
       {
         id: 'cat-fun',
-        title: 'Fun & Interactive',
+        title: 'Fun & Games',
         category: 'Workspace',
         url: 'fun/',
         icon: 'lucide:gamepad-2',

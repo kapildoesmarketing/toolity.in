@@ -1,0 +1,11 @@
+/* Pong — board, overlay, score */
+.pong-stage-wrap { gap: 0.75rem; }
+.pong-stage { position: relative; width: 100%; border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border); background: var(--surface); }
+.pong-canvas { display: block; width: 100%; aspect-ratio: 16 / 9; touch-action: none; cursor: ns-resize; user-select: none; -webkit-user-select: none; }
+.pong-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.35rem; text-align: center; padding: 1rem; background: color-mix(in srgb, var(--surface) 72%, transparent); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); pointer-events: none; }
+.pong-overlay[hidden] { display: none; }
+.pong-overlay strong { font-size: clamp(1.4rem, 5cqw, 2.4rem); font-weight: 300; letter-spacing: -0.02em; color: var(--text-primary); }
+.pong-overlay span { font-size: 0.86rem; color: var(--text-secondary); }
+.pong-score { display: inline-flex; align-items: baseline; gap: 0.35rem; font-family: var(--font-mono); font-size: 1.1rem; font-weight: 600; color: var(--text-primary); }
+.pong-score i { font-style: normal; color: var(--text-muted); }
+.pong-hint { text-align: center; }
