@@ -320,6 +320,14 @@
         tags: ['web', 'url', 'cleaner', 'parameter', 'query', 'separator', 'link', 'http', 'dns', 'favicon', 'thumbnail']
       },
       {
+        id: 'photo-booth',
+        title: 'Photo Booth',
+        category: 'Experiments',
+        url: 'experiments/photo-booth/',
+        icon: 'lucide:camera',
+        tags: ['photo', 'booth', 'photobooth', 'strip', 'camera', 'selfie', 'stickers', 'frame', 'webcam', 'print', 'polaroid']
+      },
+      {
         id: 'url-parameter-separator',
         title: 'URL Parameter Separator',
         category: 'Web',

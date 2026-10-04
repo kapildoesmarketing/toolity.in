@@ -1,6 +1,6 @@
 # Toolity.in Rules
 
-Non-negotiable. If you (human or AI) touch this repo, these hold. Verify with `bash scripts/lint-tools.sh` before committing — it must print `✓ 0 violations`.
+Non-negotiable. If you (human or AI) touch this repo, these hold. Verify with `bash scripts/lint-tools.sh` before committing — it must print `✓ 0 violations` — and `node scripts/responsive-check.js` before every push — it must print `✓ … passing`.
 
 ## Process
 1. **Never push to GitHub without Kapil's explicit permission.** When Kapil says "push to GitHub", it means: commit all local changes and push **directly to `main`**, which deploys to production immediately. The approval is the gate; no PR or feature branch is expected.
@@ -44,3 +44,12 @@ Non-negotiable. If you (human or AI) touch this repo, these hold. Verify with `b
 31. **Third-party scripts: one pinned CDN URL each, and it must actually resolve.** Prefer a lazy `import()` for fallbacks over a blocking tag.
 32. **Don't break what works.** Existing functionality survives every refactor.
 33. **Lazy senior dev.** Native first, no new dependencies, no abstractions nobody asked for. Mark deliberate shortcuts with a `Designed by Kapil Pidhwani:` comment that names the ceiling.
+
+## Responsive (every page, every build)
+34. **One breakpoint system, defined once in `styles/main.css`:** phone ≤639 · tablet 640–1023 · laptop 1024–1439 · wide ≥1440 · ultrawide ≥1920. Never invent a new number; if a component needs to adapt, it adapts to its **container** (`@container`), not the viewport.
+35. **Tool CSS (`styles/tools/*.css`) never contains `@media`.** The workspace card is a `container-type: inline-size` container — use `@container` there. Viewport rules live only in `main.css` (lint enforces this).
+36. **Touch comes first on touch devices:** under `(pointer: coarse)` every control is ≥44px tall and every text input is ≥16px (prevents iOS focus-zoom). Don't shrink controls to fit — scroll or wrap them.
+37. **Nothing overflows its card.** Horizontal groups (segmented pills, toolbars, rows) must shrink (`min-width: 0; max-width: 100%`) and scroll or wrap. The page never scrolls horizontally.
+38. **Tool above the fold on phones.** Compact hero on tool pages; the workspace card starts within the first screen at 360×780.
+39. **Fluid, not fixed, on wide screens.** Container and root font scale with `clamp()`; prose caps at `--content-max` (72ch); grids use `auto-fill` capped at 4 columns.
+40. **Gate: `node scripts/responsive-check.js` must pass (8 viewports × representative pages) before any push; run `ALL=1 node scripts/responsive-check.js` when touching `main.css`, header/footer or nav JS.** A new tool page is added to the check's `PAGES` list if it introduces a new layout pattern.

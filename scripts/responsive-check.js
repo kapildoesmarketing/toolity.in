@@ -10,7 +10,7 @@ const VIEWPORTS = [[360, 780], [390, 844], [768, 1024], [1024, 768], [1180, 820]
 // Default: 6 representative pages. ALL=1 → every index.html (categories + tools).
 const PAGES = process.env.ALL
   ? require('child_process').execSync("find . -mindepth 2 -maxdepth 3 -name index.html -not -path './templates/*' -not -path './.git/*' | sed 's|^\\./||; s|index.html$||' | sort", { encoding: 'utf8' }).trim().split('\n').concat([''])
-  : ['', 'utilities/', 'utilities/qr-code-generator/', 'convertors/video-converter/', 'productivity/online-notepad/', 'development/json-visualizer/'];
+  : ['', 'utilities/', 'utilities/qr-code-generator/', 'convertors/video-converter/', 'productivity/online-notepad/', 'development/json-visualizer/', 'experiments/photo-booth/'];
 const COARSE_MAX = 1180; // emulate touch (pointer: coarse) at and below this width
 
 // Runs in the page. Returns [] when everything passes.
