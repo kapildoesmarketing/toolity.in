@@ -46,8 +46,10 @@
   --radius-pill: 9999px;
 
   /* Layout Constants */
-  --container-max-width: 1140px;
+  --container-max-width: clamp(1140px, 80vw, 1440px); /* 1140 up to 1440 wide, 1440 cap on ultrawide */
   --header-height: 68px;
+  --content-max: 72ch;   /* prose line-length cap (FAQ, guides, descriptions) */
+  --touch: 44px;         /* min hit size on coarse pointers */
 }
 
 [data-theme="dark"] {
@@ -97,7 +99,7 @@ a, a:visited {
 }
 
 html {
-  font-size: 16px;
+  font-size: clamp(16px, 0.84rem + 0.18vw, 18px); /* 16px ≤1440 → 18px at 2560 */
   scroll-behavior: smooth;
 }
 
@@ -547,7 +549,7 @@ body {
 /* Tools Showcase Grid (4-Column Layout matching Homepage Explore) */
 .tools-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(max(250px, calc(25% - 9px)), 1fr)); /* 1→4 cols, see #category-cards */
   gap: 12px;
   width: 100%;
 }
@@ -1158,7 +1160,8 @@ body {
    ========================================================================== */
 #category-cards {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  /* Designed by Kapil Pidhwani: auto-fill with a 25% floor = 1→4 columns, never 5 on ultrawide */
+  grid-template-columns: repeat(auto-fill, minmax(max(250px, calc(25% - 9px)), 1fr));
   gap: 12px;
   width: 100%;
 }
@@ -1349,20 +1352,8 @@ body {
   overflow: hidden;
 }
 
-/* Responsive 4-Column -> 2-Column -> 1-Column */
-@media (max-width: 1100px) {
-  #category-cards,
-  .tools-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
+/* Phone card sizing (columns come from auto-fill above) */
 @media (max-width: 580px) {
-  #category-cards,
-  .tools-grid {
-    grid-template-columns: 1fr;
-  }
-
   #category-cards .category-glow-card {
     height: 200px;
   }
@@ -1877,6 +1868,14 @@ body {
   max-width: 760px;
 }
 
+/* Prose never runs past a comfortable line length on wide screens */
+.section-subtitle,
+.guide-step-card p,
+.faq-item p,
+.tool-hero-desc {
+  max-width: var(--content-max);
+}
+
 .tool-hero-title {
   font-size: clamp(1.75rem, 3vw, 2.35rem);
   font-weight: 400;
@@ -1906,6 +1905,7 @@ body {
   box-shadow: var(--shadow-sm);
   padding: 1.25rem;
   margin-bottom: 2rem;
+  container-type: inline-size; /* panes/toolbar adapt to card width, see @container below */
 }
 
 /* Action Toolbar */
@@ -2124,9 +2124,32 @@ body {
 /* 2-Column Split Pane Grid (Optimized for At-A-Glance Desktop View) */
 .split-pane-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-columns: 1fr; /* stacked; 2 columns from @container (min-width: 820px) */
   gap: 1rem;
   margin-bottom: 0.5rem;
+}
+
+/* Narrow card (phone, tablet portrait): toolbar stacks */
+@container (max-width: 819px) {
+  .tool-actions-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .toolbar-group {
+    justify-content: flex-start;
+  }
+}
+
+@container (min-width: 820px) {
+  .split-pane-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  /* Optional ratio when the preview deserves more room than the form */
+  .tool-workspace-card[data-split="40/60"] .split-pane-grid { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); }
+  .tool-workspace-card[data-split="60/40"] .split-pane-grid { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); }
+  .tool-workspace-card[data-split="35/65"] .split-pane-grid { grid-template-columns: minmax(0, 7fr) minmax(0, 13fr); }
 }
 
 .tool-pane {
@@ -2210,6 +2233,18 @@ body {
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   max-width: 100%;
+  overflow-x: auto;              /* Designed by Kapil Pidhwani: native scroll, no mask/JS — */
+  scroll-snap-type: x proximity; /* a half-visible last pill is the scroll affordance */
+  scrollbar-width: none;
+}
+
+.segmented-group::-webkit-scrollbar {
+  display: none;
+}
+
+.segmented-group .seg-pill {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
 }
 
 .segmented-group-pill {
@@ -2728,23 +2763,14 @@ body {
 
 /* ==========================================================================
    Responsive Adaptations
+   Breakpoints (suggestions.txt §7.2): phone ≤639 · tablet 640–1023 ·
+   laptop 1024–1439 · wide ≥1440 · ultrawide ≥1920. Tool panes adapt with
+   @container, so new tools never need a media query.
    ========================================================================== */
-@media (max-width: 860px) {
-  .split-pane-grid {
-    grid-template-columns: 1fr;
-  }
 
-  .tool-actions-toolbar {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .toolbar-group {
-    justify-content: flex-start;
-  }
-}
-
-@media (max-width: 768px) {
+/* Tablet & below: 9 nav links need ~1100px, so the top capsule goes away
+   at 1023 and the hamburger + bottom pill nav take over. */
+@media (max-width: 1023px) {
   .nav-container {
     display: flex;
     justify-content: space-between;
@@ -2765,6 +2791,95 @@ body {
     justify-content: center;
   }
 
+  /* Reserve room for the fixed bottom pill nav so footer/CTA stay reachable */
+  body {
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 5.5rem);
+  }
+
+  .tool-toast {
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 5.5rem);
+    right: 1rem;
+    left: 1rem;
+    text-align: center;
+  }
+}
+
+/* Touch devices: 44px hit areas and 16px inputs (prevents iOS focus-zoom).
+   Scoped to (pointer: coarse) so the compact desktop look is untouched. */
+@media (pointer: coarse) {
+  .btn,
+  .btn-icon-pill,
+  .btn-toolbar-sm,
+  .seg-pill,
+  .nav-link,
+  .pill-nav-item,
+  .mobile-nav-link,
+  .minimal-action-btn,
+  .quality-card-btn,
+  summary,
+  select,
+  button:not(.faq-item summary) {
+    min-height: var(--touch);
+  }
+
+  .breadcrumbs {
+    gap: 0.35rem;
+  }
+
+  .breadcrumb-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--touch);
+    padding-inline: 0.25rem;
+  }
+
+  .input-clean,
+  .select-clean,
+  .textarea-clean,
+  .minimal-search-input,
+  input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),
+  select,
+  textarea {
+    font-size: 16px !important; /* must beat per-tool class sizes: <16px = iOS focus-zoom */
+    min-height: var(--touch);
+  }
+}
+
+/* Small laptop / tablet landscape: tighten the 9-link capsule so it clears the brand */
+@media (min-width: 1024px) and (max-width: 1180px) {
+  .nav-link,
+  .nav-link:visited {
+    font-size: 0.8rem;
+    padding: 0.38rem 0.55rem;
+  }
+}
+
+/* No stuck hover states on touch: hover transforms only where hover exists */
+@media (hover: none) {
+  *:hover {
+    transform: none;
+  }
+}
+
+/* Phone: compact tool/category hero so the tool is above the fold */
+@media (max-width: 639px) {
+  .page-hero {
+    padding: calc(var(--header-height) + 1.25rem) 0 1.75rem;
+  }
+
+  .page-hero .breadcrumbs {
+    margin-bottom: 0.9rem;
+  }
+}
+
+@media (min-width: 1920px) {
+  .hero-section {
+    min-height: min(100dvh, 820px);
+    height: auto;
+  }
+}
+
+@media (max-width: 768px) {
   .hero-section {
     min-height: 100dvh;
     height: 100dvh;
@@ -2786,10 +2901,6 @@ body {
   .editorial-mascot-wrapper {
     width: 80px;
     height: 80px;
-  }
-
-  #category-cards {
-    grid-template-columns: 1fr;
   }
 
   .footer-grid {
@@ -3117,7 +3228,7 @@ body {
   display: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1023px) {
   .mobile-bottom-pill-nav {
     display: flex;
     position: fixed;
@@ -3188,15 +3299,6 @@ body {
 .tool-workspace-card[data-layout="stacked"] .split-pane-grid,
 .tool-workspace-card[data-layout="single"] .split-pane-grid {
   grid-template-columns: 1fr;
-}
-
-/* Optional ratio when the preview deserves more room than the form */
-.tool-workspace-card[data-split="40/60"] .split-pane-grid { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); }
-.tool-workspace-card[data-split="60/40"] .split-pane-grid { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); }
-.tool-workspace-card[data-split="35/65"] .split-pane-grid { grid-template-columns: minmax(0, 7fr) minmax(0, 13fr); }
-
-@media (max-width: 860px) {
-  .tool-workspace-card[data-split] .split-pane-grid { grid-template-columns: 1fr; }
 }
 
 /* Busy state (set by Toolity.setBusy) */

@@ -79,6 +79,6 @@
 .stats-card { background: var(--surface-elevated); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 1rem; }
 .stats-card h4 { font-size: 0.85rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem; }
 #stats-breakdown-mount { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.6; }
-@media (max-width: 1024px) {
+@container (max-width: 939px) {
   .visualizer-workspace-grid { grid-template-columns: 1fr; }
 }

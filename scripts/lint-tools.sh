@@ -32,6 +32,7 @@ for c in styles/tools/*.css; do
   [ -f "$c" ] || continue
   n=$(wc -l < "$c")
   [ "$n" -gt 120 ] && { echo "$c"; report "$n lines — over 120, promote shared rules to main.css"; }
+  grep -q '@media' "$c" && { echo "$c"; report "uses @media — tool CSS adapts with @container (card is the container), viewport rules live in main.css"; }
 done
 
 if [ $fail -eq 0 ]; then echo; echo "✓ 0 violations"; else echo; echo "✗ violations found"; fi

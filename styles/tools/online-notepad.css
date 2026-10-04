@@ -17,7 +17,7 @@
 .metric-item { display: inline-flex; align-items: center; gap: 0.25rem; }
 .metric-item strong { font-weight: 600; color: var(--text-primary); }
 .metric-separator { color: var(--border); user-select: none; }
-@media (max-width: 768px) {
+@container (max-width: 699px) {
   .notepad-bottom-bar { padding: 0.75rem 0.9rem; }
   .notepad-editor-area { min-height: 350px; padding: 1rem; font-size: 0.95rem; }
 }

@@ -3,11 +3,11 @@
 Non-negotiable. If you (human or AI) touch this repo, these hold. Verify with `bash scripts/lint-tools.sh` before committing — it must print `✓ 0 violations`.
 
 ## Process
-1. **Never push to GitHub without Kapil's explicit permission.** `main` deploys straight to production.
+1. **Never push to GitHub without Kapil's explicit permission.** When Kapil says "push to GitHub", it means: commit all local changes and push **directly to `main`**, which deploys to production immediately. The approval is the gate; no PR or feature branch is expected.
 2. **Never start implementing a plan without Kapil's approval.** Plan → approval → code, every time.
 3. **Never guess — check, verify, then implement.** Read the file, run the command, confirm the API exists.
 4. **Test-driven: no tool ships broken.** New tool → automated browser test before hand-off. Fixing an existing tool → hand it to Kapil for manual testing.
-5. **Work on a feature branch, one commit per tool/page.**
+5. **Work on `main`, one commit per tool/page.** Run `bash scripts/lint-tools.sh` before every push; a feature branch is only for work Kapil explicitly wants kept off production.
 6. **No secrets in the repo.** No API keys, tokens or credentials in any file, ever — not even in comments or examples.
 
 ## Product
