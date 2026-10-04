@@ -478,7 +478,7 @@
                   <div class="form-group">
                     <span class="form-label" style="font-size:0.75rem;">Line Spacing</span>
                     <div class="segmented-group" id="seg-line-height">
-                      <button type="button" class="seg-pill data-val="1.5">Compact</button>
+                      <button type="button" class="seg-pill" data-val="1.5">Compact</button>
                       <button type="button" class="seg-pill active" data-val="1.75">Relaxed</button>
                       <button type="button" class="seg-pill" data-val="2.0">Spacious</button>
                     </div>
@@ -678,561 +678,587 @@
     (function () {
       'use strict';
 
-      // Elements
-      var textarea = document.getElementById('notepad-textarea');
-      var saveStatus = document.getElementById('notepad-save-status');
-      var saveStatusText = document.getElementById('save-status-text');
+      function initNotepad() {
+        // Elements
+        var textarea = document.getElementById('notepad-textarea');
+        var saveStatus = document.getElementById('notepad-save-status');
+        var saveStatusText = document.getElementById('save-status-text');
 
-      // Metric elements
-      var statWords = document.getElementById('stat-words');
-      var statChars = document.getElementById('stat-chars');
-      var statCharsNoSpace = document.getElementById('stat-chars-nospace');
-      var statLines = document.getElementById('stat-lines');
-      var statParagraphs = document.getElementById('stat-paragraphs');
-      var statReadTime = document.getElementById('stat-read-time');
-      var statSpeakTime = document.getElementById('stat-speak-time');
+        if (!textarea) return;
 
-      // Toolbar buttons
-      var btnClear = document.getElementById('btn-clear-notepad');
-      var btnCopy = document.getElementById('btn-copy-notepad');
-      var downloadWrap = document.getElementById('notepad-download-dropdown-wrap');
-      var btnDownloadToggle = document.getElementById('btn-download-menu-toggle');
-      var optDlTxt = document.getElementById('opt-dl-txt');
-      var optDlMd = document.getElementById('opt-dl-md');
-      var optDlDoc = document.getElementById('opt-dl-doc');
+        // Metric elements
+        var statWords = document.getElementById('stat-words');
+        var statChars = document.getElementById('stat-chars');
+        var statCharsNoSpace = document.getElementById('stat-chars-nospace');
+        var statLines = document.getElementById('stat-lines');
+        var statParagraphs = document.getElementById('stat-paragraphs');
+        var statReadTime = document.getElementById('stat-read-time');
+        var statSpeakTime = document.getElementById('stat-speak-time');
 
-      // Transform buttons
-      var btnUpper = document.getElementById('btn-case-upper');
-      var btnLower = document.getElementById('btn-case-lower');
-      var btnTitle = document.getElementById('btn-case-title');
-      var btnSentence = document.getElementById('btn-case-sentence');
-      var btnCleanSpaces = document.getElementById('btn-clean-spaces');
-      var btnSortLines = document.getElementById('btn-sort-lines');
+        // Toolbar buttons
+        var btnClear = document.getElementById('btn-clear-notepad');
+        var btnCopy = document.getElementById('btn-copy-notepad');
+        var downloadWrap = document.getElementById('notepad-download-dropdown-wrap');
+        var btnDownloadToggle = document.getElementById('btn-download-menu-toggle');
+        var optDlTxt = document.getElementById('opt-dl-txt');
+        var optDlMd = document.getElementById('opt-dl-md');
+        var optDlDoc = document.getElementById('opt-dl-doc');
 
-      // Settings elements
-      var segFontFamily = document.getElementById('seg-font-family');
-      var segFontSize = document.getElementById('seg-font-size');
-      var segLineHeight = document.getElementById('seg-line-height');
-      var segTabBehavior = document.getElementById('seg-tab-behavior');
-      var segSpellcheck = document.getElementById('seg-spellcheck');
-      var settingsSummaryBadge = document.getElementById('settings-summary-badge');
+        // Transform buttons
+        var btnUpper = document.getElementById('btn-case-upper');
+        var btnLower = document.getElementById('btn-case-lower');
+        var btnTitle = document.getElementById('btn-case-title');
+        var btnSentence = document.getElementById('btn-case-sentence');
+        var btnCleanSpaces = document.getElementById('btn-clean-spaces');
+        var btnSortLines = document.getElementById('btn-sort-lines');
 
-      // State variables
-      var STORAGE_KEY = 'toolity_notepad_content';
-      var SETTINGS_KEY = 'toolity_notepad_settings';
-      var lastClearedText = null;
-      var saveTimeout = null;
+        // Settings elements
+        var segFontFamily = document.getElementById('seg-font-family');
+        var segFontSize = document.getElementById('seg-font-size');
+        var segLineHeight = document.getElementById('seg-line-height');
+        var segTabBehavior = document.getElementById('seg-tab-behavior');
+        var segSpellcheck = document.getElementById('seg-spellcheck');
+        var settingsSummaryBadge = document.getElementById('settings-summary-badge');
 
-      // Default settings
-      var settings = {
-        fontFamily: 'sans',
-        fontSize: '16',
-        lineHeight: '1.75',
-        tabBehavior: '2',
-        spellcheck: 'on'
-      };
+        // State variables
+        var STORAGE_KEY = 'toolity_notepad_content';
+        var SETTINGS_KEY = 'toolity_notepad_settings';
+        var lastClearedText = null;
+        var saveTimeout = null;
 
-      // Load Settings from LocalStorage
-      function loadSettings() {
-        try {
-          var saved = localStorage.getItem(SETTINGS_KEY);
-          if (saved) {
-            var parsed = JSON.parse(saved);
-            Object.assign(settings, parsed);
-          }
-        } catch (e) {
-          console.warn('Failed to load notepad settings', e);
-        }
-        applySettingsToDOM();
-      }
+        // Default settings
+        var settings = {
+          fontFamily: 'sans',
+          fontSize: '16',
+          lineHeight: '1.75',
+          tabBehavior: '2',
+          spellcheck: 'on'
+        };
 
-      function saveSettings() {
-        try {
-          localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
-        } catch (e) {
-          console.warn('Failed to save notepad settings', e);
-        }
-        updateSettingsSummaryBadge();
-      }
-
-      function applySettingsToDOM() {
-        // Font family
-        textarea.classList.remove('font-sans', 'font-mono', 'font-serif');
-        textarea.classList.add('font-' + settings.fontFamily);
-        updateSegmentedActive(segFontFamily, settings.fontFamily);
-
-        // Font size
-        textarea.style.fontSize = settings.fontSize + 'px';
-        updateSegmentedActive(segFontSize, settings.fontSize);
-
-        // Line height
-        textarea.style.lineHeight = settings.lineHeight;
-        updateSegmentedActive(segLineHeight, settings.lineHeight);
-
-        // Tab behavior
-        updateSegmentedActive(segTabBehavior, settings.tabBehavior);
-
-        // Spellcheck
-        textarea.spellcheck = settings.spellcheck === 'on';
-        updateSegmentedActive(segSpellcheck, settings.spellcheck);
-
-        updateSettingsSummaryBadge();
-      }
-
-      function updateSegmentedActive(groupEl, value) {
-        if (!groupEl) return;
-        var pills = groupEl.querySelectorAll('.seg-pill');
-        pills.forEach(function (pill) {
-          if (pill.getAttribute('data-val') === String(value)) {
-            pill.classList.add('active');
-          } else {
-            pill.classList.remove('active');
-          }
-        });
-      }
-
-      function updateSettingsSummaryBadge() {
-        if (!settingsSummaryBadge) return;
-        var fontLabel = settings.fontFamily === 'mono' ? 'Mono' : settings.fontFamily === 'serif' ? 'Serif' : 'Inter Sans';
-        var lineLabel = settings.lineHeight === '1.5' ? 'Compact' : settings.lineHeight === '2.0' ? 'Spacious' : 'Relaxed';
-        settingsSummaryBadge.textContent = '(' + fontLabel + ' • ' + settings.fontSize + 'px • ' + lineLabel + ')';
-      }
-
-      // Load Saved Content
-      function loadSavedContent() {
-        try {
-          var content = localStorage.getItem(STORAGE_KEY);
-          if (content !== null) {
-            textarea.value = content;
-          }
-        } catch (e) {
-          console.warn('LocalStorage access issue:', e);
-        }
-        updateMetrics();
-      }
-
-      // Save Content to LocalStorage with reactive status
-      function saveContent() {
-        setSavingStatus(true);
-        clearTimeout(saveTimeout);
-        saveTimeout = setTimeout(function () {
+        // Load Settings from LocalStorage
+        function loadSettings() {
           try {
-            localStorage.setItem(STORAGE_KEY, textarea.value);
-            setSavingStatus(false);
+            var saved = localStorage.getItem(SETTINGS_KEY);
+            if (saved) {
+              var parsed = JSON.parse(saved);
+              Object.assign(settings, parsed);
+            }
           } catch (e) {
-            console.error('Failed to write to localStorage:', e);
+            console.warn('Failed to load notepad settings', e);
           }
-        }, 150);
-      }
-
-      function setSavingStatus(isSaving) {
-        if (!saveStatus || !saveStatusText) return;
-        if (isSaving) {
-          saveStatus.className = 'notepad-status-tag saving';
-          saveStatusText.textContent = 'Saving...';
-        } else {
-          saveStatus.className = 'notepad-status-tag';
-          saveStatusText.textContent = 'Auto-saved';
-        }
-      }
-
-      // Live Statistics Calculator
-      function updateMetrics() {
-        var text = textarea.value;
-
-        // Characters
-        var charCount = text.length;
-        var charNoSpaceCount = text.replace(/\s/g, '').length;
-
-        // Words
-        var trimmed = text.trim();
-        var wordCount = 0;
-        if (trimmed.length > 0) {
-          var wordsArray = trimmed.match(/[\p{L}\p{N}\p{M}]+(?:['’\-][\p{L}\p{N}\p{M}]+)*/gu);
-          wordCount = wordsArray ? wordsArray.length : 0;
+          applySettingsToDOM();
         }
 
-        // Lines & Paragraphs
-        var lineCount = text.length === 0 ? 0 : text.split('\n').length;
-        var paragraphs = 0;
-        if (text.length > 0) {
-          var paraArray = text.split(/\n+/).filter(function (p) {
-            return p.trim().length > 0;
-          });
-          paragraphs = paraArray.length;
-        }
-
-        // Estimated Reading & Speaking Times
-        var readingMinutes = wordCount / 200;
-        var speakingMinutes = wordCount / 130;
-
-        function formatTime(mins) {
-          if (mins <= 0) return '0s';
-          var m = Math.floor(mins);
-          var s = Math.round((mins - m) * 60);
-          if (m === 0) return s + 's';
-          return m + 'm ' + s + 's';
-        }
-
-        // Update DOM
-        if (statWords) statWords.textContent = wordCount.toLocaleString();
-        if (statChars) statChars.textContent = charCount.toLocaleString();
-        if (statCharsNoSpace) statCharsNoSpace.textContent = charNoSpaceCount.toLocaleString();
-        if (statLines) statLines.textContent = lineCount.toLocaleString();
-        if (statParagraphs) statParagraphs.textContent = paragraphs.toLocaleString();
-        if (statReadTime) statReadTime.textContent = formatTime(readingMinutes);
-        if (statSpeakTime) statSpeakTime.textContent = formatTime(speakingMinutes);
-      }
-
-      // Input Listener
-      textarea.addEventListener('input', function () {
-        saveContent();
-        updateMetrics();
-      });
-
-      // Handle Tab Key Indentation & Shortcuts
-      textarea.addEventListener('keydown', function (e) {
-        // Ctrl+S / Cmd+S quick download shortcut
-        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') {
-          e.preventDefault();
-          downloadFile('txt');
-          return;
-        }
-
-        // Tab Indentation
-        if (e.key === 'Tab') {
-          e.preventDefault();
-          var start = this.selectionStart;
-          var end = this.selectionEnd;
-          var tabVal = settings.tabBehavior === '4' ? '    ' : settings.tabBehavior === 'tab' ? '\t' : '  ';
-
-          this.value = this.value.substring(0, start) + tabVal + this.value.substring(end);
-          this.selectionStart = this.selectionEnd = start + tabVal.length;
-          saveContent();
-          updateMetrics();
-        }
-      });
-
-      // Toast Notification Helper
-      function showToast(message, actionText, actionCallback) {
-        var existing = document.getElementById('notepad-custom-toast');
-        if (existing) existing.remove();
-
-        var toast = document.createElement('div');
-        toast.id = 'notepad-custom-toast';
-        toast.style.position = 'fixed';
-        toast.style.bottom = '2rem';
-        toast.style.left = '50%';
-        toast.style.transform = 'translateX(-50%) translateY(20px)';
-        toast.style.background = 'var(--surface-elevated)';
-        toast.style.color = 'var(--text-primary)';
-        toast.style.border = '1px solid var(--border)';
-        toast.style.padding = '0.75rem 1.25rem';
-        toast.style.borderRadius = 'var(--radius-pill)';
-        toast.style.boxShadow = 'var(--shadow-lg)';
-        toast.style.display = 'flex';
-        toast.style.alignItems = 'center';
-        toast.style.gap = '0.85rem';
-        toast.style.fontSize = '0.85rem';
-        toast.style.zIndex = '9999';
-        toast.style.opacity = '0';
-        toast.style.transition = 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)';
-
-        var textSpan = document.createElement('span');
-        textSpan.innerHTML = message;
-        toast.appendChild(textSpan);
-
-        if (actionText && actionCallback) {
-          var btnAction = document.createElement('button');
-          btnAction.type = 'button';
-          btnAction.textContent = actionText;
-          btnAction.style.background = 'var(--brand)';
-          btnAction.style.color = '#fff';
-          btnAction.style.border = 'none';
-          btnAction.style.padding = '0.25rem 0.65rem';
-          btnAction.style.borderRadius = 'var(--radius-pill)';
-          btnAction.style.fontSize = '0.75rem';
-          btnAction.style.fontWeight = '600';
-          btnAction.style.cursor = 'pointer';
-          btnAction.addEventListener('click', function () {
-            actionCallback();
-            toast.remove();
-          });
-          toast.appendChild(btnAction);
-        }
-
-        document.body.appendChild(toast);
-        requestAnimationFrame(function () {
-          toast.style.opacity = '1';
-          toast.style.transform = 'translateX(-50%) translateY(0)';
-        });
-
-        setTimeout(function () {
-          if (toast.parentNode) {
-            toast.style.opacity = '0';
-            toast.style.transform = 'translateX(-50%) translateY(10px)';
-            setTimeout(function () { toast.remove(); }, 250);
+        function saveSettings() {
+          try {
+            localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+          } catch (e) {
+            console.warn('Failed to save notepad settings', e);
           }
-        }, 4500);
-      }
+          updateSettingsSummaryBadge();
+        }
 
-      // Action: Clear Notepad with Undo Guard
-      if (btnClear) {
-        btnClear.addEventListener('click', function () {
-          if (textarea.value.trim().length === 0) {
-            showToast('Note canvas is already empty.');
-            return;
-          }
-          lastClearedText = textarea.value;
-          textarea.value = '';
-          saveContent();
-          updateMetrics();
+        function applySettingsToDOM() {
+          if (!textarea) return;
+          textarea.classList.remove('font-sans', 'font-mono', 'font-serif');
+          textarea.classList.add('font-' + settings.fontFamily);
+          updateSegmentedActive(segFontFamily, settings.fontFamily);
 
-          showToast('Note cleared.', 'Undo', function () {
-            if (lastClearedText !== null) {
-              textarea.value = lastClearedText;
-              saveContent();
-              updateMetrics();
-              showToast('Note restored successfully.');
+          textarea.style.fontSize = settings.fontSize + 'px';
+          updateSegmentedActive(segFontSize, settings.fontSize);
+
+          textarea.style.lineHeight = settings.lineHeight;
+          updateSegmentedActive(segLineHeight, settings.lineHeight);
+
+          updateSegmentedActive(segTabBehavior, settings.tabBehavior);
+
+          textarea.spellcheck = settings.spellcheck === 'on';
+          updateSegmentedActive(segSpellcheck, settings.spellcheck);
+
+          updateSettingsSummaryBadge();
+        }
+
+        function updateSegmentedActive(groupEl, value) {
+          if (!groupEl) return;
+          var pills = groupEl.querySelectorAll('.seg-pill');
+          pills.forEach(function (pill) {
+            if (pill.getAttribute('data-val') === String(value)) {
+              pill.classList.add('active');
+            } else {
+              pill.classList.remove('active');
             }
           });
-        });
-      }
+        }
 
-      // Action: Copy to Clipboard
-      if (btnCopy) {
-        btnCopy.addEventListener('click', function () {
+        function updateSettingsSummaryBadge() {
+          if (!settingsSummaryBadge) return;
+          var fontLabel = settings.fontFamily === 'mono' ? 'Mono' : settings.fontFamily === 'serif' ? 'Serif' : 'Inter Sans';
+          var lineLabel = settings.lineHeight === '1.5' ? 'Compact' : settings.lineHeight === '2.0' ? 'Spacious' : 'Relaxed';
+          settingsSummaryBadge.textContent = '(' + fontLabel + ' • ' + settings.fontSize + 'px • ' + lineLabel + ')';
+        }
+
+        // Load Saved Content
+        function loadSavedContent() {
+          try {
+            var content = localStorage.getItem(STORAGE_KEY);
+            if (content !== null) {
+              textarea.value = content;
+            }
+          } catch (e) {
+            console.warn('LocalStorage access issue:', e);
+          }
+          updateMetrics();
+        }
+
+        // Save Content to LocalStorage with reactive status
+        function saveContent() {
+          setSavingStatus(true);
+          clearTimeout(saveTimeout);
+          saveTimeout = setTimeout(function () {
+            try {
+              localStorage.setItem(STORAGE_KEY, textarea.value);
+              setSavingStatus(false);
+            } catch (e) {
+              console.error('Failed to write to localStorage:', e);
+            }
+          }, 150);
+        }
+
+        function setSavingStatus(isSaving) {
+          if (!saveStatus || !saveStatusText) return;
+          if (isSaving) {
+            saveStatus.className = 'notepad-status-tag saving';
+            saveStatusText.textContent = 'Saving...';
+          } else {
+            saveStatus.className = 'notepad-status-tag';
+            saveStatusText.textContent = 'Auto-saved';
+          }
+        }
+
+        // Live Statistics Calculator
+        function updateMetrics() {
+          if (!textarea) return;
+          var text = textarea.value || '';
+
+          // 1. Total characters
+          var charCount = text.length;
+
+          // 2. Characters without spaces
+          var charNoSpaceCount = text.replace(/\s/g, '').length;
+
+          // 3. Total words
+          var trimmed = text.trim();
+          var wordCount = 0;
+          if (trimmed.length > 0) {
+            var words = trimmed.match(/\S+/g);
+            wordCount = words ? words.length : 0;
+          }
+
+          // 4. Total lines
+          var lineCount = text.length === 0 ? 0 : text.split('\n').length;
+
+          // 5. Total paragraphs
+          var paragraphs = 0;
+          if (trimmed.length > 0) {
+            paragraphs = text.split(/\n+/).filter(function (p) {
+              return p.trim().length > 0;
+            }).length;
+          }
+
+          // 6. Estimated Reading & Speaking Times
+          var readingSeconds = Math.ceil((wordCount / 200) * 60);
+          var speakingSeconds = Math.ceil((wordCount / 130) * 60);
+
+          function formatDuration(sec) {
+            if (sec <= 0 || wordCount === 0) return '0s';
+            if (sec < 60) return sec + 's';
+            var m = Math.floor(sec / 60);
+            var s = sec % 60;
+            return s > 0 ? m + 'm ' + s + 's' : m + 'm';
+          }
+
+          // Update DOM
+          if (statWords) statWords.textContent = wordCount.toLocaleString();
+          if (statChars) statChars.textContent = charCount.toLocaleString();
+          if (statCharsNoSpace) statCharsNoSpace.textContent = charNoSpaceCount.toLocaleString();
+          if (statLines) statLines.textContent = lineCount.toLocaleString();
+          if (statParagraphs) statParagraphs.textContent = paragraphs.toLocaleString();
+          if (statReadTime) statReadTime.textContent = formatDuration(readingSeconds);
+          if (statSpeakTime) statSpeakTime.textContent = formatDuration(speakingSeconds);
+        }
+
+        // Multi-Event Listeners on Textarea for immediate real-time updates
+        textarea.addEventListener('input', function () {
+          saveContent();
+          updateMetrics();
+        });
+        textarea.addEventListener('keyup', updateMetrics);
+        textarea.addEventListener('paste', function () {
+          setTimeout(function () {
+            saveContent();
+            updateMetrics();
+          }, 10);
+        });
+        textarea.addEventListener('cut', function () {
+          setTimeout(function () {
+            saveContent();
+            updateMetrics();
+          }, 10);
+        });
+        textarea.addEventListener('change', function () {
+          saveContent();
+          updateMetrics();
+        });
+
+        // Handle Tab Key Indentation & Shortcuts
+        textarea.addEventListener('keydown', function (e) {
+          // Ctrl+S / Cmd+S quick download shortcut
+          if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') {
+            e.preventDefault();
+            downloadFile('txt');
+            return;
+          }
+
+          // Tab Indentation
+          if (e.key === 'Tab') {
+            e.preventDefault();
+            var start = this.selectionStart;
+            var end = this.selectionEnd;
+            var tabVal = settings.tabBehavior === '4' ? '    ' : settings.tabBehavior === 'tab' ? '\t' : '  ';
+
+            this.value = this.value.substring(0, start) + tabVal + this.value.substring(end);
+            this.selectionStart = this.selectionEnd = start + tabVal.length;
+            saveContent();
+            updateMetrics();
+          }
+        });
+
+        // Toast Notification Helper
+        function showToast(message, actionText, actionCallback) {
+          var existing = document.getElementById('notepad-custom-toast');
+          if (existing) existing.remove();
+
+          var toast = document.createElement('div');
+          toast.id = 'notepad-custom-toast';
+          toast.style.position = 'fixed';
+          toast.style.bottom = '2rem';
+          toast.style.left = '50%';
+          toast.style.transform = 'translateX(-50%) translateY(20px)';
+          toast.style.background = 'var(--surface-elevated)';
+          toast.style.color = 'var(--text-primary)';
+          toast.style.border = '1px solid var(--border)';
+          toast.style.padding = '0.75rem 1.25rem';
+          toast.style.borderRadius = 'var(--radius-pill)';
+          toast.style.boxShadow = 'var(--shadow-lg)';
+          toast.style.display = 'flex';
+          toast.style.alignItems = 'center';
+          toast.style.gap = '0.85rem';
+          toast.style.fontSize = '0.85rem';
+          toast.style.zIndex = '9999';
+          toast.style.opacity = '0';
+          toast.style.transition = 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)';
+
+          var textSpan = document.createElement('span');
+          textSpan.innerHTML = message;
+          toast.appendChild(textSpan);
+
+          if (actionText && actionCallback) {
+            var btnAction = document.createElement('button');
+            btnAction.type = 'button';
+            btnAction.textContent = actionText;
+            btnAction.style.background = 'var(--brand)';
+            btnAction.style.color = '#fff';
+            btnAction.style.border = 'none';
+            btnAction.style.padding = '0.25rem 0.65rem';
+            btnAction.style.borderRadius = 'var(--radius-pill)';
+            btnAction.style.fontSize = '0.75rem';
+            btnAction.style.fontWeight = '600';
+            btnAction.style.cursor = 'pointer';
+            btnAction.addEventListener('click', function () {
+              actionCallback();
+              toast.remove();
+            });
+            toast.appendChild(btnAction);
+          }
+
+          document.body.appendChild(toast);
+          requestAnimationFrame(function () {
+            toast.style.opacity = '1';
+            toast.style.transform = 'translateX(-50%) translateY(0)';
+          });
+
+          setTimeout(function () {
+            if (toast.parentNode) {
+              toast.style.opacity = '0';
+              toast.style.transform = 'translateX(-50%) translateY(10px)';
+              setTimeout(function () { toast.remove(); }, 250);
+            }
+          }, 4500);
+        }
+
+        // Action: Clear Notepad with Undo Guard
+        if (btnClear) {
+          btnClear.addEventListener('click', function () {
+            if (textarea.value.trim().length === 0) {
+              showToast('Note canvas is already empty.');
+              return;
+            }
+            lastClearedText = textarea.value;
+            textarea.value = '';
+            saveContent();
+            updateMetrics();
+
+            showToast('Note cleared.', 'Undo', function () {
+              if (lastClearedText !== null) {
+                textarea.value = lastClearedText;
+                saveContent();
+                updateMetrics();
+                showToast('Note restored successfully.');
+              }
+            });
+          });
+        }
+
+        // Action: Copy to Clipboard
+        if (btnCopy) {
+          btnCopy.addEventListener('click', function () {
+            var text = textarea.value;
+            if (!text) {
+              showToast('Notepad is empty.');
+              return;
+            }
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+              navigator.clipboard.writeText(text).then(function () {
+                showToast('✓ Note copied to clipboard!');
+              }).catch(function () {
+                fallbackCopy(text);
+              });
+            } else {
+              fallbackCopy(text);
+            }
+          });
+        }
+
+        function fallbackCopy(text) {
+          textarea.select();
+          try {
+            document.execCommand('copy');
+            showToast('✓ Note copied to clipboard!');
+          } catch (err) {
+            showToast('Failed to copy. Please select text manually.');
+          }
+        }
+
+        // Action: Download Dropdown Toggle (uses standard .open class on wrapper)
+        if (btnDownloadToggle && downloadWrap) {
+          btnDownloadToggle.addEventListener('click', function (e) {
+            e.stopPropagation();
+            var isOpen = downloadWrap.classList.contains('open');
+            if (isOpen) {
+              downloadWrap.classList.remove('open');
+              btnDownloadToggle.setAttribute('aria-expanded', 'false');
+            } else {
+              downloadWrap.classList.add('open');
+              btnDownloadToggle.setAttribute('aria-expanded', 'true');
+            }
+          });
+
+          document.addEventListener('click', function (e) {
+            if (!downloadWrap.contains(e.target)) {
+              downloadWrap.classList.remove('open');
+              btnDownloadToggle.setAttribute('aria-expanded', 'false');
+            }
+          });
+        }
+
+        // Action: File Exporters (.txt, .md, .doc)
+        function downloadFile(format) {
           var text = textarea.value;
-          if (!text) {
+          if (!text.trim()) {
+            showToast('Cannot export an empty note. Write some text first!');
+            return;
+          }
+
+          var now = new Date();
+          var dateStr = now.toISOString().slice(0, 10);
+          var filename = 'note-' + dateStr + '.' + format;
+          var blob;
+
+          if (format === 'txt') {
+            blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+          } else if (format === 'md') {
+            blob = new Blob([text], { type: 'text/markdown;charset=utf-8' });
+          } else if (format === 'doc') {
+            var formattedHtml = '<!DOCTYPE html><html><head><meta charset="utf-8"><title>Note</title><style>body{font-family:Arial,sans-serif;font-size:11pt;line-height:1.6;white-space:pre-wrap;}</style></head><body>' + escapeHtml(text) + '</body></html>';
+            blob = new Blob(['\ufeff' + formattedHtml], { type: 'application/msword;charset=utf-8' });
+          }
+
+          if (blob) {
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(function () {
+              document.body.removeChild(a);
+              URL.revokeObjectURL(url);
+            }, 150);
+            showToast('✓ Downloaded as ' + filename);
+          }
+
+          if (downloadWrap) {
+            downloadWrap.classList.remove('open');
+            if (btnDownloadToggle) btnDownloadToggle.setAttribute('aria-expanded', 'false');
+          }
+        }
+
+        function escapeHtml(str) {
+          return str
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
+        }
+
+        if (optDlTxt) optDlTxt.addEventListener('click', function () { downloadFile('txt'); });
+        if (optDlMd) optDlMd.addEventListener('click', function () { downloadFile('md'); });
+        if (optDlDoc) optDlDoc.addEventListener('click', function () { downloadFile('doc'); });
+
+        // Text Transformers (Applying directly to selection or full text)
+        function applyTextTransformation(transformFn) {
+          var start = textarea.selectionStart;
+          var end = textarea.selectionEnd;
+          var fullText = textarea.value;
+
+          if (!fullText) {
             showToast('Notepad is empty.');
             return;
           }
 
-          if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(text).then(function () {
-              showToast('✓ Note copied to clipboard!');
-            }).catch(function () {
-              fallbackCopy(text);
-            });
+          if (start !== end) {
+            var selected = fullText.substring(start, end);
+            var transformed = transformFn(selected);
+            textarea.value = fullText.substring(0, start) + transformed + fullText.substring(end);
+            textarea.selectionStart = start;
+            textarea.selectionEnd = start + transformed.length;
           } else {
-            fallbackCopy(text);
+            textarea.value = transformFn(fullText);
           }
-        });
-      }
 
-      function fallbackCopy(text) {
-        textarea.select();
-        try {
-          document.execCommand('copy');
-          showToast('✓ Note copied to clipboard!');
-        } catch (err) {
-          showToast('Failed to copy. Please select text manually.');
-        }
-      }
-
-      // Action: Download Dropdown Toggle (uses standard .open class on wrapper)
-      if (btnDownloadToggle && downloadWrap) {
-        btnDownloadToggle.addEventListener('click', function (e) {
-          e.stopPropagation();
-          var isOpen = downloadWrap.classList.contains('open');
-          if (isOpen) {
-            downloadWrap.classList.remove('open');
-            btnDownloadToggle.setAttribute('aria-expanded', 'false');
-          } else {
-            downloadWrap.classList.add('open');
-            btnDownloadToggle.setAttribute('aria-expanded', 'true');
-          }
-        });
-
-        document.addEventListener('click', function (e) {
-          if (!downloadWrap.contains(e.target)) {
-            downloadWrap.classList.remove('open');
-            btnDownloadToggle.setAttribute('aria-expanded', 'false');
-          }
-        });
-      }
-
-      // Action: File Exporters (.txt, .md, .doc)
-      function downloadFile(format) {
-        var text = textarea.value;
-        if (!text.trim()) {
-          showToast('Cannot export an empty note. Write some text first!');
-          return;
+          saveContent();
+          updateMetrics();
         }
 
-        var now = new Date();
-        var dateStr = now.toISOString().slice(0, 10);
-        var filename = 'note-' + dateStr + '.' + format;
-        var blob;
-
-        if (format === 'txt') {
-          blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
-        } else if (format === 'md') {
-          blob = new Blob([text], { type: 'text/markdown;charset=utf-8' });
-        } else if (format === 'doc') {
-          var formattedHtml = '<!DOCTYPE html><html><head><meta charset="utf-8"><title>Note</title><style>body{font-family:Arial,sans-serif;font-size:11pt;line-height:1.6;white-space:pre-wrap;}</style></head><body>' + escapeHtml(text) + '</body></html>';
-          blob = new Blob(['\ufeff' + formattedHtml], { type: 'application/msword;charset=utf-8' });
-        }
-
-        if (blob) {
-          var url = URL.createObjectURL(blob);
-          var a = document.createElement('a');
-          a.href = url;
-          a.download = filename;
-          document.body.appendChild(a);
-          a.click();
-          setTimeout(function () {
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-          }, 150);
-          showToast('✓ Downloaded as ' + filename);
-        }
-
-        if (downloadWrap) {
-          downloadWrap.classList.remove('open');
-          if (btnDownloadToggle) btnDownloadToggle.setAttribute('aria-expanded', 'false');
-        }
-      }
-
-      function escapeHtml(str) {
-        return str
-          .replace(/&/g, '&amp;')
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;')
-          .replace(/"/g, '&quot;')
-          .replace(/'/g, '&#039;');
-      }
-
-      if (optDlTxt) optDlTxt.addEventListener('click', function () { downloadFile('txt'); });
-      if (optDlMd) optDlMd.addEventListener('click', function () { downloadFile('md'); });
-      if (optDlDoc) optDlDoc.addEventListener('click', function () { downloadFile('doc'); });
-
-      // Text Transformers (Applying directly to selection or full text)
-      function applyTextTransformation(transformFn) {
-        var start = textarea.selectionStart;
-        var end = textarea.selectionEnd;
-        var fullText = textarea.value;
-
-        if (!fullText) {
-          showToast('Notepad is empty.');
-          return;
-        }
-
-        if (start !== end) {
-          var selected = fullText.substring(start, end);
-          var transformed = transformFn(selected);
-          textarea.value = fullText.substring(0, start) + transformed + fullText.substring(end);
-          textarea.selectionStart = start;
-          textarea.selectionEnd = start + transformed.length;
-        } else {
-          textarea.value = transformFn(fullText);
-        }
-
-        saveContent();
-        updateMetrics();
-      }
-
-      // Transform: Uppercase
-      if (btnUpper) {
-        btnUpper.addEventListener('click', function () {
-          applyTextTransformation(function (txt) {
-            return txt.toUpperCase();
+        // Transform: Uppercase
+        if (btnUpper) {
+          btnUpper.addEventListener('click', function () {
+            applyTextTransformation(function (txt) {
+              return txt.toUpperCase();
+            });
+            showToast('Converted to UPPERCASE');
           });
-          showToast('Converted to UPPERCASE');
-        });
-      }
+        }
 
-      // Transform: Lowercase
-      if (btnLower) {
-        btnLower.addEventListener('click', function () {
-          applyTextTransformation(function (txt) {
-            return txt.toLowerCase();
+        // Transform: Lowercase
+        if (btnLower) {
+          btnLower.addEventListener('click', function () {
+            applyTextTransformation(function (txt) {
+              return txt.toLowerCase();
+            });
+            showToast('Converted to lowercase');
           });
-          showToast('Converted to lowercase');
-        });
-      }
+        }
 
-      // Transform: Title Case
-      if (btnTitle) {
-        btnTitle.addEventListener('click', function () {
-          applyTextTransformation(function (txt) {
-            var minorWords = ['a', 'an', 'the', 'and', 'but', 'or', 'for', 'nor', 'on', 'at', 'to', 'from', 'by', 'in', 'of'];
-            return txt.toLowerCase().split(/(\s+)/).map(function (word, index) {
-              if (/^\s+$/.test(word) || word.length === 0) return word;
-              var clean = word.replace(/[^a-zA-Z0-9]/g, '');
-              if (index > 0 && minorWords.indexOf(clean.toLowerCase()) !== -1) {
-                return word.toLowerCase();
-              }
-              return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-            }).join('');
+        // Transform: Title Case
+        if (btnTitle) {
+          btnTitle.addEventListener('click', function () {
+            applyTextTransformation(function (txt) {
+              var minorWords = ['a', 'an', 'the', 'and', 'but', 'or', 'for', 'nor', 'on', 'at', 'to', 'from', 'by', 'in', 'of'];
+              return txt.toLowerCase().split(/(\s+)/).map(function (word, index) {
+                if (/^\s+$/.test(word) || word.length === 0) return word;
+                var clean = word.replace(/[^a-zA-Z0-9]/g, '');
+                if (index > 0 && minorWords.indexOf(clean.toLowerCase()) !== -1) {
+                  return word.toLowerCase();
+                }
+                return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+              }).join('');
+            });
+            showToast('Converted to Title Case');
           });
-          showToast('Converted to Title Case');
-        });
-      }
+        }
 
-      // Transform: Sentence case
-      if (btnSentence) {
-        btnSentence.addEventListener('click', function () {
-          applyTextTransformation(function (txt) {
-            return txt.toLowerCase().replace(/(^\s*|[.!?]\s+)([a-z])/gu, function (match, separator, char) {
-              return separator + char.toUpperCase();
+        // Transform: Sentence case
+        if (btnSentence) {
+          btnSentence.addEventListener('click', function () {
+            applyTextTransformation(function (txt) {
+              return txt.toLowerCase().replace(/(^\s*|[.!?]\s+)([a-z])/gu, function (match, separator, char) {
+                return separator + char.toUpperCase();
+              });
+            });
+            showToast('Converted to Sentence case');
+          });
+        }
+
+        // Transform: Clean Spaces
+        if (btnCleanSpaces) {
+          btnCleanSpaces.addEventListener('click', function () {
+            applyTextTransformation(function (txt) {
+              var lines = txt.split('\n').map(function (line) {
+                return line.replace(/[ \t]+$/g, '').replace(/[ \t]{2,}/g, ' ');
+              });
+              return lines.join('\n').replace(/\n{3,}/g, '\n\n').trim();
+            });
+            showToast('Cleaned redundant whitespace');
+          });
+        }
+
+        // Transform: Sort Lines A-Z
+        if (btnSortLines) {
+          btnSortLines.addEventListener('click', function () {
+            applyTextTransformation(function (txt) {
+              var lines = txt.split('\n');
+              lines.sort(function (a, b) {
+                return a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' });
+              });
+              return lines.join('\n');
+            });
+            showToast('Lines sorted alphabetically');
+          });
+        }
+
+        // Settings Segmented Group Handlers
+        function setupSegmentedGroup(groupEl, key) {
+          if (!groupEl) return;
+          var pills = groupEl.querySelectorAll('.seg-pill');
+          pills.forEach(function (pill) {
+            pill.addEventListener('click', function () {
+              var val = this.getAttribute('data-val');
+              settings[key] = val;
+              saveSettings();
+              applySettingsToDOM();
             });
           });
-          showToast('Converted to Sentence case');
-        });
+        }
+
+        setupSegmentedGroup(segFontFamily, 'fontFamily');
+        setupSegmentedGroup(segFontSize, 'fontSize');
+        setupSegmentedGroup(segLineHeight, 'lineHeight');
+        setupSegmentedGroup(segTabBehavior, 'tabBehavior');
+        setupSegmentedGroup(segSpellcheck, 'spellcheck');
+
+        // Initialize on Load
+        loadSettings();
+        loadSavedContent();
       }
 
-      // Transform: Clean Spaces
-      if (btnCleanSpaces) {
-        btnCleanSpaces.addEventListener('click', function () {
-          applyTextTransformation(function (txt) {
-            var lines = txt.split('\n').map(function (line) {
-              return line.replace(/[ \t]+$/g, '').replace(/[ \t]{2,}/g, ' ');
-            });
-            return lines.join('\n').replace(/\n{3,}/g, '\n\n').trim();
-          });
-          showToast('Cleaned redundant whitespace');
-        });
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initNotepad);
+      } else {
+        initNotepad();
       }
-
-      // Transform: Sort Lines A-Z
-      if (btnSortLines) {
-        btnSortLines.addEventListener('click', function () {
-          applyTextTransformation(function (txt) {
-            var lines = txt.split('\n');
-            lines.sort(function (a, b) {
-              return a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' });
-            });
-            return lines.join('\n');
-          });
-          showToast('Lines sorted alphabetically');
-        });
-      }
-
-      // Settings Segmented Group Handlers
-      function setupSegmentedGroup(groupEl, key) {
-        if (!groupEl) return;
-        var pills = groupEl.querySelectorAll('.seg-pill');
-        pills.forEach(function (pill) {
-          pill.addEventListener('click', function () {
-            var val = this.getAttribute('data-val');
-            settings[key] = val;
-            saveSettings();
-            applySettingsToDOM();
-          });
-        });
-      }
-
-      setupSegmentedGroup(segFontFamily, 'fontFamily');
-      setupSegmentedGroup(segFontSize, 'fontSize');
-      setupSegmentedGroup(segLineHeight, 'lineHeight');
-      setupSegmentedGroup(segTabBehavior, 'tabBehavior');
-      setupSegmentedGroup(segSpellcheck, 'spellcheck');
-
-      // Initialize on Load
-      loadSettings();
-      loadSavedContent();
-
     })();
   </script>
 </body>
