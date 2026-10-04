@@ -3409,3 +3409,33 @@ body {
 }
 
 .form-required { color: var(--brand); }
+
+/* Shared utility classes that replaced repeated inline style="" attributes */
+.form-group-grow { flex: 1; }
+.form-group-grow .textarea-clean { flex: 1; min-height: 120px; }
+.pane-content-tall { min-height: 380px; }
+
+/* Full-height code/text output filling the right pane */
+.pane-output-fill {
+  flex: 1;
+  height: 100%;
+  min-height: 380px;
+  margin: 0;
+  padding: 1.15rem 1.25rem;
+  border: none;
+  background: var(--surface);
+  font-family: var(--font-mono);
+  font-size: 0.86rem;
+  line-height: 1.6;
+  color: var(--text-primary);
+  white-space: pre-wrap;
+  word-break: break-all;
+  overflow: auto;
+  user-select: text;
+}
+
+.step-desc code,
+.pane-badge code {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}

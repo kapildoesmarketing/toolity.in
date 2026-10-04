@@ -18,43 +18,82 @@
       document.documentElement.setAttribute('data-theme', t);
     })();
   </script>
-  <title>Mailto Link Creator & Email HTML Tag Generator — Toolity.in</title>
-  <link rel="canonical" href="https://toolity.in/utilities/mailto-generator/">
 
-  <!-- SEO & Metadata -->
-  <meta name="description"
-    content="Free, instant Mailto Link Creator and HTML Email Tag Generator. Compose URL-encoded mailto links with Subject, CC, BCC, and Body, preview in real-time, and test in your email app.">
+  <title>Mailto Link Creator — Email HTML Tag Generator | Toolity.in</title>
+  <link rel="canonical" href="https://toolity.in/utilities/mailto-generator/">
+  <meta name="description" content="Free, instant Mailto Link Creator and HTML Email Tag Generator. Compose URL-encoded mailto links with Subject, CC, BCC, and Body, preview in real-time, and test in your email app.">
   <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Mailto Link Creator — Toolity.in">
+  <meta property="og:description" content="Compose URL-encoded mailto links with Subject, CC, BCC and Body. Copy as raw URL, HTML tag or Markdown. 100% in your browser.">
+  <meta property="og:url" content="https://toolity.in/utilities/mailto-generator/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
   <!-- Favicons -->
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
   <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
 
-  <!-- Google Fonts: Inter -->
+  <!-- Fonts & critical assets -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-  <!-- Iconify Icon Component -->
-    <!-- Preload Critical Assets -->
   <link rel="preload" href="/styles/main.css?v=2.4" as="style">
   <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
-
   <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 
   <link rel="stylesheet" href="/styles/main.css?v=2.4">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Mailto Link Creator",
+        "url": "https://toolity.in/utilities/mailto-generator/",
+        "description": "Compose URL-encoded mailto links with Subject, CC, BCC and Body. Copy as raw URL, HTML tag or Markdown. 100% in your browser.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Utilities", "item": "https://toolity.in/utilities/" },
+          { "@type": "ListItem", "position": 3, "name": "Mailto Link Creator", "item": "https://toolity.in/utilities/mailto-generator/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Is my email content sent to a server?", "acceptedAnswer": { "@type": "Answer", "text": "No. The link is assembled in your browser with JavaScript's encodeURIComponent. Nothing you type is transmitted or stored anywhere." } },
+          { "@type": "Question", "name": "Why are spaces and line breaks replaced with %20 and %0A?", "acceptedAnswer": { "@type": "Answer", "text": "The mailto scheme is a URL, so special characters must be percent-encoded (RFC 3986). Email clients decode them back into normal text, spaces and new lines." } },
+          { "@type": "Question", "name": "Can I add multiple recipients, CC or BCC addresses?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Separate addresses with commas in any field. CC and BCC become cc= and bcc= query parameters in the generated link." } },
+          { "@type": "Question", "name": "Is there a maximum length for a mailto link?", "acceptedAnswer": { "@type": "Answer", "text": "Browsers and mail clients differ, but keeping the full link under about 2,000 characters avoids truncation. Long bodies should be shortened or moved into the email itself." } },
+          { "@type": "Question", "name": "Why did nothing happen when I clicked Test Link?", "acceptedAnswer": { "@type": "Answer", "text": "mailto: links open your operating system's default mail app. If none is configured, or your browser blocks the handler, set a default email client (Gmail, Outlook, Apple Mail) and try again." } }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 
 <body>
   <div data-include="/components/header.html"></div>
 
-  <!-- Main Tool Page Content -->
   <main>
-    <!-- Page Hero Header -->
+    <!-- 1. HERO -->
     <section class="page-hero">
       <div class="container">
-        <!-- Breadcrumbs Navigation -->
         <nav class="breadcrumbs" aria-label="Breadcrumb">
           <a href="/" class="breadcrumb-link">Home</a>
           <span class="breadcrumb-separator">/</span>
@@ -62,304 +101,169 @@
           <span class="breadcrumb-separator">/</span>
           <span class="breadcrumb-current">Mailto Link Creator</span>
         </nav>
-
         <div class="page-title-row">
           <div class="page-header-content">
             <span class="section-eyebrow">Everyday Utility</span>
             <h1 class="page-title">Mailto Link Creator</h1>
-            <p class="page-desc">Generate customizable, URL-encoded mailto links, HTML anchor tags, and Markdown snippets with instant live preview.</p>
+            <p class="page-desc">Generate URL-encoded mailto links, HTML anchor tags and Markdown snippets with a live preview — 100% in your browser.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Tool Main Workspace Area -->
+    <!-- 2. WORKSPACE -->
     <section class="section-wrapper tool-section">
       <div class="container">
 
-        <div class="tool-workspace-card">
+        <div class="tool-workspace-card" data-layout="split" id="tool-card">
 
-          <!-- 1. Quick Actions Toolbar (Universal Actions on Right) -->
           <div class="tool-actions-toolbar">
             <div class="toolbar-group">
-              <span class="pane-badge" id="mailto-mode-badge">RFC 3986 Standard</span>
+              <span class="pane-badge">RFC 3986 encoding</span>
             </div>
-
             <div class="toolbar-group">
-              <button type="button" class="btn-toolbar-sm" id="btn-reset-form" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
                 <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
                 <span>Reset</span>
               </button>
-              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-top-copy">
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-copy" title="Copy generated code to clipboard" aria-label="Copy generated code to clipboard">
                 <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
-                <span>Copy Link</span>
+                <span>Copy</span>
               </button>
-              <button type="button" class="btn-toolbar-sm" id="btn-top-test" title="Open in your default email client">
+              <button type="button" class="btn-toolbar-sm" id="btn-open" title="Open in your default email client" aria-label="Open in your default email client">
                 <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
                 <span>Test Link</span>
               </button>
             </div>
           </div>
 
-          <!-- 2. Dual Split-Pane Grid -->
           <div class="split-pane-grid">
-            
-            <!-- Left: Input Form Pane -->
+
             <div class="tool-pane">
               <div class="pane-header">
                 <span>Email Parameters</span>
-                <span class="pane-badge" id="input-stats-badge">0 chars</span>
+                <span class="pane-badge" id="input-badge">0 chars</span>
               </div>
-              <div class="pane-content" style="min-height: 380px;">
-                <!-- Recipient (To) -->
+              <div class="pane-content pane-content-tall">
                 <div class="form-group">
                   <label class="form-label" for="email-to">
-                    <span>Recipient Email (To) <span style="color: var(--brand);">*</span></span>
+                    <span>Recipient Email (To) <span class="form-required">*</span></span>
                     <span class="form-label-desc">Comma-separated for multiple</span>
                   </label>
                   <input type="text" id="email-to" class="input-clean" placeholder="support@toolity.in, team@example.com" spellcheck="false" autocomplete="email">
                 </div>
 
-                <!-- CC & BCC Row -->
                 <div class="form-row-2col">
                   <div class="form-group">
-                    <label class="form-label" for="email-cc">
-                      <span>Carbon Copy (CC)</span>
-                    </label>
+                    <label class="form-label" for="email-cc"><span>Carbon Copy (CC)</span></label>
                     <input type="text" id="email-cc" class="input-clean" placeholder="manager@example.com" spellcheck="false">
                   </div>
                   <div class="form-group">
-                    <label class="form-label" for="email-bcc">
-                      <span>Blind Copy (BCC)</span>
-                    </label>
+                    <label class="form-label" for="email-bcc"><span>Blind Copy (BCC)</span></label>
                     <input type="text" id="email-bcc" class="input-clean" placeholder="archive@example.com" spellcheck="false">
                   </div>
                 </div>
 
-                <!-- Subject Line -->
                 <div class="form-group">
-                  <label class="form-label" for="email-subject">
-                    <span>Subject Line</span>
-                  </label>
+                  <label class="form-label" for="email-subject"><span>Subject Line</span></label>
                   <input type="text" id="email-subject" class="input-clean" placeholder="Inquiry regarding your services">
                 </div>
 
-                <!-- Email Body -->
-                <div class="form-group" style="flex: 1;">
+                <div class="form-group form-group-grow">
                   <label class="form-label" for="email-body">
                     <span>Email Message Body</span>
-                    <span class="form-label-desc" id="body-char-count">0 chars</span>
+                    <span class="form-label-desc" id="body-badge">0 chars</span>
                   </label>
-                  <textarea id="email-body" class="textarea-clean" style="flex: 1; min-height: 120px;" placeholder="Hi Team,&#10;&#10;I wanted to inquire about...&#10;&#10;Best regards,&#10;Your Name"></textarea>
+                  <textarea id="email-body" class="textarea-clean" placeholder="Hi Team,&#10;&#10;I wanted to inquire about...&#10;&#10;Best regards,&#10;Your Name"></textarea>
                 </div>
               </div>
             </div>
 
-            <!-- Right: Export Format Output Pane -->
             <div class="tool-pane">
               <div class="pane-header">
                 <span>Generated Output</span>
-                <div class="segmented-group segmented-group-pill" id="seg-export-format">
-                  <button type="button" class="seg-pill active" data-format="raw">Mailto URL</button>
-                  <button type="button" class="seg-pill" data-format="html">HTML Tag</button>
-                  <button type="button" class="seg-pill" data-format="md">Markdown</button>
+                <div class="segmented-group segmented-group-pill" id="seg-format" role="group" aria-label="Output format">
+                  <button type="button" class="seg-pill active" data-value="raw">Mailto URL</button>
+                  <button type="button" class="seg-pill" data-value="html">HTML Tag</button>
+                  <button type="button" class="seg-pill" data-value="md">Markdown</button>
                 </div>
               </div>
-              <div style="flex: 1; display: flex; flex-direction: column; background: var(--surface);">
-                <pre id="output-code" class="pane-output-preview" style="height: 100%; min-height: 380px; padding: 1.15rem 1.25rem; font-size: 0.86rem; border: none;"></pre>
-              </div>
+              <pre id="output-code" class="pane-output-fill" aria-live="polite"></pre>
             </div>
 
           </div>
-
         </div>
 
-        <!-- ==================================================================
-             EXACTLY 1 ADSTERRA BANNER SLOT (Positioned at bottom of tool)
-             ================================================================== -->
-        <!-- Global Shared Ad Slot Partial -->
+        <!-- 3. AD -->
         <div data-include="/components/ad-slot.html"></div>
 
-        <!-- ==================================================================
-             3-STEP INSTRUCTION GUIDE
-             ================================================================== -->
+        <!-- 4. GUIDE -->
         <section class="guide-section">
-          <div class="section-header">
+          <div class="section-header-compact">
             <span class="section-eyebrow">How It Works</span>
-            <h2 class="section-title">Creating URL-Encoded Mailto Links</h2>
-            <p class="section-desc">Build pre-populated email links for websites, contact pages, and documentation in 3 simple steps.</p>
+            <h2 class="section-heading-sm">Creating URL-Encoded Mailto Links</h2>
           </div>
-
           <div class="guide-steps-grid">
             <div class="guide-step-card">
               <div class="step-num-badge">1</div>
               <h3 class="step-title">Enter Email Parameters</h3>
-              <p class="step-desc">
-                Fill in recipient addresses (To, CC, BCC), email subject line, and draft pre-filled message body template.
-              </p>
+              <p class="step-desc">Fill in recipient addresses (To, CC, BCC), a subject line and an optional pre-filled message body.</p>
             </div>
-
             <div class="guide-step-card">
               <div class="step-num-badge">2</div>
               <h3 class="step-title">Choose Output Format</h3>
-              <p class="step-desc">
-                Select between a raw URL-encoded mailto protocol link, ready-to-paste HTML <code style="font-family:var(--font-mono); font-size:0.8rem;">&lt;a&gt;</code> anchor tag, or Markdown link.
-              </p>
+              <p class="step-desc">Switch between a raw <code>mailto:</code> URL, a ready-to-paste HTML <code>&lt;a&gt;</code> tag, or a Markdown link.</p>
             </div>
-
             <div class="guide-step-card">
               <div class="step-num-badge">3</div>
-              <h3 class="step-title">Test Link & Deploy</h3>
-              <p class="step-desc">
-                Click "Test Link" to verify in your default email client (Apple Mail, Outlook, Gmail), then copy the code directly to your website.
-              </p>
+              <h3 class="step-title">Copy or Test Link</h3>
+              <p class="step-desc">Click Test Link to verify in your mail app, then Copy the code into your website. Tip: <kbd>Esc</kbd> resets the form.</p>
             </div>
           </div>
         </section>
 
+        <!-- 6. FAQ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Mailto Link Creator — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Is my email content sent to a server?</summary>
+              <p>No. The link is assembled in your browser with JavaScript's <code>encodeURIComponent</code>. Nothing you type is transmitted or stored anywhere.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why are spaces and line breaks replaced with <code>%20</code> and <code>%0A</code>?</summary>
+              <p>The mailto scheme is a URL, so special characters must be percent-encoded (RFC 3986). Email clients decode them back into normal text, spaces and new lines.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can I add multiple recipients, CC or BCC addresses?</summary>
+              <p>Yes. Separate addresses with commas in any field. CC and BCC become <code>cc=</code> and <code>bcc=</code> query parameters in the generated link.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is there a maximum length for a mailto link?</summary>
+              <p>Browsers and mail clients differ, but keeping the full link under about 2,000 characters avoids truncation. Long bodies should be shortened or moved into the email itself.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why did nothing happen when I clicked Test Link?</summary>
+              <p><code>mailto:</code> links open your operating system's default mail app. If none is configured, or your browser blocks the handler, set a default email client (Gmail, Outlook, Apple Mail) and try again.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- 7. CTA -->
         <div data-include="/components/tool-cta.html" data-category="utilities"></div>
 
       </div>
     </section>
   </main>
 
-
-  <!-- Global Multi-Column Footer -->
   <div data-include="/components/footer.html"></div>
 
   <script src="/scripts/main.js?v=2.4"></script>
-  <script>
-    /* Designed by Kapil Pidhwani: Streamlined Mailto Link Creator Core Logic */
-    document.addEventListener('DOMContentLoaded', () => {
-      // DOM Elements
-      const inputTo = document.getElementById('email-to');
-      const inputCc = document.getElementById('email-cc');
-      const inputBcc = document.getElementById('email-bcc');
-      const inputSubject = document.getElementById('email-subject');
-      const inputBody = document.getElementById('email-body');
-
-      const outputCode = document.getElementById('output-code');
-      const inputStatsBadge = document.getElementById('input-stats-badge');
-      const bodyCharCount = document.getElementById('body-char-count');
-
-      let currentFormat = 'raw'; // 'raw', 'html', 'md'
-
-
-      function buildMailtoURL() {
-        const to = inputTo.value.trim();
-        const cc = inputCc.value.trim();
-        const bcc = inputBcc.value.trim();
-        const subject = inputSubject.value.trim();
-        const body = inputBody.value;
-
-        let mailto = 'mailto:';
-        if (to) {
-          mailto += encodeURI(to);
-        }
-
-        const params = [];
-        if (cc) params.push(`cc=${encodeURIComponent(cc)}`);
-        if (bcc) params.push(`bcc=${encodeURIComponent(bcc)}`);
-        if (subject) params.push(`subject=${encodeURIComponent(subject)}`);
-        if (body) params.push(`body=${encodeURIComponent(body)}`);
-
-        if (params.length > 0) {
-          mailto += '?' + params.join('&');
-        }
-
-        return mailto;
-      }
-
-      function updateOutputs() {
-        const toVal = inputTo.value.trim();
-        const ccVal = inputCc.value.trim();
-        const bccVal = inputBcc.value.trim();
-        const subjectVal = inputSubject.value.trim();
-        const bodyVal = inputBody.value;
-
-        const mailtoUrl = buildMailtoURL();
-        const linkText = 'Send us an email';
-
-        let finalCode = '';
-        if (currentFormat === 'raw') {
-          finalCode = mailtoUrl;
-        } else if (currentFormat === 'html') {
-          finalCode = `<a href="${mailtoUrl}">${linkText}</a>`;
-        } else if (currentFormat === 'md') {
-          finalCode = `[${linkText}](${mailtoUrl})`;
-        }
-
-        outputCode.textContent = finalCode;
-
-        // Update stats
-        const totalChars = (toVal + ccVal + bccVal + subjectVal + bodyVal).length;
-        inputStatsBadge.textContent = `${totalChars} chars`;
-        bodyCharCount.textContent = `${bodyVal.length} chars`;
-      }
-
-      // Input Event Listeners
-      [inputTo, inputCc, inputBcc, inputSubject, inputBody].forEach(el => {
-        if (el) el.addEventListener('input', updateOutputs);
-      });
-
-      // Segmented Controls - Export Format
-      const formatSeg = document.getElementById('seg-export-format');
-      if (formatSeg) {
-        formatSeg.querySelectorAll('.seg-pill').forEach(btn => {
-          btn.addEventListener('click', () => {
-            formatSeg.querySelectorAll('.seg-pill').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            currentFormat = btn.dataset.format;
-            updateOutputs();
-          });
-        });
-      }
-
-      // Copy Action
-      function copyActiveCode() {
-        const code = outputCode.textContent;
-        if (!code || code === 'mailto:') {
-          return showToast('Nothing to copy yet');
-        }
-        navigator.clipboard.writeText(code).then(() => {
-          showToast('Copied to clipboard!');
-        }).catch(() => {
-          showToast('Failed to copy');
-        });
-      }
-
-      document.getElementById('btn-top-copy').addEventListener('click', copyActiveCode);
-
-      // Test Link Action (Opens in new tab)
-      function testMailtoLink() {
-        const mailto = buildMailtoURL();
-        if (!mailto || mailto === 'mailto:') {
-          return showToast('Please enter an email address first');
-        }
-        window.open(mailto, '_blank');
-        showToast('Opening email client in new tab...');
-      }
-
-      document.getElementById('btn-top-test').addEventListener('click', testMailtoLink);
-
-      // Reset Action
-      document.getElementById('btn-reset-form').addEventListener('click', () => {
-        inputTo.value = '';
-        inputCc.value = '';
-        inputBcc.value = '';
-        inputSubject.value = '';
-        inputBody.value = '';
-        updateOutputs();
-        showToast('Form reset');
-      });
-
-      // Initialize on load
-      inputTo.value = 'support@toolity.in';
-      inputSubject.value = 'Inquiry regarding Toolity';
-      inputBody.value = 'Hi Toolity Team,\n\nI wanted to reach out regarding...';
-      updateOutputs();
-    });
-  </script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="/utilities/mailto-generator/mailto-generator.js?v=1.0"></script>
 </body>
 
 </html>
