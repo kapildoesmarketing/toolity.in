@@ -3613,3 +3613,5 @@ body {
 .pane-footnote .btn-toolbar-sm { padding: 0.25rem 0.6rem; font-size: 0.75rem; }
 .pane-footnote .btn-toolbar-sm[hidden] { display: none; }
 .trim-duration-badge { color: var(--text-muted); font-size: 0.72rem; }
+.stat-accent { color: var(--brand); font-weight: 600; }
+.flex-wrap { flex-wrap: wrap; }
