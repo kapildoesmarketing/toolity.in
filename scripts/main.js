@@ -147,6 +147,14 @@
 
     const REGISTRY = [
       {
+        id: 'image-to-favicon',
+        title: 'Image to Favicon Converter',
+        category: 'Convertors',
+        url: 'convertors/image-to-favicon/',
+        icon: 'lucide:sparkles',
+        tags: ['favicon', 'ico', 'image to favicon', 'apple touch icon', 'png to ico', 'pwa', 'icon generator', 'website icon', 'convert', 'logo to favicon', 'favicon.ico']
+      },
+      {
         id: 'image-converter',
         title: 'Image Format Converter',
         category: 'Convertors',

@@ -234,5 +234,19 @@
         4. **Top** (smooth scroll to top, resolving back-to-top feature)
       - Integrated with safe-area insets (`env(safe-area-inset-bottom)`).
     - **Multi-Device Favicon Suite**: Standardized `/assets/favicons/` across all pages with 32x32 PNG, 16x16 PNG, 180x180 Apple Touch Icon, and root `/favicon.ico` for complete cross-browser and iOS/Android compatibility.
+24. **Image to Favicon Converter (`convertors/image-to-favicon/index.html`)**:
+    - **Implemented**: 2026-10-04.
+    - **Features**:
+      - Converts PNG, JPG, WebP, SVG, GIF, AVIF, BMP into multi-resolution `favicon.ico`, Apple Touch Icons, and Android PWA icons.
+      - Fit options: `Contain` (Pad), `Cover` (Center Crop), `Stretch`.
+      - Background color: Transparent (checkerboard), White, Dark, Brand Orange, Cobalt, Emerald, or Custom Hex color picker.
+      - Quiet zone padding slider: `0%` to `30%`.
+      - Corner radius presets: `Square (0%)`, `Squircle (22%)`, `Circle (50%)`.
+      - Real-Time Live Multi-Context Previews: Interactive Chrome Browser Tab with custom editable title, iOS/Android Home Screen icon frame, Google Search result snippet (SERP), and All-Sizes Matrix Grid (16, 32, 48, 64, 128, 180, 192, 512).
+      - Multi-Format Client-Side Binary Generator: Constructs real Windows `.ico` binary files containing 16x16, 32x32, 48x48 PNG frames via JavaScript `DataView` & `Uint8Array`.
+      - Complete ZIP Package Exporter: Bundles `favicon.ico`, all PNG sizes, `site.webmanifest`, and an HTML instruction snippet in PKZIP store format.
+      - 1-Click Copyable `<link>` Embed Tags snippet.
+      - 100% Client-Side with zero server uploads (privacy-first).
+
 
 
