@@ -53,59 +53,75 @@
   <!-- Iconify Icon Component -->
   <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 
-  <link rel="stylesheet" href="../../styles/main.css?v=2.3">
+  <link rel="stylesheet" href="/styles/main.css?v=2.3">
 
   <style>
-    /* Designed by Kapil Pidhwani: Online Notepad Tool-Specific Styles */
-    .notepad-container {
-      display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
-      width: 100%;
-    }
-
-    .notepad-canvas-wrapper {
-      background: var(--surface);
+    /* Designed by Kapil Pidhwani: Minimalist Online Notepad Tool Styles */
+    .notepad-card {
+      background: var(--background);
       border: 1px solid var(--border);
-      border-radius: var(--radius-md);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
       overflow: hidden;
+      margin-bottom: 2rem;
       display: flex;
       flex-direction: column;
-      box-shadow: var(--shadow-sm);
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .notepad-canvas-wrapper:focus-within {
-      border-color: var(--brand);
-      box-shadow: 0 0 0 3px var(--brand-soft);
-    }
-
-    .notepad-pane-header {
+    /* Top Action Bar */
+    .notepad-top-bar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0.75rem 1.15rem;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      padding: 0.85rem 1.15rem;
       background: var(--surface-elevated);
       border-bottom: 1px solid var(--border);
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: var(--text-secondary);
     }
 
-    .notepad-title-group {
+    .notepad-tools-row {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      color: var(--text-primary);
+      flex-wrap: wrap;
+      gap: 0.4rem;
     }
 
+    /* Minimal Action Buttons */
+    .btn-action-pill {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      font-size: 0.76rem;
+      font-weight: 500;
+      padding: 0.32rem 0.6rem;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition: all 0.15s ease;
+      font-family: inherit;
+    }
+
+    .btn-action-pill:hover {
+      background: var(--surface-elevated);
+      color: var(--text-primary);
+      border-color: var(--text-muted);
+    }
+
+    .btn-action-pill:active {
+      transform: scale(0.97);
+    }
+
+    /* Auto-save Status Badge */
     .notepad-status-tag {
       display: inline-flex;
       align-items: center;
       gap: 0.35rem;
-      font-size: 0.75rem;
+      font-size: 0.74rem;
       font-weight: 500;
-      padding: 0.2rem 0.55rem;
+      padding: 0.22rem 0.55rem;
       border-radius: var(--radius-pill);
       background: var(--surface);
       border: 1px solid var(--border);
@@ -113,10 +129,13 @@
       transition: all 0.2s ease;
     }
 
-    .notepad-status-tag.saved {
-      color: #10B981;
-      border-color: rgba(16, 185, 129, 0.3);
-      background: rgba(16, 185, 129, 0.08);
+    .notepad-status-tag .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #10B981;
+      display: inline-block;
+      transition: background 0.2s ease;
     }
 
     .notepad-status-tag.saving {
@@ -125,15 +144,20 @@
       background: rgba(245, 158, 11, 0.08);
     }
 
-    .notepad-editor-textarea {
+    .notepad-status-tag.saving .status-dot {
+      background: #F59E0B;
+    }
+
+    /* Editor Canvas */
+    .notepad-editor-area {
       width: 100%;
-      min-height: 420px;
-      max-height: 720px;
-      padding: 1.25rem 1.35rem;
+      min-height: 480px;
+      max-height: 780px;
+      padding: 1.5rem;
       border: none;
       outline: none;
       resize: vertical;
-      background: transparent;
+      background: var(--background);
       color: var(--text-primary);
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
       font-size: 1rem;
@@ -142,109 +166,67 @@
       tab-size: 2;
     }
 
-    .notepad-editor-textarea::placeholder {
+    .notepad-editor-area::placeholder {
       color: var(--text-muted);
-      opacity: 0.6;
+      opacity: 0.65;
     }
 
     /* Font Family Modifiers */
-    .notepad-editor-textarea.font-sans {
+    .notepad-editor-area.font-sans {
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
     }
 
-    .notepad-editor-textarea.font-mono {
+    .notepad-editor-area.font-mono {
       font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     }
 
-    .notepad-editor-textarea.font-serif {
+    .notepad-editor-area.font-serif {
       font-family: 'Newsreader', Georgia, Cambria, 'Times New Roman', Times, serif;
     }
 
-    /* Live Statistics Metrics Bar */
-    .notepad-metrics-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-      gap: 0.75rem;
-      width: 100%;
-    }
-
-    .metric-chip-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 0.75rem 0.9rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.2rem;
-      transition: transform 0.15s ease, border-color 0.15s ease;
-    }
-
-    .metric-chip-card:hover {
-      border-color: var(--border-hover);
-      transform: translateY(-1px);
-    }
-
-    .metric-chip-label {
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      color: var(--text-muted);
-      font-weight: 600;
+    /* Minimal Bottom Statistics Bar */
+    .notepad-bottom-bar {
       display: flex;
       align-items: center;
-      gap: 0.35rem;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      padding: 0.75rem 1.15rem;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      font-size: 0.78rem;
+      color: var(--text-secondary);
     }
 
-    .metric-chip-value {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: var(--text-primary);
+    .notepad-metrics-inline {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
       font-feature-settings: 'tnum';
     }
 
-    .metric-chip-subtext {
-      font-size: 0.72rem;
-      color: var(--text-secondary);
-    }
-
-    /* Quick Text Actions Toolbar in Accordion/Toolbar */
-    .tools-pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      align-items: center;
-    }
-
-    .btn-text-transform {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      color: var(--text-secondary);
-      font-size: 0.78rem;
-      font-weight: 500;
-      padding: 0.35rem 0.65rem;
-      border-radius: var(--radius-sm);
-      cursor: pointer;
+    .metric-item {
       display: inline-flex;
       align-items: center;
-      gap: 0.35rem;
-      transition: all 0.15s ease;
+      gap: 0.25rem;
     }
 
-    .btn-text-transform:hover {
-      background: var(--surface-elevated);
+    .metric-item strong {
+      font-weight: 600;
       color: var(--text-primary);
-      border-color: var(--border-hover);
     }
 
-    .btn-text-transform:active {
-      transform: scale(0.97);
+    .metric-separator {
+      color: var(--border);
+      user-select: none;
     }
 
-    /* Formatters and Specs Table */
+    /* Shortcuts Table */
     .shortcuts-table-wrapper {
       width: 100%;
       overflow-x: auto;
-      margin-top: 1.5rem;
+      margin-top: 1.25rem;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
@@ -254,7 +236,7 @@
       width: 100%;
       border-collapse: collapse;
       text-align: left;
-      font-size: 0.88rem;
+      font-size: 0.86rem;
     }
 
     .shortcuts-table th,
@@ -267,7 +249,7 @@
       background: var(--surface-elevated);
       font-weight: 600;
       color: var(--text-secondary);
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
@@ -290,13 +272,13 @@
     }
 
     @media (max-width: 768px) {
-      .notepad-editor-textarea {
-        min-height: 320px;
+      .notepad-editor-area {
+        min-height: 350px;
         padding: 1rem;
         font-size: 0.95rem;
       }
-      .notepad-metrics-grid {
-        grid-template-columns: repeat(2, 1fr);
+      .notepad-top-bar, .notepad-bottom-bar {
+        padding: 0.75rem 0.9rem;
       }
     }
   </style>
@@ -338,7 +320,7 @@
         <nav class="breadcrumbs" aria-label="Breadcrumb">
           <a href="/" class="breadcrumb-link">Home</a>
           <span class="breadcrumb-separator">/</span>
-          <a href="../" class="breadcrumb-link">Productivity</a>
+          <a href="/productivity/" class="breadcrumb-link">Productivity</a>
           <span class="breadcrumb-separator">/</span>
           <span class="breadcrumb-current">Online Notepad</span>
         </nav>
@@ -347,7 +329,7 @@
           <div class="page-header-content">
             <span class="section-eyebrow">Productivity Workspace</span>
             <h1 class="page-title">Online Notepad</h1>
-            <p class="page-desc">Distraction-free text scratchpad with real-time word counting, local storage auto-save, and one-click file export. 100% private in your browser.</p>
+            <p class="page-desc">Distraction-free text editor with real-time word counting, automatic local memory auto-save, and one-click file export. 100% private in your browser.</p>
           </div>
           <div class="page-count-badge">
             <iconify-icon icon="lucide:shield-check" width="16" height="16" style="color: #10B981;"></iconify-icon>
@@ -360,38 +342,27 @@
     <!-- Tool Main Workspace Area -->
     <section class="section-wrapper" style="border-top: none; padding-top: 3.5rem;">
       <div class="container">
-        <div class="tool-workspace-card">
+        
+        <!-- Main Minimalist Notepad Card -->
+        <div class="notepad-card">
 
-          <!-- 1. Quick Actions Toolbar -->
-          <div class="tool-actions-toolbar">
-            <!-- Left Toolbar: Text Manipulation Tools -->
-            <div class="toolbar-group">
-              <div class="tools-pill-row">
-                <button type="button" class="btn-text-transform" id="btn-case-upper" title="Convert to UPPERCASE">
-                  <iconify-icon icon="lucide:type" width="13" height="13"></iconify-icon>
-                  <span>UPPER</span>
-                </button>
-                <button type="button" class="btn-text-transform" id="btn-case-lower" title="Convert to lowercase">
-                  <span>lower</span>
-                </button>
-                <button type="button" class="btn-text-transform" id="btn-case-title" title="Convert to Title Case">
-                  <span>Title Case</span>
-                </button>
-                <button type="button" class="btn-text-transform" id="btn-case-sentence" title="Convert to Sentence case">
-                  <span>Sentence</span>
-                </button>
-                <button type="button" class="btn-text-transform" id="btn-clean-spaces" title="Trim trailing spaces and collapse excess whitespace">
-                  <iconify-icon icon="lucide:sparkles" width="13" height="13"></iconify-icon>
-                  <span>Clean Spaces</span>
-                </button>
-                <button type="button" class="btn-text-transform" id="btn-sort-lines" title="Sort lines alphabetically A-Z">
-                  <iconify-icon icon="lucide:arrow-down-a-z" width="13" height="13"></iconify-icon>
-                  <span>Sort Lines</span>
-                </button>
+          <!-- 1. Top Action Toolbar -->
+          <div class="notepad-top-bar">
+            <!-- Left: Text Utilities & Status -->
+            <div class="notepad-tools-row">
+              <div class="notepad-status-tag" id="notepad-save-status">
+                <span class="status-dot"></span>
+                <span id="save-status-text">Auto-saved</span>
               </div>
+              <button type="button" class="btn-action-pill" id="btn-case-upper" title="Convert to UPPERCASE">UPPER</button>
+              <button type="button" class="btn-action-pill" id="btn-case-lower" title="Convert to lowercase">lower</button>
+              <button type="button" class="btn-action-pill" id="btn-case-title" title="Convert to Title Case">Title Case</button>
+              <button type="button" class="btn-action-pill" id="btn-case-sentence" title="Convert to Sentence case">Sentence</button>
+              <button type="button" class="btn-action-pill" id="btn-clean-spaces" title="Trim trailing whitespace and empty lines">Clean Spaces</button>
+              <button type="button" class="btn-action-pill" id="btn-sort-lines" title="Sort lines alphabetically A-Z">Sort Lines</button>
             </div>
 
-            <!-- Right Toolbar: Universal Actions -->
+            <!-- Right: Universal Actions -->
             <div class="toolbar-group">
               <button type="button" class="btn-toolbar-sm" id="btn-clear-notepad" title="Clear note canvas">
                 <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
@@ -437,151 +408,106 @@
             </div>
           </div>
 
-          <!-- 2. Notepad Workspace Editor Canvas -->
-          <div class="notepad-container">
-            <div class="notepad-canvas-wrapper">
-              <div class="notepad-pane-header">
-                <div class="notepad-title-group">
-                  <iconify-icon icon="lucide:file-edit" width="16" height="16" style="color: var(--brand);"></iconify-icon>
-                  <span>Scratchpad Note</span>
-                </div>
-                <div class="notepad-status-tag saved" id="notepad-save-status">
-                  <iconify-icon icon="lucide:check" width="13" height="13"></iconify-icon>
-                  <span id="save-status-text">Auto-saved to browser</span>
-                </div>
-              </div>
+          <!-- 2. Distraction-Free Text Canvas -->
+          <textarea 
+            id="notepad-textarea" 
+            class="notepad-editor-area font-sans" 
+            placeholder="Start typing or paste notes here... Your writing is automatically saved locally in real time." 
+            spellcheck="true"
+            aria-label="Online Notepad Text Editor"
+          ></textarea>
 
-              <textarea 
-                id="notepad-textarea" 
-                class="notepad-editor-textarea font-sans" 
-                placeholder="Start typing or paste text here... Your notes are automatically preserved in your browser's local memory in real time." 
-                spellcheck="true"
-                aria-label="Online Notepad Text Editor"
-              ></textarea>
+          <!-- 3. Minimal Statistics Footer Bar -->
+          <div class="notepad-bottom-bar">
+            <div class="notepad-metrics-inline">
+              <span class="metric-item"><strong id="stat-words">0</strong> words</span>
+              <span class="metric-separator">•</span>
+              <span class="metric-item"><strong id="stat-chars">0</strong> chars (<span id="stat-chars-nospace">0</span> no spaces)</span>
+              <span class="metric-separator">•</span>
+              <span class="metric-item"><strong id="stat-lines">0</strong> lines</span>
+              <span class="metric-separator">•</span>
+              <span class="metric-item"><strong id="stat-paragraphs">0</strong> paras</span>
             </div>
-
-            <!-- 3. Live Statistics Deck -->
-            <div class="notepad-metrics-grid">
-              <div class="metric-chip-card">
-                <span class="metric-chip-label">
-                  <iconify-icon icon="lucide:type" width="13" height="13"></iconify-icon>
-                  Words
-                </span>
-                <span class="metric-chip-value" id="stat-words">0</span>
-                <span class="metric-chip-subtext" id="stat-words-detail">0 total words</span>
-              </div>
-
-              <div class="metric-chip-card">
-                <span class="metric-chip-label">
-                  <iconify-icon icon="lucide:hash" width="13" height="13"></iconify-icon>
-                  Characters
-                </span>
-                <span class="metric-chip-value" id="stat-chars">0</span>
-                <span class="metric-chip-subtext" id="stat-chars-nospace">0 without spaces</span>
-              </div>
-
-              <div class="metric-chip-card">
-                <span class="metric-chip-label">
-                  <iconify-icon icon="lucide:align-left" width="13" height="13"></iconify-icon>
-                  Lines &amp; Paras
-                </span>
-                <span class="metric-chip-value" id="stat-lines">0</span>
-                <span class="metric-chip-subtext" id="stat-paragraphs">0 paragraphs</span>
-              </div>
-
-              <div class="metric-chip-card">
-                <span class="metric-chip-label">
-                  <iconify-icon icon="lucide:clock" width="13" height="13"></iconify-icon>
-                  Reading Time
-                </span>
-                <span class="metric-chip-value" id="stat-read-time">0m 0s</span>
-                <span class="metric-chip-subtext">@ 200 WPM</span>
-              </div>
-
-              <div class="metric-chip-card">
-                <span class="metric-chip-label">
-                  <iconify-icon icon="lucide:mic" width="13" height="13"></iconify-icon>
-                  Speaking Time
-                </span>
-                <span class="metric-chip-value" id="stat-speak-time">0m 0s</span>
-                <span class="metric-chip-subtext">@ 130 WPM</span>
-              </div>
+            <div class="notepad-metrics-inline">
+              <span class="metric-item"><iconify-icon icon="lucide:clock" width="12" height="12"></iconify-icon> Read: <strong id="stat-read-time" style="margin-left:3px;">0s</strong></span>
+              <span class="metric-separator">•</span>
+              <span class="metric-item"><iconify-icon icon="lucide:mic" width="12" height="12"></iconify-icon> Speak: <strong id="stat-speak-time" style="margin-left:3px;">0s</strong></span>
             </div>
           </div>
 
-          <!-- 4. Progressive Disclosure Settings Accordion (Below Workspace) -->
-          <details class="tool-settings-accordion">
-            <summary class="tool-settings-summary">
-              <div class="tool-settings-summary-left">
-                <iconify-icon icon="lucide:sliders-horizontal" width="16" height="16"></iconify-icon>
-                <span>Typography &amp; Editor Preferences</span>
-                <span class="pane-badge" id="settings-summary-badge">(Inter Sans • 16px • Relaxed)</span>
-              </div>
-              <iconify-icon icon="lucide:chevron-down" class="tool-settings-chevron" width="16" height="16"></iconify-icon>
-            </summary>
+        </div>
 
-            <div class="tool-settings-panel">
-              <div class="settings-sections-wrapper">
-                <div class="settings-section-card">
-                  <div class="settings-row-wrap">
-                    
-                    <!-- Font Family Switcher -->
-                    <div class="form-group">
-                      <span class="form-label" style="font-size:0.75rem;">Font Family</span>
-                      <div class="segmented-group" id="seg-font-family">
-                        <button type="button" class="seg-pill active" data-val="sans">Sans (Inter)</button>
-                        <button type="button" class="seg-pill" data-val="mono">Mono (Code)</button>
-                        <button type="button" class="seg-pill" data-val="serif">Serif (Editorial)</button>
-                      </div>
+        <!-- 4. Progressive Disclosure Settings Accordion (Below Workspace) -->
+        <details class="tool-settings-accordion">
+          <summary class="tool-settings-summary">
+            <div class="tool-settings-summary-left">
+              <iconify-icon icon="lucide:sliders-horizontal" width="16" height="16"></iconify-icon>
+              <span>Typography &amp; Editor Preferences</span>
+              <span class="pane-badge" id="settings-summary-badge">(Inter Sans • 16px • Relaxed)</span>
+            </div>
+            <iconify-icon icon="lucide:chevron-down" class="tool-settings-chevron" width="16" height="16"></iconify-icon>
+          </summary>
+
+          <div class="tool-settings-panel">
+            <div class="settings-sections-wrapper">
+              <div class="settings-section-card">
+                <div class="settings-row-wrap">
+                  
+                  <!-- Font Family Switcher -->
+                  <div class="form-group">
+                    <span class="form-label" style="font-size:0.75rem;">Font Family</span>
+                    <div class="segmented-group" id="seg-font-family">
+                      <button type="button" class="seg-pill active" data-val="sans">Sans (Inter)</button>
+                      <button type="button" class="seg-pill" data-val="mono">Mono (Code)</button>
+                      <button type="button" class="seg-pill" data-val="serif">Serif (Editorial)</button>
                     </div>
-
-                    <!-- Font Size Switcher -->
-                    <div class="form-group">
-                      <span class="form-label" style="font-size:0.75rem;">Font Size</span>
-                      <div class="segmented-group" id="seg-font-size">
-                        <button type="button" class="seg-pill" data-val="14">14px</button>
-                        <button type="button" class="seg-pill active" data-val="16">16px</button>
-                        <button type="button" class="seg-pill" data-val="18">18px</button>
-                        <button type="button" class="seg-pill" data-val="22">22px</button>
-                      </div>
-                    </div>
-
-                    <!-- Line Spacing Switcher -->
-                    <div class="form-group">
-                      <span class="form-label" style="font-size:0.75rem;">Line Spacing</span>
-                      <div class="segmented-group" id="seg-line-height">
-                        <button type="button" class="seg-pill" data-val="1.5">Compact</button>
-                        <button type="button" class="seg-pill active" data-val="1.75">Relaxed</button>
-                        <button type="button" class="seg-pill" data-val="2.0">Spacious</button>
-                      </div>
-                    </div>
-
-                    <!-- Tab Key Behavior Switcher -->
-                    <div class="form-group">
-                      <span class="form-label" style="font-size:0.75rem;">Tab Key Keypress</span>
-                      <div class="segmented-group" id="seg-tab-behavior">
-                        <button type="button" class="seg-pill active" data-val="2">2 Spaces</button>
-                        <button type="button" class="seg-pill" data-val="4">4 Spaces</button>
-                        <button type="button" class="seg-pill" data-val="tab">Tab Char</button>
-                      </div>
-                    </div>
-
-                    <!-- Spellcheck Toggle -->
-                    <div class="form-group">
-                      <span class="form-label" style="font-size:0.75rem;">Spellcheck</span>
-                      <div class="segmented-group" id="seg-spellcheck">
-                        <button type="button" class="seg-pill active" data-val="on">Enabled</button>
-                        <button type="button" class="seg-pill" data-val="off">Disabled</button>
-                      </div>
-                    </div>
-
                   </div>
+
+                  <!-- Font Size Switcher -->
+                  <div class="form-group">
+                    <span class="form-label" style="font-size:0.75rem;">Font Size</span>
+                    <div class="segmented-group" id="seg-font-size">
+                      <button type="button" class="seg-pill" data-val="14">14px</button>
+                      <button type="button" class="seg-pill active" data-val="16">16px</button>
+                      <button type="button" class="seg-pill" data-val="18">18px</button>
+                      <button type="button" class="seg-pill" data-val="22">22px</button>
+                    </div>
+                  </div>
+
+                  <!-- Line Spacing Switcher -->
+                  <div class="form-group">
+                    <span class="form-label" style="font-size:0.75rem;">Line Spacing</span>
+                    <div class="segmented-group" id="seg-line-height">
+                      <button type="button" class="seg-pill" data-val="1.5">Compact</button>
+                      <button type="button" class="seg-pill active" data-val="1.75">Relaxed</button>
+                      <button type="button" class="seg-pill" data-val="2.0">Spacious</button>
+                    </div>
+                  </div>
+
+                  <!-- Tab Key Behavior Switcher -->
+                  <div class="form-group">
+                    <span class="form-label" style="font-size:0.75rem;">Tab Key Keypress</span>
+                    <div class="segmented-group" id="seg-tab-behavior">
+                      <button type="button" class="seg-pill active" data-val="2">2 Spaces</button>
+                      <button type="button" class="seg-pill" data-val="4">4 Spaces</button>
+                      <button type="button" class="seg-pill" data-val="tab">Tab Char</button>
+                    </div>
+                  </div>
+
+                  <!-- Spellcheck Toggle -->
+                  <div class="form-group">
+                    <span class="form-label" style="font-size:0.75rem;">Spellcheck</span>
+                    <div class="segmented-group" id="seg-spellcheck">
+                      <button type="button" class="seg-pill active" data-val="on">Enabled</button>
+                      <button type="button" class="seg-pill" data-val="off">Disabled</button>
+                    </div>
+                  </div>
+
                 </div>
               </div>
             </div>
-          </details>
-
-        </div>
+          </div>
+        </details>
 
         <!-- Single Adsterra Banner Slot Include -->
         <div data-include="/components/ad-slot.html"></div>
@@ -729,7 +655,7 @@
               <span class="section-eyebrow">Explore Productivity</span>
               <h2 class="category-cta-title">Looking for more daily workflow utilities?</h2>
               <p class="category-cta-desc">Discover our growing suite of distraction-free productivity tools, formatters, and browser utilities.</p>
-              <a href="../" class="btn-pill btn-primary-signal">
+              <a href="/productivity/" class="btn-pill btn-primary-signal">
                 <span>View Productivity Workspace</span>
                 <iconify-icon icon="lucide:arrow-right" width="16" height="16"></iconify-icon>
               </a>
@@ -745,7 +671,7 @@
   <div data-include="/components/footer.html"></div>
 
   <!-- Main Platform Scripts -->
-  <script src="../../scripts/main.js?v=2.3"></script>
+  <script src="/scripts/main.js?v=2.3"></script>
 
   <!-- Online Notepad Script -->
   <script>
@@ -759,7 +685,6 @@
 
       // Metric elements
       var statWords = document.getElementById('stat-words');
-      var statWordsDetail = document.getElementById('stat-words-detail');
       var statChars = document.getElementById('stat-chars');
       var statCharsNoSpace = document.getElementById('stat-chars-nospace');
       var statLines = document.getElementById('stat-lines');
@@ -770,8 +695,8 @@
       // Toolbar buttons
       var btnClear = document.getElementById('btn-clear-notepad');
       var btnCopy = document.getElementById('btn-copy-notepad');
+      var downloadWrap = document.getElementById('notepad-download-dropdown-wrap');
       var btnDownloadToggle = document.getElementById('btn-download-menu-toggle');
-      var downloadDropdown = document.getElementById('notepad-download-dropdown-menu');
       var optDlTxt = document.getElementById('opt-dl-txt');
       var optDlMd = document.getElementById('opt-dl-md');
       var optDlDoc = document.getElementById('opt-dl-doc');
@@ -904,10 +829,10 @@
         if (!saveStatus || !saveStatusText) return;
         if (isSaving) {
           saveStatus.className = 'notepad-status-tag saving';
-          saveStatus.innerHTML = '<iconify-icon icon="lucide:loader-2" width="13" height="13" class="spin"></iconify-icon> <span>Saving...</span>';
+          saveStatusText.textContent = 'Saving...';
         } else {
-          saveStatus.className = 'notepad-status-tag saved';
-          saveStatus.innerHTML = '<iconify-icon icon="lucide:check" width="13" height="13"></iconify-icon> <span>Auto-saved to browser</span>';
+          saveStatus.className = 'notepad-status-tag';
+          saveStatusText.textContent = 'Auto-saved';
         }
       }
 
@@ -942,7 +867,7 @@
         var speakingMinutes = wordCount / 130;
 
         function formatTime(mins) {
-          if (mins <= 0) return '0m 0s';
+          if (mins <= 0) return '0s';
           var m = Math.floor(mins);
           var s = Math.round((mins - m) * 60);
           if (m === 0) return s + 's';
@@ -951,11 +876,10 @@
 
         // Update DOM
         if (statWords) statWords.textContent = wordCount.toLocaleString();
-        if (statWordsDetail) statWordsDetail.textContent = wordCount === 1 ? '1 total word' : wordCount.toLocaleString() + ' total words';
         if (statChars) statChars.textContent = charCount.toLocaleString();
-        if (statCharsNoSpace) statCharsNoSpace.textContent = charNoSpaceCount.toLocaleString() + ' without spaces';
+        if (statCharsNoSpace) statCharsNoSpace.textContent = charNoSpaceCount.toLocaleString();
         if (statLines) statLines.textContent = lineCount.toLocaleString();
-        if (statParagraphs) statParagraphs.textContent = paragraphs === 1 ? '1 paragraph' : paragraphs.toLocaleString() + ' paragraphs';
+        if (statParagraphs) statParagraphs.textContent = paragraphs.toLocaleString();
         if (statReadTime) statReadTime.textContent = formatTime(readingMinutes);
         if (statSpeakTime) statSpeakTime.textContent = formatTime(speakingMinutes);
       }
@@ -966,10 +890,10 @@
         updateMetrics();
       });
 
-      // Handle Tab Key Indentation
+      // Handle Tab Key Indentation & Shortcuts
       textarea.addEventListener('keydown', function (e) {
         // Ctrl+S / Cmd+S quick download shortcut
-        if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') {
           e.preventDefault();
           downloadFile('txt');
           return;
@@ -1106,23 +1030,23 @@
         }
       }
 
-      // Action: Download Dropdown Toggle
-      if (btnDownloadToggle && downloadDropdown) {
+      // Action: Download Dropdown Toggle (uses standard .open class on wrapper)
+      if (btnDownloadToggle && downloadWrap) {
         btnDownloadToggle.addEventListener('click', function (e) {
           e.stopPropagation();
-          var isOpen = downloadDropdown.classList.contains('show');
+          var isOpen = downloadWrap.classList.contains('open');
           if (isOpen) {
-            downloadDropdown.classList.remove('show');
+            downloadWrap.classList.remove('open');
             btnDownloadToggle.setAttribute('aria-expanded', 'false');
           } else {
-            downloadDropdown.classList.add('show');
+            downloadWrap.classList.add('open');
             btnDownloadToggle.setAttribute('aria-expanded', 'true');
           }
         });
 
         document.addEventListener('click', function (e) {
-          if (!btnDownloadToggle.contains(e.target) && !downloadDropdown.contains(e.target)) {
-            downloadDropdown.classList.remove('show');
+          if (!downloadWrap.contains(e.target)) {
+            downloadWrap.classList.remove('open');
             btnDownloadToggle.setAttribute('aria-expanded', 'false');
           }
         });
@@ -1146,7 +1070,6 @@
         } else if (format === 'md') {
           blob = new Blob([text], { type: 'text/markdown;charset=utf-8' });
         } else if (format === 'doc') {
-          // Wrap in simple HTML for Word compatibility
           var formattedHtml = '<!DOCTYPE html><html><head><meta charset="utf-8"><title>Note</title><style>body{font-family:Arial,sans-serif;font-size:11pt;line-height:1.6;white-space:pre-wrap;}</style></head><body>' + escapeHtml(text) + '</body></html>';
           blob = new Blob(['\ufeff' + formattedHtml], { type: 'application/msword;charset=utf-8' });
         }
@@ -1165,8 +1088,8 @@
           showToast('✓ Downloaded as ' + filename);
         }
 
-        if (downloadDropdown) {
-          downloadDropdown.classList.remove('show');
+        if (downloadWrap) {
+          downloadWrap.classList.remove('open');
           if (btnDownloadToggle) btnDownloadToggle.setAttribute('aria-expanded', 'false');
         }
       }
@@ -1196,14 +1119,12 @@
         }
 
         if (start !== end) {
-          // Transform selected text only
           var selected = fullText.substring(start, end);
           var transformed = transformFn(selected);
           textarea.value = fullText.substring(0, start) + transformed + fullText.substring(end);
           textarea.selectionStart = start;
           textarea.selectionEnd = start + transformed.length;
         } else {
-          // Transform entire document
           textarea.value = transformFn(fullText);
         }
 
@@ -1261,7 +1182,7 @@
         });
       }
 
-      // Transform: Clean Spaces (trailing whitespace + duplicate empty lines)
+      // Transform: Clean Spaces
       if (btnCleanSpaces) {
         btnCleanSpaces.addEventListener('click', function () {
           applyTextTransformation(function (txt) {
