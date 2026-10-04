@@ -1,442 +1,310 @@
 ================================================================================
-  TOOLITY.IN — WEBSITE POLISH & FUNCTIONALITY IMPROVEMENT PLAN
-  Reviewed: 2026-10-04
-  Scope: Making the existing site more polished, professional, and trustworthy.
-         NOT about adding new tools.
+  TOOLITY.IN — WEBSITE POLISH, UX & SEO ROADMAP
+  Updated: 2026-10-04
+  Scope: Polishing existing site functionality, performance, SEO, accessibility,
+         and user retention. (NOT about building new tool applications).
 ================================================================================
 
-Organized by impact. Items at the top give the biggest improvement per effort.
-
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  TIER 1 — HIGH IMPACT, LOW EFFORT (Do These First)
+  ✅ COMPLETED & DEPLOYED (Implemented 2026-10-04)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-1. OG SOCIAL SHARE IMAGES (Missing on tool pages)
-────────────────────────────────────────────────
-  WHY IT MATTERS: When a user shares a tool URL on Twitter, LinkedIn, WhatsApp,
-  or iMessage — no image shows up. Every social share is a dead preview card.
-  The homepage has og:image but tool pages don't.
+  ✔ HTML Modular Partial System: Header, Footer, and Ad Slots centralized into
+    /components/*.html with client-side include system & root-relative links.
+  ✔ Zero-Flash Dark Mode: Synchronous head script removes all FOUC / theme flash.
+  ✔ Canonical URL Tags: Accurate <link rel="canonical"> on all 24 pages + templates.
+  ✔ Multi-Device Favicon Suite: 32x32 PNG, 16x16 PNG, 180x180 Apple Touch Icon,
+    and root /favicon.ico for seamless cross-browser and mobile display.
+  ✔ Critical Asset Preloading: Preload headers for main.css and brand logo webp.
+  ✔ Script Deferral: Defer attribute on Iconify CDN script unblocking page render.
+  ✔ Zero-CLS Image Dimensions: Explicit width, height, and loading attributes on all
+    images and dynamic tool preview placeholders.
+  ✔ Sitemap Update: Full 24-page index with fresh 2026-10-04 timestamps.
+  ✔ Empty State Breathing Micro-Animations: CSS keyframe pulse for idle states.
+  ✔ Page Transition: Silky CSS fade-in animation on body load.
+  ✔ Mobile Floating Bottom Pill Nav Bar: Non-home mobile quick pill navigation
+    with Home, Tools drawer toggle, Web Share API, and smooth Scroll-to-Top.
+  ✔ Mobile Drawer Cleanup: Streamlined drawer footer to only display essential
+    platform pages (About, Privacy, Terms, Credits).
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  TIER 1 — HIGH IMPACT, LOW EFFORT (Immediate Next Wins)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. OG SOCIAL SHARE IMAGES (Per-tool social cards)
+─────────────────────────────────────────────────
+  WHY IT MATTERS: When someone shares a Toolity link on Twitter, LinkedIn,
+  WhatsApp, Slack, or Discord, a generic or missing card hurts click-through.
+  Tool pages currently lack og:image tags.
 
   THE FIX:
-  - Create one generic og-image: a 1200×630 image with the Toolity logo,
-    the brand color, and something like "Free Web Tools — Toolity.in".
-  - Add this to EVERY tool page <head>:
-    <meta property="og:image" content="https://toolity.in/assets/og-image.webp">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://toolity.in/assets/og-image.webp">
-  - Since you now have components/header.html, you can't inject this per-page
-    automatically — keep it inline in each HTML <head> (it's already there for
-    the homepage). Just add the og:image line to the ~10 tool pages missing it.
+  - Create a high-contrast 1200×630 OG image in /assets/og-image.webp featuring
+    the Toolity brand logo, slogan, and tagline.
+  - Add to tool pages <head>:
+      <meta property="og:image" content="https://toolity.in/assets/og-image.webp">
+      <meta name="twitter:card" content="summary_large_image">
+      <meta name="twitter:image" content="https://toolity.in/assets/og-image.webp">
 
-  EFFORT: 30 minutes. Use generate_image tool to make the OG image once.
+  EFFORT: ~30 minutes (create OG asset once + batch script to inject into tool heads).
 
 
-2. CANONICAL URL TAGS (Missing everywhere)
-──────────────────────────────────────────
-  WHY IT MATTERS: Google may index both toolity.in/web/favicon-extractor and
-  toolity.in/web/favicon-extractor/ (with and without trailing slash) as
-  separate pages — causing duplicate content penalties.
-
-  THE FIX: Add one line to every page <head>:
-    <link rel="canonical" href="https://toolity.in/web/favicon-extractor/">
-
-  Each page already has og:url — just add <link rel="canonical"> with the same
-  URL. This is the single most impactful SEO tag missing from the site.
-
-  EFFORT: Use a batch script (like the ones already used for migration) to add
-  the canonical tag below the og:url tag in every file. ~20 minutes.
-
-
-3. TOOL COUNT BADGES ON CATEGORY CARDS (Homepage feels empty)
-──────────────────────────────────────────────────────────────
-  WHY IT MATTERS: Category cards on the homepage show no tool count.
-  Visitors can't tell if a category has 1 tool or 20. A small "4 tools" badge
-  on each card signals richness and completeness.
-
-  THE FIX: Add a small count badge to each category card:
-    <span class="glow-card-count">4 tools</span>
-
-  Style it as a subtle pill inside the card's info row. Update the count
-  manually whenever a new tool is added. Low maintenance since tools are added
-  infrequently.
-
-  EFFORT: 30 minutes CSS + HTML edit.
-
-
-4. SKIP-TO-MAIN-CONTENT LINK (Accessibility + SEO)
+2. PRIVACY-FIRST TRUST BADGE ON ALL TOOL WORKSPACES
 ───────────────────────────────────────────────────
-  WHY IT MATTERS: Screen reader users and keyboard navigators are forced to
-  tab through the entire nav on every page. A skip link is a basic a11y
-  requirement and signals quality to Google.
-
-  THE FIX: Add as first child of <body> in components/header.html:
-    <a href="#main-content" class="skip-link">Skip to main content</a>
-
-  Then on each page add id="main-content" to the <main> tag.
-  Style it visually hidden until focused:
-    .skip-link { position: absolute; top: -40px; left: 1rem; z-index: 9999; }
-    .skip-link:focus { top: 1rem; }
-
-  EFFORT: 15 minutes.
-
-
-5. FAVICON — UPGRADE TO PNG/ICO (Current is .webp)
-────────────────────────────────────────────────────
-  WHY IT MATTERS: The current favicon is served as .webp:
-    <link rel="icon" type="image/webp" href="...Logo.webp">
-  Safari (iOS & macOS) does not support WebP favicons reliably. The favicon
-  may not appear in bookmarks, tabs, or home screen shortcuts on Apple devices.
+  WHY IT MATTERS: Most online converters upload files to random cloud servers.
+  Toolity's biggest competitive advantage is 100% client-side privacy.
+  Displaying a prominent, beautiful trust badge builds immediate user trust.
 
   THE FIX:
-  - Export the logo as a 32×32 .ico or .png file.
-  - Replace the favicon tag:
-    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
-  - The 180×180 apple-touch-icon makes the site look great when added to iOS
-    home screen — a real trust signal.
+  - Add a small pill badge in the hero or workspace header of each tool:
+      <div class="privacy-trust-badge">
+        <iconify-icon icon="lucide:shield-check"></iconify-icon>
+        <span>100% Local &amp; Private — Files Never Leave Your Browser</span>
+      </div>
+  - Style with subtle emerald/green or brand tint:
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      color: #10b981;
 
-  EFFORT: 20 minutes (export + update head-common across all pages with script).
+  EFFORT: ~20 minutes (add to shared CSS in main.css and tool templates).
+
+
+3. TOOL COUNT BADGES ON HOMEPAGE CATEGORY CARDS
+───────────────────────────────────────────────
+  WHY IT MATTERS: Category cards on the homepage currently show no tool count.
+  Visitors cannot immediately tell how many utilities exist in a category.
+  A subtle "4 tools" pill signals completeness.
+
+  THE FIX:
+  - Add <span class="glow-card-count">4 tools</span> or <span class="glow-card-count">Coming Soon</span>
+    inside each category card's metadata row on index.html.
+  - Style as a compact pill alongside the category tag.
+
+  EFFORT: ~20 minutes (HTML edit + small CSS rule in main.css).
+
+
+4. SKIP-TO-MAIN-CONTENT ACCESSIBILITY LINK
+──────────────────────────────────────────
+  WHY IT MATTERS: Keyboard navigators and screen readers currently have to tab
+  through all header navigation links on every page before reaching the tool.
+  Standard a11y requirement that directly impacts SEO accessibility score.
+
+  THE FIX:
+  - Add as first child inside /components/header.html:
+      <a href="#main-content" class="skip-link">Skip to main content</a>
+  - Ensure every page's primary wrapper has id="main-content".
+  - Style in main.css: visually hidden off-screen until focused by Tab key.
+
+  EFFORT: ~15 minutes.
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  TIER 2 — MEDIUM IMPACT, MEDIUM EFFORT (Strong polish improvements)
+  TIER 2 — HIGH VALUE UX & ENGAGEMENT ENHANCEMENTS
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-6. KEYBOARD SHORTCUT OVERLAY / COMMAND PALETTE HINT
-────────────────────────────────────────────────────
-  WHY IT MATTERS: The search bar already supports ⌘K / Ctrl+K shortcuts but
-  there's no visible hint that this exists on most pages. Power users who
-  discover this feel the site is "smart". Most never will.
+5. GLOBAL ⌘K / Ctrl+K COMMAND PALETTE & TOOL LAUNCHER
+─────────────────────────────────────────────────────
+  WHY IT MATTERS: The search bar only exists on the homepage. When a user is on
+  a tool page (e.g., Favicon Extractor) and wants to jump to "Video to GIF",
+  they currently have to go back to Home or open the mobile drawer.
+  A global command palette (like Linear/Raycast/GitHub) makes the site feel
+  world-class on desktop.
 
   THE FIX:
-  - On tool pages (where the search bar is not visible), show a subtle floating
-    chip on the bottom-right: "⌘K Search tools"
-  - Clicking it or pressing ⌘K focuses the search input / opens a mini search
-    overlay, similar to how Linear or Raycast work.
-  - This can be a 1-line overlay injected by main.js on non-homepage pages.
+  - In main.js, listen for Cmd+K / Ctrl+K or '/' key globally.
+  - Pop up a sleek frosted search modal overlay showing top tool results,
+    category filters, and theme toggle shortcut.
+  - Arrow key navigation + Enter to open.
 
-  EFFORT: ~2 hours (small overlay + CSS + wiring to existing search logic).
-
-
-7. BREADCRUMB STRUCTURED DATA (JSON-LD for SEO)
-─────────────────────────────────────────────────
-  WHY IT MATTERS: Tool pages already have breadcrumb HTML (Home > Web Tools >
-  Favicon Extractor). Adding JSON-LD breadcrumb structured data makes Google
-  show this breadcrumb path directly in search results (as "breadcrumb rich
-  results"), which significantly increases click-through rate.
-
-  THE FIX: Add a small <script type="application/ld+json"> block to each tool
-  page with the BreadcrumbList schema. Example for favicon-extractor:
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/"},
-        {"@type": "ListItem", "position": 2, "name": "Web Tools", "item": "https://toolity.in/web/"},
-        {"@type": "ListItem", "position": 3, "name": "Website Favicon Extractor"}
-      ]
-    }
-
-  EFFORT: ~1 hour to write and add to all tool pages (scriptable).
+  EFFORT: ~1.5 hours (lightweight modal in main.js + CSS).
 
 
-8. "COPY LINK" BUTTON ON TOOL PAGES (Shareability)
-────────────────────────────────────────────────────
-  WHY IT MATTERS: If someone uses your tool and finds it useful, the friction
-  to share it is: open address bar → select URL → copy → paste. One "Share"
-  button drops that to one click.
+6. RECENTLY USED TOOLS SHELF (LocalStorage Powered)
+──────────────────────────────────────────────────
+  WHY IT MATTERS: Power users frequently return for 2 or 3 specific tools
+  (e.g., URL Cleaner, QR Generator). A "Recently Used" quick-chip row saves
+  them from having to search or browse every time.
 
-  THE FIX: Add a Share button to the tool-actions-toolbar (already exists on
-  every tool page, alongside Reset / Copy / Download):
-    <button type="button" class="btn-toolbar-sm" id="btn-share-tool" title="Copy tool link">
-      <iconify-icon icon="lucide:share-2" width="14" height="14"></iconify-icon>
-      <span>Share</span>
-    </button>
+  THE FIX:
+  - On tool page load, main.js appends the tool name/slug to a small JSON array
+    in localStorage (max 4 items).
+  - On the homepage or ⌘K launcher, render a "Recently Used" quick-action chip row:
+      [⚡ URL Cleaner] [⚡ QR Generator] [⚡ Image Converter]
 
-  Clicking it: navigator.clipboard.writeText(location.href) → shows toast
-  "Tool link copied!". Falls back to Web Share API on mobile.
-  Add this to main.js as a site-wide auto-bind since every tool page has
-  the same toolbar structure.
-
-  EFFORT: ~45 minutes (main.js + shared button in toolbar markup).
+  EFFORT: ~45 minutes (pure JS, 0 dependencies).
 
 
-9. SCROLL PROGRESS INDICATOR ON LONG TOOL PAGES
-─────────────────────────────────────────────────
-  WHY IT MATTERS: Some tool pages are long (guide section, formats table,
-  FAQ). A thin 2px brand-color progress bar at the top of the viewport (below
-  the nav) shows reading progress and makes the page feel dynamic and alive.
+7. BREADCRUMB & WEBAPPLICATION JSON-LD STRUCTURED DATA
+──────────────────────────────────────────────────────
+  WHY IT MATTERS: Google search displays breadcrumb navigation hierarchies
+  and software application rich snippets (star ratings, 0 price, web application
+  type) directly in search results, boosting organic click-through rates.
 
-  THE FIX: Add to main.js (runs on all pages):
-    window.addEventListener('scroll', () => {
-      const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight);
-      progressBar.style.transform = `scaleX(${pct})`;
-    });
+  THE FIX:
+  - Add BreadcrumbList and WebApplication JSON-LD schemas to tool page heads:
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Website Favicon Extractor",
+        "url": "https://toolity.in/web/favicon-extractor/",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "All",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      }
+      </script>
 
-  One <div class="scroll-progress-bar"> injected by main.js below the header.
-  CSS: position fixed, top: var(--header-height), height: 2px, background:
-  var(--brand), transform-origin: left, will-change: transform.
+  EFFORT: ~45 minutes via batch script.
+
+
+8. "RELATED TOOLS" SUGGESTION ROW ON TOOL PAGES
+───────────────────────────────────────────────
+  WHY IT MATTERS: After a user finishes converting a video or grabbing a favicon,
+  they often leave immediately. Showing 2-3 related tool cards below the guide
+  section reduces bounce rate and increases pages per session.
+
+  THE FIX:
+  - Add a simple 2-card "Related Tools" row below the tool workspace before
+    the FAQ/Footer section (e.g. on Video to GIF -> suggest GIF to Video & GIF Speed).
+
+  EFFORT: ~1 hour across all tool pages.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  TIER 3 — UX MICRO-POLISH & INTERACTION DELIGHT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+9. COPY BUTTON MICRO-FEEDBACK (Checkmark Morph Animation)
+─────────────────────────────────────────────────────────
+  WHY IT MATTERS: Clicking "Copy" shows a toast, but changing the button icon
+  momentarily from <iconify-icon icon="lucide:copy"> to a glowing green
+  <iconify-icon icon="lucide:check"> provides immediate, tactile reassurance.
+
+  THE FIX:
+  - In main.js / tool scripts, when copy is triggered:
+      btn.innerHTML = '<iconify-icon icon="lucide:check"></iconify-icon><span>Copied!</span>';
+      btn.classList.add('copied-pulse');
+      setTimeout(() => { resetBtn(); }, 1800);
+
+  EFFORT: ~25 minutes.
+
+
+10. DRAG-AND-DROP FULL-VIEWPORT HIGHLIGHT ON MEDIA TOOLS
+────────────────────────────────────────────────────────
+  WHY IT MATTERS: Users dragging files from their desktop often miss the small
+  dropzone rectangle. When dragging anywhere over the browser window, the dropzone
+  should expand with a glowing dashed border and "Drop file to convert".
+
+  THE FIX:
+  - In main.js / media tools, listen to window 'dragenter' and 'dragleave'.
+  - Toggle a .drag-active class on the tool's upload container with a smooth scale
+    and glowing highlight effect.
 
   EFFORT: ~30 minutes.
 
 
-10. DARK MODE SYSTEM — REMOVE FLASH ON INITIAL LOAD
-────────────────────────────────────────────────────
-  WHY IT MATTERS: On first visit, if the user's OS prefers dark mode but
-  localStorage has no saved preference, there's a brief flash of white before
-  the dark theme is applied. This feels unpolished and jittery.
+11. KEYBOARD SHORTCUTS FOR TOOL ACTIONS (Cmd+Enter to Run)
+──────────────────────────────────────────────────────────
+  WHY IT MATTERS: Power users expect keyboard triggers. Pressing Cmd+Enter
+  (or Ctrl+Enter on Windows) inside an input field should immediately execute
+  the primary action (Extract, Convert, Generate, Clean).
 
-  CURRENT STATE: main.js already applies the initial theme early (before
-  DOMContentLoaded), but it runs after the HTML is rendered.
+  THE FIX:
+  - Add an input keydown listener in tool scripts:
+      if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') { runMainAction(); }
+  - Display a subtle "[⌘↵]" badge inside or next to the main action button.
 
-  THE FIX: Add one tiny inline <script> block to every page's <head> as the
-  VERY FIRST script (before any external scripts):
-    <script>
-      (function(){
-        var t = localStorage.getItem('toolity_theme') ||
-          (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
-        document.documentElement.setAttribute('data-theme', t);
-      })();
-    </script>
-
-  This runs synchronously before any HTML renders, eliminating the flash
-  entirely. This is the standard approach used by Vercel, Linear, and others.
-  Add this to the common <head> block of all pages.
-
-  EFFORT: ~20 minutes (add to each page head via batch script).
+  EFFORT: ~30 minutes.
 
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  TIER 3 — TRUST & CREDIBILITY SIGNALS (Makes it look "real")
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-11. TOOL LAST-UPDATED DATE (Trust signal for returning visitors)
-───────────────────────────────────────────────────────────────
-  WHY IT MATTERS: Visitors can't tell if a tool was built last month or 3 years
-  ago. A "Last updated: Sep 2026" line below the tool title adds immediate
-  freshness signal and combats the "is this still maintained?" question.
-
-  THE FIX: Add a simple line to the page-hero on each tool page:
-    <span class="tool-updated-date">Updated September 2026</span>
-
-  This is hardcoded — just update it when you actually change the tool.
-  Style: small, muted, monospace, below the page-desc.
-
-  EFFORT: 1 line per tool page. Very low.
-
-
-12. RELATED TOOLS SECTION (Increases pages-per-session)
+12. LIVE CHARACTER / WORD / BYTE COUNTERS ON TEXT INPUTS
 ─────────────────────────────────────────────────────────
-  WHY IT MATTERS: After using the YouTube Thumbnail Downloader, the user leaves.
-  If you showed "You might also like: Favicon Extractor, URL Parameter Cleaner",
-  they'd click and discover more tools. This reduces bounce rate and increases
-  session depth — both SEO signals.
+  WHY IT MATTERS: Tools like URL Parameter Separator, Mailto Creator, and
+  WhatsApp Link Creator deal with string lengths. Displaying a clean, real-time
+  badge (e.g., "128 chars • 4 parameters") makes the tool feel responsive and precise.
 
-  THE FIX: Below the guide section on each tool page, add a small
-  "Related Tools" row (2-3 cards in a horizontal scroll on mobile):
-    <section class="related-tools-row">
-      <h3>Related Tools</h3>
-      <!-- 2-3 tool cards using existing .tool-card component -->
-    </section>
+  THE FIX:
+  - Attach an input event listener that updates a small monospace count pill:
+      <span class="input-stat-badge" id="input-stats">0 chars</span>
 
-  Pick related tools manually — they won't change often. No dynamic JS needed.
-  Reuse the existing .category-glow-card or .tool-card component styles.
-
-  EFFORT: ~1 hour per tool page, or 1 new CSS class + 8-10 hours total.
+  EFFORT: ~25 minutes.
 
 
-13. STRUCTURED DATA — WebApplication SCHEMA
-────────────────────────────────────────────
-  WHY IT MATTERS: Google has a WebApplication schema that can make your tool
-  pages eligible for rich results (action buttons, ratings, etc.).
-
-  THE FIX: Add a JSON-LD block to each tool page:
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "YouTube Thumbnail Downloader",
-      "url": "https://toolity.in/web/youtube-thumbnail-downloader/",
-      "description": "...",
-      "applicationCategory": "UtilitiesApplication",
-      "operatingSystem": "Web",
-      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
-    }
-
-  EFFORT: ~1 hour (template + add to each tool page).
-
-
-14. SITEMAP — ADD MISSING TOOL PAGES
-──────────────────────────────────────
-  CURRENT STATE: Check sitemap.xml — it may not include all 24 pages.
-  Every tool page URL should be listed in sitemap.xml with a <lastmod> date.
-
-  THE FIX: Update sitemap.xml to include every index.html page with correct
-  URLs and 2026-10 as lastmod date. Resubmit via Google Search Console.
-
-  EFFORT: 30 minutes manual edit.
-
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  TIER 4 — UX MICRO-POLISH (The "wow, they thought of everything" feeling)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-15. KEYBOARD SHORTCUTS ON TOOL PAGES
-──────────────────────────────────────
-  Common patterns that feel premium:
-  - Ctrl/Cmd + Enter → trigger main action (download/extract/generate)
-  - Escape → reset/clear input
-  - Ctrl/Cmd + Shift + C → copy result
-
-  Each tool's self-contained script can bind these in ~10 lines. Users who
-  discover them feel the tool is "serious".
-
-
-16. EMPTY STATE ANIMATIONS
-────────────────────────────
-  CURRENT STATE: The preview viewport shows a static empty-state icon when
-  no input is entered.
-
-  THE FIX: Add a subtle CSS pulse/breathing animation to the empty-state icon:
-    @keyframes breathe {
-      0%, 100% { opacity: 0.4; transform: scale(1); }
-      50% { opacity: 0.7; transform: scale(1.05); }
-    }
-    .empty-preview-icon { animation: breathe 3s ease-in-out infinite; }
-
-  This makes the interface feel alive even before the user interacts.
-  Pure CSS, zero JS, zero performance cost.
-
-  EFFORT: 5 minutes per tool page. Add to main.css shared section.
-
-
-17. BACK-TO-TOP BUTTON (Long pages)
+13. PRINT STYLESHEET (@media print)
 ────────────────────────────────────
-  A minimal floating back-to-top arrow that appears after scrolling 400px.
-  Implemented globally in main.js — appears on all tool pages automatically.
-  Uses smooth scroll. Total: ~25 lines JS + 15 lines CSS.
+  WHY IT MATTERS: When users try to print tables (e.g. format reference tables)
+  or generated outputs, navigation bars, headers, floating pills, and ad slots
+  clutter the physical printout.
 
-  Appears as a small pill, bottom-right, above the toast position.
+  THE FIX:
+  - Add to main.css:
+      @media print {
+        .site-header, .site-footer, .adsterra-ad-container,
+        .mobile-bottom-pill-nav, .tool-toast, .tool-actions-toolbar {
+          display: none !important;
+        }
+        body { background: #fff !important; color: #000 !important; }
+        .workspace-card { border: none !important; box-shadow: none !important; }
+      }
 
-
-18. PAGE TRANSITION — FADE IN ON LOAD
-───────────────────────────────────────
-  Add a CSS fade-in to body on page load:
-    body { animation: fadeIn 0.2s ease; }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-  This is imperceptible as a delay but makes the experience feel silky.
-  Add to main.css. One line. No JS.
-
-
-19. PRINT STYLESHEET
-──────────────────────
-  If someone tries to print a tool page (e.g., the formats table), the output
-  is unusable — nav, ads, everything prints. A minimal @media print stylesheet
-  hides the nav, ads, and toast; shows only the tool content clearly.
-  Add to main.css at the bottom.
-
-
-20. FAVICON EXTRACTOR & SIMILAR TOOLS — INPUT VALIDATION TOAST
-────────────────────────────────────────────────────────────────
-  CURRENT STATE: If a user types an invalid URL and clicks Download, the
-  tool silently fails or shows a generic error.
-
-  THE FIX: Show a specific, helpful toast message explaining WHY it failed:
-  "That doesn't look like a valid domain. Try 'github.com' or 'apple.com'."
-  This is more polished than "invalid input."
+  EFFORT: ~15 minutes.
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  PERFORMANCE QUICK WINS
+  TIER 4 — ADVANCED PERFORMANCE & PROGRESSIVE WEB APP (PWA)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-21. PRELOAD CRITICAL ASSETS
-─────────────────────────────
-  Add to every page <head>:
-    <link rel="preload" href="/styles/main.css?v=2.3" as="style">
-    <link rel="preload" href="/assets/Toolity.in Logo.webp" as="image">
+14. OFFLINE PWA CAPABILITY (manifest.json + Cache-First Service Worker)
+───────────────────────────────────────────────────────────────────────
+  WHY IT MATTERS: Because Toolity runs 100% in the browser with zero server API
+  calls, the entire website can work completely offline! Adding a Web App
+  Manifest and a lightweight service worker allows users to "Install" Toolity as
+  a standalone Desktop or Mobile App that launches instantly with zero network.
 
-  This tells the browser to fetch these assets immediately when parsing HTML,
-  before it renders anything. Reduces Largest Contentful Paint (LCP).
-  Zero risk, pure upside.
+  THE FIX:
+  - Create /manifest.json with app metadata, theme color, and icons from /assets/favicons/.
+  - Add a lightweight /sw.js service worker caching core assets (main.css, main.js,
+    fonts, icons, HTML pages).
+  - Register sw.js in main.js.
 
-  EFFORT: 2 lines per page. Add via batch script.
-
-
-22. DEFER NON-CRITICAL SCRIPTS
-────────────────────────────────
-  The Iconify CDN script currently blocks rendering:
-    <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
-
-  Add defer attribute:
-    <script defer src="https://code.iconify.design/..."></script>
-
-  Iconify is a custom element — it handles deferred loading gracefully. Icons
-  will render slightly after page paint but the page content will be visible
-  sooner. Batch-scriptable change.
-
-  EFFORT: Add "defer" to the script tag via batch script. 15 minutes.
+  EFFORT: ~1.5 hours.
 
 
-23. IMAGE width/height ATTRIBUTES ON ALL ASSETS
-────────────────────────────────────────────────
-  The logo webp and mascot images should have explicit width and height
-  attributes to prevent Cumulative Layout Shift (CLS) — a Core Web Vital.
-  Most already have them — audit any remaining images.
+15. HELPFUL CONTEXTUAL ERROR TOASTS (Better Input Validation)
+─────────────────────────────────────────────────────────────
+  WHY IT MATTERS: When a user enters an invalid URL or corrupted media file,
+  showing generic "Error" or failing silently feels broken.
+  Clear, human instructions (e.g., "That URL doesn't include a domain. Try typing 'google.com'")
+  elevates user trust.
+
+  THE FIX:
+  - Standardize error validation messages across all input parsers using
+    showGlobalToast("Tip: ...").
+
+  EFFORT: ~30 minutes across tool files.
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  RECOMMENDED IMPLEMENTATION ORDER
+  PRIORITIZED ACTION PLAN
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Week 1 — Foundation (SEO + Trust):
-  1. Dark mode flash fix (Item 10) — 20 min
-  2. Canonical tags on all pages (Item 2) — 30 min via script
-  3. OG image + Twitter card on all tool pages (Item 1) — 1 hour
-  4. Favicon upgrade to PNG + apple-touch-icon (Item 5) — 30 min
-  5. Defer Iconify script (Item 22) — 15 min via script
-  6. Preload critical assets (Item 21) — 15 min via script
+  Sprint 1 — Immediate Polish (1 - 2 hours):
+    1. Privacy Trust Badges on all tools (#2)
+    2. Tool Count Badges on category cards (#3)
+    3. Skip-to-content A11y link (#4)
+    4. Copy Button checkmark feedback (#9)
+    5. Print stylesheet (#13)
 
-Week 2 — Polish & Engagement:
-  7. Tool count badges on category cards (Item 3) — 30 min
-  8. Skip-to-content link (Item 4) — 15 min
-  9. Share button on tool pages (Item 8) — 45 min
-  10. Scroll progress bar (Item 9) — 30 min
-  11. Empty state breathing animation (Item 16) — 10 min
-  12. Page fade-in (Item 18) — 5 min
-  13. Back-to-top button (Item 17) — 30 min
+  Sprint 2 — Search & Engagement (2 - 3 hours):
+    6. Global ⌘K Command Palette & Quick Launcher (#5)
+    7. Recently Used Tools shelf (#6)
+    8. OG Social Share image creation & head tags (#1)
+    9. Drag & Drop full viewport highlight (#10)
 
-Week 3 — Depth:
-  14. Breadcrumb JSON-LD on all tool pages (Item 7)
-  15. WebApplication JSON-LD schema (Item 13)
-  16. Sitemap audit and update (Item 14)
-  17. Related tools sections (Item 12)
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  EFFORT vs IMPACT SUMMARY
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-  Item                        | Effort  | Impact
-  ─────────────────────────────────────────────────
-  Dark mode flash fix         | 20 min  | HIGH
-  Canonical tags              | 30 min  | HIGH SEO
-  OG social images            | 1 hr    | HIGH share
-  Favicon PNG upgrade         | 30 min  | HIGH trust
-  Defer iconify script        | 15 min  | HIGH perf
-  Preload critical assets     | 15 min  | MEDIUM perf
-  Tool count badges           | 30 min  | MEDIUM UX
-  Skip-to-content link        | 15 min  | MEDIUM a11y
-  Share button                | 45 min  | MEDIUM viral
-  Scroll progress bar         | 30 min  | MEDIUM delight
-  Breadcrumb JSON-LD          | 1 hr    | HIGH SEO CTR
-  WebApp schema JSON-LD       | 1 hr    | MEDIUM SEO
-  Related tools sections      | 8 hrs   | HIGH retention
-  Keyboard shortcuts          | 1 hr    | LOW (power users)
-  ⌘K overlay on tool pages    | 2 hrs   | LOW (discovery)
-  Empty state animations      | 10 min  | LOW delight
-  Page fade-in                | 5 min   | LOW delight
-  Back-to-top button          | 30 min  | LOW UX
-  Print stylesheet            | 30 min  | LOW utility
+  Sprint 3 — SEO & Offline Power (2 - 3 hours):
+    10. JSON-LD Breadcrumb & WebApplication structured data (#7)
+    11. Related Tools recommendation row (#8)
+    12. Offline PWA Manifest & Service Worker (#14)
 
 ================================================================================
 EOF
