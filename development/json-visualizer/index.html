@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>JSON Visualizer &amp; Interactive Tree Explorer — Toolity.in</title>
+  <link rel="canonical" href="https://toolity.in/development/json-visualizer/">
+
+  <!-- SEO & Open Graph Metadata -->
+  <meta name="description" content="Free online interactive JSON visualizer, tree explorer, table generator, and schema validator. Inspect, search, format, and copy nested JSON paths 100% privately in your browser.">
+  <meta name="keywords" content="json visualizer, json tree viewer, json explorer, interactive json, json parser, json formatter, json to table, json path copy, developer tool">
+  <meta name="author" content="Kapil Pidhwani">
+  <meta property="og:title" content="JSON Visualizer & Interactive Tree Explorer — Toolity.in">
+  <meta property="og:description" content="Inspect, navigate, and explore complex JSON data with an interactive collapsible tree, live search filter, table grid generator, and schema metrics.">
+  <meta property="og:url" content="https://toolity.in/development/json-visualizer/">
+  <meta property="og:type" content="website">
+
+  <!-- Favicons Suite -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Preload Critical Assets -->
+  <link rel="preload" href="/styles/main.css?v=2.3" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+
+  <!-- Iconify Icon Component -->
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <!-- Global Core Stylesheet -->
+  <link rel="stylesheet" href="../../styles/main.css?v=2.3">
+
+  <style>
+    /* ==========================================================================
+       Designed by Kapil Pidhwani: JSON Visualizer Custom Tool Styling
+       ========================================================================== */
+    
+    .visualizer-workspace-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      align-items: stretch;
+      margin-bottom: 2rem;
+    }
+
+    @media (max-width: 1024px) {
+      .visualizer-workspace-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Dual Pane Card Containers */
+    .visualizer-card {
+      display: flex;
+      flex-direction: column;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      min-height: 580px;
+    }
+
+    .visualizer-card:focus-within {
+      border-color: var(--brand);
+      box-shadow: 0 0 0 1px var(--brand), var(--shadow-md);
+    }
+
+    /* Pane Header & Sub-Tabs */
+    .pane-header-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      padding: 0.85rem 1.15rem;
+      background: var(--surface-elevated);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .pane-header-title {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .pane-nav-tabs {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      background: var(--background);
+      padding: 3px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border);
+    }
+
+    .pane-tab-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: var(--radius-pill);
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .pane-tab-btn:hover {
+      color: var(--text-primary);
+    }
+
+    .pane-tab-btn.active {
+      background: var(--surface-elevated);
+      color: var(--brand);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    }
+
+    /* Left Input Area */
+    .input-pane-body {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      position: relative;
+    }
+
+    .json-textarea-input {
+      width: 100%;
+      flex: 1;
+      min-height: 460px;
+      padding: 1.25rem;
+      border: none;
+      outline: none;
+      resize: vertical;
+      background: var(--background);
+      color: var(--text-primary);
+      font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.88rem;
+      line-height: 1.6;
+      box-sizing: border-box;
+      tab-size: 2;
+    }
+
+    .json-textarea-input::placeholder {
+      color: var(--text-muted);
+      opacity: 0.65;
+    }
+
+    /* Left Sub-Action Bar (Beautify, Minify, Repair, Samples) */
+    .input-action-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      padding: 0.65rem 1rem;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      font-size: 0.8rem;
+    }
+
+    .sample-pill-group {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+
+    .sample-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-right: 0.2rem;
+    }
+
+    .btn-sample-chip {
+      padding: 0.25rem 0.6rem;
+      border-radius: var(--radius-pill);
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      font-size: 0.72rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-sample-chip:hover {
+      border-color: var(--brand);
+      color: var(--brand);
+      background: var(--brand-soft);
+    }
+
+    /* Validation Status Footer */
+    .validation-status-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.65rem 1.15rem;
+      background: var(--surface-elevated);
+      border-top: 1px solid var(--border);
+      font-size: 0.78rem;
+    }
+
+    .status-badge-valid {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      color: #10B981;
+      font-weight: 600;
+    }
+
+    .status-badge-invalid {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      color: #EF4444;
+      font-weight: 600;
+    }
+
+    .status-meta-info {
+      color: var(--text-muted);
+      font-feature-settings: 'tnum';
+    }
+
+    /* Right Output Viewports */
+    .output-pane-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      background: var(--background);
+      min-height: 460px;
+      overflow: hidden;
+    }
+
+    .output-viewport {
+      display: none;
+      flex: 1;
+      padding: 1.15rem;
+      overflow: auto;
+      max-height: 580px;
+    }
+
+    .output-viewport.active {
+      display: block;
+    }
+
+    /* Tree View Controls Bar */
+    .tree-filter-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      padding: 0.6rem 1rem;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tree-search-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      flex: 1;
+      min-width: 180px;
+      max-width: 320px;
+    }
+
+    .tree-search-icon {
+      position: absolute;
+      left: 0.65rem;
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    .tree-search-input {
+      width: 100%;
+      padding: 0.35rem 0.65rem 0.35rem 2rem;
+      font-size: 0.78rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-pill);
+      background: var(--surface-elevated);
+      color: var(--text-primary);
+      outline: none;
+      transition: all 0.15s ease;
+    }
+
+    .tree-search-input:focus {
+      border-color: var(--brand);
+      box-shadow: 0 0 0 2px var(--brand-soft);
+    }
+
+    .tree-search-clear {
+      position: absolute;
+      right: 0.5rem;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: none;
+      padding: 0;
+    }
+
+    .tree-depth-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .btn-tree-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      font-size: 0.72rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-tree-action:hover {
+      background: var(--surface);
+      color: var(--text-primary);
+      border-color: var(--border-hover);
+    }
+
+    /* Interactive Tree Nodes */
+    .json-tree-container {
+      font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.85rem;
+      line-height: 1.7;
+      color: var(--text-primary);
+    }
+
+    .tree-node {
+      padding-left: 1.25rem;
+      position: relative;
+    }
+
+    .tree-node-root {
+      padding-left: 0;
+    }
+
+    .tree-line {
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      padding: 0.1rem 0.35rem;
+      border-radius: 4px;
+      transition: background 0.12s ease;
+    }
+
+    .tree-line:hover {
+      background: var(--surface-elevated);
+    }
+
+    .tree-toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 14px;
+      height: 14px;
+      margin-left: -16px;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: transform 0.15s ease, color 0.15s ease;
+      vertical-align: middle;
+      padding: 0;
+    }
+
+    .tree-toggle-btn:hover {
+      color: var(--brand);
+    }
+
+    .tree-toggle-btn.collapsed {
+      transform: rotate(-90deg);
+    }
+
+    .tree-key {
+      font-weight: 600;
+      color: var(--text-primary);
+      cursor: pointer;
+    }
+
+    .tree-colon {
+      color: var(--text-muted);
+      margin-right: 0.15rem;
+    }
+
+    /* JSON Data Types Coloring */
+    .tree-val-string {
+      color: #059669;
+      word-break: break-all;
+    }
+    [data-theme="dark"] .tree-val-string {
+      color: #34D399;
+    }
+
+    .tree-val-number {
+      color: #2563EB;
+    }
+    [data-theme="dark"] .tree-val-number {
+      color: #60A5FA;
+    }
+
+    .tree-val-boolean {
+      color: #7C3AED;
+      font-weight: 600;
+    }
+    [data-theme="dark"] .tree-val-boolean {
+      color: #A78BFA;
+    }
+
+    .tree-val-null {
+      color: #D97706;
+      font-style: italic;
+    }
+    [data-theme="dark"] .tree-val-null {
+      color: #FBBF24;
+    }
+
+    .tree-bracket {
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    .tree-meta-badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0 0.35rem;
+      border-radius: 3px;
+      background: var(--surface-elevated);
+      color: var(--text-muted);
+      margin-left: 0.35rem;
+      user-select: none;
+    }
+
+    .tree-node-children.collapsed {
+      display: none;
+    }
+
+    /* Path Copy Tooltip Trigger on Hover */
+    .tree-node-actions {
+      opacity: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      margin-left: 0.5rem;
+      transition: opacity 0.12s ease;
+    }
+
+    .tree-line:hover .tree-node-actions {
+      opacity: 1;
+    }
+
+    .btn-copy-node-path {
+      padding: 0 0.35rem;
+      font-size: 0.68rem;
+      border-radius: 3px;
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.12s ease;
+    }
+
+    .btn-copy-node-path:hover {
+      background: var(--brand-soft);
+      border-color: var(--brand);
+      color: var(--brand);
+    }
+
+    /* Highlight Search Matches */
+    .tree-highlight-match {
+      background: rgba(244, 81, 30, 0.25);
+      border-radius: 2px;
+      padding: 0 2px;
+      outline: 1px solid var(--brand);
+    }
+
+    /* Table View Styling */
+    .json-table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+    }
+
+    .json-data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      text-align: left;
+    }
+
+    .json-data-table th,
+    .json-data-table td {
+      padding: 0.65rem 0.9rem;
+      border-bottom: 1px solid var(--border);
+      max-width: 280px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .json-data-table th {
+      background: var(--surface-elevated);
+      color: var(--text-secondary);
+      font-weight: 600;
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    .json-data-table tr:hover td {
+      background: var(--surface-elevated);
+    }
+
+    /* Stats Grid View */
+    .stats-metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 0.85rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .stat-metric-card {
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 0.85rem;
+      text-align: center;
+    }
+
+    .stat-metric-val {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      font-feature-settings: 'tnum';
+    }
+
+    .stat-metric-label {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 0.25rem;
+    }
+
+    /* Formatted Code View */
+    .formatted-code-pre {
+      margin: 0;
+      padding: 0;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.84rem;
+      line-height: 1.6;
+      color: var(--text-primary);
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    /* Empty States */
+    .visualizer-empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4rem 1.5rem;
+      color: var(--text-muted);
+      height: 100%;
+    }
+
+    .visualizer-empty-state iconify-icon {
+      margin-bottom: 0.75rem;
+      color: var(--text-muted);
+      opacity: 0.5;
+    }
+
+    .visualizer-empty-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 0.35rem;
+    }
+
+    .visualizer-empty-desc {
+      font-size: 0.82rem;
+      max-width: 320px;
+      line-height: 1.5;
+    }
+  </style>
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "JSON Visualizer & Interactive Tree Explorer",
+    "url": "https://toolity.in/development/json-visualizer/",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "All",
+    "browserRequirements": "Requires JavaScript. Requires HTML5.",
+    "description": "Interactive JSON tree visualizer, table generator, and schema explorer running 100% client-side with zero server uploads.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "creator": {
+      "@type": "Person",
+      "name": "Kapil Pidhwani"
+    }
+  }
+  </script>
+</head>
+
+<body>
+  <!-- Global Header Component -->
+  <div data-include="/components/header.html"></div>
+
+  <!-- Main Tool Workspace -->
+  <main>
+    <!-- Page Hero Header -->
+    <section class="page-hero">
+      <div class="container">
+        <!-- Breadcrumbs Navigation -->
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/development/" class="breadcrumb-link">Development</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">JSON Visualizer</span>
+        </nav>
+
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Developer Workspace</span>
+            <h1 class="page-title">JSON Visualizer</h1>
+            <p class="page-desc">Interactive collapsible JSON tree viewer, real-time search filter, table grid generator, and schema validator. 100% private in your browser.</p>
+          </div>
+          <div class="page-count-badge">
+            <iconify-icon icon="lucide:shield-check" width="16" height="16" style="color: #10B981;"></iconify-icon>
+            <span>100% Client-Side</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Dual-Pane Workspace Section -->
+    <section class="section-wrapper" style="border-top: none; padding-top: 3.5rem;">
+      <div class="container">
+
+        <!-- Universal Top Toolbar -->
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1.25rem;">
+          <!-- Quick Load Samples -->
+          <div class="sample-pill-group">
+            <span class="sample-label">Quick Samples:</span>
+            <button type="button" class="btn-sample-chip" id="sample-user">User Profile</button>
+            <button type="button" class="btn-sample-chip" id="sample-ecommerce">E-Commerce Orders</button>
+            <button type="button" class="btn-sample-chip" id="sample-api">Nested API Response</button>
+          </div>
+
+          <!-- Right Action Triggers -->
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <button type="button" class="btn-toolbar-sm" id="btn-upload-json-trigger" title="Upload .json file">
+              <iconify-icon icon="lucide:upload" width="14" height="14"></iconify-icon>
+              <span>Upload</span>
+            </button>
+            <input type="file" id="json-file-input" accept=".json,application/json,text/plain" style="display: none;">
+
+            <button type="button" class="btn-toolbar-sm" id="btn-clear-json" title="Clear input canvas">
+              <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+              <span>Clear</span>
+            </button>
+            <button type="button" class="btn-toolbar-sm" id="btn-copy-json" title="Copy formatted JSON">
+              <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+              <span>Copy</span>
+            </button>
+            <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download-json" title="Download JSON file">
+              <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+              <span>Download</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Symmetrical Dual-Pane Layout -->
+        <div class="visualizer-workspace-grid">
+          
+          <!-- LEFT PANE: Input & Formatter -->
+          <div class="visualizer-card">
+            <!-- Pane Header -->
+            <div class="pane-header-bar">
+              <div class="pane-header-title">
+                <iconify-icon icon="lucide:file-json" width="16" height="16" style="color: var(--brand);"></iconify-icon>
+                <span>Raw JSON Input</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 0.35rem;">
+                <button type="button" class="btn-action-pill" id="btn-format-json" title="Format & Beautify JSON (2 spaces)">Beautify</button>
+                <button type="button" class="btn-action-pill" id="btn-minify-json" title="Minify into single line">Minify</button>
+                <button type="button" class="btn-action-pill" id="btn-repair-json" title="Fix unquoted keys & trailing commas">Auto-Repair</button>
+              </div>
+            </div>
+
+            <!-- Input Textarea Body -->
+            <div class="input-pane-body">
+              <textarea 
+                id="json-input-textarea" 
+                class="json-textarea-input" 
+                placeholder="Paste or type raw JSON here... (e.g. { &quot;name&quot;: &quot;Toolity&quot;, &quot;active&quot;: true })"
+                spellcheck="false"
+                aria-label="Raw JSON Input Textarea"
+              ></textarea>
+            </div>
+
+            <!-- Validation Status Footer -->
+            <div class="validation-status-bar" id="validation-status-bar">
+              <div id="validation-status-badge">
+                <span class="status-badge-valid">
+                  <iconify-icon icon="lucide:check-circle-2" width="14" height="14"></iconify-icon>
+                  <span>Awaiting JSON input</span>
+                </span>
+              </div>
+              <div class="status-meta-info" id="status-meta-info">0 B • 0 Nodes</div>
+            </div>
+          </div>
+
+          <!-- RIGHT PANE: Interactive Visual Explorer -->
+          <div class="visualizer-card">
+            <!-- Pane Header & View Switcher Tabs -->
+            <div class="pane-header-bar">
+              <div class="pane-header-title">
+                <iconify-icon icon="lucide:sparkles" width="16" height="16" style="color: var(--brand);"></iconify-icon>
+                <span>Interactive Visualizer</span>
+              </div>
+              <!-- Sub-Tabs Navigation -->
+              <div class="pane-nav-tabs" role="tablist">
+                <button type="button" class="pane-tab-btn active" id="tab-btn-tree" role="tab" aria-selected="true" data-target="viewport-tree">
+                  <iconify-icon icon="lucide:network" width="13" height="13"></iconify-icon>
+                  <span>Tree</span>
+                </button>
+                <button type="button" class="pane-tab-btn" id="tab-btn-table" role="tab" aria-selected="false" data-target="viewport-table">
+                  <iconify-icon icon="lucide:table" width="13" height="13"></iconify-icon>
+                  <span>Table</span>
+                </button>
+                <button type="button" class="pane-tab-btn" id="tab-btn-code" role="tab" aria-selected="false" data-target="viewport-code">
+                  <iconify-icon icon="lucide:code-2" width="13" height="13"></iconify-icon>
+                  <span>Code</span>
+                </button>
+                <button type="button" class="pane-tab-btn" id="tab-btn-stats" role="tab" aria-selected="false" data-target="viewport-stats">
+                  <iconify-icon icon="lucide:bar-chart-2" width="13" height="13"></iconify-icon>
+                  <span>Stats</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Output Body Viewports -->
+            <div class="output-pane-body">
+              
+              <!-- 1. Tree View Viewport (Default Active) -->
+              <div class="output-viewport active" id="viewport-tree">
+                <!-- Tree Search & Filter Toolbar -->
+                <div class="tree-filter-bar" style="margin: -1.15rem -1.15rem 1rem -1.15rem;">
+                  <div class="tree-search-wrapper">
+                    <iconify-icon icon="lucide:search" class="tree-search-icon" width="13" height="13"></iconify-icon>
+                    <input type="text" id="tree-search-input" class="tree-search-input" placeholder="Filter keys or values...">
+                    <button type="button" id="tree-search-clear" class="tree-search-clear" title="Clear filter">
+                      <iconify-icon icon="lucide:x" width="13" height="13"></iconify-icon>
+                    </button>
+                  </div>
+
+                  <div class="tree-depth-actions">
+                    <button type="button" class="btn-tree-action" id="btn-tree-expand-all" title="Expand all branches">
+                      <iconify-icon icon="lucide:chevrons-down" width="12" height="12"></iconify-icon>
+                      <span>Expand All</span>
+                    </button>
+                    <button type="button" class="btn-tree-action" id="btn-tree-collapse-all" title="Collapse all branches">
+                      <iconify-icon icon="lucide:chevrons-up" width="12" height="12"></iconify-icon>
+                      <span>Collapse</span>
+                    </button>
+                    <button type="button" class="btn-tree-action" id="btn-tree-depth-1" title="Expand to depth 1">L1</button>
+                    <button type="button" class="btn-tree-action" id="btn-tree-depth-2" title="Expand to depth 2">L2</button>
+                  </div>
+                </div>
+
+                <!-- Rendered JSON Tree Mount -->
+                <div id="json-tree-mount" class="json-tree-container">
+                  <div class="visualizer-empty-state">
+                    <iconify-icon icon="lucide:binary" width="36" height="36"></iconify-icon>
+                    <div class="visualizer-empty-title">Awaiting JSON Data</div>
+                    <div class="visualizer-empty-desc">Paste or type JSON on the left to render an interactive collapsible tree view.</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 2. Table View Viewport -->
+              <div class="output-viewport" id="viewport-table">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
+                  <span style="font-size: 0.78rem; color: var(--text-secondary);" id="table-summary-text">Tabular Grid View</span>
+                  <button type="button" class="btn-action-pill" id="btn-export-csv" title="Export table data as CSV">
+                    <iconify-icon icon="lucide:file-spreadsheet" width="13" height="13"></iconify-icon>
+                    <span>Export CSV</span>
+                  </button>
+                </div>
+                <div id="json-table-mount" class="json-table-wrapper">
+                  <div class="visualizer-empty-state">
+                    <iconify-icon icon="lucide:table" width="36" height="36"></iconify-icon>
+                    <div class="visualizer-empty-title">No Array Dataset Found</div>
+                    <div class="visualizer-empty-desc">Table view generates automatically when your JSON contains an array of objects.</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 3. Formatted Code Viewport -->
+              <div class="output-viewport" id="viewport-code">
+                <pre id="json-code-mount" class="formatted-code-pre"><code>// Formatted JSON will appear here...</code></pre>
+              </div>
+
+              <!-- 4. Schema & Stats Viewport -->
+              <div class="output-viewport" id="viewport-stats">
+                <div class="stats-metrics-grid">
+                  <div class="stat-metric-card">
+                    <div class="stat-metric-val" id="stat-total-nodes">0</div>
+                    <div class="stat-metric-label">Total Nodes</div>
+                  </div>
+                  <div class="stat-metric-card">
+                    <div class="stat-metric-val" id="stat-max-depth">0</div>
+                    <div class="stat-metric-label">Max Depth</div>
+                  </div>
+                  <div class="stat-metric-card">
+                    <div class="stat-metric-val" id="stat-payload-size">0 B</div>
+                    <div class="stat-metric-label">Payload Size</div>
+                  </div>
+                  <div class="stat-metric-card">
+                    <div class="stat-metric-val" id="stat-arrays-count">0</div>
+                    <div class="stat-metric-label">Arrays</div>
+                  </div>
+                  <div class="stat-metric-card">
+                    <div class="stat-metric-val" id="stat-objects-count">0</div>
+                    <div class="stat-metric-label">Objects</div>
+                  </div>
+                  <div class="stat-metric-card">
+                    <div class="stat-metric-val" id="stat-primitives-count">0</div>
+                    <div class="stat-metric-label">Primitives</div>
+                  </div>
+                </div>
+
+                <div style="background: var(--surface-elevated); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 1rem;">
+                  <h4 style="font-size: 0.85rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem;">Data Type Breakdown</h4>
+                  <div id="stats-breakdown-mount" style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.6;">
+                    No JSON parsed yet.
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Progressive Disclosure Settings Accordion (Below Workspace) -->
+        <details class="tool-settings-accordion">
+          <summary class="tool-settings-summary">
+            <div class="tool-settings-summary-left">
+              <iconify-icon icon="lucide:sliders-horizontal" width="16" height="16"></iconify-icon>
+              <span>Visualizer &amp; Formatter Preferences</span>
+              <span class="pane-badge" id="settings-summary-badge">(2 Spaces • Expand All • Natural Order)</span>
+            </div>
+            <iconify-icon icon="lucide:chevron-down" class="tool-settings-chevron" width="16" height="16"></iconify-icon>
+          </summary>
+
+          <div class="tool-settings-panel">
+            <div class="settings-sections-wrapper">
+              <div class="settings-section-card">
+                <div class="settings-row-wrap">
+                  
+                  <!-- Indentation Spacing -->
+                  <div class="form-group">
+                    <span class="form-label" style="font-size:0.75rem;">Indentation Spacing</span>
+                    <div class="segmented-group" id="seg-indent-size">
+                      <button type="button" class="seg-pill active" data-val="2">2 Spaces</button>
+                      <button type="button" class="seg-pill" data-val="4">4 Spaces</button>
+                      <button type="button" class="seg-pill" data-val="tab">Tab Char</button>
+                    </div>
+                  </div>
+
+                  <!-- Default Tree Expansion -->
+                  <div class="form-group">
+                    <span class="form-label" style="font-size:0.75rem;">Default Tree Expansion</span>
+                    <div class="segmented-group" id="seg-default-depth">
+                      <button type="button" class="seg-pill active" data-val="all">Expand All</button>
+                      <button type="button" class="seg-pill" data-val="1">Level 1</button>
+                      <button type="button" class="seg-pill" data-val="2">Level 2</button>
+                      <button type="button" class="seg-pill" data-val="collapse">Collapsed</button>
+                    </div>
+                  </div>
+
+                  <!-- Key Ordering -->
+                  <div class="form-group">
+                    <span class="form-label" style="font-size:0.75rem;">Key Ordering</span>
+                    <div class="segmented-group" id="seg-sort-keys">
+                      <button type="button" class="seg-pill active" data-val="natural">Original</button>
+                      <button type="button" class="seg-pill" data-val="alpha">A-Z Sorted</button>
+                    </div>
+                  </div>
+
+                  <!-- Type & Count Badges -->
+                  <div class="form-group">
+                    <span class="form-label" style="font-size:0.75rem;">Node Metadata Badges</span>
+                    <div class="segmented-group" id="seg-show-badges">
+                      <button type="button" class="seg-pill active" data-val="on">Visible</button>
+                      <button type="button" class="seg-pill" data-val="off">Hidden</button>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- Modular Adsterra Slot Include -->
+        <div data-include="/components/ad-slot.html"></div>
+
+        <!-- 3-Step Instruction Guide -->
+        <section class="guide-section">
+          <div class="section-header">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-title">Using JSON Visualizer</h2>
+            <p class="section-desc">Parse, visualize, search, and navigate complex JSON data structures directly in your browser with complete privacy.</p>
+          </div>
+
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Paste or Upload JSON</h3>
+              <p class="step-desc">Paste your API response, config file, or raw JSON payload on the left, or upload a <code>.json</code> file from your device.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Explore Tree &amp; Table</h3>
+              <p class="step-desc">Click node chevrons to collapse or expand hierarchies, filter keys with instant search, and switch to Table view for tabular datasets.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Copy Paths &amp; Export</h3>
+              <p class="step-desc">Hover any key to copy its exact JSON path (e.g. <code>$.users[0].address</code>) with one click, or export formatted JSON and CSV files.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Keyboard Shortcuts & Feature Specs Table -->
+        <section class="guide-section" style="padding-top: 1rem;">
+          <div class="section-header">
+            <span class="section-eyebrow">Productivity Reference</span>
+            <h2 class="section-title">Visualizer Features &amp; Keybindings</h2>
+            <p class="section-desc">Fast shortcuts and navigation specifications for high-efficiency API debugging.</p>
+          </div>
+
+          <div class="shortcuts-table-wrapper">
+            <table class="shortcuts-table">
+              <thead>
+                <tr>
+                  <th>Feature / Shortcut</th>
+                  <th>Action Triggered</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="kbd-chip">Tree Node Chevron</span></td>
+                  <td>Toggle Branch Collapse</td>
+                  <td>Expands or collapses nested objects <code>{}</code> and arrays <code>[]</code> while preserving branch state.</td>
+                </tr>
+                <tr>
+                  <td><span class="kbd-chip">Live Filter Bar</span></td>
+                  <td>Instant Key/Value Search</td>
+                  <td>Filters and highlights matching tokens across all tree levels and automatically unfolds containing branches.</td>
+                </tr>
+                <tr>
+                  <td><span class="kbd-chip">Path Copy Button</span></td>
+                  <td>Copy Exact JSONPath</td>
+                  <td>Generates and copies standard dot-notation and JSONPath syntax (e.g. <code>user.profile.emails[0]</code>) directly to clipboard.</td>
+                </tr>
+                <tr>
+                  <td><span class="kbd-chip">Auto-Repair</span></td>
+                  <td>Fix Invalid Syntax</td>
+                  <td>Automatically quotes unquoted keys, replaces single quotes with double quotes, and removes trailing commas.</td>
+                </tr>
+                <tr>
+                  <td><span class="kbd-chip">Table View</span></td>
+                  <td>Array to Spreadsheet Grid</td>
+                  <td>Extracts schema headers and presents array of objects in a clean tabular view with one-click CSV export.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Frequently Asked Questions (FAQ) -->
+        <section class="guide-section" style="padding-top: 1rem;">
+          <div class="section-header">
+            <span class="section-eyebrow">Frequently Asked Questions</span>
+            <h2 class="section-title">JSON Visualizer FAQ</h2>
+            <p class="section-desc">Learn more about how Toolity parses JSON, handles large payloads, and protects data privacy.</p>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 0.75rem; max-width: 820px; margin: 0 auto;">
+            <details class="tool-settings-accordion" style="background: var(--surface-elevated); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 0.25rem;">
+              <summary class="tool-settings-summary" style="padding: 1rem 1.25rem;">
+                <span style="font-weight: 600; font-size: 0.95rem; color: var(--text-primary);">Is my JSON data uploaded to any remote server or logged?</span>
+                <iconify-icon icon="lucide:chevron-down" class="tool-settings-chevron" width="16" height="16"></iconify-icon>
+              </summary>
+              <div style="padding: 0 1.25rem 1.25rem 1.25rem; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
+                No, never. Toolity's JSON Visualizer executes 100% locally inside your web browser using JavaScript's native <code>JSON.parse()</code> engine and the Document Object Model (DOM). No API payloads, credentials, tokens, or personal data are ever sent over the network.
+              </div>
+            </details>
+
+            <details class="tool-settings-accordion" style="background: var(--surface-elevated); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 0.25rem;">
+              <summary class="tool-settings-summary" style="padding: 1rem 1.25rem;">
+                <span style="font-weight: 600; font-size: 0.95rem; color: var(--text-primary);">How does the JSON Path copy feature work?</span>
+                <iconify-icon icon="lucide:chevron-down" class="tool-settings-chevron" width="16" height="16"></iconify-icon>
+              </summary>
+              <div style="padding: 0 1.25rem 1.25rem 1.25rem; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
+                When you hover over any key or value in the Tree Explorer, a <strong>Copy Path</strong> badge appears. Clicking it copies both the standard dot-notation path (e.g. <code>users[0].address.city</code>) and the root JSONPath identifier (e.g. <code>$.users[0].address.city</code>) for easy use in code or API tests.
+              </div>
+            </details>
+
+            <details class="tool-settings-accordion" style="background: var(--surface-elevated); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 0.25rem;">
+              <summary class="tool-settings-summary" style="padding: 1rem 1.25rem;">
+                <span style="font-weight: 600; font-size: 0.95rem; color: var(--text-primary);">What does the Auto-Repair button do?</span>
+                <iconify-icon icon="lucide:chevron-down" class="tool-settings-chevron" width="16" height="16"></iconify-icon>
+              </summary>
+              <div style="padding: 0 1.25rem 1.25rem 1.25rem; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
+                Developers frequently copy JSON-like JavaScript object literals that contain unquoted keys (e.g. <code>{id: 123}</code>), single-quoted strings, or trailing commas after the last item. Auto-Repair cleans and standardizes these common syntax errors into valid RFC 8259 JSON.
+              </div>
+            </details>
+
+            <details class="tool-settings-accordion" style="background: var(--surface-elevated); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 0.25rem;">
+              <summary class="tool-settings-summary" style="padding: 1rem 1.25rem;">
+                <span style="font-weight: 600; font-size: 0.95rem; color: var(--text-primary);">Can I visualize large JSON files?</span>
+                <iconify-icon icon="lucide:chevron-down" class="tool-settings-chevron" width="16" height="16"></iconify-icon>
+              </summary>
+              <div style="padding: 0 1.25rem 1.25rem 1.25rem; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
+                Yes. Because rendering runs directly in your browser's V8 engine with optimized DOM fragment insertion, you can comfortably visualize files up to several megabytes and tens of thousands of nodes.
+              </div>
+            </details>
+
+            <details class="tool-settings-accordion" style="background: var(--surface-elevated); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 0.25rem;">
+              <summary class="tool-settings-summary" style="padding: 1rem 1.25rem;">
+                <span style="font-weight: 600; font-size: 0.95rem; color: var(--text-primary);">Can I convert my JSON to a CSV spreadsheet?</span>
+                <iconify-icon icon="lucide:chevron-down" class="tool-settings-chevron" width="16" height="16"></iconify-icon>
+              </summary>
+              <div style="padding: 0 1.25rem 1.25rem 1.25rem; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
+                Yes. If your JSON payload is an array of objects (or contains a list of records), simply switch to the <strong>Table</strong> tab and click <strong>Export CSV</strong> to download a formatted spreadsheet file instantly.
+              </div>
+            </details>
+          </div>
+        </section>
+
+        <!-- Category Workspace CTA Banner -->
+        <section class="category-workspace-cta" style="margin-top: 3.5rem;">
+          <div class="category-workspace-cta-left">
+            <span class="section-eyebrow">Explore Development</span>
+            <h2 class="category-workspace-cta-title">Looking for more developer tools?</h2>
+            <p class="category-workspace-cta-desc">Discover our fast, client-side developer utilities, code formatters, and browser converters.</p>
+          </div>
+          <div class="category-workspace-cta-right">
+            <a href="/development/" class="btn-pill btn-primary-signal">
+              <span>View Development</span>
+              <iconify-icon icon="lucide:arrow-right" width="16" height="16"></iconify-icon>
+            </a>
+          </div>
+        </section>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Global Multi-Column Footer Component -->
+  <div data-include="/components/footer.html"></div>
+
+  <!-- Platform Core Scripts -->
+  <script src="../../scripts/main.js?v=2.3"></script>
+
+  <!-- JSON Visualizer Script -->
+  <script src="json-visualizer.js?v=1.0"></script>
+</body>
+
+</html>

@@ -250,6 +250,14 @@
         tags: ['notepad', 'online notepad', 'scratchpad', 'notes', 'text editor', 'memo', 'jotter', 'write', 'word count', 'character count', 'draft', 'clean text', 'pastebin', 'auto save', 'private note']
       },
       {
+        id: 'json-visualizer',
+        title: 'JSON Visualizer',
+        category: 'Development',
+        url: 'development/json-visualizer/',
+        icon: 'lucide:binary',
+        tags: ['json', 'visualizer', 'json visualizer', 'json tree', 'tree viewer', 'json explorer', 'json parser', 'json formatter', 'table', 'json to table', 'beautify', 'minify', 'repair', 'schema', 'api', 'path', 'jsonpath']
+      },
+      {
         id: 'cat-convertors',
         title: 'Convertors',
         category: 'Workspace',
