@@ -136,6 +136,14 @@
     <priority>0.95</priority>
   </url>
 
+  <!-- Tool Applications: Productivity -->
+  <url>
+    <loc>https://toolity.in/productivity/online-notepad/</loc>
+    <lastmod>2026-10-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+
   <!-- Tool Applications: Utilities -->
   <url>
     <loc>https://toolity.in/utilities/gif-speed-changer/</loc>

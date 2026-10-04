@@ -242,6 +242,14 @@
         tags: ['whatsapp', 'wa.me', 'chat', 'link', 'generator', 'creator', 'message', 'click to chat', 'phone', 'contact', 'direct']
       },
       {
+        id: 'online-notepad',
+        title: 'Online Notepad',
+        category: 'Productivity',
+        url: 'productivity/online-notepad/',
+        icon: 'lucide:file-edit',
+        tags: ['notepad', 'online notepad', 'scratchpad', 'notes', 'text editor', 'memo', 'jotter', 'write', 'word count', 'character count', 'draft', 'clean text', 'pastebin', 'auto save', 'private note']
+      },
+      {
         id: 'cat-convertors',
         title: 'Convertors',
         category: 'Workspace',

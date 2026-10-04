@@ -1,0 +1,1319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+  <title>Online Notepad (Free, Auto-Save &amp; Word Counter) — Toolity.in</title>
+  <link rel="canonical" href="https://toolity.in/productivity/online-notepad/">
+
+  <!-- SEO & Metadata -->
+  <meta name="description"
+    content="Free, fast, and 100% private Online Notepad. Take distraction-free notes in your browser with real-time auto-save, word & character statistics, text case converters, and instant export to TXT, Markdown, or Word.">
+  <meta name="keywords"
+    content="online notepad, notepad online, free notes, web scratchpad, browser text editor, online memo, word counter notepad, private notepad, text transformer, auto save notepad">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://toolity.in/productivity/online-notepad/">
+  <meta property="og:title" content="Online Notepad (Free, Auto-Save &amp; Word Counter) — Toolity.in">
+  <meta property="og:description" content="Take notes, draft ideas, and format text in a private, distraction-free online notepad with real-time word counting and offline auto-save.">
+  <meta property="og:image" content="https://toolity.in/assets/Toolity.in%20Logo.webp">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+
+  <!-- Preload Critical Assets -->
+  <link rel="preload" href="/styles/main.css?v=2.3" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+
+  <!-- Iconify Icon Component -->
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="../../styles/main.css?v=2.3">
+
+  <style>
+    /* Designed by Kapil Pidhwani: Online Notepad Tool-Specific Styles */
+    .notepad-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      width: 100%;
+    }
+
+    .notepad-canvas-wrapper {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .notepad-canvas-wrapper:focus-within {
+      border-color: var(--brand);
+      box-shadow: 0 0 0 3px var(--brand-soft);
+    }
+
+    .notepad-pane-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1.15rem;
+      background: var(--surface-elevated);
+      border-bottom: 1px solid var(--border);
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    .notepad-title-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-primary);
+    }
+
+    .notepad-status-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 0.2rem 0.55rem;
+      border-radius: var(--radius-pill);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      transition: all 0.2s ease;
+    }
+
+    .notepad-status-tag.saved {
+      color: #10B981;
+      border-color: rgba(16, 185, 129, 0.3);
+      background: rgba(16, 185, 129, 0.08);
+    }
+
+    .notepad-status-tag.saving {
+      color: #F59E0B;
+      border-color: rgba(245, 158, 11, 0.3);
+      background: rgba(245, 158, 11, 0.08);
+    }
+
+    .notepad-editor-textarea {
+      width: 100%;
+      min-height: 420px;
+      max-height: 720px;
+      padding: 1.25rem 1.35rem;
+      border: none;
+      outline: none;
+      resize: vertical;
+      background: transparent;
+      color: var(--text-primary);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-size: 1rem;
+      line-height: 1.75;
+      box-sizing: border-box;
+      tab-size: 2;
+    }
+
+    .notepad-editor-textarea::placeholder {
+      color: var(--text-muted);
+      opacity: 0.6;
+    }
+
+    /* Font Family Modifiers */
+    .notepad-editor-textarea.font-sans {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    .notepad-editor-textarea.font-mono {
+      font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    .notepad-editor-textarea.font-serif {
+      font-family: 'Newsreader', Georgia, Cambria, 'Times New Roman', Times, serif;
+    }
+
+    /* Live Statistics Metrics Bar */
+    .notepad-metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 0.75rem;
+      width: 100%;
+    }
+
+    .metric-chip-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem 0.9rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      transition: transform 0.15s ease, border-color 0.15s ease;
+    }
+
+    .metric-chip-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-1px);
+    }
+
+    .metric-chip-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .metric-chip-value {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      font-feature-settings: 'tnum';
+    }
+
+    .metric-chip-subtext {
+      font-size: 0.72rem;
+      color: var(--text-secondary);
+    }
+
+    /* Quick Text Actions Toolbar in Accordion/Toolbar */
+    .tools-pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      align-items: center;
+    }
+
+    .btn-text-transform {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      font-size: 0.78rem;
+      font-weight: 500;
+      padding: 0.35rem 0.65rem;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: all 0.15s ease;
+    }
+
+    .btn-text-transform:hover {
+      background: var(--surface-elevated);
+      color: var(--text-primary);
+      border-color: var(--border-hover);
+    }
+
+    .btn-text-transform:active {
+      transform: scale(0.97);
+    }
+
+    /* Formatters and Specs Table */
+    .shortcuts-table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      margin-top: 1.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+    }
+
+    .shortcuts-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.88rem;
+    }
+
+    .shortcuts-table th,
+    .shortcuts-table td {
+      padding: 0.85rem 1.15rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .shortcuts-table th {
+      background: var(--surface-elevated);
+      font-weight: 600;
+      color: var(--text-secondary);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .shortcuts-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .kbd-chip {
+      display: inline-block;
+      padding: 0.15rem 0.45rem;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      box-shadow: 0 1px 0 var(--border);
+    }
+
+    @media (max-width: 768px) {
+      .notepad-editor-textarea {
+        min-height: 320px;
+        padding: 1rem;
+        font-size: 0.95rem;
+      }
+      .notepad-metrics-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Online Notepad",
+    "url": "https://toolity.in/productivity/online-notepad/",
+    "applicationCategory": "ProductivityApplication",
+    "operatingSystem": "All",
+    "browserRequirements": "Requires JavaScript. Requires HTML5.",
+    "description": "Distraction-free online notepad and text editor with real-time auto-save, word statistics, and multi-format export.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "creator": {
+      "@type": "Person",
+      "name": "Kapil Pidhwani"
+    }
+  }
+  </script>
+</head>
+
+<body>
+  <!-- Global Header Component -->
+  <div data-include="/components/header.html"></div>
+
+  <!-- Main Tool Page Content -->
+  <main>
+    <!-- Page Hero Header -->
+    <section class="page-hero">
+      <div class="container">
+        <!-- Breadcrumbs Navigation -->
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="../" class="breadcrumb-link">Productivity</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Online Notepad</span>
+        </nav>
+
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Productivity Workspace</span>
+            <h1 class="page-title">Online Notepad</h1>
+            <p class="page-desc">Distraction-free text scratchpad with real-time word counting, local storage auto-save, and one-click file export. 100% private in your browser.</p>
+          </div>
+          <div class="page-count-badge">
+            <iconify-icon icon="lucide:shield-check" width="16" height="16" style="color: #10B981;"></iconify-icon>
+            <span>100% Client-Side</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tool Main Workspace Area -->
+    <section class="section-wrapper" style="border-top: none; padding-top: 3.5rem;">
+      <div class="container">
+        <div class="tool-workspace-card">
+
+          <!-- 1. Quick Actions Toolbar -->
+          <div class="tool-actions-toolbar">
+            <!-- Left Toolbar: Text Manipulation Tools -->
+            <div class="toolbar-group">
+              <div class="tools-pill-row">
+                <button type="button" class="btn-text-transform" id="btn-case-upper" title="Convert to UPPERCASE">
+                  <iconify-icon icon="lucide:type" width="13" height="13"></iconify-icon>
+                  <span>UPPER</span>
+                </button>
+                <button type="button" class="btn-text-transform" id="btn-case-lower" title="Convert to lowercase">
+                  <span>lower</span>
+                </button>
+                <button type="button" class="btn-text-transform" id="btn-case-title" title="Convert to Title Case">
+                  <span>Title Case</span>
+                </button>
+                <button type="button" class="btn-text-transform" id="btn-case-sentence" title="Convert to Sentence case">
+                  <span>Sentence</span>
+                </button>
+                <button type="button" class="btn-text-transform" id="btn-clean-spaces" title="Trim trailing spaces and collapse excess whitespace">
+                  <iconify-icon icon="lucide:sparkles" width="13" height="13"></iconify-icon>
+                  <span>Clean Spaces</span>
+                </button>
+                <button type="button" class="btn-text-transform" id="btn-sort-lines" title="Sort lines alphabetically A-Z">
+                  <iconify-icon icon="lucide:arrow-down-a-z" width="13" height="13"></iconify-icon>
+                  <span>Sort Lines</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Right Toolbar: Universal Actions -->
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-clear-notepad" title="Clear note canvas">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Clear</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy-notepad" title="Copy entire note to clipboard">
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+
+              <!-- Single Download Dropdown Menu -->
+              <div class="dropdown-menu-wrapper" id="notepad-download-dropdown-wrap">
+                <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download-menu-toggle" aria-haspopup="true" aria-expanded="false">
+                  <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                  <span>Download</span>
+                  <iconify-icon icon="lucide:chevron-down" class="dropdown-arrow" width="13" height="13"></iconify-icon>
+                </button>
+
+                <div class="dropdown-popup" id="notepad-download-dropdown-menu" role="menu">
+                  <button type="button" class="dropdown-item" id="opt-dl-txt" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:file-text" width="14" height="14"></iconify-icon>
+                      <span>Plain Text</span>
+                    </div>
+                    <span class="dropdown-item-badge">.txt</span>
+                  </button>
+                  <button type="button" class="dropdown-item" id="opt-dl-md" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:file-code" width="14" height="14"></iconify-icon>
+                      <span>Markdown</span>
+                    </div>
+                    <span class="dropdown-item-badge">.md</span>
+                  </button>
+                  <button type="button" class="dropdown-item" id="opt-dl-doc" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:file-type" width="14" height="14"></iconify-icon>
+                      <span>Word Document</span>
+                    </div>
+                    <span class="dropdown-item-badge">.doc</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Notepad Workspace Editor Canvas -->
+          <div class="notepad-container">
+            <div class="notepad-canvas-wrapper">
+              <div class="notepad-pane-header">
+                <div class="notepad-title-group">
+                  <iconify-icon icon="lucide:file-edit" width="16" height="16" style="color: var(--brand);"></iconify-icon>
+                  <span>Scratchpad Note</span>
+                </div>
+                <div class="notepad-status-tag saved" id="notepad-save-status">
+                  <iconify-icon icon="lucide:check" width="13" height="13"></iconify-icon>
+                  <span id="save-status-text">Auto-saved to browser</span>
+                </div>
+              </div>
+
+              <textarea 
+                id="notepad-textarea" 
+                class="notepad-editor-textarea font-sans" 
+                placeholder="Start typing or paste text here... Your notes are automatically preserved in your browser's local memory in real time." 
+                spellcheck="true"
+                aria-label="Online Notepad Text Editor"
+              ></textarea>
+            </div>
+
+            <!-- 3. Live Statistics Deck -->
+            <div class="notepad-metrics-grid">
+              <div class="metric-chip-card">
+                <span class="metric-chip-label">
+                  <iconify-icon icon="lucide:type" width="13" height="13"></iconify-icon>
+                  Words
+                </span>
+                <span class="metric-chip-value" id="stat-words">0</span>
+                <span class="metric-chip-subtext" id="stat-words-detail">0 total words</span>
+              </div>
+
+              <div class="metric-chip-card">
+                <span class="metric-chip-label">
+                  <iconify-icon icon="lucide:hash" width="13" height="13"></iconify-icon>
+                  Characters
+                </span>
+                <span class="metric-chip-value" id="stat-chars">0</span>
+                <span class="metric-chip-subtext" id="stat-chars-nospace">0 without spaces</span>
+              </div>
+
+              <div class="metric-chip-card">
+                <span class="metric-chip-label">
+                  <iconify-icon icon="lucide:align-left" width="13" height="13"></iconify-icon>
+                  Lines &amp; Paras
+                </span>
+                <span class="metric-chip-value" id="stat-lines">0</span>
+                <span class="metric-chip-subtext" id="stat-paragraphs">0 paragraphs</span>
+              </div>
+
+              <div class="metric-chip-card">
+                <span class="metric-chip-label">
+                  <iconify-icon icon="lucide:clock" width="13" height="13"></iconify-icon>
+                  Reading Time
+                </span>
+                <span class="metric-chip-value" id="stat-read-time">0m 0s</span>
+                <span class="metric-chip-subtext">@ 200 WPM</span>
+              </div>
+
+              <div class="metric-chip-card">
+                <span class="metric-chip-label">
+                  <iconify-icon icon="lucide:mic" width="13" height="13"></iconify-icon>
+                  Speaking Time
+                </span>
+                <span class="metric-chip-value" id="stat-speak-time">0m 0s</span>
+                <span class="metric-chip-subtext">@ 130 WPM</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. Progressive Disclosure Settings Accordion (Below Workspace) -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="16" height="16"></iconify-icon>
+                <span>Typography &amp; Editor Preferences</span>
+                <span class="pane-badge" id="settings-summary-badge">(Inter Sans • 16px • Relaxed)</span>
+              </div>
+              <iconify-icon icon="lucide:chevron-down" class="tool-settings-chevron" width="16" height="16"></iconify-icon>
+            </summary>
+
+            <div class="tool-settings-panel">
+              <div class="settings-sections-wrapper">
+                <div class="settings-section-card">
+                  <div class="settings-row-wrap">
+                    
+                    <!-- Font Family Switcher -->
+                    <div class="form-group">
+                      <span class="form-label" style="font-size:0.75rem;">Font Family</span>
+                      <div class="segmented-group" id="seg-font-family">
+                        <button type="button" class="seg-pill active" data-val="sans">Sans (Inter)</button>
+                        <button type="button" class="seg-pill" data-val="mono">Mono (Code)</button>
+                        <button type="button" class="seg-pill" data-val="serif">Serif (Editorial)</button>
+                      </div>
+                    </div>
+
+                    <!-- Font Size Switcher -->
+                    <div class="form-group">
+                      <span class="form-label" style="font-size:0.75rem;">Font Size</span>
+                      <div class="segmented-group" id="seg-font-size">
+                        <button type="button" class="seg-pill" data-val="14">14px</button>
+                        <button type="button" class="seg-pill active" data-val="16">16px</button>
+                        <button type="button" class="seg-pill" data-val="18">18px</button>
+                        <button type="button" class="seg-pill" data-val="22">22px</button>
+                      </div>
+                    </div>
+
+                    <!-- Line Spacing Switcher -->
+                    <div class="form-group">
+                      <span class="form-label" style="font-size:0.75rem;">Line Spacing</span>
+                      <div class="segmented-group" id="seg-line-height">
+                        <button type="button" class="seg-pill" data-val="1.5">Compact</button>
+                        <button type="button" class="seg-pill active" data-val="1.75">Relaxed</button>
+                        <button type="button" class="seg-pill" data-val="2.0">Spacious</button>
+                      </div>
+                    </div>
+
+                    <!-- Tab Key Behavior Switcher -->
+                    <div class="form-group">
+                      <span class="form-label" style="font-size:0.75rem;">Tab Key Keypress</span>
+                      <div class="segmented-group" id="seg-tab-behavior">
+                        <button type="button" class="seg-pill active" data-val="2">2 Spaces</button>
+                        <button type="button" class="seg-pill" data-val="4">4 Spaces</button>
+                        <button type="button" class="seg-pill" data-val="tab">Tab Char</button>
+                      </div>
+                    </div>
+
+                    <!-- Spellcheck Toggle -->
+                    <div class="form-group">
+                      <span class="form-label" style="font-size:0.75rem;">Spellcheck</span>
+                      <div class="segmented-group" id="seg-spellcheck">
+                        <button type="button" class="seg-pill active" data-val="on">Enabled</button>
+                        <button type="button" class="seg-pill" data-val="off">Disabled</button>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+        <!-- Single Adsterra Banner Slot Include -->
+        <div data-include="/components/ad-slot.html"></div>
+
+        <!-- 3-Step Instruction Guide -->
+        <section class="guide-section">
+          <div class="section-header">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-title">Using Online Notepad</h2>
+            <p class="section-desc">Create notes, clean formatting, and export draft documents directly inside your browser with complete privacy.</p>
+          </div>
+
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Type or Paste Notes</h3>
+              <p class="step-desc">Start typing your memo, journal, or draft. Everything is automatically saved to your browser's local memory on every keystroke.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Track Metrics &amp; Transform Text</h3>
+              <p class="step-desc">Monitor real-time word, character, and reading time statistics. Use instant one-click converters for uppercase, title case, line sorting, and space cleanup.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Export &amp; Share Safely</h3>
+              <p class="step-desc">Copy your content with one click or download as Plain Text (.txt), Markdown (.md), or Microsoft Word (.doc). No data is ever sent to any remote server.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Keyboard Shortcuts & Format Specifications Table -->
+        <section class="guide-section" style="padding-top: 1rem;">
+          <div class="section-header">
+            <span class="section-eyebrow">Productivity Reference</span>
+            <h2 class="section-title">Editor Shortcuts &amp; Export Formats</h2>
+            <p class="section-desc">Quick key combinations and supported output specifications for high-efficiency workflows.</p>
+          </div>
+
+          <div class="shortcuts-table-wrapper">
+            <table class="shortcuts-table">
+              <thead>
+                <tr>
+                  <th>Shortcut / Feature</th>
+                  <th>Action Triggered</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="kbd-chip">Ctrl</span> + <span class="kbd-chip">S</span> / <span class="kbd-chip">⌘</span> + <span class="kbd-chip">S</span></td>
+                  <td>Quick Export File</td>
+                  <td>Instantly triggers download of your current notepad text as a <code>.txt</code> document without page reload.</td>
+                </tr>
+                <tr>
+                  <td><span class="kbd-chip">Tab</span></td>
+                  <td>Smart Indentation</td>
+                  <td>Inserts configured whitespace (2 spaces, 4 spaces, or tab) at current cursor position without losing focus.</td>
+                </tr>
+                <tr>
+                  <td><span class="kbd-chip">Ctrl</span> + <span class="kbd-chip">Z</span> / <span class="kbd-chip">⌘</span> + <span class="kbd-chip">Z</span></td>
+                  <td>Native Undo / Redo</td>
+                  <td>Standard full browser history undo stack preserves multi-step text edits and replacements.</td>
+                </tr>
+                <tr>
+                  <td><span class="kbd-chip">Auto-Save</span></td>
+                  <td>Local Storage Sync</td>
+                  <td>Reactively saves notes to browser storage so your work survives accidental tab closes, page refreshes, and browser restarts.</td>
+                </tr>
+                <tr>
+                  <td><span class="kbd-chip">.doc Export</span></td>
+                  <td>Word Document Export</td>
+                  <td>Generates a clean HTML-formatted Word-compatible file with preserved paragraphs and typography.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Frequently Asked Questions (FAQ) -->
+        <section class="guide-section" style="padding-top: 1rem;">
+          <div class="section-header">
+            <span class="section-eyebrow">Got Questions?</span>
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <p class="section-desc">Learn more about how Online Notepad protects your privacy and manages storage.</p>
+          </div>
+
+          <div class="faq-accordion-list">
+            <details class="faq-item">
+              <summary class="faq-question">
+                <span>Are my notes stored on any cloud server or database?</span>
+                <iconify-icon icon="lucide:chevron-down" class="faq-chevron" width="16" height="16"></iconify-icon>
+              </summary>
+              <div class="faq-answer">
+                <p>No, never. Toolity's Online Notepad operates 100% on the client side inside your web browser. Your text is saved exclusively in your personal browser's <code>localStorage</code>. No text, notes, or keystrokes are transmitted to any backend servers or external third parties.</p>
+              </div>
+            </details>
+
+            <details class="faq-item">
+              <summary class="faq-question">
+                <span>Will my notes stay intact if I refresh or close my browser tab?</span>
+                <iconify-icon icon="lucide:chevron-down" class="faq-chevron" width="16" height="16"></iconify-icon>
+              </summary>
+              <div class="faq-answer">
+                <p>Yes. Every character you type is automatically written to your browser's persistent local storage. When you return to this page, your text will automatically reload exactly as you left it, even across device reboots (unless you manually clear browser site data or click Clear).</p>
+              </div>
+            </details>
+
+            <details class="faq-item">
+              <summary class="faq-question">
+                <span>Can I use this Online Notepad offline without an internet connection?</span>
+                <iconify-icon icon="lucide:chevron-down" class="faq-chevron" width="16" height="16"></iconify-icon>
+              </summary>
+              <div class="faq-answer">
+                <p>Yes. Because all editing, word counting, text transformations, and downloads execute purely in local JavaScript, you can open the page and write notes completely offline without an active network connection.</p>
+              </div>
+            </details>
+
+            <details class="faq-item">
+              <summary class="faq-question">
+                <span>What happens if I accidentally click the Clear button?</span>
+                <iconify-icon icon="lucide:chevron-down" class="faq-chevron" width="16" height="16"></iconify-icon>
+              </summary>
+              <div class="faq-answer">
+                <p>We've built in an instant Undo protection mechanism. When you click Clear, your previous note is safely held in memory and an interactive toast banner appears with an <strong>Undo</strong> button, allowing you to restore your note immediately with a single click.</p>
+              </div>
+            </details>
+
+            <details class="faq-item">
+              <summary class="faq-question">
+                <span>Is there a character or document length limit?</span>
+                <iconify-icon icon="lucide:chevron-down" class="faq-chevron" width="16" height="16"></iconify-icon>
+              </summary>
+              <div class="faq-answer">
+                <p>Browser local storage provides approximately 5MB to 10MB of storage per domain, which is equivalent to several million characters or hundreds of pages of text—more than enough for everyday drafting, notes, and documentation.</p>
+              </div>
+            </details>
+          </div>
+        </section>
+
+        <!-- Category Hub CTA Banner -->
+        <section class="section-wrapper" style="border-top: none; padding-top: 2rem;">
+          <div class="category-cta-card">
+            <div class="category-cta-content">
+              <span class="section-eyebrow">Explore Productivity</span>
+              <h2 class="category-cta-title">Looking for more daily workflow utilities?</h2>
+              <p class="category-cta-desc">Discover our growing suite of distraction-free productivity tools, formatters, and browser utilities.</p>
+              <a href="../" class="btn-pill btn-primary-signal">
+                <span>View Productivity Workspace</span>
+                <iconify-icon icon="lucide:arrow-right" width="16" height="16"></iconify-icon>
+              </a>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Global Multi-Column Footer Component -->
+  <div data-include="/components/footer.html"></div>
+
+  <!-- Main Platform Scripts -->
+  <script src="../../scripts/main.js?v=2.3"></script>
+
+  <!-- Online Notepad Script -->
+  <script>
+    (function () {
+      'use strict';
+
+      // Elements
+      var textarea = document.getElementById('notepad-textarea');
+      var saveStatus = document.getElementById('notepad-save-status');
+      var saveStatusText = document.getElementById('save-status-text');
+
+      // Metric elements
+      var statWords = document.getElementById('stat-words');
+      var statWordsDetail = document.getElementById('stat-words-detail');
+      var statChars = document.getElementById('stat-chars');
+      var statCharsNoSpace = document.getElementById('stat-chars-nospace');
+      var statLines = document.getElementById('stat-lines');
+      var statParagraphs = document.getElementById('stat-paragraphs');
+      var statReadTime = document.getElementById('stat-read-time');
+      var statSpeakTime = document.getElementById('stat-speak-time');
+
+      // Toolbar buttons
+      var btnClear = document.getElementById('btn-clear-notepad');
+      var btnCopy = document.getElementById('btn-copy-notepad');
+      var btnDownloadToggle = document.getElementById('btn-download-menu-toggle');
+      var downloadDropdown = document.getElementById('notepad-download-dropdown-menu');
+      var optDlTxt = document.getElementById('opt-dl-txt');
+      var optDlMd = document.getElementById('opt-dl-md');
+      var optDlDoc = document.getElementById('opt-dl-doc');
+
+      // Transform buttons
+      var btnUpper = document.getElementById('btn-case-upper');
+      var btnLower = document.getElementById('btn-case-lower');
+      var btnTitle = document.getElementById('btn-case-title');
+      var btnSentence = document.getElementById('btn-case-sentence');
+      var btnCleanSpaces = document.getElementById('btn-clean-spaces');
+      var btnSortLines = document.getElementById('btn-sort-lines');
+
+      // Settings elements
+      var segFontFamily = document.getElementById('seg-font-family');
+      var segFontSize = document.getElementById('seg-font-size');
+      var segLineHeight = document.getElementById('seg-line-height');
+      var segTabBehavior = document.getElementById('seg-tab-behavior');
+      var segSpellcheck = document.getElementById('seg-spellcheck');
+      var settingsSummaryBadge = document.getElementById('settings-summary-badge');
+
+      // State variables
+      var STORAGE_KEY = 'toolity_notepad_content';
+      var SETTINGS_KEY = 'toolity_notepad_settings';
+      var lastClearedText = null;
+      var saveTimeout = null;
+
+      // Default settings
+      var settings = {
+        fontFamily: 'sans',
+        fontSize: '16',
+        lineHeight: '1.75',
+        tabBehavior: '2',
+        spellcheck: 'on'
+      };
+
+      // Load Settings from LocalStorage
+      function loadSettings() {
+        try {
+          var saved = localStorage.getItem(SETTINGS_KEY);
+          if (saved) {
+            var parsed = JSON.parse(saved);
+            Object.assign(settings, parsed);
+          }
+        } catch (e) {
+          console.warn('Failed to load notepad settings', e);
+        }
+        applySettingsToDOM();
+      }
+
+      function saveSettings() {
+        try {
+          localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+        } catch (e) {
+          console.warn('Failed to save notepad settings', e);
+        }
+        updateSettingsSummaryBadge();
+      }
+
+      function applySettingsToDOM() {
+        // Font family
+        textarea.classList.remove('font-sans', 'font-mono', 'font-serif');
+        textarea.classList.add('font-' + settings.fontFamily);
+        updateSegmentedActive(segFontFamily, settings.fontFamily);
+
+        // Font size
+        textarea.style.fontSize = settings.fontSize + 'px';
+        updateSegmentedActive(segFontSize, settings.fontSize);
+
+        // Line height
+        textarea.style.lineHeight = settings.lineHeight;
+        updateSegmentedActive(segLineHeight, settings.lineHeight);
+
+        // Tab behavior
+        updateSegmentedActive(segTabBehavior, settings.tabBehavior);
+
+        // Spellcheck
+        textarea.spellcheck = settings.spellcheck === 'on';
+        updateSegmentedActive(segSpellcheck, settings.spellcheck);
+
+        updateSettingsSummaryBadge();
+      }
+
+      function updateSegmentedActive(groupEl, value) {
+        if (!groupEl) return;
+        var pills = groupEl.querySelectorAll('.seg-pill');
+        pills.forEach(function (pill) {
+          if (pill.getAttribute('data-val') === String(value)) {
+            pill.classList.add('active');
+          } else {
+            pill.classList.remove('active');
+          }
+        });
+      }
+
+      function updateSettingsSummaryBadge() {
+        if (!settingsSummaryBadge) return;
+        var fontLabel = settings.fontFamily === 'mono' ? 'Mono' : settings.fontFamily === 'serif' ? 'Serif' : 'Inter Sans';
+        var lineLabel = settings.lineHeight === '1.5' ? 'Compact' : settings.lineHeight === '2.0' ? 'Spacious' : 'Relaxed';
+        settingsSummaryBadge.textContent = '(' + fontLabel + ' • ' + settings.fontSize + 'px • ' + lineLabel + ')';
+      }
+
+      // Load Saved Content
+      function loadSavedContent() {
+        try {
+          var content = localStorage.getItem(STORAGE_KEY);
+          if (content !== null) {
+            textarea.value = content;
+          }
+        } catch (e) {
+          console.warn('LocalStorage access issue:', e);
+        }
+        updateMetrics();
+      }
+
+      // Save Content to LocalStorage with reactive status
+      function saveContent() {
+        setSavingStatus(true);
+        clearTimeout(saveTimeout);
+        saveTimeout = setTimeout(function () {
+          try {
+            localStorage.setItem(STORAGE_KEY, textarea.value);
+            setSavingStatus(false);
+          } catch (e) {
+            console.error('Failed to write to localStorage:', e);
+          }
+        }, 150);
+      }
+
+      function setSavingStatus(isSaving) {
+        if (!saveStatus || !saveStatusText) return;
+        if (isSaving) {
+          saveStatus.className = 'notepad-status-tag saving';
+          saveStatus.innerHTML = '<iconify-icon icon="lucide:loader-2" width="13" height="13" class="spin"></iconify-icon> <span>Saving...</span>';
+        } else {
+          saveStatus.className = 'notepad-status-tag saved';
+          saveStatus.innerHTML = '<iconify-icon icon="lucide:check" width="13" height="13"></iconify-icon> <span>Auto-saved to browser</span>';
+        }
+      }
+
+      // Live Statistics Calculator
+      function updateMetrics() {
+        var text = textarea.value;
+
+        // Characters
+        var charCount = text.length;
+        var charNoSpaceCount = text.replace(/\s/g, '').length;
+
+        // Words
+        var trimmed = text.trim();
+        var wordCount = 0;
+        if (trimmed.length > 0) {
+          var wordsArray = trimmed.match(/[\p{L}\p{N}\p{M}]+(?:['’\-][\p{L}\p{N}\p{M}]+)*/gu);
+          wordCount = wordsArray ? wordsArray.length : 0;
+        }
+
+        // Lines & Paragraphs
+        var lineCount = text.length === 0 ? 0 : text.split('\n').length;
+        var paragraphs = 0;
+        if (text.length > 0) {
+          var paraArray = text.split(/\n+/).filter(function (p) {
+            return p.trim().length > 0;
+          });
+          paragraphs = paraArray.length;
+        }
+
+        // Estimated Reading & Speaking Times
+        var readingMinutes = wordCount / 200;
+        var speakingMinutes = wordCount / 130;
+
+        function formatTime(mins) {
+          if (mins <= 0) return '0m 0s';
+          var m = Math.floor(mins);
+          var s = Math.round((mins - m) * 60);
+          if (m === 0) return s + 's';
+          return m + 'm ' + s + 's';
+        }
+
+        // Update DOM
+        if (statWords) statWords.textContent = wordCount.toLocaleString();
+        if (statWordsDetail) statWordsDetail.textContent = wordCount === 1 ? '1 total word' : wordCount.toLocaleString() + ' total words';
+        if (statChars) statChars.textContent = charCount.toLocaleString();
+        if (statCharsNoSpace) statCharsNoSpace.textContent = charNoSpaceCount.toLocaleString() + ' without spaces';
+        if (statLines) statLines.textContent = lineCount.toLocaleString();
+        if (statParagraphs) statParagraphs.textContent = paragraphs === 1 ? '1 paragraph' : paragraphs.toLocaleString() + ' paragraphs';
+        if (statReadTime) statReadTime.textContent = formatTime(readingMinutes);
+        if (statSpeakTime) statSpeakTime.textContent = formatTime(speakingMinutes);
+      }
+
+      // Input Listener
+      textarea.addEventListener('input', function () {
+        saveContent();
+        updateMetrics();
+      });
+
+      // Handle Tab Key Indentation
+      textarea.addEventListener('keydown', function (e) {
+        // Ctrl+S / Cmd+S quick download shortcut
+        if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+          e.preventDefault();
+          downloadFile('txt');
+          return;
+        }
+
+        // Tab Indentation
+        if (e.key === 'Tab') {
+          e.preventDefault();
+          var start = this.selectionStart;
+          var end = this.selectionEnd;
+          var tabVal = settings.tabBehavior === '4' ? '    ' : settings.tabBehavior === 'tab' ? '\t' : '  ';
+
+          this.value = this.value.substring(0, start) + tabVal + this.value.substring(end);
+          this.selectionStart = this.selectionEnd = start + tabVal.length;
+          saveContent();
+          updateMetrics();
+        }
+      });
+
+      // Toast Notification Helper
+      function showToast(message, actionText, actionCallback) {
+        var existing = document.getElementById('notepad-custom-toast');
+        if (existing) existing.remove();
+
+        var toast = document.createElement('div');
+        toast.id = 'notepad-custom-toast';
+        toast.style.position = 'fixed';
+        toast.style.bottom = '2rem';
+        toast.style.left = '50%';
+        toast.style.transform = 'translateX(-50%) translateY(20px)';
+        toast.style.background = 'var(--surface-elevated)';
+        toast.style.color = 'var(--text-primary)';
+        toast.style.border = '1px solid var(--border)';
+        toast.style.padding = '0.75rem 1.25rem';
+        toast.style.borderRadius = 'var(--radius-pill)';
+        toast.style.boxShadow = 'var(--shadow-lg)';
+        toast.style.display = 'flex';
+        toast.style.alignItems = 'center';
+        toast.style.gap = '0.85rem';
+        toast.style.fontSize = '0.85rem';
+        toast.style.zIndex = '9999';
+        toast.style.opacity = '0';
+        toast.style.transition = 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)';
+
+        var textSpan = document.createElement('span');
+        textSpan.innerHTML = message;
+        toast.appendChild(textSpan);
+
+        if (actionText && actionCallback) {
+          var btnAction = document.createElement('button');
+          btnAction.type = 'button';
+          btnAction.textContent = actionText;
+          btnAction.style.background = 'var(--brand)';
+          btnAction.style.color = '#fff';
+          btnAction.style.border = 'none';
+          btnAction.style.padding = '0.25rem 0.65rem';
+          btnAction.style.borderRadius = 'var(--radius-pill)';
+          btnAction.style.fontSize = '0.75rem';
+          btnAction.style.fontWeight = '600';
+          btnAction.style.cursor = 'pointer';
+          btnAction.addEventListener('click', function () {
+            actionCallback();
+            toast.remove();
+          });
+          toast.appendChild(btnAction);
+        }
+
+        document.body.appendChild(toast);
+        requestAnimationFrame(function () {
+          toast.style.opacity = '1';
+          toast.style.transform = 'translateX(-50%) translateY(0)';
+        });
+
+        setTimeout(function () {
+          if (toast.parentNode) {
+            toast.style.opacity = '0';
+            toast.style.transform = 'translateX(-50%) translateY(10px)';
+            setTimeout(function () { toast.remove(); }, 250);
+          }
+        }, 4500);
+      }
+
+      // Action: Clear Notepad with Undo Guard
+      if (btnClear) {
+        btnClear.addEventListener('click', function () {
+          if (textarea.value.trim().length === 0) {
+            showToast('Note canvas is already empty.');
+            return;
+          }
+          lastClearedText = textarea.value;
+          textarea.value = '';
+          saveContent();
+          updateMetrics();
+
+          showToast('Note cleared.', 'Undo', function () {
+            if (lastClearedText !== null) {
+              textarea.value = lastClearedText;
+              saveContent();
+              updateMetrics();
+              showToast('Note restored successfully.');
+            }
+          });
+        });
+      }
+
+      // Action: Copy to Clipboard
+      if (btnCopy) {
+        btnCopy.addEventListener('click', function () {
+          var text = textarea.value;
+          if (!text) {
+            showToast('Notepad is empty.');
+            return;
+          }
+
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(function () {
+              showToast('✓ Note copied to clipboard!');
+            }).catch(function () {
+              fallbackCopy(text);
+            });
+          } else {
+            fallbackCopy(text);
+          }
+        });
+      }
+
+      function fallbackCopy(text) {
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          showToast('✓ Note copied to clipboard!');
+        } catch (err) {
+          showToast('Failed to copy. Please select text manually.');
+        }
+      }
+
+      // Action: Download Dropdown Toggle
+      if (btnDownloadToggle && downloadDropdown) {
+        btnDownloadToggle.addEventListener('click', function (e) {
+          e.stopPropagation();
+          var isOpen = downloadDropdown.classList.contains('show');
+          if (isOpen) {
+            downloadDropdown.classList.remove('show');
+            btnDownloadToggle.setAttribute('aria-expanded', 'false');
+          } else {
+            downloadDropdown.classList.add('show');
+            btnDownloadToggle.setAttribute('aria-expanded', 'true');
+          }
+        });
+
+        document.addEventListener('click', function (e) {
+          if (!btnDownloadToggle.contains(e.target) && !downloadDropdown.contains(e.target)) {
+            downloadDropdown.classList.remove('show');
+            btnDownloadToggle.setAttribute('aria-expanded', 'false');
+          }
+        });
+      }
+
+      // Action: File Exporters (.txt, .md, .doc)
+      function downloadFile(format) {
+        var text = textarea.value;
+        if (!text.trim()) {
+          showToast('Cannot export an empty note. Write some text first!');
+          return;
+        }
+
+        var now = new Date();
+        var dateStr = now.toISOString().slice(0, 10);
+        var filename = 'note-' + dateStr + '.' + format;
+        var blob;
+
+        if (format === 'txt') {
+          blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+        } else if (format === 'md') {
+          blob = new Blob([text], { type: 'text/markdown;charset=utf-8' });
+        } else if (format === 'doc') {
+          // Wrap in simple HTML for Word compatibility
+          var formattedHtml = '<!DOCTYPE html><html><head><meta charset="utf-8"><title>Note</title><style>body{font-family:Arial,sans-serif;font-size:11pt;line-height:1.6;white-space:pre-wrap;}</style></head><body>' + escapeHtml(text) + '</body></html>';
+          blob = new Blob(['\ufeff' + formattedHtml], { type: 'application/msword;charset=utf-8' });
+        }
+
+        if (blob) {
+          var url = URL.createObjectURL(blob);
+          var a = document.createElement('a');
+          a.href = url;
+          a.download = filename;
+          document.body.appendChild(a);
+          a.click();
+          setTimeout(function () {
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+          }, 150);
+          showToast('✓ Downloaded as ' + filename);
+        }
+
+        if (downloadDropdown) {
+          downloadDropdown.classList.remove('show');
+          if (btnDownloadToggle) btnDownloadToggle.setAttribute('aria-expanded', 'false');
+        }
+      }
+
+      function escapeHtml(str) {
+        return str
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
+
+      if (optDlTxt) optDlTxt.addEventListener('click', function () { downloadFile('txt'); });
+      if (optDlMd) optDlMd.addEventListener('click', function () { downloadFile('md'); });
+      if (optDlDoc) optDlDoc.addEventListener('click', function () { downloadFile('doc'); });
+
+      // Text Transformers (Applying directly to selection or full text)
+      function applyTextTransformation(transformFn) {
+        var start = textarea.selectionStart;
+        var end = textarea.selectionEnd;
+        var fullText = textarea.value;
+
+        if (!fullText) {
+          showToast('Notepad is empty.');
+          return;
+        }
+
+        if (start !== end) {
+          // Transform selected text only
+          var selected = fullText.substring(start, end);
+          var transformed = transformFn(selected);
+          textarea.value = fullText.substring(0, start) + transformed + fullText.substring(end);
+          textarea.selectionStart = start;
+          textarea.selectionEnd = start + transformed.length;
+        } else {
+          // Transform entire document
+          textarea.value = transformFn(fullText);
+        }
+
+        saveContent();
+        updateMetrics();
+      }
+
+      // Transform: Uppercase
+      if (btnUpper) {
+        btnUpper.addEventListener('click', function () {
+          applyTextTransformation(function (txt) {
+            return txt.toUpperCase();
+          });
+          showToast('Converted to UPPERCASE');
+        });
+      }
+
+      // Transform: Lowercase
+      if (btnLower) {
+        btnLower.addEventListener('click', function () {
+          applyTextTransformation(function (txt) {
+            return txt.toLowerCase();
+          });
+          showToast('Converted to lowercase');
+        });
+      }
+
+      // Transform: Title Case
+      if (btnTitle) {
+        btnTitle.addEventListener('click', function () {
+          applyTextTransformation(function (txt) {
+            var minorWords = ['a', 'an', 'the', 'and', 'but', 'or', 'for', 'nor', 'on', 'at', 'to', 'from', 'by', 'in', 'of'];
+            return txt.toLowerCase().split(/(\s+)/).map(function (word, index) {
+              if (/^\s+$/.test(word) || word.length === 0) return word;
+              var clean = word.replace(/[^a-zA-Z0-9]/g, '');
+              if (index > 0 && minorWords.indexOf(clean.toLowerCase()) !== -1) {
+                return word.toLowerCase();
+              }
+              return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+            }).join('');
+          });
+          showToast('Converted to Title Case');
+        });
+      }
+
+      // Transform: Sentence case
+      if (btnSentence) {
+        btnSentence.addEventListener('click', function () {
+          applyTextTransformation(function (txt) {
+            return txt.toLowerCase().replace(/(^\s*|[.!?]\s+)([a-z])/gu, function (match, separator, char) {
+              return separator + char.toUpperCase();
+            });
+          });
+          showToast('Converted to Sentence case');
+        });
+      }
+
+      // Transform: Clean Spaces (trailing whitespace + duplicate empty lines)
+      if (btnCleanSpaces) {
+        btnCleanSpaces.addEventListener('click', function () {
+          applyTextTransformation(function (txt) {
+            var lines = txt.split('\n').map(function (line) {
+              return line.replace(/[ \t]+$/g, '').replace(/[ \t]{2,}/g, ' ');
+            });
+            return lines.join('\n').replace(/\n{3,}/g, '\n\n').trim();
+          });
+          showToast('Cleaned redundant whitespace');
+        });
+      }
+
+      // Transform: Sort Lines A-Z
+      if (btnSortLines) {
+        btnSortLines.addEventListener('click', function () {
+          applyTextTransformation(function (txt) {
+            var lines = txt.split('\n');
+            lines.sort(function (a, b) {
+              return a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' });
+            });
+            return lines.join('\n');
+          });
+          showToast('Lines sorted alphabetically');
+        });
+      }
+
+      // Settings Segmented Group Handlers
+      function setupSegmentedGroup(groupEl, key) {
+        if (!groupEl) return;
+        var pills = groupEl.querySelectorAll('.seg-pill');
+        pills.forEach(function (pill) {
+          pill.addEventListener('click', function () {
+            var val = this.getAttribute('data-val');
+            settings[key] = val;
+            saveSettings();
+            applySettingsToDOM();
+          });
+        });
+      }
+
+      setupSegmentedGroup(segFontFamily, 'fontFamily');
+      setupSegmentedGroup(segFontSize, 'fontSize');
+      setupSegmentedGroup(segLineHeight, 'lineHeight');
+      setupSegmentedGroup(segTabBehavior, 'tabBehavior');
+      setupSegmentedGroup(segSpellcheck, 'spellcheck');
+
+      // Initialize on Load
+      loadSettings();
+      loadSavedContent();
+
+    })();
+  </script>
+</body>
+
+</html>
