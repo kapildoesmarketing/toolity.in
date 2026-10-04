@@ -200,15 +200,39 @@
     - **Category & Grid Tool Cards (`.category-glow-card`)**: Standardized to `height: 250px` matching homepage card metrics, with `padding: 1.15rem 1.15rem 1rem;`, `font-size: 0.98rem; line-height: 1.25;` on `.glow-card-title`, and constrained description margins (`margin: 0 0 0.5rem 0;`). This ensures tools with multi-line titles (such as "YouTube Thumbnail Downloader" or "URL Parameter Separator") never overflow or clip the bottom "Open →" button.
     - **Search Ranking & Cache-Busting**: Search scoring prioritizes exact and prefix phrase queries with dominant base bonuses (`+2500` exact, `+1800` prefix, `+1400` substring), outranking scattered partial token sums. Search dropdown reopens smoothly on input focus/click. All HTML asset links use versioned query strings (e.g., `?v=2.2`) to prevent stale browser caching on live deployments.
     - **Universal Link Reset & Footer Author Theme Inheritance**: Global `a, a:visited { color: inherit; text-decoration: none; }` prevents default browser blue (`#0000ee`) and purple (`#551a8b`) hyperlinks. Footer creator links explicitly enforce `.footer-creator a, .footer-creator a:visited { color: var(--text-primary) !important; }` with hover transitioning to `var(--brand)`.
-
-
-
-
-
-
-
-
-
-
+22. **HTML Partial Include System (Modular Components)**:
+    - **Implemented**: 2026-10-04. All 24 pages migrated.
+    - **Why**: Changing nav/footer/ads previously required editing all 24 HTML files. Now it is 1 file.
+    - **How It Works**: scripts/main.js fetches /components/*.html partials via fetch() on DOMContentLoaded and injects them into [data-include] placeholder divs before running initSite().
+    - **Partial Files** (edit these instead of individual pages):
+      - /components/header.html — Full header nav + GTM noscript. Update nav links, logo here.
+      - /components/footer.html — Full footer + toast div. Update footer links, copyright here.
+      - /components/ad-slot.html — Adsterra banner section (desktop 728x90 + mobile 320x50). Update ad keys here.
+    - **Root-Relative Paths**: All hrefs in partials use root-relative paths (/web/, /dev/, /assets/), not ../../. Works at any directory depth.
+    - **Active Nav Link**: setActiveNav() in main.js reads location.pathname, extracts the first URL segment (e.g. web), and sets .active on the matching a[data-nav=web] after header injection.
+    - **Per-Page HTML (stays inline in each file)**: title, meta description, Open Graph tags, h1, GTM script in head (must fire early), tool-specific style and script blocks.
+    - **WARNING - Local Development**: fetch() requires HTTPS or a local server. Opening HTML via file:// will fail to load partials. Always use: npx serve . when developing locally.
+    - **Shared Tool CSS in main.css**: Common UI component classes are now at the bottom of styles/main.css (section: SHARED TOOL WORKSPACE COMPONENTS): .url-input-container, .btn-input-clear, .sample-chips-row, .btn-sample-chip, .quality-grid, .quality-card-btn, .quality-top-row, .quality-title, .quality-tag-badge, .quality-dimensions, .preview-viewport-box, .empty-preview-content, .empty-preview-icon, .preview-floating-pill, .formats-table-card, .formats-table.
+    - **Adding a New Tool Page**: Use the three div[data-include] placeholders for header/footer/ads. Add only tool-specific CSS/JS inline.
+    - **CSS/JS Version**: Currently v=2.3. Bump this on all main.css and main.js script/link tags in all HTML files when deploying breaking style/JS changes to bust browser cache.
+23. **Core Web Vitals, SEO, Polish & Mobile Bottom Pill Nav Enhancements**:
+    - **Implemented**: 2026-10-04.
+    - **Canonical URLs**: Added `<link rel="canonical" href="https://toolity.in/...">` to `<head>` on all 24 production pages + templates to eliminate duplicate indexing penalties.
+    - **Zero-Flash Dark Mode Initialization**: Synchronous inline `<script>` in `<head>` immediately sets `data-theme` attribute on `<html>` from `localStorage` or `prefers-color-scheme` before HTML renders, eliminating FOUC / white flashes completely.
+    - **Critical Asset Preloads**: `<link rel="preload" href="/styles/main.css?v=2.3" as="style">` and `<link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">` added to `<head>` on all pages for faster LCP.
+    - **Script Deferral**: Iconify CDN scripts now use `defer` to unblock initial render pipeline.
+    - **Zero-CLS Image Dimensions**: Explicit `width`, `height`, and `loading="lazy"` (with `fetchpriority="high"` on header brand logo) enforced on all `<img>` tags across static templates and dynamic workspace previews.
+    - **Sitemap Indexing**: Updated `sitemap.xml` with current timestamps (`2026-10-04`) and all 24 URLs.
+    - **Empty State Breathing Animation**: Added `@keyframes breatheState` in `styles/main.css` to give idle tool empty states a subtle pulse, with `@media (prefers-reduced-motion: reduce)` support.
+    - **Page Load Fade-In**: Smooth `@keyframes fadeInPage` on `body` for seamless page loading transitions.
+    - **Mobile Bottom Pill Navigation Bar (Non-Home Pages)**:
+      - Automatically injected on mobile devices (`max-width: 768px`) on all non-home pages.
+      - Glassmorphism floating pill at screen bottom with 4 thumb-friendly actions:
+        1. **Home** (`/`)
+        2. **Tools** (triggers mobile drawer)
+        3. **Share** (native `navigator.share` fallback to copy URL + toast)
+        4. **Top** (smooth scroll to top, resolving back-to-top feature)
+      - Integrated with safe-area insets (`env(safe-area-inset-bottom)`).
+    - **Multi-Device Favicon Suite**: Standardized `/assets/favicons/` across all pages with 32x32 PNG, 16x16 PNG, 180x180 Apple Touch Icon, and root `/favicon.ico` for complete cross-browser and iOS/Android compatibility.
 
 

@@ -1,6 +1,40 @@
 /* Designed by Kapil Pidhwani: Theme Management & Core Site Interactions for Toolity.in */
 
 (function () {
+
+  /**
+   * Designed by Kapil Pidhwani: HTML Partial Include System
+   * Fetches /components/*.html partials and replaces [data-include] placeholders.
+   * Requires HTTPS or a local dev server (file:// will not work).
+   */
+  async function loadIncludes() {
+    const targets = document.querySelectorAll('[data-include]');
+    if (!targets.length) return;
+    await Promise.all([...targets].map(async (el) => {
+      try {
+        const res = await fetch(el.dataset.include);
+        if (!res.ok) throw new Error(`Failed to load ${el.dataset.include}`);
+        const html = await res.text();
+        const tmp = document.createElement('div');
+        tmp.innerHTML = html;
+        el.replaceWith(...tmp.childNodes);
+      } catch (e) {
+        console.warn('[Toolity] Include failed:', e.message);
+      }
+    }));
+  }
+
+  /**
+   * Designed by Kapil Pidhwani: Active Nav Link Highlighter
+   * Sets .active on the correct nav link based on the first URL path segment.
+   * Reads data-nav attributes injected by /components/header.html.
+   */
+  function setActiveNav() {
+    const segment = location.pathname.split('/').filter(Boolean)[0] || '';
+    const link = document.querySelector(`.nav-link[data-nav="${segment}"]`);
+    if (link) link.classList.add('active');
+  }
+
   const THEME_STORAGE_KEY = 'toolity_theme';
 
   /**
@@ -31,7 +65,7 @@
   const initialTheme = getPreferredTheme();
   document.documentElement.setAttribute('data-theme', initialTheme);
 
-  document.addEventListener('DOMContentLoaded', () => {
+  function initSite() {
     // Sync icon state with applied theme
     const themeIcon = document.getElementById('theme-icon');
     if (themeIcon) {
@@ -55,6 +89,9 @@
         applyTheme(e.matches ? 'dark' : 'light');
       }
     });
+
+    // Set active nav link from injected header partial
+    setActiveNav();
 
     // Handle transparent header frosted effect on scroll
     const header = document.querySelector('.site-header');
@@ -89,6 +126,10 @@
 
     // Initialize Mobile Hamburger Menu & Frosted Navigation Drawer
     initMobileNavigation();
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    loadIncludes().then(initSite);
   });
 
   /**
@@ -779,19 +820,12 @@
     let backdrop = document.getElementById('mobile-nav-backdrop');
 
     if (!drawer) {
-      // Find relative root path based on desktop links
-      const sampleLink = document.querySelector('.nav-links a');
-      let rootPrefix = '';
-      if (sampleLink) {
-        const href = sampleLink.getAttribute('href') || '';
-        if (href.startsWith('../../')) rootPrefix = '../../';
-        else if (href.startsWith('../')) rootPrefix = '../';
-        else if (href.startsWith('/')) rootPrefix = '/';
-      }
+      // Partials use root-relative paths — always use '/' as prefix
+      const rootPrefix = '/';
 
-      // Find active page
-      const activeLink = document.querySelector('.nav-links a.active');
-      const activeHref = activeLink ? (activeLink.getAttribute('href') || '') : '';
+      // Find active page via data-nav attribute (set by setActiveNav() from header partial)
+      const segment = location.pathname.split('/').filter(Boolean)[0] || '';
+      const activeHref = segment ? `/${segment}/` : '/';
 
       const categories = [
         { title: 'Home', href: rootPrefix === '' ? './' : rootPrefix, icon: 'lucide:home', key: 'home' },
@@ -814,10 +848,10 @@
       let gridHtml = '';
       categories.forEach(cat => {
         let isActive = false;
-        if (activeHref.includes(cat.key)) {
-          isActive = true;
-        } else if (cat.key === 'home' && (activeHref === '/' || activeHref === './' || activeHref === '' || activeHref.endsWith('index.html') && !activeHref.includes('/'))) {
-          isActive = true;
+        if (cat.key === '' || cat.key === 'home') {
+          isActive = segment === '';
+        } else {
+          isActive = segment === cat.key;
         }
 
         gridHtml += `
@@ -835,14 +869,8 @@
           </div>
           <div class="mobile-nav-footer-links">
             <a href="${rootPrefix}about/" class="mobile-nav-sublink">About</a>
-            <a href="${rootPrefix}web/url-parameter-separator/" class="mobile-nav-sublink">URL Cleaner</a>
-            <a href="${rootPrefix}utility/qr-code-generator/" class="mobile-nav-sublink">QR Generator</a>
-            <a href="${rootPrefix}utility/mailto-generator/" class="mobile-nav-sublink">Mailto Creator</a>
-            <a href="${rootPrefix}utility/whatsapp-link-creator/" class="mobile-nav-sublink">WhatsApp Link</a>
-            <a href="${rootPrefix}utility/gif-speed-changer/" class="mobile-nav-sublink">GIF Speed</a>
-            <a href="${rootPrefix}convertors/video-to-gif/" class="mobile-nav-sublink">Video to GIF</a>
-            <a href="${rootPrefix}convertors/gif-to-video/" class="mobile-nav-sublink">GIF to Video</a>
             <a href="${rootPrefix}privacy/" class="mobile-nav-sublink">Privacy</a>
+            <a href="${rootPrefix}terms/" class="mobile-nav-sublink">Terms</a>
             <a href="${rootPrefix}credits/" class="mobile-nav-sublink">Credits</a>
           </div>
         </div>
@@ -903,5 +931,100 @@
         closeMenu();
       }
     });
+
+    // Initialize Mobile Floating Bottom Pill Nav on non-home pages
+    initMobileBottomNav(toggleMenu);
+  }
+
+  /**
+   * Designed by Kapil Pidhwani: Mobile Floating Bottom Pill Nav (Non-Home Pages)
+   * Provides quick thumb-friendly actions: 1. Home, 2. Tools drawer (toggle), 3. Share URL, 4. Scroll to Top.
+   */
+  function initMobileBottomNav(toggleMenuFn) {
+    const pathname = window.location.pathname;
+    const isHome = pathname === '/' || pathname === '/index.html' || pathname === '';
+    if (isHome) return; // Non-home pages only
+
+    if (document.querySelector('.mobile-bottom-pill-nav')) return;
+
+    const nav = document.createElement('nav');
+    nav.className = 'mobile-bottom-pill-nav';
+    nav.setAttribute('aria-label', 'Mobile Quick Navigation');
+    nav.innerHTML = `
+      <a href="/" class="pill-nav-item" aria-label="Go to Home">
+        <iconify-icon icon="lucide:home"></iconify-icon>
+        <span>Home</span>
+      </a>
+      <button type="button" class="pill-nav-item" id="pill-nav-tools" aria-label="Toggle Tools Menu">
+        <iconify-icon icon="lucide:layout-grid"></iconify-icon>
+        <span>Tools</span>
+      </button>
+      <button type="button" class="pill-nav-item" id="pill-nav-share" aria-label="Share this tool">
+        <iconify-icon icon="lucide:share-2"></iconify-icon>
+        <span>Share</span>
+      </button>
+      <button type="button" class="pill-nav-item" id="pill-nav-top" aria-label="Scroll to top of page">
+        <iconify-icon icon="lucide:arrow-up"></iconify-icon>
+        <span>Top</span>
+      </button>
+    `;
+
+    document.body.appendChild(nav);
+
+    const toolsBtn = document.getElementById('pill-nav-tools');
+    if (toolsBtn && typeof toggleMenuFn === 'function') {
+      toolsBtn.addEventListener('click', toggleMenuFn);
+    }
+
+    const shareBtn = document.getElementById('pill-nav-share');
+    if (shareBtn) {
+      shareBtn.addEventListener('click', async () => {
+        const shareData = {
+          title: document.title || 'Toolity.in',
+          url: window.location.href
+        };
+        if (navigator.share && navigator.canShare && navigator.canShare(shareData)) {
+          try {
+            await navigator.share(shareData);
+          } catch (err) {
+            if (err.name !== 'AbortError') {
+              copyToolUrl();
+            }
+          }
+        } else {
+          copyToolUrl();
+        }
+      });
+    }
+
+    const topBtn = document.getElementById('pill-nav-top');
+    if (topBtn) {
+      topBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    function copyToolUrl() {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        showGlobalToast('Tool link copied to clipboard!');
+      }).catch(() => {
+        showGlobalToast('Link: ' + window.location.href);
+      });
+    }
+  }
+
+  /**
+   * Designed by Kapil Pidhwani: Global Toast Helper
+   */
+  function showGlobalToast(msg) {
+    const toast = document.getElementById('tool-toast');
+    if (!toast) return;
+    const msgEl = document.getElementById('toast-message') || toast.querySelector('span');
+    if (msgEl) msgEl.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => {
+      toast.classList.remove('show');
+    }, 2400);
   }
 })();
+

@@ -101,6 +101,11 @@ html {
   scroll-behavior: smooth;
 }
 
+@keyframes fadeInPage {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 body {
   min-height: 100vh;
   font-family: var(--font-family);
@@ -110,6 +115,13 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: background-color 0.2s ease, color 0.2s ease;
+  animation: fadeInPage 0.2s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body {
+    animation: none !important;
+  }
 }
 
 .container {
@@ -2789,3 +2801,348 @@ body {
     max-width: 220px;
   }
 }
+
+/* ==========================================================================
+   SHARED TOOL WORKSPACE COMPONENTS
+   Extracted from per-tool inline <style> blocks — common across all tools.
+   Designed by Kapil Pidhwani: Update here once; applies everywhere.
+   ========================================================================== */
+
+/* URL / Text Input with inline clear button */
+.url-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 0.65rem;
+}
+
+.url-input-container .input-clean {
+  padding-right: 2.5rem;
+}
+
+.btn-input-clear {
+  position: absolute;
+  right: 0.65rem;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: none;
+  padding: 0.25rem;
+  border-radius: var(--radius-xs);
+  line-height: 1;
+  transition: color 0.15s ease;
+}
+
+.btn-input-clear:hover {
+  color: var(--text-primary);
+}
+
+/* Sample / Quick-fill chips row */
+.sample-chips-row {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.sample-label {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
+
+.btn-sample-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.65rem;
+  font-size: 0.76rem;
+  font-weight: 500;
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-sample-chip:hover {
+  border-color: var(--brand);
+  color: var(--brand);
+  background: var(--brand-soft);
+}
+
+/* Quality / Option selector card grid */
+.quality-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.55rem;
+}
+
+@media (max-width: 540px) {
+  .quality-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.quality-card-btn {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 0.85rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  text-align: left;
+}
+
+.quality-card-btn:hover {
+  border-color: var(--brand);
+  background: var(--surface-elevated);
+}
+
+.quality-card-btn.active {
+  border-color: var(--brand);
+  background: var(--brand-soft);
+  box-shadow: 0 0 0 1px var(--brand);
+}
+
+.quality-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.quality-title {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.quality-tag-badge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 1px 5px;
+  border-radius: var(--radius-xs);
+  background: var(--brand);
+  color: #ffffff;
+  font-family: var(--font-mono);
+}
+
+.quality-tag-badge.subtle {
+  background: var(--border);
+  color: var(--text-secondary);
+}
+
+.quality-dimensions {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+/* Tool output preview viewport */
+.preview-viewport-box {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.preview-viewport-box.empty {
+  background: var(--surface);
+  box-shadow: none;
+}
+
+.empty-preview-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.empty-preview-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+}
+
+.preview-floating-pill {
+  position: absolute;
+  top: 0.65rem;
+  right: 0.65rem;
+  background: rgba(13, 13, 13, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  display: none;
+  align-items: center;
+  gap: 0.35rem;
+  z-index: 5;
+}
+
+/* Formats / info reference table card */
+.formats-table-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+  overflow-x: auto;
+}
+
+.formats-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.84rem;
+}
+
+.formats-table th {
+  padding: 0.65rem 0.85rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.formats-table td {
+  padding: 0.75rem 0.85rem;
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+}
+
+.formats-table tr:last-child td {
+  border-bottom: none;
+}
+
+.formats-table code {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
+  padding: 2px 6px;
+  border-radius: var(--radius-xs);
+  color: var(--text-primary);
+}
+
+/* ==========================================================================
+   EMPTY STATE MICRO-ANIMATION
+   Designed by Kapil Pidhwani: Subtle breathing pulse for idle tool states
+   ========================================================================== */
+@keyframes breatheState {
+  0%, 100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.95;
+    transform: scale(1.04);
+  }
+}
+
+.empty-preview-icon,
+.workspace-empty-icon,
+.media-empty-placeholder iconify-icon {
+  animation: breatheState 3.5s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .empty-preview-icon,
+  .workspace-empty-icon,
+  .media-empty-placeholder iconify-icon {
+    animation: none !important;
+  }
+}
+
+/* ==========================================================================
+   MOBILE FLOATING BOTTOM PILL NAV (Non-Home Pages)
+   Designed by Kapil Pidhwani: Thumb-friendly 4-action bottom pill bar for mobile
+   ========================================================================== */
+.mobile-bottom-pill-nav {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-bottom-pill-nav {
+    display: flex;
+    position: fixed;
+    bottom: max(0.85rem, env(safe-area-inset-bottom, 0.85rem));
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 990;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.35rem 0.5rem;
+    background: var(--surface-elevated);
+    background: color-mix(in srgb, var(--surface-elevated) 88%, transparent);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35), 0 1px 3px rgba(0, 0, 0, 0.15);
+  }
+
+  .mobile-bottom-pill-nav .pill-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    padding: 0.4rem 0.75rem;
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-family: inherit;
+    font-size: 0.65rem;
+    font-weight: 500;
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    transition: color var(--transition-fast), background var(--transition-fast), transform var(--transition-fast);
+    -webkit-tap-highlight-color: transparent;
+    line-height: 1;
+    min-width: 52px;
+  }
+
+  .mobile-bottom-pill-nav .pill-nav-item iconify-icon {
+    font-size: 1.15rem;
+    width: 1.15rem;
+    height: 1.15rem;
+  }
+
+  .mobile-bottom-pill-nav .pill-nav-item:hover,
+  .mobile-bottom-pill-nav .pill-nav-item:active {
+    color: var(--brand);
+    background: var(--brand-soft);
+    transform: translateY(-1px);
+  }
+}
+
