@@ -47,13 +47,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
 
   <!-- Preload Critical Assets -->
-  <link rel="preload" href="/styles/main.css?v=2.3" as="style">
+  <link rel="preload" href="/styles/main.css?v=2.4" as="style">
   <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
 
   <!-- Iconify Icon Component -->
   <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 
-  <link rel="stylesheet" href="../../styles/main.css?v=2.3">
+  <link rel="stylesheet" href="/styles/main.css?v=2.4">
 
   <style>
     /* Designed by Kapil Pidhwani: Minimalist Online Notepad Tool Styles */
@@ -340,7 +340,7 @@
     </section>
 
     <!-- Tool Main Workspace Area -->
-    <section class="section-wrapper" style="border-top: none; padding-top: 3.5rem;">
+    <section class="section-wrapper tool-section">
       <div class="container">
         
         <!-- Main Minimalist Notepad Card -->
@@ -653,20 +653,7 @@
           </div>
         </section>
 
-        <!-- Category Hub CTA Banner -->
-        <section class="category-workspace-cta" style="margin-top: 3.5rem;">
-          <div class="category-workspace-cta-left">
-            <span class="section-eyebrow">Explore Productivity</span>
-            <h2 class="category-workspace-cta-title">Looking for more daily workflow utilities?</h2>
-            <p class="category-workspace-cta-desc">Discover our growing suite of distraction-free productivity tools, formatters, and browser utilities.</p>
-          </div>
-          <div class="category-workspace-cta-right">
-            <a href="/productivity/" class="btn-pill btn-primary-signal">
-              <span>View Productivity</span>
-              <iconify-icon icon="lucide:arrow-right" width="16" height="16"></iconify-icon>
-            </a>
-          </div>
-        </section>
+        <div data-include="/components/tool-cta.html" data-category="productivity"></div>
 
       </div>
     </section>
@@ -676,7 +663,7 @@
   <div data-include="/components/footer.html"></div>
 
   <!-- Main Platform Scripts -->
-  <script src="../../scripts/main.js?v=2.3"></script>
+  <script src="/scripts/main.js?v=2.4"></script>
 
   <!-- Online Notepad Script -->
   <script src="notepad.js?v=1.1"></script>

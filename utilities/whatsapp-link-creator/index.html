@@ -40,12 +40,12 @@
 
   <!-- Iconify Icon Component -->
     <!-- Preload Critical Assets -->
-  <link rel="preload" href="/styles/main.css?v=2.3" as="style">
+  <link rel="preload" href="/styles/main.css?v=2.4" as="style">
   <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
 
   <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 
-  <link rel="stylesheet" href="../../styles/main.css?v=2.3">
+  <link rel="stylesheet" href="/styles/main.css?v=2.4">
   <style>
     /* Designed by Kapil Pidhwani: WhatsApp Link Creator Ergonomics */
     .input-clean,
@@ -126,9 +126,9 @@
       <div class="container">
         <!-- Breadcrumbs Navigation -->
         <nav class="breadcrumbs" aria-label="Breadcrumb">
-          <a href="../../" class="breadcrumb-link">Home</a>
+          <a href="/" class="breadcrumb-link">Home</a>
           <span class="breadcrumb-separator">/</span>
-          <a href="../../utilities/" class="breadcrumb-link">Utilities</a>
+          <a href="/utilities/" class="breadcrumb-link">Utilities</a>
           <span class="breadcrumb-separator">/</span>
           <span class="breadcrumb-current">WhatsApp Link Creator</span>
         </nav>
@@ -144,7 +144,7 @@
     </section>
 
     <!-- Tool Main Workspace Area -->
-    <section class="section-wrapper" style="border-top: none; padding-top: 3.5rem;">
+    <section class="section-wrapper tool-section">
       <div class="container">
 
         <div class="tool-workspace-card">
@@ -156,7 +156,7 @@
             </div>
 
             <div class="toolbar-group">
-              <button type="button" class="btn-toolbar-sm" id="btn-reset-form" title="Reset all fields">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset-form" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
                 <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
                 <span>Reset</span>
               </button>
@@ -262,43 +262,18 @@
           </div>
         </section>
 
-        <!-- ==================================================================
-             MAINTENANCE-FREE CATEGORY WORKSPACE CTA CARD
-             ================================================================== -->
-        <section class="category-workspace-cta">
-          <div class="category-workspace-cta-left">
-            <span class="section-eyebrow">Utility Workspace</span>
-            <h2 class="category-workspace-cta-title">Explore All Everyday Utility Tools</h2>
-            <p class="category-workspace-cta-desc">
-              Discover our collection of client-side utilities including QR Code Generator, Mailto Link Creator, GIF Speed Changer, and format converters.
-            </p>
-          </div>
-          <div class="category-workspace-cta-right">
-            <a href="../../utilities/" class="btn-pill btn-primary-signal">
-              <span>Explore Utility Tools</span>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14"></path>
-                <path d="m12 5 7 7-7 7"></path>
-              </svg>
-            </a>
-          </div>
-        </section>
+        <div data-include="/components/tool-cta.html" data-category="utilities"></div>
 
       </div>
     </section>
   </main>
 
-  <!-- Global Toast Notification -->
-  <div id="tool-toast" class="tool-toast" role="status" aria-live="polite">
-    Copied to clipboard!
-  </div>
 
   <!-- Global Multi-Column Footer -->
   <div data-include="/components/footer.html"></div>
 
   <!-- Main scripts -->
-  <script src="../../scripts/main.js?v=2.3"></script>
+  <script src="/scripts/main.js?v=2.4"></script>
 
   <!-- WhatsApp Link Creator Logic (Designed by Kapil Pidhwani) -->
   <script>
@@ -316,12 +291,6 @@
 
       let currentFormat = 'raw'; // 'raw' | 'html' | 'md'
 
-      function showToast(msg) {
-        if (!toastEl) return;
-        toastEl.textContent = msg;
-        toastEl.classList.add('show');
-        setTimeout(() => toastEl.classList.remove('show'), 2000);
-      }
 
       function sanitizePhoneNumber(phone) {
         if (!phone) return '';

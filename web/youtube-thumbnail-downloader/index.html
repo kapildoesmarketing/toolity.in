@@ -44,13 +44,13 @@
 
   <!-- Iconify Icon Component -->
     <!-- Preload Critical Assets -->
-  <link rel="preload" href="/styles/main.css?v=2.3" as="style">
+  <link rel="preload" href="/styles/main.css?v=2.4" as="style">
   <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
 
   <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 
   <!-- Global Design System -->
-  <link rel="stylesheet" href="../../styles/main.css?v=2.3">
+  <link rel="stylesheet" href="/styles/main.css?v=2.4">
 
   <!-- Tool Specific Self-Contained Styles -->
   <style>
@@ -68,9 +68,9 @@
       <div class="container">
         <!-- Breadcrumbs Navigation -->
         <nav class="breadcrumbs" aria-label="Breadcrumb">
-          <a href="../../" class="breadcrumb-link">Home</a>
+          <a href="/" class="breadcrumb-link">Home</a>
           <span class="breadcrumb-separator">/</span>
-          <a href="../../web/" class="breadcrumb-link">Web Tools</a>
+          <a href="/web/" class="breadcrumb-link">Web Tools</a>
           <span class="breadcrumb-separator">/</span>
           <span class="breadcrumb-current">YouTube Thumbnail Downloader</span>
         </nav>
@@ -88,7 +88,7 @@
     </section>
 
     <!-- Tool Main Workspace Area -->
-    <section class="section-wrapper" style="border-top: none; padding-top: 3.5rem;">
+    <section class="section-wrapper tool-section">
       <div class="container">
 
         <div class="tool-workspace-card">
@@ -100,7 +100,7 @@
             </div>
 
             <div class="toolbar-group">
-              <button type="button" class="btn-toolbar-sm" id="btn-reset-workspace" title="Reset all fields">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset-workspace" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
                 <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
                 <span>Reset</span>
               </button>
@@ -327,24 +327,7 @@
           </div>
         </section>
 
-        <!-- ==================================================================
-             CATEGORY WORKSPACE CTA CARD
-             ================================================================== -->
-        <section class="category-workspace-cta">
-          <div class="category-workspace-cta-left">
-            <span class="section-eyebrow">Web Workspace</span>
-            <h2 class="category-workspace-cta-title">Explore All Web & URL Tools</h2>
-            <p class="category-workspace-cta-desc">
-              Discover our collection of client-side web utilities including URL parameter separators, query strippers, and link sanitizers.
-            </p>
-          </div>
-          <div class="category-workspace-cta-right">
-            <a href="../../web/" class="btn-pill btn-primary-signal">
-              <span>Explore Web Tools</span>
-              <iconify-icon icon="lucide:arrow-right" width="15" height="15"></iconify-icon>
-            </a>
-          </div>
-        </section>
+        <div data-include="/components/tool-cta.html" data-category="web"></div>
 
       </div>
     </section>
@@ -353,7 +336,7 @@
   <div data-include="/components/footer.html"></div>
 
   <!-- Global Site Script -->
-  <script src="../../scripts/main.js?v=2.3"></script>
+  <script src="/scripts/main.js?v=2.4"></script>
 
   <!-- Tool Specific Self-Contained JavaScript Logic -->
   <script>
@@ -394,14 +377,6 @@
       /**
        * Show floating toast notification
        */
-      function showToast(msg) {
-        if (toastTimer) clearTimeout(toastTimer);
-        toastMessage.textContent = msg;
-        toast.classList.add('show');
-        toastTimer = setTimeout(() => {
-          toast.classList.remove('show');
-        }, 2500);
-      }
 
       /**
        * Robust YouTube Video ID & Format Extractor

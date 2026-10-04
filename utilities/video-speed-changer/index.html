@@ -39,12 +39,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Iconify Icon Component -->
-  <link rel="preload" href="/styles/main.css?v=2.3" as="style">
+  <link rel="preload" href="/styles/main.css?v=2.4" as="style">
   <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
 
   <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 
-  <link rel="stylesheet" href="../../styles/main.css?v=2.3">
+  <link rel="stylesheet" href="/styles/main.css?v=2.4">
   <style>
     /* Designed by Kapil Pidhwani: Video Speed Changer Tool-Specific Styles */
     .media-canvas-viewport {
@@ -227,11 +227,6 @@
 </head>
 
 <body>
-  <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W5SC3TGR"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
-
   <!-- Global Navigation Header -->
   <div data-include="/components/header.html"></div>
 
@@ -240,9 +235,9 @@
     <section class="page-hero">
       <div class="container">
         <nav class="breadcrumbs" aria-label="Breadcrumb">
-          <a href="../../" class="breadcrumb-link">Home</a>
+          <a href="/" class="breadcrumb-link">Home</a>
           <span class="breadcrumb-separator">/</span>
-          <a href="../../utilities/" class="breadcrumb-link">Utilities</a>
+          <a href="/utilities/" class="breadcrumb-link">Utilities</a>
           <span class="breadcrumb-separator">/</span>
           <span class="breadcrumb-current">Video Speed Changer</span>
         </nav>
@@ -260,7 +255,7 @@
     </section>
 
     <!-- Tool Main Workspace Area -->
-    <section class="section-wrapper" style="border-top: none; padding-top: 3.5rem;">
+    <section class="section-wrapper tool-section">
       <div class="container">
 
         <!-- Unified Tool Workspace Card -->
@@ -269,7 +264,7 @@
           <!-- 1. Actions Toolbar (Top-Right Universal Pattern) -->
           <div class="tool-actions-toolbar" style="justify-content: flex-end;">
             <div class="toolbar-group">
-              <button type="button" class="btn-toolbar-sm" id="btn-reset-tool" title="Reset video and settings">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset-tool" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
                 <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
                 <span>Reset</span>
               </button>
@@ -638,22 +633,7 @@
           </div>
         </section>
 
-        <!-- ==================================================================
-             CATEGORY WORKSPACE CTA
-             ================================================================== -->
-        <section class="category-workspace-cta" style="margin-top: 3.5rem;">
-          <div class="category-workspace-cta-left">
-            <span class="section-eyebrow">Explore More</span>
-            <h3 class="category-workspace-cta-title">Discover All Everyday Utilities</h3>
-            <p class="category-workspace-cta-desc">Explore our full suite of QR code generators, WhatsApp links, mailto creators, and GIF speed tools.</p>
-          </div>
-          <div class="category-workspace-cta-right">
-            <a href="../" class="btn-pill btn-primary-signal">
-              <span>View All Utilities</span>
-              <iconify-icon icon="lucide:arrow-right" width="16" height="16"></iconify-icon>
-            </a>
-          </div>
-        </section>
+        <div data-include="/components/tool-cta.html" data-category="utilities"></div>
 
       </div>
     </section>
@@ -662,7 +642,7 @@
   <!-- Global Multi-Column Footer -->
   <div data-include="/components/footer.html"></div>
 
-  <script src="../../scripts/main.js?v=2.3"></script>
+  <script src="/scripts/main.js?v=2.4"></script>
 
   <script>
     /* Designed by Kapil Pidhwani: Client-Side Video Speed Changer Engine */
@@ -717,13 +697,6 @@
       let trimEndTime = 0;
 
       // Toast Helper
-      function showToast(msg) {
-        if (typeof window.showToast === 'function') {
-          window.showToast(msg);
-        } else {
-          console.log('[Toast]', msg);
-        }
-      }
 
       // Format seconds as MM:SS.S
       function formatTime(sec) {

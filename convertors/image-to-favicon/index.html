@@ -48,14 +48,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Preload Critical Assets -->
-  <link rel="preload" href="/styles/main.css?v=2.3" as="style">
+  <link rel="preload" href="/styles/main.css?v=2.4" as="style">
   <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
 
   <!-- Iconify Icon Component -->
   <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 
   <!-- Global Design System -->
-  <link rel="stylesheet" href="/styles/main.css?v=2.3">
+  <link rel="stylesheet" href="/styles/main.css?v=2.4">
 
   <!-- Tool Specific Styles -->
   <style>
@@ -575,7 +575,7 @@
     </section>
 
     <!-- Main Tool Workspace -->
-    <section class="section-wrapper" style="border-top: none; padding-top: 3.5rem;">
+    <section class="section-wrapper tool-section">
       <div class="container">
         <div class="tool-workspace-card">
 
@@ -589,7 +589,7 @@
             </div>
 
             <div class="toolbar-group">
-              <button type="button" class="btn-toolbar-sm" id="btn-reset-tool" title="Reset image and all settings">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset-tool" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
                 <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
                 <span>Reset</span>
               </button>
@@ -1113,28 +1113,7 @@
           </div>
         </div>
 
-        <!-- ==================================================================
-             CATEGORY WORKSPACE CTA CARD
-             ================================================================== -->
-        <section class="category-workspace-cta">
-          <div class="category-workspace-cta-left">
-            <span class="section-eyebrow">Convertors Workspace</span>
-            <h2 class="category-workspace-cta-title">Explore All Convertor Tools</h2>
-            <p class="category-workspace-cta-desc">
-              Discover our collection of client-side media converters including Video Format Converter, Video to GIF, GIF to Video, and audio extraction tools.
-            </p>
-          </div>
-          <div class="category-workspace-cta-right">
-            <a href="/convertors/" class="btn-pill btn-primary-signal">
-              <span>Explore Convertor Tools</span>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14"></path>
-                <path d="m12 5 7 7-7 7"></path>
-              </svg>
-            </a>
-          </div>
-        </section>
+        <div data-include="/components/tool-cta.html" data-category="convertors"></div>
 
       </div>
     </section>
@@ -1144,7 +1123,7 @@
   <div data-include="/components/footer.html"></div>
 
   <!-- Global Script -->
-  <script defer src="/scripts/main.js?v=2.3"></script>
+  <script defer src="/scripts/main.js?v=2.4"></script>
 
   <!-- Tool Specific Script Logic -->
   <script>
@@ -1317,7 +1296,7 @@
       function copyHtmlCode() {
         const code = document.getElementById('html-snippet-display').textContent;
         navigator.clipboard.writeText(code).then(() => {
-          showToastMessage('HTML embed tags copied to clipboard!');
+          showToast('HTML embed tags copied to clipboard!');
         });
       }
 
@@ -1362,7 +1341,7 @@
         bgColorLabel.textContent = 'Transparent';
         updateSettingsBadge();
         renderAllSizes();
-        showToastMessage('Tool reset');
+        showToast('Tool reset');
       });
 
       // Handlers
@@ -1374,7 +1353,7 @@
 
       function processFile(file) {
         if (!file.type.startsWith('image/')) {
-          showToastMessage('Please select an image file (PNG, JPG, WebP, SVG, GIF, BMP).');
+          showToast('Please select an image file (PNG, JPG, WebP, SVG, GIF, BMP).');
           return;
         }
 
@@ -1386,7 +1365,7 @@
             if (sourceMetaBadge) sourceMetaBadge.textContent = `${img.naturalWidth}×${img.naturalHeight} px`;
             if (previewStatusBadge) previewStatusBadge.textContent = 'Live Ready';
             renderAllSizes();
-            showToastMessage('Image loaded successfully');
+            showToast('Image loaded successfully');
           };
           img.src = e.target.result;
         };
@@ -1676,34 +1655,34 @@
       // Download Helpers
       async function downloadIco() {
         if (!sourceImage) {
-          showToastMessage('Please upload an image first');
+          showToast('Please upload an image first');
           return;
         }
         const blob = await generateIcoBlob();
         triggerDownload(blob, 'favicon.ico');
-        showToastMessage('Downloaded favicon.ico');
+        showToast('Downloaded favicon.ico');
       }
 
       async function downloadZip() {
         if (!sourceImage) {
-          showToastMessage('Please upload an image first');
+          showToast('Please upload an image first');
           return;
         }
         const blob = await generateZipBlob();
         triggerDownload(blob, 'toolity-favicons.zip');
-        showToastMessage('Downloaded Favicon Suite (.zip)');
+        showToast('Downloaded Favicon Suite (.zip)');
       }
 
       function downloadSinglePng(size, filename) {
         if (!sourceImage) {
-          showToastMessage('Please upload an image first');
+          showToast('Please upload an image first');
           return;
         }
         const cvs = renderedCanvases[size];
         if (!cvs) return;
         cvs.toBlob(blob => {
           triggerDownload(blob, filename);
-          showToastMessage(`Downloaded ${filename}`);
+          showToast(`Downloaded ${filename}`);
         }, 'image/png');
       }
 
@@ -1718,13 +1697,6 @@
         setTimeout(() => URL.revokeObjectURL(url), 1000);
       }
 
-      function showToastMessage(msg) {
-        const toast = document.getElementById('tool-toast');
-        if (!toast) return;
-        toast.textContent = msg;
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 2400);
-      }
     });
   </script>
 </body>

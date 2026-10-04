@@ -40,12 +40,12 @@
 
   <!-- Iconify Icon Component -->
     <!-- Preload Critical Assets -->
-  <link rel="preload" href="/styles/main.css?v=2.3" as="style">
+  <link rel="preload" href="/styles/main.css?v=2.4" as="style">
   <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
 
   <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 
-  <link rel="stylesheet" href="../../styles/main.css?v=2.3">
+  <link rel="stylesheet" href="/styles/main.css?v=2.4">
 </head>
 
 <body>
@@ -58,9 +58,9 @@
       <div class="container">
         <!-- Breadcrumbs Navigation -->
         <nav class="breadcrumbs" aria-label="Breadcrumb">
-          <a href="../../" class="breadcrumb-link">Home</a>
+          <a href="/" class="breadcrumb-link">Home</a>
           <span class="breadcrumb-separator">/</span>
-          <a href="../../utilities/" class="breadcrumb-link">Utilities</a>
+          <a href="/utilities/" class="breadcrumb-link">Utilities</a>
           <span class="breadcrumb-separator">/</span>
           <span class="breadcrumb-current">QR Code Generator</span>
         </nav>
@@ -76,7 +76,7 @@
     </section>
 
     <!-- Tool Main Workspace Area -->
-    <section class="section-wrapper" style="border-top: none; padding-top: 3.5rem;">
+    <section class="section-wrapper tool-section">
       <div class="container">
 
         <!-- ==================================================================
@@ -118,7 +118,7 @@
 
             <!-- Right: Universal Action Buttons (Reset, Copy, Download Dropdown) -->
             <div class="toolbar-group">
-              <button type="button" class="btn-toolbar-sm" id="btn-clear-payload" title="Reset all input fields">
+              <button type="button" class="btn-toolbar-sm" id="btn-clear-payload" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
                 <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
                 <span>Reset</span>
               </button>
@@ -488,56 +488,23 @@
           </div>
         </section>
 
-        <!-- ==================================================================
-             MAINTENANCE-FREE CATEGORY WORKSPACE CTA CARD
-             ================================================================== -->
-        <section class="category-workspace-cta">
-          <div class="category-workspace-cta-left">
-            <span class="section-eyebrow">Utility Workspace</span>
-            <h2 class="category-workspace-cta-title">Explore All Utility Tools</h2>
-            <p class="category-workspace-cta-desc">
-              Discover our collection of fast client-side productivity utilities including Unix timestamp converters, password builders, IP lookup, and browser sandbox tools.
-            </p>
-          </div>
-          <div class="category-workspace-cta-right">
-            <a href="../../utilities/" class="btn-pill btn-primary-signal">
-              <span>Explore Utility Tools</span>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14"></path>
-                <path d="m12 5 7 7-7 7"></path>
-              </svg>
-            </a>
-          </div>
-        </section>
+        <div data-include="/components/tool-cta.html" data-category="utilities"></div>
 
       </div>
     </section>
   </main>
 
-  <!-- Reusable Toast Notification -->
-  <div id="tool-toast" class="tool-toast" role="status" aria-live="polite">
-    Copied to clipboard!
-  </div>
 
   <!-- Global Multi-Column Footer -->
   <div data-include="/components/footer.html"></div>
 
-  <script src="../../scripts/main.js?v=2.3"></script>
+  <script src="/scripts/main.js?v=2.4"></script>
   <script>
     /* ==========================================================================
        Pure Vanilla Client-Side QR Generator Engine (Designed by Kapil Pidhwani)
        Zero external API calls • 100% Offline & Private • Reed-Solomon QR BitMatrix
        ========================================================================== */
 
-    function showToast(msg) {
-      const toast = document.getElementById('tool-toast');
-      if (toast) {
-        toast.textContent = msg || 'Copied to clipboard!';
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 2000);
-      }
-    }
 
     // QR Code Engine Implementation (Standard ISO/IEC 18004)
     const QRMode = { MODE_NUMBER: 1 << 0, MODE_ALPHA_NUM: 1 << 1, MODE_8BIT_BYTE: 1 << 2, MODE_KANJI: 1 << 3 };
