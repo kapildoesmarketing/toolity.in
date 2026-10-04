@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+  <title>Video Speed Changer (0.1× to 10× Fast & Slow Motion) — Toolity.in</title>
+  <link rel="canonical" href="https://toolity.in/utilities/video-speed-changer/">
+
+  <!-- SEO & Metadata -->
+  <meta name="description"
+    content="Free, fast, and 100% private Video Speed Changer. Speed up or slow down videos from 0.1× to 10.0× directly in your browser. Features instant playback preview, audio pitch preservation, clip trimming, and MP4/WebM export with zero server uploads.">
+  <meta name="keywords"
+    content="video speed changer, change video speed, speed up video, slow down video, fast motion video, slow motion video, video playback speed, online video speed editor, client-side video editor">
+  <meta name="author" content="Kapil Pidhwani">
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Iconify Icon Component -->
+  <link rel="preload" href="/styles/main.css?v=2.3" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="../../styles/main.css?v=2.3">
+  <style>
+    /* Designed by Kapil Pidhwani: Video Speed Changer Tool-Specific Styles */
+    .media-canvas-viewport {
+      width: 100%;
+      height: 280px;
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .video-dropzone {
+      width: 100%;
+      height: 100%;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      background: var(--surface);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 1.5px dashed var(--border);
+      border-radius: calc(var(--radius-md) - 2px);
+      margin: 4px;
+      box-sizing: border-box;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+    }
+    .video-dropzone:hover, .video-dropzone.dragover {
+      border-color: var(--brand);
+      background: var(--brand-soft);
+    }
+    .video-drop-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--surface-elevated);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--brand);
+      margin-bottom: 0.75rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .video-drop-title {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 0.25rem;
+    }
+    .video-drop-subtitle {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+    .source-video-player,
+    .video-converted-preview {
+      width: 100%;
+      height: 100%;
+      max-height: 280px;
+      object-fit: contain;
+      background: #000;
+      display: none;
+    }
+    .media-empty-placeholder {
+      text-align: center;
+      color: var(--text-muted);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .media-empty-placeholder iconify-icon {
+      margin-bottom: 0.6rem;
+      opacity: 0.4;
+    }
+    .media-empty-placeholder p {
+      font-size: 0.86rem;
+    }
+    .minimal-trimmer-wrap {
+      margin-top: 0.85rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      padding: 0 0.15rem;
+    }
+    .minimal-trimmer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+    .trimmer-timestamps {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--brand);
+      font-weight: 600;
+    }
+    .trim-sliders-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .trim-slider-line {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .trim-slider-tag {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      width: 32px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .trim-range-slider {
+      flex: 1;
+      accent-color: var(--brand);
+      cursor: pointer;
+      height: 4px;
+    }
+    .slim-progress-bar {
+      width: 100%;
+      height: 3px;
+      background: var(--border);
+      border-radius: var(--radius-pill);
+      overflow: hidden;
+      margin-top: 0.5rem;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+    .slim-progress-bar.active {
+      opacity: 1;
+    }
+    .slim-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--brand);
+      transition: width 0.1s linear;
+    }
+    .speed-slider-control-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      width: 100%;
+    }
+    .speed-slider-input {
+      flex: 1;
+      accent-color: var(--brand);
+      cursor: pointer;
+      height: 6px;
+    }
+    .speed-val-badge {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 600;
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      padding: 3px 8px;
+      border-radius: var(--radius-xs);
+      color: var(--brand);
+      min-width: 52px;
+      text-align: center;
+    }
+    .video-stat-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W5SC3TGR"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <!-- Global Navigation Header -->
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- Tool Header Hero Section -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="../../" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="../../utilities/" class="breadcrumb-link">Utilities</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Video Speed Changer</span>
+        </nav>
+
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Everyday Utility</span>
+            <h1 class="page-title">Video Speed Changer</h1>
+            <p class="page-desc">
+              Speed up or slow down videos from 0.1× to 10.0× directly in your browser. Real-time speed preview, audio pitch preservation, clip trimming, and instant MP4/WebM export with 100% client-side privacy.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tool Main Workspace Area -->
+    <section class="section-wrapper" style="border-top: none; padding-top: 3.5rem;">
+      <div class="container">
+
+        <!-- Unified Tool Workspace Card -->
+        <div class="tool-workspace-card">
+
+          <!-- 1. Actions Toolbar (Top-Right Universal Pattern) -->
+          <div class="tool-actions-toolbar" style="justify-content: flex-end;">
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset-tool" title="Reset video and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy-video" title="Copy video to clipboard" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download-video" title="Download video file" disabled>
+                <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                <span>Download Video</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2. Dual Split-Pane Input & Output Grid (Minimalist Symmetrical Layout) -->
+          <div class="split-pane-grid" style="margin-bottom: 1.25rem;">
+
+            <!-- Left: Video Source Pane -->
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Source Video</span>
+                <span class="pane-badge" id="video-meta-badge">No video loaded</span>
+              </div>
+
+              <div class="pane-content" style="display: flex; flex-direction: column; justify-content: space-between;">
+                <!-- Media Viewport (280px) -->
+                <div class="media-canvas-viewport" id="source-viewport-frame">
+                  <!-- Drag & Drop Zone -->
+                  <div id="video-dropzone" class="video-dropzone">
+                    <input type="file" id="video-file-input" accept="video/mp4,video/webm,video/ogg,video/quicktime,video/x-matroska,video/x-msvideo" style="display: none;">
+                    <div class="video-drop-icon">
+                      <iconify-icon icon="lucide:upload-cloud" width="22" height="22"></iconify-icon>
+                    </div>
+                    <div class="video-drop-title">Drop video here or click to browse</div>
+                    <div class="video-drop-subtitle">Supports MP4, WebM, MOV, MKV, AVI, and OGG up to 200MB</div>
+                  </div>
+
+                  <!-- Active Video Player -->
+                  <video id="source-video" class="source-video-player" playsinline preload="auto" controls></video>
+                </div>
+
+                <!-- Minimalist Scrubber Timeline Bar -->
+                <div class="minimal-trimmer-wrap" id="trimmer-wrap">
+                  <div class="minimal-trimmer-header">
+                    <span>Trim Clip Boundary</span>
+                    <div class="trimmer-timestamps">
+                      <span id="trim-start-val">00:00.0</span>
+                      <span>—</span>
+                      <span id="trim-end-val">00:00.0</span>
+                      <span id="trim-duration-badge" style="color: var(--text-muted); font-size: 0.72rem;">(0.0s)</span>
+                    </div>
+                  </div>
+
+                  <div class="trim-sliders-row">
+                    <div class="trim-slider-line">
+                      <span class="trim-slider-tag">Start</span>
+                      <input type="range" id="trim-start-range" class="trim-range-slider" min="0" max="100" value="0" step="0.1" disabled>
+                    </div>
+                    <div class="trim-slider-line">
+                      <span class="trim-slider-tag">End</span>
+                      <input type="range" id="trim-end-range" class="trim-range-slider" min="0" max="100" value="100" step="0.1" disabled>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Source Video Stats & Live Speed Prompt -->
+                <div style="margin-top: 0.75rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; color: var(--text-muted); padding: 0 0.25rem;">
+                  <span id="src-duration-stat" class="video-stat-item">
+                    <iconify-icon icon="lucide:clock" width="13" height="13"></iconify-icon>
+                    <span id="src-duration-text">Original: 0.0s</span>
+                  </span>
+                  <span id="src-speed-stat" class="video-stat-item" style="color: var(--brand); font-weight: 600;">
+                    <iconify-icon icon="lucide:gauge" width="13" height="13"></iconify-icon>
+                    <span id="src-speed-text">1.0× Speed</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Speed Adjusted Converted Video Output Preview Pane -->
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Speed-Adjusted Output</span>
+                <span class="pane-badge" id="output-status-badge">Awaiting Video</span>
+              </div>
+
+              <div class="pane-content" style="display: flex; flex-direction: column; justify-content: space-between;">
+                <!-- Media Viewport (280px) -->
+                <div class="media-canvas-viewport" id="output-viewport-frame">
+                  <!-- Empty Placeholder -->
+                  <div id="output-empty-placeholder" class="media-empty-placeholder">
+                    <iconify-icon icon="lucide:gauge" width="32" height="32"></iconify-icon>
+                    <p>Speed-adjusted video preview will appear here</p>
+                  </div>
+                  <!-- Active Output Player -->
+                  <video id="output-video-player" class="video-converted-preview" playsinline controls loop></video>
+                </div>
+
+                <!-- Primary Process Action Button -->
+                <div style="margin-top: 0.85rem;">
+                  <button type="button" id="btn-process-video" class="btn-toolbar-sm btn-brand-sm" style="width: 100%; justify-content: center; height: 42px; font-size: 0.9rem; border-radius: var(--radius-sm);" disabled>
+                    <iconify-icon icon="lucide:play" width="16" height="16" id="btn-process-icon"></iconify-icon>
+                    <span id="btn-process-label">Change Video Speed</span>
+                  </button>
+                  <div class="slim-progress-bar" id="slim-progress-bar">
+                    <div class="slim-progress-fill" id="slim-progress-fill"></div>
+                  </div>
+                </div>
+
+                <!-- Output Estimated Duration & Format Details -->
+                <div style="margin-top: 0.75rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; color: var(--text-muted); padding: 0 0.25rem;">
+                  <span id="est-duration-stat" class="video-stat-item">
+                    <iconify-icon icon="lucide:timer" width="13" height="13"></iconify-icon>
+                    <span id="est-duration-text">Est. Output: 0.0s</span>
+                  </span>
+                  <span id="output-format-stat" class="video-stat-item">
+                    <iconify-icon icon="lucide:file-video" width="13" height="13"></iconify-icon>
+                    <span id="output-format-text">MP4 • 100% Quality</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 3. Progressive Disclosure Settings Accordion (Positioned Below Workspace & Closed by Default) -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="16" height="16"></iconify-icon>
+                <span>Speed, Audio &amp; Export Settings</span>
+                <span class="pane-badge" id="settings-summary-badge">(2.0× Speed • Mute Audio • MP4 • Original Res)</span>
+              </div>
+              <iconify-icon icon="lucide:chevron-down" class="tool-settings-chevron" width="16" height="16"></iconify-icon>
+            </summary>
+
+            <div class="tool-settings-panel">
+              <div class="settings-sections-wrapper">
+                
+                <!-- Section 1: Speed Multiplier Controls -->
+                <div class="settings-section-card">
+                  <div class="settings-section-header">
+                    <span>1. Playback Speed Multiplier</span>
+                  </div>
+
+                  <!-- Quick Preset Segmented Pills -->
+                  <div class="form-group" style="margin-bottom: 0.75rem;">
+                    <span class="form-label" style="font-size:0.75rem;">Quick Presets</span>
+                    <div class="segmented-group" id="speed-presets-group" style="flex-wrap: wrap;">
+                      <button type="button" class="seg-pill" data-speed="0.25">0.25×</button>
+                      <button type="button" class="seg-pill" data-speed="0.5">0.5×</button>
+                      <button type="button" class="seg-pill" data-speed="0.75">0.75×</button>
+                      <button type="button" class="seg-pill" data-speed="1.0">1.0×</button>
+                      <button type="button" class="seg-pill" data-speed="1.25">1.25×</button>
+                      <button type="button" class="seg-pill" data-speed="1.5">1.5×</button>
+                      <button type="button" class="seg-pill active" data-speed="2.0">2.0×</button>
+                      <button type="button" class="seg-pill" data-speed="4.0">4.0×</button>
+                      <button type="button" class="seg-pill" data-speed="8.0">8.0×</button>
+                    </div>
+                  </div>
+
+                  <!-- Fine-Tuning Slider -->
+                  <div class="form-group">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                      <span class="form-label" style="font-size:0.75rem; margin: 0;">Continuous Fine-Tuning</span>
+                      <span class="speed-val-badge" id="speed-slider-badge">2.00×</span>
+                    </div>
+                    <div class="speed-slider-control-row">
+                      <span style="font-size: 0.72rem; color: var(--text-muted);">0.1×</span>
+                      <input type="range" id="speed-continuous-slider" class="speed-slider-input" min="0.1" max="10.0" value="2.0" step="0.05">
+                      <span style="font-size: 0.72rem; color: var(--text-muted);">10.0×</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Section 2: Audio & Sound Handling -->
+                <div class="settings-section-card">
+                  <div class="settings-section-header">
+                    <span>2. Audio &amp; Sound Options</span>
+                  </div>
+                  <div class="settings-row-wrap">
+                    <div class="form-group" style="flex: 1;">
+                      <span class="form-label" style="font-size:0.75rem;">Audio Mode</span>
+                      <div class="segmented-group" id="audio-mode-group">
+                        <button type="button" class="seg-pill active" data-audio="mute">Mute Audio</button>
+                        <button type="button" class="seg-pill" data-audio="preserve">Keep (Pitch Correct)</button>
+                        <button type="button" class="seg-pill" data-audio="shift">Keep (Pitch Shift)</button>
+                      </div>
+                      <span class="form-label-desc" id="audio-mode-desc" style="font-size: 0.72rem; color: var(--text-muted); margin-top: 0.35rem; display: block;">
+                        Recommended for fast forward / timelapses (&gt;2.0×) to prevent sound distortion.
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Section 3: Output Format & Resolution -->
+                <div class="settings-section-card">
+                  <div class="settings-section-header">
+                    <span>3. Output Format &amp; Resolution</span>
+                  </div>
+                  <div class="settings-row-wrap">
+                    <!-- Format Selection -->
+                    <div class="form-group">
+                      <span class="form-label" style="font-size:0.75rem;">Output Format</span>
+                      <div class="segmented-group" id="format-group">
+                        <button type="button" class="seg-pill active" data-format="mp4">MP4 (H.264)</button>
+                        <button type="button" class="seg-pill" data-format="webm">WebM (VP9)</button>
+                      </div>
+                    </div>
+
+                    <!-- Resolution Scale -->
+                    <div class="form-group">
+                      <span class="form-label" style="font-size:0.75rem;">Resolution Scale</span>
+                      <div class="segmented-group" id="scale-group">
+                        <button type="button" class="seg-pill active" data-scale="original">Original</button>
+                        <button type="button" class="seg-pill" data-scale="1080">1080p</button>
+                        <button type="button" class="seg-pill" data-scale="720">720p</button>
+                        <button type="button" class="seg-pill" data-scale="480">480p</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+        <!-- Global Shared Ad Slot Partial -->
+        <div data-include="/components/ad-slot.html"></div>
+
+        <!-- ==================================================================
+             3-STEP INSTRUCTION GUIDE
+             ================================================================== -->
+        <section class="guide-section">
+          <div class="section-header">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-title">Speed Up or Slow Down Video in 3 Steps</h2>
+            <p class="section-desc">Create smooth slow-motion or rapid fast-forward timelapses with instant client-side execution.</p>
+          </div>
+
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Upload Video</h3>
+              <p class="step-desc">Select or drop any MP4, WebM, MOV, MKV, or AVI video file. All processing is 100% private in your browser.</p>
+            </div>
+
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Choose Speed &amp; Audio</h3>
+              <p class="step-desc">Pick a quick preset (0.25× to 8.0×) or use the fine-tuning slider. Toggle audio muting or pitch preservation.</p>
+            </div>
+
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Export &amp; Download</h3>
+              <p class="step-desc">Click Change Video Speed to encode your high-definition video and download it immediately to your device.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             TECHNICAL REFERENCE TABLE: SPEED FACTORS & USE CASES
+             ================================================================== -->
+        <section class="formats-table-card" style="margin-top: 3.5rem;">
+          <div class="formats-table-header">
+            <h3>Speed Multiplier &amp; Audio Reference</h3>
+            <p>Guidelines for selecting optimal speed factors and audio handling for your video projects.</p>
+          </div>
+          <table class="formats-table">
+            <thead>
+              <tr>
+                <th>Speed Factor</th>
+                <th>Motion Effect</th>
+                <th>Recommended Audio</th>
+                <th>Ideal Use Case</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>0.25× – 0.5×</strong></td>
+                <td>Smooth Slow Motion</td>
+                <td>Keep (Pitch Shift) or Mute</td>
+                <td>Sports highlights, dramatic action shots, product reveals, dance analysis</td>
+              </tr>
+              <tr>
+                <td><strong>0.75×</strong></td>
+                <td>Subtle Slowdown</td>
+                <td>Keep (Pitch Correct)</td>
+                <td>Tutorial clarity, speech comprehension, detailed motion reviews</td>
+              </tr>
+              <tr>
+                <td><strong>1.25× – 1.5×</strong></td>
+                <td>Brisk Pacing</td>
+                <td>Keep (Pitch Correct)</td>
+                <td>Presentations, webinars, educational lectures, walkthroughs</td>
+              </tr>
+              <tr>
+                <td><strong>2.0× – 4.0×</strong></td>
+                <td>Fast Forward</td>
+                <td>Mute Audio</td>
+                <td>Cooking recipes, coding sessions, art timelapses, routine walkthroughs</td>
+              </tr>
+              <tr>
+                <td><strong>4.0× – 10.0×</strong></td>
+                <td>Hyperlapse / Timelapse</td>
+                <td>Mute Audio</td>
+                <td>Long journeys, construction logs, sunset/cloud timelapses, screen recordings</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- ==================================================================
+             FAQ ACCORDION SECTION
+             ================================================================== -->
+        <section style="margin-top: 3.5rem;">
+          <div class="section-header">
+            <span class="section-eyebrow">Frequently Asked Questions</span>
+            <h2 class="section-title">Video Speed Changer FAQ</h2>
+            <p class="section-desc">Common questions about video speed adjustments, audio pitch, and client-side processing.</p>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 0.75rem; max-width: 820px; margin: 0 auto;">
+            <details class="tool-settings-accordion" style="background: var(--surface-elevated); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 0.25rem;">
+              <summary class="tool-settings-summary" style="padding: 1rem 1.25rem;">
+                <span style="font-weight: 600; font-size: 0.95rem; color: var(--text-primary);">Does changing video speed upload my files to any remote server?</span>
+                <iconify-icon icon="lucide:chevron-down" class="tool-settings-chevron" width="16" height="16"></iconify-icon>
+              </summary>
+              <div style="padding: 0 1.25rem 1.25rem 1.25rem; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
+                No. Toolity.in runs 100% locally in your browser using the HTML5 Canvas, AudioContext, and MediaRecorder APIs. Your video files never touch any external server or cloud infrastructure.
+              </div>
+            </details>
+
+            <details class="tool-settings-accordion" style="background: var(--surface-elevated); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 0.25rem;">
+              <summary class="tool-settings-summary" style="padding: 1rem 1.25rem;">
+                <span style="font-weight: 600; font-size: 0.95rem; color: var(--text-primary);">What is the difference between "Pitch Correct" and "Pitch Shift"?</span>
+                <iconify-icon icon="lucide:chevron-down" class="tool-settings-chevron" width="16" height="16"></iconify-icon>
+              </summary>
+              <div style="padding: 0 1.25rem 1.25rem 1.25rem; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
+                <strong>Pitch Correct</strong> preserves natural human voice tone so fast speech doesn't sound squeaky (chipmunk effect) and slow speech doesn't sound unnaturally deep. <strong>Pitch Shift</strong> scales the audio frequencies proportionally with playback speed for vintage vinyl record effects.
+              </div>
+            </details>
+
+            <details class="tool-settings-accordion" style="background: var(--surface-elevated); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 0.25rem;">
+              <summary class="tool-settings-summary" style="padding: 1rem 1.25rem;">
+                <span style="font-weight: 600; font-size: 0.95rem; color: var(--text-primary);">Can I speed up just a specific section of my video?</span>
+                <iconify-icon icon="lucide:chevron-down" class="tool-settings-chevron" width="16" height="16"></iconify-icon>
+              </summary>
+              <div style="padding: 0 1.25rem 1.25rem 1.25rem; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
+                Yes! Use the <strong>Trim Clip Boundary</strong> start and end sliders in the left pane to define the exact segment you wish to speed up or slow down before exporting.
+              </div>
+            </details>
+
+            <details class="tool-settings-accordion" style="background: var(--surface-elevated); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 0.25rem;">
+              <summary class="tool-settings-summary" style="padding: 1rem 1.25rem;">
+                <span style="font-weight: 600; font-size: 0.95rem; color: var(--text-primary);">What video formats are supported?</span>
+                <iconify-icon icon="lucide:chevron-down" class="tool-settings-chevron" width="16" height="16"></iconify-icon>
+              </summary>
+              <div style="padding: 0 1.25rem 1.25rem 1.25rem; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
+                You can import MP4, WebM, MOV, AVI, MKV, and OGG formats. Exported videos are rendered as universally compatible MP4 (H.264) or WebM (VP9) files suitable for social media, YouTube, and Discord.
+              </div>
+            </details>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             CATEGORY WORKSPACE CTA
+             ================================================================== -->
+        <section class="category-workspace-cta" style="margin-top: 3.5rem;">
+          <div class="category-workspace-cta-left">
+            <span class="section-eyebrow">Explore More</span>
+            <h3 class="category-workspace-cta-title">Discover All Everyday Utilities</h3>
+            <p class="category-workspace-cta-desc">Explore our full suite of QR code generators, WhatsApp links, mailto creators, and GIF speed tools.</p>
+          </div>
+          <div class="category-workspace-cta-right">
+            <a href="../" class="btn-pill btn-primary-signal">
+              <span>View All Utilities</span>
+              <iconify-icon icon="lucide:arrow-right" width="16" height="16"></iconify-icon>
+            </a>
+          </div>
+        </section>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Global Multi-Column Footer -->
+  <div data-include="/components/footer.html"></div>
+
+  <script src="../../scripts/main.js?v=2.3"></script>
+
+  <script>
+    /* Designed by Kapil Pidhwani: Client-Side Video Speed Changer Engine */
+    document.addEventListener('DOMContentLoaded', () => {
+      // DOM Elements
+      const dropzone = document.getElementById('video-dropzone');
+      const fileInput = document.getElementById('video-file-input');
+      const sourceVideo = document.getElementById('source-video');
+      const outputVideoPlayer = document.getElementById('output-video-player');
+      const outputEmptyPlaceholder = document.getElementById('output-empty-placeholder');
+      
+      const videoMetaBadge = document.getElementById('video-meta-badge');
+      const outputStatusBadge = document.getElementById('output-status-badge');
+      const srcDurationText = document.getElementById('src-duration-text');
+      const srcSpeedText = document.getElementById('src-speed-text');
+      const estDurationText = document.getElementById('est-duration-text');
+      const outputFormatText = document.getElementById('output-format-text');
+      const settingsSummaryBadge = document.getElementById('settings-summary-badge');
+      
+      const trimStartRange = document.getElementById('trim-start-range');
+      const trimEndRange = document.getElementById('trim-end-range');
+      const trimStartVal = document.getElementById('trim-start-val');
+      const trimEndVal = document.getElementById('trim-end-val');
+      const trimDurationBadge = document.getElementById('trim-duration-badge');
+      
+      const speedContinuousSlider = document.getElementById('speed-continuous-slider');
+      const speedSliderBadge = document.getElementById('speed-slider-badge');
+      const audioModeDesc = document.getElementById('audio-mode-desc');
+      
+      const btnProcess = document.getElementById('btn-process-video');
+      const btnProcessIcon = document.getElementById('btn-process-icon');
+      const btnProcessLabel = document.getElementById('btn-process-label');
+      const btnReset = document.getElementById('btn-reset-tool');
+      const btnCopy = document.getElementById('btn-copy-video');
+      const btnDownload = document.getElementById('btn-download-video');
+      const slimProgressBar = document.getElementById('slim-progress-bar');
+      const slimProgressFill = document.getElementById('slim-progress-fill');
+
+      // State Variables
+      let videoFile = null;
+      let videoUrl = null;
+      let outputVideoBlob = null;
+      let isProcessing = false;
+
+      let selectedSpeed = 2.0;
+      let selectedAudioMode = 'mute'; // 'mute', 'preserve', 'shift'
+      let selectedFormat = 'mp4'; // 'mp4', 'webm'
+      let selectedScale = 'original'; // 'original', 1080, 720, 480
+
+      let videoDuration = 0;
+      let trimStartTime = 0;
+      let trimEndTime = 0;
+
+      // Toast Helper
+      function showToast(msg) {
+        if (typeof window.showToast === 'function') {
+          window.showToast(msg);
+        } else {
+          console.log('[Toast]', msg);
+        }
+      }
+
+      // Format seconds as MM:SS.S
+      function formatTime(sec) {
+        if (!sec || isNaN(sec) || sec < 0) return "00:00.0";
+        const m = Math.floor(sec / 60);
+        const s = (sec % 60).toFixed(1);
+        const mm = String(m).padStart(2, '0');
+        const ss = String(s).padStart(4, '0');
+        return `${mm}:${ss}`;
+      }
+
+      // Format bytes
+      function formatBytes(bytes) {
+        if (bytes === 0) return '0 B';
+        const k = 1024;
+        const sizes = ['B', 'KB', 'MB', 'GB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
+      }
+
+      // Update Settings Summary Badge
+      function updateSettingsSummary() {
+        const audioLabels = {
+          'mute': 'Muted',
+          'preserve': 'Pitch Correct',
+          'shift': 'Pitch Shift'
+        };
+        const scaleLabels = {
+          'original': 'Original Res',
+          '1080': '1080p',
+          '720': '720p',
+          '480': '480p'
+        };
+        const summary = `(${selectedSpeed.toFixed(2)}× Speed • ${audioLabels[selectedAudioMode]} • ${selectedFormat.toUpperCase()} • ${scaleLabels[selectedScale]})`;
+        settingsSummaryBadge.textContent = summary;
+        outputFormatText.textContent = `${selectedFormat.toUpperCase()} • ${scaleLabels[selectedScale]}`;
+        updateEstimatedDuration();
+      }
+
+      // Calculate and update estimated output duration
+      function updateEstimatedDuration() {
+        if (videoDuration > 0) {
+          const activeDuration = Math.max(0.1, trimEndTime - trimStartTime);
+          const estOutSec = activeDuration / selectedSpeed;
+          estDurationText.textContent = `Est. Output: ${estOutSec.toFixed(1)}s`;
+          srcSpeedText.textContent = `${selectedSpeed.toFixed(2)}× Speed`;
+        } else {
+          estDurationText.textContent = `Est. Output: 0.0s`;
+          srcSpeedText.textContent = `${selectedSpeed.toFixed(2)}× Speed`;
+        }
+      }
+
+      // Sync Speed controls (Pills & Continuous Slider)
+      function setSpeed(val) {
+        selectedSpeed = Math.max(0.1, Math.min(10.0, parseFloat(val)));
+        speedContinuousSlider.value = selectedSpeed;
+        speedSliderBadge.textContent = `${selectedSpeed.toFixed(2)}×`;
+
+        // Update pills active state
+        document.querySelectorAll('#speed-presets-group .seg-pill').forEach(btn => {
+          const pillSpeed = parseFloat(btn.getAttribute('data-speed'));
+          btn.classList.toggle('active', Math.abs(pillSpeed - selectedSpeed) < 0.01);
+        });
+
+        // Live preview in source video player
+        if (sourceVideo && !sourceVideo.paused) {
+          sourceVideo.playbackRate = selectedSpeed;
+          sourceVideo.preservesPitch = (selectedAudioMode === 'preserve');
+        } else if (sourceVideo) {
+          sourceVideo.playbackRate = selectedSpeed;
+          sourceVideo.preservesPitch = (selectedAudioMode === 'preserve');
+        }
+
+        updateSettingsSummary();
+      }
+
+      // Segmented Button Binder Helper
+      function bindSegmentedPills(containerId, callback) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        const buttons = container.querySelectorAll('.seg-pill');
+        buttons.forEach(btn => {
+          btn.addEventListener('click', () => {
+            buttons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const dataVal = btn.dataset.speed || btn.dataset.audio || btn.dataset.format || btn.dataset.scale;
+            callback(dataVal);
+            updateSettingsSummary();
+          });
+        });
+      }
+
+      // Bind Segmented Controls
+      bindSegmentedPills('speed-presets-group', (val) => setSpeed(val));
+
+      speedContinuousSlider.addEventListener('input', (e) => {
+        setSpeed(e.target.value);
+      });
+
+      bindSegmentedPills('audio-mode-group', (val) => {
+        selectedAudioMode = val;
+        if (val === 'mute') {
+          audioModeDesc.textContent = 'Audio will be silenced. Ideal for timelapses & >2× speeds.';
+        } else if (val === 'preserve') {
+          audioModeDesc.textContent = 'Pitch correction preserves normal human voice timbre.';
+        } else {
+          audioModeDesc.textContent = 'Pitch shifts naturally (faster = chipmunk, slower = deep voice).';
+        }
+        if (sourceVideo) {
+          sourceVideo.muted = (val === 'mute');
+          sourceVideo.preservesPitch = (val === 'preserve');
+        }
+      });
+
+      bindSegmentedPills('format-group', (val) => { selectedFormat = val; });
+      bindSegmentedPills('scale-group', (val) => { selectedScale = val; });
+
+      // File Selection & Drag-and-Drop
+      dropzone.addEventListener('click', () => fileInput.click());
+
+      ['dragenter', 'dragover'].forEach(eventName => {
+        dropzone.addEventListener(eventName, (e) => {
+          e.preventDefault();
+          dropzone.classList.add('dragover');
+        });
+      });
+
+      ['dragleave', 'drop'].forEach(eventName => {
+        dropzone.addEventListener(eventName, (e) => {
+          e.preventDefault();
+          dropzone.classList.remove('dragover');
+        });
+      });
+
+      dropzone.addEventListener('drop', (e) => {
+        const files = e.dataTransfer.files;
+        if (files && files.length > 0) {
+          handleVideoFile(files[0]);
+        }
+      });
+
+      fileInput.addEventListener('change', (e) => {
+        if (e.target.files && e.target.files.length > 0) {
+          handleVideoFile(e.target.files[0]);
+        }
+      });
+
+      // Handle Loaded Video File
+      function handleVideoFile(file) {
+        if (!file.type.startsWith('video/') && !file.name.match(/\.(mp4|webm|mov|mkv|avi|ogg)$/i)) {
+          showToast('Please select a valid video file (MP4, WebM, MOV, MKV, AVI)');
+          return;
+        }
+
+        videoFile = file;
+        if (videoUrl) URL.revokeObjectURL(videoUrl);
+        videoUrl = URL.createObjectURL(file);
+
+        dropzone.style.display = 'none';
+        sourceVideo.src = videoUrl;
+        sourceVideo.style.display = 'block';
+        sourceVideo.playbackRate = selectedSpeed;
+        sourceVideo.preservesPitch = (selectedAudioMode === 'preserve');
+        sourceVideo.muted = (selectedAudioMode === 'mute');
+
+        videoMetaBadge.textContent = 'Loading metadata...';
+        outputStatusBadge.textContent = 'Ready to Process';
+        btnProcess.disabled = false;
+
+        sourceVideo.onloadedmetadata = () => {
+          videoDuration = sourceVideo.duration;
+          trimStartTime = 0;
+          trimEndTime = videoDuration;
+
+          trimStartRange.disabled = false;
+          trimEndRange.disabled = false;
+          trimStartRange.max = videoDuration;
+          trimEndRange.max = videoDuration;
+          trimStartRange.value = 0;
+          trimEndRange.value = videoDuration;
+
+          trimStartVal.textContent = formatTime(0);
+          trimEndVal.textContent = formatTime(videoDuration);
+          trimDurationBadge.textContent = `(${videoDuration.toFixed(1)}s)`;
+          srcDurationText.textContent = `Original: ${videoDuration.toFixed(1)}s`;
+
+          videoMetaBadge.textContent = `${sourceVideo.videoWidth}×${sourceVideo.videoHeight} • ${formatBytes(file.size)}`;
+          updateEstimatedDuration();
+          showToast(`Video loaded (${sourceVideo.videoWidth}×${sourceVideo.videoHeight}, ${videoDuration.toFixed(1)}s)`);
+        };
+      }
+
+      // Trimmer Sliders Event Listeners
+      trimStartRange.addEventListener('input', (e) => {
+        const val = parseFloat(e.target.value);
+        if (val >= trimEndTime - 0.2) {
+          trimStartRange.value = trimEndTime - 0.2;
+          trimStartTime = trimEndTime - 0.2;
+        } else {
+          trimStartTime = val;
+        }
+        trimStartVal.textContent = formatTime(trimStartTime);
+        const activeDur = trimEndTime - trimStartTime;
+        trimDurationBadge.textContent = `(${activeDur.toFixed(1)}s)`;
+        sourceVideo.currentTime = trimStartTime;
+        updateEstimatedDuration();
+      });
+
+      trimEndRange.addEventListener('input', (e) => {
+        const val = parseFloat(e.target.value);
+        if (val <= trimStartTime + 0.2) {
+          trimEndRange.value = trimStartTime + 0.2;
+          trimEndTime = trimStartTime + 0.2;
+        } else {
+          trimEndTime = val;
+        }
+        trimEndVal.textContent = formatTime(trimEndTime);
+        const activeDur = trimEndTime - trimStartTime;
+        trimDurationBadge.textContent = `(${activeDur.toFixed(1)}s)`;
+        sourceVideo.currentTime = trimEndTime;
+        updateEstimatedDuration();
+      });
+
+      // Pure Client-Side Video Speed Transcoding Engine
+      btnProcess.addEventListener('click', async () => {
+        if (!videoFile || !sourceVideo || isProcessing) return;
+
+        isProcessing = true;
+        btnProcess.disabled = true;
+        btnProcessIcon.setAttribute('icon', 'lucide:loader-2');
+        btnProcessLabel.textContent = 'Encoding speed-adjusted video...';
+        slimProgressBar.classList.add('active');
+        slimProgressFill.style.width = '0%';
+        outputStatusBadge.textContent = 'Encoding...';
+
+        showToast('Transcoding speed adjustment in browser sandbox...');
+
+        try {
+          const originalW = sourceVideo.videoWidth || 1280;
+          const originalH = sourceVideo.videoHeight || 720;
+          let targetW = originalW;
+          let targetH = originalH;
+
+          if (selectedScale !== 'original') {
+            const scaleMax = parseInt(selectedScale, 10);
+            const scale = scaleMax / Math.max(originalW, originalH);
+            if (scale < 1) {
+              targetW = Math.round(originalW * scale);
+              targetH = Math.round(originalH * scale);
+            }
+          }
+
+          // Force even dimensions for MP4/H.264 & WebM codecs
+          if (targetW % 2 !== 0) targetW--;
+          if (targetH % 2 !== 0) targetH--;
+
+          const renderCanvas = document.createElement('canvas');
+          renderCanvas.width = targetW;
+          renderCanvas.height = targetH;
+          const ctx = renderCanvas.getContext('2d', { alpha: false });
+          ctx.fillStyle = '#000000';
+          ctx.fillRect(0, 0, targetW, targetH);
+
+          // Select optimum supported MIME codec
+          let mimeType = 'video/webm;codecs=vp9';
+          if (selectedFormat === 'mp4') {
+            if (MediaRecorder.isTypeSupported('video/mp4;codecs=avc1')) {
+              mimeType = 'video/mp4;codecs=avc1';
+            } else if (MediaRecorder.isTypeSupported('video/mp4')) {
+              mimeType = 'video/mp4';
+            } else {
+              mimeType = 'video/webm;codecs=vp9';
+            }
+          } else {
+            if (MediaRecorder.isTypeSupported('video/webm;codecs=vp9')) {
+              mimeType = 'video/webm;codecs=vp9';
+            } else if (MediaRecorder.isTypeSupported('video/webm')) {
+              mimeType = 'video/webm';
+            }
+          }
+
+          const stream = renderCanvas.captureStream(30); // 30 FPS smooth video stream
+          
+          // Audio routing via AudioContext if audio is preserved
+          let audioContext = null;
+          let audioSourceNode = null;
+          if (selectedAudioMode !== 'mute') {
+            try {
+              audioContext = new (window.AudioContext || window.webkitAudioContext)();
+              const audioDest = audioContext.createMediaStreamDestination();
+              audioSourceNode = audioContext.createMediaElementSource(sourceVideo);
+              audioSourceNode.connect(audioDest);
+              audioSourceNode.connect(audioContext.destination);
+
+              audioDest.stream.getAudioTracks().forEach(track => {
+                stream.addTrack(track);
+              });
+            } catch (audioErr) {
+              console.warn('Direct AudioContext routing unavailable:', audioErr);
+            }
+          }
+
+          const recorder = new MediaRecorder(stream, {
+            mimeType: mimeType,
+            videoBitsPerSecond: 6000000 // 6 Mbps clean bitrate
+          });
+
+          const recordedChunks = [];
+          recorder.ondataavailable = (e) => {
+            if (e.data && e.data.size > 0) recordedChunks.push(e.data);
+          };
+
+          const encodingPromise = new Promise((resolve) => {
+            recorder.onstop = () => {
+              const finalBlob = new Blob(recordedChunks, { type: mimeType.split(';')[0] });
+              resolve(finalBlob);
+            };
+          });
+
+          // Prepare playback for capture
+          const startSec = trimStartTime || 0;
+          const endSec = trimEndTime || videoDuration;
+          const totalActiveSec = Math.max(0.2, endSec - startSec);
+
+          sourceVideo.currentTime = startSec;
+          sourceVideo.playbackRate = selectedSpeed;
+          sourceVideo.preservesPitch = (selectedAudioMode === 'preserve');
+          sourceVideo.muted = (selectedAudioMode === 'mute');
+
+          await new Promise(r => { sourceVideo.onseeked = r; });
+
+          recorder.start();
+          await sourceVideo.play();
+
+          // Render loop driving canvas stream frame extraction
+          await new Promise((resolve) => {
+            let animId;
+            const drawFrame = () => {
+              if (sourceVideo.paused || sourceVideo.ended || sourceVideo.currentTime >= endSec) {
+                cancelAnimationFrame(animId);
+                sourceVideo.pause();
+                recorder.stop();
+                resolve();
+                return;
+              }
+
+              ctx.drawImage(sourceVideo, 0, 0, targetW, targetH);
+              
+              // Update live progress
+              const progress = Math.min(100, Math.max(0, ((sourceVideo.currentTime - startSec) / totalActiveSec) * 100));
+              slimProgressFill.style.width = `${progress}%`;
+              outputStatusBadge.textContent = `Encoding ${Math.round(progress)}%`;
+
+              animId = requestAnimationFrame(drawFrame);
+            };
+
+            animId = requestAnimationFrame(drawFrame);
+
+            sourceVideo.onended = () => {
+              cancelAnimationFrame(animId);
+              recorder.stop();
+              resolve();
+            };
+          });
+
+          outputVideoBlob = await encodingPromise;
+
+          if (audioContext) {
+            audioContext.close().catch(() => {});
+          }
+
+          // Display Converted Result Video
+          const outputBlobUrl = URL.createObjectURL(outputVideoBlob);
+          outputEmptyPlaceholder.style.display = 'none';
+          outputVideoPlayer.src = outputBlobUrl;
+          outputVideoPlayer.style.display = 'block';
+          outputVideoPlayer.playbackRate = 1.0; // Play at normal 1.0x native rate because frames are already speed-encoded
+
+          outputStatusBadge.textContent = 'Completed';
+          btnCopy.disabled = false;
+          btnDownload.disabled = false;
+
+          showToast(`Success! Video speed adjusted (${selectedSpeed.toFixed(2)}×, ${formatBytes(outputVideoBlob.size)})`);
+        } catch (err) {
+          console.error('Video speed encoding error:', err);
+          showToast('Failed to process video speed. Try selecting WebM format.');
+          outputStatusBadge.textContent = 'Error';
+        } finally {
+          isProcessing = false;
+          btnProcess.disabled = false;
+          btnProcessIcon.setAttribute('icon', 'lucide:play');
+          btnProcessLabel.textContent = 'Change Video Speed';
+          setTimeout(() => {
+            slimProgressBar.classList.remove('active');
+            slimProgressFill.style.width = '0%';
+          }, 1200);
+        }
+      });
+
+      // Download Video File
+      btnDownload.addEventListener('click', () => {
+        if (!outputVideoBlob) return;
+        const a = document.createElement('a');
+        const baseName = videoFile ? videoFile.name.replace(/\.[^/.]+$/, "") : "toolity-speed-video";
+        const ext = outputVideoBlob.type.includes('mp4') ? 'mp4' : 'webm';
+        const filename = `${baseName}-${selectedSpeed.toFixed(2)}x.${ext}`;
+        a.href = URL.createObjectURL(outputVideoBlob);
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        showToast(`Downloaded ${filename}`);
+      });
+
+      // Copy Video to Clipboard
+      btnCopy.addEventListener('click', async () => {
+        if (!outputVideoBlob) return;
+        try {
+          if (navigator.clipboard && window.ClipboardItem) {
+            const item = new ClipboardItem({ [outputVideoBlob.type]: outputVideoBlob });
+            await navigator.clipboard.write([item]);
+            showToast('Video copied to clipboard!');
+          } else {
+            showToast('Direct video clipboard copy not supported by your browser; click Download');
+          }
+        } catch (e) {
+          console.warn('Clipboard write failed:', e);
+          showToast('Could not copy video directly; click Download instead');
+        }
+      });
+
+      // Reset Tool
+      btnReset.addEventListener('click', () => {
+        if (videoUrl) URL.revokeObjectURL(videoUrl);
+        videoFile = null;
+        videoUrl = null;
+        outputVideoBlob = null;
+        videoDuration = 0;
+        trimStartTime = 0;
+        trimEndTime = 0;
+
+        fileInput.value = '';
+        sourceVideo.src = '';
+        sourceVideo.style.display = 'none';
+        dropzone.style.display = 'flex';
+
+        outputVideoPlayer.src = '';
+        outputVideoPlayer.style.display = 'none';
+        outputEmptyPlaceholder.style.display = 'flex';
+
+        videoMetaBadge.textContent = 'No video loaded';
+        outputStatusBadge.textContent = 'Awaiting Video';
+        srcDurationText.textContent = 'Original: 0.0s';
+        estDurationText.textContent = 'Est. Output: 0.0s';
+
+        trimStartRange.disabled = true;
+        trimEndRange.disabled = true;
+        trimStartRange.value = 0;
+        trimEndRange.value = 100;
+        trimStartVal.textContent = '00:00.0';
+        trimEndVal.textContent = '00:00.0';
+        trimDurationBadge.textContent = '(0.0s)';
+
+        setSpeed(2.0);
+        btnProcess.disabled = true;
+        btnCopy.disabled = true;
+        btnDownload.disabled = true;
+        slimProgressBar.classList.remove('active');
+
+        showToast('Tool reset');
+      });
+    });
+  </script>
+</body>
+
+</html>

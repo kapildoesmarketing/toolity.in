@@ -226,6 +226,14 @@
         tags: ['gif', 'speed', 'changer', 'fast', 'slow', 'slowmo', 'hyper', 'fps', 'accelerate', 'playback', 'rate', 'multiplier', 'time', 'tempo']
       },
       {
+        id: 'video-speed-changer',
+        title: 'Video Speed Changer',
+        category: 'Utilities',
+        url: 'utilities/video-speed-changer/',
+        icon: 'lucide:play-circle',
+        tags: ['video', 'speed', 'changer', 'speed up video', 'slow motion', 'slowmo', 'timelapse', 'hyperlapse', 'fast forward', 'playback rate', 'tempo', 'accelerate', 'audio pitch', 'mp4', 'webm', 'mov']
+      },
+      {
         id: 'whatsapp-link-creator',
         title: 'WhatsApp Link Creator',
         category: 'Utilities',
