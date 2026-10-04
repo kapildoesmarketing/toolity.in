@@ -29,6 +29,7 @@
     if (raw) {
       try {
         parsed = new URL(/^(https?:)?\/\//i.test(raw) ? raw : 'https://' + raw);
+        if (!parsed.hostname.includes('.') && parsed.hostname !== 'localhost') throw new Error('no tld');
         let i = 0;
         parsed.searchParams.forEach((value, key) => params.push({ id: i++, key, value, enabled: true }));
       } catch (e) {

@@ -3439,3 +3439,36 @@ body {
   font-family: var(--font-mono);
   font-size: 0.8rem;
 }
+
+/* Filter / quick-action chip row (used under inputs) */
+.filter-chips-row {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.btn-filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.65rem;
+  font-size: 0.76rem;
+  font-weight: 500;
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-filter-chip:hover { border-color: var(--brand); color: var(--brand); background: var(--brand-soft); }
+
+.btn-filter-chip.chip-signal {
+  color: var(--brand);
+  border-color: rgba(244, 81, 30, 0.3);
+  background: rgba(244, 81, 30, 0.06);
+}
