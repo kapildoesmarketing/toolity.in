@@ -415,6 +415,11 @@
             placeholder="Start typing or paste notes here... Your writing is automatically saved locally in real time." 
             spellcheck="true"
             aria-label="Online Notepad Text Editor"
+            oninput="window.updateNotepadMetrics(); window.saveNotepadContent();"
+            onkeyup="window.updateNotepadMetrics();"
+            onpaste="setTimeout(function(){ window.updateNotepadMetrics(); window.saveNotepadContent(); }, 10);"
+            oncut="setTimeout(function(){ window.updateNotepadMetrics(); window.saveNotepadContent(); }, 10);"
+            onchange="window.updateNotepadMetrics(); window.saveNotepadContent();"
           ></textarea>
 
           <!-- 3. Minimal Statistics Footer Bar -->
@@ -675,25 +680,96 @@
 
   <!-- Online Notepad Script -->
   <script>
+    /* Designed by Kapil Pidhwani: Resilient Real-Time Online Notepad Engine */
+
+    // Global Metrics Calculator (Immediate Fail-Safe execution)
+    window.updateNotepadMetrics = function () {
+      var textarea = document.getElementById('notepad-textarea');
+      if (!textarea) return;
+      var text = textarea.value || '';
+
+      var charCount = text.length;
+      var charNoSpaceCount = text.replace(/\s/g, '').length;
+      var trimmed = text.trim();
+      var words = trimmed.length > 0 ? trimmed.match(/\S+/g) : null;
+      var wordCount = words ? words.length : 0;
+      var lineCount = text.length === 0 ? 0 : text.split('\n').length;
+      var paragraphs = trimmed.length === 0 ? 0 : text.split(/\n+/).filter(function (p) { return p.trim().length > 0; }).length;
+
+      var readingSeconds = Math.ceil((wordCount / 200) * 60);
+      var speakingSeconds = Math.ceil((wordCount / 130) * 60);
+
+      function formatDuration(sec) {
+        if (sec <= 0 || wordCount === 0) return '0s';
+        if (sec < 60) return sec + 's';
+        var m = Math.floor(sec / 60);
+        var s = sec % 60;
+        return s > 0 ? m + 'm ' + s + 's' : m + 'm';
+      }
+
+      var statWords = document.getElementById('stat-words');
+      var statChars = document.getElementById('stat-chars');
+      var statCharsNoSpace = document.getElementById('stat-chars-nospace');
+      var statLines = document.getElementById('stat-lines');
+      var statParagraphs = document.getElementById('stat-paragraphs');
+      var statReadTime = document.getElementById('stat-read-time');
+      var statSpeakTime = document.getElementById('stat-speak-time');
+
+      if (statWords) statWords.textContent = wordCount.toLocaleString();
+      if (statChars) statChars.textContent = charCount.toLocaleString();
+      if (statCharsNoSpace) statCharsNoSpace.textContent = charNoSpaceCount.toLocaleString();
+      if (statLines) statLines.textContent = lineCount.toLocaleString();
+      if (statParagraphs) statParagraphs.textContent = paragraphs.toLocaleString();
+      if (statReadTime) statReadTime.textContent = formatDuration(readingSeconds);
+      if (statSpeakTime) statSpeakTime.textContent = formatDuration(speakingSeconds);
+    };
+
+    // Global Auto-Save Handler with Debounce
+    window._notepadSaveTimeout = null;
+    window.saveNotepadContent = function () {
+      var textarea = document.getElementById('notepad-textarea');
+      var saveStatus = document.getElementById('notepad-save-status');
+      var saveStatusText = document.getElementById('save-status-text');
+      if (!textarea) return;
+
+      if (saveStatus && saveStatusText) {
+        saveStatus.className = 'notepad-status-tag saving';
+        saveStatusText.textContent = 'Saving...';
+      }
+
+      clearTimeout(window._notepadSaveTimeout);
+      window._notepadSaveTimeout = setTimeout(function () {
+        try {
+          localStorage.setItem('toolity_notepad_content', textarea.value);
+        } catch (e) {
+          console.warn('LocalStorage save error:', e);
+        }
+        if (saveStatus && saveStatusText) {
+          saveStatus.className = 'notepad-status-tag';
+          saveStatusText.textContent = 'Auto-saved';
+        }
+      }, 150);
+    };
+
+    // Main Notepad Initializer
     (function () {
       'use strict';
 
+      var STORAGE_KEY = 'toolity_notepad_content';
+      var SETTINGS_KEY = 'toolity_notepad_settings';
+      var lastClearedText = null;
+
+      var settings = {
+        fontFamily: 'sans',
+        fontSize: '16',
+        lineHeight: '1.75',
+        tabBehavior: '2',
+        spellcheck: 'on'
+      };
+
       function initNotepad() {
-        // Elements
         var textarea = document.getElementById('notepad-textarea');
-        var saveStatus = document.getElementById('notepad-save-status');
-        var saveStatusText = document.getElementById('save-status-text');
-
         if (!textarea) return;
-
-        // Metric elements
-        var statWords = document.getElementById('stat-words');
-        var statChars = document.getElementById('stat-chars');
-        var statCharsNoSpace = document.getElementById('stat-chars-nospace');
-        var statLines = document.getElementById('stat-lines');
-        var statParagraphs = document.getElementById('stat-paragraphs');
-        var statReadTime = document.getElementById('stat-read-time');
-        var statSpeakTime = document.getElementById('stat-speak-time');
 
         // Toolbar buttons
         var btnClear = document.getElementById('btn-clear-notepad');
@@ -719,219 +795,6 @@
         var segTabBehavior = document.getElementById('seg-tab-behavior');
         var segSpellcheck = document.getElementById('seg-spellcheck');
         var settingsSummaryBadge = document.getElementById('settings-summary-badge');
-
-        // State variables
-        var STORAGE_KEY = 'toolity_notepad_content';
-        var SETTINGS_KEY = 'toolity_notepad_settings';
-        var lastClearedText = null;
-        var saveTimeout = null;
-
-        // Default settings
-        var settings = {
-          fontFamily: 'sans',
-          fontSize: '16',
-          lineHeight: '1.75',
-          tabBehavior: '2',
-          spellcheck: 'on'
-        };
-
-        // Load Settings from LocalStorage
-        function loadSettings() {
-          try {
-            var saved = localStorage.getItem(SETTINGS_KEY);
-            if (saved) {
-              var parsed = JSON.parse(saved);
-              Object.assign(settings, parsed);
-            }
-          } catch (e) {
-            console.warn('Failed to load notepad settings', e);
-          }
-          applySettingsToDOM();
-        }
-
-        function saveSettings() {
-          try {
-            localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
-          } catch (e) {
-            console.warn('Failed to save notepad settings', e);
-          }
-          updateSettingsSummaryBadge();
-        }
-
-        function applySettingsToDOM() {
-          if (!textarea) return;
-          textarea.classList.remove('font-sans', 'font-mono', 'font-serif');
-          textarea.classList.add('font-' + settings.fontFamily);
-          updateSegmentedActive(segFontFamily, settings.fontFamily);
-
-          textarea.style.fontSize = settings.fontSize + 'px';
-          updateSegmentedActive(segFontSize, settings.fontSize);
-
-          textarea.style.lineHeight = settings.lineHeight;
-          updateSegmentedActive(segLineHeight, settings.lineHeight);
-
-          updateSegmentedActive(segTabBehavior, settings.tabBehavior);
-
-          textarea.spellcheck = settings.spellcheck === 'on';
-          updateSegmentedActive(segSpellcheck, settings.spellcheck);
-
-          updateSettingsSummaryBadge();
-        }
-
-        function updateSegmentedActive(groupEl, value) {
-          if (!groupEl) return;
-          var pills = groupEl.querySelectorAll('.seg-pill');
-          pills.forEach(function (pill) {
-            if (pill.getAttribute('data-val') === String(value)) {
-              pill.classList.add('active');
-            } else {
-              pill.classList.remove('active');
-            }
-          });
-        }
-
-        function updateSettingsSummaryBadge() {
-          if (!settingsSummaryBadge) return;
-          var fontLabel = settings.fontFamily === 'mono' ? 'Mono' : settings.fontFamily === 'serif' ? 'Serif' : 'Inter Sans';
-          var lineLabel = settings.lineHeight === '1.5' ? 'Compact' : settings.lineHeight === '2.0' ? 'Spacious' : 'Relaxed';
-          settingsSummaryBadge.textContent = '(' + fontLabel + ' • ' + settings.fontSize + 'px • ' + lineLabel + ')';
-        }
-
-        // Load Saved Content
-        function loadSavedContent() {
-          try {
-            var content = localStorage.getItem(STORAGE_KEY);
-            if (content !== null) {
-              textarea.value = content;
-            }
-          } catch (e) {
-            console.warn('LocalStorage access issue:', e);
-          }
-          updateMetrics();
-        }
-
-        // Save Content to LocalStorage with reactive status
-        function saveContent() {
-          setSavingStatus(true);
-          clearTimeout(saveTimeout);
-          saveTimeout = setTimeout(function () {
-            try {
-              localStorage.setItem(STORAGE_KEY, textarea.value);
-              setSavingStatus(false);
-            } catch (e) {
-              console.error('Failed to write to localStorage:', e);
-            }
-          }, 150);
-        }
-
-        function setSavingStatus(isSaving) {
-          if (!saveStatus || !saveStatusText) return;
-          if (isSaving) {
-            saveStatus.className = 'notepad-status-tag saving';
-            saveStatusText.textContent = 'Saving...';
-          } else {
-            saveStatus.className = 'notepad-status-tag';
-            saveStatusText.textContent = 'Auto-saved';
-          }
-        }
-
-        // Live Statistics Calculator
-        function updateMetrics() {
-          if (!textarea) return;
-          var text = textarea.value || '';
-
-          // 1. Total characters
-          var charCount = text.length;
-
-          // 2. Characters without spaces
-          var charNoSpaceCount = text.replace(/\s/g, '').length;
-
-          // 3. Total words
-          var trimmed = text.trim();
-          var wordCount = 0;
-          if (trimmed.length > 0) {
-            var words = trimmed.match(/\S+/g);
-            wordCount = words ? words.length : 0;
-          }
-
-          // 4. Total lines
-          var lineCount = text.length === 0 ? 0 : text.split('\n').length;
-
-          // 5. Total paragraphs
-          var paragraphs = 0;
-          if (trimmed.length > 0) {
-            paragraphs = text.split(/\n+/).filter(function (p) {
-              return p.trim().length > 0;
-            }).length;
-          }
-
-          // 6. Estimated Reading & Speaking Times
-          var readingSeconds = Math.ceil((wordCount / 200) * 60);
-          var speakingSeconds = Math.ceil((wordCount / 130) * 60);
-
-          function formatDuration(sec) {
-            if (sec <= 0 || wordCount === 0) return '0s';
-            if (sec < 60) return sec + 's';
-            var m = Math.floor(sec / 60);
-            var s = sec % 60;
-            return s > 0 ? m + 'm ' + s + 's' : m + 'm';
-          }
-
-          // Update DOM
-          if (statWords) statWords.textContent = wordCount.toLocaleString();
-          if (statChars) statChars.textContent = charCount.toLocaleString();
-          if (statCharsNoSpace) statCharsNoSpace.textContent = charNoSpaceCount.toLocaleString();
-          if (statLines) statLines.textContent = lineCount.toLocaleString();
-          if (statParagraphs) statParagraphs.textContent = paragraphs.toLocaleString();
-          if (statReadTime) statReadTime.textContent = formatDuration(readingSeconds);
-          if (statSpeakTime) statSpeakTime.textContent = formatDuration(speakingSeconds);
-        }
-
-        // Multi-Event Listeners on Textarea for immediate real-time updates
-        textarea.addEventListener('input', function () {
-          saveContent();
-          updateMetrics();
-        });
-        textarea.addEventListener('keyup', updateMetrics);
-        textarea.addEventListener('paste', function () {
-          setTimeout(function () {
-            saveContent();
-            updateMetrics();
-          }, 10);
-        });
-        textarea.addEventListener('cut', function () {
-          setTimeout(function () {
-            saveContent();
-            updateMetrics();
-          }, 10);
-        });
-        textarea.addEventListener('change', function () {
-          saveContent();
-          updateMetrics();
-        });
-
-        // Handle Tab Key Indentation & Shortcuts
-        textarea.addEventListener('keydown', function (e) {
-          // Ctrl+S / Cmd+S quick download shortcut
-          if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') {
-            e.preventDefault();
-            downloadFile('txt');
-            return;
-          }
-
-          // Tab Indentation
-          if (e.key === 'Tab') {
-            e.preventDefault();
-            var start = this.selectionStart;
-            var end = this.selectionEnd;
-            var tabVal = settings.tabBehavior === '4' ? '    ' : settings.tabBehavior === 'tab' ? '\t' : '  ';
-
-            this.value = this.value.substring(0, start) + tabVal + this.value.substring(end);
-            this.selectionStart = this.selectionEnd = start + tabVal.length;
-            saveContent();
-            updateMetrics();
-          }
-        });
 
         // Toast Notification Helper
         function showToast(message, actionText, actionCallback) {
@@ -996,7 +859,152 @@
           }, 4500);
         }
 
-        // Action: Clear Notepad with Undo Guard
+        // Settings Management
+        function applySettingsToDOM() {
+          try {
+            if (!textarea) return;
+            textarea.classList.remove('font-sans', 'font-mono', 'font-serif');
+            textarea.classList.add('font-' + (settings.fontFamily || 'sans'));
+            updateSegmentedActive(segFontFamily, settings.fontFamily);
+
+            textarea.style.fontSize = (settings.fontSize || '16') + 'px';
+            updateSegmentedActive(segFontSize, settings.fontSize);
+
+            textarea.style.lineHeight = settings.lineHeight || '1.75';
+            updateSegmentedActive(segLineHeight, settings.lineHeight);
+
+            updateSegmentedActive(segTabBehavior, settings.tabBehavior);
+
+            textarea.spellcheck = settings.spellcheck === 'on';
+            updateSegmentedActive(segSpellcheck, settings.spellcheck);
+
+            updateSettingsSummaryBadge();
+          } catch (e) {
+            console.warn('applySettingsToDOM error:', e);
+          }
+        }
+
+        function updateSegmentedActive(groupEl, value) {
+          if (!groupEl) return;
+          var pills = groupEl.querySelectorAll('.seg-pill');
+          for (var i = 0; i < pills.length; i++) {
+            var pill = pills[i];
+            if (pill.getAttribute('data-val') === String(value)) {
+              pill.classList.add('active');
+            } else {
+              pill.classList.remove('active');
+            }
+          }
+        }
+
+        function updateSettingsSummaryBadge() {
+          if (!settingsSummaryBadge) return;
+          var fontLabel = settings.fontFamily === 'mono' ? 'Mono' : settings.fontFamily === 'serif' ? 'Serif' : 'Inter Sans';
+          var lineLabel = settings.lineHeight === '1.5' ? 'Compact' : settings.lineHeight === '2.0' ? 'Spacious' : 'Relaxed';
+          settingsSummaryBadge.textContent = '(' + fontLabel + ' • ' + settings.fontSize + 'px • ' + lineLabel + ')';
+        }
+
+        function loadSettings() {
+          try {
+            var saved = localStorage.getItem(SETTINGS_KEY);
+            if (saved) {
+              var parsed = JSON.parse(saved);
+              if (parsed && typeof parsed === 'object') {
+                for (var k in parsed) {
+                  if (parsed.hasOwnProperty(k)) {
+                    settings[k] = parsed[k];
+                  }
+                }
+              }
+            }
+          } catch (e) {
+            console.warn('loadSettings error:', e);
+          }
+          applySettingsToDOM();
+        }
+
+        function saveSettings() {
+          try {
+            localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+          } catch (e) {
+            console.warn('saveSettings error:', e);
+          }
+          updateSettingsSummaryBadge();
+        }
+
+        function setupSegmentedGroup(groupEl, key) {
+          if (!groupEl) return;
+          var pills = groupEl.querySelectorAll('.seg-pill');
+          pills.forEach(function (pill) {
+            pill.addEventListener('click', function () {
+              var val = this.getAttribute('data-val');
+              settings[key] = val;
+              saveSettings();
+              applySettingsToDOM();
+            });
+          });
+        }
+
+        setupSegmentedGroup(segFontFamily, 'fontFamily');
+        setupSegmentedGroup(segFontSize, 'fontSize');
+        setupSegmentedGroup(segLineHeight, 'lineHeight');
+        setupSegmentedGroup(segTabBehavior, 'tabBehavior');
+        setupSegmentedGroup(segSpellcheck, 'spellcheck');
+
+        // Load Content from LocalStorage
+        try {
+          var savedText = localStorage.getItem(STORAGE_KEY);
+          if (savedText !== null && textarea.value === '') {
+            textarea.value = savedText;
+          }
+        } catch (e) {
+          console.warn('LocalStorage read error:', e);
+        }
+
+        // Attach DOM event listeners
+        textarea.addEventListener('input', function () {
+          window.updateNotepadMetrics();
+          window.saveNotepadContent();
+        });
+        textarea.addEventListener('keyup', window.updateNotepadMetrics);
+        textarea.addEventListener('paste', function () {
+          setTimeout(function () {
+            window.updateNotepadMetrics();
+            window.saveNotepadContent();
+          }, 10);
+        });
+        textarea.addEventListener('cut', function () {
+          setTimeout(function () {
+            window.updateNotepadMetrics();
+            window.saveNotepadContent();
+          }, 10);
+        });
+        textarea.addEventListener('change', function () {
+          window.updateNotepadMetrics();
+          window.saveNotepadContent();
+        });
+
+        // Tab Indentation & Keyboard Shortcuts
+        textarea.addEventListener('keydown', function (e) {
+          if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') {
+            e.preventDefault();
+            downloadFile('txt');
+            return;
+          }
+
+          if (e.key === 'Tab') {
+            e.preventDefault();
+            var start = this.selectionStart;
+            var end = this.selectionEnd;
+            var tabVal = settings.tabBehavior === '4' ? '    ' : settings.tabBehavior === 'tab' ? '\t' : '  ';
+            this.value = this.value.substring(0, start) + tabVal + this.value.substring(end);
+            this.selectionStart = this.selectionEnd = start + tabVal.length;
+            window.updateNotepadMetrics();
+            window.saveNotepadContent();
+          }
+        });
+
+        // Action: Clear
         if (btnClear) {
           btnClear.addEventListener('click', function () {
             if (textarea.value.trim().length === 0) {
@@ -1005,21 +1013,21 @@
             }
             lastClearedText = textarea.value;
             textarea.value = '';
-            saveContent();
-            updateMetrics();
+            window.updateNotepadMetrics();
+            window.saveNotepadContent();
 
             showToast('Note cleared.', 'Undo', function () {
               if (lastClearedText !== null) {
                 textarea.value = lastClearedText;
-                saveContent();
-                updateMetrics();
+                window.updateNotepadMetrics();
+                window.saveNotepadContent();
                 showToast('Note restored successfully.');
               }
             });
           });
         }
 
-        // Action: Copy to Clipboard
+        // Action: Copy
         if (btnCopy) {
           btnCopy.addEventListener('click', function () {
             var text = textarea.value;
@@ -1027,7 +1035,6 @@
               showToast('Notepad is empty.');
               return;
             }
-
             if (navigator.clipboard && navigator.clipboard.writeText) {
               navigator.clipboard.writeText(text).then(function () {
                 showToast('✓ Note copied to clipboard!');
@@ -1050,7 +1057,7 @@
           }
         }
 
-        // Action: Download Dropdown Toggle (uses standard .open class on wrapper)
+        // Action: Download Dropdown Toggle
         if (btnDownloadToggle && downloadWrap) {
           btnDownloadToggle.addEventListener('click', function (e) {
             e.stopPropagation();
@@ -1072,7 +1079,7 @@
           });
         }
 
-        // Action: File Exporters (.txt, .md, .doc)
+        // Action: File Exporter (.txt, .md, .doc)
         function downloadFile(format) {
           var text = textarea.value;
           if (!text.trim()) {
@@ -1127,7 +1134,7 @@
         if (optDlMd) optDlMd.addEventListener('click', function () { downloadFile('md'); });
         if (optDlDoc) optDlDoc.addEventListener('click', function () { downloadFile('doc'); });
 
-        // Text Transformers (Applying directly to selection or full text)
+        // Action: Text Transformations
         function applyTextTransformation(transformFn) {
           var start = textarea.selectionStart;
           var end = textarea.selectionEnd;
@@ -1148,31 +1155,24 @@
             textarea.value = transformFn(fullText);
           }
 
-          saveContent();
-          updateMetrics();
+          window.updateNotepadMetrics();
+          window.saveNotepadContent();
         }
 
-        // Transform: Uppercase
         if (btnUpper) {
           btnUpper.addEventListener('click', function () {
-            applyTextTransformation(function (txt) {
-              return txt.toUpperCase();
-            });
+            applyTextTransformation(function (txt) { return txt.toUpperCase(); });
             showToast('Converted to UPPERCASE');
           });
         }
 
-        // Transform: Lowercase
         if (btnLower) {
           btnLower.addEventListener('click', function () {
-            applyTextTransformation(function (txt) {
-              return txt.toLowerCase();
-            });
+            applyTextTransformation(function (txt) { return txt.toLowerCase(); });
             showToast('Converted to lowercase');
           });
         }
 
-        // Transform: Title Case
         if (btnTitle) {
           btnTitle.addEventListener('click', function () {
             applyTextTransformation(function (txt) {
@@ -1190,7 +1190,6 @@
           });
         }
 
-        // Transform: Sentence case
         if (btnSentence) {
           btnSentence.addEventListener('click', function () {
             applyTextTransformation(function (txt) {
@@ -1202,7 +1201,6 @@
           });
         }
 
-        // Transform: Clean Spaces
         if (btnCleanSpaces) {
           btnCleanSpaces.addEventListener('click', function () {
             applyTextTransformation(function (txt) {
@@ -1215,7 +1213,6 @@
           });
         }
 
-        // Transform: Sort Lines A-Z
         if (btnSortLines) {
           btnSortLines.addEventListener('click', function () {
             applyTextTransformation(function (txt) {
@@ -1229,36 +1226,20 @@
           });
         }
 
-        // Settings Segmented Group Handlers
-        function setupSegmentedGroup(groupEl, key) {
-          if (!groupEl) return;
-          var pills = groupEl.querySelectorAll('.seg-pill');
-          pills.forEach(function (pill) {
-            pill.addEventListener('click', function () {
-              var val = this.getAttribute('data-val');
-              settings[key] = val;
-              saveSettings();
-              applySettingsToDOM();
-            });
-          });
-        }
-
-        setupSegmentedGroup(segFontFamily, 'fontFamily');
-        setupSegmentedGroup(segFontSize, 'fontSize');
-        setupSegmentedGroup(segLineHeight, 'lineHeight');
-        setupSegmentedGroup(segTabBehavior, 'tabBehavior');
-        setupSegmentedGroup(segSpellcheck, 'spellcheck');
-
-        // Initialize on Load
+        // Initialize settings and initial metrics calculation
         loadSettings();
-        loadSavedContent();
+        window.updateNotepadMetrics();
       }
 
+      // Safe multi-stage initialization
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initNotepad);
       } else {
         initNotepad();
       }
+      window.addEventListener('load', function () {
+        window.updateNotepadMetrics();
+      });
     })();
   </script>
 </body>
