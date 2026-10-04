@@ -53,7 +53,7 @@
   <!-- Iconify Icon Component -->
   <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 
-  <link rel="stylesheet" href="/styles/main.css?v=2.3">
+  <link rel="stylesheet" href="../../styles/main.css?v=2.3">
 
   <style>
     /* Designed by Kapil Pidhwani: Minimalist Online Notepad Tool Styles */
@@ -478,7 +478,7 @@
                   <div class="form-group">
                     <span class="form-label" style="font-size:0.75rem;">Line Spacing</span>
                     <div class="segmented-group" id="seg-line-height">
-                      <button type="button" class="seg-pill" data-val="1.5">Compact</button>
+                      <button type="button" class="seg-pill data-val="1.5">Compact</button>
                       <button type="button" class="seg-pill active" data-val="1.75">Relaxed</button>
                       <button type="button" class="seg-pill" data-val="2.0">Spacious</button>
                     </div>
@@ -590,76 +590,76 @@
         <!-- Frequently Asked Questions (FAQ) -->
         <section class="guide-section" style="padding-top: 1rem;">
           <div class="section-header">
-            <span class="section-eyebrow">Got Questions?</span>
-            <h2 class="section-title">Frequently Asked Questions</h2>
-            <p class="section-desc">Learn more about how Online Notepad protects your privacy and manages storage.</p>
+            <span class="section-eyebrow">Frequently Asked Questions</span>
+            <h2 class="section-title">Online Notepad FAQ</h2>
+            <p class="section-desc">Learn more about how Online Notepad protects your privacy, manages local storage, and formats notes.</p>
           </div>
 
-          <div class="faq-accordion-list">
-            <details class="faq-item">
-              <summary class="faq-question">
-                <span>Are my notes stored on any cloud server or database?</span>
-                <iconify-icon icon="lucide:chevron-down" class="faq-chevron" width="16" height="16"></iconify-icon>
+          <div style="display: flex; flex-direction: column; gap: 0.75rem; max-width: 820px; margin: 0 auto;">
+            <details class="tool-settings-accordion" style="background: var(--surface-elevated); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 0.25rem;">
+              <summary class="tool-settings-summary" style="padding: 1rem 1.25rem;">
+                <span style="font-weight: 600; font-size: 0.95rem; color: var(--text-primary);">Are my notes stored on any cloud server or database?</span>
+                <iconify-icon icon="lucide:chevron-down" class="tool-settings-chevron" width="16" height="16"></iconify-icon>
               </summary>
-              <div class="faq-answer">
-                <p>No, never. Toolity's Online Notepad operates 100% on the client side inside your web browser. Your text is saved exclusively in your personal browser's <code>localStorage</code>. No text, notes, or keystrokes are transmitted to any backend servers or external third parties.</p>
+              <div style="padding: 0 1.25rem 1.25rem 1.25rem; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
+                No, never. Toolity's Online Notepad operates 100% on the client side inside your web browser. Your text is saved exclusively in your personal browser's <code>localStorage</code>. No text, notes, or keystrokes are transmitted to any backend servers or external third parties.
               </div>
             </details>
 
-            <details class="faq-item">
-              <summary class="faq-question">
-                <span>Will my notes stay intact if I refresh or close my browser tab?</span>
-                <iconify-icon icon="lucide:chevron-down" class="faq-chevron" width="16" height="16"></iconify-icon>
+            <details class="tool-settings-accordion" style="background: var(--surface-elevated); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 0.25rem;">
+              <summary class="tool-settings-summary" style="padding: 1rem 1.25rem;">
+                <span style="font-weight: 600; font-size: 0.95rem; color: var(--text-primary);">Will my notes stay intact if I refresh or close my browser tab?</span>
+                <iconify-icon icon="lucide:chevron-down" class="tool-settings-chevron" width="16" height="16"></iconify-icon>
               </summary>
-              <div class="faq-answer">
-                <p>Yes. Every character you type is automatically written to your browser's persistent local storage. When you return to this page, your text will automatically reload exactly as you left it, even across device reboots (unless you manually clear browser site data or click Clear).</p>
+              <div style="padding: 0 1.25rem 1.25rem 1.25rem; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
+                Yes. Every character you type is automatically written to your browser's persistent local storage. When you return to this page, your text will automatically reload exactly as you left it, even across device reboots (unless you manually clear browser site data or click Clear).
               </div>
             </details>
 
-            <details class="faq-item">
-              <summary class="faq-question">
-                <span>Can I use this Online Notepad offline without an internet connection?</span>
-                <iconify-icon icon="lucide:chevron-down" class="faq-chevron" width="16" height="16"></iconify-icon>
+            <details class="tool-settings-accordion" style="background: var(--surface-elevated); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 0.25rem;">
+              <summary class="tool-settings-summary" style="padding: 1rem 1.25rem;">
+                <span style="font-weight: 600; font-size: 0.95rem; color: var(--text-primary);">Can I use this Online Notepad offline without an internet connection?</span>
+                <iconify-icon icon="lucide:chevron-down" class="tool-settings-chevron" width="16" height="16"></iconify-icon>
               </summary>
-              <div class="faq-answer">
-                <p>Yes. Because all editing, word counting, text transformations, and downloads execute purely in local JavaScript, you can open the page and write notes completely offline without an active network connection.</p>
+              <div style="padding: 0 1.25rem 1.25rem 1.25rem; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
+                Yes. Because all editing, word counting, text transformations, and downloads execute purely in local JavaScript, you can open the page and write notes completely offline without an active network connection.
               </div>
             </details>
 
-            <details class="faq-item">
-              <summary class="faq-question">
-                <span>What happens if I accidentally click the Clear button?</span>
-                <iconify-icon icon="lucide:chevron-down" class="faq-chevron" width="16" height="16"></iconify-icon>
+            <details class="tool-settings-accordion" style="background: var(--surface-elevated); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 0.25rem;">
+              <summary class="tool-settings-summary" style="padding: 1rem 1.25rem;">
+                <span style="font-weight: 600; font-size: 0.95rem; color: var(--text-primary);">What happens if I accidentally click the Clear button?</span>
+                <iconify-icon icon="lucide:chevron-down" class="tool-settings-chevron" width="16" height="16"></iconify-icon>
               </summary>
-              <div class="faq-answer">
-                <p>We've built in an instant Undo protection mechanism. When you click Clear, your previous note is safely held in memory and an interactive toast banner appears with an <strong>Undo</strong> button, allowing you to restore your note immediately with a single click.</p>
+              <div style="padding: 0 1.25rem 1.25rem 1.25rem; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
+                We've built in an instant Undo protection mechanism. When you click Clear, your previous note is safely held in memory and an interactive toast banner appears with an <strong>Undo</strong> button, allowing you to restore your note immediately with a single click.
               </div>
             </details>
 
-            <details class="faq-item">
-              <summary class="faq-question">
-                <span>Is there a character or document length limit?</span>
-                <iconify-icon icon="lucide:chevron-down" class="faq-chevron" width="16" height="16"></iconify-icon>
+            <details class="tool-settings-accordion" style="background: var(--surface-elevated); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 0.25rem;">
+              <summary class="tool-settings-summary" style="padding: 1rem 1.25rem;">
+                <span style="font-weight: 600; font-size: 0.95rem; color: var(--text-primary);">Is there a character or document length limit?</span>
+                <iconify-icon icon="lucide:chevron-down" class="tool-settings-chevron" width="16" height="16"></iconify-icon>
               </summary>
-              <div class="faq-answer">
-                <p>Browser local storage provides approximately 5MB to 10MB of storage per domain, which is equivalent to several million characters or hundreds of pages of text—more than enough for everyday drafting, notes, and documentation.</p>
+              <div style="padding: 0 1.25rem 1.25rem 1.25rem; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
+                Browser local storage provides approximately 5MB to 10MB of storage per domain, which is equivalent to several million characters or hundreds of pages of text—more than enough for everyday drafting, notes, and documentation.
               </div>
             </details>
           </div>
         </section>
 
         <!-- Category Hub CTA Banner -->
-        <section class="section-wrapper" style="border-top: none; padding-top: 2rem;">
-          <div class="category-cta-card">
-            <div class="category-cta-content">
-              <span class="section-eyebrow">Explore Productivity</span>
-              <h2 class="category-cta-title">Looking for more daily workflow utilities?</h2>
-              <p class="category-cta-desc">Discover our growing suite of distraction-free productivity tools, formatters, and browser utilities.</p>
-              <a href="/productivity/" class="btn-pill btn-primary-signal">
-                <span>View Productivity Workspace</span>
-                <iconify-icon icon="lucide:arrow-right" width="16" height="16"></iconify-icon>
-              </a>
-            </div>
+        <section class="category-workspace-cta" style="margin-top: 3.5rem;">
+          <div class="category-workspace-cta-left">
+            <span class="section-eyebrow">Explore Productivity</span>
+            <h2 class="category-workspace-cta-title">Looking for more daily workflow utilities?</h2>
+            <p class="category-workspace-cta-desc">Discover our growing suite of distraction-free productivity tools, formatters, and browser utilities.</p>
+          </div>
+          <div class="category-workspace-cta-right">
+            <a href="/productivity/" class="btn-pill btn-primary-signal">
+              <span>View Productivity</span>
+              <iconify-icon icon="lucide:arrow-right" width="16" height="16"></iconify-icon>
+            </a>
           </div>
         </section>
 
@@ -671,7 +671,7 @@
   <div data-include="/components/footer.html"></div>
 
   <!-- Main Platform Scripts -->
-  <script src="/scripts/main.js?v=2.3"></script>
+  <script src="../../scripts/main.js?v=2.3"></script>
 
   <!-- Online Notepad Script -->
   <script>
