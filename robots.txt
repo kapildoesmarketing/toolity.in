@@ -1,6 +1,7 @@
 # Toolity.in Robots.txt
 User-agent: *
 Allow: /
+Disallow: /templates/
 
 # Sitemap Location
 Sitemap: https://toolity.in/sitemap.xml

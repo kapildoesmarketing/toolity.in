@@ -2586,31 +2586,13 @@ body {
   color: var(--text-muted);
 }
 
-.ad-slot-desktop {
+.ad-unit {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 90px;
   width: 100%;
+  min-height: 50px; /* ads.js raises this per creative to prevent CLS */
   overflow: hidden;
-}
-
-.ad-slot-mobile {
-  display: none;
-  justify-content: center;
-  align-items: center;
-  min-height: 50px;
-  width: 100%;
-  overflow: hidden;
-}
-
-@media (max-width: 768px) {
-  .ad-slot-desktop {
-    display: none !important;
-  }
-  .ad-slot-mobile {
-    display: flex !important;
-  }
 }
 
 /* Instruction Guide Cards (1-2-3 Visual Step Grid) */
@@ -3194,3 +3176,236 @@ body {
   }
 }
 
+/* ==========================================================================
+   TOOL PAGE STANDARD v2 — Layout variants, states, FAQ
+   Designed by Kapil Pidhwani: see /templates/tool-page.html for the contract.
+   ========================================================================== */
+
+/* Layout variants on the unified card. Toolbar + settings stay identical.
+   split   : input | output (default)
+   stacked : input above output, both full width (wide editors / tables)
+   single  : one full-width pane (notepad-style editors) */
+.tool-workspace-card[data-layout="stacked"] .split-pane-grid,
+.tool-workspace-card[data-layout="single"] .split-pane-grid {
+  grid-template-columns: 1fr;
+}
+
+/* Optional ratio when the preview deserves more room than the form */
+.tool-workspace-card[data-split="40/60"] .split-pane-grid { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); }
+.tool-workspace-card[data-split="60/40"] .split-pane-grid { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); }
+.tool-workspace-card[data-split="35/65"] .split-pane-grid { grid-template-columns: minmax(0, 7fr) minmax(0, 13fr); }
+
+@media (max-width: 860px) {
+  .tool-workspace-card[data-split] .split-pane-grid { grid-template-columns: 1fr; }
+}
+
+/* Busy state (set by Toolity.setBusy) */
+.tool-workspace-card.is-busy .split-pane-grid {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* Pane idle / empty state — same look on every tool */
+.pane-empty {
+  flex: 1;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 2rem 1.25rem;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.86rem;
+}
+
+.pane-empty iconify-icon {
+  font-size: 2.25rem;
+  color: var(--text-muted);
+  animation: breatheState 3.5s ease-in-out infinite;
+}
+
+.pane-empty[hidden] { display: none; }
+
+/* Inline error strip under a pane header */
+.pane-error {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  font-size: 0.82rem;
+  color: #B42318;
+  background: rgba(240, 68, 56, 0.08);
+  border-bottom: 1px solid rgba(240, 68, 56, 0.25);
+}
+
+[data-theme="dark"] .pane-error { color: #FDA29B; }
+
+.pane-error[hidden] { display: none; }
+
+/* Determinate progress bar for media processing */
+.pane-progress {
+  height: 4px;
+  width: 100%;
+  background: var(--border);
+  overflow: hidden;
+}
+
+.pane-progress > span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--brand);
+  transition: width 0.15s linear;
+}
+
+.pane-progress[hidden] { display: none; }
+
+/* Dropzone — one look for every file tool */
+.tool-dropzone {
+  flex: 1;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1.5rem;
+  border: 1.5px dashed var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  color: var(--text-secondary);
+  font-size: 0.86rem;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.tool-dropzone:hover,
+.tool-dropzone:focus-visible,
+.tool-dropzone.dragover {
+  border-color: var(--brand);
+  background: var(--surface-elevated);
+  outline: none;
+}
+
+.tool-dropzone iconify-icon {
+  font-size: 2rem;
+  color: var(--brand);
+}
+
+.tool-dropzone strong { color: var(--text-primary); font-weight: 600; }
+
+.tool-dropzone small { font-size: 0.74rem; color: var(--text-muted); }
+
+.tool-dropzone input[type="file"] { display: none; }
+
+/* Reference / specs section (optional block 5) */
+.reference-section {
+  padding: 0 0 2rem;
+}
+
+/* FAQ section (block 6) — native <details>, no JS */
+.faq-section {
+  padding: 2.5rem 0 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.faq-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: border-color 0.15s ease;
+}
+
+.faq-item[open] { border-color: var(--text-muted); }
+
+.faq-item summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 1.15rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+
+.faq-item summary::-webkit-details-marker { display: none; }
+
+.faq-item summary::after {
+  content: '+';
+  flex-shrink: 0;
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  transition: transform 0.2s ease;
+}
+
+.faq-item[open] summary::after { transform: rotate(45deg); }
+
+.faq-item p {
+  padding: 0 1.15rem 1rem;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.faq-item p + p { margin-top: -0.4rem; }
+
+.faq-item code {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
+  padding: 1px 5px;
+  border-radius: var(--radius-xs);
+}
+
+
+/* Tool page section wrapper (replaces the inline style every page carried) */
+.section-wrapper.tool-section {
+  border-top: none;
+  padding-top: 3.5rem;
+}
+
+/* Compact section header used below the workspace (guide / reference / FAQ) */
+.section-header-compact {
+  margin-bottom: 1.5rem;
+}
+
+.section-heading-sm {
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--text-primary);
+  margin-top: 0.25rem;
+}
+
+.section-header-compact .section-desc {
+  font-size: 0.92rem;
+  margin-top: 0.35rem;
+  max-width: 640px;
+}
+
+/* Helper text under a form field */
+.form-helper {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.form-required { color: var(--brand); }
