@@ -1004,7 +1004,7 @@
 
     // Close on resize to desktop width
     window.addEventListener('resize', () => {
-      if (window.innerWidth > 768 && drawer.classList.contains('open')) {
+      if (window.innerWidth > 1023 && drawer.classList.contains('open')) { // matches main.css nav breakpoint
         closeMenu();
       }
     });

@@ -2814,6 +2814,7 @@ body {
   .nav-link,
   .pill-nav-item,
   .mobile-nav-link,
+  .mobile-nav-sublink,
   .minimal-action-btn,
   .quality-card-btn,
   summary,
@@ -2826,7 +2827,8 @@ body {
     gap: 0.35rem;
   }
 
-  .breadcrumb-link {
+  .breadcrumb-link,
+  .mobile-nav-sublink {
     display: inline-flex;
     align-items: center;
     min-height: var(--touch);

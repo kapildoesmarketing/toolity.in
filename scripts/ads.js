@@ -10,7 +10,7 @@
 (function () {
   'use strict';
 
-  const MOBILE_BREAKPOINT = 768; // keep in sync with main.css media query
+  const MOBILE_BREAKPOINT = 768; // ad creative width (728 vs 320 banner), independent of the nav breakpoint
 
   // Slot name -> per-viewport creative. Add 'adsense' etc. here later.
   const SLOTS = {

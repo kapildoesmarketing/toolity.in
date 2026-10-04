@@ -7,12 +7,16 @@ const http = require('http');
 
 const BASE = 'http://localhost:3011/';
 const VIEWPORTS = [[360, 780], [390, 844], [768, 1024], [1024, 768], [1180, 820], [1440, 900], [1920, 1080], [2560, 1080]];
-const PAGES = ['', 'utilities/', 'utilities/qr-code-generator/', 'convertors/video-converter/', 'productivity/online-notepad/', 'development/json-visualizer/'];
+// Default: 6 representative pages. ALL=1 → every index.html (categories + tools).
+const PAGES = process.env.ALL
+  ? require('child_process').execSync("find . -mindepth 2 -maxdepth 3 -name index.html -not -path './templates/*' -not -path './.git/*' | sed 's|^\\./||; s|index.html$||' | sort", { encoding: 'utf8' }).trim().split('\n').concat([''])
+  : ['', 'utilities/', 'utilities/qr-code-generator/', 'convertors/video-converter/', 'productivity/online-notepad/', 'development/json-visualizer/'];
 const COARSE_MAX = 1180; // emulate touch (pointer: coarse) at and below this width
 
 // Runs in the page. Returns [] when everything passes.
-const CHECKS = `(() => {
+const CHECKS = `(async () => {
   const f = [];
+  const tick = () => new Promise(r => setTimeout(r, 60));
   const vw = innerWidth, vh = innerHeight;
   if (!document.querySelector('.brand-link') || !document.querySelector('footer a')) return ['page/includes not loaded: ' + location.pathname];
   const r = (el) => el.getBoundingClientRect();
@@ -37,6 +41,24 @@ const CHECKS = `(() => {
     document.querySelectorAll('.segmented-group').forEach(g => {
       if (g.scrollWidth > g.clientWidth + 1 && getComputedStyle(g).overflowX !== 'auto') f.push('segmented overflow w/o scroll: ' + (g.id || 'segmented-group'));
     });
+  }
+  // Nav state must match the breakpoint: capsule >1023, hamburger + pill nav ≤1023 (pill nav is non-home only)
+  const tablet = vw <= 1023, toggle = document.getElementById('mobile-menu-toggle'), pill = document.querySelector('.mobile-bottom-pill-nav');
+  if (cap && (getComputedStyle(cap).display === 'none') !== tablet) f.push('nav capsule visibility wrong for ' + vw);
+  if (toggle && (getComputedStyle(toggle).display !== 'none') !== tablet) f.push('hamburger visibility wrong for ' + vw);
+  if (pill && (getComputedStyle(pill).display !== 'none') !== tablet) f.push('pill nav visibility wrong for ' + vw);
+  if (tablet && toggle) {
+    toggle.click(); await tick();
+    const drawer = document.getElementById('mobile-nav-drawer');
+    const links = drawer ? [...drawer.querySelectorAll('a')].filter(vis) : [];
+    if (!drawer || !drawer.classList.contains('open') || !links.length) f.push('hamburger does not open drawer');
+    else if (matchMedia('(pointer: coarse)').matches && links.some(a => r(a).height < 44)) f.push('drawer links <44px');
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true })); await tick();
+    if (drawer && drawer.classList.contains('open')) f.push('Escape does not close drawer');
+  }
+  // Overflowing segmented groups must actually scroll
+  for (const g of document.querySelectorAll('.segmented-group')) {
+    if (g.scrollWidth > g.clientWidth + 1) { g.scrollLeft = 9999; await tick(); if (g.scrollLeft < 1) f.push('segmented group cannot scroll: ' + (g.id || 'segmented-group')); g.scrollLeft = 0; }
   }
   const card = document.querySelector('.tool-workspace-card');
   if (card && r(card).top >= vh) f.push('tool card below fold (top ' + Math.round(r(card).top) + ')');
@@ -78,7 +100,7 @@ const sleep = (ms) => new Promise(r => setTimeout(r, ms));
     const loaded = Promise.race([new Promise(r => onLoad = r), sleep(8000)]);
     const nav = await send('Page.navigate', { url: BASE + p });
     await loaded; await sleep(1200); // includes + iconify settle
-    const res = await send('Runtime.evaluate', { expression: CHECKS, returnByValue: true });
+    const res = await send('Runtime.evaluate', { expression: CHECKS, returnByValue: true, awaitPromise: true });
     ws.close();
     await getJson(`http://127.0.0.1:${port}/json/close/${t.id}`).catch(() => {});
     if (nav?.errorText) return ['navigate error ' + nav.errorText];
