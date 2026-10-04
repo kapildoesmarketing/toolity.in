@@ -20,6 +20,14 @@
   </script>
   <title>Image Format Converter (PNG, JPG, WebP, AVIF, BMP, ICO) — Toolity.in</title>
   <link rel="canonical" href="https://toolity.in/convertors/image-converter/">
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Image Format Converter — Toolity.in">
+  <meta property="og:description" content="Convert PNG, JPG, WebP, AVIF, BMP and ICO images instantly in your browser. Adjust quality, scale and background — files never leave your device.">
+  <meta property="og:url" content="https://toolity.in/convertors/image-converter/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
 
   <!-- SEO & Metadata -->
   <meta name="description"
@@ -40,106 +48,50 @@
 
   <!-- Iconify Icon Component -->
     <!-- Preload Critical Assets -->
-  <link rel="preload" href="/styles/main.css?v=2.3" as="style">
+  <link rel="preload" href="/styles/main.css?v=2.4" as="style">
   <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
 
   <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 
-  <link rel="stylesheet" href="../../styles/main.css?v=2.3">
-  <style>
-    /* Designed by Kapil Pidhwani: Image Converter Tool-Specific Styles */
-    .media-canvas-viewport {
-      width: 100%;
-      height: 280px;
-      background: var(--surface-elevated);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-    .video-dropzone {
-      width: 100%;
-      height: 100%;
-      padding: 2rem 1.5rem;
-      text-align: center;
-      background: var(--surface);
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      border: 1.5px dashed var(--border);
-      border-radius: calc(var(--radius-md) - 2px);
-      margin: 4px;
-      box-sizing: border-box;
-      transition: background-color 0.2s ease, border-color 0.2s ease;
-    }
-    .video-dropzone:hover, .video-dropzone.dragover {
-      border-color: var(--brand);
-      background: var(--brand-soft);
-    }
-    .video-drop-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: var(--surface-elevated);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--brand);
-      margin-bottom: 0.75rem;
-      box-shadow: var(--shadow-sm);
-    }
-    .video-drop-title {
-      font-size: 0.95rem;
-      font-weight: 500;
-      color: var(--text-primary);
-      margin-bottom: 0.25rem;
-    }
-    .video-drop-subtitle {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-    }
-    .media-empty-placeholder {
-      text-align: center;
-      color: var(--text-muted);
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-    .media-empty-placeholder iconify-icon {
-      margin-bottom: 0.6rem;
-      opacity: 0.4;
-    }
-    .media-empty-placeholder p {
-      font-size: 0.86rem;
-    }
-    .slim-progress-bar {
-      width: 100%;
-      height: 3px;
-      background: var(--border);
-      border-radius: var(--radius-pill);
-      overflow: hidden;
-      margin-top: 0.4rem;
-      opacity: 0;
-      transition: opacity 0.2s ease;
-    }
-    .slim-progress-bar.active {
-      opacity: 1;
-    }
-    .slim-progress-fill {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, var(--brand), var(--brand-gold));
-      transition: width 0.15s ease;
-    }
-  </style>
+  <link rel="stylesheet" href="/styles/main.css?v=2.4">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Image Format Converter",
+        "url": "https://toolity.in/convertors/image-converter/",
+        "description": "Convert PNG, JPG, WebP, AVIF, BMP and ICO images instantly in your browser. Adjust quality, scale and background \u2014 files never leave your device.",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Convertors", "item": "https://toolity.in/convertors/" },
+          { "@type": "ListItem", "position": 3, "name": "Image Format Converter", "item": "https://toolity.in/convertors/image-converter/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Is my image uploaded to a server?", "acceptedAnswer": { "@type": "Answer", "text": "No. The image is decoded by your browser, redrawn on an HTML canvas and re-encoded locally. Nothing is transmitted \u2014 you can even use the tool offline once the page has loaded." } },
+          { "@type": "Question", "name": "Why does AVIF or BMP sometimes come out as PNG?", "acceptedAnswer": { "@type": "Answer", "text": "Encoding support depends on your browser. Chrome and Edge encode AVIF; Firefox and Safari may not yet. When the browser can't encode the requested format the tool falls back to PNG so you still get a usable file \u2014 check the output badge for the actual format." } },
+          { "@type": "Question", "name": "What does the quality slider do for PNG?", "acceptedAnswer": { "@type": "Answer", "text": "Nothing \u2014 PNG, BMP and ICO are lossless, so the slider is dimmed for them. It only affects JPG, WebP and AVIF, where lower values mean smaller files with more compression artefacts." } },
+          { "@type": "Question", "name": "Why did my transparent PNG get a white background as JPG?", "acceptedAnswer": { "@type": "Answer", "text": "JPG has no alpha channel. To avoid black boxes the tool fills transparent areas with white when converting to JPG. Choose WebP, PNG or AVIF to keep transparency." } },
+          { "@type": "Question", "name": "Is there a file size limit?", "acceptedAnswer": { "@type": "Answer", "text": "Only your device's memory. Very large images (over ~50 megapixels) can be slow or fail on phones; use the Scale option to shrink them first." } },
+          { "@type": "Question", "name": "Can I convert multiple images at once?", "acceptedAnswer": { "@type": "Answer", "text": "Not yet \u2014 this tool is deliberately single-file so it stays fast and simple. Drop the next image onto the source pane to replace the current one." } }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 
 <body>
@@ -152,9 +104,9 @@
       <div class="container">
         <!-- Breadcrumbs Navigation -->
         <nav class="breadcrumbs" aria-label="Breadcrumb">
-          <a href="../../" class="breadcrumb-link">Home</a>
+          <a href="/" class="breadcrumb-link">Home</a>
           <span class="breadcrumb-separator">/</span>
-          <a href="../../convertors/" class="breadcrumb-link">Convertors</a>
+          <a href="/convertors/" class="breadcrumb-link">Convertors</a>
           <span class="breadcrumb-separator">/</span>
           <span class="breadcrumb-current">Image Converter</span>
         </nav>
@@ -172,16 +124,19 @@
     </section>
 
     <!-- Tool Main Workspace Area -->
-    <section class="section-wrapper" style="border-top: none; padding-top: 3.5rem;">
+    <section class="section-wrapper tool-section">
       <div class="container">
 
         <!-- Unified Tool Workspace Card -->
-        <div class="tool-workspace-card">
+        <div class="tool-workspace-card" data-layout="split" id="tool-card">
 
           <!-- 1. Actions Toolbar (Top-Right Universal Pattern) -->
-          <div class="tool-actions-toolbar" style="justify-content: flex-end;">
+          <div class="tool-actions-toolbar">
             <div class="toolbar-group">
-              <button type="button" class="btn-toolbar-sm" id="btn-reset-tool" title="Reset image and all settings">
+              <span class="pane-badge">Processed on your device · nothing uploaded</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset-tool" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
                 <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
                 <span>Reset</span>
               </button>
@@ -197,7 +152,7 @@
           </div>
 
           <!-- 2. Dual Split-Pane Input & Output Grid (Minimalist Symmetrical Layout) -->
-          <div class="split-pane-grid" style="margin-bottom: 1.25rem;">
+          <div class="split-pane-grid">
 
             <!-- Left: Source Image Pane -->
             <div class="tool-pane">
@@ -206,12 +161,12 @@
                 <span class="pane-badge" id="source-meta-badge">No image loaded</span>
               </div>
 
-              <div class="pane-content" style="display: flex; flex-direction: column; justify-content: space-between;">
+              <div class="pane-content pane-content-between">
                 <!-- Media Viewport (280px) -->
                 <div class="media-canvas-viewport" id="source-viewport-frame">
                   <!-- Drag & Drop Zone -->
                   <div id="image-dropzone" class="video-dropzone">
-                    <input type="file" id="image-file-input" accept="image/png, image/jpeg, image/webp, image/avif, image/bmp, image/svg+xml, image/x-icon, image/*" style="display: none;">
+                    <input type="file" id="image-file-input" accept="image/png, image/jpeg, image/webp, image/avif, image/bmp, image/svg+xml, image/x-icon, image/*">
                     <div class="video-drop-icon">
                       <iconify-icon icon="lucide:upload-cloud" width="22" height="22"></iconify-icon>
                     </div>
@@ -220,7 +175,7 @@
                   </div>
 
                   <!-- Active Image Preview -->
-                  <img id="source-img-element" alt="Source preview" style="width: 100%; height: 100%; max-height: 280px; object-fit: contain; display: none;" width="360" height="240" loading="lazy">
+                  <img id="source-img-element" alt="Source preview" class="media-preview-img" width="360" height="240">
                 </div>
               </div>
             </div>
@@ -232,7 +187,7 @@
                 <span class="pane-badge" id="output-status-badge">Awaiting Image</span>
               </div>
 
-              <div class="pane-content" style="display: flex; flex-direction: column; justify-content: space-between;">
+              <div class="pane-content pane-content-between">
                 <!-- Media Viewport (280px) -->
                 <div class="media-canvas-viewport" id="output-viewport-frame">
                   <!-- Empty Placeholder -->
@@ -242,12 +197,12 @@
                   </div>
 
                   <!-- Converted Image Preview -->
-                  <img id="output-img-element" alt="Converted preview" style="width: 100%; height: 100%; max-height: 280px; object-fit: contain; display: none;" width="360" height="240" loading="lazy">
+                  <img id="output-img-element" alt="Converted preview" class="media-preview-img" width="360" height="240">
                 </div>
 
                 <!-- Primary Convert Action Button -->
-                <div style="margin-top: 0.85rem;">
-                  <button type="button" id="btn-convert-action" class="btn-toolbar-sm btn-brand-sm" style="width: 100%; justify-content: center; height: 42px; font-size: 0.9rem; border-radius: var(--radius-sm);" disabled>
+                <div>
+                  <button type="button" id="btn-convert-action" class="btn-toolbar-sm btn-brand-sm btn-primary-action" disabled>
                     <iconify-icon icon="lucide:refresh-cw" width="16" height="16" id="btn-convert-icon"></iconify-icon>
                     <span id="btn-convert-label">Convert Image</span>
                   </button>
@@ -261,7 +216,7 @@
           </div>
 
           <!-- 3. Controls & Options inside Accordion (Closed by Default) -->
-          <details class="tool-settings-accordion" style="margin-bottom: 0.25rem;">
+          <details class="tool-settings-accordion">
             <summary class="tool-settings-summary">
               <div class="tool-settings-summary-left">
                 <iconify-icon icon="lucide:sliders-horizontal" width="16" height="16"></iconify-icon>
@@ -280,7 +235,7 @@
                   <div class="settings-row-wrap">
                     <!-- Format Control -->
                     <div class="form-group">
-                      <span class="form-label" style="font-size:0.75rem;">Target Format</span>
+                      <span class="form-label settings-label">Target Format</span>
                       <div class="segmented-group segmented-group-pill" id="seg-format">
                         <button type="button" class="seg-pill active" data-val="webp">WebP</button>
                         <button type="button" class="seg-pill" data-val="png">PNG</button>
@@ -293,16 +248,16 @@
 
                     <!-- Quality Slider Control (JPG / WebP / AVIF) -->
                     <div class="form-group" id="group-quality">
-                      <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-                        <span class="form-label" style="font-size:0.75rem; margin-bottom: 0;">Compression Quality</span>
-                        <span class="pane-badge" id="quality-val-badge" style="font-size:0.7rem;">90%</span>
+                      <div class="settings-label-row">
+                        <span class="form-label settings-label">Compression Quality</span>
+                        <span class="pane-badge" id="quality-val-badge">90%</span>
                       </div>
-                      <input type="range" id="quality-slider" min="10" max="100" value="90" step="5" style="width: 100%; accent-color: var(--color-brand-primary);">
+                      <input type="range" id="quality-slider" min="10" max="100" value="90" step="5" class="settings-range">
                     </div>
 
                     <!-- Resolution Scale Control -->
                     <div class="form-group">
-                      <span class="form-label" style="font-size:0.75rem;">Scale Resolution</span>
+                      <span class="form-label settings-label">Scale Resolution</span>
                       <div class="segmented-group segmented-group-pill" id="seg-scale">
                         <button type="button" class="seg-pill active" data-val="1.0">Original</button>
                         <button type="button" class="seg-pill" data-val="2.0">200%</button>
@@ -314,7 +269,7 @@
 
                     <!-- Background Fill (for transparency conversion) -->
                     <div class="form-group">
-                      <span class="form-label" style="font-size:0.75rem;">Background Fill (Alpha)</span>
+                      <span class="form-label settings-label">Background Fill (Alpha)</span>
                       <div class="segmented-group segmented-group-pill" id="seg-bg">
                         <button type="button" class="seg-pill active" data-val="transparent">Transparent</button>
                         <button type="button" class="seg-pill" data-val="white">White</button>
@@ -328,18 +283,12 @@
           </details>
 
         </div>
-
-        <!-- Global Shared Ad Slot Partial -->
+        <!-- 3. AD -->
         <div data-include="/components/ad-slot.html"></div>
-
-        <!-- ==================================================================
-             3-STEP INSTRUCTION GUIDE
-             ================================================================== -->
         <section class="guide-section">
-          <div class="section-header">
+          <div class="section-header-compact">
             <span class="section-eyebrow">How It Works</span>
-            <h2 class="section-title">Instant In-Browser Image Format Conversion</h2>
-            <p class="section-desc">Convert and compress PNG, JPG, WebP, AVIF, BMP, and ICO files in 3 quick steps.</p>
+            <h2 class="section-heading-sm">Instant In-Browser Image Format Conversion</h2>
           </div>
 
           <div class="guide-steps-grid">
@@ -369,400 +318,52 @@
           </div>
         </section>
 
-        <!-- ==================================================================
-             MAINTENANCE-FREE CATEGORY WORKSPACE CTA CARD
-             ================================================================== -->
-        <section class="category-workspace-cta">
-          <div class="category-workspace-cta-left">
-            <span class="section-eyebrow">Convertors Workspace</span>
-            <h2 class="category-workspace-cta-title">Explore All Converter Tools</h2>
-            <p class="category-workspace-cta-desc">
-              Discover our collection of client-side media converters including Video Format Converter, Video to GIF, GIF to Video, and audio extraction tools.
-            </p>
+                <!-- 6. FAQ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Image Format Converter — Frequently Asked Questions</h2>
           </div>
-          <div class="category-workspace-cta-right">
-            <a href="../../convertors/" class="btn-pill btn-primary-signal">
-              <span>Explore Converter Tools</span>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14"></path>
-                <path d="m12 5 7 7-7 7"></path>
-              </svg>
-            </a>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Is my image uploaded to a server?</summary>
+              <p>No. The image is decoded by your browser, redrawn on an HTML canvas and re-encoded locally. Nothing is transmitted — you can even use the tool offline once the page has loaded.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why does AVIF or BMP sometimes come out as PNG?</summary>
+              <p>Encoding support depends on your browser. Chrome and Edge encode AVIF; Firefox and Safari may not yet. When the browser can't encode the requested format the tool falls back to PNG so you still get a usable file — check the output badge for the actual format.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What does the quality slider do for PNG?</summary>
+              <p>Nothing — PNG, BMP and ICO are lossless, so the slider is dimmed for them. It only affects JPG, WebP and AVIF, where lower values mean smaller files with more compression artefacts.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why did my transparent PNG get a white background as JPG?</summary>
+              <p>JPG has no alpha channel. To avoid black boxes the tool fills transparent areas with white when converting to JPG. Choose WebP, PNG or AVIF to keep transparency.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is there a file size limit?</summary>
+              <p>Only your device's memory. Very large images (over ~50 megapixels) can be slow or fail on phones; use the Scale option to shrink them first.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can I convert multiple images at once?</summary>
+              <p>Not yet — this tool is deliberately single-file so it stays fast and simple. Drop the next image onto the source pane to replace the current one.</p>
+            </details>
           </div>
         </section>
+
+        <!-- 7. CTA -->
+        <div data-include="/components/tool-cta.html" data-category="convertors"></div>
 
       </div>
     </section>
   </main>
-
-  <!-- Global Floating Toast Notification -->
-  <div class="tool-toast" id="tool-toast" role="alert" aria-live="polite"></div>
-
-  <!-- Global Multi-Column Footer -->
   <div data-include="/components/footer.html"></div>
-
-  <!-- Main scripts -->
-  <script src="../../scripts/main.js?v=2.3"></script>
+  <script src="/scripts/main.js?v=2.4"></script>
 
   <!-- Image Format Converter Logic (Designed by Kapil Pidhwani) -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // DOM Elements
-      const dropzone = document.getElementById('image-dropzone');
-      const fileInput = document.getElementById('image-file-input');
-      const sourceImgElement = document.getElementById('source-img-element');
-      const sourceMetaBadge = document.getElementById('source-meta-badge');
-
-      const outputEmptyPlaceholder = document.getElementById('output-empty-placeholder');
-      const outputImgElement = document.getElementById('output-img-element');
-      const outputStatusBadge = document.getElementById('output-status-badge');
-      const settingsSummaryBadge = document.getElementById('settings-summary-badge');
-
-      const btnConvert = document.getElementById('btn-convert-action');
-      const btnConvertIcon = document.getElementById('btn-convert-icon');
-      const btnConvertLabel = document.getElementById('btn-convert-label');
-      const slimProgressBar = document.getElementById('slim-progress-bar');
-      const slimProgressFill = document.getElementById('slim-progress-fill');
-
-      const btnReset = document.getElementById('btn-reset-tool');
-      const btnCopy = document.getElementById('btn-copy-img');
-      const btnDownload = document.getElementById('btn-download-img');
-      const qualitySlider = document.getElementById('quality-slider');
-      const qualityValBadge = document.getElementById('quality-val-badge');
-      const groupQuality = document.getElementById('group-quality');
-      const toastEl = document.getElementById('tool-toast');
-
-      // State
-      let selectedFormat = 'webp';
-      let selectedQuality = 0.90;
-      let selectedScale = 1.0;
-      let selectedBg = 'transparent';
-
-      let imageFile = null;
-      let sourceImageUrl = null;
-      let outputUrl = null;
-      let generatedBlob = null;
-      let naturalWidth = 0;
-      let naturalHeight = 0;
-      let isConverting = false;
-
-      function showToast(msg) {
-        if (!toastEl) return;
-        toastEl.textContent = msg;
-        toastEl.classList.add('show');
-        setTimeout(() => toastEl.classList.remove('show'), 2500);
-      }
-
-      function formatBytes(bytes) {
-        if (bytes === 0) return '0 B';
-        const k = 1024;
-        const sizes = ['B', 'KB', 'MB', 'GB'];
-        const i = Math.floor(Math.log(bytes) / Math.log(k));
-        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-      }
-
-      function updateSettingsSummary() {
-        const fmtText = selectedFormat.toUpperCase();
-        const qualText = ['jpg', 'webp', 'avif'].includes(selectedFormat) ? `${Math.round(selectedQuality * 100)}% Quality` : 'Lossless';
-        const scaleText = selectedScale === 1.0 ? 'Original Size' : `${Math.round(selectedScale * 100)}% Scale`;
-        const bgText = selectedBg === 'transparent' ? 'Transparent BG' : `${selectedBg.charAt(0).toUpperCase() + selectedBg.slice(1)} BG`;
-        settingsSummaryBadge.textContent = `(${fmtText} • ${qualText} • ${scaleText} • ${bgText})`;
-
-        if (groupQuality) {
-          groupQuality.style.opacity = ['jpg', 'webp', 'avif'].includes(selectedFormat) ? '1' : '0.4';
-        }
-      }
-
-      function selectFormat(fmt) {
-        selectedFormat = fmt;
-        const container = document.getElementById('seg-format');
-        if (container) {
-          const buttons = container.querySelectorAll('.seg-pill');
-          buttons.forEach((b) => {
-            b.classList.toggle('active', b.getAttribute('data-val') === fmt);
-          });
-        }
-        updateSettingsSummary();
-      }
-
-      function bindSegmentedPills(containerId, callback) {
-        const container = document.getElementById(containerId);
-        if (!container) return;
-        const buttons = container.querySelectorAll('.seg-pill');
-        buttons.forEach((btn) => {
-          btn.addEventListener('click', () => {
-            buttons.forEach((b) => b.classList.remove('active'));
-            btn.classList.add('active');
-            callback(btn.getAttribute('data-val'));
-            updateSettingsSummary();
-            if (imageFile) performImageConversion();
-          });
-        });
-      }
-
-      bindSegmentedPills('seg-format', (val) => { selectedFormat = val; });
-      bindSegmentedPills('seg-scale', (val) => { selectedScale = parseFloat(val); });
-      bindSegmentedPills('seg-bg', (val) => { selectedBg = val; });
-
-      qualitySlider.addEventListener('input', (e) => {
-        const val = parseInt(e.target.value, 10);
-        selectedQuality = val / 100;
-        qualityValBadge.textContent = `${val}%`;
-        updateSettingsSummary();
-      });
-
-      qualitySlider.addEventListener('change', () => {
-        if (imageFile) performImageConversion();
-      });
-
-      // Dropzone & File Input
-      dropzone.addEventListener('click', () => fileInput.click());
-      sourceImgElement.addEventListener('click', () => fileInput.click());
-
-      ['dragenter', 'dragover'].forEach(eventName => {
-        dropzone.addEventListener(eventName, (e) => {
-          e.preventDefault();
-          dropzone.classList.add('dragover');
-        });
-      });
-
-      ['dragleave', 'drop'].forEach(eventName => {
-        dropzone.addEventListener(eventName, (e) => {
-          e.preventDefault();
-          dropzone.classList.remove('dragover');
-        });
-      });
-
-      dropzone.addEventListener('drop', (e) => {
-        const files = e.dataTransfer.files;
-        if (files && files.length > 0) {
-          handleImageFile(files[0]);
-        }
-      });
-
-      fileInput.addEventListener('change', (e) => {
-        if (e.target.files && e.target.files.length > 0) {
-          handleImageFile(e.target.files[0]);
-        }
-      });
-
-      function handleImageFile(file) {
-        if (!file.type.startsWith('image/') && !file.name.match(/\.(png|jpg|jpeg|webp|avif|bmp|svg|ico)$/i)) {
-          showToast('Please select a valid image file');
-          return;
-        }
-
-        imageFile = file;
-        if (sourceImageUrl) URL.revokeObjectURL(sourceImageUrl);
-        if (outputUrl) {
-          URL.revokeObjectURL(outputUrl);
-          outputUrl = null;
-        }
-
-        sourceImageUrl = URL.createObjectURL(file);
-        sourceImgElement.src = sourceImageUrl;
-
-        sourceImgElement.onload = () => {
-          naturalWidth = sourceImgElement.naturalWidth || 800;
-          naturalHeight = sourceImgElement.naturalHeight || 600;
-
-          const rawExt = (file.name.split('.').pop() || '').toLowerCase();
-          sourceMetaBadge.textContent = `${naturalWidth}×${naturalHeight} • ${rawExt.toUpperCase()} • ${formatBytes(file.size)}`;
-
-          dropzone.style.display = 'none';
-          sourceImgElement.style.display = 'block';
-          sourceImgElement.style.cursor = 'pointer';
-          sourceImgElement.title = 'Click to change image';
-          btnConvert.disabled = false;
-
-          // Auto-select alternative target format for optimal UX
-          if (rawExt === 'png') {
-            selectFormat('webp');
-          } else if (rawExt === 'jpg' || rawExt === 'jpeg') {
-            selectFormat('png');
-          } else if (rawExt === 'webp') {
-            selectFormat('jpg');
-          } else {
-            selectFormat('png');
-          }
-
-          showToast(`Loaded ${file.name} (${naturalWidth}×${naturalHeight})`);
-          performImageConversion();
-        };
-      }
-
-      // Convert Image via Canvas
-      async function performImageConversion() {
-        if (!imageFile || isConverting) return;
-
-        isConverting = true;
-        btnConvert.disabled = true;
-        btnConvertIcon.setAttribute('icon', 'lucide:loader-2');
-        btnConvertLabel.textContent = 'Converting...';
-        slimProgressBar.classList.add('active');
-        slimProgressFill.style.width = '40%';
-        outputStatusBadge.textContent = 'Processing...';
-
-        try {
-          const targetW = Math.max(1, Math.round(naturalWidth * selectedScale));
-          const targetH = Math.max(1, Math.round(naturalHeight * selectedScale));
-
-          const canvas = document.createElement('canvas');
-          canvas.width = targetW;
-          canvas.height = targetH;
-          const ctx = canvas.getContext('2d');
-
-          // Handle background fill
-          if (selectedBg === 'white') {
-            ctx.fillStyle = '#FFFFFF';
-            ctx.fillRect(0, 0, targetW, targetH);
-          } else if (selectedBg === 'black') {
-            ctx.fillStyle = '#000000';
-            ctx.fillRect(0, 0, targetW, targetH);
-          } else if (selectedFormat === 'jpg') {
-            // JPG does not support alpha, default fill to white if transparent selected
-            ctx.fillStyle = '#FFFFFF';
-            ctx.fillRect(0, 0, targetW, targetH);
-          }
-
-          ctx.drawImage(sourceImgElement, 0, 0, targetW, targetH);
-          slimProgressFill.style.width = '80%';
-
-          // Determine target MIME
-          let mimeType = 'image/png';
-          if (selectedFormat === 'webp') mimeType = 'image/webp';
-          else if (selectedFormat === 'jpg') mimeType = 'image/jpeg';
-          else if (selectedFormat === 'avif') mimeType = 'image/avif';
-          else if (selectedFormat === 'bmp') mimeType = 'image/bmp';
-          else if (selectedFormat === 'ico') mimeType = 'image/x-icon';
-
-          generatedBlob = await new Promise((resolve) => {
-            canvas.toBlob((blob) => {
-              if (blob) {
-                resolve(blob);
-              } else {
-                // Fallback to PNG if browser doesn't support specific mimeType (e.g. AVIF/BMP)
-                canvas.toBlob((fallbackBlob) => resolve(fallbackBlob), 'image/png');
-              }
-            }, mimeType, selectedQuality);
-          });
-
-          if (outputUrl) URL.revokeObjectURL(outputUrl);
-          outputUrl = URL.createObjectURL(generatedBlob);
-
-          outputEmptyPlaceholder.style.display = 'none';
-          outputImgElement.src = outputUrl;
-          outputImgElement.style.display = 'block';
-
-          // Calculate file size difference percentage
-          const diff = ((generatedBlob.size - imageFile.size) / imageFile.size) * 100;
-          const diffText = diff < 0 ? ` (${Math.round(diff)}%)` : ` (+${Math.round(diff)}%)`;
-
-          outputStatusBadge.textContent = `${selectedFormat.toUpperCase()} • ${formatBytes(generatedBlob.size)}${diffText}`;
-          slimProgressFill.style.width = '100%';
-          btnCopy.disabled = false;
-          btnDownload.disabled = false;
-
-          showToast(`Converted to ${selectedFormat.toUpperCase()} • ${formatBytes(generatedBlob.size)}`);
-        } catch (err) {
-          console.error('Image conversion error:', err);
-          outputStatusBadge.textContent = 'Conversion Error';
-          showToast('Image conversion failed');
-        } finally {
-          isConverting = false;
-          btnConvert.disabled = false;
-          btnConvertIcon.setAttribute('icon', 'lucide:refresh-cw');
-          btnConvertLabel.textContent = 'Convert Image';
-          setTimeout(() => {
-            slimProgressBar.classList.remove('active');
-            slimProgressFill.style.width = '0%';
-          }, 600);
-        }
-      }
-
-      btnConvert.addEventListener('click', performImageConversion);
-
-      // Download Converted Image
-      btnDownload.addEventListener('click', () => {
-        if (!generatedBlob) return;
-        const a = document.createElement('a');
-        const baseName = imageFile ? imageFile.name.replace(/\.[^/.]+$/, "") : "toolity-image";
-        const ext = selectedFormat.toLowerCase();
-        const filename = `${baseName}.${ext}`;
-        a.href = URL.createObjectURL(generatedBlob);
-        a.download = filename;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        showToast(`Downloaded ${filename}`);
-      });
-
-      // Copy Image to Clipboard
-      btnCopy.addEventListener('click', async () => {
-        if (!generatedBlob) return;
-        try {
-          if (navigator.clipboard && window.ClipboardItem) {
-            // Browsers universally support image/png in clipboard
-            if (generatedBlob.type === 'image/png') {
-              await navigator.clipboard.write([new ClipboardItem({ 'image/png': generatedBlob })]);
-            } else {
-              // Convert to PNG blob for clipboard compatibility
-              const canvas = document.createElement('canvas');
-              canvas.width = outputImgElement.naturalWidth || naturalWidth;
-              canvas.height = outputImgElement.naturalHeight || naturalHeight;
-              const ctx = canvas.getContext('2d');
-              ctx.drawImage(outputImgElement, 0, 0);
-              canvas.toBlob(async (pngBlob) => {
-                if (pngBlob) {
-                  await navigator.clipboard.write([new ClipboardItem({ 'image/png': pngBlob })]);
-                  showToast('Image copied to clipboard!');
-                }
-              }, 'image/png');
-              return;
-            }
-            showToast('Image copied to clipboard!');
-          } else {
-            showToast('Direct image copy not supported by browser; click Download');
-          }
-        } catch (e) {
-          console.warn('Clipboard write image failed:', e);
-          showToast('Could not copy image directly; click Download instead');
-        }
-      });
-
-      // Reset Tool
-      btnReset.addEventListener('click', () => {
-        if (sourceImageUrl) URL.revokeObjectURL(sourceImageUrl);
-        if (outputUrl) {
-          URL.revokeObjectURL(outputUrl);
-          outputUrl = null;
-        }
-
-        imageFile = null;
-        sourceImageUrl = null;
-        generatedBlob = null;
-
-        fileInput.value = '';
-        sourceImgElement.src = '';
-        sourceImgElement.style.display = 'none';
-        dropzone.style.display = 'flex';
-        sourceMetaBadge.textContent = 'No image loaded';
-
-        outputImgElement.src = '';
-        outputImgElement.style.display = 'none';
-        outputEmptyPlaceholder.style.display = 'flex';
-        outputStatusBadge.textContent = 'Awaiting Image';
-
-        btnConvert.disabled = true;
-        btnCopy.disabled = true;
-        btnDownload.disabled = true;
-        slimProgressBar.classList.remove('active');
-
-        showToast('Tool reset');
-      });
-    });
-  </script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="/convertors/image-converter/image-converter.js?v=1.0"></script>
 </body>
 
 </html>

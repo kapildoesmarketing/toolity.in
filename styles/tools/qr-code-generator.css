@@ -1,0 +1,15 @@
+/* Designed by Kapil Pidhwani: QR Code Generator — tool-only styles */
+.qr-color-row { display: flex; align-items: center; gap: 0.6rem; }
+.qr-checkbox-group { justify-content: flex-end; padding-bottom: 0.35rem; }
+.qr-checkbox-group label { font-size: 0.82rem; }
+.qr-logo-group { flex: 1; min-width: 260px; }
+#logo-size-wrap { flex: 1; min-width: 160px; }
+#fg-color-preview { background: #17191C; }
+#bg-color-preview { background: #FFFFFF; }
+.quick-palette-dot[data-color="#17191C"] { background: #17191C; }
+.quick-palette-dot[data-color="#F4511E"] { background: #F4511E; }
+.quick-palette-dot[data-color="#2563EB"] { background: #2563EB; }
+.quick-palette-dot[data-color="#059669"] { background: #059669; }
+.qr-overflow-error { padding: 1rem; color: #EF4444; font-size: 0.8rem; text-align: center; }
+label.btn-toolbar-sm { cursor: pointer; }
+.btn-toolbar-sm[hidden], .range-slider-wrap[hidden] { display: none; }

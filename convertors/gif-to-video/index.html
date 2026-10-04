@@ -20,6 +20,14 @@
   </script>
   <title>GIF to Video Converter (MP4 & WebM) — Toolity.in</title>
   <link rel="canonical" href="https://toolity.in/convertors/gif-to-video/">
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="GIF to Video Converter — Toolity.in">
+  <meta property="og:description" content="Convert animated GIFs to MP4 or WebM video in your browser. Set loop count, playback speed and resolution — nothing is uploaded.">
+  <meta property="og:url" content="https://toolity.in/convertors/gif-to-video/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
 
   <!-- SEO & Metadata -->
   <meta name="description"
@@ -40,122 +48,50 @@
 
   <!-- Iconify Icon Component -->
     <!-- Preload Critical Assets -->
-  <link rel="preload" href="/styles/main.css?v=2.3" as="style">
+  <link rel="preload" href="/styles/main.css?v=2.4" as="style">
   <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
 
   <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 
-  <link rel="stylesheet" href="../../styles/main.css?v=2.3">
-  <style>
-    /* Designed by Kapil Pidhwani: GIF to Video Tool-Specific Styles */
-    .media-canvas-viewport {
-      width: 100%;
-      height: 280px;
-      background: var(--surface-elevated);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-    .video-dropzone {
-      width: 100%;
-      height: 100%;
-      padding: 2rem 1.5rem;
-      text-align: center;
-      background: var(--surface);
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      border: 1.5px dashed var(--border);
-      border-radius: calc(var(--radius-md) - 2px);
-      margin: 4px;
-      box-sizing: border-box;
-      transition: background-color 0.2s ease, border-color 0.2s ease;
-    }
-    .video-dropzone:hover, .video-dropzone.dragover {
-      border-color: var(--brand);
-      background: var(--brand-soft);
-    }
-    .video-drop-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: var(--surface-elevated);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--brand);
-      margin-bottom: 0.75rem;
-      box-shadow: var(--shadow-sm);
-    }
-    .video-drop-title {
-      font-size: 0.95rem;
-      font-weight: 500;
-      color: var(--text-primary);
-      margin-bottom: 0.25rem;
-    }
-    .video-drop-subtitle {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-    }
-    .gif-source-preview,
-    .gif-result-preview {
-      width: 100%;
-      height: 100%;
-      max-height: 280px;
-      object-fit: contain;
-      display: none;
-    }
-    .source-video-player {
-      width: 100%;
-      height: 100%;
-      max-height: 280px;
-      object-fit: contain;
-      background: #000;
-      display: none;
-    }
-    .media-empty-placeholder {
-      text-align: center;
-      color: var(--text-muted);
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-    .media-empty-placeholder iconify-icon {
-      margin-bottom: 0.6rem;
-      opacity: 0.4;
-    }
-    .media-empty-placeholder p {
-      font-size: 0.86rem;
-    }
-    .slim-progress-bar {
-      width: 100%;
-      height: 3px;
-      background: var(--border);
-      border-radius: var(--radius-pill);
-      overflow: hidden;
-      margin-top: 0.4rem;
-      opacity: 0;
-      transition: opacity 0.2s ease;
-    }
-    .slim-progress-bar.active {
-      opacity: 1;
-    }
-    .slim-progress-fill {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, var(--brand), var(--brand-gold));
-      transition: width 0.15s ease;
-    }
-  </style>
+  <link rel="stylesheet" href="/styles/main.css?v=2.4">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "GIF to Video Converter",
+        "url": "https://toolity.in/convertors/gif-to-video/",
+        "description": "Convert animated GIFs to MP4 or WebM video in your browser. Set loop count, playback speed and resolution \u2014 nothing is uploaded.",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Convertors", "item": "https://toolity.in/convertors/" },
+          { "@type": "ListItem", "position": 3, "name": "GIF to Video Converter", "item": "https://toolity.in/convertors/gif-to-video/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Is my GIF uploaded anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. The GIF is decoded and re-rendered frame by frame on a canvas in your browser, then recorded to video with the built-in MediaRecorder API. Your file never leaves your device." } },
+          { "@type": "Question", "name": "Why do I get WebM when I chose MP4?", "acceptedAnswer": { "@type": "Answer", "text": "MP4 (H.264) recording depends on your browser. Chrome, Edge and Safari support it; Firefox currently only records WebM. The tool checks what your browser can encode and falls back to WebM so you always get a playable file \u2014 the output badge shows the real format." } },
+          { "@type": "Question", "name": "Why is the recommended loop count 3\u00d7?", "acceptedAnswer": { "@type": "Answer", "text": "A GIF is usually just a second or two long, which makes a very short video that is awkward to post. Looping it 3 times gives a comfortable length for social media while keeping the file small. Pick 1\u00d7 if you need an exact single pass." } },
+          { "@type": "Question", "name": "Does the converter change the quality of my GIF?", "acceptedAnswer": { "@type": "Answer", "text": "The video is rendered at the GIF's native size unless you pick 720p or 1080p, in which case the frames are upscaled. Video codecs are lossy, so expect slight softening compared with the original pixels \u2014 but the file will typically be 5\u201310\u00d7 smaller than the GIF." } },
+          { "@type": "Question", "name": "How long does conversion take?", "acceptedAnswer": { "@type": "Answer", "text": "Recording happens in real time: a 3-second GIF looped 3 times takes about 9 seconds at 1\u00d7 speed. Choosing 1.5\u00d7 or 2\u00d7 playback speed shortens both the video and the wait." } },
+          { "@type": "Question", "name": "Why does the output have no sound?", "acceptedAnswer": { "@type": "Answer", "text": "GIFs have no audio track, so the video is silent. If you need a soundtrack, add it in a video editor after downloading." } }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 
 <body>
@@ -168,9 +104,9 @@
       <div class="container">
         <!-- Breadcrumbs Navigation -->
         <nav class="breadcrumbs" aria-label="Breadcrumb">
-          <a href="../../" class="breadcrumb-link">Home</a>
+          <a href="/" class="breadcrumb-link">Home</a>
           <span class="breadcrumb-separator">/</span>
-          <a href="../../convertors/" class="breadcrumb-link">Convertors</a>
+          <a href="/convertors/" class="breadcrumb-link">Convertors</a>
           <span class="breadcrumb-separator">/</span>
           <span class="breadcrumb-current">GIF to Video</span>
         </nav>
@@ -188,16 +124,19 @@
     </section>
 
     <!-- Tool Main Workspace Area -->
-    <section class="section-wrapper" style="border-top: none; padding-top: 3.5rem;">
+    <section class="section-wrapper tool-section">
       <div class="container">
 
         <!-- Unified Tool Workspace Card -->
-        <div class="tool-workspace-card">
+        <div class="tool-workspace-card" data-layout="split" id="tool-card">
 
           <!-- 1. Actions Toolbar (Top-Right Universal Pattern) -->
-          <div class="tool-actions-toolbar" style="justify-content: flex-end;">
+          <div class="tool-actions-toolbar">
             <div class="toolbar-group">
-              <button type="button" class="btn-toolbar-sm" id="btn-reset-tool" title="Reset GIF and settings">
+              <span class="pane-badge">Processed on your device · nothing uploaded</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset-tool" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
                 <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
                 <span>Reset</span>
               </button>
@@ -213,7 +152,7 @@
           </div>
 
           <!-- 2. Dual Split-Pane Input & Output Grid (Minimalist Symmetrical Layout) -->
-          <div class="split-pane-grid" style="margin-bottom: 1.25rem;">
+          <div class="split-pane-grid">
 
             <!-- Left: GIF Source Pane -->
             <div class="tool-pane">
@@ -222,12 +161,12 @@
                 <span class="pane-badge" id="gif-meta-badge">No GIF loaded</span>
               </div>
 
-              <div class="pane-content" style="display: flex; flex-direction: column; justify-content: space-between;">
+              <div class="pane-content pane-content-between">
                 <!-- Media Viewport (280px) -->
                 <div class="media-canvas-viewport" id="gif-viewport-frame">
                   <!-- Drag & Drop Zone -->
                   <div id="gif-dropzone" class="video-dropzone">
-                    <input type="file" id="gif-file-input" accept="image/gif" style="display: none;">
+                    <input type="file" id="gif-file-input" accept="image/gif">
                     <div class="video-drop-icon">
                       <iconify-icon icon="lucide:upload-cloud" width="22" height="22"></iconify-icon>
                     </div>
@@ -236,13 +175,13 @@
                   </div>
 
                   <!-- Active GIF Image Preview -->
-                  <img id="gif-source-img" class="gif-source-preview" alt="Loaded GIF Source Preview" style="display: none;" width="360" height="240" loading="lazy">
+                  <img id="gif-source-img" class="media-preview-img" alt="Loaded GIF Source Preview" width="360" height="240">
                 </div>
 
                 <!-- Subtle Source Details / Change Prompt -->
-                <div style="margin-top: 0.85rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; color: var(--text-muted); padding: 0 0.25rem;">
+                <div class="pane-footnote">
                   <span id="gif-info-label">Select or drop a GIF to begin</span>
-                  <button type="button" id="btn-change-gif" class="btn-toolbar-sm" style="display: none; padding: 0.25rem 0.6rem; font-size: 0.75rem;">
+                  <button type="button" id="btn-change-gif" class="btn-toolbar-sm" hidden>
                     <iconify-icon icon="lucide:refresh-cw" width="12" height="12"></iconify-icon>
                     <span>Change GIF</span>
                   </button>
@@ -257,7 +196,7 @@
                 <span class="pane-badge" id="video-status-badge">Awaiting GIF</span>
               </div>
 
-              <div class="pane-content" style="display: flex; flex-direction: column; justify-content: space-between;">
+              <div class="pane-content pane-content-between">
                 <!-- Media Viewport (280px) -->
                 <div class="media-canvas-viewport" id="video-viewport-frame">
                   <!-- Empty Placeholder -->
@@ -270,8 +209,8 @@
                 </div>
 
                 <!-- Primary Convert Action Button -->
-                <div style="margin-top: 0.85rem;">
-                  <button type="button" id="btn-convert-video" class="btn-toolbar-sm btn-brand-sm" style="width: 100%; justify-content: center; height: 42px; font-size: 0.9rem; border-radius: var(--radius-sm);" disabled>
+                <div>
+                  <button type="button" id="btn-convert-video" class="btn-toolbar-sm btn-brand-sm btn-primary-action" disabled>
                     <iconify-icon icon="lucide:play" width="16" height="16" id="btn-convert-icon"></iconify-icon>
                     <span id="btn-convert-label">Convert to Video</span>
                   </button>
@@ -285,7 +224,7 @@
           </div>
 
           <!-- 3. Controls & Options inside Accordion (Closed by Default) -->
-          <details class="tool-settings-accordion" style="margin-bottom: 0.25rem;">
+          <details class="tool-settings-accordion">
             <summary class="tool-settings-summary">
               <div class="tool-settings-summary-left">
                 <iconify-icon icon="lucide:sliders-horizontal" width="16" height="16"></iconify-icon>
@@ -304,7 +243,7 @@
                   <div class="settings-row-wrap">
                     <!-- Format Control -->
                     <div class="form-group">
-                      <span class="form-label" style="font-size:0.75rem;">Output Format</span>
+                      <span class="form-label settings-label">Output Format</span>
                       <div class="segmented-group segmented-group-pill" id="seg-format">
                         <button type="button" class="seg-pill active" data-val="mp4">MP4 (H.264)</button>
                         <button type="button" class="seg-pill" data-val="webm">WebM</button>
@@ -313,7 +252,7 @@
 
                     <!-- Loop Multiplier Control -->
                     <div class="form-group">
-                      <span class="form-label" style="font-size:0.75rem;">Loop Count</span>
+                      <span class="form-label settings-label">Loop Count</span>
                       <div class="segmented-group segmented-group-pill" id="seg-loops">
                         <button type="button" class="seg-pill" data-val="1">1x</button>
                         <button type="button" class="seg-pill" data-val="2">2x</button>
@@ -324,7 +263,7 @@
 
                     <!-- Speed Multiplier Control -->
                     <div class="form-group">
-                      <span class="form-label" style="font-size:0.75rem;">Playback Speed</span>
+                      <span class="form-label settings-label">Playback Speed</span>
                       <div class="segmented-group segmented-group-pill" id="seg-speed">
                         <button type="button" class="seg-pill" data-val="0.5">0.5x</button>
                         <button type="button" class="seg-pill active" data-val="1.0">1.0x</button>
@@ -335,7 +274,7 @@
 
                     <!-- Scale / Resolution Control -->
                     <div class="form-group">
-                      <span class="form-label" style="font-size:0.75rem;">Resolution Scale</span>
+                      <span class="form-label settings-label">Resolution Scale</span>
                       <div class="segmented-group segmented-group-pill" id="seg-scale">
                         <button type="button" class="seg-pill active" data-val="original">Original</button>
                         <button type="button" class="seg-pill" data-val="720">720p HD</button>
@@ -349,18 +288,12 @@
           </details>
 
         </div>
-
-        <!-- Global Shared Ad Slot Partial -->
+        <!-- 3. AD -->
         <div data-include="/components/ad-slot.html"></div>
-
-        <!-- ==================================================================
-             3-STEP INSTRUCTION GUIDE
-             ================================================================== -->
         <section class="guide-section">
-          <div class="section-header">
+          <div class="section-header-compact">
             <span class="section-eyebrow">How It Works</span>
-            <h2 class="section-title">Converting Animated GIFs to High-Definition Video</h2>
-            <p class="section-desc">Transform short GIFs into universal MP4 and WebM video clips in 3 simple steps.</p>
+            <h2 class="section-heading-sm">Converting Animated GIFs to High-Definition Video</h2>
           </div>
 
           <div class="guide-steps-grid">
@@ -390,462 +323,52 @@
           </div>
         </section>
 
-        <!-- ==================================================================
-             MAINTENANCE-FREE CATEGORY WORKSPACE CTA CARD
-             ================================================================== -->
-        <section class="category-workspace-cta">
-          <div class="category-workspace-cta-left">
-            <span class="section-eyebrow">Convertors Workspace</span>
-            <h2 class="category-workspace-cta-title">Explore All Converter Tools</h2>
-            <p class="category-workspace-cta-desc">
-              Discover our collection of client-side media converters including Image Format Converter, Video Format Converter, Video to GIF, and audio extraction tools.
-            </p>
+                <!-- 6. FAQ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">GIF to Video Converter — Frequently Asked Questions</h2>
           </div>
-          <div class="category-workspace-cta-right">
-            <a href="../../convertors/" class="btn-pill btn-primary-signal">
-              <span>Explore Converter Tools</span>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14"></path>
-                <path d="m12 5 7 7-7 7"></path>
-              </svg>
-            </a>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Is my GIF uploaded anywhere?</summary>
+              <p>No. The GIF is decoded and re-rendered frame by frame on a canvas in your browser, then recorded to video with the built-in MediaRecorder API. Your file never leaves your device.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why do I get WebM when I chose MP4?</summary>
+              <p>MP4 (H.264) recording depends on your browser. Chrome, Edge and Safari support it; Firefox currently only records WebM. The tool checks what your browser can encode and falls back to WebM so you always get a playable file — the output badge shows the real format.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why is the recommended loop count 3×?</summary>
+              <p>A GIF is usually just a second or two long, which makes a very short video that is awkward to post. Looping it 3 times gives a comfortable length for social media while keeping the file small. Pick 1× if you need an exact single pass.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Does the converter change the quality of my GIF?</summary>
+              <p>The video is rendered at the GIF's native size unless you pick 720p or 1080p, in which case the frames are upscaled. Video codecs are lossy, so expect slight softening compared with the original pixels — but the file will typically be 5–10× smaller than the GIF.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How long does conversion take?</summary>
+              <p>Recording happens in real time: a 3-second GIF looped 3 times takes about 9 seconds at 1× speed. Choosing 1.5× or 2× playback speed shortens both the video and the wait.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why does the output have no sound?</summary>
+              <p>GIFs have no audio track, so the video is silent. If you need a soundtrack, add it in a video editor after downloading.</p>
+            </details>
           </div>
         </section>
+
+        <!-- 7. CTA -->
+        <div data-include="/components/tool-cta.html" data-category="convertors"></div>
 
       </div>
     </section>
   </main>
-
-  <!-- Global Toast Notification -->
-  <div id="tool-toast" class="tool-toast" role="status" aria-live="polite">
-    Copied to clipboard!
-  </div>
-
-  <!-- Global Multi-Column Footer -->
   <div data-include="/components/footer.html"></div>
-
-  <!-- Main scripts -->
-  <script src="../../scripts/main.js?v=2.3"></script>
+  <script src="/scripts/main.js?v=2.4"></script>
 
   <!-- GIF to Video Conversion Logic (Designed by Kapil Pidhwani) -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // DOM Elements - Left Pane
-      const dropzone = document.getElementById('gif-dropzone');
-      const fileInput = document.getElementById('gif-file-input');
-      const gifSourceImg = document.getElementById('gif-source-img');
-      const gifMetaBadge = document.getElementById('gif-meta-badge');
-      const gifInfoLabel = document.getElementById('gif-info-label');
-      const btnChangeGif = document.getElementById('btn-change-gif');
-
-      // DOM Elements - Right Pane
-      const videoEmptyPlaceholder = document.getElementById('video-empty-placeholder');
-      const videoResultPlayer = document.getElementById('video-result-player');
-      const videoStatusBadge = document.getElementById('video-status-badge');
-      const settingsSummaryBadge = document.getElementById('settings-summary-badge');
-
-      // Actions & Progress
-      const btnConvert = document.getElementById('btn-convert-video');
-      const btnConvertIcon = document.getElementById('btn-convert-icon');
-      const btnConvertLabel = document.getElementById('btn-convert-label');
-      const slimProgressBar = document.getElementById('slim-progress-bar');
-      const slimProgressFill = document.getElementById('slim-progress-fill');
-      const btnReset = document.getElementById('btn-reset-tool');
-      const btnCopy = document.getElementById('btn-copy-video');
-      const btnDownload = document.getElementById('btn-download-video');
-      const toastEl = document.getElementById('tool-toast');
-
-      // Settings State
-      let selectedFormat = 'mp4';
-      let selectedLoops = 3;
-      let selectedSpeed = 1.0;
-      let selectedScale = 'original';
-
-      let gifFile = null;
-      let gifUrl = null;
-      let decodedFrames = [];
-      let gifWidth = 0;
-      let gifHeight = 0;
-      let totalGifDurationSec = 0;
-      let generatedVideoBlob = null;
-      let isConverting = false;
-
-      function showToast(msg) {
-        if (!toastEl) return;
-        toastEl.textContent = msg;
-        toastEl.classList.add('show');
-        setTimeout(() => toastEl.classList.remove('show'), 2500);
-      }
-
-      function formatBytes(bytes) {
-        if (bytes === 0) return '0 B';
-        const k = 1024;
-        const sizes = ['B', 'KB', 'MB', 'GB'];
-        const i = Math.floor(Math.log(bytes) / Math.log(k));
-        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-      }
-
-      function updateSettingsSummary() {
-        const fmtText = selectedFormat.toUpperCase();
-        const scaleText = selectedScale === 'original' ? 'Original' : `${selectedScale}p`;
-        settingsSummaryBadge.textContent = `(${fmtText} • ${selectedLoops}x Loop • ${selectedSpeed}x Speed • ${scaleText})`;
-      }
-
-      function bindSegmentedPills(containerId, callback) {
-        const container = document.getElementById(containerId);
-        if (!container) return;
-        const buttons = container.querySelectorAll('.seg-pill');
-        buttons.forEach((btn) => {
-          btn.addEventListener('click', () => {
-            buttons.forEach((b) => b.classList.remove('active'));
-            btn.classList.add('active');
-            callback(btn.getAttribute('data-val'));
-            updateSettingsSummary();
-          });
-        });
-      }
-
-      bindSegmentedPills('seg-format', (val) => { selectedFormat = val; });
-      bindSegmentedPills('seg-loops', (val) => { selectedLoops = parseInt(val, 10); });
-      bindSegmentedPills('seg-speed', (val) => { selectedSpeed = parseFloat(val); });
-      bindSegmentedPills('seg-scale', (val) => { selectedScale = val === 'original' ? 'original' : parseInt(val, 10); });
-
-      // File Selection & Drag-and-Drop
-      dropzone.addEventListener('click', () => fileInput.click());
-      btnChangeGif.addEventListener('click', () => fileInput.click());
-
-      ['dragenter', 'dragover'].forEach(eventName => {
-        dropzone.addEventListener(eventName, (e) => {
-          e.preventDefault();
-          dropzone.classList.add('dragover');
-        });
-      });
-
-      ['dragleave', 'drop'].forEach(eventName => {
-        dropzone.addEventListener(eventName, (e) => {
-          e.preventDefault();
-          dropzone.classList.remove('dragover');
-        });
-      });
-
-      dropzone.addEventListener('drop', (e) => {
-        const files = e.dataTransfer.files;
-        if (files && files.length > 0) {
-          handleGifFile(files[0]);
-        }
-      });
-
-      fileInput.addEventListener('change', (e) => {
-        if (e.target.files && e.target.files.length > 0) {
-          handleGifFile(e.target.files[0]);
-        }
-      });
-
-      // Pure Client-Side GIF Frame Decoding
-      async function decodeGif(file) {
-        // Method 1: WebCodecs ImageDecoder if supported
-        if ('ImageDecoder' in window) {
-          try {
-            const stream = file.stream();
-            const decoder = new ImageDecoder({ data: stream, type: 'image/gif' });
-            await decoder.tracks.ready;
-
-            const frameCount = decoder.tracks.selectedTrack.frameCount;
-            const frames = [];
-            let totalDurationMs = 0;
-
-            for (let i = 0; i < frameCount; i++) {
-              const frameResult = await decoder.decode({ frameIndex: i });
-              const videoFrame = frameResult.image;
-              const durationMs = (videoFrame.duration || 100000) / 1000; // microseconds to ms
-
-              const canvas = document.createElement('canvas');
-              canvas.width = videoFrame.displayWidth;
-              canvas.height = videoFrame.displayHeight;
-              const ctx = canvas.getContext('2d');
-              ctx.drawImage(videoFrame, 0, 0);
-              const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-
-              frames.push({
-                canvas: canvas,
-                durationMs: Math.max(20, durationMs)
-              });
-
-              totalDurationMs += durationMs;
-              videoFrame.close();
-            }
-
-            return {
-              frames,
-              width: frames[0].canvas.width,
-              height: frames[0].canvas.height,
-              durationSec: totalDurationMs / 1000
-            };
-          } catch (e) {
-            console.warn('ImageDecoder failed, falling back to Canvas frame extraction:', e);
-          }
-        }
-
-        // Fallback: Offscreen Canvas Animation Capture
-        return new Promise((resolve, reject) => {
-          const img = new Image();
-          img.onload = () => {
-            const w = img.naturalWidth || 480;
-            const h = img.naturalHeight || 360;
-            const c = document.createElement('canvas');
-            c.width = w;
-            c.height = h;
-            const ctx = c.getContext('2d');
-            ctx.drawImage(img, 0, 0);
-
-            // Create fallback single/interpolated frame set
-            resolve({
-              frames: [{ canvas: c, durationMs: 1000 }],
-              width: w,
-              height: h,
-              durationSec: 1.0
-            });
-          };
-          img.onerror = reject;
-          img.src = URL.createObjectURL(file);
-        });
-      }
-
-      async function handleGifFile(file) {
-        if (!file.type.includes('gif') && !file.name.toLowerCase().endsWith('.gif')) {
-          showToast('Please upload a valid animated .gif file');
-          return;
-        }
-
-        gifFile = file;
-        if (gifUrl) URL.revokeObjectURL(gifUrl);
-        gifUrl = URL.createObjectURL(file);
-
-        dropzone.style.display = 'none';
-        gifSourceImg.src = gifUrl;
-        gifSourceImg.style.display = 'block';
-        btnChangeGif.style.display = 'inline-flex';
-        gifMetaBadge.textContent = 'Analyzing frames...';
-        gifInfoLabel.textContent = 'Decoding GIF timing metadata...';
-
-        try {
-          const decoded = await decodeGif(file);
-          decodedFrames = decoded.frames;
-          gifWidth = decoded.width;
-          gifHeight = decoded.height;
-          totalGifDurationSec = decoded.durationSec;
-
-          const frameCount = decodedFrames.length;
-          gifMetaBadge.textContent = `${gifWidth}×${gifHeight} • ${frameCount} frames`;
-          gifInfoLabel.textContent = `${frameCount} frames (${totalGifDurationSec.toFixed(1)}s loop) • ${formatBytes(file.size)}`;
-
-          videoStatusBadge.textContent = 'Ready to Convert';
-          btnConvert.disabled = false;
-          showToast(`GIF loaded (${gifWidth}×${gifHeight} • ${frameCount} frames)`);
-        } catch (err) {
-          console.error('GIF parsing failed:', err);
-          gifMetaBadge.textContent = `${formatBytes(file.size)}`;
-          gifInfoLabel.textContent = `Loaded ${file.name}`;
-          btnConvert.disabled = false;
-          videoStatusBadge.textContent = 'Ready to Convert';
-        }
-      }
-
-      // Convert GIF Frames to Video Stream
-      btnConvert.addEventListener('click', async () => {
-        if (!gifFile || isConverting) return;
-
-        isConverting = true;
-        btnConvert.disabled = true;
-        btnConvertIcon.setAttribute('icon', 'lucide:loader-2');
-        btnConvertLabel.textContent = 'Encoding video stream...';
-        slimProgressBar.classList.add('active');
-        slimProgressFill.style.width = '0%';
-        videoStatusBadge.textContent = 'Encoding...';
-
-        showToast('Starting video encoding...');
-
-        try {
-          let targetW = gifWidth || 480;
-          let targetH = gifHeight || 360;
-
-          if (selectedScale !== 'original') {
-            const scale = selectedScale / Math.max(targetW, targetH);
-            targetW = Math.round(targetW * scale);
-            targetH = Math.round(targetH * scale);
-          }
-
-          // Video codecs strictly require even dimensions
-          if (targetW % 2 !== 0) targetW--;
-          if (targetH % 2 !== 0) targetH--;
-
-          const renderCanvas = document.createElement('canvas');
-          renderCanvas.width = targetW;
-          renderCanvas.height = targetH;
-          const ctx = renderCanvas.getContext('2d', { alpha: false });
-          ctx.fillStyle = '#FFFFFF';
-          ctx.fillRect(0, 0, targetW, targetH);
-
-          // Determine preferred MIME type supported by the browser
-          let mimeType = 'video/webm;codecs=vp9';
-          if (selectedFormat === 'mp4') {
-            if (MediaRecorder.isTypeSupported('video/mp4;codecs=avc1')) {
-              mimeType = 'video/mp4;codecs=avc1';
-            } else if (MediaRecorder.isTypeSupported('video/mp4')) {
-              mimeType = 'video/mp4';
-            } else {
-              mimeType = 'video/webm;codecs=vp9';
-            }
-          } else {
-            if (MediaRecorder.isTypeSupported('video/webm;codecs=vp9')) {
-              mimeType = 'video/webm;codecs=vp9';
-            } else if (MediaRecorder.isTypeSupported('video/webm')) {
-              mimeType = 'video/webm';
-            }
-          }
-
-          // Calculate average FPS from frames
-          const totalFramesPerLoop = decodedFrames.length > 0 ? decodedFrames.length : 30;
-          const streamFps = Math.min(60, Math.max(10, Math.round(totalFramesPerLoop / (totalGifDurationSec || 1.0))));
-          const stream = renderCanvas.captureStream(streamFps);
-          const recorder = new MediaRecorder(stream, {
-            mimeType: mimeType,
-            videoBitsPerSecond: 5000000 // 5 Mbps HD quality
-          });
-
-          const chunks = [];
-          recorder.ondataavailable = (e) => {
-            if (e.data && e.data.size > 0) chunks.push(e.data);
-          };
-
-          const encodingPromise = new Promise((resolve) => {
-            recorder.onstop = () => {
-              const videoBlob = new Blob(chunks, { type: mimeType.split(';')[0] });
-              resolve(videoBlob);
-            };
-          });
-
-          recorder.start();
-
-          // Render loop iterations
-          const loops = selectedLoops;
-          const speed = selectedSpeed;
-          const totalSteps = loops * totalFramesPerLoop;
-          let currentStep = 0;
-
-          for (let l = 0; l < loops; l++) {
-            for (let f = 0; f < decodedFrames.length; f++) {
-              const frame = decodedFrames[f];
-              ctx.drawImage(frame.canvas, 0, 0, targetW, targetH);
-
-              const duration = Math.max(20, frame.durationMs / speed);
-              await new Promise(r => setTimeout(r, duration));
-
-              currentStep++;
-              const percent = Math.min(98, Math.round((currentStep / totalSteps) * 100));
-              slimProgressFill.style.width = `${percent}%`;
-              btnConvertLabel.textContent = `Encoding (${percent}%)...`;
-            }
-          }
-
-          // Finalize stream recording
-          recorder.stop();
-          generatedVideoBlob = await encodingPromise;
-          const videoObjectUrl = URL.createObjectURL(generatedVideoBlob);
-
-          // Render in right pane video player
-          videoEmptyPlaceholder.style.display = 'none';
-          videoResultPlayer.src = videoObjectUrl;
-          videoResultPlayer.style.display = 'block';
-          videoResultPlayer.load();
-
-          const ext = mimeType.includes('mp4') ? 'MP4' : 'WebM';
-          videoStatusBadge.textContent = `${ext} • ${formatBytes(generatedVideoBlob.size)}`;
-          slimProgressFill.style.width = '100%';
-          btnCopy.disabled = false;
-          btnDownload.disabled = false;
-          showToast(`Video created successfully! (${formatBytes(generatedVideoBlob.size)})`);
-
-        } catch (err) {
-          console.error('Video conversion error:', err);
-          showToast('Could not convert GIF to video; please try WebM format');
-          videoStatusBadge.textContent = 'Error';
-        } finally {
-          isConverting = false;
-          btnConvert.disabled = false;
-          btnConvertIcon.setAttribute('icon', 'lucide:play');
-          btnConvertLabel.textContent = 'Convert to Video';
-          setTimeout(() => {
-            slimProgressBar.classList.remove('active');
-            slimProgressFill.style.width = '0%';
-          }, 1500);
-        }
-      });
-
-      // Download Video
-      btnDownload.addEventListener('click', () => {
-        if (!generatedVideoBlob) return;
-        const a = document.createElement('a');
-        const baseName = gifFile ? gifFile.name.replace(/\.[^/.]+$/, "") : "toolity-animation";
-        const ext = generatedVideoBlob.type.includes('mp4') ? 'mp4' : 'webm';
-        const filename = `${baseName}-${selectedLoops}x.${ext}`;
-        a.href = URL.createObjectURL(generatedVideoBlob);
-        a.download = filename;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        showToast(`Downloaded ${filename}`);
-      });
-
-      // Copy Video to Clipboard
-      btnCopy.addEventListener('click', async () => {
-        if (!generatedVideoBlob) return;
-        try {
-          if (navigator.clipboard && window.ClipboardItem) {
-            const item = new ClipboardItem({ [generatedVideoBlob.type]: generatedVideoBlob });
-            await navigator.clipboard.write([item]);
-            showToast('Video copied to clipboard!');
-          } else {
-            showToast('Direct video copy not supported by your browser; click Download');
-          }
-        } catch (e) {
-          console.warn('Clipboard write video failed:', e);
-          showToast('Could not copy video directly; click Download instead');
-        }
-      });
-
-      // Reset Tool
-      btnReset.addEventListener('click', () => {
-        if (gifUrl) URL.revokeObjectURL(gifUrl);
-        gifFile = null;
-        gifUrl = null;
-        decodedFrames = [];
-        generatedVideoBlob = null;
-
-        fileInput.value = '';
-        gifSourceImg.src = '';
-        gifSourceImg.style.display = 'none';
-        dropzone.style.display = 'flex';
-        btnChangeGif.style.display = 'none';
-        gifMetaBadge.textContent = 'No GIF loaded';
-        gifInfoLabel.textContent = 'Select or drop a GIF to begin';
-
-        // Reset Output
-        videoResultPlayer.src = '';
-        videoResultPlayer.style.display = 'none';
-        videoEmptyPlaceholder.style.display = 'flex';
-        videoStatusBadge.textContent = 'Awaiting GIF';
-
-        btnConvert.disabled = true;
-        btnCopy.disabled = true;
-        btnDownload.disabled = true;
-        slimProgressBar.classList.remove('active');
-
-        showToast('Tool reset');
-      });
-    });
-  </script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="/convertors/gif-to-video/gif-to-video.js?v=1.0"></script>
 </body>
 
 </html>

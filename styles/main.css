@@ -2586,31 +2586,13 @@ body {
   color: var(--text-muted);
 }
 
-.ad-slot-desktop {
+.ad-unit {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 90px;
   width: 100%;
+  min-height: 50px; /* ads.js raises this per creative to prevent CLS */
   overflow: hidden;
-}
-
-.ad-slot-mobile {
-  display: none;
-  justify-content: center;
-  align-items: center;
-  min-height: 50px;
-  width: 100%;
-  overflow: hidden;
-}
-
-@media (max-width: 768px) {
-  .ad-slot-desktop {
-    display: none !important;
-  }
-  .ad-slot-mobile {
-    display: flex !important;
-  }
 }
 
 /* Instruction Guide Cards (1-2-3 Visual Step Grid) */
@@ -3194,3 +3176,453 @@ body {
   }
 }
 
+/* ==========================================================================
+   TOOL PAGE STANDARD v2 — Layout variants, states, FAQ
+   Designed by Kapil Pidhwani: see /templates/tool-page.html for the contract.
+   ========================================================================== */
+
+/* Layout variants on the unified card. Toolbar + settings stay identical.
+   split   : input | output (default)
+   stacked : input above output, both full width (wide editors / tables)
+   single  : one full-width pane (notepad-style editors) */
+.tool-workspace-card[data-layout="stacked"] .split-pane-grid,
+.tool-workspace-card[data-layout="single"] .split-pane-grid {
+  grid-template-columns: 1fr;
+}
+
+/* Optional ratio when the preview deserves more room than the form */
+.tool-workspace-card[data-split="40/60"] .split-pane-grid { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); }
+.tool-workspace-card[data-split="60/40"] .split-pane-grid { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); }
+.tool-workspace-card[data-split="35/65"] .split-pane-grid { grid-template-columns: minmax(0, 7fr) minmax(0, 13fr); }
+
+@media (max-width: 860px) {
+  .tool-workspace-card[data-split] .split-pane-grid { grid-template-columns: 1fr; }
+}
+
+/* Busy state (set by Toolity.setBusy) */
+.tool-workspace-card.is-busy .split-pane-grid {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* Pane idle / empty state — same look on every tool */
+.pane-empty {
+  flex: 1;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 2rem 1.25rem;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.86rem;
+}
+
+.pane-empty iconify-icon {
+  font-size: 2.25rem;
+  color: var(--text-muted);
+  animation: breatheState 3.5s ease-in-out infinite;
+}
+
+.pane-empty[hidden] { display: none; }
+
+/* Inline error strip under a pane header */
+.pane-error {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  font-size: 0.82rem;
+  color: #B42318;
+  background: rgba(240, 68, 56, 0.08);
+  border-bottom: 1px solid rgba(240, 68, 56, 0.25);
+}
+
+[data-theme="dark"] .pane-error { color: #FDA29B; }
+
+.pane-error[hidden] { display: none; }
+
+/* Determinate progress bar for media processing */
+.pane-progress {
+  height: 4px;
+  width: 100%;
+  background: var(--border);
+  overflow: hidden;
+}
+
+.pane-progress > span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--brand);
+  transition: width 0.15s linear;
+}
+
+.pane-progress[hidden] { display: none; }
+
+/* Dropzone — one look for every file tool */
+.tool-dropzone {
+  flex: 1;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1.5rem;
+  border: 1.5px dashed var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  color: var(--text-secondary);
+  font-size: 0.86rem;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.tool-dropzone:hover,
+.tool-dropzone:focus-visible,
+.tool-dropzone.dragover {
+  border-color: var(--brand);
+  background: var(--surface-elevated);
+  outline: none;
+}
+
+.tool-dropzone iconify-icon {
+  font-size: 2rem;
+  color: var(--brand);
+}
+
+.tool-dropzone strong { color: var(--text-primary); font-weight: 600; }
+
+.tool-dropzone small { font-size: 0.74rem; color: var(--text-muted); }
+
+.tool-dropzone input[type="file"] { display: none; }
+
+/* Reference / specs section (optional block 5) */
+.reference-section {
+  padding: 0 0 2rem;
+}
+
+/* FAQ section (block 6) — native <details>, no JS */
+.faq-section {
+  padding: 2.5rem 0 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.faq-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: border-color 0.15s ease;
+}
+
+.faq-item[open] { border-color: var(--text-muted); }
+
+.faq-item summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 1.15rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+
+.faq-item summary::-webkit-details-marker { display: none; }
+
+.faq-item summary::after {
+  content: '+';
+  flex-shrink: 0;
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  transition: transform 0.2s ease;
+}
+
+.faq-item[open] summary::after { transform: rotate(45deg); }
+
+.faq-item p {
+  padding: 0 1.15rem 1rem;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.faq-item p + p { margin-top: -0.4rem; }
+
+.faq-item code {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
+  padding: 1px 5px;
+  border-radius: var(--radius-xs);
+}
+
+
+/* Tool page section wrapper (replaces the inline style every page carried) */
+.section-wrapper.tool-section {
+  border-top: none;
+  padding-top: 3.5rem;
+}
+
+/* Compact section header used below the workspace (guide / reference / FAQ) */
+.section-header-compact {
+  margin-bottom: 1.5rem;
+}
+
+.section-heading-sm {
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--text-primary);
+  margin-top: 0.25rem;
+}
+
+.section-header-compact .section-desc {
+  font-size: 0.92rem;
+  margin-top: 0.35rem;
+  max-width: 640px;
+}
+
+/* Helper text under a form field */
+.form-helper {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.form-required { color: var(--brand); }
+
+/* Shared utility classes that replaced repeated inline style="" attributes */
+.form-group-grow { flex: 1; }
+.form-group-grow .textarea-clean { flex: 1; min-height: 120px; }
+.pane-content-tall { min-height: 380px; }
+
+/* Full-height code/text output filling the right pane */
+.pane-output-fill {
+  flex: 1;
+  height: 100%;
+  min-height: 380px;
+  margin: 0;
+  padding: 1.15rem 1.25rem;
+  border: none;
+  background: var(--surface);
+  font-family: var(--font-mono);
+  font-size: 0.86rem;
+  line-height: 1.6;
+  color: var(--text-primary);
+  white-space: pre-wrap;
+  word-break: break-all;
+  overflow: auto;
+  user-select: text;
+}
+
+.step-desc code,
+.pane-badge code {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+
+/* Filter / quick-action chip row (used under inputs) */
+.filter-chips-row {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.btn-filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.65rem;
+  font-size: 0.76rem;
+  font-weight: 500;
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-filter-chip:hover { border-color: var(--brand); color: var(--brand); background: var(--brand-soft); }
+
+.btn-filter-chip.chip-signal {
+  color: var(--brand);
+  border-color: rgba(244, 81, 30, 0.3);
+  background: rgba(244, 81, 30, 0.06);
+}
+
+/* ==========================================================================
+   MEDIA TOOL COMPONENTS (shared by image/video/GIF converters)
+   Promoted from six identical per-page <style> blocks.
+   ========================================================================== */
+.media-canvas-viewport {
+  width: 100%;
+  height: 280px;
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-dropzone {
+  width: 100%;
+  height: 100%;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  background: var(--surface);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px dashed var(--border);
+  border-radius: calc(var(--radius-md) - 2px);
+  margin: 4px;
+  box-sizing: border-box;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.video-dropzone:hover,
+.video-dropzone:focus-visible,
+.video-dropzone.dragover {
+  border-color: var(--brand);
+  background: var(--brand-soft);
+  outline: none;
+}
+
+.video-dropzone[hidden] { display: none; }
+
+.video-drop-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--surface-elevated);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--brand);
+  margin-bottom: 0.75rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.video-drop-title { font-size: 0.95rem; font-weight: 500; color: var(--text-primary); margin-bottom: 0.25rem; }
+.video-drop-subtitle { font-size: 0.78rem; color: var(--text-muted); }
+
+.source-video-player,
+.video-converted-preview,
+.media-preview-img {
+  width: 100%;
+  height: 100%;
+  max-height: 280px;
+  object-fit: contain;
+  display: none;
+}
+
+.source-video-player,
+.video-converted-preview { background: #000; }
+
+.media-empty-placeholder {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.media-empty-placeholder iconify-icon { margin-bottom: 0.6rem; opacity: 0.4; }
+.media-empty-placeholder p { font-size: 0.86rem; }
+
+/* Full-width primary action under the output viewport */
+.btn-primary-action {
+  width: 100%;
+  justify-content: center;
+  height: 42px;
+  font-size: 0.9rem;
+  border-radius: var(--radius-sm);
+  margin-top: 0.85rem;
+}
+
+.btn-primary-action:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.slim-progress-bar {
+  width: 100%;
+  height: 3px;
+  background: var(--border);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  margin-top: 0.4rem;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.slim-progress-bar.active { opacity: 1; }
+
+.slim-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--brand), var(--brand-gold));
+  transition: width 0.15s ease;
+}
+
+/* Trim range (video tools) */
+.minimal-trimmer-wrap { margin-top: 0.85rem; display: flex; flex-direction: column; gap: 0.4rem; padding: 0 0.15rem; }
+.minimal-trimmer-header { display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; font-weight: 500; color: var(--text-secondary); }
+.trimmer-timestamps { display: flex; align-items: center; gap: 0.35rem; font-family: var(--font-mono); font-size: 0.8rem; color: var(--brand); font-weight: 600; }
+.trim-sliders-row { display: flex; flex-direction: column; gap: 0.35rem; }
+.trim-slider-line { display: flex; align-items: center; gap: 0.5rem; }
+.trim-slider-tag { font-size: 0.7rem; color: var(--text-muted); width: 32px; text-transform: uppercase; font-weight: 600; }
+.trim-range-slider { flex: 1; accent-color: var(--brand); cursor: pointer; height: 4px; }
+.trim-range-slider:disabled { cursor: not-allowed; opacity: 0.45; }
+
+/* Settings panel labels & sliders */
+.settings-label { font-size: 0.75rem; }
+.settings-label-row { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+.settings-range { width: 100%; accent-color: var(--brand); }
+.pane-content-between { justify-content: space-between; }
+.media-canvas-viewport input[type="file"] { display: none; }
+.pane-footnote { margin-top: 0.85rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; color: var(--text-muted); padding: 0 0.25rem; }
+.pane-footnote .btn-toolbar-sm { padding: 0.25rem 0.6rem; font-size: 0.75rem; }
+.pane-footnote .btn-toolbar-sm[hidden] { display: none; }
+.trim-duration-badge { color: var(--text-muted); font-size: 0.72rem; }
+.stat-accent { color: var(--brand); font-weight: 600; }
+.flex-wrap { flex-wrap: wrap; }
+.mt-sm { margin-top: 0.5rem; }
+
+/* ---- Reference: shortcuts table + keyboard chips (notepad, json-visualizer) ---- */
+.shortcuts-table-wrapper { width: 100%; overflow-x: auto; margin-top: 1.25rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); }
+.shortcuts-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.86rem; }
+.shortcuts-table th, .shortcuts-table td { padding: 0.85rem 1.15rem; border-bottom: 1px solid var(--border); }
+.shortcuts-table th { background: var(--surface-elevated); font-weight: 600; color: var(--text-secondary); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; }
+.shortcuts-table tr:last-child td { border-bottom: none; }
+.kbd-chip { display: inline-block; padding: 0.15rem 0.45rem; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 0.75rem; font-weight: 600; color: var(--text-primary); background: var(--surface-elevated); border: 1px solid var(--border); border-radius: 4px; box-shadow: 0 1px 0 var(--border); }
+.icon-success { color: #10B981; }
+.icon-brand { color: var(--brand); }

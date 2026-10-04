@@ -20,6 +20,14 @@
   </script>
   <title>Online Notepad (Free, Auto-Save &amp; Word Counter) — Toolity.in</title>
   <link rel="canonical" href="https://toolity.in/productivity/online-notepad/">
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Online Notepad — Toolity.in">
+  <meta property="og:description" content="Distraction-free notepad that auto-saves in your browser. Word and character counts, case converters, line sorting and .txt/.md/.doc export — nothing is uploaded.">
+  <meta property="og:url" content="https://toolity.in/productivity/online-notepad/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
 
   <!-- SEO & Metadata -->
   <meta name="description"
@@ -29,11 +37,6 @@
   <meta name="author" content="Kapil Pidhwani">
 
   <!-- Open Graph / Social -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://toolity.in/productivity/online-notepad/">
-  <meta property="og:title" content="Online Notepad (Free, Auto-Save &amp; Word Counter) — Toolity.in">
-  <meta property="og:description" content="Take notes, draft ideas, and format text in a private, distraction-free online notepad with real-time word counting and offline auto-save.">
-  <meta property="og:image" content="https://toolity.in/assets/Toolity.in%20Logo.webp">
 
   <!-- Favicons -->
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
@@ -47,262 +50,50 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
 
   <!-- Preload Critical Assets -->
-  <link rel="preload" href="/styles/main.css?v=2.3" as="style">
+  <link rel="preload" href="/styles/main.css?v=2.4" as="style">
   <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
 
   <!-- Iconify Icon Component -->
   <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 
-  <link rel="stylesheet" href="../../styles/main.css?v=2.3">
+  <link rel="stylesheet" href="/styles/main.css?v=2.4">
+  <link rel="stylesheet" href="/styles/tools/online-notepad.css?v=1.0">
 
-  <style>
-    /* Designed by Kapil Pidhwani: Minimalist Online Notepad Tool Styles */
-    .notepad-card {
-      background: var(--background);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-sm);
-      overflow: hidden;
-      margin-bottom: 2rem;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* Top Action Bar */
-    .notepad-top-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      padding: 0.85rem 1.15rem;
-      background: var(--surface-elevated);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .notepad-tools-row {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-    }
-
-    /* Minimal Action Buttons */
-    .btn-action-pill {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      color: var(--text-secondary);
-      font-size: 0.76rem;
-      font-weight: 500;
-      padding: 0.32rem 0.6rem;
-      border-radius: var(--radius-sm);
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-      transition: all 0.15s ease;
-      font-family: inherit;
-    }
-
-    .btn-action-pill:hover {
-      background: var(--surface-elevated);
-      color: var(--text-primary);
-      border-color: var(--text-muted);
-    }
-
-    .btn-action-pill:active {
-      transform: scale(0.97);
-    }
-
-    /* Auto-save Status Badge */
-    .notepad-status-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      font-size: 0.74rem;
-      font-weight: 500;
-      padding: 0.22rem 0.55rem;
-      border-radius: var(--radius-pill);
-      background: var(--surface);
-      border: 1px solid var(--border);
-      color: var(--text-muted);
-      transition: all 0.2s ease;
-    }
-
-    .notepad-status-tag .status-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #10B981;
-      display: inline-block;
-      transition: background 0.2s ease;
-    }
-
-    .notepad-status-tag.saving {
-      color: #F59E0B;
-      border-color: rgba(245, 158, 11, 0.3);
-      background: rgba(245, 158, 11, 0.08);
-    }
-
-    .notepad-status-tag.saving .status-dot {
-      background: #F59E0B;
-    }
-
-    /* Editor Canvas */
-    .notepad-editor-area {
-      width: 100%;
-      min-height: 480px;
-      max-height: 780px;
-      padding: 1.5rem;
-      border: none;
-      outline: none;
-      resize: vertical;
-      background: var(--background);
-      color: var(--text-primary);
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      font-size: 1rem;
-      line-height: 1.75;
-      box-sizing: border-box;
-      tab-size: 2;
-    }
-
-    .notepad-editor-area::placeholder {
-      color: var(--text-muted);
-      opacity: 0.65;
-    }
-
-    /* Font Family Modifiers */
-    .notepad-editor-area.font-sans {
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    }
-
-    .notepad-editor-area.font-mono {
-      font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    }
-
-    .notepad-editor-area.font-serif {
-      font-family: 'Newsreader', Georgia, Cambria, 'Times New Roman', Times, serif;
-    }
-
-    /* Minimal Bottom Statistics Bar */
-    .notepad-bottom-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      padding: 0.75rem 1.15rem;
-      background: var(--surface);
-      border-top: 1px solid var(--border);
-      font-size: 0.78rem;
-      color: var(--text-secondary);
-    }
-
-    .notepad-metrics-inline {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      font-feature-settings: 'tnum';
-    }
-
-    .metric-item {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.25rem;
-    }
-
-    .metric-item strong {
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-
-    .metric-separator {
-      color: var(--border);
-      user-select: none;
-    }
-
-    /* Shortcuts Table */
-    .shortcuts-table-wrapper {
-      width: 100%;
-      overflow-x: auto;
-      margin-top: 1.25rem;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-    }
-
-    .shortcuts-table {
-      width: 100%;
-      border-collapse: collapse;
-      text-align: left;
-      font-size: 0.86rem;
-    }
-
-    .shortcuts-table th,
-    .shortcuts-table td {
-      padding: 0.85rem 1.15rem;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .shortcuts-table th {
-      background: var(--surface-elevated);
-      font-weight: 600;
-      color: var(--text-secondary);
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .shortcuts-table tr:last-child td {
-      border-bottom: none;
-    }
-
-    .kbd-chip {
-      display: inline-block;
-      padding: 0.15rem 0.45rem;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--text-primary);
-      background: var(--surface-elevated);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      box-shadow: 0 1px 0 var(--border);
-    }
-
-    @media (max-width: 768px) {
-      .notepad-editor-area {
-        min-height: 350px;
-        padding: 1rem;
-        font-size: 0.95rem;
-      }
-      .notepad-top-bar, .notepad-bottom-bar {
-        padding: 0.75rem 0.9rem;
-      }
-    }
-  </style>
-
-  <!-- Structured Data JSON-LD -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Online Notepad",
-    "url": "https://toolity.in/productivity/online-notepad/",
-    "applicationCategory": "ProductivityApplication",
-    "operatingSystem": "All",
-    "browserRequirements": "Requires JavaScript. Requires HTML5.",
-    "description": "Distraction-free online notepad and text editor with real-time auto-save, word statistics, and multi-format export.",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
-    },
-    "creator": {
-      "@type": "Person",
-      "name": "Kapil Pidhwani"
-    }
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Online Notepad",
+        "url": "https://toolity.in/productivity/online-notepad/",
+        "description": "Distraction-free notepad that auto-saves in your browser. Word and character counts, case converters, line sorting and .txt/.md/.doc export \u2014 nothing is uploaded.",
+        "applicationCategory": "ProductivityApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Productivity", "item": "https://toolity.in/productivity/" },
+          { "@type": "ListItem", "position": 3, "name": "Online Notepad", "item": "https://toolity.in/productivity/online-notepad/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Are my notes stored on a server?", "acceptedAnswer": { "@type": "Answer", "text": "No. Your text lives only in your browser's localStorage on this device. Nothing is transmitted, and the page keeps working offline once loaded." } },
+          { "@type": "Question", "name": "Will my notes survive a refresh or closing the tab?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Every keystroke is written to local storage, so the note reloads exactly as you left it \u2014 across refreshes, tab closes and reboots \u2014 until you press Reset or clear the site data in your browser." } },
+          { "@type": "Question", "name": "Can I use the same note on another device or browser?", "acceptedAnswer": { "@type": "Answer", "text": "Not automatically. Local storage is per browser profile and per device. Download the note (.txt or .md) and open it elsewhere, or paste it into a synced app." } },
+          { "@type": "Question", "name": "What happens if I press Reset by accident?", "acceptedAnswer": { "@type": "Answer", "text": "The previous note is held in memory and a toast with an Undo button appears for a few seconds. Click Undo to restore it instantly." } },
+          { "@type": "Question", "name": "Is there a length limit?", "acceptedAnswer": { "@type": "Answer", "text": "Browsers allow roughly 5 MB of local storage per site \u2014 several million characters. The editor stays responsive well beyond anything you would write by hand; very large pasted files may slow down the live word count." } },
+          { "@type": "Question", "name": "What does the .doc export contain?", "acceptedAnswer": { "@type": "Answer", "text": "A simple HTML document that Word, LibreOffice and Google Docs open as a formatted file with your paragraphs preserved. It is not a true .docx; if you need one, open the .doc and Save As .docx." } }
+        ]
+      }
+    ]
   }
   </script>
 </head>
@@ -332,7 +123,7 @@
             <p class="page-desc">Distraction-free text editor with real-time word counting, automatic local memory auto-save, and one-click file export. 100% private in your browser.</p>
           </div>
           <div class="page-count-badge">
-            <iconify-icon icon="lucide:shield-check" width="16" height="16" style="color: #10B981;"></iconify-icon>
+            <iconify-icon icon="lucide:shield-check" width="16" height="16" class="icon-success"></iconify-icon>
             <span>100% Client-Side</span>
           </div>
         </div>
@@ -340,16 +131,16 @@
     </section>
 
     <!-- Tool Main Workspace Area -->
-    <section class="section-wrapper" style="border-top: none; padding-top: 3.5rem;">
+    <section class="section-wrapper tool-section">
       <div class="container">
         
         <!-- Main Minimalist Notepad Card -->
-        <div class="notepad-card">
+        <div class="tool-workspace-card" data-layout="single" id="tool-card">
 
           <!-- 1. Top Action Toolbar -->
-          <div class="notepad-top-bar">
+          <div class="tool-actions-toolbar">
             <!-- Left: Text Utilities & Status -->
-            <div class="notepad-tools-row">
+            <div class="toolbar-group">
               <div class="notepad-status-tag" id="notepad-save-status">
                 <span class="status-dot"></span>
                 <span id="save-status-text">Auto-saved</span>
@@ -364,9 +155,9 @@
 
             <!-- Right: Universal Actions -->
             <div class="toolbar-group">
-              <button type="button" class="btn-toolbar-sm" id="btn-clear-notepad" title="Clear note canvas">
+              <button type="button" class="btn-toolbar-sm" id="btn-clear-notepad" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
                 <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
-                <span>Clear</span>
+                <span>Reset</span>
               </button>
               <button type="button" class="btn-toolbar-sm" id="btn-copy-notepad" title="Copy entire note to clipboard">
                 <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
@@ -434,15 +225,11 @@
               <span class="metric-item"><strong id="stat-paragraphs">0</strong> paras</span>
             </div>
             <div class="notepad-metrics-inline">
-              <span class="metric-item"><iconify-icon icon="lucide:clock" width="12" height="12"></iconify-icon> Read: <strong id="stat-read-time" style="margin-left:3px;">0s</strong></span>
+              <span class="metric-item"><iconify-icon icon="lucide:clock" width="12" height="12"></iconify-icon> Read: <strong id="stat-read-time">0s</strong></span>
               <span class="metric-separator">•</span>
-              <span class="metric-item"><iconify-icon icon="lucide:mic" width="12" height="12"></iconify-icon> Speak: <strong id="stat-speak-time" style="margin-left:3px;">0s</strong></span>
+              <span class="metric-item"><iconify-icon icon="lucide:mic" width="12" height="12"></iconify-icon> Speak: <strong id="stat-speak-time">0s</strong></span>
             </div>
           </div>
-
-        </div>
-
-        <!-- 4. Progressive Disclosure Settings Accordion (Below Workspace) -->
         <details class="tool-settings-accordion">
           <summary class="tool-settings-summary">
             <div class="tool-settings-summary-left">
@@ -460,7 +247,7 @@
                   
                   <!-- Font Family Switcher -->
                   <div class="form-group">
-                    <span class="form-label" style="font-size:0.75rem;">Font Family</span>
+                    <span class="form-label settings-label">Font Family</span>
                     <div class="segmented-group" id="seg-font-family">
                       <button type="button" class="seg-pill active" data-val="sans">Sans (Inter)</button>
                       <button type="button" class="seg-pill" data-val="mono">Mono (Code)</button>
@@ -470,7 +257,7 @@
 
                   <!-- Font Size Switcher -->
                   <div class="form-group">
-                    <span class="form-label" style="font-size:0.75rem;">Font Size</span>
+                    <span class="form-label settings-label">Font Size</span>
                     <div class="segmented-group" id="seg-font-size">
                       <button type="button" class="seg-pill" data-val="14">14px</button>
                       <button type="button" class="seg-pill active" data-val="16">16px</button>
@@ -481,7 +268,7 @@
 
                   <!-- Line Spacing Switcher -->
                   <div class="form-group">
-                    <span class="form-label" style="font-size:0.75rem;">Line Spacing</span>
+                    <span class="form-label settings-label">Line Spacing</span>
                     <div class="segmented-group" id="seg-line-height">
                       <button type="button" class="seg-pill" data-val="1.5">Compact</button>
                       <button type="button" class="seg-pill active" data-val="1.75">Relaxed</button>
@@ -491,7 +278,7 @@
 
                   <!-- Tab Key Behavior Switcher -->
                   <div class="form-group">
-                    <span class="form-label" style="font-size:0.75rem;">Tab Key Keypress</span>
+                    <span class="form-label settings-label">Tab Key Keypress</span>
                     <div class="segmented-group" id="seg-tab-behavior">
                       <button type="button" class="seg-pill active" data-val="2">2 Spaces</button>
                       <button type="button" class="seg-pill" data-val="4">4 Spaces</button>
@@ -501,7 +288,7 @@
 
                   <!-- Spellcheck Toggle -->
                   <div class="form-group">
-                    <span class="form-label" style="font-size:0.75rem;">Spellcheck</span>
+                    <span class="form-label settings-label">Spellcheck</span>
                     <div class="segmented-group" id="seg-spellcheck">
                       <button type="button" class="seg-pill active" data-val="on">Enabled</button>
                       <button type="button" class="seg-pill" data-val="off">Disabled</button>
@@ -514,15 +301,16 @@
           </div>
         </details>
 
+        </div>
+
         <!-- Single Adsterra Banner Slot Include -->
         <div data-include="/components/ad-slot.html"></div>
 
         <!-- 3-Step Instruction Guide -->
         <section class="guide-section">
-          <div class="section-header">
+          <div class="section-header-compact">
             <span class="section-eyebrow">How It Works</span>
-            <h2 class="section-title">Using Online Notepad</h2>
-            <p class="section-desc">Create notes, clean formatting, and export draft documents directly inside your browser with complete privacy.</p>
+            <h2 class="section-heading-sm">Using Online Notepad</h2>
           </div>
 
           <div class="guide-steps-grid">
@@ -544,12 +332,11 @@
           </div>
         </section>
 
-        <!-- Keyboard Shortcuts & Format Specifications Table -->
-        <section class="guide-section" style="padding-top: 1rem;">
-          <div class="section-header">
+        <!-- 5. REFERENCE -->
+        <section class="reference-section">
+          <div class="section-header-compact">
             <span class="section-eyebrow">Productivity Reference</span>
-            <h2 class="section-title">Editor Shortcuts &amp; Export Formats</h2>
-            <p class="section-desc">Quick key combinations and supported output specifications for high-efficiency workflows.</p>
+            <h2 class="section-heading-sm">Editor Shortcuts &amp; Export Formats</h2>
           </div>
 
           <div class="shortcuts-table-wrapper">
@@ -592,81 +379,42 @@
           </div>
         </section>
 
-        <!-- Frequently Asked Questions (FAQ) -->
-        <section class="guide-section" style="padding-top: 1rem;">
-          <div class="section-header">
-            <span class="section-eyebrow">Frequently Asked Questions</span>
-            <h2 class="section-title">Online Notepad FAQ</h2>
-            <p class="section-desc">Learn more about how Online Notepad protects your privacy, manages local storage, and formats notes.</p>
+                <!-- 6. FAQ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Online Notepad — Frequently Asked Questions</h2>
           </div>
-
-          <div style="display: flex; flex-direction: column; gap: 0.75rem; max-width: 820px; margin: 0 auto;">
-            <details class="tool-settings-accordion" style="background: var(--surface-elevated); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 0.25rem;">
-              <summary class="tool-settings-summary" style="padding: 1rem 1.25rem;">
-                <span style="font-weight: 600; font-size: 0.95rem; color: var(--text-primary);">Are my notes stored on any cloud server or database?</span>
-                <iconify-icon icon="lucide:chevron-down" class="tool-settings-chevron" width="16" height="16"></iconify-icon>
-              </summary>
-              <div style="padding: 0 1.25rem 1.25rem 1.25rem; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
-                No, never. Toolity's Online Notepad operates 100% on the client side inside your web browser. Your text is saved exclusively in your personal browser's <code>localStorage</code>. No text, notes, or keystrokes are transmitted to any backend servers or external third parties.
-              </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Are my notes stored on a server?</summary>
+              <p>No. Your text lives only in your browser's localStorage on this device. Nothing is transmitted, and the page keeps working offline once loaded.</p>
             </details>
-
-            <details class="tool-settings-accordion" style="background: var(--surface-elevated); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 0.25rem;">
-              <summary class="tool-settings-summary" style="padding: 1rem 1.25rem;">
-                <span style="font-weight: 600; font-size: 0.95rem; color: var(--text-primary);">Will my notes stay intact if I refresh or close my browser tab?</span>
-                <iconify-icon icon="lucide:chevron-down" class="tool-settings-chevron" width="16" height="16"></iconify-icon>
-              </summary>
-              <div style="padding: 0 1.25rem 1.25rem 1.25rem; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
-                Yes. Every character you type is automatically written to your browser's persistent local storage. When you return to this page, your text will automatically reload exactly as you left it, even across device reboots (unless you manually clear browser site data or click Clear).
-              </div>
+            <details class="faq-item">
+              <summary>Will my notes survive a refresh or closing the tab?</summary>
+              <p>Yes. Every keystroke is written to local storage, so the note reloads exactly as you left it — across refreshes, tab closes and reboots — until you press Reset or clear the site data in your browser.</p>
             </details>
-
-            <details class="tool-settings-accordion" style="background: var(--surface-elevated); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 0.25rem;">
-              <summary class="tool-settings-summary" style="padding: 1rem 1.25rem;">
-                <span style="font-weight: 600; font-size: 0.95rem; color: var(--text-primary);">Can I use this Online Notepad offline without an internet connection?</span>
-                <iconify-icon icon="lucide:chevron-down" class="tool-settings-chevron" width="16" height="16"></iconify-icon>
-              </summary>
-              <div style="padding: 0 1.25rem 1.25rem 1.25rem; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
-                Yes. Because all editing, word counting, text transformations, and downloads execute purely in local JavaScript, you can open the page and write notes completely offline without an active network connection.
-              </div>
+            <details class="faq-item">
+              <summary>Can I use the same note on another device or browser?</summary>
+              <p>Not automatically. Local storage is per browser profile and per device. Download the note (.txt or .md) and open it elsewhere, or paste it into a synced app.</p>
             </details>
-
-            <details class="tool-settings-accordion" style="background: var(--surface-elevated); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 0.25rem;">
-              <summary class="tool-settings-summary" style="padding: 1rem 1.25rem;">
-                <span style="font-weight: 600; font-size: 0.95rem; color: var(--text-primary);">What happens if I accidentally click the Clear button?</span>
-                <iconify-icon icon="lucide:chevron-down" class="tool-settings-chevron" width="16" height="16"></iconify-icon>
-              </summary>
-              <div style="padding: 0 1.25rem 1.25rem 1.25rem; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
-                We've built in an instant Undo protection mechanism. When you click Clear, your previous note is safely held in memory and an interactive toast banner appears with an <strong>Undo</strong> button, allowing you to restore your note immediately with a single click.
-              </div>
+            <details class="faq-item">
+              <summary>What happens if I press Reset by accident?</summary>
+              <p>The previous note is held in memory and a toast with an Undo button appears for a few seconds. Click Undo to restore it instantly.</p>
             </details>
-
-            <details class="tool-settings-accordion" style="background: var(--surface-elevated); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 0.25rem;">
-              <summary class="tool-settings-summary" style="padding: 1rem 1.25rem;">
-                <span style="font-weight: 600; font-size: 0.95rem; color: var(--text-primary);">Is there a character or document length limit?</span>
-                <iconify-icon icon="lucide:chevron-down" class="tool-settings-chevron" width="16" height="16"></iconify-icon>
-              </summary>
-              <div style="padding: 0 1.25rem 1.25rem 1.25rem; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
-                Browser local storage provides approximately 5MB to 10MB of storage per domain, which is equivalent to several million characters or hundreds of pages of text—more than enough for everyday drafting, notes, and documentation.
-              </div>
+            <details class="faq-item">
+              <summary>Is there a length limit?</summary>
+              <p>Browsers allow roughly 5 MB of local storage per site — several million characters. The editor stays responsive well beyond anything you would write by hand; very large pasted files may slow down the live word count.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What does the .doc export contain?</summary>
+              <p>A simple HTML document that Word, LibreOffice and Google Docs open as a formatted file with your paragraphs preserved. It is not a true .docx; if you need one, open the .doc and Save As .docx.</p>
             </details>
           </div>
         </section>
 
-        <!-- Category Hub CTA Banner -->
-        <section class="category-workspace-cta" style="margin-top: 3.5rem;">
-          <div class="category-workspace-cta-left">
-            <span class="section-eyebrow">Explore Productivity</span>
-            <h2 class="category-workspace-cta-title">Looking for more daily workflow utilities?</h2>
-            <p class="category-workspace-cta-desc">Discover our growing suite of distraction-free productivity tools, formatters, and browser utilities.</p>
-          </div>
-          <div class="category-workspace-cta-right">
-            <a href="/productivity/" class="btn-pill btn-primary-signal">
-              <span>View Productivity</span>
-              <iconify-icon icon="lucide:arrow-right" width="16" height="16"></iconify-icon>
-            </a>
-          </div>
-        </section>
+        <!-- 7. CTA -->
+        <div data-include="/components/tool-cta.html" data-category="productivity"></div>
 
       </div>
     </section>
@@ -676,7 +424,7 @@
   <div data-include="/components/footer.html"></div>
 
   <!-- Main Platform Scripts -->
-  <script src="../../scripts/main.js?v=2.3"></script>
+  <script src="/scripts/main.js?v=2.4"></script>
 
   <!-- Online Notepad Script -->
   <script src="notepad.js?v=1.1"></script>

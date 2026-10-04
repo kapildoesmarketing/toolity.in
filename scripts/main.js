@@ -19,7 +19,9 @@
         tmp.innerHTML = html;
         const scripts = tmp.querySelectorAll('script');
         const nodes = Array.from(tmp.childNodes);
+        const category = el.dataset.category;
         el.replaceWith(...nodes);
+        if (category) fillToolCta(nodes, category);
 
         scripts.forEach((oldScript) => {
           const newScript = document.createElement('script');
@@ -37,6 +39,34 @@
         console.warn('[Toolity] Include failed:', e.message);
       }
     }));
+  }
+
+  /**
+   * Designed by Kapil Pidhwani: Category metadata for the shared tool CTA partial.
+   * One source of truth; /components/tool-cta.html reads from this via data-category.
+   */
+  const CATEGORY_META = {
+    convertors:   { label: 'Converter Workspace',    title: 'Explore All Converter Tools',       cta: 'Explore Converters',        desc: 'Client-side image, video and GIF converters that transcode media instantly without uploading a single byte.' },
+    formatters:   { label: 'Formatter Workspace',    title: 'Explore All Code Formatters',       cta: 'Explore Formatters',        desc: 'Beautify, minify and validate JSON, CSS, HTML and more — all processed locally in your browser.' },
+    productivity: { label: 'Productivity Workspace', title: 'Explore All Productivity Tools',    cta: 'Explore Productivity Tools', desc: 'Distraction-free notepads, planners and everyday workflow boosters that keep your data on your device.' },
+    web:          { label: 'Web Workspace',          title: 'Explore All Web & URL Tools',       cta: 'Explore Web Tools',         desc: 'URL cleaners, parameter inspectors, favicon extractors and thumbnail downloaders for webmasters and marketers.' },
+    fun:          { label: 'Fun Workspace',          title: 'Explore All Fun & Interactive Toys', cta: 'Explore Fun Tools',         desc: 'Playful visualizers and interactive web toys built with modern browser APIs.' },
+    development:  { label: 'Developer Workspace',    title: 'Explore All Developer Tools',       cta: 'Explore Dev Tools',         desc: 'Encoders, validators, visualizers and debugging utilities that run 100% client-side.' },
+    utilities:    { label: 'Utility Workspace',      title: 'Explore All Everyday Utility Tools', cta: 'Explore Utility Tools',     desc: 'QR code generators, link builders, speed changers and other micro-utilities for daily digital friction.' },
+    experiments:  { label: 'Experiments Lab',        title: 'Explore All Experiments',           cta: 'Explore Experiments',       desc: 'Prototype demos and Web API labs — early ideas that may graduate into full tools.' }
+  };
+
+  function fillToolCta(nodes, category) {
+    const meta = CATEGORY_META[category];
+    const root = nodes.find((n) => n.nodeType === 1 && n.classList && n.classList.contains('category-workspace-cta'));
+    if (!meta || !root) return;
+    const set = (sel, val) => { const el = root.querySelector(sel); if (el) el.textContent = val; };
+    set('[data-cta="label"]', meta.label);
+    set('[data-cta="title"]', meta.title);
+    set('[data-cta="desc"]', meta.desc);
+    set('[data-cta="btn"]', meta.cta);
+    const link = root.querySelector('a[data-cta="link"]');
+    if (link) link.href = `/${category}/`;
   }
 
   /**
@@ -1069,9 +1099,13 @@
     const msgEl = document.getElementById('toast-message') || toast.querySelector('span');
     if (msgEl) msgEl.textContent = msg;
     toast.classList.add('show');
-    setTimeout(() => {
+    clearTimeout(showGlobalToast._t);
+    showGlobalToast._t = setTimeout(() => {
       toast.classList.remove('show');
     }, 2400);
   }
+
+  // Public API for tool pages — the ONLY toast implementation on the site.
+  window.showToast = showGlobalToast;
 })();
 

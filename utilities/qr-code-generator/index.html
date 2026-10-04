@@ -20,6 +20,14 @@
   </script>
   <title>QR Code Generator — Toolity.in</title>
   <link rel="canonical" href="https://toolity.in/utilities/qr-code-generator/">
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="QR Code Generator — Toolity.in">
+  <meta property="og:description" content="Create QR codes for URLs, text, Wi-Fi, vCards, email and phone numbers in your browser. Custom colours, dot shapes, logo and PNG/SVG/WebP/JPEG export — nothing is uploaded.">
+  <meta property="og:url" content="https://toolity.in/utilities/qr-code-generator/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
 
   <!-- SEO & Metadata -->
   <meta name="description"
@@ -40,12 +48,51 @@
 
   <!-- Iconify Icon Component -->
     <!-- Preload Critical Assets -->
-  <link rel="preload" href="/styles/main.css?v=2.3" as="style">
+  <link rel="preload" href="/styles/main.css?v=2.4" as="style">
   <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
 
   <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 
-  <link rel="stylesheet" href="../../styles/main.css?v=2.3">
+  <link rel="stylesheet" href="/styles/main.css?v=2.4">
+  <link rel="stylesheet" href="/styles/tools/qr-code-generator.css?v=1.0">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "QR Code Generator",
+        "url": "https://toolity.in/utilities/qr-code-generator/",
+        "description": "Create QR codes for URLs, text, Wi-Fi, vCards, email and phone numbers in your browser. Custom colours, dot shapes, logo and PNG/SVG/WebP/JPEG export \u2014 nothing is uploaded.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Utilities", "item": "https://toolity.in/utilities/" },
+          { "@type": "ListItem", "position": 3, "name": "QR Code Generator", "item": "https://toolity.in/utilities/qr-code-generator/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Is the content of my QR code sent to a server?", "acceptedAnswer": { "@type": "Answer", "text": "No. The QR matrix is computed and drawn entirely in your browser with a small JavaScript encoder. Wi-Fi passwords, contact details and links never leave your device, and the page works offline once loaded." } },
+          { "@type": "Question", "name": "Which error-correction level should I choose?", "acceptedAnswer": { "@type": "Answer", "text": "L (7 %) gives the smallest code; M (15 %) is the everyday default; Q (25 %) and H (30 %) survive more damage and are required when you place a logo in the centre, since the logo covers part of the pattern. The tool switches to H automatically when you add a logo." } },
+          { "@type": "Question", "name": "Why won't my QR code scan after I changed the colours?", "acceptedAnswer": { "@type": "Answer", "text": "Scanners need strong contrast and a dark pattern on a light background. Keep the foreground dark and the background light (or transparent on a light surface), and don't shrink the quiet-zone margin below the default \u2014 many camera apps fail on tight margins." } },
+          { "@type": "Question", "name": "PNG, SVG, WebP or JPEG \u2014 which should I download?", "acceptedAnswer": { "@type": "Answer", "text": "SVG is a vector file that stays crisp at any size and is ideal for print. PNG is the safe choice for screens and documents; WebP is smaller for web pages; JPEG is lossy and can't be transparent, so use it only if a platform demands it." } },
+          { "@type": "Question", "name": "How much text fits in a QR code?", "acceptedAnswer": { "@type": "Answer", "text": "Up to about 2,950 bytes at level L or 1,270 at level H, but codes that dense are hard to scan from a phone. Keep URLs short (a link shortener helps) and vCards to the essentials. If the preview shows 'Payload Overflow', shorten the content or lower the error-correction level." } },
+          { "@type": "Question", "name": "Can I generate Wi-Fi codes for WPA3 or enterprise networks?", "acceptedAnswer": { "@type": "Answer", "text": "WPA/WPA2/WPA3 personal networks work with the WPA option. Enterprise (802.1X) networks need per-user credentials that the standard Wi-Fi QR format can't express, so they are not supported." } }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 
 <body>
@@ -58,9 +105,9 @@
       <div class="container">
         <!-- Breadcrumbs Navigation -->
         <nav class="breadcrumbs" aria-label="Breadcrumb">
-          <a href="../../" class="breadcrumb-link">Home</a>
+          <a href="/" class="breadcrumb-link">Home</a>
           <span class="breadcrumb-separator">/</span>
-          <a href="../../utilities/" class="breadcrumb-link">Utilities</a>
+          <a href="/utilities/" class="breadcrumb-link">Utilities</a>
           <span class="breadcrumb-separator">/</span>
           <span class="breadcrumb-current">QR Code Generator</span>
         </nav>
@@ -76,13 +123,13 @@
     </section>
 
     <!-- Tool Main Workspace Area -->
-    <section class="section-wrapper" style="border-top: none; padding-top: 3.5rem;">
+    <section class="section-wrapper tool-section">
       <div class="container">
 
         <!-- ==================================================================
              UNIFIED TOOL WORKSPACE CARD (Visible At-A-Glance on Desktop)
              ================================================================== -->
-        <div class="tool-workspace-card">
+        <div class="tool-workspace-card" data-layout="split" id="tool-card">
 
           <!-- 1. Quick Actions Toolbar (Top-Left Modes • Top-Right Universal Actions) -->
           <div class="tool-actions-toolbar">
@@ -118,7 +165,7 @@
 
             <!-- Right: Universal Action Buttons (Reset, Copy, Download Dropdown) -->
             <div class="toolbar-group">
-              <button type="button" class="btn-toolbar-sm" id="btn-clear-payload" title="Reset all input fields">
+              <button type="button" class="btn-toolbar-sm" id="btn-clear-payload" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
                 <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
                 <span>Reset</span>
               </button>
@@ -170,7 +217,7 @@
           </div>
 
           <!-- 2. Dual Split-Pane Input & Output (At-A-Glance Responsive Grid) -->
-          <div class="split-pane-grid" style="margin-bottom: 1.25rem;">
+          <div class="split-pane-grid">
             <!-- Left: Input Configuration Pane -->
             <div class="tool-pane">
               <div class="pane-header">
@@ -189,100 +236,100 @@
                 </div>
 
                 <!-- Text Type Form -->
-                <div class="type-form-section" id="form-text" style="display: none;">
+                <div class="type-form-section" id="form-text" hidden>
                   <div class="form-group">
                     <textarea id="input-text" class="textarea-clean" placeholder="Type any text or code snippet here..." spellcheck="false"></textarea>
                   </div>
                 </div>
 
                 <!-- Wi-Fi Type Form -->
-                <div class="type-form-section" id="form-wifi" style="display: none;">
+                <div class="type-form-section" id="form-wifi" hidden>
                   <div class="form-row-2col">
                     <div class="form-group">
-                      <label for="input-wifi-ssid" class="form-label" style="font-size:0.76rem;">Network Name (SSID)</label>
+                      <label for="input-wifi-ssid" class="form-label settings-label">Network Name (SSID)</label>
                       <input type="text" id="input-wifi-ssid" class="input-clean" placeholder="e.g. Office_Guest_5G">
                     </div>
                     <div class="form-group">
-                      <label for="input-wifi-pass" class="form-label" style="font-size:0.76rem;">Password</label>
+                      <label for="input-wifi-pass" class="form-label settings-label">Password</label>
                       <input type="text" id="input-wifi-pass" class="input-clean" placeholder="Passkey">
                     </div>
                   </div>
-                  <div class="form-row-2col" style="margin-top: 0.5rem;">
+                  <div class="form-row-2col mt-sm">
                     <div class="form-group">
-                      <label for="input-wifi-enc" class="form-label" style="font-size:0.76rem;">Security</label>
+                      <label for="input-wifi-enc" class="form-label settings-label">Security</label>
                       <select id="input-wifi-enc" class="select-clean">
                         <option value="WPA" selected>WPA / WPA2 / WPA3</option>
                         <option value="WEP">WEP</option>
                         <option value="nopass">None (Open Network)</option>
                       </select>
                     </div>
-                    <div class="form-group" style="justify-content: flex-end; padding-bottom: 0.35rem;">
+                    <div class="form-group qr-checkbox-group">
                       <div class="control-item">
                         <input type="checkbox" id="input-wifi-hidden">
-                        <label for="input-wifi-hidden" style="font-size: 0.82rem;">Hidden Network</label>
+                        <label for="input-wifi-hidden">Hidden Network</label>
                       </div>
                     </div>
                   </div>
                 </div>
 
                 <!-- vCard Contact Form -->
-                <div class="type-form-section" id="form-vcard" style="display: none;">
+                <div class="type-form-section" id="form-vcard" hidden>
                   <div class="form-row-2col">
                     <div class="form-group">
-                      <label for="input-vcard-first" class="form-label" style="font-size:0.76rem;">First Name</label>
+                      <label for="input-vcard-first" class="form-label settings-label">First Name</label>
                       <input type="text" id="input-vcard-first" class="input-clean" placeholder="Alex">
                     </div>
                     <div class="form-group">
-                      <label for="input-vcard-last" class="form-label" style="font-size:0.76rem;">Last Name</label>
+                      <label for="input-vcard-last" class="form-label settings-label">Last Name</label>
                       <input type="text" id="input-vcard-last" class="input-clean" placeholder="Morgan">
                     </div>
                   </div>
-                  <div class="form-row-2col" style="margin-top: 0.5rem;">
+                  <div class="form-row-2col mt-sm">
                     <div class="form-group">
-                      <label for="input-vcard-phone" class="form-label" style="font-size:0.76rem;">Phone</label>
+                      <label for="input-vcard-phone" class="form-label settings-label">Phone</label>
                       <input type="tel" id="input-vcard-phone" class="input-clean" placeholder="+1 555-0199">
                     </div>
                     <div class="form-group">
-                      <label for="input-vcard-email" class="form-label" style="font-size:0.76rem;">Email</label>
+                      <label for="input-vcard-email" class="form-label settings-label">Email</label>
                       <input type="email" id="input-vcard-email" class="input-clean" placeholder="alex@example.com">
                     </div>
                   </div>
-                  <div class="form-row-2col" style="margin-top: 0.5rem;">
+                  <div class="form-row-2col mt-sm">
                     <div class="form-group">
-                      <label for="input-vcard-org" class="form-label" style="font-size:0.76rem;">Company</label>
+                      <label for="input-vcard-org" class="form-label settings-label">Company</label>
                       <input type="text" id="input-vcard-org" class="input-clean" placeholder="Toolity Labs">
                     </div>
                     <div class="form-group">
-                      <label for="input-vcard-url" class="form-label" style="font-size:0.76rem;">Website</label>
+                      <label for="input-vcard-url" class="form-label settings-label">Website</label>
                       <input type="url" id="input-vcard-url" class="input-clean" placeholder="https://toolity.in">
                     </div>
                   </div>
                 </div>
 
                 <!-- Email Form -->
-                <div class="type-form-section" id="form-email" style="display: none;">
+                <div class="type-form-section" id="form-email" hidden>
                   <div class="form-group">
-                    <label for="input-email-to" class="form-label" style="font-size:0.76rem;">Recipient Email</label>
+                    <label for="input-email-to" class="form-label settings-label">Recipient Email</label>
                     <input type="email" id="input-email-to" class="input-clean" placeholder="contact@example.com">
                   </div>
-                  <div class="form-group" style="margin-top: 0.5rem;">
-                    <label for="input-email-sub" class="form-label" style="font-size:0.76rem;">Subject Line</label>
+                  <div class="form-group mt-sm">
+                    <label for="input-email-sub" class="form-label settings-label">Subject Line</label>
                     <input type="text" id="input-email-sub" class="input-clean" placeholder="Hello from Toolity.in">
                   </div>
-                  <div class="form-group" style="margin-top: 0.5rem;">
-                    <label for="input-email-body" class="form-label" style="font-size:0.76rem;">Body Content</label>
+                  <div class="form-group mt-sm">
+                    <label for="input-email-body" class="form-label settings-label">Body Content</label>
                     <textarea id="input-email-body" class="textarea-clean" placeholder="Write message..."></textarea>
                   </div>
                 </div>
 
                 <!-- Phone / SMS Form -->
-                <div class="type-form-section" id="form-phone" style="display: none;">
+                <div class="type-form-section" id="form-phone" hidden>
                   <div class="form-group">
-                    <label for="input-phone-num" class="form-label" style="font-size:0.76rem;">Phone Number</label>
+                    <label for="input-phone-num" class="form-label settings-label">Phone Number</label>
                     <input type="tel" id="input-phone-num" class="input-clean" placeholder="+1 (555) 000-0000">
                   </div>
-                  <div class="form-group" style="margin-top: 0.5rem;">
-                    <label for="input-phone-sms" class="form-label" style="font-size:0.76rem;">Optional SMS Message</label>
+                  <div class="form-group mt-sm">
+                    <label for="input-phone-sms" class="form-label settings-label">Optional SMS Message</label>
                     <textarea id="input-phone-sms" class="textarea-clean" placeholder="Leave blank for dialer or enter SMS body..."></textarea>
                   </div>
                 </div>
@@ -294,7 +341,7 @@
             <div class="tool-pane">
               <div class="pane-header">
                 <span>Real-Time QR Preview</span>
-                <span class="pane-badge" id="qr-matrix-info" style="color: #10B981;">Ready to Scan</span>
+                <span class="pane-badge" id="qr-matrix-info">Ready to Scan</span>
               </div>
               <div class="qr-preview-pane-content">
                 <!-- Live QR Visual Showcase Card -->
@@ -306,7 +353,7 @@
           </div>
 
           <!-- 3. Controls & Options inside Accordion (Positioned below Input/Output) -->
-          <details class="tool-settings-accordion" style="margin-bottom: 0.25rem;">
+          <details class="tool-settings-accordion">
             <summary class="tool-settings-summary">
               <div class="tool-settings-summary-left">
                 <iconify-icon icon="lucide:sliders-horizontal" width="16" height="16"></iconify-icon>
@@ -326,29 +373,29 @@
                   <div class="settings-row-wrap">
                     <!-- Foreground Color -->
                     <div class="form-group">
-                      <span class="form-label" style="font-size:0.75rem;">Foreground Color</span>
-                      <div style="display:flex; align-items:center; gap:0.6rem;">
+                      <span class="form-label settings-label">Foreground Color</span>
+                      <div class="qr-color-row">
                         <label class="color-picker-pill" title="Pick Foreground Color">
-                          <span class="color-preview-circle" id="fg-color-preview" style="background: #17191C;"></span>
+                          <span class="color-preview-circle" id="fg-color-preview"></span>
                           <span class="color-hex-text" id="fg-hex-val">#17191C</span>
                           <input type="color" id="qr-color-fg" class="color-input-hidden" value="#17191C">
                         </label>
                         <!-- Quick Palette Swatches -->
                         <div class="color-quick-palette">
-                          <span class="quick-palette-dot active" data-color="#17191C" style="background:#17191C;" title="Charcoal"></span>
-                          <span class="quick-palette-dot" data-color="#F4511E" style="background:#F4511E;" title="Signal Orange"></span>
-                          <span class="quick-palette-dot" data-color="#2563EB" style="background:#2563EB;" title="Electric Blue"></span>
-                          <span class="quick-palette-dot" data-color="#059669" style="background:#059669;" title="Emerald"></span>
+                          <span class="quick-palette-dot active" data-color="#17191C" title="Charcoal"></span>
+                          <span class="quick-palette-dot" data-color="#F4511E" title="Signal Orange"></span>
+                          <span class="quick-palette-dot" data-color="#2563EB" title="Electric Blue"></span>
+                          <span class="quick-palette-dot" data-color="#059669" title="Emerald"></span>
                         </div>
                       </div>
                     </div>
 
                     <!-- Background Color -->
                     <div class="form-group">
-                      <span class="form-label" style="font-size:0.75rem;">Background Color</span>
-                      <div style="display:flex; align-items:center; gap:0.6rem;">
+                      <span class="form-label settings-label">Background Color</span>
+                      <div class="qr-color-row">
                         <label class="color-picker-pill" title="Pick Background Color">
-                          <span class="color-preview-circle" id="bg-color-preview" style="background: #FFFFFF;"></span>
+                          <span class="color-preview-circle" id="bg-color-preview"></span>
                           <span class="color-hex-text" id="bg-hex-val">#FFFFFF</span>
                           <input type="color" id="qr-color-bg" class="color-input-hidden" value="#FFFFFF">
                         </label>
@@ -370,7 +417,7 @@
                   <div class="settings-row-wrap">
                     <!-- Dot Style Segmented Control -->
                     <div class="form-group">
-                      <span class="form-label" style="font-size:0.75rem;">Dot / Module Shape</span>
+                      <span class="form-label settings-label">Dot / Module Shape</span>
                       <div class="segmented-group" id="seg-dot-style">
                         <button type="button" class="seg-pill active" data-val="square">■ Sharp</button>
                         <button type="button" class="seg-pill" data-val="rounded">● Rounded</button>
@@ -380,7 +427,7 @@
 
                     <!-- Finder Eye Style Segmented Control -->
                     <div class="form-group">
-                      <span class="form-label" style="font-size:0.75rem;">Corner Eye Markers</span>
+                      <span class="form-label settings-label">Corner Eye Markers</span>
                       <div class="segmented-group" id="seg-eye-style">
                         <button type="button" class="seg-pill active" data-val="square">▣ Square</button>
                         <button type="button" class="seg-pill" data-val="rounded">▢ Rounded</button>
@@ -390,7 +437,7 @@
 
                     <!-- Quiet Zone Margin Segmented Control -->
                     <div class="form-group">
-                      <span class="form-label" style="font-size:0.75rem;">Quiet Zone Margin</span>
+                      <span class="form-label settings-label">Quiet Zone Margin</span>
                       <div class="segmented-group" id="seg-margin-size">
                         <button type="button" class="seg-pill" data-val="0">Flush 0</button>
                         <button type="button" class="seg-pill active" data-val="2">Compact 2</button>
@@ -400,7 +447,7 @@
 
                     <!-- Error Correction Segmented Control -->
                     <div class="form-group">
-                      <span class="form-label" style="font-size:0.75rem;">Error Correction</span>
+                      <span class="form-label settings-label">Error Correction</span>
                       <div class="segmented-group" id="seg-ecc-level">
                         <button type="button" class="seg-pill" data-val="L" title="7% Recovery">Low</button>
                         <button type="button" class="seg-pill active" data-val="M" title="15% Recovery">Medium</button>
@@ -418,20 +465,20 @@
                   </div>
                   <div class="settings-row-wrap">
                     <!-- Logo Upload Trigger -->
-                    <div class="form-group" style="flex: 1; min-width: 260px;">
-                      <span class="form-label" style="font-size:0.75rem;">Center Brand Logo</span>
-                      <div style="display:flex; align-items:center; gap:0.65rem; flex-wrap:wrap;">
-                        <label class="btn-toolbar-sm" style="cursor: pointer;">
+                    <div class="form-group qr-logo-group">
+                      <span class="form-label settings-label">Center Brand Logo</span>
+                      <div class="qr-color-row flex-wrap">
+                        <label class="btn-toolbar-sm">
                           <iconify-icon icon="lucide:image-plus" width="15" height="15"></iconify-icon>
                           <span id="logo-upload-btn-text">Choose Logo Image</span>
-                          <input type="file" id="qr-logo-input" accept="image/*" style="display: none;">
+                          <input type="file" id="qr-logo-input" accept="image/*">
                         </label>
-                        <button type="button" class="btn-toolbar-sm" id="btn-remove-logo" style="display: none;">
+                        <button type="button" class="btn-toolbar-sm" id="btn-remove-logo" hidden>
                           <iconify-icon icon="lucide:x" width="14" height="14"></iconify-icon>
                           <span>Remove</span>
                         </button>
-                        <div class="range-slider-wrap" id="logo-size-wrap" style="display: none; flex: 1; min-width: 160px;">
-                          <span style="font-size:0.74rem; color:var(--text-muted);">Size:</span>
+                        <div class="range-slider-wrap" id="logo-size-wrap" hidden>
+                          <span class="form-helper">Size:</span>
                           <input type="range" id="qr-logo-size" class="range-slider-clean" min="14" max="26" value="20">
                           <span class="range-val-badge" id="logo-size-val">20%</span>
                         </div>
@@ -440,7 +487,7 @@
 
                     <!-- Resolution Segmented Control -->
                     <div class="form-group">
-                      <span class="form-label" style="font-size:0.75rem;">Download Resolution</span>
+                      <span class="form-label settings-label">Download Resolution</span>
                       <div class="segmented-group" id="seg-export-res">
                         <button type="button" class="seg-pill" data-val="512">512px</button>
                         <button type="button" class="seg-pill active" data-val="1024">1024px HD</button>
@@ -455,18 +502,12 @@
             </div>
           </details>
         </div>
-
-        <!-- Global Shared Ad Slot Partial -->
+        <!-- 3. AD -->
         <div data-include="/components/ad-slot.html"></div>
-
-        <!-- ==================================================================
-             3-STEP INSTRUCTION GUIDE
-             ================================================================== -->
         <section class="guide-section">
-          <div class="section-header">
+          <div class="section-header-compact">
             <span class="section-eyebrow">How It Works</span>
-            <h2 class="section-title">Creating Custom QR Codes</h2>
-            <p class="section-desc">Generate production-ready QR codes for menus, Wi-Fi networks, business cards, and marketing materials in seconds.</p>
+            <h2 class="section-heading-sm">Creating Custom QR Codes</h2>
           </div>
 
           <div class="guide-steps-grid">
@@ -488,1305 +529,51 @@
           </div>
         </section>
 
-        <!-- ==================================================================
-             MAINTENANCE-FREE CATEGORY WORKSPACE CTA CARD
-             ================================================================== -->
-        <section class="category-workspace-cta">
-          <div class="category-workspace-cta-left">
-            <span class="section-eyebrow">Utility Workspace</span>
-            <h2 class="category-workspace-cta-title">Explore All Utility Tools</h2>
-            <p class="category-workspace-cta-desc">
-              Discover our collection of fast client-side productivity utilities including Unix timestamp converters, password builders, IP lookup, and browser sandbox tools.
-            </p>
+                <!-- 6. FAQ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">QR Code Generator — Frequently Asked Questions</h2>
           </div>
-          <div class="category-workspace-cta-right">
-            <a href="../../utilities/" class="btn-pill btn-primary-signal">
-              <span>Explore Utility Tools</span>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14"></path>
-                <path d="m12 5 7 7-7 7"></path>
-              </svg>
-            </a>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Is the content of my QR code sent to a server?</summary>
+              <p>No. The QR matrix is computed and drawn entirely in your browser with a small JavaScript encoder. Wi-Fi passwords, contact details and links never leave your device, and the page works offline once loaded.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Which error-correction level should I choose?</summary>
+              <p>L (7 %) gives the smallest code; M (15 %) is the everyday default; Q (25 %) and H (30 %) survive more damage and are required when you place a logo in the centre, since the logo covers part of the pattern. The tool switches to H automatically when you add a logo.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why won't my QR code scan after I changed the colours?</summary>
+              <p>Scanners need strong contrast and a dark pattern on a light background. Keep the foreground dark and the background light (or transparent on a light surface), and don't shrink the quiet-zone margin below the default — many camera apps fail on tight margins.</p>
+            </details>
+            <details class="faq-item">
+              <summary>PNG, SVG, WebP or JPEG — which should I download?</summary>
+              <p>SVG is a vector file that stays crisp at any size and is ideal for print. PNG is the safe choice for screens and documents; WebP is smaller for web pages; JPEG is lossy and can't be transparent, so use it only if a platform demands it.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How much text fits in a QR code?</summary>
+              <p>Up to about 2,950 bytes at level L or 1,270 at level H, but codes that dense are hard to scan from a phone. Keep URLs short (a link shortener helps) and vCards to the essentials. If the preview shows 'Payload Overflow', shorten the content or lower the error-correction level.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can I generate Wi-Fi codes for WPA3 or enterprise networks?</summary>
+              <p>WPA/WPA2/WPA3 personal networks work with the WPA option. Enterprise (802.1X) networks need per-user credentials that the standard Wi-Fi QR format can't express, so they are not supported.</p>
+            </details>
           </div>
         </section>
+
+        <!-- 7. CTA -->
+        <div data-include="/components/tool-cta.html" data-category="utilities"></div>
 
       </div>
     </section>
   </main>
-
-  <!-- Reusable Toast Notification -->
-  <div id="tool-toast" class="tool-toast" role="status" aria-live="polite">
-    Copied to clipboard!
-  </div>
-
-  <!-- Global Multi-Column Footer -->
   <div data-include="/components/footer.html"></div>
 
-  <script src="../../scripts/main.js?v=2.3"></script>
-  <script>
-    /* ==========================================================================
-       Pure Vanilla Client-Side QR Generator Engine (Designed by Kapil Pidhwani)
-       Zero external API calls • 100% Offline & Private • Reed-Solomon QR BitMatrix
-       ========================================================================== */
-
-    function showToast(msg) {
-      const toast = document.getElementById('tool-toast');
-      if (toast) {
-        toast.textContent = msg || 'Copied to clipboard!';
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 2000);
-      }
-    }
-
-    // QR Code Engine Implementation (Standard ISO/IEC 18004)
-    const QRMode = { MODE_NUMBER: 1 << 0, MODE_ALPHA_NUM: 1 << 1, MODE_8BIT_BYTE: 1 << 2, MODE_KANJI: 1 << 3 };
-    const QRErrorCorrectLevel = { L: 1, M: 0, Q: 3, H: 2 };
-    const QRMaskPattern = { PATTERN000: 0, PATTERN001: 1, PATTERN010: 2, PATTERN011: 3, PATTERN100: 4, PATTERN101: 5, PATTERN110: 6, PATTERN111: 7 };
-
-    const QRUtil = {
-      PATTERN_POSITION_TABLE: [
-        [], [6, 18], [6, 22], [6, 26], [6, 30], [6, 34], [6, 22, 38], [6, 24, 42], [6, 26, 46], [6, 28, 50], [6, 30, 54],
-        [6, 32, 58], [6, 34, 62], [6, 26, 46, 66], [6, 26, 48, 70], [6, 26, 50, 74], [6, 30, 54, 78], [6, 30, 56, 82],
-        [6, 30, 58, 86], [6, 34, 62, 90], [6, 28, 50, 72, 94], [6, 26, 50, 74, 98], [6, 30, 54, 78, 102], [6, 28, 54, 80, 106],
-        [6, 32, 58, 84, 110], [6, 30, 58, 86, 114], [6, 34, 62, 90, 118], [6, 26, 50, 74, 98, 122], [6, 30, 54, 78, 102, 126],
-        [6, 26, 52, 78, 104, 130], [6, 30, 56, 82, 108, 134], [6, 34, 60, 86, 112, 138], [6, 30, 58, 86, 114, 142],
-        [6, 34, 62, 90, 118, 146], [6, 30, 54, 78, 102, 126, 150], [6, 24, 50, 76, 102, 128, 154], [6, 28, 54, 80, 106, 132, 158],
-        [6, 32, 58, 84, 110, 136, 162], [6, 26, 54, 82, 110, 138, 166], [6, 30, 58, 86, 114, 142, 170]
-      ],
-      G15: (1 << 10) | (1 << 8) | (1 << 5) | (1 << 4) | (1 << 2) | (1 << 1) | (1 << 0),
-      G18: (1 << 12) | (1 << 11) | (1 << 10) | (1 << 9) | (1 << 8) | (1 << 5) | (1 << 2) | (1 << 0),
-      G15_MASK: (1 << 14) | (1 << 12) | (1 << 10) | (1 << 4) | (1 << 1),
-      getBCHTypeInfo: function (data) {
-        let d = data << 10;
-        while (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G15) >= 0) {
-          d ^= (QRUtil.G15 << (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G15)));
-        }
-        return ((data << 10) | d) ^ QRUtil.G15_MASK;
-      },
-      getBCHTypeNumber: function (data) {
-        let d = data << 12;
-        while (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G18) >= 0) {
-          d ^= (QRUtil.G18 << (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G18)));
-        }
-        return (data << 12) | d;
-      },
-      getBCHDigit: function (data) {
-        let digit = 0;
-        while (data != 0) { digit++; data >>>= 1; }
-        return digit;
-      },
-      getPatternPosition: function (typeNumber) {
-        return QRUtil.PATTERN_POSITION_TABLE[typeNumber - 1];
-      },
-      getMask: function (maskPattern, i, j) {
-        switch (maskPattern) {
-          case QRMaskPattern.PATTERN000: return (i + j) % 2 == 0;
-          case QRMaskPattern.PATTERN001: return i % 2 == 0;
-          case QRMaskPattern.PATTERN010: return j % 3 == 0;
-          case QRMaskPattern.PATTERN011: return (i + j) % 3 == 0;
-          case QRMaskPattern.PATTERN100: return (Math.floor(i / 2) + Math.floor(j / 3)) % 2 == 0;
-          case QRMaskPattern.PATTERN101: return (i * j) % 2 + (i * j) % 3 == 0;
-          case QRMaskPattern.PATTERN110: return ((i * j) % 2 + (i * j) % 3) % 2 == 0;
-          case QRMaskPattern.PATTERN111: return ((i * j) % 3 + (i + j) % 2) % 2 == 0;
-          default: throw new Error("mask:" + maskPattern);
-        }
-      },
-      getErrorCorrectPolynomial: function (errorCorrectLength) {
-        let a = new QRPolynomial([1], 0);
-        for (let i = 0; i < errorCorrectLength; i++) {
-          a = a.multiply(new QRPolynomial([1, QRMath.gexp(i)], 0));
-        }
-        return a;
-      },
-      getLengthInBits: function (mode, type) {
-        if (1 <= type && type < 10) {
-          switch (mode) {
-            case QRMode.MODE_NUMBER: return 10;
-            case QRMode.MODE_ALPHA_NUM: return 9;
-            case QRMode.MODE_8BIT_BYTE: return 8;
-            case QRMode.MODE_KANJI: return 8;
-            default: throw new Error("mode:" + mode);
-          }
-        } else if (type < 27) {
-          switch (mode) {
-            case QRMode.MODE_NUMBER: return 12;
-            case QRMode.MODE_ALPHA_NUM: return 11;
-            case QRMode.MODE_8BIT_BYTE: return 16;
-            case QRMode.MODE_KANJI: return 10;
-            default: throw new Error("mode:" + mode);
-          }
-        } else if (type < 41) {
-          switch (mode) {
-            case QRMode.MODE_NUMBER: return 14;
-            case QRMode.MODE_ALPHA_NUM: return 13;
-            case QRMode.MODE_8BIT_BYTE: return 16;
-            case QRMode.MODE_KANJI: return 12;
-            default: throw new Error("mode:" + mode);
-          }
-        } else {
-          throw new Error("type:" + type);
-        }
-      },
-      getLostPoint: function (qrCode) {
-        const moduleCount = qrCode.getModuleCount();
-        let lostPoint = 0;
-        for (let row = 0; row < moduleCount; row++) {
-          for (let col = 0; col < moduleCount; col++) {
-            let sameCount = 0;
-            const dark = qrCode.isDark(row, col);
-            for (let r = -1; r <= 1; r++) {
-              if (row + r < 0 || moduleCount <= row + r) continue;
-              for (let c = -1; c <= 1; c++) {
-                if (col + c < 0 || moduleCount <= col + c) continue;
-                if (r == 0 && c == 0) continue;
-                if (dark == qrCode.isDark(row + r, col + c)) sameCount++;
-              }
-            }
-            if (sameCount > 5) lostPoint += (3 + sameCount - 5);
-          }
-        }
-        for (let row = 0; row < moduleCount - 1; row++) {
-          for (let col = 0; col < moduleCount - 1; col++) {
-            let count = 0;
-            if (qrCode.isDark(row, col)) count++;
-            if (qrCode.isDark(row + 1, col)) count++;
-            if (qrCode.isDark(row, col + 1)) count++;
-            if (qrCode.isDark(row + 1, col + 1)) count++;
-            if (count == 0 || count == 4) lostPoint += 3;
-          }
-        }
-        for (let row = 0; row < moduleCount; row++) {
-          for (let col = 0; col < moduleCount - 6; col++) {
-            if (qrCode.isDark(row, col) && !qrCode.isDark(row, col + 1) && qrCode.isDark(row, col + 2) &&
-              qrCode.isDark(row, col + 3) && qrCode.isDark(row, col + 4) && !qrCode.isDark(row, col + 5) && qrCode.isDark(row, col + 6)) {
-              lostPoint += 40;
-            }
-          }
-        }
-        for (let col = 0; col < moduleCount; col++) {
-          for (let row = 0; row < moduleCount - 6; row++) {
-            if (qrCode.isDark(row, col) && !qrCode.isDark(row + 1, col) && qrCode.isDark(row + 2, col) &&
-              qrCode.isDark(row + 3, col) && qrCode.isDark(row + 4, col) && !qrCode.isDark(row + 5, col) && qrCode.isDark(row + 6, col)) {
-              lostPoint += 40;
-            }
-          }
-        }
-        let darkCount = 0;
-        for (let col = 0; col < moduleCount; col++) {
-          for (let row = 0; row < moduleCount; row++) {
-            if (qrCode.isDark(row, col)) darkCount++;
-          }
-        }
-        const ratio = Math.abs((100 * darkCount) / (moduleCount * moduleCount) - 50) / 5;
-        lostPoint += ratio * 10;
-        return lostPoint;
-      }
-    };
-
-    const QRMath = {
-      glog: function (n) {
-        if (n < 1) throw new Error("glog(" + n + ")");
-        return QRMath.LOG_TABLE[n];
-      },
-      gexp: function (n) {
-        while (n < 0) n += 255;
-        while (n >= 256) n -= 255;
-        return QRMath.EXP_TABLE[n];
-      },
-      EXP_TABLE: new Array(256),
-      LOG_TABLE: new Array(256)
-    };
-
-    for (let i = 0; i < 8; i++) QRMath.EXP_TABLE[i] = 1 << i;
-    for (let i = 8; i < 256; i++) QRMath.EXP_TABLE[i] = QRMath.EXP_TABLE[i - 4] ^ QRMath.EXP_TABLE[i - 5] ^ QRMath.EXP_TABLE[i - 6] ^ QRMath.EXP_TABLE[i - 8];
-    for (let i = 0; i < 255; i++) QRMath.LOG_TABLE[QRMath.EXP_TABLE[i]] = i;
-
-    function QRPolynomial(num, shift) {
-      if (num.length == undefined) throw new Error(num.length + "/" + shift);
-      let offset = 0;
-      while (offset < num.length && num[offset] == 0) offset++;
-      this.num = new Array(num.length - offset + shift);
-      for (let i = 0; i < num.length - offset; i++) this.num[i] = num[i + offset];
-    }
-    QRPolynomial.prototype = {
-      get: function (index) { return this.num[index]; },
-      getLength: function () { return this.num.length; },
-      multiply: function (e) {
-        const num = new Array(this.getLength() + e.getLength() - 1);
-        for (let i = 0; i < this.getLength(); i++) {
-          for (let j = 0; j < e.getLength(); j++) {
-            num[i + j] ^= QRMath.gexp(QRMath.glog(this.get(i)) + QRMath.glog(e.get(j)));
-          }
-        }
-        return new QRPolynomial(num, 0);
-      },
-      mod: function (e) {
-        if (this.getLength() - e.getLength() < 0) return this;
-        const ratio = QRMath.glog(this.get(0)) - QRMath.glog(e.get(0));
-        const num = new Array(this.getLength());
-        for (let i = 0; i < this.getLength(); i++) num[i] = this.get(i);
-        for (let i = 0; i < e.getLength(); i++) num[i] ^= QRMath.gexp(QRMath.glog(e.get(i)) + ratio);
-        return new QRPolynomial(num, 0).mod(e);
-      }
-    };
-
-    function QRRSBlock(totalCount, dataCount) {
-      this.totalCount = totalCount;
-      this.dataCount = dataCount;
-    }
-    QRRSBlock.RS_BLOCK_TABLE = [
-      [1, 26, 19], [1, 26, 16], [1, 26, 13], [1, 26, 9],
-      [1, 44, 34], [1, 44, 28], [1, 44, 22], [1, 44, 16],
-      [1, 70, 55], [1, 70, 44], [2, 35, 17], [2, 35, 13],
-      [1, 100, 80], [2, 50, 32], [2, 50, 24], [4, 25, 9],
-      [1, 134, 108], [2, 67, 43], [2, 33, 15, 2, 34, 16], [2, 33, 11, 2, 34, 12],
-      [2, 86, 68], [4, 43, 27], [4, 43, 19], [4, 43, 15],
-      [2, 98, 78], [4, 49, 31], [2, 32, 14, 4, 33, 15], [4, 39, 13, 1, 40, 14],
-      [2, 121, 97], [2, 60, 38, 2, 61, 39], [4, 40, 18, 2, 41, 19], [4, 40, 14, 2, 41, 15],
-      [2, 146, 116], [3, 58, 36, 2, 59, 37], [4, 36, 16, 4, 37, 17], [4, 36, 12, 4, 37, 13],
-      [2, 86, 68, 2, 87, 69], [4, 69, 43, 1, 70, 44], [6, 43, 19, 2, 44, 20], [6, 43, 15, 2, 44, 16]
-    ];
-    QRRSBlock.getRSBlocks = function (typeNumber, errorCorrectLevel) {
-      const rsBlock = QRRSBlock.getRsBlockTable(typeNumber, errorCorrectLevel);
-      if (rsBlock == undefined) throw new Error("bad rs block @ typeNumber:" + typeNumber + "/errorCorrectLevel:" + errorCorrectLevel);
-      const length = rsBlock.length / 3;
-      const list = [];
-      for (let i = 0; i < length; i++) {
-        const count = rsBlock[i * 3 + 0];
-        const totalCount = rsBlock[i * 3 + 1];
-        const dataCount = rsBlock[i * 3 + 2];
-        for (let j = 0; j < count; j++) list.push(new QRRSBlock(totalCount, dataCount));
-      }
-      return list;
-    };
-    QRRSBlock.getRsBlockTable = function (typeNumber, errorCorrectLevel) {
-      switch (errorCorrectLevel) {
-        case QRErrorCorrectLevel.L: return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 0];
-        case QRErrorCorrectLevel.M: return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 1];
-        case QRErrorCorrectLevel.Q: return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 2];
-        case QRErrorCorrectLevel.H: return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 3];
-        default: return undefined;
-      }
-    };
-
-    function QRBitBuffer() {
-      this.buffer = [];
-      this.length = 0;
-    }
-    QRBitBuffer.prototype = {
-      get: function (index) {
-        const bufIndex = Math.floor(index / 8);
-        return ((this.buffer[bufIndex] >>> (7 - index % 8)) & 1) == 1;
-      },
-      put: function (num, length) {
-        for (let i = 0; i < length; i++) this.putBit(((num >>> (length - i - 1)) & 1) == 1);
-      },
-      getLengthInBits: function () { return this.length; },
-      putBit: function (bit) {
-        const bufIndex = Math.floor(this.length / 8);
-        if (this.buffer.length <= bufIndex) this.buffer.push(0);
-        if (bit) this.buffer[bufIndex] |= (0x80 >>> (this.length % 8));
-        this.length++;
-      }
-    };
-
-    function QR8bitByte(data) {
-      this.mode = QRMode.MODE_8BIT_BYTE;
-      this.data = data;
-    }
-    QR8bitByte.prototype = {
-      getLength: function () { return unescape(encodeURIComponent(this.data)).length; },
-      write: function (buffer) {
-        const utf8 = unescape(encodeURIComponent(this.data));
-        for (let i = 0; i < utf8.length; i++) buffer.put(utf8.charCodeAt(i), 8);
-      }
-    };
-
-    function QRCodeGenerator(typeNumber, errorCorrectLevel) {
-      this.typeNumber = typeNumber;
-      this.errorCorrectLevel = errorCorrectLevel;
-      this.modules = null;
-      this.moduleCount = 0;
-      this.dataCache = null;
-      this.dataList = [];
-    }
-    QRCodeGenerator.prototype = {
-      addData: function (data) {
-        this.dataList.push(new QR8bitByte(data));
-        this.dataCache = null;
-      },
-      isDark: function (row, col) {
-        if (row < 0 || this.moduleCount <= row || col < 0 || this.moduleCount <= col) throw new Error(row + "," + col);
-        return this.modules[row][col];
-      },
-      getModuleCount: function () { return this.moduleCount; },
-      make: function () {
-        if (this.typeNumber < 1) {
-          let typeNumber = 1;
-          for (typeNumber = 1; typeNumber < 40; typeNumber++) {
-            const rsBlocks = QRRSBlock.getRSBlocks(typeNumber, this.errorCorrectLevel);
-            const buffer = new QRBitBuffer();
-            let totalDataCount = 0;
-            for (let i = 0; i < rsBlocks.length; i++) totalDataCount += rsBlocks[i].dataCount;
-            for (let i = 0; i < this.dataList.length; i++) {
-              const data = this.dataList[i];
-              buffer.put(data.mode, 4);
-              buffer.put(data.getLength(), QRUtil.getLengthInBits(data.mode, typeNumber));
-              data.write(buffer);
-            }
-            if (buffer.getLengthInBits() <= totalDataCount * 8) break;
-          }
-          this.typeNumber = typeNumber;
-        }
-        this.makeImpl(false, this.getBestMaskPattern());
-      },
-      makeImpl: function (test, maskPattern) {
-        this.moduleCount = this.typeNumber * 4 + 17;
-        this.modules = new Array(this.moduleCount);
-        for (let row = 0; row < this.moduleCount; row++) {
-          this.modules[row] = new Array(this.moduleCount);
-          for (let col = 0; col < this.moduleCount; col++) this.modules[row][col] = null;
-        }
-        this.setupPositionProbePattern(0, 0);
-        this.setupPositionProbePattern(this.moduleCount - 7, 0);
-        this.setupPositionProbePattern(0, this.moduleCount - 7);
-        this.setupPositionAdjustPattern();
-        this.setupTimingPattern();
-        this.setupTypeInfo(test, maskPattern);
-        if (this.typeNumber >= 7) this.setupTypeNumber(test);
-        if (this.dataCache == null) this.dataCache = QRCodeGenerator.createData(this.typeNumber, this.errorCorrectLevel, this.dataList);
-        this.mapData(this.dataCache, maskPattern);
-      },
-      setupPositionProbePattern: function (row, col) {
-        for (let r = -1; r <= 7; r++) {
-          if (row + r <= -1 || this.moduleCount <= row + r) continue;
-          for (let c = -1; c <= 7; c++) {
-            if (col + c <= -1 || this.moduleCount <= col + c) continue;
-            if ((0 <= r && r <= 6 && (c == 0 || c == 6)) || (0 <= c && c <= 6 && (r == 0 || r == 6)) || (2 <= r && r <= 4 && 2 <= c && c <= 4)) {
-              this.modules[row + r][col + c] = true;
-            } else {
-              this.modules[row + r][col + c] = false;
-            }
-          }
-        }
-      },
-      getBestMaskPattern: function () {
-        let minLostPoint = 0;
-        let pattern = 0;
-        for (let i = 0; i < 8; i++) {
-          this.makeImpl(true, i);
-          const lostPoint = QRUtil.getLostPoint(this);
-          if (i == 0 || minLostPoint > lostPoint) {
-            minLostPoint = lostPoint;
-            pattern = i;
-          }
-        }
-        return pattern;
-      },
-      setupTimingPattern: function () {
-        for (let r = 8; r < this.moduleCount - 8; r++) {
-          if (this.modules[r][6] !== null) continue;
-          this.modules[r][6] = (r % 2 == 0);
-        }
-        for (let c = 8; c < this.moduleCount - 8; c++) {
-          if (this.modules[6][c] !== null) continue;
-          this.modules[6][c] = (c % 2 == 0);
-        }
-      },
-      setupPositionAdjustPattern: function () {
-        const pos = QRUtil.getPatternPosition(this.typeNumber);
-        if (!pos) return;
-        for (let i = 0; i < pos.length; i++) {
-          for (let j = 0; j < pos.length; j++) {
-            const row = pos[i];
-            const col = pos[j];
-            if (this.modules[row][col] !== null) continue;
-            for (let r = -2; r <= 2; r++) {
-              for (let c = -2; c <= 2; c++) {
-                if (r == -2 || r == 2 || c == -2 || c == 2 || (r == 0 && c == 0)) {
-                  this.modules[row + r][col + c] = true;
-                } else {
-                  this.modules[row + r][col + c] = false;
-                }
-              }
-            }
-          }
-        }
-      },
-      setupTypeNumber: function (test) {
-        const bits = QRUtil.getBCHTypeNumber(this.typeNumber);
-        for (let i = 0; i < 18; i++) {
-          const mod = (!test && ((bits >> i) & 1) == 1);
-          this.modules[Math.floor(i / 3)][i % 3 + this.moduleCount - 8 - 3] = mod;
-          this.modules[i % 3 + this.moduleCount - 8 - 3][Math.floor(i / 3)] = mod;
-        }
-      },
-      setupTypeInfo: function (test, maskPattern) {
-        const data = (this.errorCorrectLevel << 3) | maskPattern;
-        const bits = QRUtil.getBCHTypeInfo(data);
-        for (let i = 0; i < 15; i++) {
-          const mod = (!test && ((bits >> i) & 1) == 1);
-          if (i < 6) this.modules[i][8] = mod;
-          else if (i < 8) this.modules[i + 1][8] = mod;
-          else this.modules[this.moduleCount - 15 + i][8] = mod;
-
-          if (i < 8) this.modules[8][this.moduleCount - i - 1] = mod;
-          else if (i < 9) this.modules[8][15 - i - 1 + 1] = mod;
-          else this.modules[8][15 - i - 1] = mod;
-        }
-        this.modules[this.moduleCount - 8][8] = !test;
-      },
-      mapData: function (data, maskPattern) {
-        let inc = -1;
-        let row = this.moduleCount - 1;
-        let bitIndex = 7;
-        let byteIndex = 0;
-        for (let col = this.moduleCount - 1; col > 0; col -= 2) {
-          if (col == 6) col--;
-          while (true) {
-            for (let c = 0; c < 2; c++) {
-              if (this.modules[row][col - c] === null) {
-                let dark = false;
-                if (byteIndex < data.length) dark = (((data[byteIndex] >>> bitIndex) & 1) == 1);
-                const mask = QRUtil.getMask(maskPattern, row, col - c);
-                if (mask) dark = !dark;
-                this.modules[row][col - c] = dark;
-                bitIndex--;
-                if (bitIndex == -1) { byteIndex++; bitIndex = 7; }
-              }
-            }
-            row += inc;
-            if (row < 0 || this.moduleCount <= row) {
-              row -= inc;
-              inc = -inc;
-              break;
-            }
-          }
-        }
-      }
-    };
-    QRCodeGenerator.createData = function (typeNumber, errorCorrectLevel, dataList) {
-      const rsBlocks = QRRSBlock.getRSBlocks(typeNumber, errorCorrectLevel);
-      const buffer = new QRBitBuffer();
-      for (let i = 0; i < dataList.length; i++) {
-        const data = dataList[i];
-        buffer.put(data.mode, 4);
-        buffer.put(data.getLength(), QRUtil.getLengthInBits(data.mode, typeNumber));
-        data.write(buffer);
-      }
-      let totalDataCount = 0;
-      for (let i = 0; i < rsBlocks.length; i++) totalDataCount += rsBlocks[i].dataCount;
-      if (buffer.getLengthInBits() > totalDataCount * 8) throw new Error("Code length overflow. (" + buffer.getLengthInBits() + ">" + totalDataCount * 8 + "bit)");
-      if (buffer.getLengthInBits() + 4 <= totalDataCount * 8) buffer.put(0, 4);
-      while (buffer.getLengthInBits() % 8 != 0) buffer.putBit(false);
-      while (true) {
-        if (buffer.getLengthInBits() >= totalDataCount * 8) break;
-        buffer.put(0xEC, 8);
-        if (buffer.getLengthInBits() >= totalDataCount * 8) break;
-        buffer.put(0x11, 8);
-      }
-      return QRCodeGenerator.createBytes(buffer, rsBlocks);
-    };
-    QRCodeGenerator.createBytes = function (buffer, rsBlocks) {
-      let offset = 0;
-      let maxDcCount = 0;
-      let maxEcCount = 0;
-      const dcdata = new Array(rsBlocks.length);
-      const ecdata = new Array(rsBlocks.length);
-      for (let r = 0; r < rsBlocks.length; r++) {
-        const dcCount = rsBlocks[r].dataCount;
-        const ecCount = rsBlocks[r].totalCount - dcCount;
-        maxDcCount = Math.max(maxDcCount, dcCount);
-        maxEcCount = Math.max(maxEcCount, ecCount);
-        dcdata[r] = new Array(dcCount);
-        for (let i = 0; i < dcdata[r].length; i++) dcdata[r][i] = 0xFF & buffer.buffer[i + offset];
-        offset += dcCount;
-        const rsPoly = QRUtil.getErrorCorrectPolynomial(ecCount);
-        const rawPoly = new QRPolynomial(dcdata[r], rsPoly.getLength() - 1);
-        const modPoly = rawPoly.mod(rsPoly);
-        ecdata[r] = new Array(rsPoly.getLength() - 1);
-        for (let i = 0; i < ecdata[r].length; i++) {
-          const modIndex = i + modPoly.getLength() - ecdata[r].length;
-          ecdata[r][i] = (modIndex >= 0) ? modPoly.get(modIndex) : 0;
-        }
-      }
-      let totalCodeCount = 0;
-      for (let i = 0; i < rsBlocks.length; i++) totalCodeCount += rsBlocks[i].totalCount;
-      const data = new Array(totalCodeCount);
-      let index = 0;
-      for (let i = 0; i < maxDcCount; i++) {
-        for (let r = 0; r < rsBlocks.length; r++) {
-          if (i < dcdata[r].length) data[index++] = dcdata[r][i];
-        }
-      }
-      for (let i = 0; i < maxEcCount; i++) {
-        for (let r = 0; r < rsBlocks.length; r++) {
-          if (i < ecdata[r].length) data[index++] = ecdata[r][i];
-        }
-      }
-      return data;
-    };
-
-    /* ==========================================================================
-       QR UI Logic, Custom Drawing Engine & Multi-Format Exporters
-       ========================================================================== */
-
-    let currentPayloadType = 'url';
-    let uploadedLogoImg = null;
-    let uploadedLogoSrc = null;
-
-    // State Variables for Segmented Options
-    let currentDotStyle = 'square';
-    let currentEyeStyle = 'square';
-    let currentMarginSize = '2';
-    let currentEccLevel = 'M';
-    let currentExportRes = '1024';
-    let currentBgMode = 'solid'; // 'solid' or 'transparent'
-
-    // DOM Elements
-    const qrRenderTarget = document.getElementById('qr-render-target');
-    const qrPreviewBox = document.getElementById('qr-preview-box');
-    const qrInputStats = document.getElementById('qr-input-stats');
-    const qrMatrixInfo = document.getElementById('qr-matrix-info');
-    const inputPaneTitle = document.getElementById('input-pane-title');
-    const settingsSummaryBadge = document.getElementById('settings-summary-badge');
-    const dlPngResBadge = document.getElementById('dl-png-res-badge');
-
-    // Colors
-    const colorFg = document.getElementById('qr-color-fg');
-    const colorBg = document.getElementById('qr-color-bg');
-    const fgColorPreview = document.getElementById('fg-color-preview');
-    const bgColorPreview = document.getElementById('bg-color-preview');
-    const fgHexVal = document.getElementById('fg-hex-val');
-    const bgHexVal = document.getElementById('bg-hex-val');
-
-    // Logo controls
-    const logoInput = document.getElementById('qr-logo-input');
-    const btnRemoveLogo = document.getElementById('btn-remove-logo');
-    const logoSizeSlider = document.getElementById('qr-logo-size');
-    const logoSizeWrap = document.getElementById('logo-size-wrap');
-    const logoSizeVal = document.getElementById('logo-size-val');
-    const logoBtnText = document.getElementById('logo-upload-btn-text');
-
-    // Input fields
-    const inputUrl = document.getElementById('input-url');
-    const inputText = document.getElementById('input-text');
-    const inputWifiSsid = document.getElementById('input-wifi-ssid');
-    const inputWifiPass = document.getElementById('input-wifi-pass');
-    const inputWifiEnc = document.getElementById('input-wifi-enc');
-    const inputWifiHidden = document.getElementById('input-wifi-hidden');
-    const inputVcardFirst = document.getElementById('input-vcard-first');
-    const inputVcardLast = document.getElementById('input-vcard-last');
-    const inputVcardPhone = document.getElementById('input-vcard-phone');
-    const inputVcardEmail = document.getElementById('input-vcard-email');
-    const inputVcardOrg = document.getElementById('input-vcard-org');
-    const inputVcardUrl = document.getElementById('input-vcard-url');
-    const inputEmailTo = document.getElementById('input-email-to');
-    const inputEmailSub = document.getElementById('input-email-sub');
-    const inputEmailBody = document.getElementById('input-email-body');
-    const inputPhoneNum = document.getElementById('input-phone-num');
-    const inputPhoneSms = document.getElementById('input-phone-sms');
-
-    // Helper: Bind Segmented Group Button switching
-    function initSegmentedGroup(containerId, onChange) {
-      const container = document.getElementById(containerId);
-      if (!container) return;
-      container.querySelectorAll('.seg-pill').forEach(btn => {
-        btn.addEventListener('click', () => {
-          container.querySelectorAll('.seg-pill').forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          onChange(btn.dataset.val);
-        });
-      });
-    }
-
-    // Initialize Segmented Controls
-    initSegmentedGroup('seg-dot-style', (val) => { currentDotStyle = val; generateQR(); });
-    initSegmentedGroup('seg-eye-style', (val) => { currentEyeStyle = val; generateQR(); });
-    initSegmentedGroup('seg-margin-size', (val) => { currentMarginSize = val; generateQR(); });
-    initSegmentedGroup('seg-ecc-level', (val) => { currentEccLevel = val; generateQR(); });
-    initSegmentedGroup('seg-export-res', (val) => {
-      currentExportRes = val;
-      if (dlPngResBadge) dlPngResBadge.textContent = `${val}px`;
-      generateQR();
-    });
-    initSegmentedGroup('seg-transparency', (val) => { currentBgMode = val; generateQR(); });
-
-    // Set Error Correction programmatically
-    function setEccLevelActive(level) {
-      currentEccLevel = level;
-      const seg = document.getElementById('seg-ecc-level');
-      if (seg) {
-        seg.querySelectorAll('.seg-pill').forEach(b => {
-          b.classList.toggle('active', b.dataset.val === level);
-        });
-      }
-    }
-
-    // Payload Mode Titles Map
-    const modeTitles = {
-      'url': 'Website URL or Link',
-      'text': 'Plain Text Payload',
-      'wifi': 'Wi-Fi Network Credentials',
-      'vcard': 'vCard Contact Details',
-      'email': 'Email Message Draft',
-      'phone': 'Phone Dialer & SMS'
-    };
-
-    // Type Switcher
-    function setPayloadType(type) {
-      currentPayloadType = type;
-      document.querySelectorAll('#top-type-tabs .seg-pill').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.type === type);
-      });
-      document.querySelectorAll('.type-form-section').forEach(sec => {
-        sec.style.display = (sec.id === `form-${type}`) ? 'block' : 'none';
-      });
-      if (inputPaneTitle) {
-        inputPaneTitle.textContent = modeTitles[type] || 'Input Configuration';
-      }
-      generateQR();
-    }
-
-    document.querySelectorAll('#top-type-tabs .seg-pill').forEach(btn => {
-      btn.addEventListener('click', () => setPayloadType(btn.dataset.type));
-    });
-
-    // Color Swatch Event Handlers
-    colorFg.addEventListener('input', (e) => {
-      const val = e.target.value.toUpperCase();
-      fgColorPreview.style.background = val;
-      fgHexVal.textContent = val;
-      document.querySelectorAll('.quick-palette-dot').forEach(d => d.classList.toggle('active', d.dataset.color === val));
-      generateQR();
-    });
-
-    colorBg.addEventListener('input', (e) => {
-      const val = e.target.value.toUpperCase();
-      bgColorPreview.style.background = val;
-      bgHexVal.textContent = val;
-      generateQR();
-    });
-
-    document.querySelectorAll('.quick-palette-dot').forEach(dot => {
-      dot.addEventListener('click', () => {
-        const c = dot.dataset.color;
-        colorFg.value = c;
-        fgColorPreview.style.background = c;
-        fgHexVal.textContent = c.toUpperCase();
-        document.querySelectorAll('.quick-palette-dot').forEach(d => d.classList.remove('active'));
-        dot.classList.add('active');
-        generateQR();
-      });
-    });
-
-    // Reset / Clear Payload Action
-    document.getElementById('btn-clear-payload').addEventListener('click', () => {
-      if (currentPayloadType === 'url') inputUrl.value = '';
-      else if (currentPayloadType === 'text') inputText.value = '';
-      else if (currentPayloadType === 'wifi') { inputWifiSsid.value = ''; inputWifiPass.value = ''; }
-      else if (currentPayloadType === 'vcard') {
-        inputVcardFirst.value = ''; inputVcardLast.value = ''; inputVcardPhone.value = '';
-        inputVcardEmail.value = ''; inputVcardOrg.value = ''; inputVcardUrl.value = '';
-      } else if (currentPayloadType === 'email') { inputEmailTo.value = ''; inputEmailSub.value = ''; inputEmailBody.value = ''; }
-      else if (currentPayloadType === 'phone') { inputPhoneNum.value = ''; inputPhoneSms.value = ''; }
-      generateQR();
-      showToast('Cleared input fields');
-    });
-
-    // Single Download Dropdown Menu Logic
-    const dlDropdownWrap = document.getElementById('download-dropdown-wrap');
-    const btnDlToggle = document.getElementById('btn-download-menu-toggle');
-
-    btnDlToggle.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const isOpen = dlDropdownWrap.classList.toggle('open');
-      btnDlToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    });
-
-    // Close dropdown on outside click
-    document.addEventListener('click', (e) => {
-      if (!dlDropdownWrap.contains(e.target)) {
-        dlDropdownWrap.classList.remove('open');
-        btnDlToggle.setAttribute('aria-expanded', 'false');
-      }
-    });
-
-    // Construct Payload String
-    function getPayloadString() {
-      switch (currentPayloadType) {
-        case 'url':
-          return inputUrl.value.trim();
-        case 'text':
-          return inputText.value;
-        case 'wifi': {
-          const ssid = inputWifiSsid.value.trim();
-          if (!ssid) return '';
-          const pass = inputWifiPass.value;
-          const enc = inputWifiEnc.value;
-          const hidden = inputWifiHidden.checked;
-          const esc = (s) => s.replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/:/g, '\\:').replace(/,/g, '\\,');
-          return `WIFI:T:${enc};S:${esc(ssid)};P:${esc(pass)};H:${hidden ? 'true' : 'false'};;`;
-        }
-        case 'vcard': {
-          const first = inputVcardFirst.value.trim();
-          const last = inputVcardLast.value.trim();
-          const fullName = (first || last) ? `${first} ${last}`.trim() : '';
-          const phone = inputVcardPhone.value.trim();
-          const email = inputVcardEmail.value.trim();
-          const org = inputVcardOrg.value.trim();
-          const url = inputVcardUrl.value.trim();
-          if (!fullName && !phone && !email && !org && !url) return '';
-          let vcard = 'BEGIN:VCARD\nVERSION:3.0\n';
-          if (fullName) {
-            vcard += `N:${last};${first};;;\n`;
-            vcard += `FN:${fullName}\n`;
-          }
-          if (org) vcard += `ORG:${org}\n`;
-          if (phone) vcard += `TEL;TYPE=CELL:${phone}\n`;
-          if (email) vcard += `EMAIL:${email}\n`;
-          if (url) vcard += `URL:${url}\n`;
-          vcard += 'END:VCARD';
-          return vcard;
-        }
-        case 'email': {
-          const to = inputEmailTo.value.trim();
-          if (!to) return '';
-          const sub = encodeURIComponent(inputEmailSub.value.trim());
-          const body = encodeURIComponent(inputEmailBody.value.trim());
-          let mailto = `mailto:${to}`;
-          const params = [];
-          if (sub) params.push(`subject=${sub}`);
-          if (body) params.push(`body=${body}`);
-          if (params.length) mailto += `?${params.join('&')}`;
-          return mailto;
-        }
-        case 'phone': {
-          const num = inputPhoneNum.value.trim();
-          if (!num) return '';
-          const sms = inputPhoneSms.value.trim();
-          if (sms) {
-            return `SMSTO:${num}:${sms}`;
-          }
-          return `tel:${num}`;
-        }
-        default:
-          return '';
-      }
-    }
-
-    // Helper: Check if cell is part of Finder Pattern (Top-Left, Top-Right, Bottom-Left 7x7)
-    function isFinderEye(row, col, N) {
-      if (row < 7 && col < 7) return true;
-      if (row < 7 && col >= N - 7) return true;
-      if (row >= N - 7 && col < 7) return true;
-      return false;
-    }
-
-    // Intelligent Logo Dot Clearance: Check if cell is inside the protected center logo quiet-zone
-    function isLogoQuietZone(row, col, N, options) {
-      if (!options.hasLogo) return false;
-      const logoRatio = (options.logoSize || 20) / 100;
-      const logoSpanModules = N * logoRatio;
-      const clearanceRadius = (logoSpanModules / 2) + 0.8;
-      const center = (N - 1) / 2;
-      return Math.abs(row - center) <= clearanceRadius && Math.abs(col - center) <= clearanceRadius;
-    }
-
-    // Render QR Code onto Canvas with Dot Clearance & Logo Shield
-    function renderQRToCanvas(qr, targetSize, options) {
-      const N = qr.getModuleCount();
-      const marginModules = parseInt(options.margin, 10);
-      const totalModules = N + marginModules * 2;
-      const cellSize = targetSize / totalModules;
-
-      const canvas = document.createElement('canvas');
-      canvas.width = targetSize;
-      canvas.height = targetSize;
-      const ctx = canvas.getContext('2d');
-
-      // 1. Background Fill
-      if (!options.isTransparent) {
-        ctx.fillStyle = options.bgColor;
-        ctx.fillRect(0, 0, targetSize, targetSize);
-      } else {
-        ctx.clearRect(0, 0, targetSize, targetSize);
-      }
-
-      ctx.fillStyle = options.fgColor;
-
-      // 2. Draw 3 Finder Corner Eyes
-      const drawEye = (startRow, startCol) => {
-        const eyeX = (startCol + marginModules) * cellSize;
-        const eyeY = (startRow + marginModules) * cellSize;
-        const eyeSize = 7 * cellSize;
-
-        if (options.eyeStyle === 'circle') {
-          ctx.beginPath();
-          ctx.arc(eyeX + eyeSize / 2, eyeY + eyeSize / 2, eyeSize / 2, 0, Math.PI * 2);
-          ctx.arc(eyeX + eyeSize / 2, eyeY + eyeSize / 2, eyeSize / 2 - cellSize, 0, Math.PI * 2, true);
-          ctx.fill();
-
-          ctx.beginPath();
-          ctx.arc(eyeX + eyeSize / 2, eyeY + eyeSize / 2, 1.5 * cellSize, 0, Math.PI * 2);
-          ctx.fill();
-        } else if (options.eyeStyle === 'rounded') {
-          const rOuter = cellSize * 1.8;
-          ctx.beginPath();
-          ctx.roundRect(eyeX, eyeY, eyeSize, eyeSize, rOuter);
-          ctx.fill();
-
-          if (!options.isTransparent) {
-            ctx.fillStyle = options.bgColor;
-          } else {
-            ctx.globalCompositeOperation = 'destination-out';
-          }
-          ctx.beginPath();
-          ctx.roundRect(eyeX + cellSize, eyeY + cellSize, 5 * cellSize, 5 * cellSize, rOuter * 0.7);
-          ctx.fill();
-
-          if (options.isTransparent) ctx.globalCompositeOperation = 'source-over';
-          ctx.fillStyle = options.fgColor;
-
-          ctx.beginPath();
-          ctx.roundRect(eyeX + 2 * cellSize, eyeY + 2 * cellSize, 3 * cellSize, 3 * cellSize, cellSize * 0.8);
-          ctx.fill();
-        } else {
-          ctx.fillRect(eyeX, eyeY, eyeSize, eyeSize);
-          if (!options.isTransparent) {
-            ctx.fillStyle = options.bgColor;
-          } else {
-            ctx.globalCompositeOperation = 'destination-out';
-          }
-          ctx.fillRect(eyeX + cellSize, eyeY + cellSize, 5 * cellSize, 5 * cellSize);
-
-          if (options.isTransparent) ctx.globalCompositeOperation = 'source-over';
-          ctx.fillStyle = options.fgColor;
-
-          ctx.fillRect(eyeX + 2 * cellSize, eyeY + 2 * cellSize, 3 * cellSize, 3 * cellSize);
-        }
-      };
-
-      drawEye(0, 0);
-      drawEye(0, N - 7);
-      drawEye(N - 7, 0);
-
-      // 3. Draw Data Modules (Excluding Finder Eyes AND Logo Quiet-Zone)
-      for (let r = 0; r < N; r++) {
-        for (let c = 0; c < N; c++) {
-          if (isFinderEye(r, c, N)) continue;
-          if (isLogoQuietZone(r, c, N, options)) continue; // Suppress dots under logo!
-
-          if (qr.isDark(r, c)) {
-            const x = (c + marginModules) * cellSize;
-            const y = (r + marginModules) * cellSize;
-
-            if (options.dotStyle === 'rounded') {
-              ctx.beginPath();
-              ctx.arc(x + cellSize / 2, y + cellSize / 2, cellSize * 0.44, 0, Math.PI * 2);
-              ctx.fill();
-            } else if (options.dotStyle === 'smooth') {
-              ctx.beginPath();
-              ctx.roundRect(x + cellSize * 0.06, y + cellSize * 0.06, cellSize * 0.88, cellSize * 0.88, cellSize * 0.35);
-              ctx.fill();
-            } else {
-              ctx.fillRect(x, y, cellSize + 0.3, cellSize + 0.3);
-            }
-          }
-        }
-      }
-
-      // 4. Draw Center Brand Logo on Clean Floating Badge
-      if (options.logoImg) {
-        const logoRatio = (options.logoSize || 20) / 100;
-        const logoBoxSize = targetSize * logoRatio;
-        const logoX = (targetSize - logoBoxSize) / 2;
-        const logoY = (targetSize - logoBoxSize) / 2;
-        const badgePadding = cellSize * 0.7;
-        const badgeRadius = cellSize * 1.5;
-
-        // Protective Plate Shield
-        ctx.fillStyle = options.isTransparent ? '#FFFFFF' : options.bgColor;
-        ctx.shadowColor = 'rgba(0, 0, 0, 0.12)';
-        ctx.shadowBlur = targetSize * 0.015;
-        ctx.shadowOffsetY = targetSize * 0.005;
-
-        ctx.beginPath();
-        ctx.roundRect(logoX - badgePadding, logoY - badgePadding, logoBoxSize + badgePadding * 2, logoBoxSize + badgePadding * 2, badgeRadius);
-        ctx.fill();
-
-        // Subtle Plate Border
-        ctx.shadowColor = 'transparent';
-        ctx.strokeStyle = options.isTransparent ? 'rgba(0,0,0,0.08)' : 'rgba(0,0,0,0.06)';
-        ctx.lineWidth = Math.max(1, targetSize * 0.002);
-        ctx.stroke();
-
-        // Draw Image
-        try {
-          ctx.drawImage(options.logoImg, logoX, logoY, logoBoxSize, logoBoxSize);
-        } catch (e) {
-          console.error("Failed drawing logo image onto canvas", e);
-        }
-      }
-
-      return canvas;
-    }
-
-    // Generate Vector SVG Markup String with Quiet-Zone Clearance
-    function generateVectorSVG(qr, options) {
-      const N = qr.getModuleCount();
-      const marginModules = parseInt(options.margin, 10);
-      const totalModules = N + marginModules * 2;
-      const size = 1000;
-      const cellSize = size / totalModules;
-
-      const fg = options.fgColor;
-      const bg = options.isTransparent ? 'none' : options.bgColor;
-
-      // Finder Eyes
-      const makeSvgEye = (startRow, startCol) => {
-        const eyeX = (startCol + marginModules) * cellSize;
-        const eyeY = (startRow + marginModules) * cellSize;
-        const eyeSize = 7 * cellSize;
-
-        if (options.eyeStyle === 'circle') {
-          return `
-            <circle cx="${eyeX + eyeSize / 2}" cy="${eyeY + eyeSize / 2}" r="${eyeSize / 2}" fill="${fg}"/>
-            <circle cx="${eyeX + eyeSize / 2}" cy="${eyeY + eyeSize / 2}" r="${eyeSize / 2 - cellSize}" fill="${options.isTransparent ? '#ffffff' : bg}"/>
-            <circle cx="${eyeX + eyeSize / 2}" cy="${eyeY + eyeSize / 2}" r="${1.5 * cellSize}" fill="${fg}"/>
-          `;
-        } else if (options.eyeStyle === 'rounded') {
-          const rOuter = cellSize * 1.8;
-          return `
-            <rect x="${eyeX}" y="${eyeY}" width="${eyeSize}" height="${eyeSize}" rx="${rOuter}" fill="${fg}"/>
-            <rect x="${eyeX + cellSize}" y="${eyeY + cellSize}" width="${5 * cellSize}" height="${5 * cellSize}" rx="${rOuter * 0.7}" fill="${options.isTransparent ? '#ffffff' : bg}"/>
-            <rect x="${eyeX + 2 * cellSize}" y="${eyeY + 2 * cellSize}" width="${3 * cellSize}" height="${3 * cellSize}" rx="${cellSize * 0.8}" fill="${fg}"/>
-          `;
-        } else {
-          return `
-            <rect x="${eyeX}" y="${eyeY}" width="${eyeSize}" height="${eyeSize}" fill="${fg}"/>
-            <rect x="${eyeX + cellSize}" y="${eyeY + cellSize}" width="${5 * cellSize}" height="${5 * cellSize}" fill="${options.isTransparent ? '#ffffff' : bg}"/>
-            <rect x="${eyeX + 2 * cellSize}" y="${eyeY + 2 * cellSize}" width="${3 * cellSize}" height="${3 * cellSize}" fill="${fg}"/>
-          `;
-        }
-      };
-
-      const eyesSvg = makeSvgEye(0, 0) + makeSvgEye(0, N - 7) + makeSvgEye(N - 7, 0);
-
-      // Data Modules (Suppressed around logo)
-      let modulesSvg = '';
-      for (let r = 0; r < N; r++) {
-        for (let c = 0; c < N; c++) {
-          if (isFinderEye(r, c, N)) continue;
-          if (isLogoQuietZone(r, c, N, options)) continue;
-
-          if (qr.isDark(r, c)) {
-            const x = (c + marginModules) * cellSize;
-            const y = (r + marginModules) * cellSize;
-
-            if (options.dotStyle === 'rounded') {
-              modulesSvg += `<circle cx="${x + cellSize / 2}" cy="${y + cellSize / 2}" r="${cellSize * 0.44}" fill="${fg}"/>`;
-            } else if (options.dotStyle === 'smooth') {
-              modulesSvg += `<rect x="${x + cellSize * 0.06}" y="${y + cellSize * 0.06}" width="${cellSize * 0.88}" height="${cellSize * 0.88}" rx="${cellSize * 0.35}" fill="${fg}"/>`;
-            } else {
-              modulesSvg += `<rect x="${x}" y="${y}" width="${cellSize + 0.1}" height="${cellSize + 0.1}" fill="${fg}"/>`;
-            }
-          }
-        }
-      }
-
-      // Center Logo
-      let logoSvg = '';
-      if (options.logoSrc) {
-        const logoRatio = (options.logoSize || 20) / 100;
-        const logoBoxSize = size * logoRatio;
-        const logoX = (size - logoBoxSize) / 2;
-        const logoY = (size - logoBoxSize) / 2;
-        const badgePadding = cellSize * 0.7;
-        const badgeRadius = cellSize * 1.5;
-
-        logoSvg = `
-          <rect x="${logoX - badgePadding}" y="${logoY - badgePadding}" width="${logoBoxSize + badgePadding * 2}" height="${logoBoxSize + badgePadding * 2}" rx="${badgeRadius}" fill="${options.isTransparent ? '#ffffff' : bg}" stroke="rgba(0,0,0,0.06)" stroke-width="${size * 0.002}"/>
-          <image href="${options.logoSrc}" x="${logoX}" y="${logoY}" width="${logoBoxSize}" height="${logoBoxSize}" preserveAspectRatio="xMidYMid meet"/>
-        `;
-      }
-
-      return `<?xml version="1.0" encoding="utf-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 ${size} ${size}" width="${size}" height="${size}">
-  ${!options.isTransparent ? `<rect width="100%" height="100%" fill="${bg}"/>` : ''}
-  ${eyesSvg}
-  ${modulesSvg}
-  ${logoSvg}
-</svg>`;
-    }
-
-    // Main Reactive Generation Function
-    function generateQR() {
-      const payload = getPayloadString();
-      qrInputStats.textContent = `${payload.length} chars`;
-
-      const dotName = currentDotStyle.charAt(0).toUpperCase() + currentDotStyle.slice(1);
-      const isTrans = currentBgMode === 'transparent';
-      settingsSummaryBadge.textContent = `(${dotName} Dots • ECC ${currentEccLevel} • ${currentExportRes}px)`;
-
-      qrPreviewBox.classList.toggle('transparent-bg', isTrans);
-
-      if (!payload) {
-        qrRenderTarget.innerHTML = `
-          <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; color:var(--text-muted); font-size:0.84rem; text-align:center;">
-            <iconify-icon icon="lucide:qr-code" width="48" height="48" style="opacity:0.4; margin-bottom:0.5rem;"></iconify-icon>
-            <span>Enter content to render QR code</span>
-          </div>`;
-        qrMatrixInfo.textContent = 'Waiting for input';
-        qrMatrixInfo.style.color = 'var(--text-muted)';
-        return;
-      }
-
-      try {
-        const ecc = QRErrorCorrectLevel[currentEccLevel] || QRErrorCorrectLevel.M;
-        const qr = new QRCodeGenerator(0, ecc);
-        qr.addData(payload);
-        qr.make();
-
-        const renderOptions = {
-          fgColor: colorFg.value,
-          bgColor: colorBg.value,
-          isTransparent: isTrans,
-          dotStyle: currentDotStyle,
-          eyeStyle: currentEyeStyle,
-          margin: currentMarginSize,
-          hasLogo: Boolean(uploadedLogoImg),
-          logoImg: uploadedLogoImg,
-          logoSrc: uploadedLogoSrc,
-          logoSize: parseInt(logoSizeSlider.value, 10)
-        };
-
-        const previewCanvas = renderQRToCanvas(qr, 512, renderOptions);
-        previewCanvas.style.width = '100%';
-        previewCanvas.style.height = '100%';
-        previewCanvas.style.display = 'block';
-
-        qrRenderTarget.innerHTML = '';
-        qrRenderTarget.appendChild(previewCanvas);
-
-        qrMatrixInfo.textContent = `Version ${qr.typeNumber} (${qr.getModuleCount()}x${qr.getModuleCount()}) • Ready to Scan`;
-        qrMatrixInfo.style.color = '#10B981';
-
-      } catch (err) {
-        console.error(err);
-        qrRenderTarget.innerHTML = `
-          <div style="padding:1rem; color:#EF4444; font-size:0.8rem; text-align:center;">
-            <strong>Payload Overflow</strong><br>
-            Content is too large for the selected error correction level.
-          </div>`;
-        qrMatrixInfo.textContent = 'Payload Overflow';
-        qrMatrixInfo.style.color = '#EF4444';
-      }
-    }
-
-    // Logo Upload Handlers
-    logoInput.addEventListener('change', (e) => {
-      const file = e.target.files[0];
-      if (!file) return;
-
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        uploadedLogoSrc = event.target.result;
-        const img = new Image();
-        img.onload = () => {
-          uploadedLogoImg = img;
-          btnRemoveLogo.style.display = 'inline-flex';
-          logoSizeWrap.style.display = 'inline-flex';
-          logoBtnText.textContent = file.name.length > 14 ? file.name.substring(0, 11) + '...' : file.name;
-          setEccLevelActive('H');
-          showToast('Logo added with automatic quiet-zone clearance');
-          generateQR();
-        };
-        img.src = uploadedLogoSrc;
-      };
-      reader.readAsDataURL(file);
-    });
-
-    btnRemoveLogo.addEventListener('click', () => {
-      uploadedLogoImg = null;
-      uploadedLogoSrc = null;
-      logoInput.value = '';
-      btnRemoveLogo.style.display = 'none';
-      logoSizeWrap.style.display = 'none';
-      logoBtnText.textContent = 'Choose Logo Image';
-      generateQR();
-      showToast('Logo removed');
-    });
-
-    logoSizeSlider.addEventListener('input', (e) => {
-      logoSizeVal.textContent = `${e.target.value}%`;
-      generateQR();
-    });
-
-    // Event Listeners for Live Reactive Inputs
-    [inputUrl, inputText, inputWifiSsid, inputWifiPass, inputWifiEnc, inputWifiHidden,
-      inputVcardFirst, inputVcardLast, inputVcardPhone, inputVcardEmail, inputVcardOrg, inputVcardUrl,
-      inputEmailTo, inputEmailSub, inputEmailBody, inputPhoneNum, inputPhoneSms
-    ].forEach(el => {
-      if (el) {
-        el.addEventListener('input', generateQR);
-        el.addEventListener('change', generateQR);
-      }
-    });
-
-    // Export Helpers
-    function getExportCanvas() {
-      const payload = getPayloadString();
-      if (!payload) return null;
-      const ecc = QRErrorCorrectLevel[currentEccLevel] || QRErrorCorrectLevel.M;
-      const qr = new QRCodeGenerator(0, ecc);
-      qr.addData(payload);
-      qr.make();
-
-      const targetRes = parseInt(currentExportRes, 10) || 1024;
-      return renderQRToCanvas(qr, targetRes, {
-        fgColor: colorFg.value,
-        bgColor: colorBg.value,
-        isTransparent: currentBgMode === 'transparent',
-        dotStyle: currentDotStyle,
-        eyeStyle: currentEyeStyle,
-        margin: currentMarginSize,
-        hasLogo: Boolean(uploadedLogoImg),
-        logoImg: uploadedLogoImg,
-        logoSrc: uploadedLogoSrc,
-        logoSize: parseInt(logoSizeSlider.value, 10)
-      });
-    }
-
-    function downloadBlob(blob, filename) {
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = filename;
-      a.click();
-      setTimeout(() => URL.revokeObjectURL(a.href), 1000);
-    }
-
-    // 1. Download PNG
-    function downloadPNG() {
-      const canvas = getExportCanvas();
-      if (!canvas) return showToast('No QR code to download');
-      canvas.toBlob((blob) => {
-        downloadBlob(blob, `toolity-qr-${currentExportRes}px.png`);
-        showToast(`Downloaded ${currentExportRes}px PNG`);
-      }, 'image/png');
-    }
-
-    // 2. Download SVG
-    function downloadSVG() {
-      const payload = getPayloadString();
-      if (!payload) return showToast('No QR code to download');
-      const ecc = QRErrorCorrectLevel[currentEccLevel] || QRErrorCorrectLevel.M;
-      const qr = new QRCodeGenerator(0, ecc);
-      qr.addData(payload);
-      qr.make();
-
-      const svgString = generateVectorSVG(qr, {
-        fgColor: colorFg.value,
-        bgColor: colorBg.value,
-        isTransparent: currentBgMode === 'transparent',
-        dotStyle: currentDotStyle,
-        eyeStyle: currentEyeStyle,
-        margin: currentMarginSize,
-        hasLogo: Boolean(uploadedLogoImg),
-        logoSrc: uploadedLogoSrc,
-        logoSize: parseInt(logoSizeSlider.value, 10)
-      });
-
-      const blob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
-      downloadBlob(blob, 'toolity-qr-vector.svg');
-      showToast('Downloaded Vector SVG');
-    }
-
-    // 3. Download WebP
-    function downloadWebP() {
-      const canvas = getExportCanvas();
-      if (!canvas) return showToast('No QR code to download');
-      canvas.toBlob((blob) => {
-        downloadBlob(blob, `toolity-qr-${currentExportRes}px.webp`);
-        showToast('Downloaded WebP image');
-      }, 'image/webp', 0.95);
-    }
-
-    // 4. Download JPEG
-    function downloadJPEG() {
-      const payload = getPayloadString();
-      if (!payload) return showToast('No QR code to download');
-      const ecc = QRErrorCorrectLevel[currentEccLevel] || QRErrorCorrectLevel.M;
-      const qr = new QRCodeGenerator(0, ecc);
-      qr.addData(payload);
-      qr.make();
-
-      const targetRes = parseInt(currentExportRes, 10) || 1024;
-      const canvas = renderQRToCanvas(qr, targetRes, {
-        fgColor: colorFg.value,
-        bgColor: currentBgMode === 'transparent' ? '#FFFFFF' : colorBg.value,
-        isTransparent: false,
-        dotStyle: currentDotStyle,
-        eyeStyle: currentEyeStyle,
-        margin: currentMarginSize,
-        hasLogo: Boolean(uploadedLogoImg),
-        logoImg: uploadedLogoImg,
-        logoSrc: uploadedLogoSrc,
-        logoSize: parseInt(logoSizeSlider.value, 10)
-      });
-
-      canvas.toBlob((blob) => {
-        downloadBlob(blob, `toolity-qr-${currentExportRes}px.jpg`);
-        showToast('Downloaded JPEG image');
-      }, 'image/jpeg', 0.92);
-    }
-
-    // 5. Copy Image to Clipboard
-    async function copyImageToClipboard() {
-      const canvas = getExportCanvas();
-      if (!canvas) return showToast('No QR code to copy');
-
-      if (!navigator.clipboard || !window.ClipboardItem) {
-        return showToast('Clipboard image copy not supported in this browser');
-      }
-
-      canvas.toBlob(async (blob) => {
-        try {
-          await navigator.clipboard.write([
-            new ClipboardItem({ 'image/png': blob })
-          ]);
-          showToast('QR Code image copied to clipboard!');
-        } catch (err) {
-          console.error("Copy failed", err);
-          showToast('Could not copy image to clipboard');
-        }
-      }, 'image/png');
-    }
-
-    // Bind Dropdown Items
-    document.getElementById('opt-dl-png').addEventListener('click', () => {
-      dlDropdownWrap.classList.remove('open');
-      downloadPNG();
-    });
-    document.getElementById('opt-dl-svg').addEventListener('click', () => {
-      dlDropdownWrap.classList.remove('open');
-      downloadSVG();
-    });
-    document.getElementById('opt-dl-webp').addEventListener('click', () => {
-      dlDropdownWrap.classList.remove('open');
-      downloadWebP();
-    });
-    document.getElementById('opt-dl-jpeg').addEventListener('click', () => {
-      dlDropdownWrap.classList.remove('open');
-      downloadJPEG();
-    });
-
-    document.getElementById('btn-copy-image').addEventListener('click', copyImageToClipboard);
-
-    // Initial Load
-    generateQR();
-  </script>
+  <script src="/scripts/main.js?v=2.4"></script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="/utilities/qr-code-generator/qr-code-generator.js?v=1.0"></script>
 </body>
 
 </html>

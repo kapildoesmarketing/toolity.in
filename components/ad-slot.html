@@ -1,5 +1,7 @@
 <!-- ==================================================================
-     ADSTERRA ADVERTISING BANNER SLOT
+     SHARED AD SLOT (network-agnostic)
+     The actual ad snippet is rendered by /scripts/ads.js from the
+     data-ad-slot name. To change ad network, edit ads.js only.
      ================================================================== -->
 <section class="ad-slot-wrapper">
   <div class="ad-slot-container">
@@ -7,33 +9,7 @@
       <iconify-icon icon="lucide:heart"></iconify-icon>
       Sponsored • Supporting Toolity's Free Tools
     </span>
-    <div class="ad-banner-frame">
-      <!-- Desktop 728x90 Frame -->
-      <div class="ad-slot-desktop">
-        <script type="text/javascript">
-          atOptions = {
-            'key' : '173f3c31e644a6feb61843877787aa01',
-            'format' : 'iframe',
-            'height' : 90,
-            'width' : 728,
-            'params' : {}
-          };
-        </script>
-        <script type="text/javascript" src="https://www.highrevenueformat.com/173f3c31e644a6feb61843877787aa01/invoke.js"></script>
-      </div>
-      <!-- Mobile 320x50 Frame -->
-      <div class="ad-slot-mobile">
-        <script type="text/javascript">
-          atOptions = {
-            'key' : 'd494b0cbcfa90ae4f358b33b28092221',
-            'format' : 'iframe',
-            'height' : 50,
-            'width' : 320,
-            'params' : {}
-          };
-        </script>
-        <script type="text/javascript" src="https://www.highrevenueformat.com/d494b0cbcfa90ae4f358b33b28092221/invoke.js"></script>
-      </div>
-    </div>
+    <div class="ad-unit" data-ad-slot="tool-below-workspace"></div>
   </div>
 </section>
+<script src="/scripts/ads.js" defer></script>

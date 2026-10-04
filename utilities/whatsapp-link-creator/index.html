@@ -18,423 +18,238 @@
       document.documentElement.setAttribute('data-theme', t);
     })();
   </script>
-  <title>WhatsApp Link Creator & Click-to-Chat Generator — Toolity.in</title>
-  <link rel="canonical" href="https://toolity.in/utilities/whatsapp-link-creator/">
 
-  <!-- SEO & Metadata -->
-  <meta name="description"
-    content="Free, instant WhatsApp Link Creator and Click-to-Chat Generator. Create custom wa.me links with pre-filled messages, HTML chat buttons, and Markdown snippets with 100% client-side privacy.">
-  <meta name="keywords"
-    content="whatsapp link creator, wa.me link generator, whatsapp click to chat, whatsapp message link, create whatsapp link, free whatsapp link maker, client-side whatsapp generator">
+  <title>WhatsApp Link Creator — Click-to-Chat Generator | Toolity.in</title>
+  <link rel="canonical" href="https://toolity.in/utilities/whatsapp-link-creator/">
+  <meta name="description" content="Free, instant WhatsApp Link Creator and Click-to-Chat Generator. Create custom wa.me links with pre-filled messages, HTML chat buttons, and Markdown snippets with 100% client-side privacy.">
+  <meta name="keywords" content="whatsapp link creator, wa.me link generator, whatsapp click to chat, whatsapp message link, create whatsapp link, free whatsapp link maker, client-side whatsapp generator">
   <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="WhatsApp Link Creator — Toolity.in">
+  <meta property="og:description" content="Create wa.me click-to-chat links with pre-filled messages, HTML buttons and Markdown. 100% in your browser.">
+  <meta property="og:url" content="https://toolity.in/utilities/whatsapp-link-creator/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
   <!-- Favicons -->
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
   <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
 
-  <!-- Google Fonts: Inter -->
+  <!-- Fonts & critical assets -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-  <!-- Iconify Icon Component -->
-    <!-- Preload Critical Assets -->
-  <link rel="preload" href="/styles/main.css?v=2.3" as="style">
+  <link rel="preload" href="/styles/main.css?v=2.4" as="style">
   <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
-
   <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 
-  <link rel="stylesheet" href="../../styles/main.css?v=2.3">
-  <style>
-    /* Designed by Kapil Pidhwani: WhatsApp Link Creator Ergonomics */
-    .input-clean,
-    .textarea-clean {
-      width: 100%;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 0.75rem 0.95rem;
-      font-family: var(--font-family);
-      font-size: 0.9rem;
-      color: var(--text-primary);
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
-      box-sizing: border-box;
-    }
+  <link rel="stylesheet" href="/styles/main.css?v=2.4">
 
-    .input-clean:focus,
-    .textarea-clean:focus {
-      outline: none;
-      border-color: var(--brand);
-      box-shadow: 0 0 0 3px rgba(244, 81, 30, 0.12);
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.45rem;
-      margin-bottom: 1.15rem;
-    }
-
-    .form-group:last-child {
-      margin-bottom: 0;
-    }
-
-    .form-label {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-
-    .form-label-desc {
-      font-size: 0.74rem;
-      font-weight: 400;
-      color: var(--text-muted);
-    }
-
-    .pane-output-preview {
-      margin: 0;
-      font-family: var(--font-mono);
-      font-size: 0.86rem;
-      line-height: 1.6;
-      color: var(--text-primary);
-      white-space: pre-wrap;
-      word-break: break-all;
-      overflow-y: auto;
-      user-select: text;
-    }
-
-    .quick-helper-text {
-      font-size: 0.74rem;
-      color: var(--text-muted);
-      line-height: 1.4;
-      margin-top: 0.25rem;
-    }
-  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "WhatsApp Link Creator",
+        "url": "https://toolity.in/utilities/whatsapp-link-creator/",
+        "description": "Create wa.me click-to-chat links with pre-filled messages, HTML buttons and Markdown. 100% in your browser.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Utilities", "item": "https://toolity.in/utilities/" },
+          { "@type": "ListItem", "position": 3, "name": "WhatsApp Link Creator", "item": "https://toolity.in/utilities/whatsapp-link-creator/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Is my phone number or message stored anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. The wa.me link is built in your browser with JavaScript. Nothing is sent to Toolity or any server." } },
+          { "@type": "Question", "name": "What phone number format should I use?", "acceptedAnswer": { "@type": "Answer", "text": "Enter the full international number including country code, e.g. 919876543210 or +1 555 123 4567. Spaces, dashes, brackets, plus signs and a leading 00 are removed automatically because wa.me only accepts digits." } },
+          { "@type": "Question", "name": "Does the link work on both mobile and desktop?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. wa.me links open the WhatsApp app on phones and WhatsApp Web or the desktop app on computers. The pre-filled text appears in the chat box ready to send." } },
+          { "@type": "Question", "name": "Can I create a link with only a message and no number?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Leave the phone field empty and WhatsApp will ask the user to pick a contact, then pre-fill your message. This is useful for share buttons." } },
+          { "@type": "Question", "name": "Why are emojis and line breaks shown as %F0%9F and %0A?", "acceptedAnswer": { "@type": "Answer", "text": "URLs must be percent-encoded. WhatsApp decodes the text back to normal characters, emojis and new lines when the chat opens." } }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 
 <body>
   <div data-include="/components/header.html"></div>
 
-  <!-- Main Tool Page Content -->
   <main>
-    <!-- Page Hero Header -->
+    <!-- 1. HERO -->
     <section class="page-hero">
       <div class="container">
-        <!-- Breadcrumbs Navigation -->
         <nav class="breadcrumbs" aria-label="Breadcrumb">
-          <a href="../../" class="breadcrumb-link">Home</a>
+          <a href="/" class="breadcrumb-link">Home</a>
           <span class="breadcrumb-separator">/</span>
-          <a href="../../utilities/" class="breadcrumb-link">Utilities</a>
+          <a href="/utilities/" class="breadcrumb-link">Utilities</a>
           <span class="breadcrumb-separator">/</span>
           <span class="breadcrumb-current">WhatsApp Link Creator</span>
         </nav>
-
         <div class="page-title-row">
           <div class="page-header-content">
             <span class="section-eyebrow">Everyday Utility</span>
             <h1 class="page-title">WhatsApp Link Creator</h1>
-            <p class="page-desc">Generate customized, URL-encoded WhatsApp click-to-chat links, HTML buttons, and Markdown snippets with instant live preview.</p>
+            <p class="page-desc">Generate URL-encoded WhatsApp click-to-chat links, HTML buttons and Markdown snippets with a live preview — 100% in your browser.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Tool Main Workspace Area -->
-    <section class="section-wrapper" style="border-top: none; padding-top: 3.5rem;">
+    <!-- 2. WORKSPACE -->
+    <section class="section-wrapper tool-section">
       <div class="container">
 
-        <div class="tool-workspace-card">
+        <div class="tool-workspace-card" data-layout="split" id="tool-card">
 
-          <!-- 1. Quick Actions Toolbar (Universal Actions on Right) -->
           <div class="tool-actions-toolbar">
             <div class="toolbar-group">
-              <span class="pane-badge" id="wa-mode-badge">wa.me Standard</span>
+              <span class="pane-badge">wa.me standard</span>
             </div>
-
             <div class="toolbar-group">
-              <button type="button" class="btn-toolbar-sm" id="btn-reset-form" title="Reset all fields">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
                 <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
                 <span>Reset</span>
               </button>
-              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-top-copy">
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-copy" title="Copy generated code to clipboard" aria-label="Copy generated code to clipboard">
                 <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
-                <span>Copy Link</span>
+                <span>Copy</span>
               </button>
-              <button type="button" class="btn-toolbar-sm" id="btn-top-test" title="Open chat link in a new tab">
+              <button type="button" class="btn-toolbar-sm" id="btn-open" title="Open chat link in a new tab" aria-label="Open chat link in a new tab">
                 <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
                 <span>Test Link</span>
               </button>
             </div>
           </div>
 
-          <!-- 2. Dual Split-Pane Grid -->
           <div class="split-pane-grid">
-            
-            <!-- Left: Input Form Pane -->
+
             <div class="tool-pane">
               <div class="pane-header">
                 <span>Chat Parameters</span>
-                <span class="pane-badge" id="input-stats-badge">0 chars</span>
+                <span class="pane-badge" id="input-badge">0 chars</span>
               </div>
-              <div class="pane-content" style="min-height: 380px;">
-                
-                <!-- Phone Number with Country Code -->
+              <div class="pane-content pane-content-tall">
                 <div class="form-group">
                   <label class="form-label" for="wa-phone">
-                    <span>Phone Number with Country Code <span style="color: var(--brand);">*</span></span>
+                    <span>Phone Number with Country Code <span class="form-required">*</span></span>
                   </label>
                   <input type="tel" id="wa-phone" class="input-clean" placeholder="e.g. +1 555 123 4567 or 919876543210" autocomplete="tel">
-                  <span class="quick-helper-text">Include country code (e.g. 1 for US/CA, 91 for India, 44 for UK). Spaces, plus (+) and dashes are automatically formatted.</span>
+                  <span class="form-helper">Include the country code (1 for US/CA, 91 for India, 44 for UK). Spaces, plus signs and dashes are cleaned automatically.</span>
                 </div>
 
-                <!-- Pre-filled Message Body -->
-                <div class="form-group" style="flex: 1;">
+                <div class="form-group form-group-grow">
                   <label class="form-label" for="wa-message">
                     <span>Pre-filled Message (Optional)</span>
-                    <span class="form-label-desc" id="message-char-count">0 chars</span>
+                    <span class="form-label-desc" id="message-badge">0 chars</span>
                   </label>
-                  <textarea id="wa-message" class="textarea-clean" style="flex: 1; min-height: 160px;" placeholder="Hi there! I would like to inquire about..."></textarea>
-                  <span class="quick-helper-text">This message will be automatically filled into the user's WhatsApp chat bar when they click your link.</span>
+                  <textarea id="wa-message" class="textarea-clean" placeholder="Hi there! I would like to inquire about..."></textarea>
+                  <span class="form-helper">This text appears in the user's WhatsApp chat box when they open your link.</span>
                 </div>
-
               </div>
             </div>
 
-            <!-- Right: Export Format Output Pane -->
             <div class="tool-pane">
               <div class="pane-header">
                 <span>Generated Output</span>
-                <div class="segmented-group segmented-group-pill" id="seg-export-format">
-                  <button type="button" class="seg-pill active" data-format="raw">Direct Link</button>
-                  <button type="button" class="seg-pill" data-format="html">HTML Button</button>
-                  <button type="button" class="seg-pill" data-format="md">Markdown</button>
+                <div class="segmented-group segmented-group-pill" id="seg-format" role="group" aria-label="Output format">
+                  <button type="button" class="seg-pill active" data-value="raw">Direct Link</button>
+                  <button type="button" class="seg-pill" data-value="html">HTML Button</button>
+                  <button type="button" class="seg-pill" data-value="md">Markdown</button>
                 </div>
               </div>
-              <div style="flex: 1; display: flex; flex-direction: column; background: var(--surface);">
-                <pre id="output-code" class="pane-output-preview" style="height: 100%; min-height: 380px; padding: 1.15rem 1.25rem; font-size: 0.86rem; border: none;"></pre>
-              </div>
+              <pre id="output-code" class="pane-output-fill" aria-live="polite"></pre>
             </div>
 
           </div>
-
         </div>
 
-        <!-- Global Shared Ad Slot Partial -->
+        <!-- 3. AD -->
         <div data-include="/components/ad-slot.html"></div>
 
-        <!-- ==================================================================
-             3-STEP INSTRUCTION GUIDE
-             ================================================================== -->
+        <!-- 4. GUIDE -->
         <section class="guide-section">
           <div class="section-header-compact">
             <span class="section-eyebrow">How It Works</span>
             <h2 class="section-heading-sm">Creating WhatsApp Click-to-Chat Links</h2>
           </div>
-
           <div class="guide-steps-grid">
             <div class="guide-step-card">
               <div class="step-num-badge">1</div>
               <h3 class="step-title">Enter Phone Number</h3>
-              <p class="step-desc">
-                Provide your WhatsApp phone number including country code. Any spaces, hyphens, brackets, or plus signs will be automatically cleaned.
-              </p>
+              <p class="step-desc">Provide your WhatsApp number including country code. Spaces, hyphens, brackets and plus signs are cleaned automatically.</p>
             </div>
-
             <div class="guide-step-card">
               <div class="step-num-badge">2</div>
               <h3 class="step-title">Draft Pre-Filled Message</h3>
-              <p class="step-desc">
-                Optionally compose a pre-written greeting or customer inquiry message. It will be URL-encoded for seamless delivery on mobile and web.
-              </p>
+              <p class="step-desc">Optionally compose a greeting or inquiry. It is URL-encoded so it arrives intact on mobile and web.</p>
             </div>
-
             <div class="guide-step-card">
               <div class="step-num-badge">3</div>
               <h3 class="step-title">Copy or Test Link</h3>
-              <p class="step-desc">
-                Copy your direct wa.me link, embed an HTML button on your website, or test opening the link directly in your browser with one click.
-              </p>
+              <p class="step-desc">Copy the wa.me link, HTML button or Markdown — or Test Link to open it in a new tab. Tip: <kbd>Esc</kbd> resets the form.</p>
             </div>
           </div>
         </section>
 
-        <!-- ==================================================================
-             MAINTENANCE-FREE CATEGORY WORKSPACE CTA CARD
-             ================================================================== -->
-        <section class="category-workspace-cta">
-          <div class="category-workspace-cta-left">
-            <span class="section-eyebrow">Utility Workspace</span>
-            <h2 class="category-workspace-cta-title">Explore All Everyday Utility Tools</h2>
-            <p class="category-workspace-cta-desc">
-              Discover our collection of client-side utilities including QR Code Generator, Mailto Link Creator, GIF Speed Changer, and format converters.
-            </p>
+        <!-- 6. FAQ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">WhatsApp Link Creator — Frequently Asked Questions</h2>
           </div>
-          <div class="category-workspace-cta-right">
-            <a href="../../utilities/" class="btn-pill btn-primary-signal">
-              <span>Explore Utility Tools</span>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14"></path>
-                <path d="m12 5 7 7-7 7"></path>
-              </svg>
-            </a>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Is my phone number or message stored anywhere?</summary>
+              <p>No. The wa.me link is built in your browser with JavaScript. Nothing is sent to Toolity or any server.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What phone number format should I use?</summary>
+              <p>Enter the full international number including country code, e.g. <code>919876543210</code> or <code>+1 555 123 4567</code>. Spaces, dashes, brackets, plus signs and a leading <code>00</code> are removed automatically because wa.me only accepts digits.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Does the link work on both mobile and desktop?</summary>
+              <p>Yes. wa.me links open the WhatsApp app on phones and WhatsApp Web or the desktop app on computers. The pre-filled text appears in the chat box ready to send.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can I create a link with only a message and no number?</summary>
+              <p>Yes. Leave the phone field empty and WhatsApp will ask the user to pick a contact, then pre-fill your message. This is useful for share buttons.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why are emojis and line breaks shown as <code>%F0%9F…</code> and <code>%0A</code>?</summary>
+              <p>URLs must be percent-encoded. WhatsApp decodes the text back to normal characters, emojis and new lines when the chat opens.</p>
+            </details>
           </div>
         </section>
+
+        <!-- 7. CTA -->
+        <div data-include="/components/tool-cta.html" data-category="utilities"></div>
 
       </div>
     </section>
   </main>
 
-  <!-- Global Toast Notification -->
-  <div id="tool-toast" class="tool-toast" role="status" aria-live="polite">
-    Copied to clipboard!
-  </div>
-
-  <!-- Global Multi-Column Footer -->
   <div data-include="/components/footer.html"></div>
 
-  <!-- Main scripts -->
-  <script src="../../scripts/main.js?v=2.3"></script>
-
-  <!-- WhatsApp Link Creator Logic (Designed by Kapil Pidhwani) -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const phoneInput = document.getElementById('wa-phone');
-      const messageInput = document.getElementById('wa-message');
-      const outputCode = document.getElementById('output-code');
-      const messageCharCount = document.getElementById('message-char-count');
-      const inputStatsBadge = document.getElementById('input-stats-badge');
-      const toastEl = document.getElementById('tool-toast');
-
-      const btnReset = document.getElementById('btn-reset-form');
-      const btnCopy = document.getElementById('btn-top-copy');
-      const btnTest = document.getElementById('btn-top-test');
-
-      let currentFormat = 'raw'; // 'raw' | 'html' | 'md'
-
-      function showToast(msg) {
-        if (!toastEl) return;
-        toastEl.textContent = msg;
-        toastEl.classList.add('show');
-        setTimeout(() => toastEl.classList.remove('show'), 2000);
-      }
-
-      function sanitizePhoneNumber(phone) {
-        if (!phone) return '';
-        // Strip all non-digit characters (+, -, spaces, parentheses)
-        let cleaned = phone.replace(/\D/g, '');
-        // Remove leading 00 if present
-        if (cleaned.startsWith('00')) {
-          cleaned = cleaned.substring(2);
-        }
-        return cleaned;
-      }
-
-      function generateWhatsAppLink() {
-        const rawPhone = phoneInput.value.trim();
-        const cleanPhone = sanitizePhoneNumber(rawPhone);
-        const rawMessage = messageInput.value;
-
-        // Update char counter
-        messageCharCount.textContent = `${rawMessage.length} chars`;
-        inputStatsBadge.textContent = `${rawPhone.length + rawMessage.length} chars`;
-
-        if (!cleanPhone && !rawMessage.trim()) {
-          outputCode.textContent = 'https://wa.me/15551234567?text=Hello%20there!';
-          return;
-        }
-
-        let link = 'https://wa.me/';
-        if (cleanPhone) {
-          link += cleanPhone;
-        }
-
-        if (rawMessage.trim()) {
-          const encodedMessage = encodeURIComponent(rawMessage);
-          link += `?text=${encodedMessage}`;
-        }
-
-        if (currentFormat === 'raw') {
-          outputCode.textContent = link;
-        } else if (currentFormat === 'html') {
-          outputCode.textContent = `<a href="${link}" target="_blank" rel="noopener noreferrer">\n  Chat on WhatsApp\n</a>`;
-        } else if (currentFormat === 'md') {
-          outputCode.textContent = `[Chat on WhatsApp](${link})`;
-        }
-      }
-
-      function getRawLink() {
-        const rawPhone = phoneInput.value.trim();
-        const cleanPhone = sanitizePhoneNumber(rawPhone);
-        const rawMessage = messageInput.value;
-
-        let link = 'https://wa.me/';
-        if (cleanPhone) {
-          link += cleanPhone;
-        }
-        if (rawMessage.trim()) {
-          link += `?text=${encodeURIComponent(rawMessage)}`;
-        }
-        return link;
-      }
-
-      // Format Switcher Tabs
-      const segButtons = document.querySelectorAll('#seg-export-format .seg-pill');
-      segButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-          segButtons.forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          currentFormat = btn.getAttribute('data-format');
-          generateWhatsAppLink();
-        });
-      });
-
-      // Input Listeners
-      phoneInput.addEventListener('input', generateWhatsAppLink);
-      messageInput.addEventListener('input', generateWhatsAppLink);
-
-      // Reset Action
-      btnReset.addEventListener('click', () => {
-        phoneInput.value = '';
-        messageInput.value = '';
-        generateWhatsAppLink();
-        showToast('All fields cleared');
-        phoneInput.focus();
-      });
-
-      // Copy Action
-      btnCopy.addEventListener('click', async () => {
-        const textToCopy = outputCode.textContent;
-        if (!textToCopy) return;
-
-        try {
-          await navigator.clipboard.writeText(textToCopy);
-          showToast('Copied to clipboard!');
-        } catch (err) {
-          showToast('Failed to copy');
-        }
-      });
-
-      // Test Link Action (Open in new tab)
-      btnTest.addEventListener('click', () => {
-        const rawLink = getRawLink();
-        if (rawLink === 'https://wa.me/') {
-          showToast('Please enter a phone number or message first');
-          phoneInput.focus();
-          return;
-        }
-        window.open(rawLink, '_blank', 'noopener,noreferrer');
-        showToast('Opening WhatsApp in new tab...');
-      });
-
-      // Initial generation
-      generateWhatsAppLink();
-    });
-  </script>
+  <script src="/scripts/main.js?v=2.4"></script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="/utilities/whatsapp-link-creator/whatsapp-link-creator.js?v=1.0"></script>
 </body>
 
 </html>

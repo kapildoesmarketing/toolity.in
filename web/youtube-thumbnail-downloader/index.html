@@ -18,137 +18,158 @@
       document.documentElement.setAttribute('data-theme', t);
     })();
   </script>
-  <title>YouTube Thumbnail Downloader (HD, 4K, 1080p) — Toolity.in</title>
 
-  <!-- SEO & Metadata -->
+  <title>YouTube Thumbnail Downloader (HD, 1080p) — Toolity.in</title>
+  <link rel="canonical" href="https://toolity.in/web/youtube-thumbnail-downloader/">
   <meta name="description" content="Free YouTube Thumbnail Downloader: Extract, preview, and download HD (1080p, 720p), HQ (480p), and SD thumbnails from any YouTube video or Shorts link in full quality. 100% free and client-side.">
   <meta name="keywords" content="youtube thumbnail downloader, download youtube thumbnail, get youtube thumbnail, youtube shorts thumbnail, hd thumbnail download, youtube cover image, 1080p youtube thumbnail">
   <meta name="author" content="Kapil Pidhwani">
 
-  <!-- Open Graph -->
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
   <meta property="og:title" content="YouTube Thumbnail Downloader — Toolity.in">
   <meta property="og:description" content="Extract and download ultra-clear HD thumbnails from any YouTube video or Shorts link directly in your browser.">
-  <meta property="og:type" content="website">
   <meta property="og:url" content="https://toolity.in/web/youtube-thumbnail-downloader/">
-  <link rel="canonical" href="https://toolity.in/web/youtube-thumbnail-downloader/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
   <!-- Favicons -->
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
   <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
 
-  <!-- Google Fonts: Inter -->
+  <!-- Fonts & critical assets -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-  <!-- Iconify Icon Component -->
-    <!-- Preload Critical Assets -->
-  <link rel="preload" href="/styles/main.css?v=2.3" as="style">
+  <link rel="preload" href="/styles/main.css?v=2.4" as="style">
   <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
-
   <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 
-  <!-- Global Design System -->
-  <link rel="stylesheet" href="../../styles/main.css?v=2.3">
+  <link rel="stylesheet" href="/styles/main.css?v=2.4">
+  <link rel="stylesheet" href="/styles/tools/youtube-thumbnail-downloader.css?v=1.0">
 
-  <!-- Tool Specific Self-Contained Styles -->
-  <style>
-    /* Tool-specific styles only (shared UI components now in main.css) */
-  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "YouTube Thumbnail Downloader",
+        "url": "https://toolity.in/web/youtube-thumbnail-downloader/",
+        "description": "Extract and download HD, HQ and SD thumbnails from any YouTube video or Shorts link directly in your browser.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Web Tools", "item": "https://toolity.in/web/" },
+          { "@type": "ListItem", "position": 3, "name": "YouTube Thumbnail Downloader", "item": "https://toolity.in/web/youtube-thumbnail-downloader/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Is downloading a YouTube thumbnail legal?", "acceptedAnswer": { "@type": "Answer", "text": "Thumbnails are publicly served by YouTube's image CDN, and this tool simply shows you that public URL. The image itself remains the copyright of the channel owner — use it for personal reference, previews or with permission, not for re-uploading as your own." } },
+          { "@type": "Question", "name": "Why is HD (1080p) not available for some videos?", "acceptedAnswer": { "@type": "Answer", "text": "YouTube only generates maxresdefault.jpg when the uploader provided a high-resolution custom thumbnail. Older, auto-generated or Shorts thumbnails often stop at 480p, so the tool falls back to HQ automatically." } },
+          { "@type": "Question", "name": "Which YouTube link formats are supported?", "acceptedAnswer": { "@type": "Answer", "text": "Standard watch?v= links, youtu.be short links, /shorts/ links, /embed/ links and raw 11-character video IDs all work." } },
+          { "@type": "Question", "name": "Does this tool go through a Toolity server?", "acceptedAnswer": { "@type": "Answer", "text": "No. The video ID is parsed in your browser and the preview loads straight from img.youtube.com. Only the Download button may route through a public image proxy to work around browser CORS limits — Toolity never sees or stores the image." } },
+          { "@type": "Question", "name": "Can I download thumbnails for private or unlisted videos?", "acceptedAnswer": { "@type": "Answer", "text": "Unlisted videos usually work because their thumbnails are still public. Private videos do not expose thumbnails on the CDN, so nothing can be fetched." } }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 
 <body>
   <div data-include="/components/header.html"></div>
 
-  <!-- Main Tool Page Content -->
   <main>
-    <!-- Page Hero Header -->
+    <!-- 1. HERO -->
     <section class="page-hero">
       <div class="container">
-        <!-- Breadcrumbs Navigation -->
         <nav class="breadcrumbs" aria-label="Breadcrumb">
-          <a href="../../" class="breadcrumb-link">Home</a>
+          <a href="/" class="breadcrumb-link">Home</a>
           <span class="breadcrumb-separator">/</span>
-          <a href="../../web/" class="breadcrumb-link">Web Tools</a>
+          <a href="/web/" class="breadcrumb-link">Web Tools</a>
           <span class="breadcrumb-separator">/</span>
           <span class="breadcrumb-current">YouTube Thumbnail Downloader</span>
         </nav>
-
         <div class="page-title-row">
           <div class="page-header-content">
             <span class="section-eyebrow">Webmaster Tool</span>
             <h1 class="page-title">YouTube Thumbnail Downloader</h1>
-            <p class="page-desc">
-              Extract, preview, and download HD (1080p, 720p), HQ (480p), and SD thumbnails from any YouTube video or Shorts link in full quality.
-            </p>
+            <p class="page-desc">Extract, preview and download HD (1080p/720p), HQ (480p) and SD thumbnails from any YouTube video or Shorts link — 100% in your browser.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Tool Main Workspace Area -->
-    <section class="section-wrapper" style="border-top: none; padding-top: 3.5rem;">
+    <!-- 2. WORKSPACE -->
+    <section class="section-wrapper tool-section">
       <div class="container">
 
-        <div class="tool-workspace-card">
+        <div class="tool-workspace-card" data-layout="split" id="tool-card">
 
-          <!-- 1. Quick Actions Toolbar (Universal Actions on Right) -->
           <div class="tool-actions-toolbar">
             <div class="toolbar-group">
-              <span class="pane-badge" id="top-status-badge">YouTube CDN Direct</span>
+              <span class="pane-badge" id="status-badge">Waiting for URL</span>
             </div>
-
             <div class="toolbar-group">
-              <button type="button" class="btn-toolbar-sm" id="btn-reset-workspace" title="Reset all fields">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
                 <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
                 <span>Reset</span>
               </button>
-              <button type="button" class="btn-toolbar-sm" id="btn-top-copy" title="Copy active thumbnail image URL">
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy thumbnail image URL" aria-label="Copy thumbnail image URL" disabled>
                 <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
                 <span>Copy Link</span>
               </button>
-              <button type="button" class="btn-toolbar-sm" id="btn-top-open" title="Open raw thumbnail in new tab">
-                <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
-                <span>Open Raw</span>
-              </button>
-              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-top-download" title="Download active thumbnail image">
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download thumbnail image" aria-label="Download thumbnail image" disabled>
                 <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
-                <span>Download Image</span>
+                <span>Download</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-open" title="Open raw image in a new tab" aria-label="Open raw image in a new tab" disabled>
+                <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
+                <span>Open</span>
               </button>
             </div>
           </div>
 
-          <!-- 2. Dual Split-Pane Grid -->
           <div class="split-pane-grid">
-            
-            <!-- Left: Video Input & Quality Settings Pane -->
+
             <div class="tool-pane">
               <div class="pane-header">
-                <span>Video Source & Quality</span>
-                <span class="pane-badge" id="video-format-pill">Waiting for URL</span>
+                <span>Video Source &amp; Quality</span>
+                <span class="pane-badge" id="input-badge">—</span>
               </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span>That doesn't look like a YouTube link or video ID.</span>
+              </div>
+              <div class="pane-content pane-content-tall">
 
-              <div class="pane-content" style="min-height: 420px; display: flex; flex-direction: column;">
-                
-                <!-- URL Input Group -->
                 <div class="form-group">
                   <label class="form-label" for="yt-url-input">
-                    <span>YouTube Video / Shorts Link <span style="color: var(--brand);">*</span></span>
-                    <button type="button" class="btn-sample-chip" id="btn-paste-clipboard" style="padding: 1px 6px; font-size: 0.72rem;">
+                    <span>YouTube Video / Shorts Link <span class="form-required">*</span></span>
+                    <button type="button" class="btn-sample-chip" id="btn-paste" title="Paste from clipboard">
                       <iconify-icon icon="lucide:clipboard" width="12" height="12"></iconify-icon>
                       <span>Paste</span>
                     </button>
                   </label>
-                  
                   <div class="url-input-container">
-                    <input type="text" id="yt-url-input" class="input-clean" placeholder="e.g. https://youtu.be/... or watch?v=..." spellcheck="false" autocomplete="off">
-                    <button type="button" id="btn-clear-url" class="btn-input-clear" title="Clear input">
+                    <input type="text" id="yt-url-input" class="input-clean" placeholder="e.g. https://youtu.be/… or watch?v=…" spellcheck="false" autocomplete="off">
+                    <button type="button" id="btn-clear-url" class="btn-input-clear" title="Clear" aria-label="Clear link field" hidden>
                       <iconify-icon icon="lucide:x" width="15" height="15"></iconify-icon>
                     </button>
                   </div>
-
-                  <!-- Quick Sample Links -->
                   <div class="sample-chips-row">
                     <span class="sample-label">Try sample:</span>
                     <button type="button" class="btn-sample-chip sample-chip" data-url="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Never Gonna Give You Up</button>
@@ -156,24 +177,20 @@
                   </div>
                 </div>
 
-                <!-- Video ID Meta Deck -->
                 <div class="video-info-deck">
                   <div class="video-id-display">
                     <span>Video ID:</span>
                     <span id="video-id-text" class="video-id-val">None</span>
                   </div>
-                  <span id="video-type-text" style="color: var(--text-muted);">Paste a YouTube link above</span>
+                  <span id="video-type-text">Paste a YouTube link above</span>
                 </div>
 
-                <!-- Quality Selection Section -->
-                <div class="form-group" style="margin-top: auto;">
-                  <label class="form-label">
+                <div class="form-group quality-group">
+                  <div class="form-label">
                     <span>Available Resolutions</span>
                     <span class="form-label-desc">Select image quality</span>
-                  </label>
-
-                  <div class="quality-grid">
-                    <!-- 1. Maxres HD -->
+                  </div>
+                  <div class="quality-grid" id="quality-grid" role="group" aria-label="Thumbnail quality">
                     <button type="button" class="quality-card-btn active" data-quality="maxres">
                       <div class="quality-top-row">
                         <span class="quality-title">HD (1080p / 720p)</span>
@@ -181,8 +198,6 @@
                       </div>
                       <span class="quality-dimensions">1280 × 720 or 1920 × 1080</span>
                     </button>
-
-                    <!-- 2. High Quality -->
                     <button type="button" class="quality-card-btn" data-quality="hq">
                       <div class="quality-top-row">
                         <span class="quality-title">High Quality (480p)</span>
@@ -190,8 +205,6 @@
                       </div>
                       <span class="quality-dimensions">480 × 360 px</span>
                     </button>
-
-                    <!-- 3. Standard Quality -->
                     <button type="button" class="quality-card-btn" data-quality="sd">
                       <div class="quality-top-row">
                         <span class="quality-title">Standard (SD)</span>
@@ -199,8 +212,6 @@
                       </div>
                       <span class="quality-dimensions">640 × 480 px</span>
                     </button>
-
-                    <!-- 4. Medium Quality -->
                     <button type="button" class="quality-card-btn" data-quality="mq">
                       <div class="quality-top-row">
                         <span class="quality-title">Medium Quality</span>
@@ -214,137 +225,111 @@
               </div>
             </div>
 
-            <!-- Right: Thumbnail Preview & Actions Pane -->
             <div class="tool-pane">
               <div class="pane-header">
                 <span>Thumbnail Preview</span>
-                <span class="pane-badge" id="preview-res-badge">1280 × 720 px</span>
+                <span class="pane-badge" id="output-badge">—</span>
               </div>
-
-              <div class="pane-content" style="min-height: 420px; display: flex; flex-direction: column;">
-                
-                <!-- Main Preview Box -->
-                <div class="preview-viewport-box empty" id="preview-viewport" style="flex: 1; height: 100%; min-height: 380px;">
-                  <div class="empty-preview-content" id="empty-state">
-                    <div class="empty-preview-icon">
-                      <iconify-icon icon="lucide:video" width="22" height="22"></iconify-icon>
-                    </div>
-                    <div>
-                      <div style="font-weight: 500; color: var(--text-primary); font-size: 0.88rem; margin-bottom: 2px;">No video loaded</div>
-                      <div style="font-size: 0.78rem;">Paste any YouTube video or Shorts link on the left to view artwork</div>
-                    </div>
+              <div class="pane-content pane-content-tall">
+                <div class="preview-viewport-box preview-stage empty" id="preview-viewport">
+                  <div class="pane-empty" id="output-empty">
+                    <iconify-icon icon="lucide:video"></iconify-icon>
+                    <span>Paste any YouTube video or Shorts link to preview its artwork</span>
                   </div>
-
-                  <img id="thumbnail-preview-img" class="preview-thumbnail-img" alt="YouTube Thumbnail Preview" style="display: none;" width="640" height="360" loading="lazy">
+                  <img id="thumbnail-preview-img" class="preview-thumbnail-img" alt="YouTube thumbnail preview" width="640" height="360" hidden>
                   <div id="badge-overlay" class="preview-floating-pill">
-                    <iconify-icon icon="lucide:check-circle" width="13" height="13" style="color: #10B981;"></iconify-icon>
+                    <iconify-icon icon="lucide:check-circle" width="13" height="13"></iconify-icon>
                     <span id="overlay-text">HD 1080p</span>
                   </div>
                 </div>
-
               </div>
             </div>
 
           </div>
         </div>
 
+        <!-- 3. AD -->
         <div data-include="/components/ad-slot.html"></div>
 
-        <!-- ==================================================================
-             3-STEP INSTRUCTION GUIDE
-             ================================================================== -->
+        <!-- 4. GUIDE -->
         <section class="guide-section">
           <div class="section-header-compact">
             <span class="section-eyebrow">How It Works</span>
             <h2 class="section-heading-sm">How to Download YouTube Thumbnails</h2>
           </div>
-
           <div class="guide-steps-grid">
             <div class="guide-step-card">
               <div class="step-num-badge">1</div>
               <h3 class="step-title">Paste YouTube Link</h3>
-              <p class="step-desc">
-                Copy any video or Shorts URL from your browser or YouTube app and paste it into the input field above.
-              </p>
+              <p class="step-desc">Copy any video or Shorts URL from your browser or the YouTube app and paste it into the field above.</p>
             </div>
-
             <div class="guide-step-card">
               <div class="step-num-badge">2</div>
               <h3 class="step-title">Select Quality Tier</h3>
-              <p class="step-desc">
-                Choose your desired resolution from HD Maxres (1080p), High Quality (480p), Standard (SD), or Medium (MQ).
-              </p>
+              <p class="step-desc">Choose HD Maxres (1080p), High Quality (480p), Standard (SD) or Medium (MQ). If HD doesn't exist we fall back to HQ automatically.</p>
             </div>
-
             <div class="guide-step-card">
               <div class="step-num-badge">3</div>
               <h3 class="step-title">Download or Copy</h3>
-              <p class="step-desc">
-                Click "Download Image" to save the high-res JPG directly to your device with zero server latency.
-              </p>
+              <p class="step-desc">Click Download to save the JPG, Copy Link for the CDN URL, or Open to view it raw. Tip: <kbd>Ctrl/⌘+Enter</kbd> downloads, <kbd>Esc</kbd> resets.</p>
             </div>
           </div>
+        </section>
 
-          <!-- Supported URL Formats Table Card -->
+        <!-- 5. REFERENCE -->
+        <section class="reference-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">Reference</span>
+            <h2 class="section-heading-sm">Supported YouTube Link Formats</h2>
+          </div>
           <div class="formats-table-card">
-            <h3 style="font-size: 0.95rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.75rem;">Supported YouTube Link Formats</h3>
             <table class="formats-table">
               <thead>
-                <tr>
-                  <th>Format Type</th>
-                  <th>Example Input</th>
-                  <th>Resolution Available</th>
-                </tr>
+                <tr><th>Format Type</th><th>Example Input</th><th>Resolution Available</th></tr>
               </thead>
               <tbody>
-                <tr>
-                  <td><strong>Standard Desktop Watch</strong></td>
-                  <td><code>https://www.youtube.com/watch?v=dQw4w9WgXcQ</code></td>
-                  <td>Up to 1080p (HD Maxres)</td>
-                </tr>
-                <tr>
-                  <td><strong>Shortened Link</strong></td>
-                  <td><code>https://youtu.be/dQw4w9WgXcQ</code></td>
-                  <td>Up to 1080p (HD Maxres)</td>
-                </tr>
-                <tr>
-                  <td><strong>YouTube Shorts</strong></td>
-                  <td><code>https://www.youtube.com/shorts/30G2H3bYlHQ</code></td>
-                  <td>High Quality (HQ 480p)</td>
-                </tr>
-                <tr>
-                  <td><strong>Embed & Legacy Links</strong></td>
-                  <td><code>https://www.youtube.com/embed/dQw4w9WgXcQ</code></td>
-                  <td>Up to 1080p (HD Maxres)</td>
-                </tr>
-                <tr>
-                  <td><strong>Raw 11-Digit Video ID</strong></td>
-                  <td><code>dQw4w9WgXcQ</code></td>
-                  <td>All Qualities</td>
-                </tr>
+                <tr><td><strong>Standard Desktop Watch</strong></td><td><code>https://www.youtube.com/watch?v=dQw4w9WgXcQ</code></td><td>Up to 1080p (HD Maxres)</td></tr>
+                <tr><td><strong>Shortened Link</strong></td><td><code>https://youtu.be/dQw4w9WgXcQ</code></td><td>Up to 1080p (HD Maxres)</td></tr>
+                <tr><td><strong>YouTube Shorts</strong></td><td><code>https://www.youtube.com/shorts/30G2H3bYlHQ</code></td><td>High Quality (HQ 480p)</td></tr>
+                <tr><td><strong>Embed &amp; Legacy Links</strong></td><td><code>https://www.youtube.com/embed/dQw4w9WgXcQ</code></td><td>Up to 1080p (HD Maxres)</td></tr>
+                <tr><td><strong>Raw 11-Digit Video ID</strong></td><td><code>dQw4w9WgXcQ</code></td><td>All Qualities</td></tr>
               </tbody>
             </table>
           </div>
         </section>
 
-        <!-- ==================================================================
-             CATEGORY WORKSPACE CTA CARD
-             ================================================================== -->
-        <section class="category-workspace-cta">
-          <div class="category-workspace-cta-left">
-            <span class="section-eyebrow">Web Workspace</span>
-            <h2 class="category-workspace-cta-title">Explore All Web & URL Tools</h2>
-            <p class="category-workspace-cta-desc">
-              Discover our collection of client-side web utilities including URL parameter separators, query strippers, and link sanitizers.
-            </p>
+        <!-- 6. FAQ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">YouTube Thumbnail Downloader — Frequently Asked Questions</h2>
           </div>
-          <div class="category-workspace-cta-right">
-            <a href="../../web/" class="btn-pill btn-primary-signal">
-              <span>Explore Web Tools</span>
-              <iconify-icon icon="lucide:arrow-right" width="15" height="15"></iconify-icon>
-            </a>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Is downloading a YouTube thumbnail legal?</summary>
+              <p>Thumbnails are publicly served by YouTube's image CDN, and this tool simply shows you that public URL. The image itself remains the copyright of the channel owner — use it for personal reference, previews or with permission, not for re-uploading as your own.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why is HD (1080p) not available for some videos?</summary>
+              <p>YouTube only generates <code>maxresdefault.jpg</code> when the uploader provided a high-resolution custom thumbnail. Older, auto-generated or Shorts thumbnails often stop at 480p, so the tool falls back to HQ automatically.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Which YouTube link formats are supported?</summary>
+              <p>Standard <code>watch?v=</code> links, <code>youtu.be</code> short links, <code>/shorts/</code> links, <code>/embed/</code> links and raw 11-character video IDs all work.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Does this tool go through a Toolity server?</summary>
+              <p>No. The video ID is parsed in your browser and the preview loads straight from <code>img.youtube.com</code>. Only the Download button may route through a public image proxy to work around browser CORS limits — Toolity never sees or stores the image.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can I download thumbnails for private or unlisted videos?</summary>
+              <p>Unlisted videos usually work because their thumbnails are still public. Private videos do not expose thumbnails on the CDN, so nothing can be fetched.</p>
+            </details>
           </div>
         </section>
+
+        <!-- 7. CTA -->
+        <div data-include="/components/tool-cta.html" data-category="web"></div>
 
       </div>
     </section>
@@ -352,376 +337,9 @@
 
   <div data-include="/components/footer.html"></div>
 
-  <!-- Global Site Script -->
-  <script src="../../scripts/main.js?v=2.3"></script>
-
-  <!-- Tool Specific Self-Contained JavaScript Logic -->
-  <script>
-    /* Designed by Kapil Pidhwani: Client-Side YouTube Thumbnail Downloader Engine */
-    document.addEventListener('DOMContentLoaded', () => {
-      // DOM Elements
-      const urlInput = document.getElementById('yt-url-input');
-      const clearInputBtn = document.getElementById('btn-clear-url');
-      const pasteBtn = document.getElementById('btn-paste-clipboard');
-      const videoIdText = document.getElementById('video-id-text');
-      const videoTypeText = document.getElementById('video-type-text');
-      const videoFormatPill = document.getElementById('video-format-pill');
-      const qualityCards = document.querySelectorAll('.quality-card-btn');
-      const sampleChips = document.querySelectorAll('.sample-chip');
-
-      // Preview Elements
-      const previewViewport = document.getElementById('preview-viewport');
-      const emptyState = document.getElementById('empty-state');
-      const previewImg = document.getElementById('thumbnail-preview-img');
-      const badgeOverlay = document.getElementById('badge-overlay');
-      const overlayText = document.getElementById('overlay-text');
-      const previewResBadge = document.getElementById('preview-res-badge');
-
-      // Action Buttons
-      const resetBtn = document.getElementById('btn-reset-workspace');
-      const topCopyBtn = document.getElementById('btn-top-copy');
-      const topOpenBtn = document.getElementById('btn-top-open');
-      const topDownloadBtn = document.getElementById('btn-top-download');
-      const toast = document.getElementById('tool-toast');
-      const toastMessage = document.getElementById('toast-message');
-
-      // State
-      let currentVideoId = null;
-      let currentQuality = 'maxres'; // 'maxres' | 'hq' | 'sd' | 'mq'
-      let activeThumbnailUrl = null;
-      let toastTimer = null;
-
-      /**
-       * Show floating toast notification
-       */
-      function showToast(msg) {
-        if (toastTimer) clearTimeout(toastTimer);
-        toastMessage.textContent = msg;
-        toast.classList.add('show');
-        toastTimer = setTimeout(() => {
-          toast.classList.remove('show');
-        }, 2500);
-      }
-
-      /**
-       * Robust YouTube Video ID & Format Extractor
-       */
-      function parseYouTubeUrl(input) {
-        if (!input) return null;
-        const str = input.trim();
-
-        // Direct 11-char ID check
-        if (/^[a-zA-Z0-9_-]{11}$/.test(str)) {
-          return { id: str, type: 'Direct ID' };
-        }
-
-        // Shorts URL
-        const shortsMatch = str.match(/(?:https?:\/\/)?(?:www\.)?youtube\.com\/shorts\/([a-zA-Z0-9_-]{11})/i);
-        if (shortsMatch && shortsMatch[1]) {
-          return { id: shortsMatch[1], type: 'YouTube Shorts' };
-        }
-
-        // youtu.be Short URL
-        const youtuBeMatch = str.match(/(?:https?:\/\/)?(?:www\.)?youtu\.be\/([a-zA-Z0-9_-]{11})/i);
-        if (youtuBeMatch && youtuBeMatch[1]) {
-          return { id: youtuBeMatch[1], type: 'Shortened Link' };
-        }
-
-        // Embed URL
-        const embedMatch = str.match(/(?:https?:\/\/)?(?:www\.)?youtube\.com\/(?:embed|v)\/([a-zA-Z0-9_-]{11})/i);
-        if (embedMatch && embedMatch[1]) {
-          return { id: embedMatch[1], type: 'Embedded Video' };
-        }
-
-        // Standard watch URL
-        const standardMatch = str.match(/(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?.*v=([a-zA-Z0-9_-]{11})/i);
-        if (standardMatch && standardMatch[1]) {
-          return { id: standardMatch[1], type: 'Standard Video' };
-        }
-
-        return null;
-      }
-
-      /**
-       * Quality filename mapping
-       */
-      const QUALITY_FILES = {
-        maxres: { file: 'maxresdefault.jpg', label: 'HD 1080p', res: '1280 × 720 px' },
-        hq: { file: 'hqdefault.jpg', label: 'HQ 480p', res: '480 × 360 px' },
-        sd: { file: 'sddefault.jpg', label: 'SD 480p', res: '640 × 480 px' },
-        mq: { file: 'mqdefault.jpg', label: 'MQ 360p', res: '320 × 180 px' }
-      };
-
-      /**
-       * Build YouTube CDN URL
-       */
-      function getCdnUrl(id, quality) {
-        const config = QUALITY_FILES[quality] || QUALITY_FILES.maxres;
-        return `https://img.youtube.com/vi/${id}/${config.file}`;
-      }
-
-      /**
-       * Update thumbnail preview
-       */
-      function updatePreview() {
-        if (!currentVideoId) {
-          // Clear preview to empty state
-          previewViewport.classList.add('empty');
-          emptyState.style.display = 'flex';
-          previewImg.style.display = 'none';
-          previewImg.src = '';
-          badgeOverlay.style.display = 'none';
-          previewResBadge.textContent = '1280 × 720 px';
-
-          videoIdText.textContent = 'None';
-          videoTypeText.textContent = 'Paste a YouTube link above';
-          videoFormatPill.textContent = 'Waiting for URL';
-          clearInputBtn.style.display = 'none';
-
-          // Disable buttons
-          paneDownloadBtn.disabled = true;
-          paneCopyBtn.disabled = true;
-          paneOpenBtn.style.pointerEvents = 'none';
-          paneOpenBtn.style.opacity = '0.5';
-          paneOpenBtn.href = '#';
-          activeThumbnailUrl = null;
-          return;
-        }
-
-        clearInputBtn.style.display = 'block';
-
-        const config = QUALITY_FILES[currentQuality] || QUALITY_FILES.maxres;
-        const targetUrl = getCdnUrl(currentVideoId, currentQuality);
-        activeThumbnailUrl = targetUrl;
-
-        // Verify image natural dimensions (Handling fallback if maxres is unavailable)
-        const tester = new Image();
-        tester.onload = () => {
-          // YouTube returns a 120x90 image if maxresdefault doesn't exist
-          if (currentQuality === 'maxres' && tester.naturalWidth <= 120) {
-            // Auto fallback to HQ
-            currentQuality = 'hq';
-            updateQualityCards();
-            showToast('HD (1080p) unavailable for this video. Showing HQ (480p).');
-            updatePreview();
-            return;
-          }
-
-          previewViewport.classList.remove('empty');
-          emptyState.style.display = 'none';
-          previewImg.src = targetUrl;
-          previewImg.style.display = 'block';
-
-          // Update badges
-          overlayText.textContent = config.label;
-          badgeOverlay.style.display = 'flex';
-          previewResBadge.textContent = `${tester.naturalWidth || 1280} × ${tester.naturalHeight || 720} px`;
-        };
-
-        tester.onerror = () => {
-          // Fallback to HQ if maxres errors out
-          if (currentQuality !== 'hq') {
-            currentQuality = 'hq';
-            updateQualityCards();
-            updatePreview();
-          }
-        };
-
-        tester.src = targetUrl;
-      }
-
-      /**
-       * Handle Input change
-       */
-      function handleInputChange() {
-        const val = urlInput.value;
-        const parsed = parseYouTubeUrl(val);
-
-        if (parsed) {
-          currentVideoId = parsed.id;
-          videoIdText.textContent = parsed.id;
-          videoTypeText.textContent = parsed.type;
-          videoFormatPill.textContent = parsed.type;
-        } else {
-          currentVideoId = null;
-        }
-
-        updatePreview();
-      }
-
-      /**
-       * Update quality card active states
-       */
-      function updateQualityCards() {
-        qualityCards.forEach(card => {
-          if (card.getAttribute('data-quality') === currentQuality) {
-            card.classList.add('active');
-          } else {
-            card.classList.remove('active');
-          }
-        });
-      }
-
-      /**
-       * Fetch image blob with CORS proxy fallback to enable client-side downloads
-       */
-      async function fetchImageBlob(url) {
-        // 1. Try global image cache/proxy (weserv.nl - Cloudflare edge, full CORS)
-        try {
-          const proxyUrl = `https://images.weserv.nl/?url=${encodeURIComponent(url)}`;
-          const res = await fetch(proxyUrl);
-          if (res.ok) {
-            const blob = await res.blob();
-            if (blob && blob.size > 0) return blob;
-          }
-        } catch (e) {
-          // Continue to proxy fallbacks
-        }
-
-        // 2. Try proxy: allorigins.win
-        try {
-          const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
-          const res = await fetch(proxyUrl);
-          if (res.ok) {
-            const blob = await res.blob();
-            if (blob && blob.size > 0) return blob;
-          }
-        } catch (e) {
-          // Continue to next proxy
-        }
-
-        // 3. Try direct fetch
-        try {
-          const res = await fetch(url);
-          if (res.ok) {
-            const blob = await res.blob();
-            if (blob && blob.size > 0) return blob;
-          }
-        } catch (e) {
-          // Continue
-        }
-
-        throw new Error('Could not fetch image blob');
-      }
-
-      /**
-       * Download Image Client-Side via Blob
-       */
-      async function downloadThumbnail() {
-        if (!activeThumbnailUrl || !currentVideoId) {
-          showToast('Please enter a valid YouTube video link first');
-          return;
-        }
-
-        showToast('Downloading thumbnail...');
-
-        try {
-          const blob = await fetchImageBlob(activeThumbnailUrl);
-          const blobUrl = URL.createObjectURL(blob);
-
-          const link = document.createElement('a');
-          link.href = blobUrl;
-          link.download = `youtube-thumbnail-${currentVideoId}-${currentQuality}.jpg`;
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-          setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
-
-          showToast('Thumbnail downloaded successfully!');
-        } catch (err) {
-          showToast('Download failed. You can use "Open Raw" to view.');
-        }
-      }
-
-      /**
-       * Copy Image URL
-       */
-      function copyThumbnailUrl() {
-        if (!activeThumbnailUrl) {
-          showToast('No active thumbnail to copy');
-          return;
-        }
-
-        navigator.clipboard.writeText(activeThumbnailUrl).then(() => {
-          showToast('Thumbnail CDN URL copied to clipboard!');
-        }).catch(() => {
-          showToast('Failed to copy URL');
-        });
-      }
-
-      // Event Listeners
-      urlInput.addEventListener('input', handleInputChange);
-      urlInput.addEventListener('paste', () => {
-        setTimeout(handleInputChange, 10);
-      });
-
-      clearInputBtn.addEventListener('click', () => {
-        urlInput.value = '';
-        handleInputChange();
-        urlInput.focus();
-      });
-
-      pasteBtn.addEventListener('click', async () => {
-        try {
-          const text = await navigator.clipboard.readText();
-          if (text) {
-            urlInput.value = text;
-            handleInputChange();
-            showToast('Link pasted from clipboard');
-          }
-        } catch (err) {
-          urlInput.focus();
-          showToast('Please press ⌘V or Ctrl+V to paste');
-        }
-      });
-
-      // Sample link chips
-      sampleChips.forEach(chip => {
-        chip.addEventListener('click', () => {
-          const url = chip.getAttribute('data-url');
-          if (url) {
-            urlInput.value = url;
-            handleInputChange();
-            showToast('Sample link loaded');
-          }
-        });
-      });
-
-      // Quality selector cards
-      qualityCards.forEach(card => {
-        card.addEventListener('click', () => {
-          const q = card.getAttribute('data-quality');
-          if (q && q !== currentQuality) {
-            currentQuality = q;
-            updateQualityCards();
-            updatePreview();
-          }
-        });
-      });
-
-      // Action toolbar bindings
-      resetBtn.addEventListener('click', () => {
-        urlInput.value = '';
-        currentQuality = 'maxres';
-        updateQualityCards();
-        handleInputChange();
-        showToast('Workspace reset');
-      });
-
-      topDownloadBtn.addEventListener('click', downloadThumbnail);
-      topCopyBtn.addEventListener('click', copyThumbnailUrl);
-      topOpenBtn.addEventListener('click', () => {
-        if (activeThumbnailUrl) {
-          window.open(activeThumbnailUrl, '_blank');
-        } else {
-          showToast('Please enter a valid YouTube video link first');
-        }
-      });
-
-      // Initial check in case URL is prefilled
-      handleInputChange();
-    });
-  </script>
+  <script src="/scripts/main.js?v=2.4"></script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="/web/youtube-thumbnail-downloader/youtube-thumbnail-downloader.js?v=1.0"></script>
 </body>
 
 </html>
