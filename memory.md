@@ -256,6 +256,24 @@
     - **Git Hygiene**: Development task lists (`tasks.md`), suggestion checklists (`suggestion*.txt`, `todo*.txt`), and temporary notes must be ignored via `.gitignore` and never committed or pushed to remote repositories.
     - **Zero Autonomous Git Push Gate**: Pair programmers must NEVER run `git push` autonomously. Remote commits/pushes require explicit user instruction.
 
-
-
+26. **Global Navigation & Workspace Taxonomy Restructuring**:
+    - **Implemented**: 2026-10-04.
+    - **Canonical Workspace Order & Routing**:
+      1. **Home** (`/`)
+      2. **Convertors** (`/convertors/` — image, video, gif, favicon tools)
+      3. **Formatters** (`/formatters/` — code formatters & beautifiers)
+      4. **Productivity** (`/productivity/` — workflow boosters, planners, focus utilities)
+      5. **Web** (`/web/` — parameter separator, favicon extractor, thumbnail downloader)
+      6. **Fun** (`/fun/` — interactive web toys, audio tools & visualizers)
+      7. **Development** (`/development/` — renamed from `/dev/`)
+      8. **Utilities** (`/utilities/` — renamed from `/utility/` housing QR code, mailto, GIF speed, WhatsApp tools)
+      9. **Experiments** (`/experiments/` — renamed from `/others/`)
+    - **Consolidated Folders**: Cleanly removed obsolete placeholder folders `text/` and `design/`.
+    - **Global Synchronization**: Synchronized desktop header capsule (`components/header.html`), mobile navigation drawer (`scripts/main.js`), footer workspace links (`components/footer.html`), homepage category cards (`index.html`), search registry (`scripts/main.js`), and sitemap (`sitemap.xml`).
+27. **Homepage Section Seamless Blending Standards**:
+    - **Top & Bottom Seamless Transitions**:
+      - `#categories` uses `.section-wrapper-alt` with a vertical gradient `linear-gradient(180deg, var(--surface) 0%, var(--surface) 65%, var(--background) 100%)`.
+      - The top of `#categories` seamlessly receives the hero section's atmospheric vignette (`.hero-section::after` ending in `var(--surface)`).
+      - The bottom of `#categories` smoothly dissolves into `var(--background)` with `border-top: none` on `#features`, removing rigid horizontal 1px line breaks and naturally framing the editorial Fox mascot feature card.
+      - Dual-theme compatible across Light Mode (`#F7F7F5` $\to$ `#FFFFFF`) and Dark Mode (`#151515` $\to$ `#0D0D0D`).
 

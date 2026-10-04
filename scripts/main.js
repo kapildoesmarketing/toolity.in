@@ -189,50 +189,58 @@
       {
         id: 'qr-generator',
         title: 'QR Code Generator',
-        category: 'Utility',
-        url: 'utility/qr-code-generator/',
+        category: 'Utilities',
+        url: 'utilities/qr-code-generator/',
         icon: 'lucide:qr-code',
         tags: ['qr', 'code', 'barcode', 'generator', 'wifi', 'url', 'png', 'svg', 'vcard', 'text']
       },
       {
         id: 'mailto-generator',
         title: 'Mailto Link Creator',
-        category: 'Utility',
-        url: 'utility/mailto-generator/',
+        category: 'Utilities',
+        url: 'utilities/mailto-generator/',
         icon: 'lucide:mail',
         tags: ['mailto', 'email', 'link', 'generator', 'creator', 'html', 'href', 'contact', 'composer', 'message', 'support']
       },
       {
         id: 'gif-speed-changer',
         title: 'GIF Speed Changer',
-        category: 'Utility',
-        url: 'utility/gif-speed-changer/',
+        category: 'Utilities',
+        url: 'utilities/gif-speed-changer/',
         icon: 'lucide:gauge',
         tags: ['gif', 'speed', 'changer', 'fast', 'slow', 'slowmo', 'hyper', 'fps', 'accelerate', 'playback', 'rate', 'multiplier', 'time', 'tempo']
       },
       {
         id: 'whatsapp-link-creator',
         title: 'WhatsApp Link Creator',
-        category: 'Utility',
-        url: 'utility/whatsapp-link-creator/',
+        category: 'Utilities',
+        url: 'utilities/whatsapp-link-creator/',
         icon: 'lucide:message-circle',
         tags: ['whatsapp', 'wa.me', 'chat', 'link', 'generator', 'creator', 'message', 'click to chat', 'phone', 'contact', 'direct']
       },
       {
-        id: 'cat-dev',
-        title: 'Developer Tools',
+        id: 'cat-convertors',
+        title: 'Convertors',
         category: 'Workspace',
-        url: 'dev/',
-        icon: 'lucide:code-2',
-        tags: ['dev', 'developer', 'json', 'base64', 'hash', 'code', 'jwt', 'curl']
+        url: 'convertors/',
+        icon: 'lucide:arrow-left-right',
+        tags: ['convert', 'convertor', 'converter', 'units', 'image', 'video', 'gif', 'favicon', 'media']
       },
       {
-        id: 'cat-text',
-        title: 'Text Utilities',
+        id: 'cat-formatters',
+        title: 'Code Formatters',
         category: 'Workspace',
-        url: 'text/',
-        icon: 'lucide:file-text',
-        tags: ['text', 'case', 'words', 'diff', 'markdown', 'slug', 'strings', 'count']
+        url: 'formatters/',
+        icon: 'lucide:align-left',
+        tags: ['format', 'formatters', 'formatter', 'beautify', 'minify', 'sql', 'xml', 'html', 'json', 'css', 'prettier']
+      },
+      {
+        id: 'cat-productivity',
+        title: 'Productivity',
+        category: 'Workspace',
+        url: 'productivity/',
+        icon: 'lucide:check-square',
+        tags: ['productivity', 'productive', 'work', 'tasks', 'todo', 'planner', 'calculator', 'timer', 'focus', 'utility']
       },
       {
         id: 'cat-web',
@@ -240,7 +248,7 @@
         category: 'Workspace',
         url: 'web/',
         icon: 'lucide:globe',
-        tags: ['web', 'url', 'cleaner', 'parameter', 'query', 'separator', 'link', 'http', 'dns']
+        tags: ['web', 'url', 'cleaner', 'parameter', 'query', 'separator', 'link', 'http', 'dns', 'favicon', 'thumbnail']
       },
       {
         id: 'url-parameter-separator',
@@ -267,44 +275,36 @@
         tags: ['youtube', 'thumbnail', 'downloader', 'hd', '1080p', 'image', 'cover', 'shorts', 'video', 'download']
       },
       {
-        id: 'cat-design',
-        title: 'Design Tools',
+        id: 'cat-fun',
+        title: 'Fun & Interactive',
         category: 'Workspace',
-        url: 'design/',
-        icon: 'lucide:palette',
-        tags: ['design', 'color', 'contrast', 'palette', 'gradient', 'css', 'ui']
+        url: 'fun/',
+        icon: 'lucide:gamepad-2',
+        tags: ['fun', 'games', 'interactive', 'sound', 'toys', 'play', 'audio', 'visualizer']
       },
       {
-        id: 'cat-utility',
+        id: 'cat-development',
+        title: 'Development',
+        category: 'Workspace',
+        url: 'development/',
+        icon: 'lucide:code-2',
+        tags: ['dev', 'developer', 'development', 'json', 'base64', 'hash', 'code', 'jwt', 'curl']
+      },
+      {
+        id: 'cat-utilities',
         title: 'Everyday Utilities',
         category: 'Workspace',
-        url: 'utility/',
+        url: 'utilities/',
         icon: 'lucide:wrench',
-        tags: ['utility', 'qr', 'uuid', 'timer', 'stopwatch', 'random', 'tools']
+        tags: ['utility', 'utilities', 'qr', 'mailto', 'whatsapp', 'speed', 'tools']
       },
       {
-        id: 'cat-convertors',
-        title: 'Convertors',
+        id: 'cat-experiments',
+        title: 'Experiments & Labs',
         category: 'Workspace',
-        url: 'convertors/',
-        icon: 'lucide:arrow-left-right',
-        tags: ['convert', 'units', 'timestamp', 'base', 'transform', 'distance']
-      },
-      {
-        id: 'cat-formatters',
-        title: 'Formatters',
-        category: 'Workspace',
-        url: 'formatters/',
-        icon: 'lucide:align-left',
-        tags: ['format', 'beautify', 'minify', 'sql', 'xml', 'html', 'json', 'css', 'prettier']
-      },
-      {
-        id: 'cat-others',
-        title: 'Other Micro-Tools',
-        category: 'Workspace',
-        url: 'others/',
-        icon: 'lucide:sparkles',
-        tags: ['other', 'misc', 'experimental', 'niche', 'tools']
+        url: 'experiments/',
+        icon: 'lucide:layers',
+        tags: ['experiments', 'experiment', 'lab', 'labs', 'misc', 'prototype', 'niche', 'tools']
       }
     ];
 
@@ -837,14 +837,14 @@
 
       const categories = [
         { title: 'Home', href: rootPrefix === '' ? './' : rootPrefix, icon: 'lucide:home', key: 'home' },
-        { title: 'Dev', href: `${rootPrefix}dev/`, icon: 'lucide:code-2', key: 'dev' },
-        { title: 'Text', href: `${rootPrefix}text/`, icon: 'lucide:file-text', key: 'text' },
-        { title: 'Web', href: `${rootPrefix}web/`, icon: 'lucide:globe', key: 'web' },
-        { title: 'Design', href: `${rootPrefix}design/`, icon: 'lucide:palette', key: 'design' },
-        { title: 'Utility', href: `${rootPrefix}utility/`, icon: 'lucide:wrench', key: 'utility' },
         { title: 'Convertors', href: `${rootPrefix}convertors/`, icon: 'lucide:arrow-left-right', key: 'convertors' },
         { title: 'Formatters', href: `${rootPrefix}formatters/`, icon: 'lucide:align-left', key: 'formatters' },
-        { title: 'Others', href: `${rootPrefix}others/`, icon: 'lucide:sparkles', key: 'others' }
+        { title: 'Productivity', href: `${rootPrefix}productivity/`, icon: 'lucide:check-square', key: 'productivity' },
+        { title: 'Web', href: `${rootPrefix}web/`, icon: 'lucide:globe', key: 'web' },
+        { title: 'Fun', href: `${rootPrefix}fun/`, icon: 'lucide:gamepad-2', key: 'fun' },
+        { title: 'Development', href: `${rootPrefix}development/`, icon: 'lucide:code-2', key: 'development' },
+        { title: 'Utilities', href: `${rootPrefix}utilities/`, icon: 'lucide:wrench', key: 'utilities' },
+        { title: 'Experiments', href: `${rootPrefix}experiments/`, icon: 'lucide:layers', key: 'experiments' }
       ];
 
       drawer = document.createElement('div');
