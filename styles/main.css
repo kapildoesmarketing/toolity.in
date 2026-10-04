@@ -3609,3 +3609,7 @@ body {
 .settings-range { width: 100%; accent-color: var(--brand); }
 .pane-content-between { justify-content: space-between; }
 .media-canvas-viewport input[type="file"] { display: none; }
+.pane-footnote { margin-top: 0.85rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; color: var(--text-muted); padding: 0 0.25rem; }
+.pane-footnote .btn-toolbar-sm { padding: 0.25rem 0.6rem; font-size: 0.75rem; }
+.pane-footnote .btn-toolbar-sm[hidden] { display: none; }
+.trim-duration-badge { color: var(--text-muted); font-size: 0.72rem; }
