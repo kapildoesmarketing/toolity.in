@@ -1947,6 +1947,11 @@ body {
   border-color: var(--text-muted);
 }
 
+.btn-toolbar-sm:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .btn-toolbar-sm.btn-brand-sm {
   background: var(--brand);
   color: #FFFFFF;
