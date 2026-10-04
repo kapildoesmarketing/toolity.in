@@ -21,7 +21,7 @@
    - Every individual tool is its own static `.html` file.
    - No single-page app (SPA) frameworks or runtime client-side page generation.
 2. **Production Root Homepage**:
-   - Root [`index.html`](index.html) is the official live homepage styled according to [`design.md`](design.md).
+   - Root [`index.html`](index.html) is the official live homepage styled with warm minimalist aesthetic.
    - Temporary `pre-launch/` directory has been removed completely.
 3. **Design & Icon Standard**:
    - Strictly guided by editorial warm minimalist aesthetic with Fox-inspired warm accents (`#F4511E`, `#FF6A2A`).
@@ -196,10 +196,11 @@
       - **Relevance Scoring & Levenshtein Typo Tolerance**: Calculates weighted relevance scores across titles (2.5×), tags (1.8×), and categories (1.2×) with exact match boosts (+1000/800), multi-word conjunction bonuses (+200), single-character edit distance tolerance for words ≥4 chars, and prioritization of specific micro-tools over general workspace categories.
       - **Zero Layout Shifts**: Preserves 100% of the minimal underline search bar, background-free top-3 results display, keyboard arrow navigation, and instant launcher performance without external search libraries.
 
-21. **Card Sizing, Search Robustness & Universal Link Styling Standards**:
-    - **Category & Grid Tool Cards (`.category-glow-card`)**: Standardized to `height: 250px` matching homepage card metrics, with `padding: 1.15rem 1.15rem 1rem;`, `font-size: 0.98rem; line-height: 1.25;` on `.glow-card-title`, and constrained description margins (`margin: 0 0 0.5rem 0;`). This ensures tools with multi-line titles (such as "YouTube Thumbnail Downloader" or "URL Parameter Separator") never overflow or clip the bottom "Open →" button.
-    - **Search Ranking & Cache-Busting**: Search scoring prioritizes exact and prefix phrase queries with dominant base bonuses (`+2500` exact, `+1800` prefix, `+1400` substring), outranking scattered partial token sums. Search dropdown reopens smoothly on input focus/click. All HTML asset links use versioned query strings (e.g., `?v=2.2`) to prevent stale browser caching on live deployments.
+21. **Card Sizing, Search Ranking & Universal Link Styling Standards**:
+    - **Category & Grid Tool Cards (`.category-glow-card`)**: Standardized to `height: 250px` matching homepage card metrics, with `padding: 1.15rem 1.15rem 1rem;`, `font-size: 0.98rem; line-height: 1.25;` on `.glow-card-title`, and constrained description margins (`margin: 0 0 0.5rem 0;`). This ensures tools with multi-line titles never overflow or clip the bottom "Open →" button.
+    - **Search Ranking & Cache-Busting**: Search scoring prioritizes exact and prefix phrase queries with dominant base bonuses (`+2500` exact, `+1800` prefix, `+1400` substring), outranking scattered partial token sums. Search dropdown reopens smoothly on input focus/click. All HTML asset links use versioned query strings (e.g., `?v=2.3`) to prevent stale browser caching on live deployments.
     - **Universal Link Reset & Footer Author Theme Inheritance**: Global `a, a:visited { color: inherit; text-decoration: none; }` prevents default browser blue (`#0000ee`) and purple (`#551a8b`) hyperlinks. Footer creator links explicitly enforce `.footer-creator a, .footer-creator a:visited { color: var(--text-primary) !important; }` with hover transitioning to `var(--brand)`.
+
 22. **HTML Partial Include System (Modular Components)**:
     - **Implemented**: 2026-10-04. All 24 pages migrated.
     - **Why**: Changing nav/footer/ads previously required editing all 24 HTML files. Now it is 1 file.
@@ -212,28 +213,22 @@
     - **Active Nav Link**: setActiveNav() in main.js reads location.pathname, extracts the first URL segment (e.g. web), and sets .active on the matching a[data-nav=web] after header injection.
     - **Per-Page HTML (stays inline in each file)**: title, meta description, Open Graph tags, h1, GTM script in head (must fire early), tool-specific style and script blocks.
     - **WARNING - Local Development**: fetch() requires HTTPS or a local server. Opening HTML via file:// will fail to load partials. Always use: npx serve . when developing locally.
-    - **Shared Tool CSS in main.css**: Common UI component classes are now at the bottom of styles/main.css (section: SHARED TOOL WORKSPACE COMPONENTS): .url-input-container, .btn-input-clear, .sample-chips-row, .btn-sample-chip, .quality-grid, .quality-card-btn, .quality-top-row, .quality-title, .quality-tag-badge, .quality-dimensions, .preview-viewport-box, .empty-preview-content, .empty-preview-icon, .preview-floating-pill, .formats-table-card, .formats-table.
-    - **Adding a New Tool Page**: Use the three div[data-include] placeholders for header/footer/ads. Add only tool-specific CSS/JS inline.
+    - **Shared Tool CSS in main.css**: Common UI component classes are in styles/main.css: .url-input-container, .btn-input-clear, .sample-chips-row, .btn-sample-chip, .quality-grid, .quality-card-btn, .preview-viewport-box, .empty-preview-content, .formats-table-card, .formats-table.
     - **CSS/JS Version**: Currently v=2.3. Bump this on all main.css and main.js script/link tags in all HTML files when deploying breaking style/JS changes to bust browser cache.
+
 23. **Core Web Vitals, SEO, Polish & Mobile Bottom Pill Nav Enhancements**:
     - **Implemented**: 2026-10-04.
-    - **Canonical URLs**: Added `<link rel="canonical" href="https://toolity.in/...">` to `<head>` on all 24 production pages + templates to eliminate duplicate indexing penalties.
+    - **Canonical URLs**: Added `<link rel="canonical" href="https://toolity.in/...">` to `<head>` on all production pages.
     - **Zero-Flash Dark Mode Initialization**: Synchronous inline `<script>` in `<head>` immediately sets `data-theme` attribute on `<html>` from `localStorage` or `prefers-color-scheme` before HTML renders, eliminating FOUC / white flashes completely.
     - **Critical Asset Preloads**: `<link rel="preload" href="/styles/main.css?v=2.3" as="style">` and `<link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">` added to `<head>` on all pages for faster LCP.
     - **Script Deferral**: Iconify CDN scripts now use `defer` to unblock initial render pipeline.
     - **Zero-CLS Image Dimensions**: Explicit `width`, `height`, and `loading="lazy"` (with `fetchpriority="high"` on header brand logo) enforced on all `<img>` tags across static templates and dynamic workspace previews.
     - **Sitemap Indexing**: Updated `sitemap.xml` with current timestamps (`2026-10-04`) and all 24 URLs.
-    - **Empty State Breathing Animation**: Added `@keyframes breatheState` in `styles/main.css` to give idle tool empty states a subtle pulse, with `@media (prefers-reduced-motion: reduce)` support.
-    - **Page Load Fade-In**: Smooth `@keyframes fadeInPage` on `body` for seamless page loading transitions.
     - **Mobile Bottom Pill Navigation Bar (Non-Home Pages)**:
       - Automatically injected on mobile devices (`max-width: 768px`) on all non-home pages.
-      - Glassmorphism floating pill at screen bottom with 4 thumb-friendly actions:
-        1. **Home** (`/`)
-        2. **Tools** (triggers mobile drawer)
-        3. **Share** (native `navigator.share` fallback to copy URL + toast)
-        4. **Top** (smooth scroll to top, resolving back-to-top feature)
-      - Integrated with safe-area insets (`env(safe-area-inset-bottom)`).
-    - **Multi-Device Favicon Suite**: Standardized `/assets/favicons/` across all pages with 32x32 PNG, 16x16 PNG, 180x180 Apple Touch Icon, and root `/favicon.ico` for complete cross-browser and iOS/Android compatibility.
+      - Glassmorphism floating pill at screen bottom with 4 thumb-friendly actions: Home (`/`), Tools (drawer), Share (native `navigator.share` with clipboard fallback), and Top (smooth scroll to top).
+    - **Multi-Device Favicon Suite**: Standardized `/assets/favicons/` across all pages with 32x32 PNG, 16x16 PNG, 180x180 Apple Touch Icon, and root `/favicon.ico`.
+
 24. **Image to Favicon Converter (`convertors/image-to-favicon/index.html`)**:
     - **Implemented**: 2026-10-04.
     - **Features**:
@@ -242,11 +237,25 @@
       - Background color: Transparent (checkerboard), White, Dark, Brand Orange, Cobalt, Emerald, or Custom Hex color picker.
       - Quiet zone padding slider: `0%` to `30%`.
       - Corner radius presets: `Square (0%)`, `Squircle (22%)`, `Circle (50%)`.
-      - Real-Time Live Multi-Context Previews: Interactive Chrome Browser Tab with custom editable title, iOS/Android Home Screen icon frame, Google Search result snippet (SERP), and All-Sizes Matrix Grid (16, 32, 48, 64, 128, 180, 192, 512).
+      - Real-Time Multi-Context Sub-Tabs:
+        1. **All Sizes (Default Active Tab)**: 16×16, 32×32, 48×48, 180×180, 192×192, 512×512 matrix with individual PNG downloads.
+        2. **HTML Code (Dedicated 2nd Tab)**: Clean copyable `<link rel="icon">` embed code snippet without vertical scroll.
+        3. **Browser Tab Simulation**: Interactive Chrome tab with live title and URL bar.
+        4. **Mobile Home Screen Simulation**: iOS/Android app icon tile mockup.
+        5. **Google SERP Simulation**: Search result snippet mockup.
       - Multi-Format Client-Side Binary Generator: Constructs real Windows `.ico` binary files containing 16x16, 32x32, 48x48 PNG frames via JavaScript `DataView` & `Uint8Array`.
       - Complete ZIP Package Exporter: Bundles `favicon.ico`, all PNG sizes, `site.webmanifest`, and an HTML instruction snippet in PKZIP store format.
-      - 1-Click Copyable `<link>` Embed Tags snippet.
+      - Minimalist, Dropzone-First UX: Presets removed for clean, focused user workflow; upload guards on all download buttons with informative toast alerts.
       - 100% Client-Side with zero server uploads (privacy-first).
+
+25. **Tool Development Best Practices, UI Layout Rules & Git Hygiene**:
+    - **Primary Output First**: The default active tab in the output pane must always be the primary useful output (e.g. All Sizes Grid for Favicon tool, Formatted output for JSON formatter).
+    - **No Output Stacking / Hidden Below Scroll**: Never stack secondary outputs (like HTML embed code or large tables) below mockup previews in a way that requires vertical scrollbars. Use dedicated sub-tabs (`.preview-mode-nav`) so every output format has its own clean, un-scrolled viewport.
+    - **Ad Slot Centering**: All tool ad slots must use `.ad-slot-wrapper` and `.ad-slot-container` with centered flex layouts to ensure headers (`.ad-label`) and banner iframes remain centered on both desktop and mobile.
+    - **Progressive Disclosure Accordion Placement**: Secondary customization settings must strictly reside inside `<details class="tool-settings-accordion">` positioned **below** the dual-pane workspace, closed by default with an informative live summary badge.
+    - **Git Hygiene**: Development task lists (`tasks.md`), suggestion checklists (`suggestion*.txt`, `todo*.txt`), and temporary notes must be ignored via `.gitignore` and never committed or pushed to remote repositories.
+    - **Zero Autonomous Git Push Gate**: Pair programmers must NEVER run `git push` autonomously. Remote commits/pushes require explicit user instruction.
+
 
 
 

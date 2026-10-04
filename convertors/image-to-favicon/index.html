@@ -74,92 +74,40 @@
       margin-top: 0.5rem;
     }
 
-    /* Custom Form & Controls in Left Pane */
-    .control-group-block {
-      margin-bottom: 1.25rem;
-    }
-
-    .control-group-label {
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 0.45rem;
+    /* Left Pane Container */
+    .favicon-source-container {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
+      flex-direction: column;
+      gap: 1rem;
+      height: 100%;
     }
 
-    .control-group-hint {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      font-weight: 400;
-    }
-
-    /* Segmented Controls */
-    .segmented-group {
-      display: flex;
-      background: var(--surface-elevated);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-pill);
-      padding: 3px;
-      gap: 3px;
-    }
-
-    .segmented-btn {
-      flex: 1;
-      border: none;
-      background: transparent;
-      color: var(--text-secondary);
-      font-family: inherit;
-      font-size: 0.78rem;
-      font-weight: 500;
-      padding: 0.35rem 0.5rem;
-      border-radius: var(--radius-pill);
-      cursor: pointer;
-      transition: all var(--transition-fast);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.3rem;
-      white-space: nowrap;
-    }
-
-    .segmented-btn.active {
-      background: var(--surface);
-      color: var(--brand);
-      font-weight: 600;
-      box-shadow: var(--shadow-sm);
-    }
-
-    /* Color Selection Swatches */
+    /* Color Swatches */
     .color-swatches-row {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.45rem;
       flex-wrap: wrap;
     }
 
     .color-swatch-btn {
-      width: 32px;
-      height: 32px;
-      border-radius: var(--radius-sm);
-      border: 2px solid var(--border);
+      width: 28px;
+      height: 28px;
+      border-radius: var(--radius-xs);
+      border: 1.5px solid var(--border);
       cursor: pointer;
       position: relative;
       transition: transform var(--transition-fast), border-color var(--transition-fast);
-      display: flex;
-      align-items: center;
-      justify-content: center;
       padding: 0;
     }
 
     .color-swatch-btn:hover {
-      transform: scale(1.08);
+      transform: scale(1.1);
     }
 
     .color-swatch-btn.active {
       border-color: var(--brand);
-      box-shadow: 0 0 0 2px rgba(255, 106, 42, 0.3);
+      box-shadow: 0 0 0 2px rgba(255, 106, 42, 0.35);
     }
 
     .swatch-transparent {
@@ -174,11 +122,11 @@
 
     .color-picker-input-wrapper {
       position: relative;
-      width: 32px;
-      height: 32px;
-      border-radius: var(--radius-sm);
+      width: 28px;
+      height: 28px;
+      border-radius: var(--radius-xs);
       overflow: hidden;
-      border: 2px solid var(--border);
+      border: 1.5px solid var(--border);
       cursor: pointer;
     }
 
@@ -186,18 +134,19 @@
       position: absolute;
       top: -10px;
       left: -10px;
-      width: 50px;
-      height: 50px;
+      width: 48px;
+      height: 48px;
       cursor: pointer;
       border: none;
       background: none;
     }
 
-    /* Slider Row */
+    /* Range Slider */
     .range-row {
       display: flex;
       align-items: center;
       gap: 0.75rem;
+      width: 100%;
     }
 
     .range-input {
@@ -208,13 +157,13 @@
 
     .range-val-badge {
       font-family: var(--font-mono);
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       background: var(--surface-elevated);
       border: 1px solid var(--border);
-      padding: 2px 8px;
+      padding: 2px 6px;
       border-radius: var(--radius-xs);
       color: var(--text-primary);
-      min-width: 44px;
+      min-width: 38px;
       text-align: center;
     }
 
@@ -224,10 +173,10 @@
       background: var(--surface-elevated);
       border: 1px solid var(--border);
       border-radius: var(--radius-sm);
-      padding: 0.5rem 0.75rem;
+      padding: 0.45rem 0.7rem;
       color: var(--text-primary);
       font-family: inherit;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       outline: none;
       transition: border-color var(--transition-fast);
     }
@@ -236,12 +185,12 @@
       border-color: var(--brand);
     }
 
-    /* Right Pane: Context Preview Area */
+    /* Right Pane: Sub-Navigation */
     .preview-mode-nav {
       display: flex;
       border-bottom: 1px solid var(--border);
-      margin-bottom: 1.25rem;
-      gap: 0.5rem;
+      margin-bottom: 0.85rem;
+      gap: 0.25rem;
     }
 
     .preview-mode-tab {
@@ -250,9 +199,9 @@
       border-bottom: 2px solid transparent;
       color: var(--text-secondary);
       font-family: inherit;
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       font-weight: 500;
-      padding: 0.5rem 0.75rem;
+      padding: 0.45rem 0.65rem;
       cursor: pointer;
       transition: all var(--transition-fast);
       display: flex;
@@ -276,8 +225,8 @@
     }
 
     .mock-browser-chrome {
-      background: color-mix(in srgb, var(--surface) 70%, #000 30%);
-      padding: 0.5rem 0.75rem;
+      background: color-mix(in srgb, var(--surface) 75%, #000 25%);
+      padding: 0.45rem 0.75rem;
       display: flex;
       align-items: center;
       gap: 0.75rem;
@@ -290,8 +239,8 @@
     }
 
     .mock-window-dot {
-      width: 10px;
-      height: 10px;
+      width: 9px;
+      height: 9px;
       border-radius: 50%;
     }
 
@@ -304,12 +253,12 @@
       border: 1px solid var(--border);
       border-bottom: none;
       border-radius: 6px 6px 0 0;
-      padding: 0.35rem 0.75rem;
+      padding: 0.3rem 0.65rem;
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      max-width: 200px;
-      font-size: 0.75rem;
+      gap: 0.45rem;
+      max-width: 180px;
+      font-size: 0.74rem;
       color: var(--text-primary);
       font-weight: 500;
       white-space: nowrap;
@@ -321,47 +270,46 @@
       width: 16px;
       height: 16px;
       flex-shrink: 0;
-      border-radius: 2px;
     }
 
     .mock-browser-address-bar {
       background: var(--surface);
       border-bottom: 1px solid var(--border);
-      padding: 0.4rem 0.75rem;
+      padding: 0.35rem 0.75rem;
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      font-size: 0.75rem;
+      gap: 0.45rem;
+      font-size: 0.72rem;
       color: var(--text-muted);
     }
 
     .mock-browser-viewport {
-      padding: 2.5rem 1.5rem;
+      padding: 1.5rem 1rem;
       background: var(--surface);
       text-align: center;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 0.75rem;
+      gap: 0.5rem;
     }
 
-    /* Mobile Home Screen Simulation */
+    /* Mobile Home Screen Mockup */
     .mock-phone-frame {
-      max-width: 260px;
+      max-width: 220px;
       margin: 0 auto;
       background: #000000;
-      border-radius: 36px;
-      padding: 12px;
-      border: 4px solid #333333;
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+      border-radius: 28px;
+      padding: 8px;
+      border: 3px solid #333333;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
     }
 
     .mock-phone-screen {
       background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-      border-radius: 26px;
-      padding: 1.5rem 1rem;
-      min-height: 280px;
+      border-radius: 20px;
+      padding: 1.25rem 0.75rem;
+      min-height: 200px;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
@@ -370,7 +318,7 @@
     .mock-app-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
+      gap: 0.75rem;
       text-align: center;
     }
 
@@ -378,16 +326,16 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0.35rem;
+      gap: 0.3rem;
     }
 
     .mock-app-icon-box {
-      width: 54px;
-      height: 54px;
-      border-radius: 12px;
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
       overflow: hidden;
       background: #ffffff;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -400,32 +348,32 @@
     }
 
     .mock-app-name {
-      font-size: 0.68rem;
+      font-size: 0.65rem;
       color: #ffffff;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      max-width: 60px;
+      max-width: 50px;
     }
 
-    /* Google Search Snippet Simulation */
+    /* Google Search Snippet */
     .mock-serp-box {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
-      padding: 1.25rem;
+      padding: 1.15rem;
     }
 
     .mock-serp-header {
       display: flex;
       align-items: center;
-      gap: 0.65rem;
-      margin-bottom: 0.35rem;
+      gap: 0.55rem;
+      margin-bottom: 0.25rem;
     }
 
     .mock-serp-favicon {
-      width: 26px;
-      height: 26px;
+      width: 24px;
+      height: 24px;
       border-radius: 50%;
       background: var(--surface-elevated);
       display: flex;
@@ -436,14 +384,14 @@
     }
 
     .mock-serp-favicon img {
-      width: 18px;
-      height: 18px;
+      width: 16px;
+      height: 16px;
     }
 
     .mock-serp-meta {
       display: flex;
       flex-direction: column;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
     }
 
     .mock-serp-sitename {
@@ -453,15 +401,15 @@
 
     .mock-serp-url {
       color: var(--text-muted);
-      font-size: 0.72rem;
+      font-size: 0.68rem;
     }
 
     .mock-serp-title {
       color: #1a0dab;
-      font-size: 1.05rem;
+      font-size: 0.98rem;
       font-weight: 500;
       text-decoration: none;
-      margin-top: 0.25rem;
+      margin-top: 0.2rem;
       display: block;
     }
 
@@ -471,27 +419,27 @@
 
     .mock-serp-snippet {
       color: var(--text-secondary);
-      font-size: 0.8rem;
-      margin-top: 0.35rem;
+      font-size: 0.78rem;
+      margin-top: 0.25rem;
       line-height: 1.4;
     }
 
     /* All Sizes Grid */
     .sizes-matrix-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-      gap: 0.75rem;
+      grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+      gap: 0.55rem;
     }
 
     .size-matrix-card {
       background: var(--surface-elevated);
       border: 1px solid var(--border);
       border-radius: var(--radius-sm);
-      padding: 0.75rem;
+      padding: 0.55rem 0.45rem;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0.4rem;
+      gap: 0.3rem;
       text-align: center;
       transition: border-color var(--transition-fast);
     }
@@ -501,8 +449,8 @@
     }
 
     .size-preview-box {
-      width: 64px;
-      height: 64px;
+      width: 48px;
+      height: 48px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -512,36 +460,31 @@
       overflow: hidden;
     }
 
-    .size-preview-box img {
-      image-rendering: -webkit-optimize-contrast;
-      image-rendering: crisp-edges;
-    }
-
     .size-card-title {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 600;
       color: var(--text-primary);
     }
 
     .size-card-desc {
-      font-size: 0.68rem;
+      font-size: 0.64rem;
       color: var(--text-muted);
-      line-height: 1.2;
+      line-height: 1.15;
     }
 
     .size-btn-download {
-      font-size: 0.68rem;
-      padding: 2px 8px;
+      font-size: 0.64rem;
+      padding: 2px 7px;
       border-radius: var(--radius-pill);
       background: var(--surface);
       border: 1px solid var(--border);
       color: var(--text-secondary);
       cursor: pointer;
       transition: all var(--transition-fast);
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 3px;
-      margin-top: 0.2rem;
+      margin-top: 0.1rem;
     }
 
     .size-btn-download:hover {
@@ -554,16 +497,16 @@
       background: var(--surface-elevated);
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
-      padding: 1rem;
-      margin-top: 1.25rem;
+      padding: 0.75rem 0.85rem;
+      margin-top: 0.75rem;
       position: relative;
     }
 
     .html-code-pre {
       font-family: var(--font-mono);
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       color: var(--text-secondary);
-      line-height: 1.5;
+      line-height: 1.45;
       overflow-x: auto;
       white-space: pre-wrap;
       margin: 0;
@@ -571,88 +514,25 @@
 
     .btn-copy-code {
       position: absolute;
-      top: 0.65rem;
-      right: 0.65rem;
+      top: 0.5rem;
+      right: 0.5rem;
       background: var(--surface);
       border: 1px solid var(--border);
       color: var(--text-secondary);
-      padding: 0.3rem 0.65rem;
+      padding: 0.25rem 0.55rem;
       border-radius: var(--radius-sm);
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       font-weight: 500;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 0.35rem;
+      gap: 0.3rem;
       transition: all var(--transition-fast);
     }
 
     .btn-copy-code:hover {
       color: var(--brand);
       border-color: var(--brand);
-    }
-
-    /* Dropdown popup for master download button */
-    .dropdown-container {
-      position: relative;
-    }
-
-    .dropdown-popup {
-      position: absolute;
-      top: calc(100% + 6px);
-      right: 0;
-      background: var(--surface-elevated);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      box-shadow: var(--shadow-md);
-      padding: 0.4rem;
-      min-width: 230px;
-      z-index: 100;
-      display: none;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .dropdown-popup.show {
-      display: flex;
-    }
-
-    .dropdown-item {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      padding: 0.5rem 0.75rem;
-      border: none;
-      background: transparent;
-      color: var(--text-primary);
-      font-family: inherit;
-      font-size: 0.78rem;
-      font-weight: 500;
-      border-radius: var(--radius-sm);
-      cursor: pointer;
-      text-align: left;
-      transition: background var(--transition-fast), color var(--transition-fast);
-    }
-
-    .dropdown-item:hover {
-      background: var(--surface);
-      color: var(--brand);
-    }
-
-    .dropdown-item-badge {
-      margin-left: auto;
-      font-size: 0.65rem;
-      font-family: var(--font-mono);
-      color: var(--text-muted);
-      background: var(--surface);
-      padding: 1px 5px;
-      border-radius: 4px;
-    }
-
-    .dropdown-divider {
-      height: 1px;
-      background: var(--border);
-      margin: 0.3rem 0;
     }
   </style>
 </head>
@@ -693,75 +573,72 @@
       </div>
     </section>
 
-    <!-- Adsterra Advertising Slot -->
-    <div data-include="/components/ad-slot.html"></div>
-
     <!-- Main Tool Workspace -->
-    <section class="section-wrapper" style="border-top: none; padding-top: 2rem;">
+    <section class="section-wrapper" style="border-top: none; padding-top: 3.5rem;">
       <div class="container">
         <div class="tool-workspace-card">
 
-          <!-- Top Universal Toolbar -->
-          <div class="tool-workspace-toolbar">
-            <div class="toolbar-left">
-              <div class="segmented-group" id="fit-mode-group">
-                <button type="button" class="segmented-btn active" data-fit="contain" title="Preserve aspect ratio with padding">
-                  <iconify-icon icon="lucide:minimize-2"></iconify-icon>
-                  <span>Contain</span>
-                </button>
-                <button type="button" class="segmented-btn" data-fit="cover" title="Center crop image to square">
-                  <iconify-icon icon="lucide:maximize-2"></iconify-icon>
-                  <span>Cover</span>
-                </button>
-                <button type="button" class="segmented-btn" data-fit="stretch" title="Stretch to square fill">
-                  <iconify-icon icon="lucide:scaling"></iconify-icon>
-                  <span>Stretch</span>
-                </button>
-              </div>
+          <!-- 1. Actions Toolbar (Top-Right Universal Pattern) -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span style="font-size: 0.78rem; font-weight: 500; color: var(--text-muted); display: inline-flex; align-items: center; gap: 0.35rem;">
+                <iconify-icon icon="lucide:image" width="14" height="14" style="color: var(--brand);"></iconify-icon>
+                <span>Favicon Suite Engine</span>
+              </span>
             </div>
 
-            <div class="toolbar-right">
-              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all settings">
-                <iconify-icon icon="lucide:rotate-ccw"></iconify-icon>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset-tool" title="Reset image and all settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
                 <span>Reset</span>
               </button>
-              <button type="button" class="btn-toolbar-sm" id="btn-copy-html-top" title="Copy HTML link tags">
-                <iconify-icon icon="lucide:copy"></iconify-icon>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy-html-top" title="Copy HTML embed tags">
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
                 <span>Copy HTML</span>
               </button>
 
               <!-- Master Download Button & Dropdown -->
-              <div class="dropdown-container">
-                <button type="button" class="btn-toolbar-brand" id="btn-download-master" title="Download Favicon Files">
-                  <iconify-icon icon="lucide:download"></iconify-icon>
+              <div class="dropdown-menu-wrapper" id="download-dropdown-wrapper">
+                <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download-master" title="Download Favicon Files" aria-haspopup="true" aria-expanded="false">
+                  <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
                   <span>Download Favicons</span>
-                  <iconify-icon icon="lucide:chevron-down" style="font-size: 0.8rem; margin-left: 2px;"></iconify-icon>
+                  <iconify-icon icon="lucide:chevron-down" class="dropdown-arrow" width="12" height="12"></iconify-icon>
                 </button>
-                <div class="dropdown-popup" id="download-dropdown">
-                  <button type="button" class="dropdown-item" id="opt-dl-ico">
-                    <iconify-icon icon="lucide:file-code"></iconify-icon>
-                    <span>Download Multi-Size .ICO</span>
+                <div class="dropdown-popup" id="download-dropdown" role="menu">
+                  <button type="button" class="dropdown-item" id="opt-dl-ico" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:file-code" width="14" height="14"></iconify-icon>
+                      <span>Multi-Size .ICO</span>
+                    </div>
                     <span class="dropdown-item-badge">16•32•48px</span>
                   </button>
-                  <button type="button" class="dropdown-item" id="opt-dl-zip">
-                    <iconify-icon icon="lucide:archive"></iconify-icon>
-                    <span>Complete ZIP Package</span>
-                    <span class="dropdown-item-badge">All Assets</span>
+                  <button type="button" class="dropdown-item" id="opt-dl-zip" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:archive" width="14" height="14"></iconify-icon>
+                      <span>Complete ZIP Package</span>
+                    </div>
+                    <span class="dropdown-item-badge">All Files</span>
                   </button>
-                  <div class="dropdown-divider"></div>
-                  <button type="button" class="dropdown-item" id="opt-dl-apple">
-                    <iconify-icon icon="lucide:smartphone"></iconify-icon>
-                    <span>Apple Touch Icon (PNG)</span>
+                  <div class="dropdown-divider" style="height: 1px; background: var(--border); margin: 3px 0;"></div>
+                  <button type="button" class="dropdown-item" id="opt-dl-apple" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:smartphone" width="14" height="14"></iconify-icon>
+                      <span>Apple Touch Icon</span>
+                    </div>
                     <span class="dropdown-item-badge">180×180</span>
                   </button>
-                  <button type="button" class="dropdown-item" id="opt-dl-32">
-                    <iconify-icon icon="lucide:image"></iconify-icon>
-                    <span>Standard Tab Icon (PNG)</span>
+                  <button type="button" class="dropdown-item" id="opt-dl-32" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:image" width="14" height="14"></iconify-icon>
+                      <span>Standard PNG</span>
+                    </div>
                     <span class="dropdown-item-badge">32×32</span>
                   </button>
-                  <button type="button" class="dropdown-item" id="opt-dl-512">
-                    <iconify-icon icon="lucide:monitor"></iconify-icon>
-                    <span>Android / PWA Icon (PNG)</span>
+                  <button type="button" class="dropdown-item" id="opt-dl-512" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:monitor" width="14" height="14"></iconify-icon>
+                      <span>Android / PWA Icon</span>
+                    </div>
                     <span class="dropdown-item-badge">512×512</span>
                   </button>
                 </div>
@@ -769,139 +646,164 @@
             </div>
           </div>
 
-          <!-- Dual Workspace Panes -->
-          <div class="tool-workspace-split">
+          <!-- 2. Dual Symmetrical Split-Pane Grid -->
+          <div class="split-pane-grid" style="margin-bottom: 1.25rem;">
 
-            <!-- LEFT PANE: Input & Framing Controls -->
-            <div class="workspace-pane">
+            <!-- LEFT: Source Image & Upload Pane -->
+            <div class="tool-pane">
               <div class="pane-header">
-                <h3 class="pane-title">Source Image &amp; Design</h3>
-                <span class="pane-badge" id="source-status-badge">No image loaded</span>
+                <span>Source Artwork &amp; Upload</span>
+                <span class="pane-badge" id="source-meta-badge">No image loaded</span>
               </div>
 
-              <div class="pane-body">
-                <!-- Dropzone / File Picker -->
-                <div class="url-input-container" style="margin-bottom: 0.75rem;">
-                  <input type="file" id="file-input" accept="image/png, image/jpeg, image/webp, image/svg+xml, image/gif, image/bmp, image/avif" style="display: none;">
-                  <div id="drop-zone" class="preview-viewport-box" style="min-height: 140px; cursor: pointer; border-style: dashed; padding: 1.25rem; text-align: center;">
-                    <div class="empty-preview-content" id="drop-prompt">
-                      <div class="empty-preview-icon">
-                        <iconify-icon icon="lucide:upload-cloud" width="32" height="32"></iconify-icon>
-                      </div>
-                      <p class="empty-preview-text" style="font-weight: 500;">
-                        <strong>Click to upload</strong> or drag &amp; drop your logo here
-                      </p>
-                      <p style="font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;">
-                        PNG, JPG, WebP, SVG, GIF or BMP up to 25MB
-                      </p>
-                    </div>
+              <div class="pane-content" style="padding: 1.15rem; display: flex; flex-direction: column; justify-content: center; height: 100%;">
+                <!-- Drag & Drop Zone -->
+                <div id="image-dropzone" class="video-dropzone" style="cursor: pointer; padding: 2.75rem 1rem; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                  <input type="file" id="image-file-input" accept="image/png, image/jpeg, image/webp, image/svg+xml, image/gif, image/bmp, image/avif, image/*" style="display: none;">
+                  <div class="video-drop-icon">
+                    <iconify-icon icon="lucide:upload-cloud" width="32" height="32"></iconify-icon>
                   </div>
+                  <div class="video-drop-title" style="margin-top: 0.5rem; font-weight: 600;">Drop image here or click to browse</div>
+                  <div class="video-drop-subtitle" style="margin-top: 0.25rem;">Supports PNG, JPG, WebP, SVG, GIF, AVIF, BMP up to 25MB</div>
                 </div>
-
-                <!-- Sample Chips -->
-                <div class="control-group-block" style="margin-bottom: 1.25rem;">
-                  <div class="control-group-label">
-                    <span>Try Sample Symbols</span>
-                  </div>
-                  <div class="sample-chips-row">
-                    <button type="button" class="btn-sample-chip" data-sample="fox">🦊 Fox Mascot</button>
-                    <button type="button" class="btn-sample-chip" data-sample="code">⚡ Tech Symbol</button>
-                    <button type="button" class="btn-sample-chip" data-sample="shield">🛡️ Shield Emblem</button>
-                  </div>
-                </div>
-
-                <!-- Background Fill Selector -->
-                <div class="control-group-block">
-                  <div class="control-group-label">
-                    <span>Background Fill</span>
-                    <span class="control-group-hint" id="bg-color-label">Transparent</span>
-                  </div>
-                  <div class="color-swatches-row">
-                    <button type="button" class="color-swatch-btn swatch-transparent active" data-bg="transparent" title="Transparent Background"></button>
-                    <button type="button" class="color-swatch-btn" data-bg="#ffffff" style="background: #ffffff;" title="White"></button>
-                    <button type="button" class="color-swatch-btn" data-bg="#0D0D0D" style="background: #0D0D0D;" title="Dark Charcoal"></button>
-                    <button type="button" class="color-swatch-btn" data-bg="#FF6A2A" style="background: #FF6A2A;" title="Toolity Brand Orange"></button>
-                    <button type="button" class="color-swatch-btn" data-bg="#2563EB" style="background: #2563EB;" title="Cobalt Blue"></button>
-                    <button type="button" class="color-swatch-btn" data-bg="#10B981" style="background: #10B981;" title="Emerald Green"></button>
-                    <div class="color-picker-input-wrapper" title="Custom Hex Color">
-                      <input type="color" id="custom-color-picker" class="color-picker-native" value="#FF6A2A">
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Padding / Quiet Zone Buffer Slider -->
-                <div class="control-group-block">
-                  <div class="control-group-label">
-                    <span>Quiet Zone Padding</span>
-                    <span class="range-val-badge" id="padding-val-badge">8%</span>
-                  </div>
-                  <div class="range-row">
-                    <input type="range" id="padding-slider" class="range-input" min="0" max="30" value="8" step="1">
-                  </div>
-                </div>
-
-                <!-- Shape / Corner Radius Presets -->
-                <div class="control-group-block">
-                  <div class="control-group-label">
-                    <span>Icon Shape &amp; Radius</span>
-                  </div>
-                  <div class="segmented-group" id="shape-group">
-                    <button type="button" class="segmented-btn active" data-radius="0">
-                      <iconify-icon icon="lucide:square"></iconify-icon>
-                      <span>Square (0%)</span>
-                    </button>
-                    <button type="button" class="segmented-btn" data-radius="22">
-                      <iconify-icon icon="lucide:app-window"></iconify-icon>
-                      <span>Squircle (22%)</span>
-                    </button>
-                    <button type="button" class="segmented-btn" data-radius="50">
-                      <iconify-icon icon="lucide:circle"></iconify-icon>
-                      <span>Circle (50%)</span>
-                    </button>
-                  </div>
-                </div>
-
-                <!-- Site Title Customizer for Previews -->
-                <div class="control-group-block">
-                  <div class="control-group-label">
-                    <span>Website Title (for Live Previews)</span>
-                  </div>
-                  <input type="text" id="site-title-input" class="control-text-input" value="My Awesome Website" placeholder="Enter site title...">
-                </div>
-
               </div>
             </div>
 
-            <!-- RIGHT PANE: Realistic Previews & All-Sizes Export -->
-            <div class="workspace-pane">
+            <!-- RIGHT: Live Simulation Pane -->
+            <div class="tool-pane">
               <div class="pane-header">
-                <h3 class="pane-title">Real-Time Simulation</h3>
-                <span class="pane-badge" id="preview-status-badge">Live Preview</span>
+                <span>Real-Time Simulation</span>
+                <span class="pane-badge" id="preview-status-badge">Awaiting Image</span>
               </div>
 
-              <div class="pane-body">
-                <!-- Preview Mode Navigation Tabs -->
+              <div class="pane-content" style="padding: 1.15rem; display: flex; flex-direction: column; justify-content: flex-start; gap: 0.85rem;">
+                <!-- Sub-Tabs Switcher -->
                 <div class="preview-mode-nav">
-                  <button type="button" class="preview-mode-tab active" data-tab="tab-browser">
-                    <iconify-icon icon="lucide:globe"></iconify-icon>
+                  <button type="button" class="preview-mode-tab active" data-tab="tab-matrix">
+                    <iconify-icon icon="lucide:grid" width="14" height="14"></iconify-icon>
+                    <span>All Sizes</span>
+                  </button>
+                  <button type="button" class="preview-mode-tab" data-tab="tab-html">
+                    <iconify-icon icon="lucide:code-2" width="14" height="14"></iconify-icon>
+                    <span>HTML Code</span>
+                  </button>
+                  <button type="button" class="preview-mode-tab" data-tab="tab-browser">
+                    <iconify-icon icon="lucide:globe" width="14" height="14"></iconify-icon>
                     <span>Browser Tab</span>
                   </button>
                   <button type="button" class="preview-mode-tab" data-tab="tab-mobile">
-                    <iconify-icon icon="lucide:smartphone"></iconify-icon>
+                    <iconify-icon icon="lucide:smartphone" width="14" height="14"></iconify-icon>
                     <span>Home Screen</span>
                   </button>
                   <button type="button" class="preview-mode-tab" data-tab="tab-serp">
-                    <iconify-icon icon="lucide:search"></iconify-icon>
+                    <iconify-icon icon="lucide:search" width="14" height="14"></iconify-icon>
                     <span>Google SERP</span>
-                  </button>
-                  <button type="button" class="preview-mode-tab" data-tab="tab-matrix">
-                    <iconify-icon icon="lucide:grid"></iconify-icon>
-                    <span>All Sizes</span>
                   </button>
                 </div>
 
-                <!-- TAB 1: Browser Window Simulation -->
-                <div class="tab-view active" id="tab-browser">
+                <!-- TAB 1: All Sizes Grid (Default Active) -->
+                <div class="tab-view active" id="tab-matrix">
+                  <div class="sizes-matrix-grid">
+                    <!-- 16x16 -->
+                    <div class="size-matrix-card">
+                      <div class="size-preview-box">
+                        <img id="size-img-16" src="/assets/favicons/favicon-16x16.png" alt="16x16 Favicon" width="16" height="16">
+                      </div>
+                      <span class="size-card-title">16×16</span>
+                      <span class="size-card-desc">Tab</span>
+                      <button type="button" class="size-btn-download" data-size="16">
+                        <iconify-icon icon="lucide:download"></iconify-icon> PNG
+                      </button>
+                    </div>
+
+                    <!-- 32x32 -->
+                    <div class="size-matrix-card">
+                      <div class="size-preview-box">
+                        <img id="size-img-32" src="/assets/favicons/favicon-32x32.png" alt="32x32 Favicon" width="32" height="32">
+                      </div>
+                      <span class="size-card-title">32×32</span>
+                      <span class="size-card-desc">Retina</span>
+                      <button type="button" class="size-btn-download" data-size="32">
+                        <iconify-icon icon="lucide:download"></iconify-icon> PNG
+                      </button>
+                    </div>
+
+                    <!-- 48x48 -->
+                    <div class="size-matrix-card">
+                      <div class="size-preview-box">
+                        <img id="size-img-48" src="/assets/favicons/favicon-32x32.png" alt="48x48 Favicon" width="48" height="48">
+                      </div>
+                      <span class="size-card-title">48×48</span>
+                      <span class="size-card-desc">Desktop</span>
+                      <button type="button" class="size-btn-download" data-size="48">
+                        <iconify-icon icon="lucide:download"></iconify-icon> PNG
+                      </button>
+                    </div>
+
+                    <!-- 180x180 -->
+                    <div class="size-matrix-card">
+                      <div class="size-preview-box">
+                        <img id="size-img-180" src="/assets/favicons/apple-touch-icon.png" alt="180x180 Apple Touch Icon" width="44" height="44">
+                      </div>
+                      <span class="size-card-title">180×180</span>
+                      <span class="size-card-desc">Apple</span>
+                      <button type="button" class="size-btn-download" data-size="180">
+                        <iconify-icon icon="lucide:download"></iconify-icon> PNG
+                      </button>
+                    </div>
+
+                    <!-- 192x192 -->
+                    <div class="size-matrix-card">
+                      <div class="size-preview-box">
+                        <img id="size-img-192" src="/assets/favicons/android-chrome-192x192.png" alt="192x192 Android Icon" width="44" height="44">
+                      </div>
+                      <span class="size-card-title">192×192</span>
+                      <span class="size-card-desc">Android</span>
+                      <button type="button" class="size-btn-download" data-size="192">
+                        <iconify-icon icon="lucide:download"></iconify-icon> PNG
+                      </button>
+                    </div>
+
+                    <!-- 512x512 -->
+                    <div class="size-matrix-card">
+                      <div class="size-preview-box">
+                        <img id="size-img-512" src="/assets/favicons/android-chrome-512x512.png" alt="512x512 PWA Splash Icon" width="44" height="44">
+                      </div>
+                      <span class="size-card-title">512×512</span>
+                      <span class="size-card-desc">PWA</span>
+                      <button type="button" class="size-btn-download" data-size="512">
+                        <iconify-icon icon="lucide:download"></iconify-icon> PNG
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- TAB 2: HTML Embed Code Snippet -->
+                <div class="tab-view" id="tab-html" style="display: none;">
+                  <div style="background: var(--surface-elevated); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 0.85rem;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.6rem;">
+                      <span style="font-size: 0.78rem; font-weight: 600; color: var(--text-primary); display: flex; align-items: center; gap: 0.35rem;">
+                        <iconify-icon icon="lucide:code-2" width="14" height="14" style="color: var(--brand);"></iconify-icon>
+                        <span>Favicon HTML &lt;head&gt; Code</span>
+                      </span>
+                      <button type="button" class="btn-toolbar-sm" id="btn-copy-html-snippet" style="font-size: 0.72rem; padding: 0.25rem 0.6rem; height: auto;">
+                        <iconify-icon icon="lucide:copy" width="12" height="12"></iconify-icon>
+                        <span>Copy Code</span>
+                      </button>
+                    </div>
+                    <pre class="html-code-pre" id="html-snippet-display" style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-secondary); line-height: 1.5; background: var(--surface); padding: 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle); margin: 0; overflow-x: auto;">&lt;!-- Favicon Suite generated by Toolity.in --&gt;
+&lt;link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"&gt;
+&lt;link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"&gt;
+&lt;link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"&gt;
+&lt;link rel="shortcut icon" href="/favicon.ico"&gt;</pre>
+                    <p style="font-size: 0.72rem; color: var(--text-muted); margin: 0.6rem 0 0 0;">
+                      Paste these tags directly inside the <code>&lt;head&gt;</code> of your website HTML documents.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- TAB 3: Browser Simulation -->
+                <div class="tab-view" id="tab-browser" style="display: none;">
                   <div class="mock-browser-window">
                     <div class="mock-browser-chrome">
                       <div class="mock-window-dots">
@@ -919,36 +821,36 @@
                       <span>https://myawesomewebsite.com</span>
                     </div>
                     <div class="mock-browser-viewport">
-                      <div style="width: 80px; height: 80px; display: flex; align-items: center; justify-content: center;">
-                        <img id="tab-main-preview-img" src="/assets/favicons/favicon-32x32.png" alt="Favicon Preview" style="width: 64px; height: 64px; object-fit: contain;">
+                      <div style="width: 64px; height: 64px; display: flex; align-items: center; justify-content: center;">
+                        <img id="tab-main-preview-img" src="/assets/favicons/favicon-32x32.png" alt="Favicon Preview" style="width: 48px; height: 48px; object-fit: contain;">
                       </div>
-                      <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0;">
-                        High-resolution 32×32 &amp; 16×16 tab display preview
+                      <p style="font-size: 0.78rem; color: var(--text-muted); margin: 0;">
+                        32×32 Retina &amp; 16×16 Standard Tab Preview
                       </p>
                     </div>
                   </div>
                 </div>
 
-                <!-- TAB 2: Mobile Home Screen Simulation -->
+                <!-- TAB 4: Mobile Home Screen Simulation -->
                 <div class="tab-view" id="tab-mobile" style="display: none;">
                   <div class="mock-phone-frame">
                     <div class="mock-phone-screen">
                       <div class="mock-app-grid">
                         <div class="mock-app-item">
                           <div class="mock-app-icon-box" style="background: #2563EB; color: white;">
-                            <iconify-icon icon="lucide:mail" width="28" height="28"></iconify-icon>
+                            <iconify-icon icon="lucide:mail" width="22" height="22"></iconify-icon>
                           </div>
                           <span class="mock-app-name">Mail</span>
                         </div>
                         <div class="mock-app-item">
                           <div class="mock-app-icon-box" id="mobile-preview-icon-box">
-                            <img id="mobile-preview-img" src="/assets/favicons/apple-touch-icon.png" alt="Mobile App Favicon" width="54" height="54">
+                            <img id="mobile-preview-img" src="/assets/favicons/apple-touch-icon.png" alt="Mobile App Favicon" width="44" height="44">
                           </div>
                           <span class="mock-app-name" id="mobile-app-name">My Website</span>
                         </div>
                         <div class="mock-app-item">
                           <div class="mock-app-icon-box" style="background: #10B981; color: white;">
-                            <iconify-icon icon="lucide:camera" width="28" height="28"></iconify-icon>
+                            <iconify-icon icon="lucide:camera" width="22" height="22"></iconify-icon>
                           </div>
                           <span class="mock-app-name">Camera</span>
                         </div>
@@ -957,12 +859,12 @@
                   </div>
                 </div>
 
-                <!-- TAB 3: Google Search Result Simulation -->
+                <!-- TAB 5: Google SERP Simulation -->
                 <div class="tab-view" id="tab-serp" style="display: none;">
                   <div class="mock-serp-box">
                     <div class="mock-serp-header">
                       <div class="mock-serp-favicon">
-                        <img id="serp-preview-img" src="/assets/favicons/favicon-32x32.png" alt="Google SERP Favicon" width="18" height="18">
+                        <img id="serp-preview-img" src="/assets/favicons/favicon-32x32.png" alt="Google SERP Favicon" width="16" height="16">
                       </div>
                       <div class="mock-serp-meta">
                         <span class="mock-serp-sitename" id="serp-sitename">My Awesome Website</span>
@@ -971,99 +873,9 @@
                     </div>
                     <a href="#" class="mock-serp-title" id="serp-title-link">My Awesome Website — Simple &amp; Fast Solutions</a>
                     <p class="mock-serp-snippet">
-                      Explore tools, utilities, and resources built for creators and developers. Fast, private, and zero installation required.
+                      Explore utilities and tools built for creators and developers. Fast, private, and zero installation required.
                     </p>
                   </div>
-                </div>
-
-                <!-- TAB 4: All Sizes Matrix -->
-                <div class="tab-view" id="tab-matrix" style="display: none;">
-                  <div class="sizes-matrix-grid">
-                    <!-- 16x16 -->
-                    <div class="size-matrix-card">
-                      <div class="size-preview-box">
-                        <img id="size-img-16" src="/assets/favicons/favicon-16x16.png" alt="16x16 Favicon" width="16" height="16">
-                      </div>
-                      <span class="size-card-title">16×16</span>
-                      <span class="size-card-desc">Standard Tab</span>
-                      <button type="button" class="size-btn-download" data-size="16">
-                        <iconify-icon icon="lucide:download"></iconify-icon> PNG
-                      </button>
-                    </div>
-
-                    <!-- 32x32 -->
-                    <div class="size-matrix-card">
-                      <div class="size-preview-box">
-                        <img id="size-img-32" src="/assets/favicons/favicon-32x32.png" alt="32x32 Favicon" width="32" height="32">
-                      </div>
-                      <span class="size-card-title">32×32</span>
-                      <span class="size-card-desc">Retina Desktop</span>
-                      <button type="button" class="size-btn-download" data-size="32">
-                        <iconify-icon icon="lucide:download"></iconify-icon> PNG
-                      </button>
-                    </div>
-
-                    <!-- 48x48 -->
-                    <div class="size-matrix-card">
-                      <div class="size-preview-box">
-                        <img id="size-img-48" src="/assets/favicons/favicon-32x32.png" alt="48x48 Favicon" width="48" height="48">
-                      </div>
-                      <span class="size-card-title">48×48</span>
-                      <span class="size-card-desc">Windows Desktop</span>
-                      <button type="button" class="size-btn-download" data-size="48">
-                        <iconify-icon icon="lucide:download"></iconify-icon> PNG
-                      </button>
-                    </div>
-
-                    <!-- 180x180 -->
-                    <div class="size-matrix-card">
-                      <div class="size-preview-box">
-                        <img id="size-img-180" src="/assets/favicons/apple-touch-icon.png" alt="180x180 Apple Touch Icon" width="56" height="56">
-                      </div>
-                      <span class="size-card-title">180×180</span>
-                      <span class="size-card-desc">Apple Touch</span>
-                      <button type="button" class="size-btn-download" data-size="180">
-                        <iconify-icon icon="lucide:download"></iconify-icon> PNG
-                      </button>
-                    </div>
-
-                    <!-- 192x192 -->
-                    <div class="size-matrix-card">
-                      <div class="size-preview-box">
-                        <img id="size-img-192" src="/assets/favicons/android-chrome-192x192.png" alt="192x192 Android Icon" width="56" height="56">
-                      </div>
-                      <span class="size-card-title">192×192</span>
-                      <span class="size-card-desc">Android Home</span>
-                      <button type="button" class="size-btn-download" data-size="192">
-                        <iconify-icon icon="lucide:download"></iconify-icon> PNG
-                      </button>
-                    </div>
-
-                    <!-- 512x512 -->
-                    <div class="size-matrix-card">
-                      <div class="size-preview-box">
-                        <img id="size-img-512" src="/assets/favicons/android-chrome-512x512.png" alt="512x512 PWA Splash Icon" width="56" height="56">
-                      </div>
-                      <span class="size-card-title">512×512</span>
-                      <span class="size-card-desc">PWA Splash</span>
-                      <button type="button" class="size-btn-download" data-size="512">
-                        <iconify-icon icon="lucide:download"></iconify-icon> PNG
-                      </button>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- HTML Embed Code Snippet -->
-                <div class="html-code-box">
-                  <button type="button" class="btn-copy-code" id="btn-copy-html-snippet">
-                    <iconify-icon icon="lucide:copy"></iconify-icon>
-                    <span>Copy Code</span>
-                  </button>
-                  <pre class="html-code-pre" id="html-snippet-display">&lt;!-- Favicon Suite generated by Toolity.in --&gt;
-&lt;link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"&gt;
-&lt;link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"&gt;
-&lt;link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"&gt;
-&lt;link rel="shortcut icon" href="/favicon.ico"&gt;</pre>
                 </div>
 
               </div>
@@ -1071,9 +883,143 @@
 
           </div>
 
+          <!-- 3. Controls & Options inside Accordion (Positioned Below Split-Pane & Closed by Default) -->
+          <details class="tool-settings-accordion" style="margin-bottom: 0.25rem;">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="16" height="16"></iconify-icon>
+                <span>Favicon Customization &amp; Style Settings</span>
+                <span class="pane-badge" id="settings-summary-badge">(Contain • Transparent • 8% Padding • Square)</span>
+              </div>
+              <iconify-icon icon="lucide:chevron-down" class="tool-settings-chevron" width="16" height="16"></iconify-icon>
+            </summary>
+
+            <div class="tool-settings-panel">
+              <div class="settings-sections-wrapper">
+                
+                <!-- Section 1: Framing, Scale & Fit -->
+                <div class="settings-section-card">
+                  <div class="settings-section-header">
+                    <span>1. Framing, Fit Mode &amp; Quiet Zone</span>
+                  </div>
+                  <div class="settings-row-wrap">
+                    <!-- Fit Mode Segmented -->
+                    <div class="form-group">
+                      <span class="form-label" style="font-size:0.75rem;">Aspect Ratio Fit</span>
+                      <div class="segmented-group" id="fit-mode-group">
+                        <button type="button" class="seg-pill active" data-fit="contain">Contain</button>
+                        <button type="button" class="seg-pill" data-fit="cover">Cover Crop</button>
+                        <button type="button" class="seg-pill" data-fit="stretch">Stretch</button>
+                      </div>
+                    </div>
+
+                    <!-- Shape & Radius Segmented -->
+                    <div class="form-group">
+                      <span class="form-label" style="font-size:0.75rem;">Icon Shape</span>
+                      <div class="segmented-group" id="shape-group">
+                        <button type="button" class="seg-pill active" data-radius="0">Square (0%)</button>
+                        <button type="button" class="seg-pill" data-radius="22">Squircle (22%)</button>
+                        <button type="button" class="seg-pill" data-radius="50">Circle (50%)</button>
+                      </div>
+                    </div>
+
+                    <!-- Padding Slider Control -->
+                    <div class="form-group" style="min-width: 220px; flex: 1;">
+                      <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                        <span class="form-label" style="font-size:0.75rem; margin-bottom: 0;">Quiet Zone Padding</span>
+                        <span class="pane-badge" id="padding-val-badge" style="font-size:0.7rem;">8%</span>
+                      </div>
+                      <div class="range-row" style="margin-top: 0.35rem;">
+                        <input type="range" id="padding-slider" class="range-input" min="0" max="30" value="8" step="1">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Section 2: Background Fill & Website Title -->
+                <div class="settings-section-card">
+                  <div class="settings-section-header">
+                    <span>2. Background Fill &amp; Simulation Branding</span>
+                  </div>
+                  <div class="settings-row-wrap">
+                    <!-- Background Swatches -->
+                    <div class="form-group">
+                      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                        <span class="form-label" style="font-size:0.75rem; margin: 0;">Background Fill</span>
+                        <span id="bg-color-label" style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-secondary);">Transparent</span>
+                      </div>
+                      <div class="color-swatches-row">
+                        <button type="button" class="color-swatch-btn swatch-transparent active" data-bg="transparent" title="Transparent"></button>
+                        <button type="button" class="color-swatch-btn" data-bg="#ffffff" style="background: #ffffff;" title="White"></button>
+                        <button type="button" class="color-swatch-btn" data-bg="#0D0D0D" style="background: #0D0D0D;" title="Dark Charcoal"></button>
+                        <button type="button" class="color-swatch-btn" data-bg="#FF6A2A" style="background: #FF6A2A;" title="Brand Orange"></button>
+                        <button type="button" class="color-swatch-btn" data-bg="#2563EB" style="background: #2563EB;" title="Cobalt Blue"></button>
+                        <button type="button" class="color-swatch-btn" data-bg="#10B981" style="background: #10B981;" title="Emerald Green"></button>
+                        <div class="color-picker-input-wrapper" title="Custom Hex Color">
+                          <input type="color" id="custom-color-picker" class="color-picker-native" value="#FF6A2A">
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Website Title -->
+                    <div class="form-group" style="min-width: 240px; flex: 1;">
+                      <span class="form-label" style="font-size:0.75rem;">Website Title (for Live Previews)</span>
+                      <input type="text" id="site-title-input" class="control-text-input" value="My Awesome Website" placeholder="Enter website title...">
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </details>
+
         </div>
 
-        <!-- Comprehensive Tool Guide & Format Specs -->
+        <!-- ==================================================================
+             ADSTERRA BANNER SLOT (Positioned Below Tool Workspace)
+             ================================================================== -->
+        <div data-include="/components/ad-slot.html"></div>
+
+        <!-- ==================================================================
+             3-STEP INSTRUCTION GUIDE
+             ================================================================== -->
+        <section class="guide-section">
+          <div class="section-header">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-title">Using the Image to Favicon Converter</h2>
+            <p class="section-desc">Generate multi-resolution favicons and icons in 3 quick steps with 100% client-side privacy.</p>
+          </div>
+
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Upload Image Artwork</h3>
+              <p class="step-desc">
+                Drop your logo, symbol, or brand artwork (PNG, JPG, WebP, SVG, GIF, AVIF, BMP) into the dropzone to begin.
+              </p>
+            </div>
+
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Customize Framing &amp; Styling</h3>
+              <p class="step-desc">
+                Expand Tool Settings to adjust fit mode, quiet zone padding, background fill color, rounded corners, or website title.
+              </p>
+            </div>
+
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Download .ICO Suite &amp; Embed</h3>
+              <p class="step-desc">
+                Export a multi-size <code>favicon.ico</code> (16/32/48px), individual high-res PNGs, or download the complete ZIP suite with HTML tags.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             FAVICON SPECIFICATIONS & PLATFORM REFERENCE TABLE
+             ================================================================== -->
         <div class="formats-table-card">
           <h2 style="font-size: 1.15rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.75rem;">
             Favicon Dimension &amp; Platform Reference
@@ -1131,7 +1077,9 @@
           </table>
         </div>
 
-        <!-- FAQ Section -->
+        <!-- ==================================================================
+             FREQUENTLY ASKED QUESTIONS (FAQ)
+             ================================================================== -->
         <div class="formats-table-card" style="margin-top: 1.5rem;">
           <h2 style="font-size: 1.15rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1rem;">
             Frequently Asked Questions
@@ -1164,6 +1112,29 @@
           </div>
         </div>
 
+        <!-- ==================================================================
+             CATEGORY WORKSPACE CTA CARD
+             ================================================================== -->
+        <section class="category-workspace-cta">
+          <div class="category-workspace-cta-left">
+            <span class="section-eyebrow">Convertors Workspace</span>
+            <h2 class="category-workspace-cta-title">Explore All Convertor Tools</h2>
+            <p class="category-workspace-cta-desc">
+              Discover our collection of client-side media converters including Video Format Converter, Video to GIF, GIF to Video, and audio extraction tools.
+            </p>
+          </div>
+          <div class="category-workspace-cta-right">
+            <a href="/convertors/" class="btn-pill btn-primary-signal">
+              <span>Explore Convertor Tools</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14"></path>
+                <path d="m12 5 7 7-7 7"></path>
+              </svg>
+            </a>
+          </div>
+        </section>
+
       </div>
     </section>
   </main>
@@ -1179,10 +1150,10 @@
     /* Designed by Kapil Pidhwani: Image to Favicon Converter Engine */
     document.addEventListener('DOMContentLoaded', () => {
       // DOM Elements
-      const fileInput = document.getElementById('file-input');
-      const dropZone = document.getElementById('drop-zone');
-      const dropPrompt = document.getElementById('drop-prompt');
-      const sourceStatusBadge = document.getElementById('source-status-badge');
+      const fileInput = document.getElementById('image-file-input');
+      const dropZone = document.getElementById('image-dropzone');
+      const sourceMetaBadge = document.getElementById('source-meta-badge');
+      const previewStatusBadge = document.getElementById('preview-status-badge');
       const fitModeGroup = document.getElementById('fit-mode-group');
       const shapeGroup = document.getElementById('shape-group');
       const paddingSlider = document.getElementById('padding-slider');
@@ -1190,11 +1161,12 @@
       const customColorPicker = document.getElementById('custom-color-picker');
       const bgColorLabel = document.getElementById('bg-color-label');
       const siteTitleInput = document.getElementById('site-title-input');
-      const btnReset = document.getElementById('btn-reset');
+      const settingsSummaryBadge = document.getElementById('settings-summary-badge');
+      const btnReset = document.getElementById('btn-reset-tool');
       const btnCopyHtmlTop = document.getElementById('btn-copy-html-top');
       const btnCopyHtmlSnippet = document.getElementById('btn-copy-html-snippet');
       const btnDownloadMaster = document.getElementById('btn-download-master');
-      const downloadDropdown = document.getElementById('download-dropdown');
+      const downloadDropdownWrapper = document.getElementById('download-dropdown-wrapper');
 
       // Previews
       const tabPreviewImg = document.getElementById('tab-preview-img');
@@ -1224,8 +1196,18 @@
       let cornerRadiusPct = 0;
       let renderedCanvases = {};
 
-      // Initialize with default sample
-      loadSamplePreset('fox');
+      // Initialize tool
+      updateSettingsBadge();
+      renderAllSizes();
+
+      function updateSettingsBadge() {
+        const fitCapitalized = fitMode.charAt(0).toUpperCase() + fitMode.slice(1);
+        const bgText = bgColor === 'transparent' ? 'Transparent BG' : `${bgColor.toUpperCase()} BG`;
+        const shapeText = cornerRadiusPct === 0 ? 'Square' : (cornerRadiusPct === 22 ? 'Squircle' : 'Circle');
+        if (settingsSummaryBadge) {
+          settingsSummaryBadge.textContent = `(${fitCapitalized} • ${bgText} • ${paddingPct}% Padding • ${shapeText})`;
+        }
+      }
 
       // Event Listeners for File Input & Dropzone
       dropZone.addEventListener('click', () => fileInput.click());
@@ -1249,21 +1231,23 @@
       });
 
       // Fit mode segmented buttons
-      fitModeGroup.querySelectorAll('.segmented-btn').forEach(btn => {
+      fitModeGroup.querySelectorAll('.seg-pill').forEach(btn => {
         btn.addEventListener('click', () => {
-          fitModeGroup.querySelectorAll('.segmented-btn').forEach(b => b.classList.remove('active'));
+          fitModeGroup.querySelectorAll('.seg-pill').forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
           fitMode = btn.dataset.fit;
+          updateSettingsBadge();
           renderAllSizes();
         });
       });
 
       // Shape segmented buttons
-      shapeGroup.querySelectorAll('.segmented-btn').forEach(btn => {
+      shapeGroup.querySelectorAll('.seg-pill').forEach(btn => {
         btn.addEventListener('click', () => {
-          shapeGroup.querySelectorAll('.segmented-btn').forEach(b => b.classList.remove('active'));
+          shapeGroup.querySelectorAll('.seg-pill').forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
           cornerRadiusPct = parseInt(btn.dataset.radius, 10);
+          updateSettingsBadge();
           renderAllSizes();
         });
       });
@@ -1272,6 +1256,7 @@
       paddingSlider.addEventListener('input', (e) => {
         paddingPct = parseInt(e.target.value, 10);
         paddingValBadge.textContent = `${paddingPct}%`;
+        updateSettingsBadge();
         renderAllSizes();
       });
 
@@ -1282,6 +1267,7 @@
           btn.classList.add('active');
           bgColor = btn.dataset.bg;
           bgColorLabel.textContent = bgColor === 'transparent' ? 'Transparent' : bgColor.toUpperCase();
+          updateSettingsBadge();
           renderAllSizes();
         });
       });
@@ -1290,6 +1276,7 @@
         document.querySelectorAll('.color-swatch-btn').forEach(b => b.classList.remove('active'));
         bgColor = e.target.value;
         bgColorLabel.textContent = bgColor.toUpperCase();
+        updateSettingsBadge();
         renderAllSizes();
       });
 
@@ -1300,14 +1287,6 @@
         mobileAppName.textContent = val.split(' ')[0] || val;
         serpSitename.textContent = val;
         serpTitleLink.textContent = `${val} — Simple & Fast Solutions`;
-      });
-
-      // Sample chips
-      document.querySelectorAll('.btn-sample-chip').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          loadSamplePreset(btn.dataset.sample);
-        });
       });
 
       // Preview sub-tab switcher
@@ -1321,25 +1300,23 @@
         });
       });
 
-      // Download dropdown toggle
+      // Download dropdown toggle (using .open on .dropdown-menu-wrapper matching main.css)
       btnDownloadMaster.addEventListener('click', (e) => {
         e.stopPropagation();
-        downloadDropdown.classList.toggle('show');
+        const isOpen = downloadDropdownWrapper.classList.toggle('open');
+        btnDownloadMaster.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
       });
 
       document.addEventListener('click', () => {
-        downloadDropdown.classList.remove('show');
+        downloadDropdownWrapper.classList.remove('open');
+        btnDownloadMaster.setAttribute('aria-expanded', 'false');
       });
 
       // Copy HTML buttons
       function copyHtmlCode() {
         const code = document.getElementById('html-snippet-display').textContent;
         navigator.clipboard.writeText(code).then(() => {
-          if (typeof showToastMessage === 'function') {
-            showToastMessage('HTML embed tags copied to clipboard!');
-          } else {
-            alert('HTML embed tags copied!');
-          }
+          showToastMessage('HTML embed tags copied to clipboard!');
         });
       }
 
@@ -1363,7 +1340,10 @@
 
       // Reset
       btnReset.addEventListener('click', () => {
-        loadSamplePreset('fox');
+        sourceImage = null;
+        fileInput.value = '';
+        if (sourceMetaBadge) sourceMetaBadge.textContent = 'No image loaded';
+        if (previewStatusBadge) previewStatusBadge.textContent = 'Awaiting Image';
         fitMode = 'contain';
         bgColor = 'transparent';
         paddingPct = 8;
@@ -1375,10 +1355,13 @@
         mobileAppName.textContent = 'My Website';
         serpSitename.textContent = 'My Awesome Website';
         serpTitleLink.textContent = 'My Awesome Website — Simple & Fast Solutions';
-        fitModeGroup.querySelectorAll('.segmented-btn').forEach((b, i) => b.classList.toggle('active', i === 0));
-        shapeGroup.querySelectorAll('.segmented-btn').forEach((b, i) => b.classList.toggle('active', i === 0));
+        fitModeGroup.querySelectorAll('.seg-pill').forEach((b, i) => b.classList.toggle('active', i === 0));
+        shapeGroup.querySelectorAll('.seg-pill').forEach((b, i) => b.classList.toggle('active', i === 0));
         document.querySelectorAll('.color-swatch-btn').forEach((b, i) => b.classList.toggle('active', i === 0));
         bgColorLabel.textContent = 'Transparent';
+        updateSettingsBadge();
+        renderAllSizes();
+        showToastMessage('Tool reset');
       });
 
       // Handlers
@@ -1390,7 +1373,7 @@
 
       function processFile(file) {
         if (!file.type.startsWith('image/')) {
-          alert('Please select an image file (PNG, JPG, WebP, SVG, GIF, BMP).');
+          showToastMessage('Please select an image file (PNG, JPG, WebP, SVG, GIF, BMP).');
           return;
         }
 
@@ -1399,86 +1382,14 @@
           const img = new Image();
           img.onload = () => {
             sourceImage = img;
-            sourceStatusBadge.textContent = `${img.naturalWidth}×${img.naturalHeight} px`;
+            if (sourceMetaBadge) sourceMetaBadge.textContent = `${img.naturalWidth}×${img.naturalHeight} px`;
+            if (previewStatusBadge) previewStatusBadge.textContent = 'Live Ready';
             renderAllSizes();
+            showToastMessage('Image loaded successfully');
           };
           img.src = e.target.result;
         };
         reader.readAsDataURL(file);
-      }
-
-      function loadSamplePreset(type) {
-        const canvas = document.createElement('canvas');
-        canvas.width = 256;
-        canvas.height = 256;
-        const ctx = canvas.getContext('2d');
-
-        if (type === 'fox') {
-          // Mascot Fox Sample
-          ctx.fillStyle = '#FF6A2A';
-          ctx.beginPath();
-          ctx.arc(128, 128, 110, 0, Math.PI * 2);
-          ctx.fill();
-
-          ctx.fillStyle = '#FFFFFF';
-          ctx.beginPath();
-          ctx.ellipse(90, 110, 24, 32, 0, 0, Math.PI * 2);
-          ctx.ellipse(166, 110, 24, 32, 0, 0, Math.PI * 2);
-          ctx.fill();
-
-          ctx.fillStyle = '#0D0D0D';
-          ctx.beginPath();
-          ctx.arc(94, 112, 12, 0, Math.PI * 2);
-          ctx.arc(162, 112, 12, 0, Math.PI * 2);
-          ctx.fill();
-
-          ctx.fillStyle = '#0D0D0D';
-          ctx.beginPath();
-          ctx.arc(128, 155, 16, 0, Math.PI * 2);
-          ctx.fill();
-        } else if (type === 'code') {
-          // Tech lightning bolt
-          ctx.fillStyle = '#2563EB';
-          ctx.beginPath();
-          ctx.roundRect(16, 16, 224, 224, 48);
-          ctx.fill();
-
-          ctx.fillStyle = '#FACC15';
-          ctx.beginPath();
-          ctx.moveTo(140, 35);
-          ctx.lineTo(70, 135);
-          ctx.lineTo(125, 135);
-          ctx.lineTo(110, 225);
-          ctx.lineTo(190, 115);
-          ctx.lineTo(135, 115);
-          ctx.closePath();
-          ctx.fill();
-        } else {
-          // Shield Emblem
-          ctx.fillStyle = '#10B981';
-          ctx.beginPath();
-          ctx.moveTo(128, 25);
-          ctx.lineTo(220, 60);
-          ctx.lineTo(220, 140);
-          ctx.quadraticCurveTo(220, 215, 128, 245);
-          ctx.quadraticCurveTo(36, 215, 36, 140);
-          ctx.lineTo(36, 60);
-          ctx.closePath();
-          ctx.fill();
-
-          ctx.fillStyle = '#FFFFFF';
-          ctx.beginPath();
-          ctx.arc(128, 130, 45, 0, Math.PI * 2);
-          ctx.fill();
-        }
-
-        const img = new Image();
-        img.onload = () => {
-          sourceImage = img;
-          sourceStatusBadge.textContent = 'Preset Loaded';
-          renderAllSizes();
-        };
-        img.src = canvas.toDataURL('image/png');
       }
 
       function renderFaviconToCanvas(size) {
@@ -1750,6 +1661,9 @@
         const table = [];
         for (let n = 0; n < 256; n++) {
           c = n;
+        }
+        for (let n = 0; n < 256; n++) {
+          c = n;
           for (let k = 0; k < 8; k++) {
             c = ((c & 1) ? (0xEDB88320 ^ (c >>> 1)) : (c >>> 1));
           }
@@ -1760,19 +1674,36 @@
 
       // Download Helpers
       async function downloadIco() {
+        if (!sourceImage) {
+          showToastMessage('Please upload an image first');
+          return;
+        }
         const blob = await generateIcoBlob();
         triggerDownload(blob, 'favicon.ico');
+        showToastMessage('Downloaded favicon.ico');
       }
 
       async function downloadZip() {
+        if (!sourceImage) {
+          showToastMessage('Please upload an image first');
+          return;
+        }
         const blob = await generateZipBlob();
         triggerDownload(blob, 'toolity-favicons.zip');
+        showToastMessage('Downloaded Favicon Suite (.zip)');
       }
 
       function downloadSinglePng(size, filename) {
+        if (!sourceImage) {
+          showToastMessage('Please upload an image first');
+          return;
+        }
         const cvs = renderedCanvases[size];
         if (!cvs) return;
-        cvs.toBlob(blob => triggerDownload(blob, filename), 'image/png');
+        cvs.toBlob(blob => {
+          triggerDownload(blob, filename);
+          showToastMessage(`Downloaded ${filename}`);
+        }, 'image/png');
       }
 
       function triggerDownload(blob, filename) {
@@ -1789,8 +1720,7 @@
       function showToastMessage(msg) {
         const toast = document.getElementById('tool-toast');
         if (!toast) return;
-        const msgEl = document.getElementById('toast-message') || toast.querySelector('span');
-        if (msgEl) msgEl.textContent = msg;
+        toast.textContent = msg;
         toast.classList.add('show');
         setTimeout(() => toast.classList.remove('show'), 2400);
       }

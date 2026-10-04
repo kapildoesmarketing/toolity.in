@@ -13,19 +13,25 @@
 
 ---
 
-## 2. Design & Aesthetics (Follow `design.md`)
+## 2. Design & Aesthetics
 
-- **Visual Inspiration**: ElevenLabs-inspired warm minimalist aesthetic documented in [`design.md`](design.md).
-- **Canvas & Colors**: Near-white canvas (`#ffffff`, `#f5f5f5`, `#f5f2ef`), warm stone undertones, and warm-tinted shadows (`rgba(78, 50, 23, 0.04)`).
+- **Visual Style**: Editorial warm minimalist aesthetic with Fox-inspired warm accents (`#F4511E`, `#FF6A2A`).
+- **Canvas & Colors**: Light mode near-white canvas (`#ffffff`, `#f5f5f5`, `#f5f2ef`), warm stone undertones, warm-tinted shadows, and sleek dark mode (`#0D0D0D`, `#141414`).
+- **Design Tokens**: Strictly use standard CSS variables (`var(--brand)`, `var(--brand-soft)`, `var(--surface)`, `var(--surface-elevated)`, `var(--border)`, `var(--text-primary)`, `var(--text-secondary)`, `var(--text-muted)`). Never use ad-hoc non-existent variables.
 - **Typography Hierarchy**:
-  - Display headings: `Waldenburg` (weight 300, light/whisper-thin) or elegant lightweight sans fallback.
-  - Body & UI: `Inter` with positive letter-spacing (`+0.14px` to `+0.18px`).
+  - Display headings: `Waldenburg` (weight 300, light/whisper-thin) or lightweight sans fallback.
+  - Body & UI: `Inter` with clean positive letter-spacing (`+0.14px` to `+0.18px`).
   - Monospace: `Geist Mono` or system monospace for code/editor panes.
 - **Icons**: Use **Iconify** with Lucide vector icons (`<iconify-icon icon="lucide:..." ...></iconify-icon>`). Never use raw emojis in production UI.
 - **Buttons & Elevation**:
-  - Pill radius (`9999px`) for buttons.
+  - Pill radius (`9999px` / `var(--radius-pill)`) for buttons.
   - Multi-layered sub-0.1 opacity shadows (inset + outline + gentle elevation).
   - Warm stone CTA pills (`rgba(245, 242, 239, 0.8)`).
+- **Layout Flow & Workspace Hierarchy**:
+  - Symmetrical dual-pane workspace (Left = Input/Source, Right = Output/Simulation).
+  - Top Actions toolbar (Left = Presets/Modes, Right = Universal actions: Reset, Copy, Single Download dropdown).
+  - Progressive disclosure settings accordion (`<details class="tool-settings-accordion">`) positioned **below** the dual-pane workspace, closed by default with an informative live summary badge.
+  - 3-Step visual instruction guide (`<section class="guide-section">`), Format reference table, FAQ card, and Category Workspace CTA (`<section class="category-workspace-cta">`) on every tool page.
 
 ---
 
@@ -45,3 +51,5 @@
 5. **No Unrequested Browser Testing**: Do not execute automated browser testing subagents unless explicitly instructed by the user. Request manual testing by the user.
 6. **Intentional Craftsmanship**: Mark intentional simplifications or custom solutions with:
    `/* Designed by Kapil Pidhwani */` (or HTML/markdown equivalent).
+7. **No Git Push Without Explicit User Request**: Never execute `git push` autonomously or automatically upon finishing a task. All code changes and feature additions must remain local for the user to manually inspect and test. Only push to GitHub / remote repositories when the user explicitly commands to push.
+

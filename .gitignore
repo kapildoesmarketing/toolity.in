@@ -34,3 +34,18 @@ sample.*
 scratch/
 Hero Inspiration/
 temp/
+
+# Project Planning & Scratch Notes (Local Only)
+tasks.md
+tasks_*.md
+*task*.md
+suggestion*.txt
+suggestions*.txt
+*suggestion*.txt
+todo*.txt
+todos*.txt
+*todo*.txt
+notes*.txt
+brain/
+scratchpad*
+
