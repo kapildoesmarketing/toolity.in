@@ -20,6 +20,14 @@
   </script>
   <title>Image to Favicon Converter (Multi-Size .ICO, PNG &amp; Apple Touch) — Toolity.in</title>
   <link rel="canonical" href="https://toolity.in/convertors/image-to-favicon/">
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Image to Favicon Generator — Toolity.in">
+  <meta property="og:description" content="Turn any PNG, JPG, WebP or SVG into a complete favicon set — favicon.ico, PNG sizes, Apple Touch and Android icons — with live browser, mobile and search previews. Runs entirely in your browser.">
+  <meta property="og:url" content="https://toolity.in/convertors/image-to-favicon/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
 
   <!-- SEO & Metadata -->
   <meta name="description"
@@ -28,13 +36,7 @@
     content="image to favicon, favicon generator, png to ico, jpg to favicon, svg to ico, apple touch icon generator, website favicon maker, favicon ico download, pwa icons">
   <meta name="author" content="Kapil Pidhwani">
 
-  <!-- Open Graph -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://toolity.in/convertors/image-to-favicon/">
-  <meta property="og:title" content="Image to Favicon Converter — Toolity.in">
-  <meta property="og:description"
     content="Generate multi-resolution favicon.ico, Apple Touch Icons, and web manifest bundles directly in your browser. 100% private.">
-  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
 
   <!-- Favicons -->
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
@@ -56,486 +58,47 @@
 
   <!-- Global Design System -->
   <link rel="stylesheet" href="/styles/main.css?v=2.4">
+  <link rel="stylesheet" href="/styles/tools/image-to-favicon.css?v=1.0">
 
   <!-- Tool Specific Styles -->
-  <style>
-    /* Privacy Trust Badge */
-    .privacy-trust-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.35rem 0.85rem;
-      border-radius: var(--radius-pill);
-      background: rgba(16, 185, 129, 0.08);
-      border: 1px solid rgba(16, 185, 129, 0.25);
-      color: #10B981;
-      font-size: 0.78rem;
-      font-weight: 500;
-      margin-top: 0.5rem;
-    }
 
-    /* Left Pane Container */
-    .favicon-source-container {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      height: 100%;
-    }
-
-    /* Color Swatches */
-    .color-swatches-row {
-      display: flex;
-      align-items: center;
-      gap: 0.45rem;
-      flex-wrap: wrap;
-    }
-
-    .color-swatch-btn {
-      width: 28px;
-      height: 28px;
-      border-radius: var(--radius-xs);
-      border: 1.5px solid var(--border);
-      cursor: pointer;
-      position: relative;
-      transition: transform var(--transition-fast), border-color var(--transition-fast);
-      padding: 0;
-    }
-
-    .color-swatch-btn:hover {
-      transform: scale(1.1);
-    }
-
-    .color-swatch-btn.active {
-      border-color: var(--brand);
-      box-shadow: 0 0 0 2px rgba(255, 106, 42, 0.35);
-    }
-
-    .swatch-transparent {
-      background-image: linear-gradient(45deg, #ccc 25%, transparent 25%),
-        linear-gradient(-45deg, #ccc 25%, transparent 25%),
-        linear-gradient(45deg, transparent 75%, #ccc 75%),
-        linear-gradient(-45deg, transparent 75%, #ccc 75%);
-      background-size: 8px 8px;
-      background-position: 0 0, 0 4px, 4px -4px, -4px 0px;
-      background-color: #fff;
-    }
-
-    .color-picker-input-wrapper {
-      position: relative;
-      width: 28px;
-      height: 28px;
-      border-radius: var(--radius-xs);
-      overflow: hidden;
-      border: 1.5px solid var(--border);
-      cursor: pointer;
-    }
-
-    .color-picker-native {
-      position: absolute;
-      top: -10px;
-      left: -10px;
-      width: 48px;
-      height: 48px;
-      cursor: pointer;
-      border: none;
-      background: none;
-    }
-
-    /* Range Slider */
-    .range-row {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      width: 100%;
-    }
-
-    .range-input {
-      flex: 1;
-      accent-color: var(--brand);
-      cursor: pointer;
-    }
-
-    .range-val-badge {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      background: var(--surface-elevated);
-      border: 1px solid var(--border);
-      padding: 2px 6px;
-      border-radius: var(--radius-xs);
-      color: var(--text-primary);
-      min-width: 38px;
-      text-align: center;
-    }
-
-    /* Text Input */
-    .control-text-input {
-      width: 100%;
-      background: var(--surface-elevated);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 0.45rem 0.7rem;
-      color: var(--text-primary);
-      font-family: inherit;
-      font-size: 0.82rem;
-      outline: none;
-      transition: border-color var(--transition-fast);
-    }
-
-    .control-text-input:focus {
-      border-color: var(--brand);
-    }
-
-    /* Right Pane: Sub-Navigation */
-    .preview-mode-nav {
-      display: flex;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 0.85rem;
-      gap: 0.25rem;
-    }
-
-    .preview-mode-tab {
-      background: none;
-      border: none;
-      border-bottom: 2px solid transparent;
-      color: var(--text-secondary);
-      font-family: inherit;
-      font-size: 0.8rem;
-      font-weight: 500;
-      padding: 0.45rem 0.65rem;
-      cursor: pointer;
-      transition: all var(--transition-fast);
-      display: flex;
-      align-items: center;
-      gap: 0.35rem;
-    }
-
-    .preview-mode-tab.active {
-      color: var(--brand);
-      border-bottom-color: var(--brand);
-      font-weight: 600;
-    }
-
-    /* Browser Window Simulation */
-    .mock-browser-window {
-      background: var(--surface-elevated);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .mock-browser-chrome {
-      background: color-mix(in srgb, var(--surface) 75%, #000 25%);
-      padding: 0.45rem 0.75rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .mock-window-dots {
-      display: flex;
-      gap: 5px;
-    }
-
-    .mock-window-dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-    }
-
-    .dot-close { background: #FF5F56; }
-    .dot-min { background: #FFBD2E; }
-    .dot-max { background: #27C93F; }
-
-    .mock-browser-tab {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-bottom: none;
-      border-radius: 6px 6px 0 0;
-      padding: 0.3rem 0.65rem;
-      display: flex;
-      align-items: center;
-      gap: 0.45rem;
-      max-width: 180px;
-      font-size: 0.74rem;
-      color: var(--text-primary);
-      font-weight: 500;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .mock-browser-tab img {
-      width: 16px;
-      height: 16px;
-      flex-shrink: 0;
-    }
-
-    .mock-browser-address-bar {
-      background: var(--surface);
-      border-bottom: 1px solid var(--border);
-      padding: 0.35rem 0.75rem;
-      display: flex;
-      align-items: center;
-      gap: 0.45rem;
-      font-size: 0.72rem;
-      color: var(--text-muted);
-    }
-
-    .mock-browser-viewport {
-      padding: 1.5rem 1rem;
-      background: var(--surface);
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-    }
-
-    /* Mobile Home Screen Mockup */
-    .mock-phone-frame {
-      max-width: 220px;
-      margin: 0 auto;
-      background: #000000;
-      border-radius: 28px;
-      padding: 8px;
-      border: 3px solid #333333;
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
-    }
-
-    .mock-phone-screen {
-      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-      border-radius: 20px;
-      padding: 1.25rem 0.75rem;
-      min-height: 200px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-    }
-
-    .mock-app-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0.75rem;
-      text-align: center;
-    }
-
-    .mock-app-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.3rem;
-    }
-
-    .mock-app-icon-box {
-      width: 44px;
-      height: 44px;
-      border-radius: 10px;
-      overflow: hidden;
-      background: #ffffff;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .mock-app-icon-box img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .mock-app-name {
-      font-size: 0.65rem;
-      color: #ffffff;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 50px;
-    }
-
-    /* Google Search Snippet */
-    .mock-serp-box {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 1.15rem;
-    }
-
-    .mock-serp-header {
-      display: flex;
-      align-items: center;
-      gap: 0.55rem;
-      margin-bottom: 0.25rem;
-    }
-
-    .mock-serp-favicon {
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      background: var(--surface-elevated);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      border: 1px solid var(--border);
-    }
-
-    .mock-serp-favicon img {
-      width: 16px;
-      height: 16px;
-    }
-
-    .mock-serp-meta {
-      display: flex;
-      flex-direction: column;
-      font-size: 0.72rem;
-    }
-
-    .mock-serp-sitename {
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-
-    .mock-serp-url {
-      color: var(--text-muted);
-      font-size: 0.68rem;
-    }
-
-    .mock-serp-title {
-      color: #1a0dab;
-      font-size: 0.98rem;
-      font-weight: 500;
-      text-decoration: none;
-      margin-top: 0.2rem;
-      display: block;
-    }
-
-    [data-theme="dark"] .mock-serp-title {
-      color: #8ab4f8;
-    }
-
-    .mock-serp-snippet {
-      color: var(--text-secondary);
-      font-size: 0.78rem;
-      margin-top: 0.25rem;
-      line-height: 1.4;
-    }
-
-    /* All Sizes Grid (Symmetrical 3x2 Layout) */
-    .sizes-matrix-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0.5rem;
-      width: 100%;
-    }
-
-    .size-matrix-card {
-      background: var(--surface-elevated);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 0.45rem 0.35rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.25rem;
-      text-align: center;
-      transition: border-color var(--transition-fast);
-    }
-
-    .size-matrix-card:hover {
-      border-color: var(--brand);
-    }
-
-    .size-preview-box {
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--surface);
-      border-radius: var(--radius-xs);
-      border: 1px solid var(--border-subtle);
-      overflow: hidden;
-    }
-
-    .size-card-title {
-      font-size: 0.72rem;
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-
-    .size-card-desc {
-      font-size: 0.64rem;
-      color: var(--text-muted);
-      line-height: 1.15;
-    }
-
-    .size-btn-download {
-      font-size: 0.64rem;
-      padding: 2px 7px;
-      border-radius: var(--radius-pill);
-      background: var(--surface);
-      border: 1px solid var(--border);
-      color: var(--text-secondary);
-      cursor: pointer;
-      transition: all var(--transition-fast);
-      display: inline-flex;
-      align-items: center;
-      gap: 3px;
-      margin-top: 0.1rem;
-    }
-
-    .size-btn-download:hover {
-      color: var(--brand);
-      border-color: var(--brand);
-    }
-
-    /* HTML Code Snippet Box */
-    .html-code-box {
-      background: var(--surface-elevated);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 0.75rem 0.85rem;
-      margin-top: 0.75rem;
-      position: relative;
-    }
-
-    .html-code-pre {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      color: var(--text-secondary);
-      line-height: 1.45;
-      overflow-x: auto;
-      white-space: pre-wrap;
-      margin: 0;
-    }
-
-    .btn-copy-code {
-      position: absolute;
-      top: 0.5rem;
-      right: 0.5rem;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      color: var(--text-secondary);
-      padding: 0.25rem 0.55rem;
-      border-radius: var(--radius-sm);
-      font-size: 0.7rem;
-      font-weight: 500;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-      transition: all var(--transition-fast);
-    }
-
-    .btn-copy-code:hover {
-      color: var(--brand);
-      border-color: var(--brand);
-    }
-  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Image to Favicon Generator",
+        "url": "https://toolity.in/convertors/image-to-favicon/",
+        "description": "Turn any PNG, JPG, WebP or SVG into a complete favicon set \u2014 favicon.ico, PNG sizes, Apple Touch and Android icons \u2014 with live browser, mobile and search previews. Runs entirely in your browser.",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Convertors", "item": "https://toolity.in/convertors/" },
+          { "@type": "ListItem", "position": 3, "name": "Image to Favicon Generator", "item": "https://toolity.in/convertors/image-to-favicon/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Is my image uploaded to a server?", "acceptedAnswer": { "@type": "Answer", "text": "No. Resizing, shape masking and ICO packaging are done on an HTML canvas inside your browser, and the ZIP is assembled locally. Your artwork never leaves your device." } },
+          { "@type": "Question", "name": "Which files are in the download and where do I put them?", "acceptedAnswer": { "@type": "Answer", "text": "favicon.ico (16/32/48 px multi-size), favicon-16x16.png, favicon-32x32.png, apple-touch-icon.png (180 px) and android-chrome 192/512 px. Unzip them into your site root (or an /assets/favicons/ folder) and paste the generated &lt;link&gt; tags into the &lt;head&gt; \u2014 the Copy HTML button gives you exactly those tags." } },
+          { "@type": "Question", "name": "Why is there still a .ico file in 2025?", "acceptedAnswer": { "@type": "Answer", "text": "Browsers request /favicon.ico by default, Windows uses it for pinned sites and shortcuts, and some older crawlers only read it. The ICO here bundles 16, 32 and 48 px bitmaps so each context picks the crisp one." } },
+          { "@type": "Question", "name": "What source image works best?", "acceptedAnswer": { "@type": "Answer", "text": "A square image of at least 512 \u00d7 512 px with a simple, high-contrast mark. SVG scales perfectly; PNG with transparency keeps a clean background. Avoid thin lines and small text \u2014 they disappear at 16 px." } },
+          { "@type": "Question", "name": "What does Quiet Zone Padding do?", "acceptedAnswer": { "@type": "Answer", "text": "It shrinks the artwork inside the icon and leaves a margin so rounded or circular masks (iOS, Android adaptive icons) don't clip the edges. 8\u201312 % is a safe default for most logos." } },
+          { "@type": "Question", "name": "My new favicon doesn't show up \u2014 why?", "acceptedAnswer": { "@type": "Answer", "text": "Browsers cache favicons aggressively. Hard-refresh (Ctrl/\u2318 + Shift + R), open the page in a private window, or add a query string such as favicon.ico?v=2 to the link tags." } }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 
 <body>
@@ -561,7 +124,7 @@
             <span class="section-eyebrow">Conversion Utility</span>
             <h1 class="page-title">Image to Favicon Converter</h1>
             <p class="page-desc">
-              Transform any PNG, JPG, WebP, or SVG into multi-resolution <code style="font-family:var(--font-mono); font-size:0.88rem;">favicon.ico</code>, Apple Touch Icons, and Android PWA packages 100% locally.
+              Transform any PNG, JPG, WebP, or SVG into multi-resolution <code>favicon.ico</code>, Apple Touch Icons, and Android PWA packages 100% locally.
             </p>
             <div>
               <span class="privacy-trust-pill">
@@ -577,13 +140,13 @@
     <!-- Main Tool Workspace -->
     <section class="section-wrapper tool-section">
       <div class="container">
-        <div class="tool-workspace-card">
+        <div class="tool-workspace-card" data-layout="split" id="tool-card">
 
           <!-- 1. Actions Toolbar (Top-Right Universal Pattern) -->
           <div class="tool-actions-toolbar">
             <div class="toolbar-group">
-              <span style="font-size: 0.78rem; font-weight: 500; color: var(--text-muted); display: inline-flex; align-items: center; gap: 0.35rem;">
-                <iconify-icon icon="lucide:image" width="14" height="14" style="color: var(--brand);"></iconify-icon>
+              <span class="span-s1">
+                <iconify-icon icon="lucide:image" width="14" height="14" class="icon-brand"></iconify-icon>
                 <span>Favicon Suite Engine</span>
               </span>
             </div>
@@ -620,7 +183,7 @@
                     </div>
                     <span class="dropdown-item-badge">All Files</span>
                   </button>
-                  <div class="dropdown-divider" style="height: 1px; background: var(--border); margin: 3px 0;"></div>
+                  <div class="dropdown-divider"></div>
                   <button type="button" class="dropdown-item" id="opt-dl-apple" role="menuitem">
                     <div class="dropdown-item-left">
                       <iconify-icon icon="lucide:smartphone" width="14" height="14"></iconify-icon>
@@ -648,7 +211,7 @@
           </div>
 
           <!-- 2. Dual Symmetrical Split-Pane Grid -->
-          <div class="split-pane-grid" style="margin-bottom: 1.25rem;">
+          <div class="split-pane-grid">
 
             <!-- LEFT: Source Image & Upload Pane -->
             <div class="tool-pane">
@@ -657,15 +220,15 @@
                 <span class="pane-badge" id="source-meta-badge">No image loaded</span>
               </div>
 
-              <div class="pane-content" style="padding: 1.15rem; display: flex; flex-direction: column; justify-content: center; height: 100%;">
+              <div class="pane-content pane-content-s1">
                 <!-- Drag & Drop Zone -->
-                <div id="image-dropzone" class="video-dropzone" style="cursor: pointer; padding: 2.75rem 1rem; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                  <input type="file" id="image-file-input" accept="image/png, image/jpeg, image/webp, image/svg+xml, image/gif, image/bmp, image/avif, image/*" style="display: none;">
+                <div id="image-dropzone" class="video-dropzone image-dropzone-s">
+                  <input type="file" id="image-file-input" accept="image/png, image/jpeg, image/webp, image/svg+xml, image/gif, image/bmp, image/avif, image/*">
                   <div class="video-drop-icon">
                     <iconify-icon icon="lucide:upload-cloud" width="32" height="32"></iconify-icon>
                   </div>
-                  <div class="video-drop-title" style="margin-top: 0.5rem; font-weight: 600;">Drop image here or click to browse</div>
-                  <div class="video-drop-subtitle" style="margin-top: 0.25rem;">Supports PNG, JPG, WebP, SVG, GIF, AVIF, BMP up to 25MB</div>
+                  <div class="video-drop-title video-drop-title-s1">Drop image here or click to browse</div>
+                  <div class="video-drop-subtitle video-drop-subtitle-s1">Supports PNG, JPG, WebP, SVG, GIF, AVIF, BMP up to 25MB</div>
                 </div>
               </div>
             </div>
@@ -677,7 +240,7 @@
                 <span class="pane-badge" id="preview-status-badge">Awaiting Image</span>
               </div>
 
-              <div class="pane-content" style="padding: 1.15rem; display: flex; flex-direction: column; justify-content: flex-start; gap: 0.85rem;">
+              <div class="pane-content pane-content-s2">
                 <!-- Sub-Tabs Switcher -->
                 <div class="preview-mode-nav">
                   <button type="button" class="preview-mode-tab active" data-tab="tab-matrix">
@@ -780,31 +343,27 @@
                 </div>
 
                 <!-- TAB 2: HTML Embed Code Snippet -->
-                <div class="tab-view" id="tab-html" style="display: none;">
-                  <div style="background: var(--surface-elevated); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 0.85rem;">
-                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.6rem;">
-                      <span style="font-size: 0.78rem; font-weight: 600; color: var(--text-primary); display: flex; align-items: center; gap: 0.35rem;">
-                        <iconify-icon icon="lucide:code-2" width="14" height="14" style="color: var(--brand);"></iconify-icon>
+                <div class="tab-view tab-html-s" id="tab-html">
+                  <div class="div-s1">
+                    <div class="div-s2">
+                      <span class="span-s2">
+                        <iconify-icon icon="lucide:code-2" width="14" height="14" class="icon-brand"></iconify-icon>
                         <span>Favicon HTML &lt;head&gt; Code</span>
                       </span>
-                      <button type="button" class="btn-toolbar-sm" id="btn-copy-html-snippet" style="font-size: 0.72rem; padding: 0.25rem 0.6rem; height: auto;">
-                        <iconify-icon icon="lucide:copy" width="12" height="12"></iconify-icon>
-                        <span>Copy Code</span>
-                      </button>
                     </div>
-                    <pre class="html-code-pre" id="html-snippet-display" style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-secondary); line-height: 1.5; background: var(--surface); padding: 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle); margin: 0; overflow-x: auto;">&lt;!-- Favicon Suite generated by Toolity.in --&gt;
+                    <pre class="html-code-pre html-snippet-display-s" id="html-snippet-display">&lt;!-- Favicon Suite generated by Toolity.in --&gt;
 &lt;link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"&gt;
 &lt;link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"&gt;
 &lt;link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"&gt;
 &lt;link rel="shortcut icon" href="/favicon.ico"&gt;</pre>
-                    <p style="font-size: 0.72rem; color: var(--text-muted); margin: 0.6rem 0 0 0;">
+                    <p class="p-s1">
                       Paste these tags directly inside the <code>&lt;head&gt;</code> of your website HTML documents.
                     </p>
                   </div>
                 </div>
 
                 <!-- TAB 3: Browser Simulation -->
-                <div class="tab-view" id="tab-browser" style="display: none;">
+                <div class="tab-view tab-html-s" id="tab-browser">
                   <div class="mock-browser-window">
                     <div class="mock-browser-chrome">
                       <div class="mock-window-dots">
@@ -818,14 +377,14 @@
                       </div>
                     </div>
                     <div class="mock-browser-address-bar">
-                      <iconify-icon icon="lucide:lock" width="12" height="12" style="color: #10B981;"></iconify-icon>
+                      <iconify-icon icon="lucide:lock" width="12" height="12" class="icon-success"></iconify-icon>
                       <span>https://myawesomewebsite.com</span>
                     </div>
                     <div class="mock-browser-viewport">
-                      <div style="width: 64px; height: 64px; display: flex; align-items: center; justify-content: center;">
-                        <img id="tab-main-preview-img" src="/assets/favicons/favicon-32x32.png" alt="Favicon Preview" style="width: 48px; height: 48px; object-fit: contain;">
+                      <div class="div-s3">
+                        <img id="tab-main-preview-img" src="/assets/favicons/favicon-32x32.png" alt="Favicon Preview" class="tab-main-preview-img-s">
                       </div>
-                      <p style="font-size: 0.78rem; color: var(--text-muted); margin: 0;">
+                      <p class="p-s2">
                         32×32 Retina &amp; 16×16 Standard Tab Preview
                       </p>
                     </div>
@@ -833,12 +392,12 @@
                 </div>
 
                 <!-- TAB 4: Mobile Home Screen Simulation -->
-                <div class="tab-view" id="tab-mobile" style="display: none;">
+                <div class="tab-view tab-html-s" id="tab-mobile">
                   <div class="mock-phone-frame">
                     <div class="mock-phone-screen">
                       <div class="mock-app-grid">
                         <div class="mock-app-item">
-                          <div class="mock-app-icon-box" style="background: #2563EB; color: white;">
+                          <div class="mock-app-icon-box mock-app-icon-box-s1">
                             <iconify-icon icon="lucide:mail" width="22" height="22"></iconify-icon>
                           </div>
                           <span class="mock-app-name">Mail</span>
@@ -850,7 +409,7 @@
                           <span class="mock-app-name" id="mobile-app-name">My Website</span>
                         </div>
                         <div class="mock-app-item">
-                          <div class="mock-app-icon-box" style="background: #10B981; color: white;">
+                          <div class="mock-app-icon-box mock-app-icon-box-s2">
                             <iconify-icon icon="lucide:camera" width="22" height="22"></iconify-icon>
                           </div>
                           <span class="mock-app-name">Camera</span>
@@ -861,7 +420,7 @@
                 </div>
 
                 <!-- TAB 5: Google SERP Simulation -->
-                <div class="tab-view" id="tab-serp" style="display: none;">
+                <div class="tab-view tab-html-s" id="tab-serp">
                   <div class="mock-serp-box">
                     <div class="mock-serp-header">
                       <div class="mock-serp-favicon">
@@ -885,7 +444,7 @@
           </div>
 
           <!-- 3. Controls & Options inside Accordion (Positioned Below Split-Pane & Closed by Default) -->
-          <details class="tool-settings-accordion" style="margin-bottom: 0.25rem;">
+          <details class="tool-settings-accordion">
             <summary class="tool-settings-summary">
               <div class="tool-settings-summary-left">
                 <iconify-icon icon="lucide:sliders-horizontal" width="16" height="16"></iconify-icon>
@@ -906,7 +465,7 @@
                   <div class="settings-row-wrap">
                     <!-- Fit Mode Segmented -->
                     <div class="form-group">
-                      <span class="form-label" style="font-size:0.75rem;">Aspect Ratio Fit</span>
+                      <span class="form-label settings-label">Aspect Ratio Fit</span>
                       <div class="segmented-group" id="fit-mode-group">
                         <button type="button" class="seg-pill active" data-fit="contain">Contain</button>
                         <button type="button" class="seg-pill" data-fit="cover">Cover Crop</button>
@@ -916,7 +475,7 @@
 
                     <!-- Shape & Radius Segmented -->
                     <div class="form-group">
-                      <span class="form-label" style="font-size:0.75rem;">Icon Shape</span>
+                      <span class="form-label settings-label">Icon Shape</span>
                       <div class="segmented-group" id="shape-group">
                         <button type="button" class="seg-pill active" data-radius="0">Square (0%)</button>
                         <button type="button" class="seg-pill" data-radius="22">Squircle (22%)</button>
@@ -925,12 +484,12 @@
                     </div>
 
                     <!-- Padding Slider Control -->
-                    <div class="form-group" style="min-width: 220px; flex: 1;">
-                      <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-                        <span class="form-label" style="font-size:0.75rem; margin-bottom: 0;">Quiet Zone Padding</span>
-                        <span class="pane-badge" id="padding-val-badge" style="font-size:0.7rem;">8%</span>
+                    <div class="form-group form-group-grow">
+                      <div class="settings-label-row">
+                        <span class="form-label settings-label">Quiet Zone Padding</span>
+                        <span class="pane-badge" id="padding-val-badge">8%</span>
                       </div>
-                      <div class="range-row" style="margin-top: 0.35rem;">
+                      <div class="range-row range-row-s1">
                         <input type="range" id="padding-slider" class="range-input" min="0" max="30" value="8" step="1">
                       </div>
                     </div>
@@ -945,17 +504,17 @@
                   <div class="settings-row-wrap">
                     <!-- Background Swatches -->
                     <div class="form-group">
-                      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
-                        <span class="form-label" style="font-size:0.75rem; margin: 0;">Background Fill</span>
-                        <span id="bg-color-label" style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-secondary);">Transparent</span>
+                      <div class="settings-label-row">
+                        <span class="form-label" class="settings-label">Background Fill</span>
+                        <span id="bg-color-label" class="bg-color-label-s">Transparent</span>
                       </div>
                       <div class="color-swatches-row">
                         <button type="button" class="color-swatch-btn swatch-transparent active" data-bg="transparent" title="Transparent"></button>
-                        <button type="button" class="color-swatch-btn" data-bg="#ffffff" style="background: #ffffff;" title="White"></button>
-                        <button type="button" class="color-swatch-btn" data-bg="#0D0D0D" style="background: #0D0D0D;" title="Dark Charcoal"></button>
-                        <button type="button" class="color-swatch-btn" data-bg="#FF6A2A" style="background: #FF6A2A;" title="Brand Orange"></button>
-                        <button type="button" class="color-swatch-btn" data-bg="#2563EB" style="background: #2563EB;" title="Cobalt Blue"></button>
-                        <button type="button" class="color-swatch-btn" data-bg="#10B981" style="background: #10B981;" title="Emerald Green"></button>
+                        <button type="button" class="color-swatch-btn" data-bg="#ffffff" title="White"></button>
+                        <button type="button" class="color-swatch-btn" data-bg="#0D0D0D" title="Dark Charcoal"></button>
+                        <button type="button" class="color-swatch-btn" data-bg="#FF6A2A" title="Brand Orange"></button>
+                        <button type="button" class="color-swatch-btn" data-bg="#2563EB" title="Cobalt Blue"></button>
+                        <button type="button" class="color-swatch-btn" data-bg="#10B981" title="Emerald Green"></button>
                         <div class="color-picker-input-wrapper" title="Custom Hex Color">
                           <input type="color" id="custom-color-picker" class="color-picker-native" value="#FF6A2A">
                         </div>
@@ -963,8 +522,8 @@
                     </div>
 
                     <!-- Website Title -->
-                    <div class="form-group" style="min-width: 240px; flex: 1;">
-                      <span class="form-label" style="font-size:0.75rem;">Website Title (for Live Previews)</span>
+                    <div class="form-group form-group-grow">
+                      <span class="form-label settings-label">Website Title (for Live Previews)</span>
                       <input type="text" id="site-title-input" class="control-text-input" value="My Awesome Website" placeholder="Enter website title...">
                     </div>
                   </div>
@@ -980,15 +539,10 @@
              ADSTERRA BANNER SLOT (Positioned Below Tool Workspace)
              ================================================================== -->
         <div data-include="/components/ad-slot.html"></div>
-
-        <!-- ==================================================================
-             3-STEP INSTRUCTION GUIDE
-             ================================================================== -->
         <section class="guide-section">
-          <div class="section-header">
+          <div class="section-header-compact">
             <span class="section-eyebrow">How It Works</span>
-            <h2 class="section-title">Using the Image to Favicon Converter</h2>
-            <p class="section-desc">Generate multi-resolution favicons and icons in 3 quick steps with 100% client-side privacy.</p>
+            <h2 class="section-heading-sm">Using the Image to Favicon Converter</h2>
           </div>
 
           <div class="guide-steps-grid">
@@ -1017,17 +571,12 @@
             </div>
           </div>
         </section>
-
-        <!-- ==================================================================
-             FAVICON SPECIFICATIONS & PLATFORM REFERENCE TABLE
-             ================================================================== -->
-        <div class="formats-table-card">
-          <h2 style="font-size: 1.15rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.75rem;">
-            Favicon Dimension &amp; Platform Reference
-          </h2>
-          <p style="font-size: 0.84rem; color: var(--text-secondary); margin-bottom: 1.25rem;">
-            Modern web browsers, operating systems, and mobile devices request specific icon dimensions to ensure crisp display across tabs, bookmarks, search engine results, and home-screen shortcuts:
-          </p>
+        <!-- 5. REFERENCE -->
+        <section class="formats-table-card reference-section">
+          <div class="formats-table-header">
+            <h3>Favicon Dimension &amp; Platform Reference</h3>
+            <p>Modern web browsers, operating systems, and mobile devices request specific icon dimensions to ensure crisp display across tabs, bookmarks, search engine results, and home-screen shortcuts:</p>
+          </div>
           <table class="formats-table">
             <thead>
               <tr>
@@ -1076,43 +625,43 @@
               </tr>
             </tbody>
           </table>
-        </div>
+        </section>
 
-        <!-- ==================================================================
-             FREQUENTLY ASKED QUESTIONS (FAQ)
-             ================================================================== -->
-        <div class="formats-table-card" style="margin-top: 1.5rem;">
-          <h2 style="font-size: 1.15rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1rem;">
-            Frequently Asked Questions
-          </h2>
-          <div style="display: flex; flex-direction: column; gap: 1rem;">
-            <div>
-              <h3 style="font-size: 0.92rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.3rem;">
-                Why do I need a multi-resolution <code>.ico</code> file instead of just a PNG?
-              </h3>
-              <p style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5;">
-                A standard <code>.ico</code> binary encapsulates multiple resolutions (16×16, 32×32, and 48×48) within a single file. When Windows or browser address bars render the icon, the operating system selects the exact pixel dimension required without blurry browser-side scaling.
-              </p>
-            </div>
-            <div>
-              <h3 style="font-size: 0.92rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.3rem;">
-                Are my uploaded images or logos uploaded to any server?
-              </h3>
-              <p style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5;">
-                No. Toolity processes 100% of images locally in your browser memory using the HTML5 Canvas API and JavaScript TypedArrays. Your source files, logo artwork, and generated favicons never leave your device.
-              </p>
-            </div>
-            <div>
-              <h3 style="font-size: 0.92rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.3rem;">
-                Where should I place the generated favicon files in my website?
-              </h3>
-              <p style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5;">
-                Extract the downloaded ZIP package and place all image files in your website's root directory (or an <code>/assets/favicons/</code> directory). Then paste the generated <code>&lt;link&gt;</code> tags into the <code>&lt;head&gt;</code> of your HTML files.
-              </p>
-            </div>
+                <!-- 6. FAQ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Image to Favicon Generator — Frequently Asked Questions</h2>
           </div>
-        </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Is my image uploaded to a server?</summary>
+              <p>No. Resizing, shape masking and ICO packaging are done on an HTML canvas inside your browser, and the ZIP is assembled locally. Your artwork never leaves your device.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Which files are in the download and where do I put them?</summary>
+              <p>favicon.ico (16/32/48 px multi-size), favicon-16x16.png, favicon-32x32.png, apple-touch-icon.png (180 px) and android-chrome 192/512 px. Unzip them into your site root (or an /assets/favicons/ folder) and paste the generated <code>&lt;link&gt;</code> tags into the <code>&lt;head&gt;</code> — the Copy HTML button gives you exactly those tags.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why is there still a .ico file in 2025?</summary>
+              <p>Browsers request /favicon.ico by default, Windows uses it for pinned sites and shortcuts, and some older crawlers only read it. The ICO here bundles 16, 32 and 48 px bitmaps so each context picks the crisp one.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What source image works best?</summary>
+              <p>A square image of at least 512 × 512 px with a simple, high-contrast mark. SVG scales perfectly; PNG with transparency keeps a clean background. Avoid thin lines and small text — they disappear at 16 px.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What does Quiet Zone Padding do?</summary>
+              <p>It shrinks the artwork inside the icon and leaves a margin so rounded or circular masks (iOS, Android adaptive icons) don't clip the edges. 8–12 % is a safe default for most logos.</p>
+            </details>
+            <details class="faq-item">
+              <summary>My new favicon doesn't show up — why?</summary>
+              <p>Browsers cache favicons aggressively. Hard-refresh (Ctrl/⌘ + Shift + R), open the page in a private window, or add a query string such as <code>favicon.ico?v=2</code> to the link tags.</p>
+            </details>
+          </div>
+        </section>
 
+        <!-- 7. CTA -->
         <div data-include="/components/tool-cta.html" data-category="convertors"></div>
 
       </div>
@@ -1126,579 +675,8 @@
   <script defer src="/scripts/main.js?v=2.4"></script>
 
   <!-- Tool Specific Script Logic -->
-  <script>
-    /* Designed by Kapil Pidhwani: Image to Favicon Converter Engine */
-    document.addEventListener('DOMContentLoaded', () => {
-      // DOM Elements
-      const fileInput = document.getElementById('image-file-input');
-      const dropZone = document.getElementById('image-dropzone');
-      const sourceMetaBadge = document.getElementById('source-meta-badge');
-      const previewStatusBadge = document.getElementById('preview-status-badge');
-      const fitModeGroup = document.getElementById('fit-mode-group');
-      const shapeGroup = document.getElementById('shape-group');
-      const paddingSlider = document.getElementById('padding-slider');
-      const paddingValBadge = document.getElementById('padding-val-badge');
-      const customColorPicker = document.getElementById('custom-color-picker');
-      const bgColorLabel = document.getElementById('bg-color-label');
-      const siteTitleInput = document.getElementById('site-title-input');
-      const settingsSummaryBadge = document.getElementById('settings-summary-badge');
-      const btnReset = document.getElementById('btn-reset-tool');
-      const btnCopyHtmlTop = document.getElementById('btn-copy-html-top');
-      const btnCopyHtmlSnippet = document.getElementById('btn-copy-html-snippet');
-      const btnDownloadMaster = document.getElementById('btn-download-master');
-      const downloadDropdownWrapper = document.getElementById('download-dropdown-wrapper');
-
-      // Previews
-      const tabPreviewImg = document.getElementById('tab-preview-img');
-      const tabMainPreviewImg = document.getElementById('tab-main-preview-img');
-      const tabTitleText = document.getElementById('tab-title-text');
-      const mobilePreviewImg = document.getElementById('mobile-preview-img');
-      const mobileAppName = document.getElementById('mobile-app-name');
-      const serpPreviewImg = document.getElementById('serp-preview-img');
-      const serpSitename = document.getElementById('serp-sitename');
-      const serpTitleLink = document.getElementById('serp-title-link');
-
-      // Size matrix previews
-      const sizeImgs = {
-        16: document.getElementById('size-img-16'),
-        32: document.getElementById('size-img-32'),
-        48: document.getElementById('size-img-48'),
-        180: document.getElementById('size-img-180'),
-        192: document.getElementById('size-img-192'),
-        512: document.getElementById('size-img-512')
-      };
-
-      // State
-      let sourceImage = null;
-      let fitMode = 'contain';
-      let bgColor = 'transparent';
-      let paddingPct = 8;
-      let cornerRadiusPct = 0;
-      let renderedCanvases = {};
-
-      // Initialize tool
-      updateSettingsBadge();
-      renderAllSizes();
-
-      function updateSettingsBadge() {
-        const fitCapitalized = fitMode.charAt(0).toUpperCase() + fitMode.slice(1);
-        const bgText = bgColor === 'transparent' ? 'Transparent BG' : `${bgColor.toUpperCase()} BG`;
-        const shapeText = cornerRadiusPct === 0 ? 'Square' : (cornerRadiusPct === 22 ? 'Squircle' : 'Circle');
-        if (settingsSummaryBadge) {
-          settingsSummaryBadge.textContent = `(${fitCapitalized} • ${bgText} • ${paddingPct}% Padding • ${shapeText})`;
-        }
-      }
-
-      // Event Listeners for File Input & Dropzone
-      dropZone.addEventListener('click', () => fileInput.click());
-      fileInput.addEventListener('change', handleFileSelect);
-
-      dropZone.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        dropZone.style.borderColor = 'var(--brand)';
-      });
-
-      dropZone.addEventListener('dragleave', () => {
-        dropZone.style.borderColor = '';
-      });
-
-      dropZone.addEventListener('drop', (e) => {
-        e.preventDefault();
-        dropZone.style.borderColor = '';
-        if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-          processFile(e.dataTransfer.files[0]);
-        }
-      });
-
-      // Fit mode segmented buttons
-      fitModeGroup.querySelectorAll('.seg-pill').forEach(btn => {
-        btn.addEventListener('click', () => {
-          fitModeGroup.querySelectorAll('.seg-pill').forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          fitMode = btn.dataset.fit;
-          updateSettingsBadge();
-          renderAllSizes();
-        });
-      });
-
-      // Shape segmented buttons
-      shapeGroup.querySelectorAll('.seg-pill').forEach(btn => {
-        btn.addEventListener('click', () => {
-          shapeGroup.querySelectorAll('.seg-pill').forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          cornerRadiusPct = parseInt(btn.dataset.radius, 10);
-          updateSettingsBadge();
-          renderAllSizes();
-        });
-      });
-
-      // Padding slider
-      paddingSlider.addEventListener('input', (e) => {
-        paddingPct = parseInt(e.target.value, 10);
-        paddingValBadge.textContent = `${paddingPct}%`;
-        updateSettingsBadge();
-        renderAllSizes();
-      });
-
-      // Color Swatches
-      document.querySelectorAll('.color-swatch-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          document.querySelectorAll('.color-swatch-btn').forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          bgColor = btn.dataset.bg;
-          bgColorLabel.textContent = bgColor === 'transparent' ? 'Transparent' : bgColor.toUpperCase();
-          updateSettingsBadge();
-          renderAllSizes();
-        });
-      });
-
-      customColorPicker.addEventListener('input', (e) => {
-        document.querySelectorAll('.color-swatch-btn').forEach(b => b.classList.remove('active'));
-        bgColor = e.target.value;
-        bgColorLabel.textContent = bgColor.toUpperCase();
-        updateSettingsBadge();
-        renderAllSizes();
-      });
-
-      // Site Title Customizer
-      siteTitleInput.addEventListener('input', (e) => {
-        const val = e.target.value.trim() || 'My Awesome Website';
-        tabTitleText.textContent = val;
-        mobileAppName.textContent = val.split(' ')[0] || val;
-        serpSitename.textContent = val;
-        serpTitleLink.textContent = `${val} — Simple & Fast Solutions`;
-      });
-
-      // Preview sub-tab switcher
-      document.querySelectorAll('.preview-mode-tab').forEach(tab => {
-        tab.addEventListener('click', () => {
-          document.querySelectorAll('.preview-mode-tab').forEach(t => t.classList.remove('active'));
-          document.querySelectorAll('.tab-view').forEach(v => v.style.display = 'none');
-          tab.classList.add('active');
-          const target = document.getElementById(tab.dataset.tab);
-          if (target) target.style.display = 'block';
-        });
-      });
-
-      // Download dropdown toggle (using .open on .dropdown-menu-wrapper matching main.css)
-      btnDownloadMaster.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const isOpen = downloadDropdownWrapper.classList.toggle('open');
-        btnDownloadMaster.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-      });
-
-      document.addEventListener('click', () => {
-        downloadDropdownWrapper.classList.remove('open');
-        btnDownloadMaster.setAttribute('aria-expanded', 'false');
-      });
-
-      // Copy HTML buttons
-      function copyHtmlCode() {
-        const code = document.getElementById('html-snippet-display').textContent;
-        navigator.clipboard.writeText(code).then(() => {
-          showToast('HTML embed tags copied to clipboard!');
-        });
-      }
-
-      btnCopyHtmlTop.addEventListener('click', copyHtmlCode);
-      btnCopyHtmlSnippet.addEventListener('click', copyHtmlCode);
-
-      // Download actions
-      document.getElementById('opt-dl-ico').addEventListener('click', downloadIco);
-      document.getElementById('opt-dl-zip').addEventListener('click', downloadZip);
-      document.getElementById('opt-dl-apple').addEventListener('click', () => downloadSinglePng(180, 'apple-touch-icon.png'));
-      document.getElementById('opt-dl-32').addEventListener('click', () => downloadSinglePng(32, 'favicon-32x32.png'));
-      document.getElementById('opt-dl-512').addEventListener('click', () => downloadSinglePng(512, 'android-chrome-512x512.png'));
-
-      // Individual size download buttons
-      document.querySelectorAll('.size-btn-download').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const sz = parseInt(btn.dataset.size, 10);
-          downloadSinglePng(sz, sz === 180 ? 'apple-touch-icon.png' : `favicon-${sz}x${sz}.png`);
-        });
-      });
-
-      // Reset
-      btnReset.addEventListener('click', () => {
-        sourceImage = null;
-        fileInput.value = '';
-        if (sourceMetaBadge) sourceMetaBadge.textContent = 'No image loaded';
-        if (previewStatusBadge) previewStatusBadge.textContent = 'Awaiting Image';
-        fitMode = 'contain';
-        bgColor = 'transparent';
-        paddingPct = 8;
-        cornerRadiusPct = 0;
-        paddingSlider.value = 8;
-        paddingValBadge.textContent = '8%';
-        siteTitleInput.value = 'My Awesome Website';
-        tabTitleText.textContent = 'My Awesome Website';
-        mobileAppName.textContent = 'My Website';
-        serpSitename.textContent = 'My Awesome Website';
-        serpTitleLink.textContent = 'My Awesome Website — Simple & Fast Solutions';
-        fitModeGroup.querySelectorAll('.seg-pill').forEach((b, i) => b.classList.toggle('active', i === 0));
-        shapeGroup.querySelectorAll('.seg-pill').forEach((b, i) => b.classList.toggle('active', i === 0));
-        document.querySelectorAll('.color-swatch-btn').forEach((b, i) => b.classList.toggle('active', i === 0));
-        bgColorLabel.textContent = 'Transparent';
-        updateSettingsBadge();
-        renderAllSizes();
-        showToast('Tool reset');
-      });
-
-      // Handlers
-      function handleFileSelect(e) {
-        if (e.target.files && e.target.files[0]) {
-          processFile(e.target.files[0]);
-        }
-      }
-
-      function processFile(file) {
-        if (!file.type.startsWith('image/')) {
-          showToast('Please select an image file (PNG, JPG, WebP, SVG, GIF, BMP).');
-          return;
-        }
-
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          const img = new Image();
-          img.onload = () => {
-            sourceImage = img;
-            if (sourceMetaBadge) sourceMetaBadge.textContent = `${img.naturalWidth}×${img.naturalHeight} px`;
-            if (previewStatusBadge) previewStatusBadge.textContent = 'Live Ready';
-            renderAllSizes();
-            showToast('Image loaded successfully');
-          };
-          img.src = e.target.result;
-        };
-        reader.readAsDataURL(file);
-      }
-
-      function renderFaviconToCanvas(size) {
-        const canvas = document.createElement('canvas');
-        canvas.width = size;
-        canvas.height = size;
-        const ctx = canvas.getContext('2d');
-        ctx.imageSmoothingEnabled = true;
-        ctx.imageSmoothingQuality = 'high';
-
-        // Draw Corner Radius Clip
-        const radius = (cornerRadiusPct / 100) * (size / 2);
-        if (radius > 0) {
-          ctx.beginPath();
-          ctx.roundRect(0, 0, size, size, radius);
-          ctx.clip();
-        }
-
-        // Fill background
-        if (bgColor !== 'transparent') {
-          ctx.fillStyle = bgColor;
-          ctx.fillRect(0, 0, size, size);
-        }
-
-        if (!sourceImage) return canvas;
-
-        // Apply Padding
-        const padPx = (paddingPct / 100) * size;
-        const targetW = size - (padPx * 2);
-        const targetH = size - (padPx * 2);
-
-        const sw = sourceImage.naturalWidth || sourceImage.width;
-        const sh = sourceImage.naturalHeight || sourceImage.height;
-
-        let dx, dy, dw, dh;
-
-        if (fitMode === 'contain') {
-          const ratio = Math.min(targetW / sw, targetH / sh);
-          dw = sw * ratio;
-          dh = sh * ratio;
-          dx = padPx + (targetW - dw) / 2;
-          dy = padPx + (targetH - dh) / 2;
-          ctx.drawImage(sourceImage, dx, dy, dw, dh);
-        } else if (fitMode === 'cover') {
-          const ratio = Math.max(targetW / sw, targetH / sh);
-          const cropW = targetW / ratio;
-          const cropH = targetH / ratio;
-          const sx = (sw - cropW) / 2;
-          const sy = (sh - cropH) / 2;
-          ctx.drawImage(sourceImage, sx, sy, cropW, cropH, padPx, padPx, targetW, targetH);
-        } else {
-          // Stretch
-          ctx.drawImage(sourceImage, padPx, padPx, targetW, targetH);
-        }
-
-        return canvas;
-      }
-
-      function renderAllSizes() {
-        const sizes = [16, 32, 48, 64, 128, 180, 192, 512];
-        sizes.forEach(sz => {
-          const cvs = renderFaviconToCanvas(sz);
-          renderedCanvases[sz] = cvs;
-          const dataUrl = cvs.toDataURL('image/png');
-
-          if (sizeImgs[sz]) {
-            sizeImgs[sz].src = dataUrl;
-          }
-        });
-
-        // Update live contextual previews
-        const url32 = renderedCanvases[32].toDataURL('image/png');
-        const url180 = renderedCanvases[180].toDataURL('image/png');
-
-        tabPreviewImg.src = url32;
-        tabMainPreviewImg.src = url32;
-        mobilePreviewImg.src = url180;
-        serpPreviewImg.src = url32;
-      }
-
-      /* Designed by Kapil Pidhwani: Pure Client-Side Binary Windows .ICO File Generator */
-      async function generateIcoBlob() {
-        const icoSizes = [16, 32, 48];
-        const pngBlobs = await Promise.all(icoSizes.map(sz => {
-          return new Promise(resolve => renderedCanvases[sz].toBlob(resolve, 'image/png'));
-        }));
-
-        const pngBuffers = await Promise.all(pngBlobs.map(b => b.arrayBuffer()));
-
-        // Calculate Header & Entries size
-        const numImages = icoSizes.length;
-        const headerSize = 6;
-        const entrySize = 16;
-        const dirSize = headerSize + (numImages * entrySize);
-
-        let totalSize = dirSize;
-        pngBuffers.forEach(buf => totalSize += buf.byteLength);
-
-        const icoBuffer = new ArrayBuffer(totalSize);
-        const view = new DataView(icoBuffer);
-        const uint8 = new Uint8Array(icoBuffer);
-
-        // 1. ICONDIR Header
-        view.setUint16(0, 0, true); // Reserved (must be 0)
-        view.setUint16(2, 1, true); // Type (1 = ICO)
-        view.setUint16(4, numImages, true); // Image count
-
-        // 2. ICONDIRENTRY Structures
-        let currentOffset = dirSize;
-        for (let i = 0; i < numImages; i++) {
-          const sz = icoSizes[i];
-          const pngBytes = new Uint8Array(pngBuffers[i]);
-          const entryOffset = headerSize + (i * entrySize);
-
-          view.setUint8(entryOffset + 0, sz >= 256 ? 0 : sz); // Width
-          view.setUint8(entryOffset + 1, sz >= 256 ? 0 : sz); // Height
-          view.setUint8(entryOffset + 2, 0); // Color palette
-          view.setUint8(entryOffset + 3, 0); // Reserved
-          view.setUint16(entryOffset + 4, 1, true); // Color planes
-          view.setUint16(entryOffset + 6, 32, true); // Bits per pixel
-          view.setUint32(entryOffset + 8, pngBytes.length, true); // Image data length
-          view.setUint32(entryOffset + 12, currentOffset, true); // Image data offset
-
-          // Copy PNG bytes into icoBuffer
-          uint8.set(pngBytes, currentOffset);
-          currentOffset += pngBytes.length;
-        }
-
-        return new Blob([icoBuffer], { type: 'image/x-icon' });
-      }
-
-      /* Designed by Kapil Pidhwani: Pure Client-Side ZIP Archive Generator */
-      async function generateZipBlob() {
-        const filesToZip = [];
-
-        // 1. Add favicon.ico
-        const icoBlob = await generateIcoBlob();
-        const icoBytes = new Uint8Array(await icoBlob.arrayBuffer());
-        filesToZip.push({ name: 'favicon.ico', bytes: icoBytes });
-
-        // 2. Add PNG sizes
-        const exportPngSizes = [
-          { sz: 16, name: 'favicon-16x16.png' },
-          { sz: 32, name: 'favicon-32x32.png' },
-          { sz: 48, name: 'favicon-48x48.png' },
-          { sz: 180, name: 'apple-touch-icon.png' },
-          { sz: 192, name: 'android-chrome-192x192.png' },
-          { sz: 512, name: 'android-chrome-512x512.png' }
-        ];
-
-        for (const item of exportPngSizes) {
-          const b = await new Promise(res => renderedCanvases[item.sz].toBlob(res, 'image/png'));
-          const bytes = new Uint8Array(await b.arrayBuffer());
-          filesToZip.push({ name: item.name, bytes });
-        }
-
-        // 3. Add site.webmanifest
-        const manifestText = JSON.stringify({
-          name: siteTitleInput.value.trim() || 'My Website',
-          short_name: (siteTitleInput.value.trim() || 'My Website').split(' ')[0],
-          icons: [
-            { src: '/android-chrome-192x192.png', sizes: '192x192', type: 'image/png' },
-            { src: '/android-chrome-512x512.png', sizes: '512x512', type: 'image/png' }
-          ],
-          theme_color: bgColor !== 'transparent' ? bgColor : '#ffffff',
-          background_color: '#ffffff',
-          display: 'standalone'
-        }, null, 2);
-        filesToZip.push({ name: 'site.webmanifest', bytes: new TextEncoder().encode(manifestText) });
-
-        // 4. Add HTML Snippet instructions file
-        const htmlSnippet = document.getElementById('html-snippet-display').textContent;
-        filesToZip.push({ name: 'favicon-html-code.html', bytes: new TextEncoder().encode(htmlSnippet) });
-
-        // Build ZIP buffer (Store format)
-        let localHeaders = [];
-        let centralHeaders = [];
-        let offset = 0;
-
-        for (const file of filesToZip) {
-          const nameBytes = new TextEncoder().encode(file.name);
-          const crc = calculateCRC32(file.bytes);
-          const size = file.bytes.length;
-
-          // Local File Header (30 bytes + name length)
-          const localHeader = new Uint8Array(30 + nameBytes.length);
-          const lv = new DataView(localHeader.buffer);
-          lv.setUint32(0, 0x04034b50, true); // Local header signature
-          lv.setUint16(4, 10, true); // Version needed
-          lv.setUint16(6, 0, true); // Flags
-          lv.setUint16(8, 0, true); // Compression (0 = Store)
-          lv.setUint16(10, 0, true); // Mod time
-          lv.setUint16(12, 0, true); // Mod date
-          lv.setUint32(14, crc, true); // CRC-32
-          lv.setUint32(18, size, true); // Compressed size
-          lv.setUint32(22, size, true); // Uncompressed size
-          lv.setUint16(26, nameBytes.length, true); // Filename length
-          lv.setUint16(28, 0, true); // Extra length
-          localHeader.set(nameBytes, 30);
-
-          localHeaders.push({ header: localHeader, data: file.bytes, offset });
-
-          // Central Directory Header (46 bytes + name length)
-          const centralHeader = new Uint8Array(46 + nameBytes.length);
-          const cv = new DataView(centralHeader.buffer);
-          cv.setUint32(0, 0x02014b50, true); // Central header signature
-          cv.setUint16(4, 10, true); // Version made by
-          cv.setUint16(6, 10, true); // Version needed
-          cv.setUint16(8, 0, true); // Flags
-          cv.setUint16(10, 0, true); // Compression (0 = Store)
-          cv.setUint16(12, 0, true); // Mod time
-          cv.setUint16(14, 0, true); // Mod date
-          cv.setUint32(16, crc, true); // CRC-32
-          cv.setUint32(20, size, true); // Compressed size
-          cv.setUint32(24, size, true); // Uncompressed size
-          cv.setUint16(28, nameBytes.length, true); // Filename length
-          cv.setUint16(30, 0, true); // Extra field length
-          cv.setUint16(32, 0, true); // Comment length
-          cv.setUint16(34, 0, true); // Disk number
-          cv.setUint16(36, 0, true); // Internal attributes
-          cv.setUint32(38, 0, true); // External attributes
-          cv.setUint32(42, offset, true); // Local header offset
-          centralHeader.set(nameBytes, 46);
-
-          centralHeaders.push(centralHeader);
-
-          offset += localHeader.length + size;
-        }
-
-        const centralDirOffset = offset;
-        let centralDirSize = 0;
-        centralHeaders.forEach(c => centralDirSize += c.length);
-
-        // End of Central Directory Record (22 bytes)
-        const eocd = new Uint8Array(22);
-        const ev = new DataView(eocd.buffer);
-        ev.setUint32(0, 0x06054b50, true); // EOCD signature
-        ev.setUint16(4, 0, true); // Disk number
-        ev.setUint16(6, 0, true); // Disk with central dir
-        ev.setUint16(8, filesToZip.length, true); // Entries on disk
-        ev.setUint16(10, filesToZip.length, true); // Total entries
-        ev.setUint32(12, centralDirSize, true); // Central directory size
-        ev.setUint32(16, centralDirOffset, true); // Offset of central dir
-        ev.setUint16(20, 0, true); // Comment length
-
-        // Combine into single blob
-        const blobParts = [];
-        localHeaders.forEach(lh => {
-          blobParts.push(lh.header);
-          blobParts.push(lh.data);
-        });
-        centralHeaders.forEach(ch => blobParts.push(ch));
-        blobParts.push(eocd);
-
-        return new Blob(blobParts, { type: 'application/zip' });
-      }
-
-      function calculateCRC32(bytes) {
-        let crc = 0 ^ (-1);
-        for (let i = 0; i < bytes.length; i++) {
-          crc = (crc >>> 8) ^ crcTable[(crc ^ bytes[i]) & 0xFF];
-        }
-        return (crc ^ (-1)) >>> 0;
-      }
-
-      // CRC32 Lookup Table
-      const crcTable = (() => {
-        let c;
-        const table = [];
-        for (let n = 0; n < 256; n++) {
-          c = n;
-        }
-        for (let n = 0; n < 256; n++) {
-          c = n;
-          for (let k = 0; k < 8; k++) {
-            c = ((c & 1) ? (0xEDB88320 ^ (c >>> 1)) : (c >>> 1));
-          }
-          table[n] = c;
-        }
-        return table;
-      })();
-
-      // Download Helpers
-      async function downloadIco() {
-        if (!sourceImage) {
-          showToast('Please upload an image first');
-          return;
-        }
-        const blob = await generateIcoBlob();
-        triggerDownload(blob, 'favicon.ico');
-        showToast('Downloaded favicon.ico');
-      }
-
-      async function downloadZip() {
-        if (!sourceImage) {
-          showToast('Please upload an image first');
-          return;
-        }
-        const blob = await generateZipBlob();
-        triggerDownload(blob, 'toolity-favicons.zip');
-        showToast('Downloaded Favicon Suite (.zip)');
-      }
-
-      function downloadSinglePng(size, filename) {
-        if (!sourceImage) {
-          showToast('Please upload an image first');
-          return;
-        }
-        const cvs = renderedCanvases[size];
-        if (!cvs) return;
-        cvs.toBlob(blob => {
-          triggerDownload(blob, filename);
-          showToast(`Downloaded ${filename}`);
-        }, 'image/png');
-      }
-
-      function triggerDownload(blob, filename) {
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = filename;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        setTimeout(() => URL.revokeObjectURL(url), 1000);
-      }
-
-    });
-  </script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="/convertors/image-to-favicon/image-to-favicon.js?v=1.0"></script>
 </body>
 
 </html>
