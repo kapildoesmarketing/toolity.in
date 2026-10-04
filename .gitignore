@@ -35,10 +35,16 @@ scratch/
 Hero Inspiration/
 temp/
 
-# Project Planning & Scratch Notes (Local Only)
+# Project Planning, Memory & Internal Guidelines (Local Only)
 tasks.md
 tasks_*.md
 *task*.md
+memory.md
+memory_*.md
+rules.md
+rules_*.md
+architecture.md
+design.md
 suggestion*.txt
 suggestions*.txt
 *suggestion*.txt
