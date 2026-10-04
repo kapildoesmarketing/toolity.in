@@ -18,55 +18,84 @@
       document.documentElement.setAttribute('data-theme', t);
     })();
   </script>
-  <title>Website Favicon Extractor & Downloader (HD 256px, 128px) — Toolity.in</title>
 
-  <!-- SEO & Metadata -->
+  <title>Website Favicon Extractor &amp; Downloader (HD 256px, 128px) — Toolity.in</title>
+  <link rel="canonical" href="https://toolity.in/web/favicon-extractor/">
   <meta name="description" content="Free Website Favicon Extractor: Grab, preview, and download high-resolution favicons (16px to 256px HD) from any website or domain using Google's Favicon Service. 100% free and client-side.">
   <meta name="keywords" content="favicon extractor, website favicon downloader, get favicon from url, google favicon service, download favicon hd, favicon grabber, website icon download">
   <meta name="author" content="Kapil Pidhwani">
 
-  <!-- Open Graph -->
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
   <meta property="og:title" content="Website Favicon Extractor — Toolity.in">
   <meta property="og:description" content="Extract and download ultra-clear HD favicons and touch icons from any domain directly in your browser.">
-  <meta property="og:type" content="website">
   <meta property="og:url" content="https://toolity.in/web/favicon-extractor/">
-  <link rel="canonical" href="https://toolity.in/web/favicon-extractor/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
   <!-- Favicons -->
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
   <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
 
-  <!-- Google Fonts: Inter -->
+  <!-- Fonts & critical assets -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-  <!-- Iconify Icon Component -->
-    <!-- Preload Critical Assets -->
   <link rel="preload" href="/styles/main.css?v=2.4" as="style">
   <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
-
   <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 
-  <!-- Global Design System -->
   <link rel="stylesheet" href="/styles/main.css?v=2.4">
+  <link rel="stylesheet" href="/styles/tools/favicon-extractor.css?v=1.0">
 
-  <!-- Tool Specific Self-Contained Styles -->
-  <style>
-    /* Tool-specific styles only (shared UI components now in main.css) */
-  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Website Favicon Extractor",
+        "url": "https://toolity.in/web/favicon-extractor/",
+        "description": "Extract and download ultra-clear HD favicons and touch icons from any domain directly in your browser.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Web Tools", "item": "https://toolity.in/web/" },
+          { "@type": "ListItem", "position": 3, "name": "Website Favicon Extractor", "item": "https://toolity.in/web/favicon-extractor/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Where does the favicon come from?", "acceptedAnswer": { "@type": "Answer", "text": "From Google's public favicon service (google.com/s2/favicons). It crawls and caches site icons, which is why it works even for sites that block direct hot-linking. Toolity never proxies or stores the image." } },
+          { "@type": "Question", "name": "Why does the icon look blurry at 256px?", "acceptedAnswer": { "@type": "Answer", "text": "Google only has the sizes the site actually publishes. If a site ships a 32px favicon and no touch icon, the 256px request is upscaled. Try 128px or 64px for a sharper result." } },
+          { "@type": "Question", "name": "Can I paste a full URL instead of a domain?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Paste https://github.com/profile/settings and the tool extracts github.com automatically. A leading www. is removed as well." } },
+          { "@type": "Question", "name": "Is it legal to use another site's favicon?", "acceptedAnswer": { "@type": "Answer", "text": "Favicons are usually trademarked brand assets. Using them to link to that site, build bookmarks or dashboards is normal practice; using them as your own brand is not. When in doubt, check the brand's usage guidelines." } },
+          { "@type": "Question", "name": "Why did the download fail but Open works?", "acceptedAnswer": { "@type": "Answer", "text": "Browsers block scripts from reading cross-origin images, so Download routes through a public image proxy. If the proxy is slow or blocked by your network, click Open and save the image from the new tab." } }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 
 <body>
   <div data-include="/components/header.html"></div>
 
-  <!-- Main Tool Page Content -->
   <main>
-    <!-- Page Hero Header -->
+    <!-- 1. HERO -->
     <section class="page-hero">
       <div class="container">
-        <!-- Breadcrumbs Navigation -->
         <nav class="breadcrumbs" aria-label="Breadcrumb">
           <a href="/" class="breadcrumb-link">Home</a>
           <span class="breadcrumb-separator">/</span>
@@ -74,81 +103,73 @@
           <span class="breadcrumb-separator">/</span>
           <span class="breadcrumb-current">Website Favicon Extractor</span>
         </nav>
-
         <div class="page-title-row">
           <div class="page-header-content">
             <span class="section-eyebrow">Webmaster Tool</span>
             <h1 class="page-title">Website Favicon Extractor</h1>
-            <p class="page-desc">
-              Grab, preview, and download ultra-clear high-resolution favicons, touch icons, and app markers (16px to 256px HD) from any website using Google's Favicon Service.
-            </p>
+            <p class="page-desc">Grab, preview and download high-resolution favicons, touch icons and app markers (16px to 256px) from any website — 100% in your browser.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Tool Main Workspace Area -->
+    <!-- 2. WORKSPACE -->
     <section class="section-wrapper tool-section">
       <div class="container">
 
-        <div class="tool-workspace-card">
+        <div class="tool-workspace-card" data-layout="split" id="tool-card">
 
-          <!-- 1. Quick Actions Toolbar (Universal Actions on Right) -->
           <div class="tool-actions-toolbar">
             <div class="toolbar-group">
-              <span class="pane-badge" id="top-status-badge">Google Shared Favicon CDN</span>
+              <span class="pane-badge" id="status-badge">Waiting for domain</span>
             </div>
-
             <div class="toolbar-group">
-              <button type="button" class="btn-toolbar-sm" id="btn-reset-workspace" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
                 <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
                 <span>Reset</span>
               </button>
-              <button type="button" class="btn-toolbar-sm" id="btn-top-copy" title="Copy active favicon CDN URL">
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy favicon image URL" aria-label="Copy favicon image URL" disabled>
                 <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
                 <span>Copy Link</span>
               </button>
-              <button type="button" class="btn-toolbar-sm" id="btn-top-open" title="Open raw favicon in new tab">
-                <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
-                <span>Open Raw</span>
-              </button>
-              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-top-download" title="Download active favicon image">
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download favicon PNG" aria-label="Download favicon PNG" disabled>
                 <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
-                <span>Download Favicon</span>
+                <span>Download</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-open" title="Open raw favicon in a new tab" aria-label="Open raw favicon in a new tab" disabled>
+                <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
+                <span>Open</span>
               </button>
             </div>
           </div>
 
-          <!-- 2. Dual Split-Pane Grid -->
           <div class="split-pane-grid">
-            
-            <!-- Left: Domain Input & Resolution Selection Pane -->
+
             <div class="tool-pane">
               <div class="pane-header">
-                <span>Domain Source & Quality</span>
-                <span class="pane-badge" id="domain-format-pill">Waiting for Domain</span>
+                <span>Domain Source &amp; Size</span>
+                <span class="pane-badge" id="input-badge">—</span>
               </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span>Enter a valid domain like <code>apple.com</code> or a full URL.</span>
+              </div>
+              <div class="pane-content pane-content-tall">
 
-              <div class="pane-content" style="min-height: 420px; display: flex; flex-direction: column;">
-                
-                <!-- URL/Domain Input Group -->
                 <div class="form-group">
                   <label class="form-label" for="domain-input">
-                    <span>Website Domain or Full URL <span style="color: var(--brand);">*</span></span>
-                    <button type="button" class="btn-sample-chip" id="btn-paste-clipboard" style="padding: 1px 6px; font-size: 0.72rem;">
+                    <span>Website Domain or Full URL <span class="form-required">*</span></span>
+                    <button type="button" class="btn-sample-chip" id="btn-paste" title="Paste from clipboard">
                       <iconify-icon icon="lucide:clipboard" width="12" height="12"></iconify-icon>
                       <span>Paste</span>
                     </button>
                   </label>
-                  
                   <div class="url-input-container">
                     <input type="text" id="domain-input" class="input-clean" placeholder="e.g. apple.com, https://github.com, or stripe.com" spellcheck="false" autocomplete="off">
-                    <button type="button" id="btn-clear-domain" class="btn-input-clear" title="Clear input">
+                    <button type="button" id="btn-clear-domain" class="btn-input-clear" title="Clear" aria-label="Clear domain field" hidden>
                       <iconify-icon icon="lucide:x" width="15" height="15"></iconify-icon>
                     </button>
                   </div>
-
-                  <!-- Quick Sample Brands -->
                   <div class="sample-chips-row">
                     <span class="sample-label">Try sample:</span>
                     <button type="button" class="btn-sample-chip sample-chip" data-domain="apple.com">Apple</button>
@@ -159,24 +180,20 @@
                   </div>
                 </div>
 
-                <!-- Domain Meta Deck -->
                 <div class="domain-info-deck">
                   <div class="domain-id-display">
                     <span>Host:</span>
                     <span id="domain-host-text" class="domain-id-val">None</span>
                   </div>
-                  <span id="domain-status-text" style="color: var(--text-muted);">Enter domain or URL above</span>
+                  <span id="domain-status-text">Enter a domain or URL above</span>
                 </div>
 
-                <!-- Resolution Selection Section -->
-                <div class="form-group" style="margin-top: auto;">
-                  <label class="form-label">
+                <div class="form-group quality-group">
+                  <div class="form-label">
                     <span>Favicon Resolution</span>
                     <span class="form-label-desc">Select pixel dimensions</span>
-                  </label>
-
-                  <div class="quality-grid">
-                    <!-- 1. 256px Ultra HD -->
+                  </div>
+                  <div class="quality-grid" id="quality-grid" role="group" aria-label="Favicon size">
                     <button type="button" class="quality-card-btn active" data-size="256">
                       <div class="quality-top-row">
                         <span class="quality-title">Ultra HD (256px)</span>
@@ -184,8 +201,6 @@
                       </div>
                       <span class="quality-dimensions">256 × 256 px • App Icon</span>
                     </button>
-
-                    <!-- 2. 128px High Res -->
                     <button type="button" class="quality-card-btn" data-size="128">
                       <div class="quality-top-row">
                         <span class="quality-title">Touch Icon (128px)</span>
@@ -193,8 +208,6 @@
                       </div>
                       <span class="quality-dimensions">128 × 128 px • Mobile</span>
                     </button>
-
-                    <!-- 3. 64px Retina -->
                     <button type="button" class="quality-card-btn" data-size="64">
                       <div class="quality-top-row">
                         <span class="quality-title">Retina Tab (64px)</span>
@@ -202,8 +215,6 @@
                       </div>
                       <span class="quality-dimensions">64 × 64 px • HiDPI</span>
                     </button>
-
-                    <!-- 4. 32px Standard -->
                     <button type="button" class="quality-card-btn" data-size="32">
                       <div class="quality-top-row">
                         <span class="quality-title">Standard Tab (32px)</span>
@@ -217,132 +228,120 @@
               </div>
             </div>
 
-            <!-- Right: Favicon Preview & Actions Pane -->
             <div class="tool-pane">
               <div class="pane-header">
                 <span>Favicon Preview</span>
-                <span class="pane-badge" id="preview-res-badge">256 × 256 px</span>
+                <span class="pane-badge" id="output-badge">—</span>
               </div>
-
-              <div class="pane-content" style="min-height: 420px; display: flex; flex-direction: column;">
-                
-                <!-- Main Preview Box -->
-                <div class="preview-viewport-box empty" id="preview-viewport" style="flex: 1; height: 100%; min-height: 280px;">
-                  <div class="empty-preview-content" id="empty-state">
-                    <div class="empty-preview-icon">
-                      <iconify-icon icon="lucide:globe" width="22" height="22"></iconify-icon>
-                    </div>
-                    <div>
-                      <div style="font-weight: 500; color: var(--text-primary); font-size: 0.88rem; margin-bottom: 2px;">No domain entered</div>
-                      <div style="font-size: 0.78rem;">Paste any website URL or domain on the left to extract its favicon</div>
-                    </div>
+              <div class="pane-content pane-content-tall">
+                <div class="preview-viewport-box preview-stage empty" id="preview-viewport">
+                  <div class="pane-empty" id="output-empty">
+                    <iconify-icon icon="lucide:globe"></iconify-icon>
+                    <span>Paste any website URL or domain to extract its favicon</span>
                   </div>
-
-                  <img id="favicon-preview-img" class="preview-favicon-img" alt="Website Favicon Preview" style="display: none;" width="128" height="128" loading="lazy">
+                  <img id="favicon-preview-img" class="preview-favicon-img" alt="Website favicon preview" width="128" height="128" loading="lazy" hidden>
                   <div id="badge-overlay" class="preview-floating-pill">
-                    <iconify-icon icon="lucide:check-circle" width="13" height="13" style="color: #10B981;"></iconify-icon>
-                    <span id="overlay-text">256px HD</span>
+                    <iconify-icon icon="lucide:check-circle" width="13" height="13"></iconify-icon>
+                    <span id="overlay-text">256px</span>
                   </div>
                 </div>
 
-                <!-- HTML Embed Snippet Code -->
-                <div class="snippet-group" id="snippet-group" style="display: none; margin-top: 1rem;">
-                  <label class="form-label" style="margin-bottom: 0.35rem;">
-                    <span>HTML Embed Snippet</span>
-                  </label>
+                <div class="snippet-group" id="snippet-group" hidden>
+                  <div class="form-label"><span>HTML Embed Snippet</span></div>
                   <div class="snippet-box">
-                    <code class="snippet-code" id="snippet-code-text">&lt;link rel="icon" type="image/png" sizes="256x256" href="..."&gt;</code>
-                    <button type="button" class="btn-snippet-copy" id="btn-copy-snippet" title="Copy HTML Snippet">
+                    <code class="snippet-code" id="snippet-code-text"></code>
+                    <button type="button" class="btn-snippet-copy" id="btn-copy-snippet" title="Copy HTML snippet" aria-label="Copy HTML snippet">
                       <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
                     </button>
                   </div>
                 </div>
-
               </div>
             </div>
 
           </div>
         </div>
 
+        <!-- 3. AD -->
         <div data-include="/components/ad-slot.html"></div>
 
-        <!-- ==================================================================
-             3-STEP INSTRUCTION GUIDE
-             ================================================================== -->
+        <!-- 4. GUIDE -->
         <section class="guide-section">
           <div class="section-header-compact">
             <span class="section-eyebrow">How It Works</span>
-            <h2 class="section-heading-sm">How to Extract & Download Website Favicons</h2>
+            <h2 class="section-heading-sm">How to Extract &amp; Download Website Favicons</h2>
           </div>
-
           <div class="guide-steps-grid">
             <div class="guide-step-card">
               <div class="step-num-badge">1</div>
               <h3 class="step-title">Enter Domain or URL</h3>
-              <p class="step-desc">
-                Paste any full website address (e.g. <code>https://github.com/profile</code>) or bare domain name (e.g. <code>apple.com</code>).
-              </p>
+              <p class="step-desc">Paste a full address (e.g. <code>https://github.com/profile</code>) or a bare domain (e.g. <code>apple.com</code>). The host is extracted automatically.</p>
             </div>
-
             <div class="guide-step-card">
               <div class="step-num-badge">2</div>
               <h3 class="step-title">Choose Pixel Resolution</h3>
-              <p class="step-desc">
-                Select your preferred size from Ultra HD (256px), Touch Icon (128px), Retina (64px), or Standard Tab (32px).
-              </p>
+              <p class="step-desc">Pick Ultra HD (256px), Touch Icon (128px), Retina (64px) or Standard Tab (32px). The preview updates instantly.</p>
             </div>
-
             <div class="guide-step-card">
               <div class="step-num-badge">3</div>
-              <h3 class="step-title">Download or Copy HTML</h3>
-              <p class="step-desc">
-                Click <strong>Download PNG</strong> to save the transparent icon or copy the ready-to-use HTML <code>&lt;link rel="icon"&gt;</code> code snippet.
-              </p>
+              <h3 class="step-title">Download or Copy</h3>
+              <p class="step-desc">Download the PNG, Copy Link for the CDN URL, or copy the ready-made <code>&lt;link rel="icon"&gt;</code> tag. Tip: <kbd>Ctrl/⌘+Enter</kbd> downloads, <kbd>Esc</kbd> resets.</p>
             </div>
           </div>
+        </section>
 
-          <!-- Supported Dimensions Table Card -->
+        <!-- 5. REFERENCE -->
+        <section class="reference-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">Reference</span>
+            <h2 class="section-heading-sm">Standard Favicon Resolutions &amp; Use Cases</h2>
+          </div>
           <div class="formats-table-card">
-            <h3 style="font-size: 0.95rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.75rem;">Standard Favicon Resolutions & Use Cases</h3>
             <table class="formats-table">
               <thead>
-                <tr>
-                  <th>Resolution</th>
-                  <th>Use Case</th>
-                  <th>Recommended Format</th>
-                </tr>
+                <tr><th>Resolution</th><th>Use Case</th><th>Recommended Format</th></tr>
               </thead>
               <tbody>
-                <tr>
-                  <td><strong>256 × 256 px</strong></td>
-                  <td>PWA App Icon, Android Home Screen & Chrome Web Store</td>
-                  <td><code>PNG (Ultra HD)</code></td>
-                </tr>
-                <tr>
-                  <td><strong>128 × 128 px</strong></td>
-                  <td>iOS Apple Touch Icon & macOS Safari Pinned Tab</td>
-                  <td><code>PNG (Touch Icon)</code></td>
-                </tr>
-                <tr>
-                  <td><strong>64 × 64 px</strong></td>
-                  <td>High-DPI Retina Browser Tabs & Desktop Bookmarks</td>
-                  <td><code>PNG / ICO</code></td>
-                </tr>
-                <tr>
-                  <td><strong>32 × 32 px</strong></td>
-                  <td>Standard Browser Tab Icon</td>
-                  <td><code>PNG / ICO</code></td>
-                </tr>
-                <tr>
-                  <td><strong>16 × 16 px</strong></td>
-                  <td>Classic Address Bar & Bookmark Favicon</td>
-                  <td><code>PNG / ICO</code></td>
-                </tr>
+                <tr><td><strong>256 × 256 px</strong></td><td>PWA App Icon, Android Home Screen &amp; Chrome Web Store</td><td><code>PNG (Ultra HD)</code></td></tr>
+                <tr><td><strong>128 × 128 px</strong></td><td>iOS Apple Touch Icon &amp; macOS Safari Pinned Tab</td><td><code>PNG (Touch Icon)</code></td></tr>
+                <tr><td><strong>64 × 64 px</strong></td><td>High-DPI Retina Browser Tabs &amp; Desktop Bookmarks</td><td><code>PNG / ICO</code></td></tr>
+                <tr><td><strong>32 × 32 px</strong></td><td>Standard Browser Tab Icon</td><td><code>PNG / ICO</code></td></tr>
+                <tr><td><strong>16 × 16 px</strong></td><td>Classic Address Bar &amp; Bookmark Favicon</td><td><code>PNG / ICO</code></td></tr>
               </tbody>
             </table>
           </div>
         </section>
 
+        <!-- 6. FAQ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Favicon Extractor — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Where does the favicon come from?</summary>
+              <p>From Google's public favicon service (<code>google.com/s2/favicons</code>). It crawls and caches site icons, which is why it works even for sites that block direct hot-linking. Toolity never proxies or stores the image.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why does the icon look blurry at 256px?</summary>
+              <p>Google only has the sizes the site actually publishes. If a site ships a 32px favicon and no touch icon, the 256px request is upscaled. Try 128px or 64px for a sharper result.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can I paste a full URL instead of a domain?</summary>
+              <p>Yes. Paste <code>https://github.com/profile/settings</code> and the tool extracts <code>github.com</code> automatically. A leading <code>www.</code> is removed as well.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is it legal to use another site's favicon?</summary>
+              <p>Favicons are usually trademarked brand assets. Using them to link to that site, build bookmarks or dashboards is normal practice; using them as your own brand is not. When in doubt, check the brand's usage guidelines.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why did the download fail but Open works?</summary>
+              <p>Browsers block scripts from reading cross-origin images, so Download routes through a public image proxy. If the proxy is slow or blocked by your network, click Open and save the image from the new tab.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- 7. CTA -->
         <div data-include="/components/tool-cta.html" data-category="web"></div>
 
       </div>
@@ -351,363 +350,9 @@
 
   <div data-include="/components/footer.html"></div>
 
-  <!-- Global Site Script -->
   <script src="/scripts/main.js?v=2.4"></script>
-
-  <!-- Tool Specific Self-Contained JavaScript Logic -->
-  <script>
-    /* Designed by Kapil Pidhwani: Client-Side Website Favicon Extractor Engine */
-    document.addEventListener('DOMContentLoaded', () => {
-      // DOM Elements
-      const domainInput = document.getElementById('domain-input');
-      const clearDomainBtn = document.getElementById('btn-clear-domain');
-      const pasteBtn = document.getElementById('btn-paste-clipboard');
-      const domainHostText = document.getElementById('domain-host-text');
-      const domainStatusText = document.getElementById('domain-status-text');
-      const domainFormatPill = document.getElementById('domain-format-pill');
-      const qualityCards = document.querySelectorAll('.quality-card-btn');
-      const sampleChips = document.querySelectorAll('.sample-chip');
-
-      // Preview Elements
-      const previewViewport = document.getElementById('preview-viewport');
-      const emptyState = document.getElementById('empty-state');
-      const previewImg = document.getElementById('favicon-preview-img');
-      const badgeOverlay = document.getElementById('badge-overlay');
-      const overlayText = document.getElementById('overlay-text');
-      const previewResBadge = document.getElementById('preview-res-badge');
-      const snippetGroup = document.getElementById('snippet-group');
-      const snippetCodeText = document.getElementById('snippet-code-text');
-      const btnCopySnippet = document.getElementById('btn-copy-snippet');
-
-      // Action Buttons
-      const resetBtn = document.getElementById('btn-reset-workspace');
-      const topCopyBtn = document.getElementById('btn-top-copy');
-      const topOpenBtn = document.getElementById('btn-top-open');
-      const topDownloadBtn = document.getElementById('btn-top-download');
-      const toast = document.getElementById('tool-toast');
-      const toastMessage = document.getElementById('toast-message');
-
-      // State
-      let currentDomain = null;
-      let currentSize = '256'; // '256' | '128' | '64' | '32'
-      let activeFaviconUrl = null;
-      let toastTimer = null;
-
-      /**
-       * Show floating toast notification
-       */
-
-      /**
-       * Sanitize user input to pure clean domain hostname
-       */
-      function sanitizeDomain(input) {
-        if (!input) return null;
-        let str = input.trim().toLowerCase();
-
-        // Strip protocols and paths if pasted as full URL
-        try {
-          if (!str.startsWith('http://') && !str.startsWith('https://')) {
-            str = 'https://' + str;
-          }
-          const parsed = new URL(str);
-          let host = parsed.hostname;
-
-          // Strip standard www. prefix for cleaner domain fetching if preferred
-          if (host.startsWith('www.')) {
-            host = host.substring(4);
-          }
-
-          // Basic domain validity check (must contain at least one dot or be localhost)
-          if (host.includes('.') || host === 'localhost') {
-            return host;
-          }
-        } catch (e) {
-          // Fallback regex if URL parsing fails
-          const match = str.match(/^(?:https?:\/\/)?(?:www\.)?([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})(?:\/.*)?$/);
-          if (match && match[1]) {
-            return match[1];
-          }
-        }
-
-        return null;
-      }
-
-      /**
-       * Build Google Shared Favicon CDN URL
-       */
-      function getFaviconUrl(domain, size) {
-        return `https://www.google.com/s2/favicons?domain=${encodeURIComponent(domain)}&sz=${size}`;
-      }
-
-      /**
-       * Update Favicon Preview Viewport
-       */
-      function updatePreview() {
-        if (!currentDomain) {
-          // Empty State
-          previewViewport.classList.add('empty');
-          emptyState.style.display = 'flex';
-          previewImg.style.display = 'none';
-          previewImg.src = '';
-          badgeOverlay.style.display = 'none';
-          previewResBadge.textContent = `${currentSize} × ${currentSize} px`;
-          snippetGroup.style.display = 'none';
-
-          domainHostText.textContent = 'None';
-          domainStatusText.textContent = 'Enter domain or URL above';
-          domainFormatPill.textContent = 'Waiting for Domain';
-          clearDomainBtn.style.display = 'none';
-
-          // Disable toolbar actions
-          topDownloadBtn.disabled = true;
-          topCopyBtn.disabled = true;
-          topOpenBtn.style.pointerEvents = 'none';
-          topOpenBtn.style.opacity = '0.5';
-          activeFaviconUrl = null;
-          return;
-        }
-
-        clearDomainBtn.style.display = 'block';
-
-        const targetUrl = getFaviconUrl(currentDomain, currentSize);
-        activeFaviconUrl = targetUrl;
-
-        // Load image tester
-        const img = new Image();
-        img.onload = () => {
-          previewViewport.classList.remove('empty');
-          emptyState.style.display = 'none';
-          previewImg.src = targetUrl;
-          previewImg.style.display = 'block';
-
-          // Update badges
-          overlayText.textContent = `${currentSize}px HD`;
-          badgeOverlay.style.display = 'flex';
-          previewResBadge.textContent = `${currentSize} × ${currentSize} px`;
-
-          // Update HTML snippet
-          snippetCodeText.textContent = `<link rel="icon" type="image/png" sizes="${currentSize}x${currentSize}" href="${targetUrl}">`;
-          snippetGroup.style.display = 'block';
-
-          // Enable toolbar actions
-          topDownloadBtn.disabled = false;
-          topCopyBtn.disabled = false;
-          topOpenBtn.style.pointerEvents = 'auto';
-          topOpenBtn.style.opacity = '1';
-        };
-
-        img.onerror = () => {
-          showToast('Failed to load favicon from Google CDN');
-        };
-
-        img.src = targetUrl;
-      }
-
-      /**
-       * Handle Input change
-       */
-      function handleInputChange() {
-        const val = domainInput.value;
-        const sanitized = sanitizeDomain(val);
-
-        if (sanitized) {
-          currentDomain = sanitized;
-          domainHostText.textContent = sanitized;
-          domainStatusText.textContent = 'Active Domain';
-          domainFormatPill.textContent = 'Valid Host';
-        } else {
-          currentDomain = null;
-        }
-
-        updatePreview();
-      }
-
-      /**
-       * Update quality card active states
-       */
-      function updateQualityCards() {
-        qualityCards.forEach(card => {
-          if (card.getAttribute('data-size') === currentSize) {
-            card.classList.add('active');
-          } else {
-            card.classList.remove('active');
-          }
-        });
-      }
-
-      /**
-       * Fetch image blob with CORS proxy fallback to enable client-side downloads
-       */
-      async function fetchImageBlob(url) {
-        // 1. Try global image cache/proxy (weserv.nl - Cloudflare edge, full CORS)
-        try {
-          const proxyUrl = `https://images.weserv.nl/?url=${encodeURIComponent(url)}`;
-          const res = await fetch(proxyUrl);
-          if (res.ok) {
-            const blob = await res.blob();
-            if (blob && blob.size > 0) return blob;
-          }
-        } catch (e) {
-          // Continue to proxy fallbacks
-        }
-
-        // 2. Try proxy: allorigins.win
-        try {
-          const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
-          const res = await fetch(proxyUrl);
-          if (res.ok) {
-            const blob = await res.blob();
-            if (blob && blob.size > 0) return blob;
-          }
-        } catch (e) {
-          // Continue to next proxy
-        }
-
-        // 3. Try direct fetch
-        try {
-          const res = await fetch(url);
-          if (res.ok) {
-            const blob = await res.blob();
-            if (blob && blob.size > 0) return blob;
-          }
-        } catch (e) {
-          // Continue
-        }
-
-        throw new Error('Could not fetch image blob');
-      }
-
-      /**
-       * Download Favicon Client-Side via Blob
-       */
-      async function downloadFavicon() {
-        if (!activeFaviconUrl || !currentDomain) {
-          showToast('Please enter a valid website domain first');
-          return;
-        }
-
-        showToast('Downloading favicon...');
-
-        try {
-          const blob = await fetchImageBlob(activeFaviconUrl);
-          const blobUrl = URL.createObjectURL(blob);
-
-          const link = document.createElement('a');
-          link.href = blobUrl;
-          link.download = `favicon-${currentDomain}-${currentSize}px.png`;
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-          setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
-
-          showToast('Favicon downloaded successfully!');
-        } catch (err) {
-          showToast('Download failed. You can use "Open Raw" to view.');
-        }
-      }
-
-      /**
-       * Copy Favicon CDN URL
-       */
-      function copyFaviconUrl() {
-        if (!activeFaviconUrl) {
-          showToast('No active favicon to copy');
-          return;
-        }
-
-        navigator.clipboard.writeText(activeFaviconUrl).then(() => {
-          showToast('Favicon Google CDN URL copied!');
-        }).catch(() => {
-          showToast('Failed to copy URL');
-        });
-      }
-
-      /**
-       * Copy HTML Snippet
-       */
-      function copySnippet() {
-        if (!snippetCodeText.textContent) return;
-        navigator.clipboard.writeText(snippetCodeText.textContent).then(() => {
-          showToast('HTML <link> snippet copied to clipboard!');
-        }).catch(() => {
-          showToast('Failed to copy snippet');
-        });
-      }
-
-      // Event Listeners
-      domainInput.addEventListener('input', handleInputChange);
-      domainInput.addEventListener('paste', () => {
-        setTimeout(handleInputChange, 10);
-      });
-
-      clearDomainBtn.addEventListener('click', () => {
-        domainInput.value = '';
-        handleInputChange();
-        domainInput.focus();
-      });
-
-      pasteBtn.addEventListener('click', async () => {
-        try {
-          const text = await navigator.clipboard.readText();
-          if (text) {
-            domainInput.value = text;
-            handleInputChange();
-            showToast('Domain pasted from clipboard');
-          }
-        } catch (err) {
-          domainInput.focus();
-          showToast('Please press ⌘V or Ctrl+V to paste');
-        }
-      });
-
-      // Sample domain chips
-      sampleChips.forEach(chip => {
-        chip.addEventListener('click', () => {
-          const d = chip.getAttribute('data-domain');
-          if (d) {
-            domainInput.value = d;
-            handleInputChange();
-            showToast(`Loaded ${d}`);
-          }
-        });
-      });
-
-      // Resolution selector cards
-      qualityCards.forEach(card => {
-        card.addEventListener('click', () => {
-          const sz = card.getAttribute('data-size');
-          if (sz && sz !== currentSize) {
-            currentSize = sz;
-            updateQualityCards();
-            updatePreview();
-          }
-        });
-      });
-
-      // Action toolbar bindings
-      resetBtn.addEventListener('click', () => {
-        domainInput.value = '';
-        currentSize = '256';
-        updateQualityCards();
-        handleInputChange();
-        showToast('Workspace reset');
-      });
-
-      topDownloadBtn.addEventListener('click', downloadFavicon);
-      topCopyBtn.addEventListener('click', copyFaviconUrl);
-      topOpenBtn.addEventListener('click', () => {
-        if (activeFaviconUrl) {
-          window.open(activeFaviconUrl, '_blank', 'noopener,noreferrer');
-        } else {
-          showToast('Please enter a valid website domain first');
-        }
-      });
-      btnCopySnippet.addEventListener('click', copySnippet);
-
-      // Initial check in case domain is prefilled
-      handleInputChange();
-    });
-  </script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="/web/favicon-extractor/favicon-extractor.js?v=1.0"></script>
 </body>
 
 </html>

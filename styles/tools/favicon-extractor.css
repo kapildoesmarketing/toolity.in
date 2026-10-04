@@ -1,0 +1,83 @@
+/* Designed by Kapil Pidhwani: Website Favicon Extractor — tool-only styles */
+.domain-info-deck {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  padding: 0.6rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.domain-id-display {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.domain-id-val {
+  font-family: var(--font-mono);
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.quality-group { margin-top: auto; }
+
+.preview-stage {
+  flex: 1;
+  min-height: 280px;
+}
+
+.preview-favicon-img {
+  width: 128px;
+  height: 128px;
+  image-rendering: -webkit-optimize-contrast;
+  display: block;
+}
+
+.preview-favicon-img[hidden] { display: none; }
+
+.preview-floating-pill iconify-icon { color: #10B981; }
+
+/* HTML <link> snippet under the preview */
+.snippet-group { margin-top: 1rem; }
+.snippet-group[hidden] { display: none; }
+
+.snippet-box {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.5rem 0.5rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+}
+
+.snippet-code {
+  flex: 1;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow-x: auto;
+}
+
+.btn-snippet-copy {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--border);
+  background: var(--background);
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.btn-snippet-copy:hover { color: var(--brand); border-color: var(--brand); }
