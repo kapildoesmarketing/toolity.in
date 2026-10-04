@@ -18,296 +18,84 @@
       document.documentElement.setAttribute('data-theme', t);
     })();
   </script>
-  <title>URL Parameter Separator & Cleaner — Toolity.in</title>
-  <link rel="canonical" href="https://toolity.in/web/url-parameter-separator/">
 
-  <!-- SEO & Metadata -->
-  <meta name="description"
-    content="Free, instant URL Parameter Separator and Link Cleaner. Paste any URL, inspect query parameters individually, strip tracking IDs (UTM, fbclid, gclid), and research unfamiliar parameters with one click.">
-  <meta name="keywords"
-    content="url parameter separator, url cleaner, remove utm parameters, strip tracking url, query string parser, clean url link, query parameter lookup, client side url parser">
+  <title>URL Parameter Separator &amp; Cleaner — Toolity.in</title>
+  <link rel="canonical" href="https://toolity.in/web/url-parameter-separator/">
+  <meta name="description" content="Free, instant URL Parameter Separator and Link Cleaner. Paste any URL, inspect query parameters individually, strip tracking IDs (UTM, fbclid, gclid), and research unfamiliar parameters with one click.">
+  <meta name="keywords" content="url parameter separator, url cleaner, remove utm parameters, strip tracking url, query string parser, clean url link, query parameter lookup, client side url parser">
   <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="URL Parameter Separator &amp; Cleaner — Toolity.in">
+  <meta property="og:description" content="Inspect query parameters, strip UTM and click-ID trackers, and copy a clean link. 100% in your browser.">
+  <meta property="og:url" content="https://toolity.in/web/url-parameter-separator/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
   <!-- Favicons -->
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
   <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
 
-  <!-- Google Fonts: Inter -->
+  <!-- Fonts & critical assets -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-  <!-- Iconify Icon Component -->
-    <!-- Preload Critical Assets -->
   <link rel="preload" href="/styles/main.css?v=2.4" as="style">
   <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
-
   <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 
   <link rel="stylesheet" href="/styles/main.css?v=2.4">
-  <style>
-    /* Designed by Kapil Pidhwani: URL Parameter Separator Ergonomics */
-    .url-input-container {
-      display: flex;
-      gap: 0.5rem;
-      margin-bottom: 0.85rem;
-    }
+  <link rel="stylesheet" href="/styles/tools/url-parameter-separator.css?v=1.0">
 
-    .input-clean {
-      width: 100%;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 0.75rem 0.95rem;
-      font-family: var(--font-mono);
-      font-size: 0.86rem;
-      color: var(--text-primary);
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
-      box-sizing: border-box;
-    }
-
-    .input-clean:focus {
-      outline: none;
-      border-color: var(--brand);
-      box-shadow: 0 0 0 3px rgba(244, 81, 30, 0.12);
-    }
-
-    .filter-chips-row {
-      display: flex;
-      align-items: center;
-      gap: 0.45rem;
-      flex-wrap: wrap;
-      margin-bottom: 0.85rem;
-      padding-bottom: 0.75rem;
-      border-bottom: 1px solid var(--border-subtle);
-    }
-
-    .btn-filter-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      padding: 0.3rem 0.65rem;
-      font-size: 0.76rem;
-      font-weight: 500;
-      border-radius: var(--radius-pill);
-      background: var(--surface);
-      border: 1px solid var(--border);
-      color: var(--text-secondary);
-      cursor: pointer;
-      transition: all 0.15s ease;
-    }
-
-    .btn-filter-chip:hover {
-      border-color: var(--brand);
-      color: var(--brand);
-      background: var(--brand-soft);
-    }
-
-    .btn-filter-chip.chip-signal {
-      color: var(--brand);
-      border-color: rgba(244, 81, 30, 0.3);
-      background: rgba(244, 81, 30, 0.06);
-    }
-
-    .params-list-box {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      max-height: 290px;
-      overflow-y: auto;
-      padding-right: 0.25rem;
-    }
-
-    .param-card-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.65rem;
-      padding: 0.55rem 0.75rem;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      transition: border-color 0.15s ease, background-color 0.15s ease, opacity 0.15s ease;
-    }
-
-    .param-card-row.disabled {
-      opacity: 0.45;
-      background: var(--surface-soft-orange);
-      border-color: var(--border-subtle);
-      text-decoration: line-through;
-    }
-
-    .param-left-group {
-      display: flex;
-      align-items: center;
-      gap: 0.65rem;
-      min-width: 0;
-      flex: 1;
-    }
-
-    .param-checkbox {
-      width: 16px;
-      height: 16px;
-      accent-color: var(--brand);
-      cursor: pointer;
-      flex-shrink: 0;
-    }
-
-    .param-key-val-wrap {
-      display: flex;
-      align-items: baseline;
-      gap: 0.4rem;
-      font-family: var(--font-mono);
-      font-size: 0.82rem;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .param-key {
-      font-weight: 700;
-      color: var(--brand);
-      flex-shrink: 0;
-    }
-
-    .param-equals {
-      color: var(--text-muted);
-      flex-shrink: 0;
-    }
-
-    .param-value {
-      color: var(--text-primary);
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .param-actions-group {
-      display: flex;
-      align-items: center;
-      gap: 0.35rem;
-      flex-shrink: 0;
-    }
-
-    .btn-param-help {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      background: var(--surface-elevated);
-      border: 1px solid var(--border);
-      color: var(--text-secondary);
-      font-size: 0.78rem;
-      font-weight: 700;
-      font-family: var(--font-mono);
-      cursor: pointer;
-      transition: all 0.15s ease;
-    }
-
-    .btn-param-help:hover {
-      background: var(--brand-soft);
-      border-color: var(--brand);
-      color: var(--brand);
-      transform: scale(1.08);
-    }
-
-    .btn-param-delete {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 26px;
-      height: 26px;
-      border-radius: var(--radius-xs);
-      background: transparent;
-      border: 1px solid transparent;
-      color: var(--text-muted);
-      cursor: pointer;
-      transition: all 0.15s ease;
-    }
-
-    .btn-param-delete:hover {
-      background: rgba(220, 38, 38, 0.08);
-      border-color: rgba(220, 38, 38, 0.2);
-      color: #DC2626;
-    }
-
-    .empty-params-state {
-      padding: 2.5rem 1.5rem;
-      text-align: center;
-      color: var(--text-muted);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      border: 1.5px dashed var(--border);
-      border-radius: var(--radius-sm);
-    }
-
-    .empty-params-state iconify-icon {
-      margin-bottom: 0.5rem;
-      opacity: 0.5;
-    }
-
-    .url-meta-deck {
-      margin-top: 0.85rem;
-      padding: 0.55rem 0.85rem;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-      font-size: 0.76rem;
-      font-family: var(--font-mono);
-      color: var(--text-secondary);
-    }
-
-    .url-meta-line {
-      display: flex;
-      gap: 0.4rem;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .url-meta-tag {
-      color: var(--brand);
-      font-weight: 600;
-      flex-shrink: 0;
-    }
-
-    .url-meta-val {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .pane-output-preview {
-      margin: 0;
-      font-family: var(--font-mono);
-      font-size: 0.86rem;
-      line-height: 1.6;
-      color: var(--text-primary);
-      white-space: pre-wrap;
-      word-break: break-all;
-      overflow-y: auto;
-      user-select: text;
-    }
-  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "URL Parameter Separator & Cleaner",
+        "url": "https://toolity.in/web/url-parameter-separator/",
+        "description": "Inspect query parameters, strip UTM and click-ID trackers, and copy a clean link. 100% in your browser.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Web Tools", "item": "https://toolity.in/web/" },
+          { "@type": "ListItem", "position": 3, "name": "URL Parameter Separator", "item": "https://toolity.in/web/url-parameter-separator/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Is the URL I paste sent anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. Parsing uses the browser's built-in URL API and happens entirely on your device. The only network request this page can make is when you click the ? button, which opens a Google search in a new tab." } },
+          { "@type": "Question", "name": "Which tracking parameters does Strip Tracking remove?", "acceptedAnswer": { "@type": "Answer", "text": "All utm_* keys plus common click identifiers such as fbclid, gclid, gbraid, wbraid, msclkid, ttclid, twclid, igshid, mc_cid, mc_eid, yclid, _ga and _gl. Anything else stays enabled so functional parameters are never lost." } },
+          { "@type": "Question", "name": "Will the cleaned link still work?", "acceptedAnswer": { "@type": "Answer", "text": "Tracking parameters are only used for analytics, so removing them does not change the page you land on. If a site breaks, re-enable parameters one at a time to find the one it actually needs." } },
+          { "@type": "Question", "name": "What does the ? button next to a parameter do?", "acceptedAnswer": { "@type": "Answer", "text": "It opens a Google search for that parameter name together with the site's domain, so you can quickly find out what an unfamiliar key like spm or ref_src means." } },
+          { "@type": "Question", "name": "Can I export the parameters as JSON?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Switch the output pane to JSON or Key-Value to get just the active parameters in a structured format, then Copy." } }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 
 <body>
   <div data-include="/components/header.html"></div>
 
-  <!-- Main Tool Page Content -->
   <main>
-    <!-- Page Hero Header -->
+    <!-- 1. HERO -->
     <section class="page-hero">
       <div class="container">
-        <!-- Breadcrumbs Navigation -->
         <nav class="breadcrumbs" aria-label="Breadcrumb">
           <a href="/" class="breadcrumb-link">Home</a>
           <span class="breadcrumb-separator">/</span>
@@ -315,539 +103,171 @@
           <span class="breadcrumb-separator">/</span>
           <span class="breadcrumb-current">URL Parameter Separator</span>
         </nav>
-
         <div class="page-title-row">
           <div class="page-header-content">
             <span class="section-eyebrow">Webmaster Tool</span>
-            <h1 class="page-title">URL Parameter Separator & Cleaner</h1>
-            <p class="page-desc">
-              Paste complex URLs to inspect query parameters individually, strip tracking tokens (UTMs, click IDs), research unfamiliar parameters via Google search, and get a clean link.
-            </p>
+            <h1 class="page-title">URL Parameter Separator &amp; Cleaner</h1>
+            <p class="page-desc">Inspect query parameters one by one, strip tracking tokens (UTMs, click IDs), research unfamiliar keys and copy a clean link — 100% in your browser.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Tool Main Workspace Area -->
+    <!-- 2. WORKSPACE -->
     <section class="section-wrapper tool-section">
       <div class="container">
 
-        <div class="tool-workspace-card">
+        <div class="tool-workspace-card" data-layout="split" id="tool-card">
 
-          <!-- 1. Quick Actions Toolbar (Universal Actions on Right) -->
           <div class="tool-actions-toolbar">
             <div class="toolbar-group">
-              <span class="pane-badge" id="cleaner-mode-badge">URL & Query Sanitizer</span>
+              <span class="pane-badge" id="status-badge">URL &amp; query sanitizer</span>
             </div>
-
             <div class="toolbar-group">
-              <button type="button" class="btn-toolbar-sm" id="btn-reset-tool" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
                 <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
                 <span>Reset</span>
               </button>
-              <button type="button" class="btn-toolbar-sm" id="btn-sample-url" title="Load sample URL with tracking parameters">
-                <iconify-icon icon="lucide:sparkles" width="14" height="14"></iconify-icon>
-                <span>Sample URL</span>
-              </button>
-              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-copy-url" title="Copy cleaned URL to clipboard">
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-copy" title="Copy output to clipboard" aria-label="Copy output to clipboard">
                 <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
-                <span>Copy Clean URL</span>
+                <span>Copy</span>
               </button>
-              <button type="button" class="btn-toolbar-sm" id="btn-open-url" title="Open cleaned URL in a new tab">
+              <button type="button" class="btn-toolbar-sm" id="btn-open" title="Open cleaned URL in a new tab" aria-label="Open cleaned URL in a new tab">
                 <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
-                <span>Open Link</span>
+                <span>Open</span>
               </button>
             </div>
           </div>
 
-          <!-- 2. Dual Split-Pane Grid -->
           <div class="split-pane-grid">
-            
-            <!-- Left: URL Input & Separated Parameters Pane -->
+
             <div class="tool-pane">
               <div class="pane-header">
-                <span>URL & Query Parameters</span>
-                <span class="pane-badge" id="params-count-badge">0 Parameters</span>
+                <span>URL &amp; Query Parameters</span>
+                <span class="pane-badge" id="params-count-badge">0 parameters</span>
               </div>
-              <div class="pane-content" style="min-height: 420px; display: flex; flex-direction: column;">
-                
-                <!-- URL Input Bar -->
-                <div class="url-input-container">
-                  <input type="url" id="input-url" class="input-clean" placeholder="Paste full URL with query parameters (https://example.com/?utm_source=...)" spellcheck="false" autocomplete="off">
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span>Invalid URL — make sure it includes a domain name.</span>
+              </div>
+              <div class="pane-content pane-content-tall">
+
+                <div class="form-group">
+                  <label class="form-label" for="input-url">
+                    <span>Full URL <span class="form-required">*</span></span>
+                  </label>
+                  <input type="url" id="input-url" class="input-clean" placeholder="https://example.com/?utm_source=…" spellcheck="false" autocomplete="off">
+                  <div class="sample-chips-row">
+                    <span class="sample-label">Try sample:</span>
+                    <button type="button" class="btn-sample-chip" id="btn-sample">URL with UTMs &amp; click IDs</button>
+                  </div>
                 </div>
 
-                <!-- Quick Filter Actions -->
                 <div class="filter-chips-row">
                   <button type="button" class="btn-filter-chip chip-signal" id="btn-strip-tracking" title="Uncheck all UTM and marketing tracking parameters">
                     <iconify-icon icon="lucide:shield-check" width="14" height="14"></iconify-icon>
-                    <span>⚡ Strip Tracking (UTMs & IDs)</span>
+                    <span>Strip Tracking (UTMs &amp; IDs)</span>
                   </button>
-                  <button type="button" class="btn-filter-chip" id="btn-select-all" title="Include all parameters">
-                    <span>Select All</span>
-                  </button>
-                  <button type="button" class="btn-filter-chip" id="btn-clear-all" title="Exclude all parameters">
-                    <span>Clear All</span>
-                  </button>
+                  <button type="button" class="btn-filter-chip" id="btn-select-all" title="Include all parameters">Select All</button>
+                  <button type="button" class="btn-filter-chip" id="btn-clear-all" title="Exclude all parameters">Clear All</button>
                 </div>
 
-                <!-- Parameters List Box -->
-                <div class="params-list-box" id="params-list-box" style="flex: 1;">
-                  <div class="empty-params-state" id="empty-params-state">
-                    <iconify-icon icon="lucide:link-2" width="28" height="28"></iconify-icon>
-                    <p style="font-size: 0.88rem; font-weight: 500; margin-bottom: 0.25rem;">No parameters loaded</p>
-                    <span style="font-size: 0.78rem;">Paste a URL above or click "Sample URL" to inspect parameters</span>
-                  </div>
-                </div>
+                <div class="params-list-box" id="params-list-box"></div>
 
-                <!-- Base URL & Fragment Metadata Deck -->
-                <div class="url-meta-deck" id="url-meta-deck" style="display: none;">
-                  <div class="url-meta-line">
-                    <span class="url-meta-tag">Host:</span>
-                    <span class="url-meta-val" id="meta-host">—</span>
-                  </div>
-                  <div class="url-meta-line">
-                    <span class="url-meta-tag">Path:</span>
-                    <span class="url-meta-val" id="meta-path">—</span>
-                  </div>
-                  <div class="url-meta-line" id="meta-hash-row" style="display: none;">
-                    <span class="url-meta-tag">Hash:</span>
-                    <span class="url-meta-val" id="meta-hash">—</span>
-                  </div>
+                <div class="url-meta-deck" id="url-meta-deck" hidden>
+                  <div class="url-meta-line"><span class="url-meta-tag">Host:</span><span class="url-meta-val" id="meta-host">—</span></div>
+                  <div class="url-meta-line"><span class="url-meta-tag">Path:</span><span class="url-meta-val" id="meta-path">—</span></div>
+                  <div class="url-meta-line" id="meta-hash-row" hidden><span class="url-meta-tag">Hash:</span><span class="url-meta-val" id="meta-hash">—</span></div>
                 </div>
 
               </div>
             </div>
 
-            <!-- Right: Cleaned URL Output Pane -->
             <div class="tool-pane">
               <div class="pane-header">
                 <span>Cleaned Output</span>
-                <div class="segmented-group segmented-group-pill" id="seg-output-format">
-                  <button type="button" class="seg-pill active" data-format="url">Clean URL</button>
-                  <button type="button" class="seg-pill" data-format="json">JSON</button>
-                  <button type="button" class="seg-pill" data-format="keyval">Key-Value</button>
+                <div class="segmented-group segmented-group-pill" id="seg-format" role="group" aria-label="Output format">
+                  <button type="button" class="seg-pill active" data-value="url">Clean URL</button>
+                  <button type="button" class="seg-pill" data-value="json">JSON</button>
+                  <button type="button" class="seg-pill" data-value="keyval">Key-Value</button>
                 </div>
               </div>
-              <div style="flex: 1; display: flex; flex-direction: column; background: var(--surface);">
-                <pre id="output-code" class="pane-output-preview" style="height: 100%; min-height: 420px; padding: 1.15rem 1.25rem; font-size: 0.86rem; border: none;"></pre>
-              </div>
+              <pre id="output-code" class="pane-output-fill" aria-live="polite"></pre>
             </div>
 
           </div>
-
         </div>
 
+        <!-- 3. AD -->
         <div data-include="/components/ad-slot.html"></div>
 
-        <!-- ==================================================================
-             3-STEP INSTRUCTION GUIDE
-             ================================================================== -->
+        <!-- 4. GUIDE -->
         <section class="guide-section">
           <div class="section-header-compact">
             <span class="section-eyebrow">How It Works</span>
-            <h2 class="section-heading-sm">How to Separate & Clean URL Parameters</h2>
+            <h2 class="section-heading-sm">How to Separate &amp; Clean URL Parameters</h2>
           </div>
-
           <div class="guide-steps-grid">
             <div class="guide-step-card">
               <div class="step-num-badge">1</div>
               <h3 class="step-title">Paste Full Web Link</h3>
-              <p class="step-desc">
-                Paste any web address containing query parameters. The tool instantly extracts all keys and values into an interactive checklist.
-              </p>
+              <p class="step-desc">Paste any address containing query parameters. Every key and value is extracted into an interactive checklist instantly.</p>
             </div>
-
             <div class="guide-step-card">
               <div class="step-num-badge">2</div>
               <h3 class="step-title">Strip or Research Parameters</h3>
-              <p class="step-desc">
-                Uncheck unwanted tokens or click "Strip Tracking". Click the <strong>?</strong> button beside any parameter to research its exact purpose via Google.
-              </p>
+              <p class="step-desc">Uncheck unwanted tokens or hit Strip Tracking. Click the <strong>?</strong> beside any parameter to look up what it does.</p>
             </div>
-
             <div class="guide-step-card">
               <div class="step-num-badge">3</div>
-              <h3 class="step-title">Copy or Open Clean URL</h3>
-              <p class="step-desc">
-                Get an uncluttered, privacy-friendly sanitized link in real-time. Copy to clipboard or open directly in a new browser tab.
-              </p>
+              <h3 class="step-title">Copy or Test Link</h3>
+              <p class="step-desc">Copy the sanitized link (or JSON / key-value export) or Open it in a new tab. Tip: <kbd>Ctrl/⌘+Enter</kbd> copies, <kbd>Esc</kbd> resets.</p>
             </div>
           </div>
         </section>
 
+        <!-- 6. FAQ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">URL Parameter Separator — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Is the URL I paste sent anywhere?</summary>
+              <p>No. Parsing uses the browser's built-in <code>URL</code> API and happens entirely on your device. The only network request this page can make is when you click the <strong>?</strong> button, which opens a Google search in a new tab.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Which tracking parameters does Strip Tracking remove?</summary>
+              <p>All <code>utm_*</code> keys plus common click identifiers such as <code>fbclid</code>, <code>gclid</code>, <code>gbraid</code>, <code>wbraid</code>, <code>msclkid</code>, <code>ttclid</code>, <code>twclid</code>, <code>igshid</code>, <code>mc_cid</code>, <code>mc_eid</code>, <code>yclid</code>, <code>_ga</code> and <code>_gl</code>. Anything else stays enabled so functional parameters are never lost.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Will the cleaned link still work?</summary>
+              <p>Tracking parameters are only used for analytics, so removing them does not change the page you land on. If a site breaks, re-enable parameters one at a time to find the one it actually needs.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What does the <strong>?</strong> button next to a parameter do?</summary>
+              <p>It opens a Google search for that parameter name together with the site's domain, so you can quickly find out what an unfamiliar key like <code>spm</code> or <code>ref_src</code> means.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can I export the parameters as JSON?</summary>
+              <p>Yes. Switch the output pane to JSON or Key-Value to get just the active parameters in a structured format, then Copy.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- 7. CTA -->
         <div data-include="/components/tool-cta.html" data-category="web"></div>
 
       </div>
     </section>
   </main>
 
-
-  <!-- Global Multi-Column Footer -->
   <div data-include="/components/footer.html"></div>
 
-  <!-- Main scripts -->
   <script src="/scripts/main.js?v=2.4"></script>
-
-  <!-- URL Parameter Separator Logic (Designed by Kapil Pidhwani) -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // DOM Elements
-      const inputUrl = document.getElementById('input-url');
-      const paramsListBox = document.getElementById('params-list-box');
-      const paramsCountBadge = document.getElementById('params-count-badge');
-      const outputCode = document.getElementById('output-code');
-      const toastEl = document.getElementById('tool-toast');
-
-      // Metadata elements
-      const urlMetaDeck = document.getElementById('url-meta-deck');
-      const metaHost = document.getElementById('meta-host');
-      const metaPath = document.getElementById('meta-path');
-      const metaHashRow = document.getElementById('meta-hash-row');
-      const metaHash = document.getElementById('meta-hash');
-
-      // Buttons
-      const btnReset = document.getElementById('btn-reset-tool');
-      const btnSample = document.getElementById('btn-sample-url');
-      const btnCopy = document.getElementById('btn-copy-url');
-      const btnOpen = document.getElementById('btn-open-url');
-      const btnStripTracking = document.getElementById('btn-strip-tracking');
-      const btnSelectAll = document.getElementById('btn-select-all');
-      const btnClearAll = document.getElementById('btn-clear-all');
-
-      // Known tracking parameter keys for auto-stripping
-      const TRACKING_KEYS = new Set([
-        'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'utm_id', 'utm_reader',
-        'fbclid', 'gclid', 'gclsrc', 'dclid', 'wbraid', 'gbraid', 'msclkid', 'twclid', 'ttclid',
-        'igshid', '_ga', '_gl', 'mc_cid', 'mc_eid', 'yclid', 'zanpid', 'ref_src', 'ref_url', 'si',
-        'spm', 's_kwcid', 'sc_cid', 'sc_source', 'ef_id', 's_kwcid', 'trk', 'tracking_code'
-      ]);
-
-      // State
-      let parsedUrlObject = null;
-      let parametersList = []; // Array of { id, key, value, enabled }
-      let currentFormat = 'url'; // 'url' | 'json' | 'keyval'
-      let currentDomain = '';
-
-
-      function escapeHtml(str) {
-        return (str || '')
-          .replace(/&/g, '&amp;')
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;')
-          .replace(/"/g, '&quot;')
-          .replace(/'/g, '&#039;');
-      }
-
-      function parseUrl(rawString) {
-        rawString = (rawString || '').trim();
-        parametersList = [];
-        parsedUrlObject = null;
-        currentDomain = '';
-
-        if (!rawString) {
-          renderParameters();
-          renderOutput();
-          return;
-        }
-
-        let fullString = rawString;
-        if (!/^https?:\/\//i.test(fullString) && !/^\/\//.test(fullString)) {
-          // If user pasted domain without protocol (e.g. example.com/path?key=val)
-          fullString = 'https://' + fullString;
-        }
-
-        try {
-          const url = new URL(fullString);
-          parsedUrlObject = url;
-          currentDomain = url.hostname.replace(/^www\./i, '');
-
-          // Extract all params preserving duplicates
-          let idx = 0;
-          url.searchParams.forEach((value, key) => {
-            parametersList.push({
-              id: `param_${idx++}`,
-              key: key,
-              value: value,
-              enabled: true
-            });
-          });
-
-          renderParameters();
-          renderOutput();
-        } catch (e) {
-          // Invalid URL
-          paramsListBox.innerHTML = `
-            <div class="empty-params-state">
-              <iconify-icon icon="lucide:alert-circle" width="28" height="28" style="color: #DC2626; opacity: 0.8;"></iconify-icon>
-              <p style="font-size: 0.88rem; font-weight: 500; color: #DC2626; margin-bottom: 0.25rem;">Invalid URL format</p>
-              <span style="font-size: 0.78rem;">Please ensure the URL includes a valid domain name</span>
-            </div>
-          `;
-          urlMetaDeck.style.display = 'none';
-          outputCode.textContent = 'Invalid URL';
-          paramsCountBadge.textContent = '0 Parameters';
-        }
-      }
-
-      function renderParameters() {
-        if (!parsedUrlObject || parametersList.length === 0) {
-          paramsListBox.innerHTML = `
-            <div class="empty-params-state" id="empty-params-state">
-              <iconify-icon icon="lucide:link-2" width="28" height="28"></iconify-icon>
-              <p style="font-size: 0.88rem; font-weight: 500; margin-bottom: 0.25rem;">${parsedUrlObject ? 'No query parameters found in URL' : 'No parameters loaded'}</p>
-              <span style="font-size: 0.78rem;">${parsedUrlObject ? 'The provided URL contains a clean path without query parameters' : 'Paste a URL above or click "Sample URL" to inspect parameters'}</span>
-            </div>
-          `;
-          if (parsedUrlObject) {
-            urlMetaDeck.style.display = 'flex';
-            metaHost.textContent = parsedUrlObject.host;
-            metaPath.textContent = parsedUrlObject.pathname;
-            if (parsedUrlObject.hash) {
-              metaHashRow.style.display = 'flex';
-              metaHash.textContent = parsedUrlObject.hash;
-            } else {
-              metaHashRow.style.display = 'none';
-            }
-            paramsCountBadge.textContent = '0 Parameters';
-          } else {
-            urlMetaDeck.style.display = 'none';
-            paramsCountBadge.textContent = '0 Parameters';
-          }
-          return;
-        }
-
-        urlMetaDeck.style.display = 'flex';
-        metaHost.textContent = parsedUrlObject.host;
-        metaPath.textContent = parsedUrlObject.pathname;
-        if (parsedUrlObject.hash) {
-          metaHashRow.style.display = 'flex';
-          metaHash.textContent = parsedUrlObject.hash;
-        } else {
-          metaHashRow.style.display = 'none';
-        }
-
-        const activeCount = parametersList.filter(p => p.enabled).length;
-        paramsCountBadge.textContent = `${activeCount} of ${parametersList.length} Active`;
-
-        let html = '';
-        parametersList.forEach(p => {
-          const isTracking = TRACKING_KEYS.has(p.key.toLowerCase());
-          const badgeHtml = isTracking ? `<span style="font-size: 0.68rem; font-weight: 600; padding: 0.1rem 0.35rem; background: rgba(220, 38, 38, 0.08); color: #DC2626; border-radius: 4px; border: 1px solid rgba(220, 38, 38, 0.2);">Tracker</span>` : '';
-
-          html += `
-            <div class="param-card-row ${p.enabled ? '' : 'disabled'}" id="row-${p.id}">
-              <div class="param-left-group">
-                <input type="checkbox" class="param-checkbox" data-id="${p.id}" ${p.enabled ? 'checked' : ''} aria-label="Toggle ${escapeHtml(p.key)}">
-                <div class="param-key-val-wrap">
-                  <span class="param-key" title="${escapeHtml(p.key)}">${escapeHtml(p.key)}</span>
-                  ${badgeHtml}
-                  <span class="param-equals">=</span>
-                  <span class="param-value" title="${escapeHtml(p.value)}">${escapeHtml(p.value || '""')}</span>
-                </div>
-              </div>
-              <div class="param-actions-group">
-                <button type="button" class="btn-param-help" data-key="${escapeHtml(p.key)}" title="Search: What is the '${escapeHtml(p.key)}' parameter on ${escapeHtml(currentDomain)}?">?</button>
-                <button type="button" class="btn-param-delete" data-id="${p.id}" title="Remove this parameter">
-                  <iconify-icon icon="lucide:trash-2" width="14" height="14"></iconify-icon>
-                </button>
-              </div>
-            </div>
-          `;
-        });
-
-        paramsListBox.innerHTML = html;
-
-        // Bind checkboxes
-        paramsListBox.querySelectorAll('.param-checkbox').forEach(cb => {
-          cb.addEventListener('change', (e) => {
-            const id = e.target.getAttribute('data-id');
-            const param = parametersList.find(p => p.id === id);
-            if (param) {
-              param.enabled = e.target.checked;
-              const row = document.getElementById(`row-${id}`);
-              if (row) row.classList.toggle('disabled', !param.enabled);
-              const activeCount = parametersList.filter(p => p.enabled).length;
-              paramsCountBadge.textContent = `${activeCount} of ${parametersList.length} Active`;
-              renderOutput();
-            }
-          });
-        });
-
-        // Bind delete buttons
-        paramsListBox.querySelectorAll('.btn-param-delete').forEach(btn => {
-          btn.addEventListener('click', (e) => {
-            const id = btn.getAttribute('data-id');
-            parametersList = parametersList.filter(p => p.id !== id);
-            renderParameters();
-            renderOutput();
-            showToast('Parameter removed');
-          });
-        });
-
-        // Bind intelligent help ? buttons
-        paramsListBox.querySelectorAll('.btn-param-help').forEach(btn => {
-          btn.addEventListener('click', (e) => {
-            const key = btn.getAttribute('data-key');
-            let searchQuery = '';
-            if (currentDomain) {
-              searchQuery = `what does the "${key}" parameter do in ${currentDomain} url`;
-            } else {
-              searchQuery = `what is the "${key}" query parameter in url`;
-            }
-            const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`;
-            window.open(googleSearchUrl, '_blank', 'noopener,noreferrer');
-            showToast(`Searching info for "${key}"...`);
-          });
-        });
-      }
-
-      function buildCleanUrl() {
-        if (!parsedUrlObject) return '';
-
-        const clean = new URL(parsedUrlObject.origin + parsedUrlObject.pathname);
-        parametersList.forEach(p => {
-          if (p.enabled) {
-            clean.searchParams.append(p.key, p.value);
-          }
-        });
-
-        if (parsedUrlObject.hash) {
-          clean.hash = parsedUrlObject.hash;
-        }
-
-        return clean.toString();
-      }
-
-      function renderOutput() {
-        if (!parsedUrlObject) {
-          outputCode.textContent = 'Paste a URL on the left to see the cleaned result here...';
-          return;
-        }
-
-        const cleanUrl = buildCleanUrl();
-        const activeParams = parametersList.filter(p => p.enabled);
-
-        if (currentFormat === 'url') {
-          outputCode.textContent = cleanUrl;
-        } else if (currentFormat === 'json') {
-          const jsonObj = {};
-          activeParams.forEach(p => {
-            if (jsonObj[p.key]) {
-              if (Array.isArray(jsonObj[p.key])) {
-                jsonObj[p.key].push(p.value);
-              } else {
-                jsonObj[p.key] = [jsonObj[p.key], p.value];
-              }
-            } else {
-              jsonObj[p.key] = p.value;
-            }
-          });
-          outputCode.textContent = JSON.stringify(jsonObj, null, 2);
-        } else if (currentFormat === 'keyval') {
-          if (activeParams.length === 0) {
-            outputCode.textContent = '# No active query parameters';
-          } else {
-            outputCode.textContent = activeParams.map(p => `${p.key}: ${p.value}`).join('\n');
-          }
-        }
-      }
-
-      // Format Switcher
-      const formatButtons = document.querySelectorAll('#seg-output-format .seg-pill');
-      formatButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-          formatButtons.forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          currentFormat = btn.getAttribute('data-format');
-          renderOutput();
-        });
-      });
-
-      // Input change listener
-      inputUrl.addEventListener('input', () => {
-        parseUrl(inputUrl.value);
-      });
-
-      // Strip Tracking Button Action
-      btnStripTracking.addEventListener('click', () => {
-        if (parametersList.length === 0) return;
-        let strippedCount = 0;
-        parametersList.forEach(p => {
-          if (TRACKING_KEYS.has(p.key.toLowerCase())) {
-            p.enabled = false;
-            strippedCount++;
-          }
-        });
-        renderParameters();
-        renderOutput();
-        showToast(strippedCount > 0 ? `Stripped ${strippedCount} tracking parameters` : 'No tracking parameters found');
-      });
-
-      // Select All Action
-      btnSelectAll.addEventListener('click', () => {
-        if (parametersList.length === 0) return;
-        parametersList.forEach(p => p.enabled = true);
-        renderParameters();
-        renderOutput();
-        showToast('All parameters enabled');
-      });
-
-      // Clear All Action
-      btnClearAll.addEventListener('click', () => {
-        if (parametersList.length === 0) return;
-        parametersList.forEach(p => p.enabled = false);
-        renderParameters();
-        renderOutput();
-        showToast('All parameters disabled');
-      });
-
-      // Sample URL Action
-      btnSample.addEventListener('click', () => {
-        inputUrl.value = 'https://www.example.com/shop/products/wireless-headphones?utm_source=newsletter&utm_medium=email&utm_campaign=summer_sale_2026&item_id=89432&color=midnight_black&fbclid=IwAR2xK9L_0zJ18q&gclid=Cj0KCQjw&ref=hero_banner#specifications';
-        parseUrl(inputUrl.value);
-        showToast('Sample URL loaded');
-      });
-
-      // Reset Action
-      btnReset.addEventListener('click', () => {
-        inputUrl.value = '';
-        parseUrl('');
-        showToast('Tool reset');
-        inputUrl.focus();
-      });
-
-      // Copy Action
-      btnCopy.addEventListener('click', async () => {
-        const textToCopy = outputCode.textContent;
-        if (!textToCopy || textToCopy.startsWith('Paste a URL') || textToCopy === 'Invalid URL') {
-          showToast('No clean URL to copy');
-          return;
-        }
-
-        try {
-          await navigator.clipboard.writeText(textToCopy);
-          showToast('Clean URL copied to clipboard!');
-        } catch (err) {
-          showToast('Failed to copy to clipboard');
-        }
-      });
-
-      // Open Link Action
-      btnOpen.addEventListener('click', () => {
-        const cleanUrl = buildCleanUrl();
-        if (!cleanUrl) {
-          showToast('Please enter a valid URL first');
-          inputUrl.focus();
-          return;
-        }
-        window.open(cleanUrl, '_blank', 'noopener,noreferrer');
-        showToast('Opening cleaned link in new tab...');
-      });
-
-      // Load initial sample
-      btnSample.click();
-    });
-  </script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="/web/url-parameter-separator/url-parameter-separator.js?v=1.0"></script>
 </body>
 
 </html>
