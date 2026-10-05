@@ -1,0 +1,4 @@
+/* Designed by Kapil Pidhwani: PDF Splitter — tool-only styles; grid/thumb rules live in main.css */
+.pds-range { width: 200px; font-family: var(--font-mono); }
+.pds-n { width: 80px; }
+.control-item[hidden], #zip-summary[hidden] { display: none; }
