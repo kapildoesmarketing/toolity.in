@@ -15,7 +15,7 @@
 
 - **🔒 100% Client-Side Privacy**: Files, documents, inputs, and media never touch a remote server. Conversions and parsing execute entirely inside the local browser sandbox.
 - **⚡ Zero Framework Bloat**: Crafted with pure Vanilla HTML5, modern CSS, and lightweight ES6+ JavaScript for sub-100ms first contentful paint.
-- **🧩 Modular HTML Component Partials**: Dynamic client-side include system (`components/header.html`, `components/footer.html`, `components/ad-slot.html`) enabling single-source-of-truth updates across all pages.
+- **🧩 Modular HTML Component Partials**: Dynamic client-side include system (`components/header.html`, `components/footer.html`, `components/tool-cta.html`) enabling single-source-of-truth updates across all pages.
 - **🌓 Zero-Flash Dual Theme System**: Instantaneous dark/light theme initialization in `<head>` to prevent flash-of-unstyled-content (FOUC).
 - **🔍 Smart Multi-Token Search**: Typo-tolerant Levenshtein scoring, root-word stemming (`convert` ↔ `converter`), shorthand expansion (`wa` → `whatsapp`), and keyboard navigation.
 - **📱 Ergonomic Mobile UX**: Responsive navigation drawer and an ambient bottom pill floating action bar on mobile devices.
@@ -49,7 +49,6 @@ Toolity.in/
 ├── components/             # Reusable modular HTML partials
 │   ├── header.html
 │   ├── footer.html
-│   └── ad-slot.html
 ├── assets/                 # Brand assets, logos & favicon suite
 ├── styles/
 │   └── main.css            # Fox-inspired warm minimalist design system

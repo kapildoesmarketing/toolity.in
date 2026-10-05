@@ -38,7 +38,7 @@ Non-negotiable. If you (human or AI) touch this repo, these hold. Verify with `b
 25. **No `<style>` blocks and no `style=""` attributes in HTML.** Shared rules go in `styles/main.css`; true one-offs in `styles/tools/<slug>.css` (≤120 lines). JS may set inline styles only for live values (progress width, colour previews).
 26. **No inline `<script>` tool logic.** Each tool ships `<cat>/<slug>/<slug>.js`; the toast is global (`window.showToast`) — never add a local one.
 27. **Root-absolute paths only** (`/scripts/…`, `/styles/…`, `/components/…`). No `../../`.
-28. **Ads go through `/components/ad-slot.html` + `scripts/ads.js` only.** One slot per page. Changing ad network means editing `NETWORKS` in `ads.js`, not pages.
+28. **No ads, no "Sponsored" blocks, no third-party ad scripts on any page — for now.** Tool pages have 6 blocks (hero → card → guide → optional reference → FAQ → CTA). `ads.txt` stays at the root for a future AdSense application; when monetisation returns it is a planned change (one shared partial, one loader), never a snippet pasted into a page.
 29. **Images are cached effectively.** Long `Cache-Control` for `/assets/` images; bust with a filename or `?v=` change, never by shortening the cache.
 30. **Dynamic preview `<img>`/`<video>` elements never use `loading="lazy"`** (hidden lazy images never load — this has bitten us).
 31. **Third-party scripts: one pinned CDN URL each, and it must actually resolve.** Prefer a lazy `import()` for fallbacks over a blocking tag.

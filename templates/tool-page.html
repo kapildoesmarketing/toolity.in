@@ -6,14 +6,13 @@
   Copy this file to /<category>/<tool-slug>/index.html and replace every {{PLACEHOLDER}}.
   Then: bash scripts/lint-tools.sh  — must print 0 violations.
 
-  THE 7 BLOCKS (fixed order; omit a block, never replace it with a custom one):
+  THE 6 BLOCKS (fixed order; omit a block, never replace it with a custom one):
     1. .page-hero                 breadcrumbs + h1 + one-line desc
     2. .tool-workspace-card       toolbar → panes → <details> settings (closed)
-    3. ad-slot include
-    4. .guide-section             exactly 3 steps
-    5. .reference-section         OPTIONAL table/specs
-    6. .faq-section               4–6 <details class="faq-item">
-    7. tool-cta include
+    3. .guide-section             exactly 3 steps
+    4. .reference-section         OPTIONAL table/specs
+    5. .faq-section               4–6 <details class="faq-item">
+    6. tool-cta include
 
   LAYOUT: data-layout="split" | "stacked" | "single"  (+ optional data-split="40/60")
   TOOLBAR (right side, fixed order, one of each max): Reset · Copy · Download(▾) · Open ↗
@@ -63,11 +62,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="preload" href="/styles/main.css?v=2.6" as="style">
+  <link rel="preload" href="/styles/main.css?v=2.7" as="style">
   <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
   <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 
-  <link rel="stylesheet" href="/styles/main.css?v=2.6">
+  <link rel="stylesheet" href="/styles/main.css?v=2.7">
   <link rel="stylesheet" href="/styles/tools/{{slug}}.css?v=1.0"><!-- delete if the tool needs no custom CSS -->
 
   <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
@@ -229,10 +228,8 @@
 
         </div>
 
-        <!-- ═══════════ 3. AD ═══════════ -->
-        <div data-include="/components/ad-slot.html"></div>
 
-        <!-- ═══════════ 4. GUIDE (exactly 3 steps) ═══════════ -->
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
         <section class="guide-section">
           <div class="section-header-compact">
             <span class="section-eyebrow">How It Works</span>
@@ -258,7 +255,7 @@
           </div>
         </section>
 
-        <!-- ═══════════ 5. REFERENCE (optional) ═══════════ -->
+        <!-- ═══════════ 4. REFERENCE (optional) ═══════════ -->
         <!--
         <section class="reference-section">
           <div class="section-header-compact">
@@ -274,7 +271,7 @@
         </section>
         -->
 
-        <!-- ═══════════ 6. FAQ (4–6; mirror in JSON-LD) ═══════════ -->
+        <!-- ═══════════ 5. FAQ (4–6; mirror in JSON-LD) ═══════════ -->
         <section class="faq-section">
           <div class="section-header-compact">
             <span class="section-eyebrow">FAQ</span>
@@ -300,7 +297,7 @@
           </div>
         </section>
 
-        <!-- ═══════════ 7. CATEGORY CTA ═══════════ -->
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
         <div data-include="/components/tool-cta.html" data-category="{{category}}"></div>
 
       </div>
