@@ -328,6 +328,14 @@
         tags: ['color', 'colour', 'palette', 'extract', 'extractor', 'image colors', 'dominant color', 'color picker', 'eyedropper', 'hex', 'rgb', 'hsl', 'swatch', 'theme', 'brand colors', 'pipette']
       },
       {
+        id: 'placeholder-image-generator',
+        title: 'Placeholder Image Generator',
+        category: 'Visuals',
+        url: 'visuals/placeholder-image-generator/',
+        icon: 'lucide:image-plus',
+        tags: ['placeholder', 'dummy image', 'mock image', 'image generator', 'blank image', 'sample image', 'png', 'jpg', 'webp', 'svg', 'banner', 'thumbnail', 'og image', 'lorem picsum', 'placehold']
+      },
+      {
         id: 'pong',
         title: 'Pong',
         category: 'Fun',
