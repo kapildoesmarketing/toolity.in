@@ -17,7 +17,6 @@ Visuals
 - Color Converter
 - Pattern Background Generator
 - Image Resizer
-- Image Compressor
 - Image Blur & Pixelate
 - Rounded Corners Image Maker
 

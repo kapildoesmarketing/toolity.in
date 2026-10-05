@@ -172,6 +172,36 @@
 
   <!-- Tool Applications: Utilities -->
   <url>
+    <loc>https://toolity.in/utilities/audio-compressor/</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://toolity.in/utilities/gif-compressor/</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://toolity.in/utilities/image-compressor/</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://toolity.in/utilities/pdf-compressor/</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://toolity.in/utilities/video-compressor/</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://toolity.in/utilities/gif-speed-changer/</loc>
     <lastmod>2026-10-04</lastmod>
     <changefreq>weekly</changefreq>

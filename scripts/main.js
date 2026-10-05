@@ -240,6 +240,46 @@
         tags: ['qr', 'code', 'barcode', 'generator', 'wifi', 'url', 'png', 'svg', 'vcard', 'text']
       },
       {
+        id: 'audio-compressor',
+        title: 'Audio Compressor',
+        category: 'Utilities',
+        url: 'utilities/audio-compressor/',
+        icon: 'lucide:audio-lines',
+        tags: ['audio', 'mp3', 'compress', 'compressor', 'shrink', 'reduce size', 'wav to mp3', 'm4a', 'ogg', 'flac', 'bitrate', 'podcast', 'voice memo']
+      },
+      {
+        id: 'gif-compressor',
+        title: 'GIF Compressor',
+        category: 'Utilities',
+        url: 'utilities/gif-compressor/',
+        icon: 'lucide:image-down',
+        tags: ['gif', 'compress', 'compressor', 'shrink', 'reduce size', 'animated gif', 'optimize gif', 'smaller gif', 'frames', 'colors']
+      },
+      {
+        id: 'image-compressor',
+        title: 'Image Compressor',
+        category: 'Utilities',
+        url: 'utilities/image-compressor/',
+        icon: 'lucide:file-image',
+        tags: ['image', 'compress', 'compressor', 'shrink', 'reduce size', 'jpg', 'jpeg', 'png', 'webp', 'optimize', 'photo', 'kb', 'target size', 'resize']
+      },
+      {
+        id: 'pdf-compressor',
+        title: 'PDF Compressor',
+        category: 'Utilities',
+        url: 'utilities/pdf-compressor/',
+        icon: 'lucide:file-text',
+        tags: ['pdf', 'compress', 'compressor', 'shrink', 'reduce size', 'scan', 'scanned pdf', 'optimize pdf', 'smaller pdf', 'dpi', 'email attachment']
+      },
+      {
+        id: 'video-compressor',
+        title: 'Video Compressor',
+        category: 'Utilities',
+        url: 'utilities/video-compressor/',
+        icon: 'lucide:film',
+        tags: ['video', 'compress', 'compressor', 'shrink', 'reduce size', 'mp4', 'mov', 'webm', 'bitrate', '720p', '480p', 'whatsapp video', 'email video', 'target size']
+      },
+      {
         id: 'mailto-generator',
         title: 'Mailto Link Creator',
         category: 'Utilities',
