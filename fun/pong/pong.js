@@ -185,21 +185,26 @@
 
   /* ── Input ── */
   const GAME_KEYS = new Set(['ArrowUp', 'ArrowDown', 'KeyW', 'KeyS', 'Space']);
+  const KEY_FALLBACK = { ArrowUp: 'ArrowUp', ArrowDown: 'ArrowDown', Up: 'ArrowUp', Down: 'ArrowDown', w: 'KeyW', W: 'KeyW', s: 'KeyS', S: 'KeyS', ' ': 'Space', Spacebar: 'Space' };
+  // Designed by Kapil Pidhwani: `code` is blank/odd on some remapped Linux keyboards and IMEs — fall back to `key`.
+  const codeOf = (e) => (GAME_KEYS.has(e.code) ? e.code : KEY_FALLBACK[e.key]);
   window.addEventListener('keydown', (e) => {
     if (e.target instanceof Element && e.target.matches('input, select, textarea')) return;
-    if (!GAME_KEYS.has(e.code)) return;
+    const code = codeOf(e); if (!code) return;
     e.preventDefault();
-    if (e.code === 'Space') { if (!e.repeat) togglePlay(); return; }
-    S.keys.add(e.code);
+    if (code === 'Space') { if (!e.repeat) togglePlay(); return; }
+    S.keys.add(code);
   });
-  window.addEventListener('keyup', (e) => S.keys.delete(e.code));
+  window.addEventListener('keyup', (e) => { const code = codeOf(e); if (code) S.keys.delete(code); });
   const toBoard = (e) => { const r = canvas.getBoundingClientRect(); return { x: (e.clientX - r.left) / r.width * W, y: (e.clientY - r.top) / r.height * H }; };
   canvas.addEventListener('pointerdown', (e) => { try { canvas.setPointerCapture(e.pointerId); } catch (_) { /* inactive pointer id */ } S.pointers.set(e.pointerId, toBoard(e)); if (S.phase === 'idle' || S.phase === 'over' || S.phase === 'paused') startOrResume(); });
   canvas.addEventListener('pointermove', (e) => { if (S.pointers.has(e.pointerId)) S.pointers.set(e.pointerId, toBoard(e)); });
-  ['pointerup', 'pointercancel', 'lostpointercapture'].forEach((ev) => canvas.addEventListener(ev, (e) => S.pointers.delete(e.pointerId)));
+  ['pointerup', 'pointercancel'].forEach((ev) => window.addEventListener(ev, (e) => S.pointers.delete(e.pointerId)));
+  canvas.addEventListener('lostpointercapture', (e) => S.pointers.delete(e.pointerId));
   $('btn-play').addEventListener('click', togglePlay);
-  window.addEventListener('blur', pause);
-  document.addEventListener('visibilitychange', () => { if (document.hidden) pause(); });
+  const releaseAll = () => { S.keys.clear(); S.pointers.clear(); };
+  window.addEventListener('blur', () => { releaseAll(); pause(); });
+  document.addEventListener('visibilitychange', () => { if (document.hidden) { releaseAll(); pause(); } });
 
   /* ── Options ── */
   bindSegmented($('seg-mode'), (v) => { S.mode = v; newMatch(false); showBest(); });
