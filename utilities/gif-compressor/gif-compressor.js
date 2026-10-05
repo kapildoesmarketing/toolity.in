@@ -52,7 +52,7 @@
       $('source-badge').textContent = `${S.w} × ${S.h} · ${frames.length} frames · ${formatBytes(file.size)}`;
       $('result-badge').textContent = `${formatBytes(file.size)} → press Compress`;
       $('btn-compress').disabled = false; syncSummary();
-    } catch (e) { console.error(e); showError("Couldn't decode that GIF."); $('source-badge').textContent = 'No file loaded'; }
+    } catch (e) { console.warn(e); showError("Couldn't decode that GIF."); $('source-badge').textContent = 'No file loaded'; }
   }
   bindDropzone($('dropzone'), $('file-input'), load, { accept: 'image/gif' });
 
