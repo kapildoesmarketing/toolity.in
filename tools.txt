@@ -4,33 +4,35 @@ Convertors
 - HEIC to JPG
 - SVG to PNG
 - Images to GIF
-- GIF to WebP
 - Video to Image Frames
-- Images to Video Slideshow
+- Images to PDF
+- PDF to Images
 - Image to Base64
-- Video to WebM
+- WebP to JPG
 
 Visuals
 - Gradient Generator
 - Color Palette Generator
 - Contrast Checker
 - Color Converter
-- Pattern Background Generator
 - Image Resizer
-- Image Blur & Pixelate
+- Image Cropper
 - Rounded Corners Image Maker
+- Favicon Generator
+- Twitter Header Generator
+- Meme Generator
 
 Productivity
 - Markdown Notepad
 - To-Do List
-- Kanban Board
 - Pomodoro Timer
 - Word Counter
 - Daily Journal
 - Checklist Maker
 - Sticky Notes Board
 - Text Snippets Manager
-- Scratchpad Calculator
+- Countdown Timer
+- Habit Tracker
 
 Web
 - Open Graph Preview
@@ -40,16 +42,21 @@ Web
 - URL Encoder Decoder
 - YouTube Timestamp Link Generator
 - YouTube Embed Code Generator
-- Vimeo Thumbnail Downloader
 - Social Share Link Generator
 - Slug Generator
+- Redirect Checker
 
 Fun
 - Breakout
 - Space Invaders
-- Asteroids
-- Whack-a-Mole
 - Minesweeper
+- Whack-a-Mole
+- Memory Match
+- Sudoku
+- Typing Speed Test
+- Reaction Time Test
+- Connect Four
+- Wordle Clone
 
 Development
 - YAML Visualizer
@@ -57,22 +64,22 @@ Development
 - CSV Table Viewer
 - JSON Diff
 - JSON to TypeScript
-- JSON Schema Generator
-- JSON Path Finder
-- HTML DOM Tree Visualizer
-- Regex Visualizer
+- JSON Formatter
+- Regex Tester
 - Cron Expression Explainer
+- JWT Decoder
+- Base64 Encoder Decoder
 
 Utilities
-- Audio Speed Changer
+- Audio Trimmer
 - Video Trimmer
 - GIF Trimmer
-- Video Reverser
-- GIF Reverser
 - Video Muter
-- Telegram Link Generator
-- SMS Link Generator
-- Calendar Event Link Generator
+- Video Reverser
+- Image Metadata Remover
+- PDF Merger
+- PDF Splitter
+- PDF Page Rotator
 - WiFi QR Code Generator
 
 Experiments
@@ -84,5 +91,5 @@ Experiments
 - Kaleidoscope Camera
 - Pixelate Camera
 - Face Mask Filter
-- Hand Gesture Drawing
 - Motion Detector
+- Voice Changer
