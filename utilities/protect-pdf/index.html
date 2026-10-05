@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Protect PDF — Add a Password to a PDF Online, Free &amp; Private | Toolity.in</title>
+  <link rel="canonical" href="https://toolity.in/utilities/protect-pdf/">
+  <meta name="description" content="Free online PDF password protector: encrypt a PDF with AES-256, require a password to open it, and set permissions for printing, copying, editing and annotating. Processed entirely in your browser — files never leave your device.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Protect PDF — Toolity.in">
+  <meta property="og:description" content="Free online PDF password protector: encrypt a PDF with AES-256, require a password to open it, and set permissions for printing, copying, editing and annotating. Processed entirely in your browser — files never leave your device.">
+  <meta property="og:url" content="https://toolity.in/utilities/protect-pdf/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=2.8" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=2.8">
+  <link rel="stylesheet" href="/styles/tools/protect-pdf.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Protect PDF",
+        "url": "https://toolity.in/utilities/protect-pdf/",
+        "description": "Free online PDF password protector: encrypt a PDF with AES-256, require a password to open it, and set permissions for printing, copying, editing and annotating. Processed entirely in your browser — files never leave your device.",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Utilities", "item": "https://toolity.in/utilities/" },
+          { "@type": "ListItem", "position": 3, "name": "Protect PDF", "item": "https://toolity.in/utilities/protect-pdf/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "How strong is the encryption?", "acceptedAnswer": { "@type": "Answer", "text": "AES-256 (PDF 2.0 standard security handler), the strongest level the PDF format defines. Any modern reader — Acrobat, Preview, Chrome, Firefox, Edge — opens it after the password." } },
+          { "@type": "Question", "name": "What is the owner password for?", "acceptedAnswer": { "@type": "Answer", "text": "The open (user) password is what readers ask for. The owner password additionally unlocks the permission flags, so someone with only the open password cannot lift a printing or copying restriction. Leave it blank and a random one is used." } },
+          { "@type": "Question", "name": "Do the permission restrictions really stop copying?", "acceptedAnswer": { "@type": "Answer", "text": "Honest readers obey them, and that covers most situations. They are flags, not cryptography — any tool that can open the file with the open password could ignore them. Treat them as a polite fence, and the open password as the real lock." } },
+          { "@type": "Question", "name": "I forgot the password — can you remove it?", "acceptedAnswer": { "@type": "Answer", "text": "No. Nothing is stored and there is no back door; that is the point. Unlock PDF can remove a password you know, and can strip owner-only restrictions when there is no open password." } },
+          { "@type": "Question", "name": "Is my PDF uploaded anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. The document is parsed and rewritten by pdf-lib and rendered by PDF.js (the engine Firefox uses) entirely inside your browser. Nothing is transmitted or stored." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/utilities/" class="breadcrumb-link">Utilities</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Protect PDF</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Utilities</span>
+            <h1 class="page-title">Protect PDF</h1>
+            <p class="page-desc">Lock a PDF with an open password and AES-256 encryption, and optionally block printing, copying or editing — without the file ever leaving your browser.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" data-split="40/60" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge pdf-result-badge" id="result-badge">Drop a PDF to begin</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset" aria-label="Reset">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result summary" aria-label="Copy result summary" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download PDF" aria-label="Download PDF" disabled>
+                <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                <span>Download</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Original</span>
+                <span class="pane-badge" id="source-badge">No file loaded</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content pane-content-between">
+                <div class="media-canvas-viewport">
+                  <div id="dropzone" class="video-dropzone" tabindex="0" role="button" aria-label="Drop PDF here or click to browse">
+                    <input type="file" id="file-input" accept="application/pdf, .pdf">
+                    <div class="video-drop-icon">
+                      <iconify-icon icon="lucide:upload-cloud" width="22" height="22"></iconify-icon>
+                    </div>
+                    <div class="video-drop-title">Drop PDF here or click to browse</div>
+                    <div class="video-drop-subtitle">Any PDF — up to 100 MB</div>
+                  </div>
+                  <canvas id="source-canvas" class="pdf-page-canvas" hidden aria-label="First page of original"></canvas>
+                </div>
+                <div class="ppd-fields">
+                  <label class="ppd-field"><span>Open password</span>
+                    <input type="password" id="opt-pw" class="input-clean" maxlength="64" minlength="4" placeholder="at least 4 characters" aria-label="Password required to open the PDF" autocomplete="new-password"></label>
+                  <label class="ppd-field"><span>Confirm</span>
+                    <input type="password" id="opt-pw2" class="input-clean" maxlength="64" placeholder="repeat it" aria-label="Confirm password" autocomplete="new-password"></label>
+                  <label class="ppd-show"><input type="checkbox" id="opt-show"> Show</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Protected</span>
+                <span class="pane-badge" id="output-badge">Awaiting file</span>
+              </div>
+              <div class="pane-content pane-content-between">
+                <div class="media-canvas-viewport">
+                  <div id="output-empty" class="media-empty-placeholder">
+                    <iconify-icon icon="lucide:lock" width="32" height="32"></iconify-icon>
+                    <p>The encrypted PDF (opened with your password) will preview here</p>
+                  </div>
+                  <canvas id="output-canvas" class="pdf-page-canvas" hidden aria-label="First page of result"></canvas>
+                </div>
+                <div>
+                  <button type="button" id="btn-compress" class="btn-toolbar-sm btn-brand-sm btn-primary-action" disabled>
+                    <iconify-icon icon="lucide:lock" width="16" height="16"></iconify-icon>
+                    <span id="btn-compress-label">Protect PDF</span>
+                  </button>
+                  <div class="slim-progress-bar" id="progress-bar">
+                    <div class="slim-progress-fill" id="progress-fill"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">AES-256 · all permissions allowed</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item">
+                <label for="opt-owner">Owner password</label>
+                <input type="password" id="opt-owner" class="input-clean ppd-pw" maxlength="64" placeholder="optional" aria-label="Owner password (optional)" autocomplete="new-password">
+                <span class="form-helper">needed to change permissions later</span>
+              </div>
+              <div class="control-item">
+                <input type="checkbox" id="opt-print" checked>
+                <label for="opt-print">Allow printing</label>
+              </div>
+              <div class="control-item">
+                <input type="checkbox" id="opt-copy" checked>
+                <label for="opt-copy">Allow copying text &amp; images</label>
+              </div>
+              <div class="control-item">
+                <input type="checkbox" id="opt-edit" checked>
+                <label for="opt-edit">Allow editing</label>
+              </div>
+              <div class="control-item">
+                <input type="checkbox" id="opt-annotate" checked>
+                <label for="opt-annotate">Allow comments &amp; form filling</label>
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Password-Protect a PDF in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Drop a PDF</h3>
+              <p class="step-desc">The first page shows on the left so you know you have the right file.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Set the Password</h3>
+              <p class="step-desc">Type the open password twice. In Settings you can add a separate owner password and untick anything you want to block — printing, copying, editing or commenting.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Protect &amp; Download</h3>
+              <p class="step-desc">Click Protect. The preview on the right is rendered from the encrypted file using your password, which proves it opens. Download and keep the password safe — it cannot be recovered.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Protect PDF — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>How strong is the encryption?</summary>
+              <p>AES-256 (PDF 2.0 standard security handler), the strongest level the PDF format defines. Any modern reader — Acrobat, Preview, Chrome, Firefox, Edge — opens it after the password.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What is the owner password for?</summary>
+              <p>The open (user) password is what readers ask for. The owner password additionally unlocks the permission flags, so someone with only the open password cannot lift a printing or copying restriction. Leave it blank and a random one is used.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Do the permission restrictions really stop copying?</summary>
+              <p>Honest readers obey them, and that covers most situations. They are flags, not cryptography — any tool that can open the file with the open password could ignore them. Treat them as a polite fence, and the open password as the real lock.</p>
+            </details>
+            <details class="faq-item">
+              <summary>I forgot the password — can you remove it?</summary>
+              <p>No. Nothing is stored and there is no back door; that is the point. <a href="/utilities/unlock-pdf/">Unlock PDF</a> can remove a password you know, and can strip owner-only restrictions when there is no open password.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is my PDF uploaded anywhere?</summary>
+              <p>No. The document is parsed and rewritten by pdf-lib and rendered by PDF.js (the engine Firefox uses) entirely inside your browser. Nothing is transmitted or stored.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="utilities"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=2.4"></script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@cantoo/pdf-lib@2.11.1/dist/pdf-lib.min.js" defer></script>
+  <script src="/scripts/pdf-common.js?v=1.0"></script>
+  <script src="/utilities/protect-pdf/protect-pdf.js?v=1.0"></script>
+</body>
+</html>

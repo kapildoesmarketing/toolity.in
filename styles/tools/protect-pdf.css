@@ -1,0 +1,6 @@
+/* Designed by Kapil Pidhwani: Protect PDF — password fields under the source preview; everything else from main.css */
+.ppd-fields { display: flex; flex-wrap: wrap; gap: 0.6rem 1rem; align-items: flex-end; margin-top: 0.75rem; }
+.ppd-field { display: flex; flex-direction: column; gap: 0.25rem; font-size: 0.78rem; color: var(--text-secondary); flex: 1 1 160px; }
+.ppd-field .input-clean { width: 100%; }
+.ppd-show { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.78rem; color: var(--text-secondary); padding-bottom: 0.45rem; }
+.ppd-pw { width: 160px; }
