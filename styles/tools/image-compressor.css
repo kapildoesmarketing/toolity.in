@@ -1,0 +1,9 @@
+/* Designed by Kapil Pidhwani: Image Compressor — tool-only styles; adapts via @container (card is the container) */
+.media-preview-img.imc-show { display: block; }
+.media-empty-placeholder[hidden] { display: none; }
+.control-item[hidden] { display: none; }
+.imc-range { width: 140px; }
+.imc-target { width: 90px; font-family: var(--font-mono); }
+#result-badge { font-weight: 600; }
+#result-badge.imc-win { color: #15803d; background: rgba(22, 163, 74, 0.1); }
+[data-theme="dark"] #result-badge.imc-win { color: #4ade80; }
