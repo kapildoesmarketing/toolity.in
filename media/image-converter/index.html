@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+  <title>Free Online Image Format Converter | Toolity Media</title>
+  <link rel="canonical" href="https://toolity.in/media/image-converter/">
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Image Format Converter | Toolity Media">
+  <meta property="og:description" content="Convert PNG, JPG, WebP, AVIF, BMP and ICO images instantly in your browser. Adjust quality, scale and background — files never leave your device.">
+  <meta property="og:url" content="https://toolity.in/media/image-converter/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- SEO & Metadata -->
+  <meta name="description"
+    content="Free, fast, and 100% private Image Format Converter. Convert images between PNG, JPG, WebP, AVIF, BMP, and ICO directly in your browser. Features custom compression quality, resolution scaling, transparency background fill, and zero server uploads.">
+  <meta name="keywords"
+    content="image converter, image format converter, png to jpg, jpg to png, png to webp, webp to jpg, avif converter, convert image online, client-side image converter, free image converter">
+  <meta name="author" content="Kapil Pidhwani">
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Iconify Icon Component -->
+    <!-- Preload Critical Assets -->
+  <link rel="preload" href="/styles/main.css?v=2.9" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=2.9">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Image Format Converter",
+        "url": "https://toolity.in/media/image-converter/",
+        "description": "Convert PNG, JPG, WebP, AVIF, BMP and ICO images instantly in your browser. Adjust quality, scale and background \u2014 files never leave your device.",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Media", "item": "https://toolity.in/media/" },
+          { "@type": "ListItem", "position": 3, "name": "Image Format Converter", "item": "https://toolity.in/media/image-converter/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Is my image uploaded to a server?", "acceptedAnswer": { "@type": "Answer", "text": "No. The image is decoded by your browser, redrawn on an HTML canvas and re-encoded locally. Nothing is transmitted \u2014 you can even use the tool offline once the page has loaded." } },
+          { "@type": "Question", "name": "Why does AVIF or BMP sometimes come out as PNG?", "acceptedAnswer": { "@type": "Answer", "text": "Encoding support depends on your browser. Chrome and Edge encode AVIF; Firefox and Safari may not yet. When the browser can't encode the requested format the tool falls back to PNG so you still get a usable file \u2014 check the output badge for the actual format." } },
+          { "@type": "Question", "name": "What does the quality slider do for PNG?", "acceptedAnswer": { "@type": "Answer", "text": "Nothing \u2014 PNG, BMP and ICO are lossless, so the slider is dimmed for them. It only affects JPG, WebP and AVIF, where lower values mean smaller files with more compression artefacts." } },
+          { "@type": "Question", "name": "Why did my transparent PNG get a white background as JPG?", "acceptedAnswer": { "@type": "Answer", "text": "JPG has no alpha channel. To avoid black boxes the tool fills transparent areas with white when converting to JPG. Choose WebP, PNG or AVIF to keep transparency." } },
+          { "@type": "Question", "name": "Is there a file size limit?", "acceptedAnswer": { "@type": "Answer", "text": "Only your device's memory. Very large images (over ~50 megapixels) can be slow or fail on phones; use the Scale option to shrink them first." } },
+          { "@type": "Question", "name": "Can I convert multiple images at once?", "acceptedAnswer": { "@type": "Answer", "text": "Not yet \u2014 this tool is deliberately single-file so it stays fast and simple. Drop the next image onto the source pane to replace the current one." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <!-- Main Tool Page Content -->
+  <main>
+    <!-- Page Hero Header -->
+    <section class="page-hero">
+      <div class="container">
+        <!-- Breadcrumbs Navigation -->
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/media/" class="breadcrumb-link">Media</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Image Converter</span>
+        </nav>
+
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Convertor Tool</span>
+            <h1 class="page-title">Image Format Converter</h1>
+            <p class="page-desc">
+              Convert images instantly between PNG, JPG, WebP, AVIF, BMP, and ICO. Customize compression quality, scale dimensions, and apply background fills with 100% client-side privacy.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tool Main Workspace Area -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <!-- Unified Tool Workspace Card -->
+        <div class="tool-workspace-card" data-layout="split" id="tool-card">
+
+          <!-- 1. Actions Toolbar (Top-Right Universal Pattern) -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge">Processed on your device · nothing uploaded</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset-tool" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy-img" title="Copy converted image to clipboard" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download-img" title="Download converted image file" disabled>
+                <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                <span>Download Image</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2. Dual Split-Pane Input & Output Grid (Minimalist Symmetrical Layout) -->
+          <div class="split-pane-grid">
+
+            <!-- Left: Source Image Pane -->
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Source Image</span>
+                <span class="pane-badge" id="source-meta-badge">No image loaded</span>
+              </div>
+
+              <div class="pane-content pane-content-between">
+                <!-- Media Viewport (280px) -->
+                <div class="media-canvas-viewport" id="source-viewport-frame">
+                  <!-- Drag & Drop Zone -->
+                  <div id="image-dropzone" class="video-dropzone">
+                    <input type="file" id="image-file-input" accept="image/png, image/jpeg, image/webp, image/avif, image/bmp, image/svg+xml, image/x-icon, image/*">
+                    <div class="video-drop-icon">
+                      <iconify-icon icon="lucide:upload-cloud" width="22" height="22"></iconify-icon>
+                    </div>
+                    <div class="video-drop-title">Drop image here or click to browse</div>
+                    <div class="video-drop-subtitle">Supports PNG, JPG, WebP, AVIF, BMP, SVG, and ICO</div>
+                  </div>
+
+                  <!-- Active Image Preview -->
+                  <img id="source-img-element" alt="Source preview" class="media-preview-img" width="360" height="240">
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Converted Output Preview Pane -->
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Converted Output</span>
+                <span class="pane-badge" id="output-status-badge">Awaiting Image</span>
+              </div>
+
+              <div class="pane-content pane-content-between">
+                <!-- Media Viewport (280px) -->
+                <div class="media-canvas-viewport" id="output-viewport-frame">
+                  <!-- Empty Placeholder -->
+                  <div id="output-empty-placeholder" class="media-empty-placeholder">
+                    <iconify-icon icon="lucide:sparkles" width="32" height="32"></iconify-icon>
+                    <p>Converted image output will appear here</p>
+                  </div>
+
+                  <!-- Converted Image Preview -->
+                  <img id="output-img-element" alt="Converted preview" class="media-preview-img" width="360" height="240">
+                </div>
+
+                <!-- Primary Convert Action Button -->
+                <div>
+                  <button type="button" id="btn-convert-action" class="btn-toolbar-sm btn-brand-sm btn-primary-action" disabled>
+                    <iconify-icon icon="lucide:refresh-cw" width="16" height="16" id="btn-convert-icon"></iconify-icon>
+                    <span id="btn-convert-label">Convert Image</span>
+                  </button>
+                  <div class="slim-progress-bar" id="slim-progress-bar">
+                    <div class="slim-progress-fill" id="slim-progress-fill"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 3. Controls & Options inside Accordion (Closed by Default) -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="16" height="16"></iconify-icon>
+                <span>Format & Compression Settings</span>
+                <span class="pane-badge" id="settings-summary-badge">(WEBP • 90% Quality • Original Size • Transparent BG)</span>
+              </div>
+              <iconify-icon icon="lucide:chevron-down" class="tool-settings-chevron" width="16" height="16"></iconify-icon>
+            </summary>
+
+            <div class="tool-settings-panel">
+              <div class="settings-sections-wrapper">
+                <div class="settings-section-card">
+                  <div class="settings-section-header">
+                    <span>1. Target Format, Quality & Scaling</span>
+                  </div>
+                  <div class="settings-row-wrap">
+                    <!-- Format Control -->
+                    <div class="form-group">
+                      <span class="form-label settings-label">Target Format</span>
+                      <div class="segmented-group segmented-group-pill" id="seg-format">
+                        <button type="button" class="seg-pill active" data-val="webp">WebP</button>
+                        <button type="button" class="seg-pill" data-val="png">PNG</button>
+                        <button type="button" class="seg-pill" data-val="jpg">JPG</button>
+                        <button type="button" class="seg-pill" data-val="avif">AVIF</button>
+                        <button type="button" class="seg-pill" data-val="bmp">BMP</button>
+                        <button type="button" class="seg-pill" data-val="ico">ICO</button>
+                      </div>
+                    </div>
+
+                    <!-- Quality Slider Control (JPG / WebP / AVIF) -->
+                    <div class="form-group" id="group-quality">
+                      <div class="settings-label-row">
+                        <span class="form-label settings-label">Compression Quality</span>
+                        <span class="pane-badge" id="quality-val-badge">90%</span>
+                      </div>
+                      <input type="range" id="quality-slider" min="10" max="100" value="90" step="5" class="settings-range">
+                    </div>
+
+                    <!-- Resolution Scale Control -->
+                    <div class="form-group">
+                      <span class="form-label settings-label">Scale Resolution</span>
+                      <div class="segmented-group segmented-group-pill" id="seg-scale">
+                        <button type="button" class="seg-pill active" data-val="1.0">Original</button>
+                        <button type="button" class="seg-pill" data-val="2.0">200%</button>
+                        <button type="button" class="seg-pill" data-val="0.75">75%</button>
+                        <button type="button" class="seg-pill" data-val="0.5">50%</button>
+                        <button type="button" class="seg-pill" data-val="0.25">25%</button>
+                      </div>
+                    </div>
+
+                    <!-- Background Fill (for transparency conversion) -->
+                    <div class="form-group">
+                      <span class="form-label settings-label">Background Fill (Alpha)</span>
+                      <div class="segmented-group segmented-group-pill" id="seg-bg">
+                        <button type="button" class="seg-pill active" data-val="transparent">Transparent</button>
+                        <button type="button" class="seg-pill" data-val="white">White</button>
+                        <button type="button" class="seg-pill" data-val="black">Black</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </details>
+
+        </div>
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">Instant In-Browser Image Format Conversion</h2>
+          </div>
+
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Upload Image File</h3>
+              <p class="step-desc">
+                Drop your image file or click to browse. The browser decodes the source bitmap in memory with 100% privacy.
+              </p>
+            </div>
+
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Select Format & Quality</h3>
+              <p class="step-desc">
+                Choose your target output format (PNG, JPG, WebP, AVIF, BMP, ICO) and customize quality, max dimensions, and background fill.
+              </p>
+            </div>
+
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Convert & Download</h3>
+              <p class="step-desc">
+                Click Convert to render the target image instantly. Preview the output file specs and download directly to your device.
+              </p>
+            </div>
+          </div>
+        </section>
+
+                <!-- 5. FAQ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Image Format Converter — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Is my image uploaded to a server?</summary>
+              <p>No. The image is decoded by your browser, redrawn on an HTML canvas and re-encoded locally. Nothing is transmitted — you can even use the tool offline once the page has loaded.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why does AVIF or BMP sometimes come out as PNG?</summary>
+              <p>Encoding support depends on your browser. Chrome and Edge encode AVIF; Firefox and Safari may not yet. When the browser can't encode the requested format the tool falls back to PNG so you still get a usable file — check the output badge for the actual format.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What does the quality slider do for PNG?</summary>
+              <p>Nothing — PNG, BMP and ICO are lossless, so the slider is dimmed for them. It only affects JPG, WebP and AVIF, where lower values mean smaller files with more compression artefacts.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why did my transparent PNG get a white background as JPG?</summary>
+              <p>JPG has no alpha channel. To avoid black boxes the tool fills transparent areas with white when converting to JPG. Choose WebP, PNG or AVIF to keep transparency.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is there a file size limit?</summary>
+              <p>Only your device's memory. Very large images (over ~50 megapixels) can be slow or fail on phones; use the Scale option to shrink them first.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can I convert multiple images at once?</summary>
+              <p>Not yet — this tool is deliberately single-file so it stays fast and simple. Drop the next image onto the source pane to replace the current one.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- 6. CTA -->
+        <div data-include="/components/tool-cta.html" data-category="media"></div>
+
+      </div>
+    </section>
+  </main>
+  <div data-include="/components/footer.html"></div>
+  <script src="/scripts/main.js?v=2.4"></script>
+
+  <!-- Image Format Converter Logic (Designed by Kapil Pidhwani) -->
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="/media/image-converter/image-converter.js?v=1.0"></script>
+</body>
+
+</html>

@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+  <title>Free Online Notepad | Toolity Docs</title>
+  <link rel="canonical" href="https://toolity.in/docs/online-notepad/">
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Notepad | Toolity Docs">
+  <meta property="og:description" content="Distraction-free notepad that auto-saves in your browser. Word and character counts, case converters, line sorting and .txt/.md/.doc export — nothing is uploaded.">
+  <meta property="og:url" content="https://toolity.in/docs/online-notepad/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- SEO & Metadata -->
+  <meta name="description"
+    content="Free, fast, and 100% private Online Notepad. Take distraction-free notes in your browser with real-time auto-save, word & character statistics, text case converters, and instant export to TXT, Markdown, or Word.">
+  <meta name="keywords"
+    content="online notepad, notepad online, free notes, web scratchpad, browser text editor, online memo, word counter notepad, private notepad, text transformer, auto save notepad">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Social -->
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+
+  <!-- Preload Critical Assets -->
+  <link rel="preload" href="/styles/main.css?v=2.9" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+
+  <!-- Iconify Icon Component -->
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=2.9">
+  <link rel="stylesheet" href="/styles/tools/online-notepad.css?v=1.0">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Online Notepad",
+        "url": "https://toolity.in/docs/online-notepad/",
+        "description": "Distraction-free notepad that auto-saves in your browser. Word and character counts, case converters, line sorting and .txt/.md/.doc export \u2014 nothing is uploaded.",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Docs", "item": "https://toolity.in/docs/" },
+          { "@type": "ListItem", "position": 3, "name": "Online Notepad", "item": "https://toolity.in/docs/online-notepad/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Are my notes stored on a server?", "acceptedAnswer": { "@type": "Answer", "text": "No. Your text lives only in your browser's localStorage on this device. Nothing is transmitted, and the page keeps working offline once loaded." } },
+          { "@type": "Question", "name": "Will my notes survive a refresh or closing the tab?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Every keystroke is written to local storage, so the note reloads exactly as you left it \u2014 across refreshes, tab closes and reboots \u2014 until you press Reset or clear the site data in your browser." } },
+          { "@type": "Question", "name": "Can I use the same note on another device or browser?", "acceptedAnswer": { "@type": "Answer", "text": "Not automatically. Local storage is per browser profile and per device. Download the note (.txt or .md) and open it elsewhere, or paste it into a synced app." } },
+          { "@type": "Question", "name": "What happens if I press Reset by accident?", "acceptedAnswer": { "@type": "Answer", "text": "The previous note is held in memory and a toast with an Undo button appears for a few seconds. Click Undo to restore it instantly." } },
+          { "@type": "Question", "name": "Is there a length limit?", "acceptedAnswer": { "@type": "Answer", "text": "Browsers allow roughly 5 MB of local storage per site \u2014 several million characters. The editor stays responsive well beyond anything you would write by hand; very large pasted files may slow down the live word count." } },
+          { "@type": "Question", "name": "What does the .doc export contain?", "acceptedAnswer": { "@type": "Answer", "text": "A simple HTML document that Word, LibreOffice and Google Docs open as a formatted file with your paragraphs preserved. It is not a true .docx; if you need one, open the .doc and Save As .docx." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <!-- Global Header Component -->
+  <div data-include="/components/header.html"></div>
+
+  <!-- Main Tool Page Content -->
+  <main>
+    <!-- Page Hero Header -->
+    <section class="page-hero">
+      <div class="container">
+        <!-- Breadcrumbs Navigation -->
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/docs/" class="breadcrumb-link">Docs</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Online Notepad</span>
+        </nav>
+
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Productivity Workspace</span>
+            <h1 class="page-title">Online Notepad</h1>
+            <p class="page-desc">Distraction-free text editor with real-time word counting, automatic local memory auto-save, and one-click file export. 100% private in your browser.</p>
+          </div>
+          <div class="page-count-badge">
+            <iconify-icon icon="lucide:shield-check" width="16" height="16" class="icon-success"></iconify-icon>
+            <span>100% Client-Side</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tool Main Workspace Area -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+        
+        <!-- Main Minimalist Notepad Card -->
+        <div class="tool-workspace-card" data-layout="single" id="tool-card">
+
+          <!-- 1. Top Action Toolbar -->
+          <div class="tool-actions-toolbar">
+            <!-- Left: Text Utilities & Status -->
+            <div class="toolbar-group">
+              <div class="notepad-status-tag" id="notepad-save-status">
+                <span class="status-dot"></span>
+                <span id="save-status-text">Auto-saved</span>
+              </div>
+              <button type="button" class="btn-action-pill" id="btn-case-upper" title="Convert to UPPERCASE">UPPER</button>
+              <button type="button" class="btn-action-pill" id="btn-case-lower" title="Convert to lowercase">lower</button>
+              <button type="button" class="btn-action-pill" id="btn-case-title" title="Convert to Title Case">Title Case</button>
+              <button type="button" class="btn-action-pill" id="btn-case-sentence" title="Convert to Sentence case">Sentence</button>
+              <button type="button" class="btn-action-pill" id="btn-clean-spaces" title="Trim trailing whitespace and empty lines">Clean Spaces</button>
+              <button type="button" class="btn-action-pill" id="btn-sort-lines" title="Sort lines alphabetically A-Z">Sort Lines</button>
+            </div>
+
+            <!-- Right: Universal Actions -->
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-clear-notepad" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy-notepad" title="Copy entire note to clipboard">
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+
+              <!-- Single Download Dropdown Menu -->
+              <div class="dropdown-menu-wrapper" id="notepad-download-dropdown-wrap">
+                <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download-menu-toggle" aria-haspopup="true" aria-expanded="false">
+                  <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                  <span>Download</span>
+                  <iconify-icon icon="lucide:chevron-down" class="dropdown-arrow" width="13" height="13"></iconify-icon>
+                </button>
+
+                <div class="dropdown-popup" id="notepad-download-dropdown-menu" role="menu">
+                  <button type="button" class="dropdown-item" id="opt-dl-txt" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:file-text" width="14" height="14"></iconify-icon>
+                      <span>Plain Text</span>
+                    </div>
+                    <span class="dropdown-item-badge">.txt</span>
+                  </button>
+                  <button type="button" class="dropdown-item" id="opt-dl-md" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:file-code" width="14" height="14"></iconify-icon>
+                      <span>Markdown</span>
+                    </div>
+                    <span class="dropdown-item-badge">.md</span>
+                  </button>
+                  <button type="button" class="dropdown-item" id="opt-dl-doc" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:file-type" width="14" height="14"></iconify-icon>
+                      <span>Word Document</span>
+                    </div>
+                    <span class="dropdown-item-badge">.doc</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Distraction-Free Text Canvas -->
+          <textarea 
+            id="notepad-textarea" 
+            class="notepad-editor-area font-sans" 
+            placeholder="Start typing or paste notes here... Your writing is automatically saved locally in real time." 
+            spellcheck="true"
+            aria-label="Online Notepad Text Editor"
+            oninput="window.updateNotepadMetrics(); window.saveNotepadContent();"
+            onkeyup="window.updateNotepadMetrics();"
+            onpaste="setTimeout(function(){ window.updateNotepadMetrics(); window.saveNotepadContent(); }, 10);"
+            oncut="setTimeout(function(){ window.updateNotepadMetrics(); window.saveNotepadContent(); }, 10);"
+            onchange="window.updateNotepadMetrics(); window.saveNotepadContent();"
+          ></textarea>
+
+          <!-- 3. Minimal Statistics Footer Bar -->
+          <div class="notepad-bottom-bar">
+            <div class="notepad-metrics-inline">
+              <span class="metric-item"><strong id="stat-words">0</strong> words</span>
+              <span class="metric-separator">•</span>
+              <span class="metric-item"><strong id="stat-chars">0</strong> chars (<span id="stat-chars-nospace">0</span> no spaces)</span>
+              <span class="metric-separator">•</span>
+              <span class="metric-item"><strong id="stat-lines">0</strong> lines</span>
+              <span class="metric-separator">•</span>
+              <span class="metric-item"><strong id="stat-paragraphs">0</strong> paras</span>
+            </div>
+            <div class="notepad-metrics-inline">
+              <span class="metric-item"><iconify-icon icon="lucide:clock" width="12" height="12"></iconify-icon> Read: <strong id="stat-read-time">0s</strong></span>
+              <span class="metric-separator">•</span>
+              <span class="metric-item"><iconify-icon icon="lucide:mic" width="12" height="12"></iconify-icon> Speak: <strong id="stat-speak-time">0s</strong></span>
+            </div>
+          </div>
+        <details class="tool-settings-accordion">
+          <summary class="tool-settings-summary">
+            <div class="tool-settings-summary-left">
+              <iconify-icon icon="lucide:sliders-horizontal" width="16" height="16"></iconify-icon>
+              <span>Typography &amp; Editor Preferences</span>
+              <span class="pane-badge" id="settings-summary-badge">(Inter Sans • 16px • Relaxed)</span>
+            </div>
+            <iconify-icon icon="lucide:chevron-down" class="tool-settings-chevron" width="16" height="16"></iconify-icon>
+          </summary>
+
+          <div class="tool-settings-panel">
+            <div class="settings-sections-wrapper">
+              <div class="settings-section-card">
+                <div class="settings-row-wrap">
+                  
+                  <!-- Font Family Switcher -->
+                  <div class="form-group">
+                    <span class="form-label settings-label">Font Family</span>
+                    <div class="segmented-group" id="seg-font-family">
+                      <button type="button" class="seg-pill active" data-val="sans">Sans (Inter)</button>
+                      <button type="button" class="seg-pill" data-val="mono">Mono (Code)</button>
+                      <button type="button" class="seg-pill" data-val="serif">Serif (Editorial)</button>
+                    </div>
+                  </div>
+
+                  <!-- Font Size Switcher -->
+                  <div class="form-group">
+                    <span class="form-label settings-label">Font Size</span>
+                    <div class="segmented-group" id="seg-font-size">
+                      <button type="button" class="seg-pill" data-val="14">14px</button>
+                      <button type="button" class="seg-pill active" data-val="16">16px</button>
+                      <button type="button" class="seg-pill" data-val="18">18px</button>
+                      <button type="button" class="seg-pill" data-val="22">22px</button>
+                    </div>
+                  </div>
+
+                  <!-- Line Spacing Switcher -->
+                  <div class="form-group">
+                    <span class="form-label settings-label">Line Spacing</span>
+                    <div class="segmented-group" id="seg-line-height">
+                      <button type="button" class="seg-pill" data-val="1.5">Compact</button>
+                      <button type="button" class="seg-pill active" data-val="1.75">Relaxed</button>
+                      <button type="button" class="seg-pill" data-val="2.0">Spacious</button>
+                    </div>
+                  </div>
+
+                  <!-- Tab Key Behavior Switcher -->
+                  <div class="form-group">
+                    <span class="form-label settings-label">Tab Key Keypress</span>
+                    <div class="segmented-group" id="seg-tab-behavior">
+                      <button type="button" class="seg-pill active" data-val="2">2 Spaces</button>
+                      <button type="button" class="seg-pill" data-val="4">4 Spaces</button>
+                      <button type="button" class="seg-pill" data-val="tab">Tab Char</button>
+                    </div>
+                  </div>
+
+                  <!-- Spellcheck Toggle -->
+                  <div class="form-group">
+                    <span class="form-label settings-label">Spellcheck</span>
+                    <div class="segmented-group" id="seg-spellcheck">
+                      <button type="button" class="seg-pill active" data-val="on">Enabled</button>
+                      <button type="button" class="seg-pill" data-val="off">Disabled</button>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        </div>
+
+        <!-- 3-Step Instruction Guide -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">Using Online Notepad</h2>
+          </div>
+
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Type or Paste Notes</h3>
+              <p class="step-desc">Start typing your memo, journal, or draft. Everything is automatically saved to your browser's local memory on every keystroke.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Track Metrics &amp; Transform Text</h3>
+              <p class="step-desc">Monitor real-time word, character, and reading time statistics. Use instant one-click converters for uppercase, title case, line sorting, and space cleanup.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Export &amp; Share Safely</h3>
+              <p class="step-desc">Copy your content with one click or download as Plain Text (.txt), Markdown (.md), or Microsoft Word (.doc). No data is ever sent to any remote server.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. REFERENCE -->
+        <section class="reference-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">Productivity Reference</span>
+            <h2 class="section-heading-sm">Editor Shortcuts &amp; Export Formats</h2>
+          </div>
+
+          <div class="shortcuts-table-wrapper">
+            <table class="shortcuts-table">
+              <thead>
+                <tr>
+                  <th>Shortcut / Feature</th>
+                  <th>Action Triggered</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="kbd-chip">Ctrl</span> + <span class="kbd-chip">S</span> / <span class="kbd-chip">⌘</span> + <span class="kbd-chip">S</span></td>
+                  <td>Quick Export File</td>
+                  <td>Instantly triggers download of your current notepad text as a <code>.txt</code> document without page reload.</td>
+                </tr>
+                <tr>
+                  <td><span class="kbd-chip">Tab</span></td>
+                  <td>Smart Indentation</td>
+                  <td>Inserts configured whitespace (2 spaces, 4 spaces, or tab) at current cursor position without losing focus.</td>
+                </tr>
+                <tr>
+                  <td><span class="kbd-chip">Ctrl</span> + <span class="kbd-chip">Z</span> / <span class="kbd-chip">⌘</span> + <span class="kbd-chip">Z</span></td>
+                  <td>Native Undo / Redo</td>
+                  <td>Standard full browser history undo stack preserves multi-step text edits and replacements.</td>
+                </tr>
+                <tr>
+                  <td><span class="kbd-chip">Auto-Save</span></td>
+                  <td>Local Storage Sync</td>
+                  <td>Reactively saves notes to browser storage so your work survives accidental tab closes, page refreshes, and browser restarts.</td>
+                </tr>
+                <tr>
+                  <td><span class="kbd-chip">.doc Export</span></td>
+                  <td>Word Document Export</td>
+                  <td>Generates a clean HTML-formatted Word-compatible file with preserved paragraphs and typography.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+                <!-- 5. FAQ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Online Notepad — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Are my notes stored on a server?</summary>
+              <p>No. Your text lives only in your browser's localStorage on this device. Nothing is transmitted, and the page keeps working offline once loaded.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Will my notes survive a refresh or closing the tab?</summary>
+              <p>Yes. Every keystroke is written to local storage, so the note reloads exactly as you left it — across refreshes, tab closes and reboots — until you press Reset or clear the site data in your browser.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can I use the same note on another device or browser?</summary>
+              <p>Not automatically. Local storage is per browser profile and per device. Download the note (.txt or .md) and open it elsewhere, or paste it into a synced app.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What happens if I press Reset by accident?</summary>
+              <p>The previous note is held in memory and a toast with an Undo button appears for a few seconds. Click Undo to restore it instantly.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is there a length limit?</summary>
+              <p>Browsers allow roughly 5 MB of local storage per site — several million characters. The editor stays responsive well beyond anything you would write by hand; very large pasted files may slow down the live word count.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What does the .doc export contain?</summary>
+              <p>A simple HTML document that Word, LibreOffice and Google Docs open as a formatted file with your paragraphs preserved. It is not a true .docx; if you need one, open the .doc and Save As .docx.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- 6. CTA -->
+        <div data-include="/components/tool-cta.html" data-category="docs"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Global Multi-Column Footer Component -->
+  <div data-include="/components/footer.html"></div>
+
+  <!-- Main Platform Scripts -->
+  <script src="/scripts/main.js?v=2.4"></script>
+
+  <!-- Online Notepad Script -->
+  <script src="notepad.js?v=1.1"></script>
+</body>
+
+</html>

@@ -3,7 +3,7 @@
 <!--
   TOOLITY TOOL PAGE TEMPLATE  (Designed by Kapil Pidhwani)
   ─────────────────────────────────────────────────────────
-  Copy this file to /<category>/<tool-slug>/index.html and replace every {{PLACEHOLDER}}.
+  Copy this file to /<category>/<tool-slug>/index.html  (category ∈ media · docs · labs · dev · data · games) and replace every {{PLACEHOLDER}}.
   Then: bash scripts/lint-tools.sh  — must print 0 violations.
 
   THE 6 BLOCKS (fixed order; omit a block, never replace it with a custom one):
@@ -38,7 +38,7 @@
     })();
   </script>
 
-  <title>{{TOOL_NAME}} — {{SHORT_BENEFIT}} | Toolity.in</title>
+  <title>Free Online {{TOOL_NAME}} | Toolity {{Category Label}}</title>
   <link rel="canonical" href="https://toolity.in/{{category}}/{{slug}}/">
   <meta name="description" content="{{150-160 char description. Mention free, instant, in-browser, no upload.}}">
   <meta name="author" content="Kapil Pidhwani">
@@ -46,7 +46,7 @@
   <!-- Open Graph / Twitter -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Toolity.in">
-  <meta property="og:title" content="{{TOOL_NAME}} — Toolity.in">
+  <meta property="og:title" content="Free Online {{TOOL_NAME}} | Toolity {{Category Label}}">
   <meta property="og:description" content="{{same as description}}">
   <meta property="og:url" content="https://toolity.in/{{category}}/{{slug}}/">
   <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
@@ -62,11 +62,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="preload" href="/styles/main.css?v=2.8" as="style">
+  <link rel="preload" href="/styles/main.css?v=2.9" as="style">
   <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
   <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 
-  <link rel="stylesheet" href="/styles/main.css?v=2.8">
+  <link rel="stylesheet" href="/styles/main.css?v=2.9">
   <link rel="stylesheet" href="/styles/tools/{{slug}}.css?v=1.0"><!-- delete if the tool needs no custom CSS -->
 
   <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
@@ -152,7 +152,7 @@
                 <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
                 <span>Copy</span>
               </button>
-              <!-- Single format: plain button. Multiple formats: wrap in .dropdown-menu-wrapper (see /utilities/qr-code-generator/). -->
+              <!-- Single format: plain button. Multiple formats: wrap in .dropdown-menu-wrapper (see /labs/qr-code-generator/). -->
               <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download result" aria-label="Download result" disabled>
                 <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
                 <span>Download</span>

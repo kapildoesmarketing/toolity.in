@@ -46,14 +46,12 @@
    * One source of truth; /components/tool-cta.html reads from this via data-category.
    */
   const CATEGORY_META = {
-    convertors:   { label: 'Converter Workspace',    title: 'Explore All Converter Tools',       cta: 'Explore Converters',        desc: 'Client-side image, video and GIF converters that transcode media instantly without uploading a single byte.' },
-    visuals:      { label: 'Visuals',                title: 'Explore All Visual Tools',           cta: 'Explore Visuals',            desc: 'Color and image tools for designers and developers — palettes, pixel picking and more, all processed locally in your browser.' },
-    productivity: { label: 'Productivity Workspace', title: 'Explore All Productivity Tools',    cta: 'Explore Productivity Tools', desc: 'Distraction-free notepads, planners and everyday workflow boosters that keep your data on your device.' },
-    web:          { label: 'Web Workspace',          title: 'Explore All Web & URL Tools',       cta: 'Explore Web Tools',         desc: 'URL cleaners, parameter inspectors, favicon extractors and thumbnail downloaders for webmasters and marketers.' },
-    fun:          { label: 'Fun & Games',            title: 'Explore All Games',                 cta: 'Play More Games',           desc: 'Quick browser games — classic arcade and puzzle titles that run instantly, no download or account.' },
-    development:  { label: 'Developer Workspace',    title: 'Explore All Developer Tools',       cta: 'Explore Dev Tools',         desc: 'Encoders, validators, visualizers and debugging utilities that run 100% client-side.' },
-    utilities:    { label: 'Utility Workspace',      title: 'Explore All Everyday Utility Tools', cta: 'Explore Utility Tools',     desc: 'QR code generators, link builders, speed changers and other micro-utilities for daily digital friction.' },
-    experiments:  { label: 'Experiments Lab',        title: 'Explore All Experiments',           cta: 'Explore Experiments',       desc: 'Prototype demos and Web API labs — early ideas that may graduate into full tools.' }
+    media:  { label: 'Toolity Media', title: 'Explore All Media Tools', cta: 'Explore Media Tools', desc: 'Image, video, GIF and audio tools — compress, convert, resize and tweak, all in your browser.' },
+    docs:   { label: 'Toolity Docs', title: 'Explore All Docs Tools', cta: 'Explore Docs Tools', desc: 'Tools to compress, merge, convert and manage documents.' },
+    labs:   { label: 'Toolity Labs', title: 'Explore All Labs Tools', cta: 'Explore Labs', desc: 'Quick everyday utilities — QR codes, link builders, converters and experiments.' },
+    dev:    { label: 'Toolity Dev', title: 'Explore All Dev Tools', cta: 'Explore Dev Tools', desc: 'Tools for software engineers to format, minify, inspect and validate.' },
+    data:   { label: 'Toolity Data', title: 'Explore All Data Tools', cta: 'Explore Data Tools', desc: 'Tools to parse and manipulate data.' },
+    games:  { label: 'Toolity Games', title: 'Explore All Games', cta: 'Play More Games', desc: 'Quick browser games that run instantly — no download, no account.' }
   };
 
   function fillToolCta(nodes, category) {
@@ -194,378 +192,362 @@
       {
         id: 'image-to-favicon',
         title: 'Image to Favicon Converter',
-        category: 'Convertors',
-        url: 'convertors/image-to-favicon/',
+        category: 'Media',
+        url: 'media/image-to-favicon/',
         icon: 'lucide:sparkles',
         tags: ['favicon', 'ico', 'image to favicon', 'apple touch icon', 'png to ico', 'pwa', 'icon generator', 'website icon', 'convert', 'logo to favicon', 'favicon.ico']
       },
       {
         id: 'image-converter',
         title: 'Image Format Converter',
-        category: 'Convertors',
-        url: 'convertors/image-converter/',
+        category: 'Media',
+        url: 'media/image-converter/',
         icon: 'lucide:image',
         tags: ['image', 'photo', 'picture', 'converter', 'format', 'png', 'jpg', 'jpeg', 'webp', 'avif', 'bmp', 'ico', 'compress', 'scale', 'resize']
       },
       {
         id: 'video-converter',
         title: 'Video Format Converter',
-        category: 'Convertors',
-        url: 'convertors/video-converter/',
+        category: 'Media',
+        url: 'media/video-converter/',
         icon: 'lucide:refresh-cw',
         tags: ['video', 'format', 'converter', 'transcode', 'mp4', 'webm', 'mov', 'mkv', 'avi', 'audio', 'extract', 'trim', 'compress', 'resolution', 'fps']
       },
       {
         id: 'video-to-gif',
         title: 'Video to GIF Converter',
-        category: 'Convertors',
-        url: 'convertors/video-to-gif/',
+        category: 'Media',
+        url: 'media/video-to-gif/',
         icon: 'lucide:film',
         tags: ['video', 'gif', 'mp4', 'webm', 'mov', 'convert', 'animation', 'trim', 'clip', 'maker', 'generator']
       },
       {
         id: 'gif-to-video',
         title: 'GIF to Video Converter',
-        category: 'Convertors',
-        url: 'convertors/gif-to-video/',
+        category: 'Media',
+        url: 'media/gif-to-video/',
         icon: 'lucide:video',
         tags: ['gif', 'video', 'mp4', 'webm', 'convert', 'animation', 'loop', 'instagram', 'tiktok', 'discord']
       },
       {
         id: 'qr-generator',
         title: 'QR Code Generator',
-        category: 'Utilities',
-        url: 'utilities/qr-code-generator/',
+        category: 'Labs',
+        url: 'labs/qr-code-generator/',
         icon: 'lucide:qr-code',
         tags: ['qr', 'code', 'barcode', 'generator', 'wifi', 'url', 'png', 'svg', 'vcard', 'text']
       },
       {
         id: 'audio-compressor',
         title: 'Audio Compressor',
-        category: 'Utilities',
-        url: 'utilities/audio-compressor/',
+        category: 'Media',
+        url: 'media/audio-compressor/',
         icon: 'lucide:audio-lines',
         tags: ['audio', 'mp3', 'compress', 'compressor', 'shrink', 'reduce size', 'wav to mp3', 'm4a', 'ogg', 'flac', 'bitrate', 'podcast', 'voice memo']
       },
       {
         id: 'gif-compressor',
         title: 'GIF Compressor',
-        category: 'Utilities',
-        url: 'utilities/gif-compressor/',
+        category: 'Media',
+        url: 'media/gif-compressor/',
         icon: 'lucide:image-down',
         tags: ['gif', 'compress', 'compressor', 'shrink', 'reduce size', 'animated gif', 'optimize gif', 'smaller gif', 'frames', 'colors']
       },
       {
         id: 'image-compressor',
         title: 'Image Compressor',
-        category: 'Utilities',
-        url: 'utilities/image-compressor/',
+        category: 'Media',
+        url: 'media/image-compressor/',
         icon: 'lucide:file-image',
         tags: ['image', 'compress', 'compressor', 'shrink', 'reduce size', 'jpg', 'jpeg', 'png', 'webp', 'optimize', 'photo', 'kb', 'target size', 'resize']
       },
       {
         id: 'pdf-compressor',
         title: 'PDF Compressor',
-        category: 'Utilities',
-        url: 'utilities/pdf-compressor/',
+        category: 'Docs',
+        url: 'docs/pdf-compressor/',
         icon: 'lucide:file-text',
         tags: ['pdf', 'compress', 'compressor', 'shrink', 'reduce size', 'scan', 'scanned pdf', 'optimize pdf', 'smaller pdf', 'dpi', 'email attachment']
       },
       {
         id: 'video-compressor',
         title: 'Video Compressor',
-        category: 'Utilities',
-        url: 'utilities/video-compressor/',
+        category: 'Media',
+        url: 'media/video-compressor/',
         icon: 'lucide:film',
         tags: ['video', 'compress', 'compressor', 'shrink', 'reduce size', 'mp4', 'mov', 'webm', 'bitrate', '720p', '480p', 'whatsapp video', 'email video', 'target size']
       },
       {
         id: 'organise-pdf',
         title: 'Organise PDF',
-        category: 'Utilities',
-        url: 'utilities/organise-pdf/',
+        category: 'Docs',
+        url: 'docs/organise-pdf/',
         icon: 'lucide:layout-grid',
         tags: ['pdf', 'organise', 'organize', 'reorder', 'rearrange', 'move pages', 'delete pages', 'rotate pages', 'sort pages']
       },
       {
         id: 'pdf-merger',
         title: 'PDF Merger',
-        category: 'Utilities',
-        url: 'utilities/pdf-merger/',
+        category: 'Docs',
+        url: 'docs/pdf-merger/',
         icon: 'lucide:files',
         tags: ['pdf', 'merge', 'merger', 'combine', 'join', 'append', 'concatenate', 'multiple pdfs']
       },
       {
         id: 'pdf-page-rotator',
         title: 'PDF Page Rotator',
-        category: 'Utilities',
-        url: 'utilities/pdf-page-rotator/',
+        category: 'Docs',
+        url: 'docs/pdf-page-rotator/',
         icon: 'lucide:rotate-cw',
         tags: ['pdf', 'rotate', 'rotator', 'rotation', 'sideways', 'landscape', 'portrait', 'fix orientation', 'scan']
       },
       {
         id: 'pdf-splitter',
         title: 'PDF Splitter',
-        category: 'Utilities',
-        url: 'utilities/pdf-splitter/',
+        category: 'Docs',
+        url: 'docs/pdf-splitter/',
         icon: 'lucide:scissors',
         tags: ['pdf', 'split', 'splitter', 'extract pages', 'page range', 'separate', 'zip', 'every page', 'divide']
       },
       {
         id: 'protect-pdf',
         title: 'Protect PDF',
-        category: 'Utilities',
-        url: 'utilities/protect-pdf/',
+        category: 'Docs',
+        url: 'docs/protect-pdf/',
         icon: 'lucide:lock',
         tags: ['pdf', 'protect', 'password', 'encrypt', 'lock', 'secure', 'aes', 'permissions', 'no copy', 'no print']
       },
       {
         id: 'redact-pdf',
         title: 'Redact PDF',
-        category: 'Utilities',
-        url: 'utilities/redact-pdf/',
+        category: 'Docs',
+        url: 'docs/redact-pdf/',
         icon: 'lucide:eye-off',
         tags: ['pdf', 'redact', 'redaction', 'black out', 'censor', 'hide text', 'remove sensitive', 'blackout', 'flatten']
       },
       {
         id: 'sign-pdf',
         title: 'Sign PDF',
-        category: 'Utilities',
-        url: 'utilities/sign-pdf/',
+        category: 'Docs',
+        url: 'docs/sign-pdf/',
         icon: 'lucide:pen-line',
         tags: ['pdf', 'sign', 'signature', 'esign', 'e-signature', 'draw signature', 'initials', 'date stamp', 'fill and sign']
       },
       {
         id: 'unlock-pdf',
         title: 'Unlock PDF',
-        category: 'Utilities',
-        url: 'utilities/unlock-pdf/',
+        category: 'Docs',
+        url: 'docs/unlock-pdf/',
         icon: 'lucide:lock-open',
         tags: ['pdf', 'unlock', 'remove password', 'decrypt', 'restrictions', 'owner password', 'open password', 'unprotect']
       },
       {
         id: 'watermark-pdf',
         title: 'Watermark PDF',
-        category: 'Utilities',
-        url: 'utilities/watermark-pdf/',
+        category: 'Docs',
+        url: 'docs/watermark-pdf/',
         icon: 'lucide:stamp',
         tags: ['pdf', 'watermark', 'stamp', 'confidential', 'draft', 'logo', 'tiled', 'overlay text', 'brand']
       },
       {
         id: 'mailto-generator',
         title: 'Mailto Link Creator',
-        category: 'Utilities',
-        url: 'utilities/mailto-generator/',
+        category: 'Labs',
+        url: 'labs/mailto-generator/',
         icon: 'lucide:mail',
         tags: ['mailto', 'email', 'link', 'generator', 'creator', 'html', 'href', 'contact', 'composer', 'message', 'support']
       },
       {
         id: 'gif-speed-changer',
         title: 'GIF Speed Changer',
-        category: 'Utilities',
-        url: 'utilities/gif-speed-changer/',
+        category: 'Media',
+        url: 'media/gif-speed-changer/',
         icon: 'lucide:gauge',
         tags: ['gif', 'speed', 'changer', 'fast', 'slow', 'slowmo', 'hyper', 'fps', 'accelerate', 'playback', 'rate', 'multiplier', 'time', 'tempo']
       },
       {
         id: 'video-speed-changer',
         title: 'Video Speed Changer',
-        category: 'Utilities',
-        url: 'utilities/video-speed-changer/',
+        category: 'Media',
+        url: 'media/video-speed-changer/',
         icon: 'lucide:play-circle',
         tags: ['video', 'speed', 'changer', 'speed up video', 'slow motion', 'slowmo', 'timelapse', 'hyperlapse', 'fast forward', 'playback rate', 'tempo', 'accelerate', 'audio pitch', 'mp4', 'webm', 'mov']
       },
       {
         id: 'whatsapp-link-creator',
         title: 'WhatsApp Link Creator',
-        category: 'Utilities',
-        url: 'utilities/whatsapp-link-creator/',
+        category: 'Labs',
+        url: 'labs/whatsapp-link-creator/',
         icon: 'lucide:message-circle',
         tags: ['whatsapp', 'wa.me', 'chat', 'link', 'generator', 'creator', 'message', 'click to chat', 'phone', 'contact', 'direct']
       },
       {
         id: 'online-notepad',
         title: 'Online Notepad',
-        category: 'Productivity',
-        url: 'productivity/online-notepad/',
+        category: 'Docs',
+        url: 'docs/online-notepad/',
         icon: 'lucide:file-edit',
         tags: ['notepad', 'online notepad', 'scratchpad', 'notes', 'text editor', 'memo', 'jotter', 'write', 'word count', 'character count', 'draft', 'clean text', 'pastebin', 'auto save', 'private note']
       },
       {
         id: 'json-visualizer',
         title: 'JSON Visualizer',
-        category: 'Development',
-        url: 'development/json-visualizer/',
+        category: 'Dev',
+        url: 'dev/json-visualizer/',
         icon: 'lucide:binary',
         tags: ['json', 'visualizer', 'json visualizer', 'json tree', 'tree viewer', 'json explorer', 'json parser', 'json formatter', 'table', 'json to table', 'beautify', 'minify', 'repair', 'schema', 'api', 'path', 'jsonpath']
       },
       {
-        id: 'cat-convertors',
-        title: 'Convertors',
-        category: 'Workspace',
-        url: 'convertors/',
-        icon: 'lucide:arrow-left-right',
-        tags: ['convert', 'convertor', 'converter', 'units', 'image', 'video', 'gif', 'favicon', 'media']
-      },
-      {
-        id: 'cat-visuals',
-        title: 'Visuals',
+        id: 'cat-media',
+        title: 'Media',
         category: 'Category',
-        url: 'visuals/',
-        icon: 'lucide:palette',
-        tags: ['visuals', 'visual', 'color', 'colour', 'palette', 'image', 'design', 'picker', 'hex', 'rgb', 'hsl']
+        url: 'media/',
+        icon: 'lucide:clapperboard',
+        tags: ['media', 'image', 'photo', 'video', 'gif', 'audio', 'compress', 'convert', 'favicon', 'thumbnail']
       },
       {
-        id: 'cat-productivity',
-        title: 'Productivity',
-        category: 'Workspace',
-        url: 'productivity/',
-        icon: 'lucide:check-square',
-        tags: ['productivity', 'productive', 'work', 'tasks', 'todo', 'planner', 'calculator', 'timer', 'focus', 'utility']
+        id: 'cat-docs',
+        title: 'Docs',
+        category: 'Category',
+        url: 'docs/',
+        icon: 'lucide:file-text',
+        tags: ['docs', 'documents', 'pdf', 'merge', 'split', 'sign', 'watermark', 'notepad', 'text']
       },
       {
-        id: 'cat-web',
-        title: 'Web Tools',
-        category: 'Workspace',
-        url: 'web/',
-        icon: 'lucide:globe',
-        tags: ['web', 'url', 'cleaner', 'parameter', 'query', 'separator', 'link', 'http', 'dns', 'favicon', 'thumbnail']
+        id: 'cat-labs',
+        title: 'Labs',
+        category: 'Category',
+        url: 'labs/',
+        icon: 'lucide:flask-conical',
+        tags: ['labs', 'utilities', 'qr', 'link', 'mailto', 'whatsapp', 'favicon', 'experiments', 'photo booth']
+      },
+      {
+        id: 'cat-dev',
+        title: 'Dev',
+        category: 'Category',
+        url: 'dev/',
+        icon: 'lucide:code-2',
+        tags: ['dev', 'developer', 'json', 'format', 'minify', 'validate', 'inspect', 'code']
+      },
+      {
+        id: 'cat-data',
+        title: 'Data',
+        category: 'Category',
+        url: 'data/',
+        icon: 'lucide:database',
+        tags: ['data', 'parse', 'url', 'parameters', 'query', 'csv', 'table']
+      },
+      {
+        id: 'cat-games',
+        title: 'Games',
+        category: 'Category',
+        url: 'games/',
+        icon: 'lucide:gamepad-2',
+        tags: ['games', 'play', 'arcade', 'puzzle', 'snake', 'tetris', '2048', 'pong', 'flappy', 'tic tac toe']
       },
       {
         id: 'image-color-extractor',
         title: 'Image Color Extractor',
-        category: 'Visuals',
-        url: 'visuals/image-color-extractor/',
+        category: 'Media',
+        url: 'media/image-color-extractor/',
         icon: 'lucide:palette',
         tags: ['color', 'colour', 'palette', 'extract', 'extractor', 'image colors', 'dominant color', 'color picker', 'eyedropper', 'hex', 'rgb', 'hsl', 'swatch', 'theme', 'brand colors', 'pipette']
       },
       {
         id: 'og-image-generator',
         title: 'OG Image Generator',
-        category: 'Visuals',
-        url: 'visuals/og-image-generator/',
+        category: 'Media',
+        url: 'media/og-image-generator/',
         icon: 'lucide:share-2',
         tags: ['og', 'open graph', 'og image', 'social', 'social preview', 'twitter card', 'link preview', 'meta image', 'facebook', 'linkedin', '1200x630', 'thumbnail', 'share image', 'seo']
       },
       {
         id: 'placeholder-image-generator',
         title: 'Placeholder Image Generator',
-        category: 'Visuals',
-        url: 'visuals/placeholder-image-generator/',
+        category: 'Media',
+        url: 'media/placeholder-image-generator/',
         icon: 'lucide:image-plus',
         tags: ['placeholder', 'dummy image', 'mock image', 'image generator', 'blank image', 'sample image', 'png', 'jpg', 'webp', 'svg', 'banner', 'thumbnail', 'og image', 'lorem picsum', 'placehold']
       },
       {
         id: '2048',
         title: '2048',
-        category: 'Fun',
-        url: 'fun/2048/',
+        category: 'Games',
+        url: 'games/2048/',
         icon: 'lucide:grid-2x2',
         tags: ['2048', 'puzzle', 'tiles', 'merge', 'numbers', 'slide', 'game', 'games', 'swipe']
       },
       {
         id: 'flappy-bird',
         title: 'Flappy Bird',
-        category: 'Fun',
-        url: 'fun/flappy-bird/',
+        category: 'Games',
+        url: 'games/flappy-bird/',
         icon: 'lucide:bird',
         tags: ['flappy', 'flappy bird', 'bird', 'pipes', 'tap', 'arcade', 'game', 'games']
       },
       {
         id: 'snake',
         title: 'Snake',
-        category: 'Fun',
-        url: 'fun/snake/',
+        category: 'Games',
+        url: 'games/snake/',
         icon: 'lucide:worm',
         tags: ['snake', 'nokia', 'arcade', 'grow', 'food', 'retro', 'game', 'games', 'swipe']
       },
       {
         id: 'tetris',
         title: 'Tetris',
-        category: 'Fun',
-        url: 'fun/tetris/',
+        category: 'Games',
+        url: 'games/tetris/',
         icon: 'lucide:layout-grid',
         tags: ['tetris', 'blocks', 'block puzzle', 'lines', 'tetromino', 'puzzle', 'game', 'games']
       },
       {
         id: 'tic-tac-toe',
         title: 'Tic Tac Toe',
-        category: 'Fun',
-        url: 'fun/tic-tac-toe/',
+        category: 'Games',
+        url: 'games/tic-tac-toe/',
         icon: 'lucide:hash',
         tags: ['tic tac toe', 'tictactoe', 'noughts and crosses', 'xo', 'x and o', 'minimax', 'game', 'games', 'two player']
       },
       {
         id: 'pong',
         title: 'Pong',
-        category: 'Fun',
-        url: 'fun/pong/',
+        category: 'Games',
+        url: 'games/pong/',
         icon: 'lucide:gamepad-2',
         tags: ['pong', 'game', 'games', 'arcade', 'ping pong', 'paddle', 'retro', 'two player', '2 player', 'play', 'fun']
       },
       {
         id: 'photo-booth',
         title: 'Photo Booth',
-        category: 'Experiments',
-        url: 'experiments/photo-booth/',
+        category: 'Labs',
+        url: 'labs/photo-booth/',
         icon: 'lucide:camera',
         tags: ['photo', 'booth', 'photobooth', 'strip', 'camera', 'selfie', 'stickers', 'frame', 'webcam', 'print', 'polaroid']
       },
       {
         id: 'url-parameter-separator',
         title: 'URL Parameter Separator',
-        category: 'Web',
-        url: 'web/url-parameter-separator/',
+        category: 'Data',
+        url: 'data/url-parameter-separator/',
         icon: 'lucide:link-2',
         tags: ['url', 'parameter', 'cleaner', 'query', 'separator', 'utm', 'tracking', 'strip', 'link', 'sanitize']
       },
       {
         id: 'favicon-extractor',
         title: 'Website Favicon Extractor',
-        category: 'Web',
-        url: 'web/favicon-extractor/',
+        category: 'Labs',
+        url: 'labs/favicon-extractor/',
         icon: 'lucide:globe',
         tags: ['favicon', 'extractor', 'downloader', 'google', 'icon', 'website', 'touch icon', 'apple', 'grabber', 'pwa']
       },
       {
         id: 'youtube-thumbnail-downloader',
         title: 'YouTube Thumbnail Downloader',
-        category: 'Web',
-        url: 'web/youtube-thumbnail-downloader/',
+        category: 'Media',
+        url: 'media/youtube-thumbnail-downloader/',
         icon: 'lucide:youtube',
         tags: ['youtube', 'thumbnail', 'downloader', 'hd', '1080p', 'image', 'cover', 'shorts', 'video', 'download']
-      },
-      {
-        id: 'cat-fun',
-        title: 'Fun & Games',
-        category: 'Workspace',
-        url: 'fun/',
-        icon: 'lucide:gamepad-2',
-        tags: ['fun', 'games', 'interactive', 'sound', 'toys', 'play', 'audio', 'visualizer']
-      },
-      {
-        id: 'cat-development',
-        title: 'Development',
-        category: 'Workspace',
-        url: 'development/',
-        icon: 'lucide:code-2',
-        tags: ['dev', 'developer', 'development', 'json', 'base64', 'hash', 'code', 'jwt', 'curl']
-      },
-      {
-        id: 'cat-utilities',
-        title: 'Everyday Utilities',
-        category: 'Workspace',
-        url: 'utilities/',
-        icon: 'lucide:wrench',
-        tags: ['utility', 'utilities', 'qr', 'mailto', 'whatsapp', 'speed', 'tools']
-      },
-      {
-        id: 'cat-experiments',
-        title: 'Experiments & Labs',
-        category: 'Workspace',
-        url: 'experiments/',
-        icon: 'lucide:layers',
-        tags: ['experiments', 'experiment', 'lab', 'labs', 'misc', 'prototype', 'niche', 'tools']
       }
     ];
 
@@ -574,7 +556,6 @@
      */
     const SYNONYM_MAP = {
       'convertor': 'converter',
-      'convertors': 'converter',
       'convert': 'converter',
       'converting': 'converter',
       'downloader': 'download',
@@ -1098,14 +1079,12 @@
 
       const categories = [
         { title: 'Home', href: rootPrefix === '' ? './' : rootPrefix, icon: 'lucide:home', key: 'home' },
-        { title: 'Convertors', href: `${rootPrefix}convertors/`, icon: 'lucide:arrow-left-right', key: 'convertors' },
-        { title: 'Visuals', href: `${rootPrefix}visuals/`, icon: 'lucide:palette', key: 'visuals' },
-        { title: 'Productivity', href: `${rootPrefix}productivity/`, icon: 'lucide:check-square', key: 'productivity' },
-        { title: 'Web', href: `${rootPrefix}web/`, icon: 'lucide:globe', key: 'web' },
-        { title: 'Fun', href: `${rootPrefix}fun/`, icon: 'lucide:gamepad-2', key: 'fun' },
-        { title: 'Development', href: `${rootPrefix}development/`, icon: 'lucide:code-2', key: 'development' },
-        { title: 'Utilities', href: `${rootPrefix}utilities/`, icon: 'lucide:wrench', key: 'utilities' },
-        { title: 'Experiments', href: `${rootPrefix}experiments/`, icon: 'lucide:layers', key: 'experiments' }
+        { title: 'Media', href: `${rootPrefix}media/`, icon: 'lucide:clapperboard', key: 'media' },
+        { title: 'Docs', href: `${rootPrefix}docs/`, icon: 'lucide:file-text', key: 'docs' },
+        { title: 'Labs', href: `${rootPrefix}labs/`, icon: 'lucide:flask-conical', key: 'labs' },
+        { title: 'Dev', href: `${rootPrefix}dev/`, icon: 'lucide:code-2', key: 'dev' },
+        { title: 'Data', href: `${rootPrefix}data/`, icon: 'lucide:database', key: 'data' },
+        { title: 'Games', href: `${rootPrefix}games/`, icon: 'lucide:gamepad-2', key: 'games' }
       ];
 
       drawer = document.createElement('div');

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Organise PDF | Toolity Docs</title>
+  <link rel="canonical" href="https://toolity.in/docs/organise-pdf/">
+  <meta name="description" content="Free online PDF page organiser: drag and drop thumbnails to reorder pages, rotate individual pages, delete pages and reverse the whole document, then save a new PDF. Processed entirely in your browser — files never leave your device.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Organise PDF | Toolity Docs">
+  <meta property="og:description" content="Free online PDF page organiser: drag and drop thumbnails to reorder pages, rotate individual pages, delete pages and reverse the whole document, then save a new PDF. Processed entirely in your browser — files never leave your device.">
+  <meta property="og:url" content="https://toolity.in/docs/organise-pdf/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=2.9" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=2.9">
+  <link rel="stylesheet" href="/styles/tools/organise-pdf.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Organise PDF",
+        "url": "https://toolity.in/docs/organise-pdf/",
+        "description": "Free online PDF page organiser: drag and drop thumbnails to reorder pages, rotate individual pages, delete pages and reverse the whole document, then save a new PDF. Processed entirely in your browser — files never leave your device.",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Docs", "item": "https://toolity.in/docs/" },
+          { "@type": "ListItem", "position": 3, "name": "Organise PDF", "item": "https://toolity.in/docs/organise-pdf/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Can I move a page to the very end quickly?", "acceptedAnswer": { "@type": "Answer", "text": "Drag it onto the last thumbnail — it drops after it. For long documents, deleting and re-adding is not needed: just drag; the grid scrolls as you reach the edge." } },
+          { "@type": "Question", "name": "Does deleting a page here really remove it?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The new PDF is built only from the pages you kept, so deleted pages (and their text) are not in the file. That is different from merely hiding them." } },
+          { "@type": "Question", "name": "Will links, bookmarks and form fields survive?", "acceptedAnswer": { "@type": "Answer", "text": "Pages are copied with their annotations and form fields. Document-level bookmarks (the outline) are not carried over, because they point at page positions that no longer apply." } },
+          { "@type": "Question", "name": "Can I combine pages from two PDFs?", "acceptedAnswer": { "@type": "Answer", "text": "Use PDF Merger first, then organise the merged file here." } },
+          { "@type": "Question", "name": "The tool says my PDF is encrypted — what now?", "acceptedAnswer": { "@type": "Answer", "text": "Password-protected PDFs must be opened with their password before they can be edited. Use the Unlock PDF tool first, then come back." } },
+          { "@type": "Question", "name": "Is my PDF uploaded anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. The document is parsed and rewritten by pdf-lib and rendered by PDF.js (the engine Firefox uses) entirely inside your browser. Nothing is transmitted or stored." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/docs/" class="breadcrumb-link">Docs</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Organise PDF</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Utilities</span>
+            <h1 class="page-title">Organise PDF</h1>
+            <p class="page-desc">Drag pages into a new order, rotate the odd one out and delete what you do not need — one visual grid, all in your browser.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" data-split="40/60" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge pdf-result-badge" id="result-badge">Drop a PDF to begin</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset" aria-label="Reset">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result summary" aria-label="Copy result summary" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download PDF" aria-label="Download PDF" disabled>
+                <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                <span>Download</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Pages</span>
+                <span class="pane-badge" id="source-badge">No file loaded</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content pane-content-between">
+                <div class="media-canvas-viewport pdf-tall">
+                  <div id="dropzone" class="video-dropzone" tabindex="0" role="button" aria-label="Drop PDF here or click to browse">
+                    <input type="file" id="file-input" accept="application/pdf, .pdf">
+                    <div class="video-drop-icon">
+                      <iconify-icon icon="lucide:upload-cloud" width="22" height="22"></iconify-icon>
+                    </div>
+                    <div class="video-drop-title">Drop PDF here or click to browse</div>
+                    <div class="video-drop-subtitle">Any PDF — up to 100 MB</div>
+                  </div>
+                  <div class="pdf-grid opd-grid" id="page-grid" hidden aria-label="Pages — drag to reorder"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Organised PDF</span>
+                <span class="pane-badge" id="output-badge">Awaiting file</span>
+              </div>
+              <div class="pane-content pane-content-between">
+                <div class="media-canvas-viewport">
+                  <div id="output-empty" class="media-empty-placeholder">
+                    <iconify-icon icon="lucide:layout-grid" width="32" height="32"></iconify-icon>
+                    <p>The new first page will appear here after you apply</p>
+                  </div>
+                  <canvas id="output-canvas" class="pdf-page-canvas" hidden aria-label="First page of result"></canvas>
+                </div>
+                <div>
+                  <button type="button" id="btn-compress" class="btn-toolbar-sm btn-brand-sm btn-primary-action" disabled>
+                    <iconify-icon icon="lucide:layout-grid" width="16" height="16"></iconify-icon>
+                    <span id="btn-compress-label">Apply Changes</span>
+                  </button>
+                  <div class="slim-progress-bar" id="progress-bar">
+                    <div class="slim-progress-fill" id="progress-fill"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">Drag · rotate · delete</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item">
+                <span>Quick actions</span>
+                <div class="segmented-group segmented-group-pill" id="seg-quick" role="group" aria-label="Quick actions">
+                  <button type="button" class="seg-pill" data-value="reverse">Reverse order</button>
+                  <button type="button" class="seg-pill" data-value="restore">Restore deleted</button>
+                  <button type="button" class="seg-pill" data-value="original">Back to original</button>
+                </div>
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Organise PDF Pages in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Drop a PDF</h3>
+              <p class="step-desc">Every page appears as a thumbnail with its original number. Nothing happens to the file until you click Apply.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Arrange the Pages</h3>
+              <p class="step-desc">Drag a thumbnail to a new spot, or use the ← → buttons. ↻ rotates a page, ✕ deletes it (click again to undo). Quick actions in Settings reverse the order or restore everything.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Apply &amp; Download</h3>
+              <p class="step-desc">Click Apply. A new PDF is built from your arrangement — pages are copied intact, so text stays selectable and quality is untouched.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Organise PDF — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Can I move a page to the very end quickly?</summary>
+              <p>Drag it onto the last thumbnail — it drops after it. For long documents, deleting and re-adding is not needed: just drag; the grid scrolls as you reach the edge.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Does deleting a page here really remove it?</summary>
+              <p>Yes. The new PDF is built only from the pages you kept, so deleted pages (and their text) are not in the file. That is different from merely hiding them.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Will links, bookmarks and form fields survive?</summary>
+              <p>Pages are copied with their annotations and form fields. Document-level bookmarks (the outline) are not carried over, because they point at page positions that no longer apply.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can I combine pages from two PDFs?</summary>
+              <p>Use <a href="/docs/pdf-merger/">PDF Merger</a> first, then organise the merged file here.</p>
+            </details>
+            <details class="faq-item">
+              <summary>The tool says my PDF is encrypted — what now?</summary>
+              <p>Password-protected PDFs must be opened with their password before they can be edited. Use the <a href="/docs/unlock-pdf/">Unlock PDF</a> tool first, then come back.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is my PDF uploaded anywhere?</summary>
+              <p>No. The document is parsed and rewritten by pdf-lib and rendered by PDF.js (the engine Firefox uses) entirely inside your browser. Nothing is transmitted or stored.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="docs"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=2.4"></script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@cantoo/pdf-lib@2.11.1/dist/pdf-lib.min.js" defer></script>
+  <script src="/scripts/pdf-common.js?v=1.0"></script>
+  <script src="/docs/organise-pdf/organise-pdf.js?v=1.0"></script>
+</body>
+</html>

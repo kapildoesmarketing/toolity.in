@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Video Compressor | Toolity Media</title>
+  <link rel="canonical" href="https://toolity.in/media/video-compressor/">
+  <meta name="description" content="Free online video compressor: reduce MP4, MOV and WebM file size with quality presets, an exact target size (MB) or lower resolution. Estimated size before you start, processed entirely in your browser — videos never leave your device.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Video Compressor | Toolity Media">
+  <meta property="og:description" content="Free online video compressor: reduce MP4, MOV and WebM file size with quality presets, an exact target size (MB) or lower resolution. Estimated size before you start, processed entirely in your browser — videos never leave your device.">
+  <meta property="og:url" content="https://toolity.in/media/video-compressor/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=2.9" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=2.9">
+  <link rel="stylesheet" href="/styles/tools/video-compressor.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Video Compressor",
+        "url": "https://toolity.in/media/video-compressor/",
+        "description": "Free online video compressor: reduce MP4, MOV and WebM file size with quality presets, an exact target size (MB) or lower resolution. Estimated size before you start, processed entirely in your browser — videos never leave your device.",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Media", "item": "https://toolity.in/media/" },
+          { "@type": "ListItem", "position": 3, "name": "Video Compressor", "item": "https://toolity.in/media/video-compressor/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Why does compression take as long as the video?", "acceptedAnswer": { "@type": "Answer", "text": "The browser re-encodes by playing the video onto a canvas and recording it with the built-in MediaRecorder, which works in real time. It is the only way to compress video without uploading it or shipping a 30 MB encoder. Keep the tab in the foreground while it runs." } },
+          { "@type": "Question", "name": "How accurate is the target size?", "acceptedAnswer": { "@type": "Answer", "text": "Within roughly ±10%. The bitrate is calculated from your target and the duration; encoders are variable-bitrate so the final file can land a little above or below. Set the target 10% under any hard limit." } },
+          { "@type": "Question", "name": "Will I get an MP4 or a WebM?", "acceptedAnswer": { "@type": "Answer", "text": "MP4 (H.264) in Chrome, Edge and Safari; WebM (VP9) in Firefox and older browsers. Both play everywhere that matters — WhatsApp, iMessage, Slack, YouTube and all modern browsers." } },
+          { "@type": "Question", "name": "Is the audio re-encoded too?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, to Opus or AAC depending on the container. Choose \"Keep · 64 kbps\" for voice recordings, or \"Remove\" to strip audio entirely from screen recordings and B-roll." } },
+          { "@type": "Question", "name": "Is my video uploaded anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. Decoding, scaling and re-encoding all happen inside your browser with the Canvas, Web Audio and MediaRecorder APIs. Nothing is transmitted or stored." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/media/" class="breadcrumb-link">Media</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Video Compressor</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Utilities</span>
+            <h1 class="page-title">Video Compressor</h1>
+            <p class="page-desc">Shrink MP4, MOV and WebM videos by picking a quality preset, a target size in MB or a lower resolution — re-encoded in your browser, nothing uploaded.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" data-split="40/60" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge" id="result-badge">Drop a file to begin</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset" aria-label="Reset">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result summary" aria-label="Copy result summary" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download compressed file" aria-label="Download compressed file" disabled>
+                <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                <span>Download</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Original</span>
+                <span class="pane-badge" id="source-badge">No file loaded</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content pane-content-between">
+                <div class="media-canvas-viewport">
+                  <div id="dropzone" class="video-dropzone" tabindex="0" role="button" aria-label="Drop video here or click to browse">
+                    <input type="file" id="file-input" accept="video/mp4, video/quicktime, video/webm, video/*">
+                    <div class="video-drop-icon">
+                      <iconify-icon icon="lucide:upload-cloud" width="22" height="22"></iconify-icon>
+                    </div>
+                    <div class="video-drop-title">Drop video here or click to browse</div>
+                    <div class="video-drop-subtitle">MP4, MOV or WebM — up to 500 MB</div>
+                  </div>
+                  <video id="source-video" class="source-video-player" controls playsinline preload="metadata"></video>
+                </div>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Compressed</span>
+                <span class="pane-badge" id="output-badge">Awaiting file</span>
+              </div>
+              <div class="pane-content pane-content-between">
+                <div class="media-canvas-viewport">
+                  <div id="output-empty" class="media-empty-placeholder">
+                    <iconify-icon icon="lucide:film" width="32" height="32"></iconify-icon>
+                    <p>The compressed video will appear here</p>
+                  </div>
+                  <video id="output-video" class="video-converted-preview" controls playsinline></video>
+                </div>
+                <div>
+                  <button type="button" id="btn-compress" class="btn-toolbar-sm btn-brand-sm btn-primary-action" disabled>
+                    <iconify-icon icon="lucide:minimize-2" width="16" height="16"></iconify-icon>
+                    <span id="btn-compress-label">Compress Video</span>
+                  </button>
+                  <div class="slim-progress-bar" id="progress-bar">
+                    <div class="slim-progress-fill" id="progress-fill"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">Balanced 2.5 Mbps · Original resolution · Keep audio</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item">
+                <label for="opt-preset">Quality</label>
+                <select id="opt-preset" class="select-clean">
+                  <option value="1000000">Small · 1 Mbps</option>
+                  <option value="2500000" selected>Balanced · 2.5 Mbps</option>
+                  <option value="5000000">High · 5 Mbps</option>
+                </select>
+              </div>
+              <div class="control-item">
+                <label for="opt-target">Target size</label>
+                <input type="number" id="opt-target" class="input-clean vdc-target" min="1" max="2000" step="1" placeholder="MB" aria-label="Target file size in MB" inputmode="numeric">
+                <span class="form-helper">MB · overrides quality</span>
+              </div>
+              <div class="control-item">
+                <label for="opt-res">Resolution</label>
+                <select id="opt-res" class="select-clean">
+                  <option value="0" selected>Original</option>
+                  <option value="1080">1080p</option>
+                  <option value="720">720p</option>
+                  <option value="480">480p</option>
+                </select>
+              </div>
+              <div class="control-item">
+                <label for="opt-audio">Audio</label>
+                <select id="opt-audio" class="select-clean">
+                  <option value="keep" selected>Keep</option>
+                  <option value="low">Keep · 64 kbps</option>
+                  <option value="mute">Remove</option>
+                </select>
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Compress a Video in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Drop a Video</h3>
+              <p class="step-desc">Drag an MP4, MOV or WebM onto the left pane. Duration, resolution and size show in the header, and the toolbar estimates the output size for the current settings.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Pick Quality or a Target Size</h3>
+              <p class="step-desc">Choose Small, Balanced or High, or type a target size in MB and the tool works out the bitrate. Lower the resolution for the biggest savings on 4K phone footage.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Compress &amp; Download</h3>
+              <p class="step-desc">Click Compress. Encoding runs at playback speed — a 2-minute clip takes about 2 minutes. Preview the result, check the saving, then download.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 4. REFERENCE ═══════════ -->
+        <section class="reference-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">Reference</span>
+            <h2 class="section-heading-sm">Bitrate Cheat Sheet</h2>
+          </div>
+          <div class="formats-table-card">
+            <table class="formats-table">
+              <thead><tr><th>Use case</th><th>Resolution</th><th>Bitrate</th><th>1 minute ≈</th></tr></thead>
+              <tbody>
+                <tr><td>WhatsApp / chat</td><td><code>480p</code></td><td><code>1 Mbps</code></td><td>7.5 MB</td></tr>
+                <tr><td>Email attachment (under 25 MB)</td><td><code>720p</code></td><td>Target <code>20 MB</code></td><td>up to 5 min</td></tr>
+                <tr><td>Web / blog embed</td><td><code>720p</code></td><td><code>2.5 Mbps</code></td><td>19 MB</td></tr>
+                <tr><td>Social upload (Instagram, LinkedIn)</td><td><code>1080p</code></td><td><code>5 Mbps</code></td><td>37 MB</td></tr>
+                <tr><td>Archive, keep quality</td><td>Original</td><td><code>5 Mbps</code>+</td><td>37 MB+</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Video Compressor — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Why does compression take as long as the video?</summary>
+              <p>The browser re-encodes by playing the video onto a canvas and recording it with the built-in MediaRecorder, which works in real time. It is the only way to compress video without uploading it or shipping a 30 MB encoder. Keep the tab in the foreground while it runs.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How accurate is the target size?</summary>
+              <p>Within roughly ±10%. The bitrate is calculated from your target and the duration; encoders are variable-bitrate so the final file can land a little above or below. Set the target 10% under any hard limit.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Will I get an MP4 or a WebM?</summary>
+              <p>MP4 (H.264) in Chrome, Edge and Safari; WebM (VP9) in Firefox and older browsers. Both play everywhere that matters — WhatsApp, iMessage, Slack, YouTube and all modern browsers.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is the audio re-encoded too?</summary>
+              <p>Yes, to Opus or AAC depending on the container. Choose "Keep · 64 kbps" for voice recordings, or "Remove" to strip audio entirely from screen recordings and B-roll.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is my video uploaded anywhere?</summary>
+              <p>No. Decoding, scaling and re-encoding all happen inside your browser with the Canvas, Web Audio and MediaRecorder APIs. Nothing is transmitted or stored.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="media"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=2.4"></script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="/media/video-compressor/video-compressor.js?v=1.0"></script>
+</body>
+</html>

@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+  <title>Free Online Video Speed Changer | Toolity Media</title>
+  <link rel="canonical" href="https://toolity.in/media/video-speed-changer/">
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Video Speed Changer | Toolity Media">
+  <meta property="og:description" content="Speed up or slow down any video from 0.1× to 10× in your browser, with pitch-corrected audio, trimming and MP4/WebM export. Nothing is uploaded.">
+  <meta property="og:url" content="https://toolity.in/media/video-speed-changer/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- SEO & Metadata -->
+  <meta name="description"
+    content="Free, fast, and 100% private Video Speed Changer. Speed up or slow down videos from 0.1× to 10.0× directly in your browser. Features instant playback preview, audio pitch preservation, clip trimming, and MP4/WebM export with zero server uploads.">
+  <meta name="keywords"
+    content="video speed changer, change video speed, speed up video, slow down video, fast motion video, slow motion video, video playback speed, online video speed editor, client-side video editor">
+  <meta name="author" content="Kapil Pidhwani">
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Iconify Icon Component -->
+  <link rel="preload" href="/styles/main.css?v=2.9" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=2.9">
+  <link rel="stylesheet" href="/styles/tools/video-speed-changer.css?v=1.0">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Video Speed Changer",
+        "url": "https://toolity.in/media/video-speed-changer/",
+        "description": "Speed up or slow down any video from 0.1\u00d7 to 10\u00d7 in your browser, with pitch-corrected audio, trimming and MP4/WebM export. Nothing is uploaded.",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Media", "item": "https://toolity.in/media/" },
+          { "@type": "ListItem", "position": 3, "name": "Video Speed Changer", "item": "https://toolity.in/media/video-speed-changer/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Does changing video speed upload my file to a server?", "acceptedAnswer": { "@type": "Answer", "text": "No. The video is played by your browser, each frame is redrawn on a canvas at the new speed and recorded with the built-in MediaRecorder API. Audio is routed through the Web Audio API on your device. Nothing is sent anywhere." } },
+          { "@type": "Question", "name": "What is the difference between \"Pitch Correct\" and \"Pitch Shift\"?", "acceptedAnswer": { "@type": "Answer", "text": "Pitch Correct keeps voices at their natural pitch, so sped-up speech doesn't sound like a chipmunk and slowed speech doesn't sound deep. Pitch Shift lets the pitch change with the speed, like a record played too fast or too slow. Mute drops the audio entirely \u2014 recommended above 2\u00d7 where any audio becomes hard to follow." } },
+          { "@type": "Question", "name": "Can I speed up just one section of the video?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Use the Trim start and end sliders in the source pane to choose the segment first; only that range is exported at the new speed." } },
+          { "@type": "Question", "name": "Why did I get WebM when I selected MP4?", "acceptedAnswer": { "@type": "Answer", "text": "MP4 (H.264) recording depends on the browser: Chrome, Edge and Safari support it, Firefox records WebM only. If MP4 isn't available the tool falls back to WebM so you still get a playable file \u2014 the output stat shows the real format." } },
+          { "@type": "Question", "name": "How long does processing take?", "acceptedAnswer": { "@type": "Answer", "text": "Processing runs in real time at the output speed. A 60-second clip at 2\u00d7 takes about 30 seconds; at 0.5\u00d7 it takes two minutes. Keep the tab in the foreground \u2014 browsers throttle background tabs and may stall the recording." } },
+          { "@type": "Question", "name": "Which input formats are supported?", "acceptedAnswer": { "@type": "Answer", "text": "Anything your browser can play: MP4 (H.264), WebM and Ogg work everywhere; MOV works in Chrome and Safari; MKV and AVI only when they contain a browser-decodable codec. If the preview stays black, convert the file to MP4 first." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <!-- Global Navigation Header -->
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- Tool Header Hero Section -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/media/" class="breadcrumb-link">Media</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Video Speed Changer</span>
+        </nav>
+
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Everyday Utility</span>
+            <h1 class="page-title">Video Speed Changer</h1>
+            <p class="page-desc">
+              Speed up or slow down videos from 0.1× to 10.0× directly in your browser. Real-time speed preview, audio pitch preservation, clip trimming, and instant MP4/WebM export with 100% client-side privacy.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tool Main Workspace Area -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <!-- Unified Tool Workspace Card -->
+        <div class="tool-workspace-card" data-layout="split" id="tool-card">
+
+          <!-- 1. Actions Toolbar (Top-Right Universal Pattern) -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge">Processed on your device · nothing uploaded</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset-tool" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy-video" title="Copy video to clipboard" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download-video" title="Download video file" disabled>
+                <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                <span>Download Video</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2. Dual Split-Pane Input & Output Grid (Minimalist Symmetrical Layout) -->
+          <div class="split-pane-grid">
+
+            <!-- Left: Video Source Pane -->
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Source Video</span>
+                <span class="pane-badge" id="video-meta-badge">No video loaded</span>
+              </div>
+
+              <div class="pane-content pane-content-between">
+                <!-- Media Viewport (280px) -->
+                <div class="media-canvas-viewport" id="source-viewport-frame">
+                  <!-- Drag & Drop Zone -->
+                  <div id="video-dropzone" class="video-dropzone">
+                    <input type="file" id="video-file-input" accept="video/mp4,video/webm,video/ogg,video/quicktime,video/x-matroska,video/x-msvideo">
+                    <div class="video-drop-icon">
+                      <iconify-icon icon="lucide:upload-cloud" width="22" height="22"></iconify-icon>
+                    </div>
+                    <div class="video-drop-title">Drop video here or click to browse</div>
+                    <div class="video-drop-subtitle">Supports MP4, WebM, MOV, MKV, AVI, and OGG up to 200MB</div>
+                  </div>
+
+                  <!-- Active Video Player -->
+                  <video id="source-video" class="source-video-player" playsinline preload="auto" controls></video>
+                </div>
+
+                <!-- Minimalist Scrubber Timeline Bar -->
+                <div class="minimal-trimmer-wrap" id="trimmer-wrap">
+                  <div class="minimal-trimmer-header">
+                    <span>Trim Clip Boundary</span>
+                    <div class="trimmer-timestamps">
+                      <span id="trim-start-val">00:00.0</span>
+                      <span>—</span>
+                      <span id="trim-end-val">00:00.0</span>
+                      <span id="trim-duration-badge" class="trim-duration-badge">(0.0s)</span>
+                    </div>
+                  </div>
+
+                  <div class="trim-sliders-row">
+                    <div class="trim-slider-line">
+                      <span class="trim-slider-tag">Start</span>
+                      <input type="range" id="trim-start-range" class="trim-range-slider" min="0" max="100" value="0" step="0.1" disabled>
+                    </div>
+                    <div class="trim-slider-line">
+                      <span class="trim-slider-tag">End</span>
+                      <input type="range" id="trim-end-range" class="trim-range-slider" min="0" max="100" value="100" step="0.1" disabled>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Source Video Stats & Live Speed Prompt -->
+                <div class="pane-footnote">
+                  <span id="src-duration-stat" class="video-stat-item">
+                    <iconify-icon icon="lucide:clock" width="13" height="13"></iconify-icon>
+                    <span id="src-duration-text">Original: 0.0s</span>
+                  </span>
+                  <span id="src-speed-stat" class="video-stat-item stat-accent">
+                    <iconify-icon icon="lucide:gauge" width="13" height="13"></iconify-icon>
+                    <span id="src-speed-text">1.0× Speed</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Speed Adjusted Converted Video Output Preview Pane -->
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Speed-Adjusted Output</span>
+                <span class="pane-badge" id="output-status-badge">Awaiting Video</span>
+              </div>
+
+              <div class="pane-content pane-content-between">
+                <!-- Media Viewport (280px) -->
+                <div class="media-canvas-viewport" id="output-viewport-frame">
+                  <!-- Empty Placeholder -->
+                  <div id="output-empty-placeholder" class="media-empty-placeholder">
+                    <iconify-icon icon="lucide:gauge" width="32" height="32"></iconify-icon>
+                    <p>Speed-adjusted video preview will appear here</p>
+                  </div>
+                  <!-- Active Output Player -->
+                  <video id="output-video-player" class="video-converted-preview" playsinline controls loop></video>
+                </div>
+
+                <!-- Primary Process Action Button -->
+                <div>
+                  <button type="button" id="btn-process-video" class="btn-toolbar-sm btn-brand-sm btn-primary-action" disabled>
+                    <iconify-icon icon="lucide:play" width="16" height="16" id="btn-process-icon"></iconify-icon>
+                    <span id="btn-process-label">Change Video Speed</span>
+                  </button>
+                  <div class="slim-progress-bar" id="slim-progress-bar">
+                    <div class="slim-progress-fill" id="slim-progress-fill"></div>
+                  </div>
+                </div>
+
+                <!-- Output Estimated Duration & Format Details -->
+                <div class="pane-footnote">
+                  <span id="est-duration-stat" class="video-stat-item">
+                    <iconify-icon icon="lucide:timer" width="13" height="13"></iconify-icon>
+                    <span id="est-duration-text">Est. Output: 0.0s</span>
+                  </span>
+                  <span id="output-format-stat" class="video-stat-item">
+                    <iconify-icon icon="lucide:file-video" width="13" height="13"></iconify-icon>
+                    <span id="output-format-text">MP4 • 100% Quality</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 3. Progressive Disclosure Settings Accordion (Positioned Below Workspace & Closed by Default) -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="16" height="16"></iconify-icon>
+                <span>Speed, Audio &amp; Export Settings</span>
+                <span class="pane-badge" id="settings-summary-badge">(2.0× Speed • Mute Audio • MP4 • Original Res)</span>
+              </div>
+              <iconify-icon icon="lucide:chevron-down" class="tool-settings-chevron" width="16" height="16"></iconify-icon>
+            </summary>
+
+            <div class="tool-settings-panel">
+              <div class="settings-sections-wrapper">
+                
+                <!-- Section 1: Speed Multiplier Controls -->
+                <div class="settings-section-card">
+                  <div class="settings-section-header">
+                    <span>1. Playback Speed Multiplier</span>
+                  </div>
+
+                  <!-- Quick Preset Segmented Pills -->
+                  <div class="form-group">
+                    <span class="form-label settings-label">Quick Presets</span>
+                    <div class="segmented-group flex-wrap" id="speed-presets-group">
+                      <button type="button" class="seg-pill" data-speed="0.25">0.25×</button>
+                      <button type="button" class="seg-pill" data-speed="0.5">0.5×</button>
+                      <button type="button" class="seg-pill" data-speed="0.75">0.75×</button>
+                      <button type="button" class="seg-pill" data-speed="1.0">1.0×</button>
+                      <button type="button" class="seg-pill" data-speed="1.25">1.25×</button>
+                      <button type="button" class="seg-pill" data-speed="1.5">1.5×</button>
+                      <button type="button" class="seg-pill active" data-speed="2.0">2.0×</button>
+                      <button type="button" class="seg-pill" data-speed="4.0">4.0×</button>
+                      <button type="button" class="seg-pill" data-speed="8.0">8.0×</button>
+                    </div>
+                  </div>
+
+                  <!-- Fine-Tuning Slider -->
+                  <div class="form-group">
+                    <div class="settings-label-row">
+                      <span class="form-label settings-label">Continuous Fine-Tuning</span>
+                      <span class="speed-val-badge" id="speed-slider-badge">2.00×</span>
+                    </div>
+                    <div class="speed-slider-control-row">
+                      <span class="form-helper">0.1×</span>
+                      <input type="range" id="speed-continuous-slider" class="speed-slider-input" min="0.1" max="10.0" value="2.0" step="0.05">
+                      <span class="form-helper">10.0×</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Section 2: Audio & Sound Handling -->
+                <div class="settings-section-card">
+                  <div class="settings-section-header">
+                    <span>2. Audio &amp; Sound Options</span>
+                  </div>
+                  <div class="settings-row-wrap">
+                    <div class="form-group form-group-grow">
+                      <span class="form-label settings-label">Audio Mode</span>
+                      <div class="segmented-group" id="audio-mode-group">
+                        <button type="button" class="seg-pill active" data-audio="mute">Mute Audio</button>
+                        <button type="button" class="seg-pill" data-audio="preserve">Keep (Pitch Correct)</button>
+                        <button type="button" class="seg-pill" data-audio="shift">Keep (Pitch Shift)</button>
+                      </div>
+                      <span class="form-label-desc" id="audio-mode-desc">
+                        Recommended for fast forward / timelapses (&gt;2.0×) to prevent sound distortion.
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Section 3: Output Format & Resolution -->
+                <div class="settings-section-card">
+                  <div class="settings-section-header">
+                    <span>3. Output Format &amp; Resolution</span>
+                  </div>
+                  <div class="settings-row-wrap">
+                    <!-- Format Selection -->
+                    <div class="form-group">
+                      <span class="form-label settings-label">Output Format</span>
+                      <div class="segmented-group" id="format-group">
+                        <button type="button" class="seg-pill active" data-format="mp4">MP4 (H.264)</button>
+                        <button type="button" class="seg-pill" data-format="webm">WebM (VP9)</button>
+                      </div>
+                    </div>
+
+                    <!-- Resolution Scale -->
+                    <div class="form-group">
+                      <span class="form-label settings-label">Resolution Scale</span>
+                      <div class="segmented-group" id="scale-group">
+                        <button type="button" class="seg-pill active" data-scale="original">Original</button>
+                        <button type="button" class="seg-pill" data-scale="1080">1080p</button>
+                        <button type="button" class="seg-pill" data-scale="720">720p</button>
+                        <button type="button" class="seg-pill" data-scale="480">480p</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </details>
+
+        </div>
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">Speed Up or Slow Down Video in 3 Steps</h2>
+          </div>
+
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Upload Video</h3>
+              <p class="step-desc">Select or drop any MP4, WebM, MOV, MKV, or AVI video file. All processing is 100% private in your browser.</p>
+            </div>
+
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Choose Speed &amp; Audio</h3>
+              <p class="step-desc">Pick a quick preset (0.25× to 8.0×) or use the fine-tuning slider. Toggle audio muting or pitch preservation.</p>
+            </div>
+
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Export &amp; Download</h3>
+              <p class="step-desc">Click Change Video Speed to encode your high-definition video and download it immediately to your device.</p>
+            </div>
+          </div>
+        </section>
+        <!-- 4. REFERENCE -->
+        <section class="formats-table-card reference-section">
+          <div class="formats-table-header">
+            <h3>Speed Multiplier &amp; Audio Reference</h3>
+            <p>Guidelines for selecting optimal speed factors and audio handling for your video projects.</p>
+          </div>
+          <table class="formats-table">
+            <thead>
+              <tr>
+                <th>Speed Factor</th>
+                <th>Motion Effect</th>
+                <th>Recommended Audio</th>
+                <th>Ideal Use Case</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>0.25× – 0.5×</strong></td>
+                <td>Smooth Slow Motion</td>
+                <td>Keep (Pitch Shift) or Mute</td>
+                <td>Sports highlights, dramatic action shots, product reveals, dance analysis</td>
+              </tr>
+              <tr>
+                <td><strong>0.75×</strong></td>
+                <td>Subtle Slowdown</td>
+                <td>Keep (Pitch Correct)</td>
+                <td>Tutorial clarity, speech comprehension, detailed motion reviews</td>
+              </tr>
+              <tr>
+                <td><strong>1.25× – 1.5×</strong></td>
+                <td>Brisk Pacing</td>
+                <td>Keep (Pitch Correct)</td>
+                <td>Presentations, webinars, educational lectures, walkthroughs</td>
+              </tr>
+              <tr>
+                <td><strong>2.0× – 4.0×</strong></td>
+                <td>Fast Forward</td>
+                <td>Mute Audio</td>
+                <td>Cooking recipes, coding sessions, art timelapses, routine walkthroughs</td>
+              </tr>
+              <tr>
+                <td><strong>4.0× – 10.0×</strong></td>
+                <td>Hyperlapse / Timelapse</td>
+                <td>Mute Audio</td>
+                <td>Long journeys, construction logs, sunset/cloud timelapses, screen recordings</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+                <!-- 5. FAQ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Video Speed Changer — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Does changing video speed upload my file to a server?</summary>
+              <p>No. The video is played by your browser, each frame is redrawn on a canvas at the new speed and recorded with the built-in MediaRecorder API. Audio is routed through the Web Audio API on your device. Nothing is sent anywhere.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What is the difference between "Pitch Correct" and "Pitch Shift"?</summary>
+              <p>Pitch Correct keeps voices at their natural pitch, so sped-up speech doesn't sound like a chipmunk and slowed speech doesn't sound deep. Pitch Shift lets the pitch change with the speed, like a record played too fast or too slow. Mute drops the audio entirely — recommended above 2× where any audio becomes hard to follow.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can I speed up just one section of the video?</summary>
+              <p>Yes. Use the Trim start and end sliders in the source pane to choose the segment first; only that range is exported at the new speed.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why did I get WebM when I selected MP4?</summary>
+              <p>MP4 (H.264) recording depends on the browser: Chrome, Edge and Safari support it, Firefox records WebM only. If MP4 isn't available the tool falls back to WebM so you still get a playable file — the output stat shows the real format.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How long does processing take?</summary>
+              <p>Processing runs in real time at the output speed. A 60-second clip at 2× takes about 30 seconds; at 0.5× it takes two minutes. Keep the tab in the foreground — browsers throttle background tabs and may stall the recording.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Which input formats are supported?</summary>
+              <p>Anything your browser can play: MP4 (H.264), WebM and Ogg work everywhere; MOV works in Chrome and Safari; MKV and AVI only when they contain a browser-decodable codec. If the preview stays black, convert the file to MP4 first.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- 6. CTA -->
+        <div data-include="/components/tool-cta.html" data-category="media"></div>
+
+      </div>
+    </section>
+  </main>
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=2.4"></script>
+
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="/media/video-speed-changer/video-speed-changer.js?v=1.0"></script>
+</body>
+
+</html>

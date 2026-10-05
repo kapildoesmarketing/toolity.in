@@ -26,26 +26,24 @@
 
 ```
 Toolity.in/
-├── convertors/             # Media & format converters
+├── media/                  # Image, video, GIF & audio tools
 │   ├── image-converter/
 │   ├── video-converter/
 │   ├── gif-to-video/
 │   ├── video-to-gif/
 │   └── image-to-favicon/
-├── visuals/                # Color & image tools (palette extractor…)
-├── productivity/           # Workflow boosters & focus planners
-├── web/                    # URL, metadata & link utilities
+├── docs/                   # PDF & document tools
+├── labs/                   # Everyday utilities, links, QR, experiments
 │   ├── url-parameter-separator/
 │   ├── youtube-thumbnail-downloader/
 │   └── favicon-extractor/
-├── fun/                    # Playful web toys & interactive visualizers
-├── development/            # Encoders, validators & dev utilities
-├── utilities/              # Everyday micro-utilities
+├── games/                  # Browser games
+├── dev/                    # Developer tools
+├── data/                   # Data parsing & manipulation
 │   ├── qr-code-generator/
 │   ├── whatsapp-link-creator/
 │   ├── mailto-generator/
 │   └── gif-speed-changer/
-├── experiments/            # Web API labs & prototype demos
 ├── components/             # Reusable modular HTML partials
 │   ├── header.html
 │   ├── footer.html
@@ -65,18 +63,18 @@ Toolity.in/
 
 | Tool | Workspace | Description |
 | :--- | :--- | :--- |
-| **[Image to Favicon](https://toolity.in/convertors/image-to-favicon/)** | Convertors | Converts images to Windows `.ico`, Apple Touch Icons, and web manifests with real-time multi-context previews. |
-| **[Image Converter](https://toolity.in/convertors/image-converter/)** | Convertors | Instant client-side conversions between PNG, JPG, WebP, and AVIF formats. |
-| **[Video Converter](https://toolity.in/convertors/video-converter/)** | Convertors | Fast in-browser media transcoding and format adjustments. |
-| **[GIF to Video](https://toolity.in/convertors/gif-to-video/)** | Convertors | Converts heavy animated GIFs into lightweight MP4/WebM videos. |
-| **[Video to GIF](https://toolity.in/convertors/video-to-gif/)** | Convertors | Captures video clips into smooth animated GIFs with custom FPS and quality. |
-| **[URL Parameter Separator](https://toolity.in/web/url-parameter-separator/)** | Web | Parses, inspects, and cleans URL query strings and UTM parameters into structured tables. |
-| **[YouTube Thumbnail Downloader](https://toolity.in/web/youtube-thumbnail-downloader/)** | Web | Fetches HD, SD, and max-resolution video covers from any YouTube link. |
-| **[Favicon Extractor](https://toolity.in/web/favicon-extractor/)** | Web | Extracts high-res website icons and Apple touch icons from any domain. |
-| **[QR Code Generator](https://toolity.in/utilities/qr-code-generator/)** | Utilities | Generates custom vector and raster QR codes for URLs, text, and WiFi. |
-| **[WhatsApp Link Creator](https://toolity.in/utilities/whatsapp-link-creator/)** | Utilities | Generates instant `wa.me` click-to-chat links with pre-filled messages. |
-| **[Mailto Link Generator](https://toolity.in/utilities/mailto-generator/)** | Utilities | Builds URL-encoded `mailto:` HTML links with subject, CC, BCC, and body. |
-| **[GIF Speed Changer](https://toolity.in/utilities/gif-speed-changer/)** | Utilities | Speeds up or slows down animated GIFs without quality loss. |
+| **[Image to Favicon](https://toolity.in/media/image-to-favicon/)** | Media | Converts images to Windows `.ico`, Apple Touch Icons, and web manifests with real-time multi-context previews. |
+| **[Image Converter](https://toolity.in/media/image-converter/)** | Media | Instant client-side conversions between PNG, JPG, WebP, and AVIF formats. |
+| **[Video Converter](https://toolity.in/media/video-converter/)** | Media | Fast in-browser media transcoding and format adjustments. |
+| **[GIF to Video](https://toolity.in/media/gif-to-video/)** | Media | Converts heavy animated GIFs into lightweight MP4/WebM videos. |
+| **[Video to GIF](https://toolity.in/media/video-to-gif/)** | Media | Captures video clips into smooth animated GIFs with custom FPS and quality. |
+| **[URL Parameter Separator](https://toolity.in/data/url-parameter-separator/)** | Data | Parses, inspects, and cleans URL query strings and UTM parameters into structured tables. |
+| **[YouTube Thumbnail Downloader](https://toolity.in/media/youtube-thumbnail-downloader/)** | Media | Fetches HD, SD, and max-resolution video covers from any YouTube link. |
+| **[Favicon Extractor](https://toolity.in/labs/favicon-extractor/)** | Labs | Extracts high-res website icons and Apple touch icons from any domain. |
+| **[QR Code Generator](https://toolity.in/labs/qr-code-generator/)** | Labs | Generates custom vector and raster QR codes for URLs, text, and WiFi. |
+| **[WhatsApp Link Creator](https://toolity.in/labs/whatsapp-link-creator/)** | Labs | Generates instant `wa.me` click-to-chat links with pre-filled messages. |
+| **[Mailto Link Generator](https://toolity.in/labs/mailto-generator/)** | Labs | Builds URL-encoded `mailto:` HTML links with subject, CC, BCC, and body. |
+| **[GIF Speed Changer](https://toolity.in/media/gif-speed-changer/)** | Media | Speeds up or slows down animated GIFs without quality loss. |
 
 ---
 

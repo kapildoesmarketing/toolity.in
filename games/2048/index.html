@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online 2048 | Toolity Games</title>
+  <link rel="canonical" href="https://toolity.in/games/2048/">
+  <meta name="description" content="Play 2048 online for free: slide tiles with the arrow keys or a swipe, merge equal numbers and reach 2048. Undo, 3×3 / 4×4 / 5×5 boards and a saved best score — no download, no account.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online 2048 | Toolity Games">
+  <meta property="og:description" content="Play 2048 online for free: slide tiles with the arrow keys or a swipe, merge equal numbers and reach 2048. Undo, 3×3 / 4×4 / 5×5 boards and a saved best score — no download, no account.">
+  <meta property="og:url" content="https://toolity.in/games/2048/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=2.9" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=2.9">
+  <link rel="stylesheet" href="/styles/tools/2048.css?v=1.0">
+
+  <!-- Structured data: VideoGame + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": ["VideoGame", "WebApplication"],
+        "name": "2048",
+        "url": "https://toolity.in/games/2048/",
+        "description": "Play 2048 online for free: slide tiles with the arrow keys or a swipe, merge equal numbers and reach 2048. Undo, 3×3 / 4×4 / 5×5 boards and a saved best score — no download, no account.",
+        "genre": "Puzzle",
+        "gamePlatform": "Web browser",
+        "numberOfPlayers": { "@type": "QuantitativeValue", "minValue": 1, "maxValue": 1 },
+        "applicationCategory": "GameApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Games", "item": "https://toolity.in/games/" },
+          { "@type": "ListItem", "position": 3, "name": "2048", "item": "https://toolity.in/games/2048/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "How do you win 2048?", "acceptedAnswer": { "@type": "Answer", "text": "Create a tile with the number 2048 by repeatedly merging equal tiles: 2+2=4, 4+4=8 and so on. After you win you can choose Keep playing to go for 4096 and beyond." } },
+          { "@type": "Question", "name": "What is the best strategy?", "acceptedAnswer": { "@type": "Answer", "text": "Pick a corner and never move your largest tile away from it. Use only three directions as long as you can, keep the row along that corner sorted from big to small, and avoid moves that leave the corner empty." } },
+          { "@type": "Question", "name": "Does Undo work more than once?", "acceptedAnswer": { "@type": "Answer", "text": "Undo restores the single previous board — one step, by design, so it saves you from a slip without turning the game into trial and error. You can disable it in the options." } },
+          { "@type": "Question", "name": "Where is my best score saved?", "acceptedAnswer": { "@type": "Answer", "text": "Only in your browser's localStorage under the key toolity_2048, separately for each board size. Nothing is sent anywhere; Reset or clearing site data removes it." } },
+          { "@type": "Question", "name": "Why 3×3 and 5×5 boards?", "acceptedAnswer": { "@type": "Answer", "text": "3×3 is a short, brutal variant where 256 is already an achievement; 5×5 gives you room to breathe and is a good way to learn the corner strategy before returning to the classic 4×4." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/games/" class="breadcrumb-link">Games</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">2048</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Fun</span>
+            <h1 class="page-title">2048</h1>
+            <p class="page-desc">Slide, merge, and chase the 2048 tile — arrow keys or swipe, with undo and your best score saved on this device.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="single" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <div class="segmented-group segmented-group-pill" id="seg-size" role="group" aria-label="Board size">
+                <button type="button" class="seg-pill" data-value="3">3×3</button>
+                <button type="button" class="seg-pill active" data-value="4">4×4</button>
+                <button type="button" class="seg-pill" data-value="5">5×5</button>
+              </div>
+              <span class="pane-badge" id="best-badge" hidden></span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset the game and settings" aria-label="Reset the game and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-undo" title="Undo last move" aria-label="Undo last move" disabled>
+                <iconify-icon icon="lucide:undo-2" width="14" height="14"></iconify-icon>
+                <span>Undo</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-play" aria-label="New game">
+                <iconify-icon icon="lucide:play" width="14" height="14" id="play-icon"></iconify-icon>
+                <span id="play-label">New game</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Game pane -->
+          <div class="split-pane-grid">
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Score</span>
+                <span class="g2048-score" id="score" aria-live="polite"><b id="score-val">0</b><i>·</i><span class="g2048-best">best <b id="best-val">0</b></span></span>
+                <span id="status-badge" class="pane-badge">Reach 2048</span>
+              </div>
+              <div class="pane-content g2048-stage-wrap">
+                <div class="g2048-stage" id="stage">
+                  <div class="g2048-board" id="board" role="grid" aria-label="2048 board" tabindex="0"></div>
+                  <div class="g2048-overlay" id="overlay" hidden>
+                    <strong id="overlay-title">Game over</strong>
+                    <span id="overlay-text">Space or New game to try again</span>
+                    <button type="button" class="btn-toolbar-sm" id="btn-continue" hidden>Keep playing</button>
+                  </div>
+                </div>
+                <p class="form-helper g2048-hint" id="hint">← → ↑ ↓ or W A S D to slide · swipe on touch · Space for a new game · Z to undo</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Game options</span>
+                <span class="pane-badge" id="settings-summary">4×4 · undo on · sound on</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item">
+                <input type="checkbox" id="opt-undo" checked>
+                <label for="opt-undo">Allow undo (one step)</label>
+              </div>
+              <div class="control-item">
+                <input type="checkbox" id="opt-sound" checked>
+                <label for="opt-sound">Sound effects</label>
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+        <!-- ═══════════ 3. GUIDE ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Play 2048 in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Slide the tiles</h3>
+              <p class="step-desc">Press an arrow key (or W A S D), or swipe on a touchscreen. Every tile slides as far as it can in that direction and a new 2 or 4 appears.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Merge equal numbers</h3>
+              <p class="step-desc">Two tiles with the same number that collide merge into one and add to your score. Keep your biggest tile in a corner and build chains toward it.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Reach 2048 — then keep going</h3>
+              <p class="step-desc">Make a 2048 tile to win; you can keep playing for a higher score. The game ends when the board is full and no merges are left. Undo takes back one move.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 4. REFERENCE ═══════════ -->
+        <section class="reference-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">Reference</span>
+            <h2 class="section-heading-sm">Controls &amp; boards</h2>
+          </div>
+          <div class="formats-table-card">
+            <table class="formats-table">
+              <thead><tr><th>Action</th><th>Keyboard</th><th>Touch</th></tr></thead>
+              <tbody>
+                <tr><td>Slide tiles</td><td><code>←</code> <code>→</code> <code>↑</code> <code>↓</code> or <code>W</code> <code>A</code> <code>S</code> <code>D</code></td><td>Swipe on the board</td></tr>
+                <tr><td>Undo last move</td><td><code>Z</code></td><td>Tap Undo</td></tr>
+                <tr><td>New game</td><td><code>Space</code></td><td>Tap New game</td></tr>
+                <tr><td>Reset best score &amp; settings</td><td><code>Esc</code></td><td>Tap Reset</td></tr>
+                <tr><td>Board size</td><td>Toolbar: 3×3 (hard, small), 4×4 (classic), 5×5 (relaxed)</td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">2048 — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>How do you win 2048?</summary>
+              <p>Create a tile with the number 2048 by repeatedly merging equal tiles: 2+2=4, 4+4=8 and so on. After you win you can choose <strong>Keep playing</strong> to go for 4096 and beyond.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What is the best strategy?</summary>
+              <p>Pick a corner and never move your largest tile away from it. Use only three directions as long as you can, keep the row along that corner sorted from big to small, and avoid moves that leave the corner empty.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Does Undo work more than once?</summary>
+              <p>Undo restores the single previous board — one step, by design, so it saves you from a slip without turning the game into trial and error. You can disable it in the options.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Where is my best score saved?</summary>
+              <p>Only in your browser's localStorage under the key <code>toolity_2048</code>, separately for each board size. Nothing is sent anywhere; Reset or clearing site data removes it.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why 3×3 and 5×5 boards?</summary>
+              <p>3×3 is a short, brutal variant where 256 is already an achievement; 5×5 gives you room to breathe and is a good way to learn the corner strategy before returning to the classic 4×4.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="games"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=2.4"></script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="/games/2048/2048.js?v=1.0"></script>
+</body>
+</html>

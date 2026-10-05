@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Tic Tac Toe | Toolity Games</title>
+  <link rel="canonical" href="https://toolity.in/games/tic-tac-toe/">
+  <meta name="description" content="Play Tic Tac Toe online for free: challenge an unbeatable computer, an easy one, or a friend on the same device. Keyboard and touch friendly, no download, no account.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Tic Tac Toe | Toolity Games">
+  <meta property="og:description" content="Play Tic Tac Toe online for free: challenge an unbeatable computer, an easy one, or a friend on the same device. Keyboard and touch friendly, no download, no account.">
+  <meta property="og:url" content="https://toolity.in/games/tic-tac-toe/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=2.9" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=2.9">
+  <link rel="stylesheet" href="/styles/tools/tic-tac-toe.css?v=1.0">
+
+  <!-- Structured data: VideoGame + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": ["VideoGame", "WebApplication"],
+        "name": "Tic Tac Toe",
+        "url": "https://toolity.in/games/tic-tac-toe/",
+        "description": "Play Tic Tac Toe online for free: challenge an unbeatable computer, an easy one, or a friend on the same device. Keyboard and touch friendly, no download, no account.",
+        "genre": "Puzzle",
+        "gamePlatform": "Web browser",
+        "numberOfPlayers": { "@type": "QuantitativeValue", "minValue": 1, "maxValue": 2 },
+        "applicationCategory": "GameApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Games", "item": "https://toolity.in/games/" },
+          { "@type": "ListItem", "position": 3, "name": "Tic Tac Toe", "item": "https://toolity.in/games/tic-tac-toe/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Can the computer be beaten?", "acceptedAnswer": { "@type": "Answer", "text": "On Easy it plays random legal squares, so yes. On Unbeatable it uses the minimax algorithm to look at every possible continuation, so the best you can do is draw — try taking a corner first." } },
+          { "@type": "Question", "name": "Why do 1–9 feel upside down?", "acceptedAnswer": { "@type": "Answer", "text": "The keys follow a phone or numpad layout: 7 8 9 is the top row, 4 5 6 the middle and 1 2 3 the bottom, so your hand position matches the board." } },
+          { "@type": "Question", "name": "Who goes first?", "acceptedAnswer": { "@type": "Answer", "text": "X by default. In the options you can let O start or alternate the first move every game; in two-player mode Player 1 is X and Player 2 is O." } },
+          { "@type": "Question", "name": "Where is the score saved?", "acceptedAnswer": { "@type": "Answer", "text": "Only in your browser's localStorage, under the key toolity_tictactoe: wins, draws and losses per mode. Nothing is sent anywhere; Reset or clearing site data removes it." } },
+          { "@type": "Question", "name": "Does it work on a phone?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The board scales to the screen, squares are large tap targets, and two people can pass one phone back and forth in 2 Players mode." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/games/" class="breadcrumb-link">Games</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Tic Tac Toe</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Fun</span>
+            <h1 class="page-title">Tic Tac Toe</h1>
+            <p class="page-desc">Noughts and crosses against an unbeatable computer, an easy one, or a friend on the same screen — right in your browser.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="single" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <div class="segmented-group segmented-group-pill" id="seg-mode" role="group" aria-label="Game mode">
+                <button type="button" class="seg-pill active" data-value="cpu"><iconify-icon icon="lucide:cpu" width="14" height="14"></iconify-icon><span>vs Computer</span></button>
+                <button type="button" class="seg-pill" data-value="2p"><iconify-icon icon="lucide:users" width="14" height="14"></iconify-icon><span>2 Players</span></button>
+              </div>
+              <span class="pane-badge" id="turn-badge" aria-live="polite">X to move</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset the game and settings" aria-label="Reset the game and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-play" aria-label="New game">
+                <iconify-icon icon="lucide:play" width="14" height="14" id="play-icon"></iconify-icon>
+                <span id="play-label">New game</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Game pane -->
+          <div class="split-pane-grid">
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span id="p1-name">You (X)</span>
+                <span class="ttt-score" id="score" aria-live="polite"><b id="score-x">0</b><i>·</i><b id="score-d">0</b><i>·</i><b id="score-o">0</b></span>
+                <span id="p2-name">Computer (O)</span>
+              </div>
+              <div class="pane-content tic-tac-toe-stage-wrap">
+                <div class="ttt-stage" id="stage">
+                  <div class="ttt-board" id="board" role="grid" aria-label="Tic Tac Toe board">
+                    <button type="button" class="ttt-cell" data-i="0" role="gridcell" aria-label="Row 1, column 1"></button>
+                    <button type="button" class="ttt-cell" data-i="1" role="gridcell" aria-label="Row 1, column 2"></button>
+                    <button type="button" class="ttt-cell" data-i="2" role="gridcell" aria-label="Row 1, column 3"></button>
+                    <button type="button" class="ttt-cell" data-i="3" role="gridcell" aria-label="Row 2, column 1"></button>
+                    <button type="button" class="ttt-cell" data-i="4" role="gridcell" aria-label="Row 2, column 2"></button>
+                    <button type="button" class="ttt-cell" data-i="5" role="gridcell" aria-label="Row 2, column 3"></button>
+                    <button type="button" class="ttt-cell" data-i="6" role="gridcell" aria-label="Row 3, column 1"></button>
+                    <button type="button" class="ttt-cell" data-i="7" role="gridcell" aria-label="Row 3, column 2"></button>
+                    <button type="button" class="ttt-cell" data-i="8" role="gridcell" aria-label="Row 3, column 3"></button>
+                  </div>
+                  <div class="ttt-overlay" id="overlay" hidden>
+                    <strong id="overlay-title">You win!</strong>
+                    <span id="overlay-text">Space or New game to play again</span>
+                  </div>
+                </div>
+                <p class="form-helper tic-tac-toe-hint" id="hint">Click a square or press 1–9 (numpad layout) · Space for a new game</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Game options</span>
+                <span class="pane-badge" id="settings-summary">Unbeatable · X starts · sound on</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item">
+                <label for="opt-difficulty">Computer strength</label>
+                <select id="opt-difficulty" class="select-clean">
+                  <option value="easy">Easy (random)</option>
+                  <option value="hard" selected>Unbeatable</option>
+                </select>
+              </div>
+              <div class="control-item">
+                <label for="opt-first">Who starts</label>
+                <select id="opt-first" class="select-clean">
+                  <option value="x" selected>X (you / Player 1)</option>
+                  <option value="o">O (computer / Player 2)</option>
+                  <option value="alternate">Alternate each game</option>
+                </select>
+              </div>
+              <div class="control-item">
+                <input type="checkbox" id="opt-sound" checked>
+                <label for="opt-sound">Sound effects</label>
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+        <!-- ═══════════ 3. GUIDE ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Play Tic Tac Toe in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Pick an opponent</h3>
+              <p class="step-desc">Play the computer — Easy picks random squares, Unbeatable never loses — or choose 2 Players to share one keyboard or touchscreen.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Take turns</h3>
+              <p class="step-desc">Click or tap an empty square, or press 1–9 like a phone numpad (7 8 9 on the top row). X always goes first unless you change it in the options.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Three in a row wins</h3>
+              <p class="step-desc">Line up three horizontally, vertically or diagonally. The tally of wins, draws and losses is kept on this device only.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 4. REFERENCE ═══════════ -->
+        <section class="reference-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">Reference</span>
+            <h2 class="section-heading-sm">Controls</h2>
+          </div>
+          <div class="formats-table-card">
+            <table class="formats-table">
+              <thead><tr><th>Action</th><th>Keyboard</th><th>Touch / mouse</th></tr></thead>
+              <tbody>
+                <tr><td>Place a mark</td><td><code>1</code>–<code>9</code> (numpad layout: 7 8 9 top row)</td><td>Tap / click a square</td></tr>
+                <tr><td>New game</td><td><code>Space</code></td><td>Tap New game</td></tr>
+                <tr><td>Reset tally &amp; settings</td><td><code>Esc</code></td><td>Tap Reset</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Tic Tac Toe — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Can the computer be beaten?</summary>
+              <p>On <strong>Easy</strong> it plays random legal squares, so yes. On <strong>Unbeatable</strong> it uses the minimax algorithm to look at every possible continuation, so the best you can do is draw — try taking a corner first.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why do 1–9 feel upside down?</summary>
+              <p>The keys follow a phone or numpad layout: <strong>7 8 9</strong> is the top row, <strong>4 5 6</strong> the middle and <strong>1 2 3</strong> the bottom, so your hand position matches the board.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Who goes first?</summary>
+              <p>X by default. In the options you can let O start or alternate the first move every game; in two-player mode Player 1 is X and Player 2 is O.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Where is the score saved?</summary>
+              <p>Only in your browser's localStorage, under the key <code>toolity_tictactoe</code>: wins, draws and losses per mode. Nothing is sent anywhere; Reset or clearing site data removes it.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Does it work on a phone?</summary>
+              <p>Yes. The board scales to the screen, squares are large tap targets, and two people can pass one phone back and forth in 2 Players mode.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="games"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=2.4"></script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="/games/tic-tac-toe/tic-tac-toe.js?v=1.0"></script>
+</body>
+</html>

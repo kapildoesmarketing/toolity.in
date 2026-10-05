@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+  <title>Free Online QR Code Generator | Toolity Labs</title>
+  <link rel="canonical" href="https://toolity.in/labs/qr-code-generator/">
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online QR Code Generator | Toolity Labs">
+  <meta property="og:description" content="Create QR codes for URLs, text, Wi-Fi, vCards, email and phone numbers in your browser. Custom colours, dot shapes, logo and PNG/SVG/WebP/JPEG export — nothing is uploaded.">
+  <meta property="og:url" content="https://toolity.in/labs/qr-code-generator/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- SEO & Metadata -->
+  <meta name="description"
+    content="Free, customizable, and 100% private QR Code Generator. Create custom QR codes for URLs, Wi-Fi, vCard contacts, emails, and text with custom colors, dot styles, logo uploads with automatic quiet-zone clearance, and 4K vector downloads.">
+  <meta name="keywords"
+    content="qr code generator, free qr generator, wifi qr code, vcard qr code, vector qr code svg, high res qr code 4k, private qr generator, no tracking qr">
+  <meta name="author" content="Kapil Pidhwani">
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Iconify Icon Component -->
+    <!-- Preload Critical Assets -->
+  <link rel="preload" href="/styles/main.css?v=2.9" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=2.9">
+  <link rel="stylesheet" href="/styles/tools/qr-code-generator.css?v=1.0">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "QR Code Generator",
+        "url": "https://toolity.in/labs/qr-code-generator/",
+        "description": "Create QR codes for URLs, text, Wi-Fi, vCards, email and phone numbers in your browser. Custom colours, dot shapes, logo and PNG/SVG/WebP/JPEG export \u2014 nothing is uploaded.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Labs", "item": "https://toolity.in/labs/" },
+          { "@type": "ListItem", "position": 3, "name": "QR Code Generator", "item": "https://toolity.in/labs/qr-code-generator/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Is the content of my QR code sent to a server?", "acceptedAnswer": { "@type": "Answer", "text": "No. The QR matrix is computed and drawn entirely in your browser with a small JavaScript encoder. Wi-Fi passwords, contact details and links never leave your device, and the page works offline once loaded." } },
+          { "@type": "Question", "name": "Which error-correction level should I choose?", "acceptedAnswer": { "@type": "Answer", "text": "L (7 %) gives the smallest code; M (15 %) is the everyday default; Q (25 %) and H (30 %) survive more damage and are required when you place a logo in the centre, since the logo covers part of the pattern. The tool switches to H automatically when you add a logo." } },
+          { "@type": "Question", "name": "Why won't my QR code scan after I changed the colours?", "acceptedAnswer": { "@type": "Answer", "text": "Scanners need strong contrast and a dark pattern on a light background. Keep the foreground dark and the background light (or transparent on a light surface), and don't shrink the quiet-zone margin below the default \u2014 many camera apps fail on tight margins." } },
+          { "@type": "Question", "name": "PNG, SVG, WebP or JPEG \u2014 which should I download?", "acceptedAnswer": { "@type": "Answer", "text": "SVG is a vector file that stays crisp at any size and is ideal for print. PNG is the safe choice for screens and documents; WebP is smaller for web pages; JPEG is lossy and can't be transparent, so use it only if a platform demands it." } },
+          { "@type": "Question", "name": "How much text fits in a QR code?", "acceptedAnswer": { "@type": "Answer", "text": "Up to about 2,950 bytes at level L or 1,270 at level H, but codes that dense are hard to scan from a phone. Keep URLs short (a link shortener helps) and vCards to the essentials. If the preview shows 'Payload Overflow', shorten the content or lower the error-correction level." } },
+          { "@type": "Question", "name": "Can I generate Wi-Fi codes for WPA3 or enterprise networks?", "acceptedAnswer": { "@type": "Answer", "text": "WPA/WPA2/WPA3 personal networks work with the WPA option. Enterprise (802.1X) networks need per-user credentials that the standard Wi-Fi QR format can't express, so they are not supported." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <!-- Main Tool Page Content -->
+  <main>
+    <!-- Page Hero Header -->
+    <section class="page-hero">
+      <div class="container">
+        <!-- Breadcrumbs Navigation -->
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/labs/" class="breadcrumb-link">Labs</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">QR Code Generator</span>
+        </nav>
+
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Utility Tool</span>
+            <h1 class="page-title">Custom QR Code Generator</h1>
+            <p class="page-desc">Generate high-resolution QR codes with customizable dot styling, finder eye markers, center brand logos, and multi-format exports entirely in your browser.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tool Main Workspace Area -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <!-- ==================================================================
+             UNIFIED TOOL WORKSPACE CARD (Visible At-A-Glance on Desktop)
+             ================================================================== -->
+        <div class="tool-workspace-card" data-layout="split" id="tool-card">
+
+          <!-- 1. Quick Actions Toolbar (Top-Left Modes • Top-Right Universal Actions) -->
+          <div class="tool-actions-toolbar">
+            <!-- Left: Segmented Payload Mode Switcher -->
+            <div class="toolbar-group">
+              <div class="segmented-group segmented-group-pill" id="top-type-tabs">
+                <button type="button" class="seg-pill active" data-type="url">
+                  <iconify-icon icon="lucide:link-2" width="13" height="13"></iconify-icon>
+                  <span>URL</span>
+                </button>
+                <button type="button" class="seg-pill" data-type="text">
+                  <iconify-icon icon="lucide:file-text" width="13" height="13"></iconify-icon>
+                  <span>Text</span>
+                </button>
+                <button type="button" class="seg-pill" data-type="wifi">
+                  <iconify-icon icon="lucide:wifi" width="13" height="13"></iconify-icon>
+                  <span>Wi-Fi</span>
+                </button>
+                <button type="button" class="seg-pill" data-type="vcard">
+                  <iconify-icon icon="lucide:contact-2" width="13" height="13"></iconify-icon>
+                  <span>vCard</span>
+                </button>
+                <button type="button" class="seg-pill" data-type="email">
+                  <iconify-icon icon="lucide:mail" width="13" height="13"></iconify-icon>
+                  <span>Email</span>
+                </button>
+                <button type="button" class="seg-pill" data-type="phone">
+                  <iconify-icon icon="lucide:phone" width="13" height="13"></iconify-icon>
+                  <span>Phone</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Right: Universal Action Buttons (Reset, Copy, Download Dropdown) -->
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-clear-payload" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy-image" title="Copy QR Code image to clipboard">
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+
+              <!-- Single Download Dropdown Menu -->
+              <div class="dropdown-menu-wrapper" id="download-dropdown-wrap">
+                <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download-menu-toggle" aria-haspopup="true" aria-expanded="false">
+                  <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                  <span>Download</span>
+                  <iconify-icon icon="lucide:chevron-down" class="dropdown-arrow" width="13" height="13"></iconify-icon>
+                </button>
+
+                <div class="dropdown-popup" id="download-dropdown-menu" role="menu">
+                  <button type="button" class="dropdown-item" id="opt-dl-png" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:image" width="14" height="14"></iconify-icon>
+                      <span>PNG Image</span>
+                    </div>
+                    <span class="dropdown-item-badge" id="dl-png-res-badge">1024px</span>
+                  </button>
+                  <button type="button" class="dropdown-item" id="opt-dl-svg" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:code" width="14" height="14"></iconify-icon>
+                      <span>Vector SVG</span>
+                    </div>
+                    <span class="dropdown-item-badge">Vector</span>
+                  </button>
+                  <button type="button" class="dropdown-item" id="opt-dl-webp" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:sparkles" width="14" height="14"></iconify-icon>
+                      <span>WebP Image</span>
+                    </div>
+                    <span class="dropdown-item-badge">WebP</span>
+                  </button>
+                  <button type="button" class="dropdown-item" id="opt-dl-jpeg" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:file-image" width="14" height="14"></iconify-icon>
+                      <span>JPEG Image</span>
+                    </div>
+                    <span class="dropdown-item-badge">JPG</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Dual Split-Pane Input & Output (At-A-Glance Responsive Grid) -->
+          <div class="split-pane-grid">
+            <!-- Left: Input Configuration Pane -->
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span id="input-pane-title">Website URL or Link</span>
+                <span class="pane-badge" id="qr-input-stats">0 chars</span>
+              </div>
+
+              <!-- Input Form Body -->
+              <div class="pane-content">
+
+                <!-- URL Type Form -->
+                <div class="type-form-section" id="form-url">
+                  <div class="form-group">
+                    <input type="url" id="input-url" class="input-clean" placeholder="https://toolity.in" value="https://toolity.in" autocomplete="off" spellcheck="false">
+                  </div>
+                </div>
+
+                <!-- Text Type Form -->
+                <div class="type-form-section" id="form-text" hidden>
+                  <div class="form-group">
+                    <textarea id="input-text" class="textarea-clean" placeholder="Type any text or code snippet here..." spellcheck="false"></textarea>
+                  </div>
+                </div>
+
+                <!-- Wi-Fi Type Form -->
+                <div class="type-form-section" id="form-wifi" hidden>
+                  <div class="form-row-2col">
+                    <div class="form-group">
+                      <label for="input-wifi-ssid" class="form-label settings-label">Network Name (SSID)</label>
+                      <input type="text" id="input-wifi-ssid" class="input-clean" placeholder="e.g. Office_Guest_5G">
+                    </div>
+                    <div class="form-group">
+                      <label for="input-wifi-pass" class="form-label settings-label">Password</label>
+                      <input type="text" id="input-wifi-pass" class="input-clean" placeholder="Passkey">
+                    </div>
+                  </div>
+                  <div class="form-row-2col mt-sm">
+                    <div class="form-group">
+                      <label for="input-wifi-enc" class="form-label settings-label">Security</label>
+                      <select id="input-wifi-enc" class="select-clean">
+                        <option value="WPA" selected>WPA / WPA2 / WPA3</option>
+                        <option value="WEP">WEP</option>
+                        <option value="nopass">None (Open Network)</option>
+                      </select>
+                    </div>
+                    <div class="form-group qr-checkbox-group">
+                      <div class="control-item">
+                        <input type="checkbox" id="input-wifi-hidden">
+                        <label for="input-wifi-hidden">Hidden Network</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- vCard Contact Form -->
+                <div class="type-form-section" id="form-vcard" hidden>
+                  <div class="form-row-2col">
+                    <div class="form-group">
+                      <label for="input-vcard-first" class="form-label settings-label">First Name</label>
+                      <input type="text" id="input-vcard-first" class="input-clean" placeholder="Alex">
+                    </div>
+                    <div class="form-group">
+                      <label for="input-vcard-last" class="form-label settings-label">Last Name</label>
+                      <input type="text" id="input-vcard-last" class="input-clean" placeholder="Morgan">
+                    </div>
+                  </div>
+                  <div class="form-row-2col mt-sm">
+                    <div class="form-group">
+                      <label for="input-vcard-phone" class="form-label settings-label">Phone</label>
+                      <input type="tel" id="input-vcard-phone" class="input-clean" placeholder="+1 555-0199">
+                    </div>
+                    <div class="form-group">
+                      <label for="input-vcard-email" class="form-label settings-label">Email</label>
+                      <input type="email" id="input-vcard-email" class="input-clean" placeholder="alex@example.com">
+                    </div>
+                  </div>
+                  <div class="form-row-2col mt-sm">
+                    <div class="form-group">
+                      <label for="input-vcard-org" class="form-label settings-label">Company</label>
+                      <input type="text" id="input-vcard-org" class="input-clean" placeholder="Toolity Labs">
+                    </div>
+                    <div class="form-group">
+                      <label for="input-vcard-url" class="form-label settings-label">Website</label>
+                      <input type="url" id="input-vcard-url" class="input-clean" placeholder="https://toolity.in">
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Email Form -->
+                <div class="type-form-section" id="form-email" hidden>
+                  <div class="form-group">
+                    <label for="input-email-to" class="form-label settings-label">Recipient Email</label>
+                    <input type="email" id="input-email-to" class="input-clean" placeholder="contact@example.com">
+                  </div>
+                  <div class="form-group mt-sm">
+                    <label for="input-email-sub" class="form-label settings-label">Subject Line</label>
+                    <input type="text" id="input-email-sub" class="input-clean" placeholder="Hello from Toolity.in">
+                  </div>
+                  <div class="form-group mt-sm">
+                    <label for="input-email-body" class="form-label settings-label">Body Content</label>
+                    <textarea id="input-email-body" class="textarea-clean" placeholder="Write message..."></textarea>
+                  </div>
+                </div>
+
+                <!-- Phone / SMS Form -->
+                <div class="type-form-section" id="form-phone" hidden>
+                  <div class="form-group">
+                    <label for="input-phone-num" class="form-label settings-label">Phone Number</label>
+                    <input type="tel" id="input-phone-num" class="input-clean" placeholder="+1 (555) 000-0000">
+                  </div>
+                  <div class="form-group mt-sm">
+                    <label for="input-phone-sms" class="form-label settings-label">Optional SMS Message</label>
+                    <textarea id="input-phone-sms" class="textarea-clean" placeholder="Leave blank for dialer or enter SMS body..."></textarea>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Right: Real-time Live Output Preview Pane -->
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Real-Time QR Preview</span>
+                <span class="pane-badge" id="qr-matrix-info">Ready to Scan</span>
+              </div>
+              <div class="qr-preview-pane-content">
+                <!-- Live QR Visual Showcase Card -->
+                <div class="qr-canvas-wrapper" id="qr-preview-box">
+                  <div id="qr-render-target"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Controls & Options inside Accordion (Positioned below Input/Output) -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="16" height="16"></iconify-icon>
+                <span>QR Customization & Style Settings</span>
+                <span class="pane-badge" id="settings-summary-badge">(Sharp Dots • Medium ECC • 1024px HD)</span>
+              </div>
+              <iconify-icon icon="lucide:chevron-down" class="tool-settings-chevron" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="settings-sections-wrapper">
+
+                <!-- Section 1: Colors & Environment -->
+                <div class="settings-section-card">
+                  <div class="settings-section-header">
+                    <span>1. Color Palette & Background</span>
+                  </div>
+                  <div class="settings-row-wrap">
+                    <!-- Foreground Color -->
+                    <div class="form-group">
+                      <span class="form-label settings-label">Foreground Color</span>
+                      <div class="qr-color-row">
+                        <label class="color-picker-pill" title="Pick Foreground Color">
+                          <span class="color-preview-circle" id="fg-color-preview"></span>
+                          <span class="color-hex-text" id="fg-hex-val">#17191C</span>
+                          <input type="color" id="qr-color-fg" class="color-input-hidden" value="#17191C">
+                        </label>
+                        <!-- Quick Palette Swatches -->
+                        <div class="color-quick-palette">
+                          <span class="quick-palette-dot active" data-color="#17191C" title="Charcoal"></span>
+                          <span class="quick-palette-dot" data-color="#F4511E" title="Signal Orange"></span>
+                          <span class="quick-palette-dot" data-color="#2563EB" title="Electric Blue"></span>
+                          <span class="quick-palette-dot" data-color="#059669" title="Emerald"></span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Background Color -->
+                    <div class="form-group">
+                      <span class="form-label settings-label">Background Color</span>
+                      <div class="qr-color-row">
+                        <label class="color-picker-pill" title="Pick Background Color">
+                          <span class="color-preview-circle" id="bg-color-preview"></span>
+                          <span class="color-hex-text" id="bg-hex-val">#FFFFFF</span>
+                          <input type="color" id="qr-color-bg" class="color-input-hidden" value="#FFFFFF">
+                        </label>
+                        <!-- Transparent Toggle Pill -->
+                        <div class="segmented-group segmented-group-pill" id="seg-transparency">
+                          <button type="button" class="seg-pill active" data-val="solid">Solid</button>
+                          <button type="button" class="seg-pill" data-val="transparent">Transparent</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Section 2: Shapes & Geometry -->
+                <div class="settings-section-card">
+                  <div class="settings-section-header">
+                    <span>2. Shapes, Eyes & Geometry</span>
+                  </div>
+                  <div class="settings-row-wrap">
+                    <!-- Dot Style Segmented Control -->
+                    <div class="form-group">
+                      <span class="form-label settings-label">Dot / Module Shape</span>
+                      <div class="segmented-group" id="seg-dot-style">
+                        <button type="button" class="seg-pill active" data-val="square">■ Sharp</button>
+                        <button type="button" class="seg-pill" data-val="rounded">● Rounded</button>
+                        <button type="button" class="seg-pill" data-val="smooth">⬭ Smooth</button>
+                      </div>
+                    </div>
+
+                    <!-- Finder Eye Style Segmented Control -->
+                    <div class="form-group">
+                      <span class="form-label settings-label">Corner Eye Markers</span>
+                      <div class="segmented-group" id="seg-eye-style">
+                        <button type="button" class="seg-pill active" data-val="square">▣ Square</button>
+                        <button type="button" class="seg-pill" data-val="rounded">▢ Rounded</button>
+                        <button type="button" class="seg-pill" data-val="circle">◎ Circle</button>
+                      </div>
+                    </div>
+
+                    <!-- Quiet Zone Margin Segmented Control -->
+                    <div class="form-group">
+                      <span class="form-label settings-label">Quiet Zone Margin</span>
+                      <div class="segmented-group" id="seg-margin-size">
+                        <button type="button" class="seg-pill" data-val="0">Flush 0</button>
+                        <button type="button" class="seg-pill active" data-val="2">Compact 2</button>
+                        <button type="button" class="seg-pill" data-val="4">Safe 4</button>
+                      </div>
+                    </div>
+
+                    <!-- Error Correction Segmented Control -->
+                    <div class="form-group">
+                      <span class="form-label settings-label">Error Correction</span>
+                      <div class="segmented-group" id="seg-ecc-level">
+                        <button type="button" class="seg-pill" data-val="L" title="7% Recovery">Low</button>
+                        <button type="button" class="seg-pill active" data-val="M" title="15% Recovery">Medium</button>
+                        <button type="button" class="seg-pill" data-val="Q" title="25% Recovery">Quartile</button>
+                        <button type="button" class="seg-pill" data-val="H" title="30% Recovery - Recommended for logos">High</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Section 3: Center Brand Logo & Output Resolution -->
+                <div class="settings-section-card">
+                  <div class="settings-section-header">
+                    <span>3. Center Brand Logo & Export Resolution</span>
+                  </div>
+                  <div class="settings-row-wrap">
+                    <!-- Logo Upload Trigger -->
+                    <div class="form-group qr-logo-group">
+                      <span class="form-label settings-label">Center Brand Logo</span>
+                      <div class="qr-color-row flex-wrap">
+                        <label class="btn-toolbar-sm">
+                          <iconify-icon icon="lucide:image-plus" width="15" height="15"></iconify-icon>
+                          <span id="logo-upload-btn-text">Choose Logo Image</span>
+                          <input type="file" id="qr-logo-input" accept="image/*">
+                        </label>
+                        <button type="button" class="btn-toolbar-sm" id="btn-remove-logo" hidden>
+                          <iconify-icon icon="lucide:x" width="14" height="14"></iconify-icon>
+                          <span>Remove</span>
+                        </button>
+                        <div class="range-slider-wrap" id="logo-size-wrap" hidden>
+                          <span class="form-helper">Size:</span>
+                          <input type="range" id="qr-logo-size" class="range-slider-clean" min="14" max="26" value="20">
+                          <span class="range-val-badge" id="logo-size-val">20%</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Resolution Segmented Control -->
+                    <div class="form-group">
+                      <span class="form-label settings-label">Download Resolution</span>
+                      <div class="segmented-group" id="seg-export-res">
+                        <button type="button" class="seg-pill" data-val="512">512px</button>
+                        <button type="button" class="seg-pill active" data-val="1024">1024px HD</button>
+                        <button type="button" class="seg-pill" data-val="2048">2K</button>
+                        <button type="button" class="seg-pill" data-val="4096">4K Print</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </details>
+        </div>
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">Creating Custom QR Codes</h2>
+          </div>
+
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Select Type & Enter Data</h3>
+              <p class="step-desc">Choose your payload type (URL, Wi-Fi network, vCard, email, phone, or raw text) and enter your details.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Customize Colors, Shapes & Logo</h3>
+              <p class="step-desc">Pick custom colors, dot modules, finder eyes, and upload your center brand logo with automatic quiet-zone clearance.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Copy or Download Multi-Format</h3>
+              <p class="step-desc">Click "Download" on the top right for crisp vector SVG, crystal-clear 4K PNG, WebP, or click "Copy" for instant clipboard export.</p>
+            </div>
+          </div>
+        </section>
+
+                <!-- 5. FAQ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">QR Code Generator — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Is the content of my QR code sent to a server?</summary>
+              <p>No. The QR matrix is computed and drawn entirely in your browser with a small JavaScript encoder. Wi-Fi passwords, contact details and links never leave your device, and the page works offline once loaded.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Which error-correction level should I choose?</summary>
+              <p>L (7 %) gives the smallest code; M (15 %) is the everyday default; Q (25 %) and H (30 %) survive more damage and are required when you place a logo in the centre, since the logo covers part of the pattern. The tool switches to H automatically when you add a logo.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why won't my QR code scan after I changed the colours?</summary>
+              <p>Scanners need strong contrast and a dark pattern on a light background. Keep the foreground dark and the background light (or transparent on a light surface), and don't shrink the quiet-zone margin below the default — many camera apps fail on tight margins.</p>
+            </details>
+            <details class="faq-item">
+              <summary>PNG, SVG, WebP or JPEG — which should I download?</summary>
+              <p>SVG is a vector file that stays crisp at any size and is ideal for print. PNG is the safe choice for screens and documents; WebP is smaller for web pages; JPEG is lossy and can't be transparent, so use it only if a platform demands it.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How much text fits in a QR code?</summary>
+              <p>Up to about 2,950 bytes at level L or 1,270 at level H, but codes that dense are hard to scan from a phone. Keep URLs short (a link shortener helps) and vCards to the essentials. If the preview shows 'Payload Overflow', shorten the content or lower the error-correction level.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can I generate Wi-Fi codes for WPA3 or enterprise networks?</summary>
+              <p>WPA/WPA2/WPA3 personal networks work with the WPA option. Enterprise (802.1X) networks need per-user credentials that the standard Wi-Fi QR format can't express, so they are not supported.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- 6. CTA -->
+        <div data-include="/components/tool-cta.html" data-category="labs"></div>
+
+      </div>
+    </section>
+  </main>
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=2.4"></script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="/labs/qr-code-generator/qr-code-generator.js?v=1.0"></script>
+</body>
+
+</html>

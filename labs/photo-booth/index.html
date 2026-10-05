@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Photo Booth | Toolity Labs</title>
+  <link rel="canonical" href="https://toolity.in/labs/photo-booth/">
+  <meta name="description" content="Free online photo booth. Pick a strip layout, shoot with a countdown, add emoji sticker packs, your logo and a date caption, then download a print-ready PNG. 100% in your browser — photos never leave your device.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Photo Booth | Toolity Labs">
+  <meta property="og:description" content="Free online photo booth. Pick a strip layout, shoot with a countdown, add emoji sticker packs, your logo and a date caption, then download a print-ready PNG. 100% in your browser — photos never leave your device.">
+  <meta property="og:url" content="https://toolity.in/labs/photo-booth/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=2.9" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=2.9">
+  <link rel="stylesheet" href="/styles/tools/photo-booth.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Online Photo Booth",
+        "url": "https://toolity.in/labs/photo-booth/",
+        "description": "Free online photo booth. Pick a strip layout, shoot with a countdown, add emoji sticker packs, your logo and a date caption, then download a print-ready PNG. 100% in your browser — photos never leave your device.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript and a camera (or photo upload)",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Labs", "item": "https://toolity.in/labs/" },
+          { "@type": "ListItem", "position": 3, "name": "Online Photo Booth", "item": "https://toolity.in/labs/photo-booth/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Are my photos uploaded anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. The camera feed, every shot and the finished strip exist only in your browser's memory. The page makes no network requests with your images; closing the tab discards everything." } },
+          { "@type": "Question", "name": "What size are the downloaded strips?", "acceptedAnswer": { "@type": "Answer", "text": "Strips export at 300 dpi print size: 2×6 inch layouts are 600×1800 px and 4×6 inch layouts are 1200×1800 px, as PNG (lossless) or JPG (smaller)." } },
+          { "@type": "Question", "name": "Can I use it without a webcam?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Switch the source to Upload on the layout step and pick photos from your device; they are cropped to the layout and go through the same customisation and download steps." } },
+          { "@type": "Question", "name": "Why does the browser ask for camera permission every time?", "acceptedAnswer": { "@type": "Answer", "text": "Browsers only remember camera permission on secure (https) sites and when you choose Allow rather than Allow once. On iPhone, Safari asks on every visit by design; the booth also stops the camera as soon as you leave the shooting step." } },
+          { "@type": "Question", "name": "How do I move or remove a sticker?", "acceptedAnswer": { "@type": "Answer", "text": "Drag any sticker on the preview. Tap a sticker to select it, then use the size slider or Remove sticker; Clear all removes the whole pack. Tapping a pack again re-scatters it in new positions." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/labs/" class="breadcrumb-link">Labs</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Photo Booth</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Experiments</span>
+            <h1 class="page-title">Online Photo Booth</h1>
+            <p class="page-desc">Pick a layout, strike a pose on the countdown, decorate the strip with sticker packs, your logo and a date — then download a print-ready strip. 100% in your browser.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" data-split="60/40" id="tool-card" data-step="layout">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <ol class="step-indicator" id="stepper" aria-label="Progress">
+                <li class="step-item is-current" data-step="layout"><span class="step-dot">1</span><span class="step-label">Layout</span></li>
+                <li class="step-item" data-step="shoot"><span class="step-dot">2</span><span class="step-label">Shoot</span></li>
+                <li class="step-item" data-step="customize"><span class="step-dot">3</span><span class="step-label">Customize</span></li>
+              </ol>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset everything — layout, photos, stickers and settings" aria-label="Reset everything — layout, photos, stickers and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy strip image to clipboard" aria-label="Copy strip image to clipboard" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <div class="dropdown-menu-wrapper" id="download-dropdown-wrap">
+                <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download-menu-toggle" aria-haspopup="true" aria-expanded="false" disabled>
+                  <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                  <span>Download</span>
+                  <iconify-icon icon="lucide:chevron-down" class="dropdown-arrow" width="13" height="13"></iconify-icon>
+                </button>
+                <div class="dropdown-popup" id="download-dropdown-menu" role="menu">
+                  <button type="button" class="dropdown-item" id="opt-dl-png" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:image" width="14" height="14"></iconify-icon>
+                      <span>PNG · lossless</span>
+                    </div>
+                    <span class="dropdown-item-badge" id="dl-size-badge">600×1800</span>
+                  </button>
+                  <button type="button" class="dropdown-item" id="opt-dl-jpg" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:file-image" width="14" height="14"></iconify-icon>
+                      <span>JPG · smaller</span>
+                    </div>
+                    <span class="dropdown-item-badge">300 dpi</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ═══ STEP 1 · LAYOUT ═══ -->
+          <section class="booth-step" id="step-layout" aria-labelledby="layout-heading">
+            <div class="booth-step-head">
+              <div>
+                <h2 class="booth-step-title" id="layout-heading">Choose your layout</h2>
+                <p class="booth-step-desc">Real print sizes. You can change the layout later without re-shooting.</p>
+              </div>
+              <div class="segmented-group segmented-group-pill" id="seg-source" role="group" aria-label="Photo source">
+                <button type="button" class="seg-pill active" data-value="camera"><iconify-icon icon="lucide:camera" width="14" height="14"></iconify-icon><span>Camera</span></button>
+                <button type="button" class="seg-pill" data-value="upload"><iconify-icon icon="lucide:images" width="14" height="14"></iconify-icon><span>Upload photos</span></button>
+              </div>
+            </div>
+            <div class="booth-layout-grid" id="layout-grid">
+              <button type="button" class="booth-layout-card" data-layout="strip3">
+                <span class="booth-sil" data-cols="1" data-rows="3"><i></i><i></i><i></i></span>
+                <strong>Strip · 3</strong><small>2 × 6 in</small>
+              </button>
+              <button type="button" class="booth-layout-card" data-layout="strip4">
+                <span class="booth-sil" data-cols="1" data-rows="4"><i></i><i></i><i></i><i></i></span>
+                <strong>Strip · 4</strong><small>2 × 6 in</small>
+              </button>
+              <button type="button" class="booth-layout-card" data-layout="duo">
+                <span class="booth-sil" data-cols="1" data-rows="2"><i></i><i></i></span>
+                <strong>Duo · 2</strong><small>2 × 6 in</small>
+              </button>
+              <button type="button" class="booth-layout-card" data-layout="grid4">
+                <span class="booth-sil booth-sil-wide" data-cols="2" data-rows="2"><i></i><i></i><i></i><i></i></span>
+                <strong>Grid · 4</strong><small>4 × 6 in</small>
+              </button>
+              <button type="button" class="booth-layout-card" data-layout="big6">
+                <span class="booth-sil booth-sil-wide" data-cols="2" data-rows="3"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+                <strong>Big · 6</strong><small>4 × 6 in</small>
+              </button>
+            </div>
+            <p class="pane-footnote"><iconify-icon icon="lucide:shield-check" width="13" height="13"></iconify-icon> Photos never leave your device — the camera feed and every shot stay in this tab.</p>
+          </section>
+
+          <!-- ═══ STEP 2 · SHOOT ═══ -->
+          <section class="booth-step" id="step-shoot" hidden aria-labelledby="shoot-heading">
+            <div class="split-pane-grid">
+              <div class="tool-pane">
+                <div class="pane-header">
+                  <span id="shoot-heading">Camera</span>
+                  <span class="pane-badge" id="cam-badge">Starting…</span>
+                </div>
+                <div class="pane-content booth-stage-wrap">
+                  <div class="booth-stage" id="stage">
+                    <video id="cam-video" class="booth-video" autoplay playsinline muted></video>
+                    <div class="booth-countdown" id="cam-countdown" aria-live="assertive" hidden></div>
+                    <div class="booth-flash" id="cam-flash"></div>
+                    <div class="booth-cam-error" id="cam-error" hidden>
+                      <iconify-icon icon="lucide:camera-off" width="26" height="26"></iconify-icon>
+                      <strong id="cam-error-title">Camera unavailable</strong>
+                      <span id="cam-error-text">Allow camera access in the address bar, or use photos from your device instead.</span>
+                      <button type="button" class="btn-toolbar-sm" id="btn-switch-upload">
+                        <iconify-icon icon="lucide:images" width="14" height="14"></iconify-icon><span>Upload photos instead</span>
+                      </button>
+                    </div>
+                    <div class="tool-dropzone booth-upload" id="upload-zone" tabindex="0" role="button" aria-label="Upload photos" hidden>
+                      <iconify-icon icon="lucide:upload-cloud"></iconify-icon>
+                      <strong>Drop photos here or click to browse</strong>
+                      <small id="upload-hint">Pick up to 4 images · JPG, PNG, WebP, HEIC</small>
+                      <input type="file" id="photo-input" accept="image/*" multiple>
+                    </div>
+                  </div>
+                  <div class="booth-shoot-controls">
+                    <div class="segmented-group segmented-group-pill" id="seg-filter" role="group" aria-label="Filter">
+                      <button type="button" class="seg-pill active" data-value="none">None</button>
+                      <button type="button" class="seg-pill" data-value="bw">B&amp;W</button>
+                      <button type="button" class="seg-pill" data-value="sepia">Sepia</button>
+                      <button type="button" class="seg-pill" data-value="warm">Warm</button>
+                      <button type="button" class="seg-pill" data-value="cool">Cool</button>
+                      <button type="button" class="seg-pill" data-value="vintage">Vintage</button>
+                    </div>
+                    <button type="button" class="booth-shutter" id="btn-shutter" aria-label="Take photo" disabled>
+                      <span class="booth-shutter-ring"></span>
+                      <span class="booth-shutter-label" id="shutter-label">Take photo 1/4</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tool-pane">
+                <div class="pane-header">
+                  <span>Your shots</span>
+                  <span class="pane-badge" id="shots-badge">0 / 4</span>
+                </div>
+                <div class="pane-content">
+                  <div class="thumb-rail" id="thumb-rail" aria-live="polite"></div>
+                  <p class="form-helper">Tap a shot to retake it. Drag to reorder.</p>
+                  <div class="booth-step-actions">
+                    <button type="button" class="btn-toolbar-sm" id="btn-back-layout">
+                      <iconify-icon icon="lucide:arrow-left" width="14" height="14"></iconify-icon><span>Layout</span>
+                    </button>
+                    <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-continue" disabled>
+                      <span>Customize strip</span><iconify-icon icon="lucide:arrow-right" width="14" height="14"></iconify-icon>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ═══ STEP 3 · CUSTOMIZE ═══ -->
+          <section class="booth-step" id="step-customize" hidden aria-labelledby="custom-heading">
+            <div class="split-pane-grid">
+              <div class="tool-pane">
+                <div class="pane-header">
+                  <span id="custom-heading">Preview</span>
+                  <span class="pane-badge" id="preview-badge">2 × 6 in</span>
+                </div>
+                <div class="pane-content booth-preview-wrap">
+                  <canvas id="strip-canvas" class="booth-strip" aria-label="Photo strip preview. Drag stickers to move them." tabindex="0"></canvas>
+                  <p class="form-helper" id="sticker-hint">Drag stickers to move · tap to select</p>
+                </div>
+              </div>
+
+              <div class="tool-pane">
+                <div class="pane-header">
+                  <span>Customize</span>
+                  <button type="button" class="btn-toolbar-sm" id="btn-back-shoot">
+                    <iconify-icon icon="lucide:camera" width="14" height="14"></iconify-icon><span>Retake photos</span>
+                  </button>
+                </div>
+                <div class="pane-content booth-controls">
+
+                  <div class="form-group">
+                    <span class="form-label">Frame</span>
+                    <div class="swatch-grid" id="frame-swatches" role="radiogroup" aria-label="Frame colour"></div>
+                    <div class="range-slider-wrap">
+                      <label class="form-helper" for="frame-color">Custom</label>
+                      <input type="color" id="frame-color" class="color-input-clean" value="#ffffff" aria-label="Custom frame colour">
+                      <label class="form-helper" for="corner-radius">Corners</label>
+                      <input type="range" id="corner-radius" class="range-slider-clean" min="0" max="40" value="8" aria-label="Photo corner radius">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <span class="form-label">Stickers <span class="form-label-desc">tap a pack to scatter · tap again to shuffle</span></span>
+                    <div class="booth-packs" id="sticker-packs" role="group" aria-label="Sticker packs"></div>
+                    <div class="range-slider-wrap">
+                      <label class="form-helper" for="sticker-size">Size</label>
+                      <input type="range" id="sticker-size" class="range-slider-clean" min="5" max="22" value="10" disabled aria-label="Selected sticker size">
+                      <button type="button" class="btn-toolbar-sm" id="btn-remove-sticker" disabled>
+                        <iconify-icon icon="lucide:x" width="14" height="14"></iconify-icon><span>Remove</span>
+                      </button>
+                      <button type="button" class="btn-toolbar-sm" id="btn-clear-stickers" disabled>
+                        <iconify-icon icon="lucide:eraser" width="14" height="14"></iconify-icon><span>Clear all</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <span class="form-label">Logo <span class="form-label-desc">PNG / SVG, shown in the footer</span></span>
+                    <div class="range-slider-wrap">
+                      <label class="btn-toolbar-sm booth-file-btn" for="logo-input">
+                        <iconify-icon icon="lucide:image-plus" width="14" height="14"></iconify-icon><span id="logo-btn-label">Add logo</span>
+                        <input type="file" id="logo-input" accept="image/*" class="visually-hidden">
+                      </label>
+                      <button type="button" class="btn-toolbar-sm" id="btn-remove-logo" hidden>
+                        <iconify-icon icon="lucide:x" width="14" height="14"></iconify-icon><span>Remove</span>
+                      </button>
+                      <label class="form-helper" for="logo-size">Size</label>
+                      <input type="range" id="logo-size" class="range-slider-clean" min="20" max="80" value="45" disabled aria-label="Logo size">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="caption-text">Caption</label>
+                    <div class="segmented-group segmented-group-pill" id="seg-caption-preset" role="group" aria-label="Caption preset">
+                      <button type="button" class="seg-pill active" data-value="custom">Custom</button>
+                      <button type="button" class="seg-pill" data-value="date">Today's date</button>
+                      <button type="button" class="seg-pill" data-value="datetime">Date &amp; time</button>
+                    </div>
+                    <input type="text" id="caption-text" class="input-clean" maxlength="60" placeholder="e.g. Priya's birthday · Goa trip · 2026" autocomplete="off">
+                    <div class="range-slider-wrap">
+                      <div class="segmented-group" id="seg-caption-font" role="group" aria-label="Caption font">
+                        <button type="button" class="seg-pill active" data-value="sans">Sans</button>
+                        <button type="button" class="seg-pill" data-value="serif">Serif</button>
+                        <button type="button" class="seg-pill" data-value="hand">Hand</button>
+                      </div>
+                      <label class="form-helper" for="caption-color">Colour</label>
+                      <input type="color" id="caption-color" class="color-input-clean" value="#222222" aria-label="Caption colour">
+                      <div class="control-item">
+                        <input type="checkbox" id="caption-auto" checked>
+                        <label for="caption-auto">Auto</label>
+                      </div>
+                    </div>
+                    <div class="control-item">
+                      <input type="checkbox" id="brand-toggle">
+                      <label for="brand-toggle">Add a small “toolity.in” credit line</label>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 2c. Settings — closed by default -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Camera options</span>
+                <span class="pane-badge" id="settings-summary">3 s countdown · auto-advance · mirrored</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item">
+                <label for="opt-countdown">Countdown</label>
+                <select id="opt-countdown" class="select-clean">
+                  <option value="3" selected>3 seconds</option>
+                  <option value="5">5 seconds</option>
+                  <option value="10">10 seconds</option>
+                  <option value="0">None</option>
+                </select>
+              </div>
+              <div class="control-item">
+                <label for="opt-res">Camera quality</label>
+                <select id="opt-res" class="select-clean">
+                  <option value="720" selected>HD (1280×720)</option>
+                  <option value="1080">Full HD (1920×1080)</option>
+                </select>
+              </div>
+              <div class="control-item">
+                <input type="checkbox" id="opt-auto" checked>
+                <label for="opt-auto">Auto-advance to the next shot</label>
+              </div>
+              <div class="control-item">
+                <input type="checkbox" id="opt-mirror" checked>
+                <label for="opt-mirror">Mirror preview (selfie style)</label>
+              </div>
+              <div class="control-item">
+                <input type="checkbox" id="opt-sound" checked>
+                <label for="opt-sound">Shutter sound</label>
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+        <!-- ═══════════ 3. GUIDE ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Make a Photo Strip in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Pick a layout</h3>
+              <p class="step-desc">Choose a classic 2×6 strip (2, 3 or 4 photos) or a 4×6 grid. Use your camera, or switch to Upload to use photos you already have.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Shoot on the countdown</h3>
+              <p class="step-desc">Press the shutter once — the booth counts down, flashes and moves to the next frame by itself. Pick a filter before you start; tap any shot to retake it.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Decorate and download</h3>
+              <p class="step-desc">Set the frame colour, drop in a sticker pack, add your logo and a caption or today's date, then download a 300 dpi PNG or JPG ready to print.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 4. REFERENCE ═══════════ -->
+        <section class="reference-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">Reference</span>
+            <h2 class="section-heading-sm">Layouts &amp; Print Sizes</h2>
+          </div>
+          <div class="formats-table-card">
+            <table class="formats-table">
+              <thead><tr><th>Layout</th><th>Photos</th><th>Print size</th><th>Export</th></tr></thead>
+              <tbody>
+                <tr><td><code>Strip · 3</code></td><td>3, stacked</td><td>2 × 6 in</td><td>600 × 1800 px</td></tr>
+                <tr><td><code>Strip · 4</code></td><td>4, stacked</td><td>2 × 6 in</td><td>600 × 1800 px</td></tr>
+                <tr><td><code>Duo · 2</code></td><td>2, portrait</td><td>2 × 6 in</td><td>600 × 1800 px</td></tr>
+                <tr><td><code>Grid · 4</code></td><td>2 × 2</td><td>4 × 6 in</td><td>1200 × 1800 px</td></tr>
+                <tr><td><code>Big · 6</code></td><td>2 × 3</td><td>4 × 6 in</td><td>1200 × 1800 px</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Photo Booth — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Are my photos uploaded anywhere?</summary>
+              <p>No. The camera feed, every shot and the finished strip exist only in your browser's memory. The page makes no network requests with your images; closing the tab discards everything.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What size are the downloaded strips?</summary>
+              <p>Strips export at 300 dpi print size: 2×6 inch layouts are 600×1800 px and 4×6 inch layouts are 1200×1800 px, as PNG (lossless) or JPG (smaller).</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can I use it without a webcam?</summary>
+              <p>Yes. Switch the source to <strong>Upload</strong> on the layout step and pick photos from your device; they are cropped to the layout and go through the same customisation and download steps.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why does the browser ask for camera permission every time?</summary>
+              <p>Browsers only remember camera permission on secure (https) sites and when you choose <em>Allow</em> rather than <em>Allow once</em>. On iPhone, Safari asks on every visit by design; the booth also stops the camera as soon as you leave the shooting step.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How do I move or remove a sticker?</summary>
+              <p>Drag any sticker on the preview. Tap a sticker to select it, then use the size slider or <strong>Remove</strong>; <strong>Clear all</strong> removes the whole pack. Tapping a pack again re-scatters it in new positions.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="labs"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=2.4"></script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="/labs/photo-booth/photo-booth.js?v=1.0"></script>
+</body>
+</html>

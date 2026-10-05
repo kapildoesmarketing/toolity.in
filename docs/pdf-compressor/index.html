@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online PDF Compressor | Toolity Docs</title>
+  <link rel="canonical" href="https://toolity.in/docs/pdf-compressor/">
+  <meta name="description" content="Free online PDF compressor: reduce PDF size losslessly (keeps text and links) or with maximum compression for scans by re-rendering pages at a chosen DPI and JPEG quality. Before/after sizes, processed entirely in your browser — documents never leave your device.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online PDF Compressor | Toolity Docs">
+  <meta property="og:description" content="Free online PDF compressor: reduce PDF size losslessly (keeps text and links) or with maximum compression for scans by re-rendering pages at a chosen DPI and JPEG quality. Before/after sizes, processed entirely in your browser — documents never leave your device.">
+  <meta property="og:url" content="https://toolity.in/docs/pdf-compressor/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=2.9" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=2.9">
+  <link rel="stylesheet" href="/styles/tools/pdf-compressor.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "PDF Compressor",
+        "url": "https://toolity.in/docs/pdf-compressor/",
+        "description": "Free online PDF compressor: reduce PDF size losslessly (keeps text and links) or with maximum compression for scans by re-rendering pages at a chosen DPI and JPEG quality. Before/after sizes, processed entirely in your browser — documents never leave your device.",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Docs", "item": "https://toolity.in/docs/" },
+          { "@type": "ListItem", "position": 3, "name": "PDF Compressor", "item": "https://toolity.in/docs/pdf-compressor/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Why are there two modes?", "acceptedAnswer": { "@type": "Answer", "text": "PDFs are containers: a text PDF is already tiny and only benefits from structural clean-up, while a scanned PDF is a stack of large images that only shrink if they are re-encoded. Keep text is safe for everything; Maximum is for scans and image-heavy files where you can accept flattened pages." } },
+          { "@type": "Question", "name": "Does Maximum mode remove the text layer?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Every page is rendered to a JPEG, so text can no longer be selected, searched or read by screen readers, and links stop working. Use Keep text if any of that matters." } },
+          { "@type": "Question", "name": "Why did Keep text barely change the size?", "acceptedAnswer": { "@type": "Answer", "text": "Because the file was already well-formed and the images in it were already compressed. Only Maximum mode can shrink embedded images — try it with 110 DPI and quality 70." } },
+          { "@type": "Question", "name": "Is my PDF uploaded anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. The document is parsed by pdf-lib and rendered by PDF.js (the same engine Firefox uses) inside your browser. Nothing is transmitted or stored." } },
+          { "@type": "Question", "name": "Are password-protected PDFs supported?", "acceptedAnswer": { "@type": "Answer", "text": "Encrypted PDFs that open without a password are processed; Maximum mode drops the encryption. PDFs that need a password to open are refused — remove the password first." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/docs/" class="breadcrumb-link">Docs</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">PDF Compressor</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Utilities</span>
+            <h1 class="page-title">PDF Compressor</h1>
+            <p class="page-desc">Shrink PDFs two ways: a lossless clean-up that keeps text selectable, or maximum compression that re-renders scanned pages — both entirely in your browser.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" data-split="40/60" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge" id="result-badge">Drop a file to begin</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset" aria-label="Reset">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result summary" aria-label="Copy result summary" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download compressed file" aria-label="Download compressed file" disabled>
+                <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                <span>Download</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Original</span>
+                <span class="pane-badge" id="source-badge">No file loaded</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content pane-content-between">
+                <div class="media-canvas-viewport">
+                  <div id="dropzone" class="video-dropzone" tabindex="0" role="button" aria-label="Drop PDF here or click to browse">
+                    <input type="file" id="file-input" accept="application/pdf, .pdf">
+                    <div class="video-drop-icon">
+                      <iconify-icon icon="lucide:upload-cloud" width="22" height="22"></iconify-icon>
+                    </div>
+                    <div class="video-drop-title">Drop PDF here or click to browse</div>
+                    <div class="video-drop-subtitle">Any PDF — up to 100 MB</div>
+                  </div>
+                  <canvas id="source-canvas" class="pdc-page" hidden aria-label="First page of original"></canvas>
+                </div>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Compressed</span>
+                <span class="pane-badge" id="output-badge">Awaiting file</span>
+              </div>
+              <div class="pane-content pane-content-between">
+                <div class="media-canvas-viewport">
+                  <div id="output-empty" class="media-empty-placeholder">
+                    <iconify-icon icon="lucide:file-text" width="32" height="32"></iconify-icon>
+                    <p>The compressed PDF's first page will appear here</p>
+                  </div>
+                  <canvas id="output-canvas" class="pdc-page" hidden aria-label="First page of compressed PDF"></canvas>
+                </div>
+                <div>
+                  <button type="button" id="btn-compress" class="btn-toolbar-sm btn-brand-sm btn-primary-action" disabled>
+                    <iconify-icon icon="lucide:minimize-2" width="16" height="16"></iconify-icon>
+                    <span id="btn-compress-label">Compress PDF</span>
+                  </button>
+                  <div class="slim-progress-bar" id="progress-bar">
+                    <div class="slim-progress-fill" id="progress-fill"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">Keep text (lossless)</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item">
+                <label for="opt-mode">Mode</label>
+                <select id="opt-mode" class="select-clean">
+                  <option value="keep" selected>Keep text · lossless</option>
+                  <option value="flatten">Maximum · re-render pages</option>
+                </select>
+              </div>
+              <div class="control-item pdc-flatten-only" hidden>
+                <label for="opt-dpi">Resolution</label>
+                <select id="opt-dpi" class="select-clean">
+                  <option value="72">72 DPI · screen</option>
+                  <option value="110" selected>110 DPI · balanced</option>
+                  <option value="150">150 DPI · print</option>
+                </select>
+              </div>
+              <div class="control-item pdc-flatten-only" hidden>
+                <label for="opt-quality">JPEG quality</label>
+                <input type="range" id="opt-quality" class="range-slider-clean pdc-range" min="50" max="90" step="5" value="70" aria-label="JPEG quality">
+                <span class="range-val-badge" id="opt-quality-val">70</span>
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Compress a PDF in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Drop a PDF</h3>
+              <p class="step-desc">Drag a PDF onto the left pane. The page count and size appear in the header and the first page is previewed.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Choose a Mode</h3>
+              <p class="step-desc"><strong>Keep text</strong> rewrites the file structure losslessly — text, links and search stay intact; savings are modest. <strong>Maximum</strong> re-renders every page as a JPEG at the DPI and quality you choose — ideal for scans, where it routinely saves 70–90%.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Compress &amp; Download</h3>
+              <p class="step-desc">Click Compress, watch per-page progress, compare the first page and the sizes, then download. If the result would be larger, the original is kept and you are told.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 4. REFERENCE ═══════════ -->
+        <section class="reference-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">Reference</span>
+            <h2 class="section-heading-sm">Which Mode for Which PDF?</h2>
+          </div>
+          <div class="formats-table-card">
+            <table class="formats-table">
+              <thead><tr><th>PDF type</th><th>Mode</th><th>Typical saving</th><th>What changes</th></tr></thead>
+              <tbody>
+                <tr><td>Exported from Word / Docs, mostly text</td><td>Keep text</td><td><code>5–25%</code></td><td>Nothing visible; object streams, duplicate objects and metadata are tidied</td></tr>
+                <tr><td>Scanned pages, photos of documents</td><td>Maximum · 110 DPI · 70</td><td><code>70–90%</code></td><td>Pages become images; still perfectly readable on screen</td></tr>
+                <tr><td>Slides / brochures with big images</td><td>Maximum · 110 DPI · 75</td><td><code>50–80%</code></td><td>Text becomes non-selectable; fine for sharing, not for editing</td></tr>
+                <tr><td>Needs printing</td><td>Maximum · 150 DPI · 80</td><td><code>40–70%</code></td><td>Sharp on paper at A4 / Letter</td></tr>
+                <tr><td>Already optimised (small per page)</td><td>Keep text</td><td><code>0%</code></td><td>Tool detects no gain and keeps the original</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">PDF Compressor — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Why are there two modes?</summary>
+              <p>PDFs are containers: a text PDF is already tiny and only benefits from structural clean-up, while a scanned PDF is a stack of large images that only shrink if they are re-encoded. Keep text is safe for everything; Maximum is for scans and image-heavy files where you can accept flattened pages.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Does Maximum mode remove the text layer?</summary>
+              <p>Yes. Every page is rendered to a JPEG, so text can no longer be selected, searched or read by screen readers, and links stop working. Use Keep text if any of that matters.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why did Keep text barely change the size?</summary>
+              <p>Because the file was already well-formed and the images in it were already compressed. Only Maximum mode can shrink embedded images — try it with 110 DPI and quality 70.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is my PDF uploaded anywhere?</summary>
+              <p>No. The document is parsed by pdf-lib and rendered by PDF.js (the same engine Firefox uses) inside your browser. Nothing is transmitted or stored.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Are password-protected PDFs supported?</summary>
+              <p>Encrypted PDFs that open without a password are processed; Maximum mode drops the encryption. PDFs that need a password to open are refused — remove the password first.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="docs"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=2.4"></script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js" defer></script>
+  <script src="/docs/pdf-compressor/pdf-compressor.js?v=1.0"></script>
+</body>
+</html>

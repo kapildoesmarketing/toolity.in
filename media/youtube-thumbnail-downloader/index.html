@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online YouTube Thumbnail Downloader | Toolity Media</title>
+  <link rel="canonical" href="https://toolity.in/media/youtube-thumbnail-downloader/">
+  <meta name="description" content="Free YouTube Thumbnail Downloader: Extract, preview, and download HD (1080p, 720p), HQ (480p), and SD thumbnails from any YouTube video or Shorts link in full quality. 100% free and client-side.">
+  <meta name="keywords" content="youtube thumbnail downloader, download youtube thumbnail, get youtube thumbnail, youtube shorts thumbnail, hd thumbnail download, youtube cover image, 1080p youtube thumbnail">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online YouTube Thumbnail Downloader | Toolity Media">
+  <meta property="og:description" content="Extract and download ultra-clear HD thumbnails from any YouTube video or Shorts link directly in your browser.">
+  <meta property="og:url" content="https://toolity.in/media/youtube-thumbnail-downloader/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=2.9" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=2.9">
+  <link rel="stylesheet" href="/styles/tools/youtube-thumbnail-downloader.css?v=1.0">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "YouTube Thumbnail Downloader",
+        "url": "https://toolity.in/media/youtube-thumbnail-downloader/",
+        "description": "Extract and download HD, HQ and SD thumbnails from any YouTube video or Shorts link directly in your browser.",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Media", "item": "https://toolity.in/media/" },
+          { "@type": "ListItem", "position": 3, "name": "YouTube Thumbnail Downloader", "item": "https://toolity.in/media/youtube-thumbnail-downloader/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Is downloading a YouTube thumbnail legal?", "acceptedAnswer": { "@type": "Answer", "text": "Thumbnails are publicly served by YouTube's image CDN, and this tool simply shows you that public URL. The image itself remains the copyright of the channel owner — use it for personal reference, previews or with permission, not for re-uploading as your own." } },
+          { "@type": "Question", "name": "Why is HD (1080p) not available for some videos?", "acceptedAnswer": { "@type": "Answer", "text": "YouTube only generates maxresdefault.jpg when the uploader provided a high-resolution custom thumbnail. Older, auto-generated or Shorts thumbnails often stop at 480p, so the tool falls back to HQ automatically." } },
+          { "@type": "Question", "name": "Which YouTube link formats are supported?", "acceptedAnswer": { "@type": "Answer", "text": "Standard watch?v= links, youtu.be short links, /shorts/ links, /embed/ links and raw 11-character video IDs all work." } },
+          { "@type": "Question", "name": "Does this tool go through a Toolity server?", "acceptedAnswer": { "@type": "Answer", "text": "No. The video ID is parsed in your browser and the preview loads straight from img.youtube.com. Only the Download button may route through a public image proxy to work around browser CORS limits — Toolity never sees or stores the image." } },
+          { "@type": "Question", "name": "Can I download thumbnails for private or unlisted videos?", "acceptedAnswer": { "@type": "Answer", "text": "Unlisted videos usually work because their thumbnails are still public. Private videos do not expose thumbnails on the CDN, so nothing can be fetched." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- 1. HERO -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/media/" class="breadcrumb-link">Media</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">YouTube Thumbnail Downloader</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Webmaster Tool</span>
+            <h1 class="page-title">YouTube Thumbnail Downloader</h1>
+            <p class="page-desc">Extract, preview and download HD (1080p/720p), HQ (480p) and SD thumbnails from any YouTube video or Shorts link — 100% in your browser.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. WORKSPACE -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" id="tool-card">
+
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge" id="status-badge">Waiting for URL</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy thumbnail image URL" aria-label="Copy thumbnail image URL" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy Link</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download thumbnail image" aria-label="Download thumbnail image" disabled>
+                <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                <span>Download</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-open" title="Open raw image in a new tab" aria-label="Open raw image in a new tab" disabled>
+                <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
+                <span>Open</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Video Source &amp; Quality</span>
+                <span class="pane-badge" id="input-badge">—</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span>That doesn't look like a YouTube link or video ID.</span>
+              </div>
+              <div class="pane-content pane-content-tall">
+
+                <div class="form-group">
+                  <label class="form-label" for="yt-url-input">
+                    <span>YouTube Video / Shorts Link <span class="form-required">*</span></span>
+                    <button type="button" class="btn-sample-chip" id="btn-paste" title="Paste from clipboard">
+                      <iconify-icon icon="lucide:clipboard" width="12" height="12"></iconify-icon>
+                      <span>Paste</span>
+                    </button>
+                  </label>
+                  <div class="url-input-container">
+                    <input type="text" id="yt-url-input" class="input-clean" placeholder="e.g. https://youtu.be/… or watch?v=…" spellcheck="false" autocomplete="off">
+                    <button type="button" id="btn-clear-url" class="btn-input-clear" title="Clear" aria-label="Clear link field" hidden>
+                      <iconify-icon icon="lucide:x" width="15" height="15"></iconify-icon>
+                    </button>
+                  </div>
+                  <div class="sample-chips-row">
+                    <span class="sample-label">Try sample:</span>
+                    <button type="button" class="btn-sample-chip sample-chip" data-url="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Never Gonna Give You Up</button>
+                    <button type="button" class="btn-sample-chip sample-chip" data-url="https://www.youtube.com/shorts/30G2H3bYlHQ">Shorts Sample</button>
+                  </div>
+                </div>
+
+                <div class="video-info-deck">
+                  <div class="video-id-display">
+                    <span>Video ID:</span>
+                    <span id="video-id-text" class="video-id-val">None</span>
+                  </div>
+                  <span id="video-type-text">Paste a YouTube link above</span>
+                </div>
+
+                <div class="form-group quality-group">
+                  <div class="form-label">
+                    <span>Available Resolutions</span>
+                    <span class="form-label-desc">Select image quality</span>
+                  </div>
+                  <div class="quality-grid" id="quality-grid" role="group" aria-label="Thumbnail quality">
+                    <button type="button" class="quality-card-btn active" data-quality="maxres">
+                      <div class="quality-top-row">
+                        <span class="quality-title">HD (1080p / 720p)</span>
+                        <span class="quality-tag-badge">Maxres</span>
+                      </div>
+                      <span class="quality-dimensions">1280 × 720 or 1920 × 1080</span>
+                    </button>
+                    <button type="button" class="quality-card-btn" data-quality="hq">
+                      <div class="quality-top-row">
+                        <span class="quality-title">High Quality (480p)</span>
+                        <span class="quality-tag-badge subtle">HQ</span>
+                      </div>
+                      <span class="quality-dimensions">480 × 360 px</span>
+                    </button>
+                    <button type="button" class="quality-card-btn" data-quality="sd">
+                      <div class="quality-top-row">
+                        <span class="quality-title">Standard (SD)</span>
+                        <span class="quality-tag-badge subtle">SD</span>
+                      </div>
+                      <span class="quality-dimensions">640 × 480 px</span>
+                    </button>
+                    <button type="button" class="quality-card-btn" data-quality="mq">
+                      <div class="quality-top-row">
+                        <span class="quality-title">Medium Quality</span>
+                        <span class="quality-tag-badge subtle">MQ</span>
+                      </div>
+                      <span class="quality-dimensions">320 × 180 px</span>
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Thumbnail Preview</span>
+                <span class="pane-badge" id="output-badge">—</span>
+              </div>
+              <div class="pane-content pane-content-tall">
+                <div class="preview-viewport-box preview-stage empty" id="preview-viewport">
+                  <div class="pane-empty" id="output-empty">
+                    <iconify-icon icon="lucide:video"></iconify-icon>
+                    <span>Paste any YouTube video or Shorts link to preview its artwork</span>
+                  </div>
+                  <img id="thumbnail-preview-img" class="preview-thumbnail-img" alt="YouTube thumbnail preview" width="640" height="360" hidden>
+                  <div id="badge-overlay" class="preview-floating-pill">
+                    <iconify-icon icon="lucide:check-circle" width="13" height="13"></iconify-icon>
+                    <span id="overlay-text">HD 1080p</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- 3. GUIDE -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Download YouTube Thumbnails</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Paste YouTube Link</h3>
+              <p class="step-desc">Copy any video or Shorts URL from your browser or the YouTube app and paste it into the field above.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Select Quality Tier</h3>
+              <p class="step-desc">Choose HD Maxres (1080p), High Quality (480p), Standard (SD) or Medium (MQ). If HD doesn't exist we fall back to HQ automatically.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Download or Copy</h3>
+              <p class="step-desc">Click Download to save the JPG, Copy Link for the CDN URL, or Open to view it raw. Tip: <kbd>Ctrl/⌘+Enter</kbd> downloads, <kbd>Esc</kbd> resets.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. REFERENCE -->
+        <section class="reference-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">Reference</span>
+            <h2 class="section-heading-sm">Supported YouTube Link Formats</h2>
+          </div>
+          <div class="formats-table-card">
+            <table class="formats-table">
+              <thead>
+                <tr><th>Format Type</th><th>Example Input</th><th>Resolution Available</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><strong>Standard Desktop Watch</strong></td><td><code>https://www.youtube.com/watch?v=dQw4w9WgXcQ</code></td><td>Up to 1080p (HD Maxres)</td></tr>
+                <tr><td><strong>Shortened Link</strong></td><td><code>https://youtu.be/dQw4w9WgXcQ</code></td><td>Up to 1080p (HD Maxres)</td></tr>
+                <tr><td><strong>YouTube Shorts</strong></td><td><code>https://www.youtube.com/shorts/30G2H3bYlHQ</code></td><td>High Quality (HQ 480p)</td></tr>
+                <tr><td><strong>Embed &amp; Legacy Links</strong></td><td><code>https://www.youtube.com/embed/dQw4w9WgXcQ</code></td><td>Up to 1080p (HD Maxres)</td></tr>
+                <tr><td><strong>Raw 11-Digit Video ID</strong></td><td><code>dQw4w9WgXcQ</code></td><td>All Qualities</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 5. FAQ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">YouTube Thumbnail Downloader — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Is downloading a YouTube thumbnail legal?</summary>
+              <p>Thumbnails are publicly served by YouTube's image CDN, and this tool simply shows you that public URL. The image itself remains the copyright of the channel owner — use it for personal reference, previews or with permission, not for re-uploading as your own.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why is HD (1080p) not available for some videos?</summary>
+              <p>YouTube only generates <code>maxresdefault.jpg</code> when the uploader provided a high-resolution custom thumbnail. Older, auto-generated or Shorts thumbnails often stop at 480p, so the tool falls back to HQ automatically.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Which YouTube link formats are supported?</summary>
+              <p>Standard <code>watch?v=</code> links, <code>youtu.be</code> short links, <code>/shorts/</code> links, <code>/embed/</code> links and raw 11-character video IDs all work.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Does this tool go through a Toolity server?</summary>
+              <p>No. The video ID is parsed in your browser and the preview loads straight from <code>img.youtube.com</code>. Only the Download button may route through a public image proxy to work around browser CORS limits — Toolity never sees or stores the image.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can I download thumbnails for private or unlisted videos?</summary>
+              <p>Unlisted videos usually work because their thumbnails are still public. Private videos do not expose thumbnails on the CDN, so nothing can be fetched.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- 6. CTA -->
+        <div data-include="/components/tool-cta.html" data-category="media"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=2.4"></script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="/media/youtube-thumbnail-downloader/youtube-thumbnail-downloader.js?v=1.0"></script>
+</body>
+
+</html>

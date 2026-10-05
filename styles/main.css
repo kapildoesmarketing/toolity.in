@@ -3858,3 +3858,8 @@ body {
 .pdf-result-badge { font-weight: 600; }
 .pdf-result-badge.is-win { color: #15803d; background: rgba(22, 163, 74, 0.1); }
 [data-theme="dark"] .pdf-result-badge.is-win { color: #4ade80; }
+
+/* ─── Category pages: section headings between tool grids ─── */
+.tools-section-title { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.01em; color: var(--text-primary); margin: 0 0 1.25rem; }
+.tools-grid + .tools-section-title { margin-top: 3rem; }
+.section-wrapper.category-tools { border-top: none; padding-top: 3.5rem; }

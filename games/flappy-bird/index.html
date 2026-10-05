@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Flappy Bird | Toolity Games</title>
+  <link rel="canonical" href="https://toolity.in/games/flappy-bird/">
+  <meta name="description" content="Play Flappy Bird online for free: tap, click or press Space to flap through the pipes. Three difficulties, best score saved on your device. No download, no account — runs in your browser.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Flappy Bird | Toolity Games">
+  <meta property="og:description" content="Play Flappy Bird online for free: tap, click or press Space to flap through the pipes. Three difficulties, best score saved on your device. No download, no account — runs in your browser.">
+  <meta property="og:url" content="https://toolity.in/games/flappy-bird/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=2.9" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=2.9">
+  <link rel="stylesheet" href="/styles/tools/flappy-bird.css?v=1.0">
+
+  <!-- Structured data: VideoGame + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": ["VideoGame", "WebApplication"],
+        "name": "Flappy Bird",
+        "url": "https://toolity.in/games/flappy-bird/",
+        "description": "Play Flappy Bird online for free: tap, click or press Space to flap through the pipes. Three difficulties, best score saved on your device. No download, no account — runs in your browser.",
+        "genre": "Arcade",
+        "gamePlatform": "Web browser",
+        "numberOfPlayers": { "@type": "QuantitativeValue", "minValue": 1, "maxValue": 1 },
+        "applicationCategory": "GameApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Games", "item": "https://toolity.in/games/" },
+          { "@type": "ListItem", "position": 3, "name": "Flappy Bird", "item": "https://toolity.in/games/flappy-bird/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "How do I flap?", "acceptedAnswer": { "@type": "Answer", "text": "Press Space or ↑, click the board with a mouse, or tap it on a touchscreen. Short, regular taps are easier to control than long gaps between flaps." } },
+          { "@type": "Question", "name": "Why does the bird feel heavy?", "acceptedAnswer": { "@type": "Answer", "text": "Gravity pulls constantly while each flap only sets a fixed upward speed, exactly like the original. Flap a little earlier than feels natural and aim for the lower half of each gap." } },
+          { "@type": "Question", "name": "What changes between difficulties?", "acceptedAnswer": { "@type": "Answer", "text": "Easy widens the gap and slows the pipes; Hard narrows the gap and speeds them up. Pipe heights are random on all three." } },
+          { "@type": "Question", "name": "Where is my best score saved?", "acceptedAnswer": { "@type": "Answer", "text": "Only in your browser's localStorage under the key toolity_flappy, separately per difficulty. Nothing is sent anywhere; Reset or clearing site data removes it." } },
+          { "@type": "Question", "name": "Does it work on a phone?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — tap anywhere on the board to flap. The board is portrait, scales to your screen, and the game pauses by itself when you switch apps." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/games/" class="breadcrumb-link">Games</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Flappy Bird</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Fun</span>
+            <h1 class="page-title">Flappy Bird</h1>
+            <p class="page-desc">Tap, click or press Space to flap. Squeeze through the pipes, beat your best — three difficulties, nothing to install.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="single" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <div class="segmented-group segmented-group-pill" id="seg-diff" role="group" aria-label="Difficulty">
+                <button type="button" class="seg-pill" data-value="easy">Easy</button>
+                <button type="button" class="seg-pill active" data-value="normal">Normal</button>
+                <button type="button" class="seg-pill" data-value="hard">Hard</button>
+              </div>
+              <span class="pane-badge" id="best-badge" hidden></span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset the game and settings" aria-label="Reset the game and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-play" aria-label="Play">
+                <iconify-icon icon="lucide:play" width="14" height="14" id="play-icon"></iconify-icon>
+                <span id="play-label">Play</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Game pane -->
+          <div class="split-pane-grid">
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Pipes</span>
+                <span class="flappy-score" id="score" aria-live="polite"><b id="score-val">0</b><i>·</i><span class="flappy-best">best <b id="best-val">0</b></span></span>
+                <span id="status-badge" class="pane-badge">Ready</span>
+              </div>
+              <div class="pane-content flappy-bird-stage-wrap">
+                <div class="flappy-stage" id="stage">
+                  <canvas id="flappy-canvas" class="flappy-canvas" aria-label="Flappy Bird. Tap to flap."></canvas>
+                  <div class="flappy-overlay" id="overlay">
+                    <strong id="overlay-title">Flappy Bird</strong>
+                    <span id="overlay-text">Tap, click or press Space to flap</span>
+                  </div>
+                </div>
+                <p class="form-helper flappy-bird-hint" id="hint">Space, ↑ or click / tap to flap · P to pause</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Game options</span>
+                <span class="pane-badge" id="settings-summary">Normal · sound on</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item">
+                <label for="opt-theme">Time of day</label>
+                <select id="opt-theme" class="select-clean">
+                  <option value="day" selected>Day</option>
+                  <option value="night">Night</option>
+                </select>
+              </div>
+              <div class="control-item">
+                <input type="checkbox" id="opt-sound" checked>
+                <label for="opt-sound">Sound effects</label>
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+        <!-- ═══════════ 3. GUIDE ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Play Flappy Bird in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Flap to start</h3>
+              <p class="step-desc">Press Space or ↑, click, or tap the board. Every flap gives the bird a small upward push; gravity does the rest.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Thread the pipes</h3>
+              <p class="step-desc">Each pair of pipes has a gap — fly through it to score a point. Easy has wide gaps and slow pipes; Hard is tight and quick.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Beat your best</h3>
+              <p class="step-desc">Touching a pipe, the ground or the ceiling ends the run. Your best score per difficulty is stored on this device only.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 4. REFERENCE ═══════════ -->
+        <section class="reference-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">Reference</span>
+            <h2 class="section-heading-sm">Controls &amp; difficulty</h2>
+          </div>
+          <div class="formats-table-card">
+            <table class="formats-table">
+              <thead><tr><th>Setting</th><th>Easy</th><th>Normal</th><th>Hard</th></tr></thead>
+              <tbody>
+                <tr><td>Gap between pipes</td><td>Wide</td><td>Classic</td><td>Tight</td></tr>
+                <tr><td>Pipe speed</td><td>Slow</td><td>Classic</td><td>Fast</td></tr>
+                <tr><td>Flap</td><td><code>Space</code> · <code>↑</code> · click · tap</td><td></td><td></td></tr>
+                <tr><td>Pause / resume</td><td><code>P</code> or tap Play / Pause</td><td></td><td></td></tr>
+                <tr><td>Reset best &amp; settings</td><td><code>Esc</code> or tap Reset</td><td></td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Flappy Bird — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>How do I flap?</summary>
+              <p>Press <strong>Space</strong> or <strong>↑</strong>, click the board with a mouse, or tap it on a touchscreen. Short, regular taps are easier to control than long gaps between flaps.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why does the bird feel heavy?</summary>
+              <p>Gravity pulls constantly while each flap only sets a fixed upward speed, exactly like the original. Flap a little earlier than feels natural and aim for the lower half of each gap.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What changes between difficulties?</summary>
+              <p>Easy widens the gap and slows the pipes; Hard narrows the gap and speeds them up. Pipe heights are random on all three.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Where is my best score saved?</summary>
+              <p>Only in your browser's localStorage under the key <code>toolity_flappy</code>, separately per difficulty. Nothing is sent anywhere; Reset or clearing site data removes it.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Does it work on a phone?</summary>
+              <p>Yes — tap anywhere on the board to flap. The board is portrait, scales to your screen, and the game pauses by itself when you switch apps.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="games"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=2.4"></script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="/games/flappy-bird/flappy-bird.js?v=1.0"></script>
+</body>
+</html>

@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+  <title>Free Online Video Format Converter | Toolity Media</title>
+  <link rel="canonical" href="https://toolity.in/media/video-converter/">
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Video Format Converter | Toolity Media">
+  <meta property="og:description" content="Convert video between MP4, WebM and MOV or extract the audio track — in your browser, with trimming, resolution and frame-rate controls. Nothing is uploaded.">
+  <meta property="og:url" content="https://toolity.in/media/video-converter/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- SEO & Metadata -->
+  <meta name="description"
+    content="Free, fast, and 100% private Video Format Converter. Convert MP4, WebM, MOV, MKV, AVI, and audio formats directly in your browser. Features custom resolution scaling, framerate adjustments, clip trimming, and audio extraction with zero server uploads.">
+  <meta name="keywords"
+    content="video converter, video format converter, mp4 to webm, webm to mp4, mov to mp4, mkv to mp4, client-side video converter, free video converter, extract audio from video">
+  <meta name="author" content="Kapil Pidhwani">
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Iconify Icon Component -->
+    <!-- Preload Critical Assets -->
+  <link rel="preload" href="/styles/main.css?v=2.9" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=2.9">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Video Format Converter",
+        "url": "https://toolity.in/media/video-converter/",
+        "description": "Convert video between MP4, WebM and MOV or extract the audio track \u2014 in your browser, with trimming, resolution and frame-rate controls. Nothing is uploaded.",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Media", "item": "https://toolity.in/media/" },
+          { "@type": "ListItem", "position": 3, "name": "Video Format Converter", "item": "https://toolity.in/media/video-converter/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Is my video uploaded to a server?", "acceptedAnswer": { "@type": "Answer", "text": "No. Your browser plays the source file, re-draws each frame on a canvas and records it with the built-in MediaRecorder API. The whole pipeline runs on your device; the file never leaves it." } },
+          { "@type": "Question", "name": "Why does the output come out as WebM when I picked MP4 or MOV?", "acceptedAnswer": { "@type": "Answer", "text": "The browser decides which codecs it can record. Chrome, Edge and Safari can record H.264 MP4; Firefox can only record WebM. If MP4 isn't available the tool falls back to WebM so you still get a file \u2014 the output badge tells you the actual container." } },
+          { "@type": "Question", "name": "Is a MOV file really different from MP4 here?", "acceptedAnswer": { "@type": "Answer", "text": "Technically MOV and MP4 share the same underlying format (QuickTime/ISO BMFF). The tool records H.264 and names the file .mov, which is what Apple apps expect. If a program rejects it, rename the extension to .mp4." } },
+          { "@type": "Question", "name": "How long does conversion take?", "acceptedAnswer": { "@type": "Answer", "text": "Recording happens in real time, so a 30-second clip takes about 30 seconds at 1\u00d7 speed. Trim the clip or choose 1.5\u00d7/2\u00d7 playback speed to shorten the wait. Keep the tab in the foreground \u2014 browsers throttle background tabs and may stall the recording." } },
+          { "@type": "Question", "name": "Is quality preserved?", "acceptedAnswer": { "@type": "Answer", "text": "Not bit-for-bit. The frames are re-encoded at a fixed bitrate chosen for the output resolution, which is fine for sharing but is a second lossy generation. Keep 'Original' resolution and 'Auto' frame rate for the closest match to the source." } },
+          { "@type": "Question", "name": "What does 'Extract Audio' produce?", "acceptedAnswer": { "@type": "Answer", "text": "An audio-only file (WebM/Opus or M4A depending on the browser) containing the trimmed section's soundtrack, with no video frames. Choose 'Mute Track' instead if you want video without sound." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <!-- Main Tool Page Content -->
+  <main>
+    <!-- Page Hero Header -->
+    <section class="page-hero">
+      <div class="container">
+        <!-- Breadcrumbs Navigation -->
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/media/" class="breadcrumb-link">Media</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Video Converter</span>
+        </nav>
+
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Convertor Tool</span>
+            <h1 class="page-title">Video Format Converter</h1>
+            <p class="page-desc">
+              Convert video clips between MP4, WebM, MOV, MKV, and audio formats entirely in your browser. Customize resolutions, framerates, audio tracks, and clip boundaries with zero data tracking.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tool Main Workspace Area -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <!-- Unified Tool Workspace Card -->
+        <div class="tool-workspace-card" data-layout="split" id="tool-card">
+
+          <!-- 1. Actions Toolbar (Top-Right Universal Pattern) -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge">Processed on your device · nothing uploaded</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset-tool" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy-video" title="Copy video to clipboard" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download-video" title="Download converted video" disabled>
+                <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                <span>Download Video</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2. Dual Split-Pane Input & Output Grid (Minimalist Symmetrical Layout) -->
+          <div class="split-pane-grid">
+
+            <!-- Left: Video Source & Trimmer Pane -->
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Source Video</span>
+                <span class="pane-badge" id="video-meta-badge">No video loaded</span>
+              </div>
+
+              <div class="pane-content pane-content-between">
+                <!-- Media Viewport (280px) -->
+                <div class="media-canvas-viewport" id="video-viewport-frame">
+                  <!-- Drag & Drop Zone -->
+                  <div id="video-dropzone" class="video-dropzone">
+                    <input type="file" id="video-file-input" accept="video/mp4,video/webm,video/ogg,video/quicktime,video/x-matroska,video/x-msvideo">
+                    <div class="video-drop-icon">
+                      <iconify-icon icon="lucide:upload-cloud" width="22" height="22"></iconify-icon>
+                    </div>
+                    <div class="video-drop-title">Drop video here or click to browse</div>
+                    <div class="video-drop-subtitle">Supports MP4, WebM, MOV, MKV, AVI, and OGG</div>
+                  </div>
+
+                  <!-- Active Video Player -->
+                  <video id="source-video" class="source-video-player" playsinline preload="auto" controls></video>
+                </div>
+
+                <!-- Minimalist Scrubber Timeline Bar -->
+                <div class="minimal-trimmer-wrap" id="trimmer-wrap">
+                  <div class="minimal-trimmer-header">
+                    <span>Trim Clip Boundary</span>
+                    <div class="trimmer-timestamps">
+                      <span id="trim-start-val">00:00.0</span>
+                      <span>—</span>
+                      <span id="trim-end-val">00:00.0</span>
+                      <span id="trim-duration-badge" class="trim-duration-badge">(0.0s)</span>
+                    </div>
+                  </div>
+
+                  <div class="trim-sliders-row">
+                    <div class="trim-slider-line">
+                      <span class="trim-slider-tag">Start</span>
+                      <input type="range" id="trim-start-range" class="trim-range-slider" min="0" max="100" value="0" step="0.1" disabled>
+                    </div>
+                    <div class="trim-slider-line">
+                      <span class="trim-slider-tag">End</span>
+                      <input type="range" id="trim-end-range" class="trim-range-slider" min="0" max="100" value="100" step="0.1" disabled>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Converted Video Output Preview Pane -->
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Converted Output</span>
+                <span class="pane-badge" id="video-status-badge">Awaiting Video</span>
+              </div>
+
+              <div class="pane-content pane-content-between">
+                <!-- Media Viewport (280px) -->
+                <div class="media-canvas-viewport" id="output-viewport-frame">
+                  <!-- Empty Placeholder -->
+                  <div id="output-empty-placeholder" class="media-empty-placeholder">
+                    <iconify-icon icon="lucide:sparkles" width="32" height="32"></iconify-icon>
+                    <p>Converted video output will appear here</p>
+                  </div>
+                  <!-- Active Output Player -->
+                  <video id="output-video-player" class="source-video-player" playsinline controls></video>
+                </div>
+
+                <!-- Primary Convert Action Button -->
+                <div>
+                  <button type="button" id="btn-convert-video" class="btn-toolbar-sm btn-brand-sm btn-primary-action" disabled>
+                    <iconify-icon icon="lucide:play" width="16" height="16" id="btn-convert-icon"></iconify-icon>
+                    <span id="btn-convert-label">Convert Video</span>
+                  </button>
+                  <div class="slim-progress-bar" id="slim-progress-bar">
+                    <div class="slim-progress-fill" id="slim-progress-fill"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 3. Controls & Options inside Accordion (Closed by Default) -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="16" height="16"></iconify-icon>
+                <span>Conversion & Output Settings</span>
+                <span class="pane-badge" id="settings-summary-badge">(MP4 • 1080p • 60 FPS • Audio On)</span>
+              </div>
+              <iconify-icon icon="lucide:chevron-down" class="tool-settings-chevron" width="16" height="16"></iconify-icon>
+            </summary>
+
+            <div class="tool-settings-panel">
+              <div class="settings-sections-wrapper">
+                <div class="settings-section-card">
+                  <div class="settings-section-header">
+                    <span>1. Target Container, Resolution & Audio</span>
+                  </div>
+                  <div class="settings-row-wrap">
+                    <!-- Format Control -->
+                    <div class="form-group">
+                      <span class="form-label settings-label">Target Format</span>
+                      <div class="segmented-group segmented-group-pill" id="seg-format">
+                        <button type="button" class="seg-pill active" data-val="mp4">MP4</button>
+                        <button type="button" class="seg-pill" data-val="webm">WebM</button>
+                        <button type="button" class="seg-pill" data-val="mov">MOV</button>
+                        <button type="button" class="seg-pill" data-val="audio">Extract Audio</button>
+                      </div>
+                    </div>
+
+                    <!-- Resolution Scale Control -->
+                    <div class="form-group">
+                      <span class="form-label settings-label">Resolution</span>
+                      <div class="segmented-group segmented-group-pill" id="seg-scale">
+                        <button type="button" class="seg-pill active" data-val="original">Original</button>
+                        <button type="button" class="seg-pill" data-val="1080">1080p</button>
+                        <button type="button" class="seg-pill" data-val="720">720p</button>
+                        <button type="button" class="seg-pill" data-val="480">480p</button>
+                      </div>
+                    </div>
+
+                    <!-- Framerate Control -->
+                    <div class="form-group">
+                      <span class="form-label settings-label">Framerate (FPS)</span>
+                      <div class="segmented-group segmented-group-pill" id="seg-fps">
+                        <button type="button" class="seg-pill active" data-val="auto">Auto</button>
+                        <button type="button" class="seg-pill" data-val="60">60 fps</button>
+                        <button type="button" class="seg-pill" data-val="30">30 fps</button>
+                        <button type="button" class="seg-pill" data-val="24">24 fps</button>
+                      </div>
+                    </div>
+
+                    <!-- Audio Track Control -->
+                    <div class="form-group">
+                      <span class="form-label settings-label">Audio Track</span>
+                      <div class="segmented-group segmented-group-pill" id="seg-audio">
+                        <button type="button" class="seg-pill active" data-val="keep">Include Audio</button>
+                        <button type="button" class="seg-pill" data-val="mute">Mute Track</button>
+                      </div>
+                    </div>
+
+                    <!-- Speed Multiplier Control -->
+                    <div class="form-group">
+                      <span class="form-label settings-label">Playback Speed</span>
+                      <div class="segmented-group segmented-group-pill" id="seg-speed">
+                        <button type="button" class="seg-pill" data-val="0.5">0.5x</button>
+                        <button type="button" class="seg-pill active" data-val="1.0">1.0x</button>
+                        <button type="button" class="seg-pill" data-val="1.5">1.5x</button>
+                        <button type="button" class="seg-pill" data-val="2.0">2.0x</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </details>
+
+        </div>
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">Universal Video Transcoding in Your Browser</h2>
+          </div>
+
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Upload Video File</h3>
+              <p class="step-desc">
+                Drop your MP4, WebM, MOV, MKV, or AVI file into the workspace. The browser reads metadata and initializes the decoding pipeline.
+              </p>
+            </div>
+
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Choose Format & Resolution</h3>
+              <p class="step-desc">
+                Select your desired output container (MP4, WebM, MOV, or Audio), adjust resolution scaling (1080p, 720p), framerate, and clip boundaries.
+              </p>
+            </div>
+
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Transcode & Download</h3>
+              <p class="step-desc">
+                Click Convert to render the new stream in memory. Watch the preview in the output player and download directly to your device.
+              </p>
+            </div>
+          </div>
+        </section>
+
+                <!-- 5. FAQ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Video Format Converter — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Is my video uploaded to a server?</summary>
+              <p>No. Your browser plays the source file, re-draws each frame on a canvas and records it with the built-in MediaRecorder API. The whole pipeline runs on your device; the file never leaves it.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why does the output come out as WebM when I picked MP4 or MOV?</summary>
+              <p>The browser decides which codecs it can record. Chrome, Edge and Safari can record H.264 MP4; Firefox can only record WebM. If MP4 isn't available the tool falls back to WebM so you still get a file — the output badge tells you the actual container.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is a MOV file really different from MP4 here?</summary>
+              <p>Technically MOV and MP4 share the same underlying format (QuickTime/ISO BMFF). The tool records H.264 and names the file .mov, which is what Apple apps expect. If a program rejects it, rename the extension to .mp4.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How long does conversion take?</summary>
+              <p>Recording happens in real time, so a 30-second clip takes about 30 seconds at 1× speed. Trim the clip or choose 1.5×/2× playback speed to shorten the wait. Keep the tab in the foreground — browsers throttle background tabs and may stall the recording.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is quality preserved?</summary>
+              <p>Not bit-for-bit. The frames are re-encoded at a fixed bitrate chosen for the output resolution, which is fine for sharing but is a second lossy generation. Keep 'Original' resolution and 'Auto' frame rate for the closest match to the source.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What does 'Extract Audio' produce?</summary>
+              <p>An audio-only file (WebM/Opus or M4A depending on the browser) containing the trimmed section's soundtrack, with no video frames. Choose 'Mute Track' instead if you want video without sound.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- 6. CTA -->
+        <div data-include="/components/tool-cta.html" data-category="media"></div>
+
+      </div>
+    </section>
+  </main>
+  <div data-include="/components/footer.html"></div>
+  <script src="/scripts/main.js?v=2.4"></script>
+
+  <!-- Video Converter Logic (Designed by Kapil Pidhwani) -->
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="/media/video-converter/video-converter.js?v=1.0"></script>
+</body>
+
+</html>

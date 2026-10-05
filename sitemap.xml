@@ -3,7 +3,7 @@
   <!-- Homepage -->
   <url>
     <loc>https://toolity.in/</loc>
-    <lastmod>2026-10-04</lastmod>
+    <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -11,312 +11,300 @@
   <!-- Essential Platform & Legal Pages -->
   <url>
     <loc>https://toolity.in/about/</loc>
-    <lastmod>2026-10-04</lastmod>
+    <lastmod>2026-10-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://toolity.in/privacy/</loc>
-    <lastmod>2026-10-04</lastmod>
+    <lastmod>2026-10-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://toolity.in/terms/</loc>
-    <lastmod>2026-10-04</lastmod>
+    <lastmod>2026-10-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://toolity.in/credits/</loc>
-    <lastmod>2026-10-04</lastmod>
+    <lastmod>2026-10-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://toolity.in/media/</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://toolity.in/docs/</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://toolity.in/labs/</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://toolity.in/dev/</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://toolity.in/data/</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://toolity.in/games/</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
 
   <!-- Workspaces / Category Catalogs -->
   <url>
-    <loc>https://toolity.in/convertors/</loc>
-    <lastmod>2026-10-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://toolity.in/visuals/</loc>
-    <lastmod>2026-10-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://toolity.in/visuals/image-color-extractor/</loc>
+    <loc>https://toolity.in/media/image-color-extractor/</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://toolity.in/visuals/og-image-generator/</loc>
+    <loc>https://toolity.in/media/og-image-generator/</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://toolity.in/visuals/placeholder-image-generator/</loc>
+    <loc>https://toolity.in/media/placeholder-image-generator/</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://toolity.in/productivity/</loc>
-    <lastmod>2026-10-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://toolity.in/web/</loc>
-    <lastmod>2026-10-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://toolity.in/fun/</loc>
-    <lastmod>2026-10-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://toolity.in/development/</loc>
-    <lastmod>2026-10-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://toolity.in/utilities/</loc>
-    <lastmod>2026-10-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://toolity.in/experiments/</loc>
-    <lastmod>2026-10-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
   </url>
 
   <!-- Tool Applications: Convertors -->
   <url>
-    <loc>https://toolity.in/convertors/gif-to-video/</loc>
-    <lastmod>2026-10-04</lastmod>
+    <loc>https://toolity.in/media/gif-to-video/</loc>
+    <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://toolity.in/convertors/image-converter/</loc>
-    <lastmod>2026-10-04</lastmod>
+    <loc>https://toolity.in/media/image-converter/</loc>
+    <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://toolity.in/convertors/image-to-favicon/</loc>
-    <lastmod>2026-10-04</lastmod>
+    <loc>https://toolity.in/media/image-to-favicon/</loc>
+    <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://toolity.in/convertors/video-converter/</loc>
-    <lastmod>2026-10-04</lastmod>
+    <loc>https://toolity.in/media/video-converter/</loc>
+    <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://toolity.in/convertors/video-to-gif/</loc>
-    <lastmod>2026-10-04</lastmod>
+    <loc>https://toolity.in/media/video-to-gif/</loc>
+    <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
 
   <!-- Tool Applications: Web -->
   <url>
-    <loc>https://toolity.in/web/favicon-extractor/</loc>
-    <lastmod>2026-10-04</lastmod>
+    <loc>https://toolity.in/labs/favicon-extractor/</loc>
+    <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://toolity.in/web/url-parameter-separator/</loc>
-    <lastmod>2026-10-04</lastmod>
+    <loc>https://toolity.in/data/url-parameter-separator/</loc>
+    <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://toolity.in/web/youtube-thumbnail-downloader/</loc>
-    <lastmod>2026-10-04</lastmod>
+    <loc>https://toolity.in/media/youtube-thumbnail-downloader/</loc>
+    <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
 
   <!-- Tool Applications: Productivity -->
   <url>
-    <loc>https://toolity.in/productivity/online-notepad/</loc>
-    <lastmod>2026-10-04</lastmod>
+    <loc>https://toolity.in/docs/online-notepad/</loc>
+    <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
 
   <!-- Tool Applications: Development -->
   <url>
-    <loc>https://toolity.in/development/json-visualizer/</loc>
-    <lastmod>2026-10-04</lastmod>
+    <loc>https://toolity.in/dev/json-visualizer/</loc>
+    <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
 
   <!-- Tool Applications: Utilities -->
   <url>
-    <loc>https://toolity.in/utilities/audio-compressor/</loc>
+    <loc>https://toolity.in/media/audio-compressor/</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://toolity.in/utilities/gif-compressor/</loc>
+    <loc>https://toolity.in/media/gif-compressor/</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://toolity.in/utilities/image-compressor/</loc>
+    <loc>https://toolity.in/media/image-compressor/</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://toolity.in/utilities/pdf-compressor/</loc>
+    <loc>https://toolity.in/docs/pdf-compressor/</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://toolity.in/utilities/video-compressor/</loc>
+    <loc>https://toolity.in/media/video-compressor/</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://toolity.in/utilities/organise-pdf/</loc>
+    <loc>https://toolity.in/docs/organise-pdf/</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://toolity.in/utilities/pdf-merger/</loc>
+    <loc>https://toolity.in/docs/pdf-merger/</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://toolity.in/utilities/pdf-page-rotator/</loc>
+    <loc>https://toolity.in/docs/pdf-page-rotator/</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://toolity.in/utilities/pdf-splitter/</loc>
+    <loc>https://toolity.in/docs/pdf-splitter/</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://toolity.in/utilities/protect-pdf/</loc>
+    <loc>https://toolity.in/docs/protect-pdf/</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://toolity.in/utilities/redact-pdf/</loc>
+    <loc>https://toolity.in/docs/redact-pdf/</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://toolity.in/utilities/sign-pdf/</loc>
+    <loc>https://toolity.in/docs/sign-pdf/</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://toolity.in/utilities/unlock-pdf/</loc>
+    <loc>https://toolity.in/docs/unlock-pdf/</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://toolity.in/utilities/watermark-pdf/</loc>
+    <loc>https://toolity.in/docs/watermark-pdf/</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://toolity.in/utilities/gif-speed-changer/</loc>
-    <lastmod>2026-10-04</lastmod>
+    <loc>https://toolity.in/media/gif-speed-changer/</loc>
+    <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://toolity.in/utilities/mailto-generator/</loc>
-    <lastmod>2026-10-04</lastmod>
+    <loc>https://toolity.in/labs/mailto-generator/</loc>
+    <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://toolity.in/utilities/qr-code-generator/</loc>
-    <lastmod>2026-10-04</lastmod>
+    <loc>https://toolity.in/labs/qr-code-generator/</loc>
+    <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://toolity.in/utilities/video-speed-changer/</loc>
-    <lastmod>2026-10-04</lastmod>
+    <loc>https://toolity.in/media/video-speed-changer/</loc>
+    <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://toolity.in/utilities/whatsapp-link-creator/</loc>
-    <lastmod>2026-10-04</lastmod>
+    <loc>https://toolity.in/labs/whatsapp-link-creator/</loc>
+    <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://toolity.in/fun/2048/</loc>
+    <loc>https://toolity.in/games/2048/</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://toolity.in/fun/flappy-bird/</loc>
+    <loc>https://toolity.in/games/flappy-bird/</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://toolity.in/fun/pong/</loc>
+    <loc>https://toolity.in/games/pong/</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://toolity.in/fun/snake/</loc>
+    <loc>https://toolity.in/games/snake/</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://toolity.in/fun/tetris/</loc>
+    <loc>https://toolity.in/games/tetris/</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://toolity.in/fun/tic-tac-toe/</loc>
+    <loc>https://toolity.in/games/tic-tac-toe/</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

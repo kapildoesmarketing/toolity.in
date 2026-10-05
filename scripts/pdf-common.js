@@ -1,4 +1,4 @@
-/* Toolity PDF helpers — shared by the /utilities/ PDF tools. Lazy PDF.js (render) + @cantoo/pdf-lib (edit, loaded per page as window.PDFLib). */
+/* Toolity PDF helpers — shared by the /docs/ PDF tools. Lazy PDF.js (render) + @cantoo/pdf-lib (edit, loaded per page as window.PDFLib). */
 (function () {
   'use strict';
   const PDFJS_URL = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.min.mjs';

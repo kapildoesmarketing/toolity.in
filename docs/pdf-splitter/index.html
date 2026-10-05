@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online PDF Splitter | Toolity Docs</title>
+  <link rel="canonical" href="https://toolity.in/docs/pdf-splitter/">
+  <meta name="description" content="Free online PDF splitter: extract a page range (e.g. 1-3, 7) into a new PDF, or split a document into single pages or chunks of N pages downloaded as a ZIP. Thumbnails for every page. Processed entirely in your browser — files never leave your device.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online PDF Splitter | Toolity Docs">
+  <meta property="og:description" content="Free online PDF splitter: extract a page range (e.g. 1-3, 7) into a new PDF, or split a document into single pages or chunks of N pages downloaded as a ZIP. Thumbnails for every page. Processed entirely in your browser — files never leave your device.">
+  <meta property="og:url" content="https://toolity.in/docs/pdf-splitter/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=2.9" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=2.9">
+  <link rel="stylesheet" href="/styles/tools/pdf-splitter.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "PDF Splitter",
+        "url": "https://toolity.in/docs/pdf-splitter/",
+        "description": "Free online PDF splitter: extract a page range (e.g. 1-3, 7) into a new PDF, or split a document into single pages or chunks of N pages downloaded as a ZIP. Thumbnails for every page. Processed entirely in your browser — files never leave your device.",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Docs", "item": "https://toolity.in/docs/" },
+          { "@type": "ListItem", "position": 3, "name": "PDF Splitter", "item": "https://toolity.in/docs/pdf-splitter/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "How do I write page ranges?", "acceptedAnswer": { "@type": "Answer", "text": "Comma-separated numbers and ranges: 1-3, 7, 10-12. Order does not matter — pages come out in document order. Clicking a thumbnail adds or removes that page from the box." } },
+          { "@type": "Question", "name": "Can I reorder pages while extracting?", "acceptedAnswer": { "@type": "Answer", "text": "Extract keeps document order. To reorder, use Organise PDF, which lets you drag pages and delete the ones you do not need." } },
+          { "@type": "Question", "name": "Why a ZIP for the split modes?", "acceptedAnswer": { "@type": "Answer", "text": "Browsers only allow one download per click, and splitting a 60-page file into 60 downloads would be miserable. The ZIP is built in your browser too." } },
+          { "@type": "Question", "name": "Do the extracted pages keep their links and form fields?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — pages are copied intact, including annotations and form fields on them. Document bookmarks are not carried over." } },
+          { "@type": "Question", "name": "The tool says my PDF is encrypted — what now?", "acceptedAnswer": { "@type": "Answer", "text": "Password-protected PDFs must be opened with their password before they can be edited. Use the Unlock PDF tool first, then come back." } },
+          { "@type": "Question", "name": "Is my PDF uploaded anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. The document is parsed and rewritten by pdf-lib and rendered by PDF.js (the engine Firefox uses) entirely inside your browser. Nothing is transmitted or stored." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/docs/" class="breadcrumb-link">Docs</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">PDF Splitter</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Utilities</span>
+            <h1 class="page-title">PDF Splitter</h1>
+            <p class="page-desc">Pull out the pages you need into a new PDF, or split a document into every page or every N pages as a ZIP — all in your browser.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" data-split="40/60" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge pdf-result-badge" id="result-badge">Drop a PDF to begin</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset" aria-label="Reset">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result summary" aria-label="Copy result summary" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download result" aria-label="Download result" disabled>
+                <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                <span>Download</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Pages</span>
+                <span class="pane-badge" id="source-badge">No file loaded</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content pane-content-between">
+                <div class="media-canvas-viewport pdf-tall">
+                  <div id="dropzone" class="video-dropzone" tabindex="0" role="button" aria-label="Drop PDF here or click to browse">
+                    <input type="file" id="file-input" accept="application/pdf, .pdf">
+                    <div class="video-drop-icon">
+                      <iconify-icon icon="lucide:upload-cloud" width="22" height="22"></iconify-icon>
+                    </div>
+                    <div class="video-drop-title">Drop PDF here or click to browse</div>
+                    <div class="video-drop-subtitle">Any PDF — up to 100 MB</div>
+                  </div>
+                  <div class="pdf-grid" id="page-grid" hidden></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Result</span>
+                <span class="pane-badge" id="output-badge">Awaiting file</span>
+              </div>
+              <div class="pane-content pane-content-between">
+                <div class="media-canvas-viewport">
+                  <div id="output-empty" class="media-empty-placeholder">
+                    <iconify-icon icon="lucide:scissors" width="32" height="32"></iconify-icon>
+                    <p>The extracted PDF (or ZIP summary) will appear here</p>
+                  </div>
+                  <canvas id="output-canvas" class="pdf-page-canvas" hidden aria-label="First page of result"></canvas>
+                  <div id="zip-summary" class="media-empty-placeholder" hidden><iconify-icon icon="lucide:folder-archive" width="32" height="32"></iconify-icon><p id="zip-text"></p></div>
+                </div>
+                <div>
+                  <button type="button" id="btn-compress" class="btn-toolbar-sm btn-brand-sm btn-primary-action" disabled>
+                    <iconify-icon icon="lucide:scissors" width="16" height="16"></iconify-icon>
+                    <span id="btn-compress-label">Split PDF</span>
+                  </button>
+                  <div class="slim-progress-bar" id="progress-bar">
+                    <div class="slim-progress-fill" id="progress-fill"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">Extract pages → one PDF</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item">
+                <label for="opt-mode">Mode</label>
+                <select id="opt-mode" class="select-clean">
+                  <option value="extract" selected>Extract pages → one PDF</option>
+                  <option value="each">Split every page → ZIP</option>
+                  <option value="every">Split every N pages → ZIP</option>
+                </select>
+              </div>
+              <div class="control-item" id="row-range">
+                <label for="opt-range">Pages</label>
+                <input type="text" id="opt-range" class="input-clean pds-range" placeholder="e.g. 1-3, 7, 10-12" aria-label="Page ranges to extract" autocomplete="off">
+                <span class="form-helper">click thumbnails to toggle</span>
+              </div>
+              <div class="control-item" id="row-n" hidden>
+                <label for="opt-n">Pages per file</label>
+                <input type="number" id="opt-n" class="input-clean pds-n" min="1" max="999" value="2" inputmode="numeric" aria-label="Pages per file">
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Split a PDF in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Drop a PDF</h3>
+              <p class="step-desc">Every page appears as a thumbnail with its number, so you can see what you are picking.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Pick Pages or a Split Rule</h3>
+              <p class="step-desc">Type ranges like <code>1-3, 7</code> or just click thumbnails to select them. Or switch the mode to split every page, or every N pages, into separate files.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Split &amp; Download</h3>
+              <p class="step-desc">Extract mode gives you one PDF with the chosen pages in order. The split modes give a ZIP with numbered files.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">PDF Splitter — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>How do I write page ranges?</summary>
+              <p>Comma-separated numbers and ranges: <code>1-3, 7, 10-12</code>. Order does not matter — pages come out in document order. Clicking a thumbnail adds or removes that page from the box.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can I reorder pages while extracting?</summary>
+              <p>Extract keeps document order. To reorder, use <a href="/docs/organise-pdf/">Organise PDF</a>, which lets you drag pages and delete the ones you do not need.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why a ZIP for the split modes?</summary>
+              <p>Browsers only allow one download per click, and splitting a 60-page file into 60 downloads would be miserable. The ZIP is built in your browser too.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Do the extracted pages keep their links and form fields?</summary>
+              <p>Yes — pages are copied intact, including annotations and form fields on them. Document bookmarks are not carried over.</p>
+            </details>
+            <details class="faq-item">
+              <summary>The tool says my PDF is encrypted — what now?</summary>
+              <p>Password-protected PDFs must be opened with their password before they can be edited. Use the <a href="/docs/unlock-pdf/">Unlock PDF</a> tool first, then come back.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is my PDF uploaded anywhere?</summary>
+              <p>No. The document is parsed and rewritten by pdf-lib and rendered by PDF.js (the engine Firefox uses) entirely inside your browser. Nothing is transmitted or stored.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="docs"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=2.4"></script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@cantoo/pdf-lib@2.11.1/dist/pdf-lib.min.js" defer></script>
+  <script src="/scripts/pdf-common.js?v=1.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js" defer></script>
+  <script src="/docs/pdf-splitter/pdf-splitter.js?v=1.0"></script>
+</body>
+</html>
