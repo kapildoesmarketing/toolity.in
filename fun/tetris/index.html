@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Tetris — Play the Classic Block Puzzle Online, Free | Toolity.in</title>
+  <link rel="canonical" href="https://toolity.in/fun/tetris/">
+  <meta name="description" content="Play Tetris online for free: 7-bag randomiser, ghost piece, hard drop, next-piece preview and classic scoring. Keyboard or touch, best score saved on your device. No download, no account.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Tetris — Toolity.in">
+  <meta property="og:description" content="Play Tetris online for free: 7-bag randomiser, ghost piece, hard drop, next-piece preview and classic scoring. Keyboard or touch, best score saved on your device. No download, no account.">
+  <meta property="og:url" content="https://toolity.in/fun/tetris/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=2.7" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=2.7">
+  <link rel="stylesheet" href="/styles/tools/tetris.css?v=1.0">
+
+  <!-- Structured data: VideoGame + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": ["VideoGame", "WebApplication"],
+        "name": "Tetris",
+        "url": "https://toolity.in/fun/tetris/",
+        "description": "Play Tetris online for free: 7-bag randomiser, ghost piece, hard drop, next-piece preview and classic scoring. Keyboard or touch, best score saved on your device. No download, no account.",
+        "genre": "Puzzle",
+        "gamePlatform": "Web browser",
+        "numberOfPlayers": { "@type": "QuantitativeValue", "minValue": 1, "maxValue": 1 },
+        "applicationCategory": "GameApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Fun", "item": "https://toolity.in/fun/" },
+          { "@type": "ListItem", "position": 3, "name": "Tetris", "item": "https://toolity.in/fun/tetris/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "What is the 7-bag randomiser?", "acceptedAnswer": { "@type": "Answer", "text": "The seven pieces (I, O, T, S, Z, J, L) are shuffled into a bag and dealt one by one; when the bag is empty a new one is shuffled. You will never wait more than 12 pieces for an I — the same rule modern official versions use." } },
+          { "@type": "Question", "name": "What is the ghost piece?", "acceptedAnswer": { "@type": "Answer", "text": "The faint outline at the bottom shows exactly where the current piece will land if you hard-drop. It makes fast play much safer; turn it off in the options for a purist experience." } },
+          { "@type": "Question", "name": "How does scoring work?", "acceptedAnswer": { "@type": "Answer", "text": "Classic Nintendo scoring: 40, 100, 300 and 1200 points for clearing 1–4 lines at once, multiplied by the current level. Soft drops add 1 point per cell and hard drops 2 per cell. The level rises every 10 lines and the fall speed with it." } },
+          { "@type": "Question", "name": "Where is my best score saved?", "acceptedAnswer": { "@type": "Answer", "text": "Only in your browser's localStorage under the key toolity_tetris. Nothing is sent anywhere; Reset or clearing site data removes it." } },
+          { "@type": "Question", "name": "Does it work on a phone?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Swipe left or right to move one column per swipe, tap to rotate, swipe down to drop. The board scales to the screen and the game auto-pauses when you switch apps." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/fun/" class="breadcrumb-link">Fun</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Tetris</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Fun</span>
+            <h1 class="page-title">Tetris</h1>
+            <p class="page-desc">The block puzzle, done properly: 7-bag randomiser, ghost piece, hard drop and classic scoring — keyboard or swipe.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="single" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <div class="segmented-group segmented-group-pill" id="seg-level" role="group" aria-label="Starting level">
+                <button type="button" class="seg-pill active" data-value="1">Level 1</button>
+                <button type="button" class="seg-pill" data-value="5">Level 5</button>
+                <button type="button" class="seg-pill" data-value="10">Level 10</button>
+              </div>
+              <span class="pane-badge" id="best-badge" hidden></span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset the game and settings" aria-label="Reset the game and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-play" aria-label="Play">
+                <iconify-icon icon="lucide:play" width="14" height="14" id="play-icon"></iconify-icon>
+                <span id="play-label">Play</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Game pane -->
+          <div class="split-pane-grid">
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Score</span>
+                <span class="tetris-score" id="score" aria-live="polite"><b id="score-val">0</b><i>·</i><span class="tetris-best">best <b id="best-val">0</b></span></span>
+                <span id="status-badge" class="pane-badge">Ready</span>
+              </div>
+              <div class="pane-content tetris-stage-wrap">
+                <div class="tetris-stage" id="stage">
+                  <div class="tetris-board-wrap">
+                    <canvas id="tetris-canvas" class="tetris-canvas" aria-label="Tetris board"></canvas>
+                    <div class="tetris-overlay" id="overlay">
+                      <strong id="overlay-title">Tetris</strong>
+                      <span id="overlay-text">Press Space or tap Play to start</span>
+                    </div>
+                  </div>
+                  <aside class="tetris-side">
+                    <div class="tetris-panel">
+                      <span class="tetris-panel-label">Next</span>
+                      <canvas id="next-canvas" class="tetris-next" width="80" height="80" aria-label="Next piece"></canvas>
+                    </div>
+                    <div class="tetris-panel"><span class="tetris-panel-label">Level</span><b id="level-val">1</b></div>
+                    <div class="tetris-panel"><span class="tetris-panel-label">Lines</span><b id="lines-val">0</b></div>
+                  </aside>
+                </div>
+                <p class="form-helper tetris-hint" id="hint">← → move · ↑ or X rotate · ↓ soft drop · Space hard drop · P pause · swipe on touch, tap to rotate</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Game options</span>
+                <span class="pane-badge" id="settings-summary">Level 1 · ghost on · sound on</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item">
+                <input type="checkbox" id="opt-ghost" checked>
+                <label for="opt-ghost">Ghost piece (landing preview)</label>
+              </div>
+              <div class="control-item">
+                <input type="checkbox" id="opt-sound" checked>
+                <label for="opt-sound">Sound effects</label>
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+        <!-- ═══════════ 3. GUIDE ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Play Tetris in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Place the falling piece</h3>
+              <p class="step-desc">Move with ← →, rotate with ↑ or X, soft-drop with ↓ and hard-drop with Space. On touch, swipe sideways to move, swipe down to drop and tap to rotate.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Clear lines</h3>
+              <p class="step-desc">Fill a full row and it vanishes. Clearing 1, 2, 3 or 4 rows at once scores 40, 100, 300 or 1200 × level — a Tetris (4 rows) is worth far more than four singles.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Survive the speed-up</h3>
+              <p class="step-desc">Every 10 lines the level rises and pieces fall faster. Start at level 5 or 10 for a challenge. The game ends when a new piece has no room to spawn.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 4. REFERENCE ═══════════ -->
+        <section class="reference-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">Reference</span>
+            <h2 class="section-heading-sm">Controls &amp; scoring</h2>
+          </div>
+          <div class="formats-table-card">
+            <table class="formats-table">
+              <thead><tr><th>Action</th><th>Keyboard</th><th>Touch</th></tr></thead>
+              <tbody>
+                <tr><td>Move left / right</td><td><code>←</code> / <code>→</code> (hold to repeat)</td><td>Swipe left / right</td></tr>
+                <tr><td>Rotate clockwise</td><td><code>↑</code> or <code>X</code></td><td>Tap the board</td></tr>
+                <tr><td>Rotate counter-clockwise</td><td><code>Z</code></td><td></td></tr>
+                <tr><td>Soft drop</td><td><code>↓</code> (hold)</td><td>Swipe down a little</td></tr>
+                <tr><td>Hard drop</td><td><code>Space</code></td><td>Swipe down fast / far</td></tr>
+                <tr><td>Pause / resume</td><td><code>P</code></td><td>Tap Play / Pause</td></tr>
+                <tr><td>Scoring</td><td>1 line 40 · 2 lines 100 · 3 lines 300 · 4 lines 1200 — all × level; soft drop +1 per cell, hard drop +2 per cell</td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Tetris — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>What is the 7-bag randomiser?</summary>
+              <p>The seven pieces (I, O, T, S, Z, J, L) are shuffled into a bag and dealt one by one; when the bag is empty a new one is shuffled. You will never wait more than 12 pieces for an I — the same rule modern official versions use.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What is the ghost piece?</summary>
+              <p>The faint outline at the bottom shows exactly where the current piece will land if you hard-drop. It makes fast play much safer; turn it off in the options for a purist experience.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How does scoring work?</summary>
+              <p>Classic Nintendo scoring: 40, 100, 300 and 1200 points for clearing 1–4 lines at once, multiplied by the current level. Soft drops add 1 point per cell and hard drops 2 per cell. The level rises every 10 lines and the fall speed with it.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Where is my best score saved?</summary>
+              <p>Only in your browser's localStorage under the key <code>toolity_tetris</code>. Nothing is sent anywhere; Reset or clearing site data removes it.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Does it work on a phone?</summary>
+              <p>Yes. Swipe left or right to move one column per swipe, tap to rotate, swipe down to drop. The board scales to the screen and the game auto-pauses when you switch apps.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="fun"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=2.4"></script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="/fun/tetris/tetris.js?v=1.0"></script>
+</body>
+</html>
