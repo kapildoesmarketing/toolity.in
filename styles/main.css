@@ -3863,7 +3863,7 @@ body {
 .section-wrapper.category-tools { border-top: none; padding-top: 3.5rem; }
 
 /* ─── Metadata tools (viewer + remover × image/audio/video/PDF) — shared by 8 pages ─── */
-.meta-out { width: 100%; height: 100%; overflow: auto; padding: 0.85rem; display: flex; flex-direction: column; gap: 0.75rem; align-self: stretch; text-align: left; }
+.meta-out { width: 100%; flex: 1 1 auto; min-height: 0; overflow: auto; padding: 0.85rem; display: flex; flex-direction: column; gap: 0.75rem; align-self: stretch; text-align: left; } /* min-height:0 lets the flex child scroll inside the capped viewport instead of being clipped */
 .meta-out[hidden] { display: none; }
 .meta-flags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
 .meta-flag { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.72rem; font-weight: 600; padding: 0.25rem 0.55rem; border-radius: 999px; border: 1px solid var(--border); color: var(--text-muted); background: var(--surface); }
@@ -3890,5 +3890,6 @@ body {
 .meta-summary.is-warn iconify-icon { color: #b45309; }
 .meta-note, .meta-empty { margin: 0; font-size: 0.76rem; color: var(--text-muted); }
 .media-canvas-viewport.meta-tall { height: auto; min-height: 280px; max-height: 560px; align-items: stretch; justify-content: flex-start; }
+.meta-out > * { flex: none; } /* sections must not shrink inside the column flex — they'd clip rows (bug seen with 20+ fields) */
 #result-badge.meta-hot { color: #b45309; background: rgba(245, 158, 11, 0.12); font-weight: 600; }
 [data-theme="dark"] #result-badge.meta-hot { color: #fbbf24; }
