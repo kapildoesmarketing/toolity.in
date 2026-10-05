@@ -256,6 +256,12 @@
     <priority>0.95</priority>
   </url>
   <url>
+    <loc>https://toolity.in/labs/photo-booth/</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://toolity.in/labs/qr-code-generator/</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
