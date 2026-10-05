@@ -1,0 +1,6 @@
+/* Designed by Kapil Pidhwani: Watermark PDF — tool-only styles; page-canvas rules live in main.css */
+.wpd-text { width: 220px; }
+.wpd-pages { width: 160px; font-family: var(--font-mono); }
+.wpd-range { width: 140px; }
+.wpd-file { max-width: 220px; font-size: 0.8rem; }
+.control-item[hidden] { display: none; }

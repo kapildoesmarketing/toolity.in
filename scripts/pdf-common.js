@@ -35,10 +35,10 @@
     return { c, vp, page };
   }
 
-  /** First page of a PDF (bytes) into a canvas; used for output previews. */
-  async function preview(bytes, canvas, password) {
+  /** Page n (default first) of a PDF (bytes) into a canvas; used for output previews. */
+  async function preview(bytes, canvas, password, n = 1) {
     const doc = await open(bytes, password);
-    await render(doc, 1, 1.2, canvas); canvas.hidden = false; doc.destroy();
+    await render(doc, Math.min(Math.max(1, n), doc.numPages), 1.2, canvas); canvas.hidden = false; doc.destroy();
   }
 
   /**
