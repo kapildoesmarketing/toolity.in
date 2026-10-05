@@ -1,0 +1,7 @@
+/* Designed by Kapil Pidhwani: Video Compressor — tool-only styles; adapts via @container (card is the container) */
+.source-video-player.vdc-show, .video-converted-preview.vdc-show { display: block; }
+.media-empty-placeholder[hidden] { display: none; }
+.vdc-target { width: 90px; font-family: var(--font-mono); }
+#result-badge { font-weight: 600; }
+#result-badge.vdc-win { color: #15803d; background: rgba(22, 163, 74, 0.1); }
+[data-theme="dark"] #result-badge.vdc-win { color: #4ade80; }
