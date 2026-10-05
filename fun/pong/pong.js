@@ -195,7 +195,15 @@
     e.preventDefault();
     if (code === 'Space') { if (!e.repeat) togglePlay(); return; }
     S.keys.add(code);
+    // Designed by Kapil Pidhwani: also nudge immediately — remote-desktop/VNC setups deliver key presses as instant down+up pairs,
+    // which the frame loop never sees as "held". Non-repeat only, so a real held key isn't double-counted.
+    if (!e.repeat) nudge(code);
   });
+  function nudge(code) {
+    const dir = (code === 'ArrowUp' || code === 'KeyW') ? -1 : 1;
+    const pad = (S.mode === '2p' && code.startsWith('Arrow')) ? S.r : S.l;
+    pad.y = clamp(pad.y + dir * 4, paddleH() / 2, H - paddleH() / 2);
+  }
   window.addEventListener('keyup', (e) => { const code = codeOf(e); if (code) S.keys.delete(code); });
   const toBoard = (e) => { const r = canvas.getBoundingClientRect(); return { x: (e.clientX - r.left) / r.width * W, y: (e.clientY - r.top) / r.height * H }; };
   canvas.addEventListener('pointerdown', (e) => { try { canvas.setPointerCapture(e.pointerId); } catch (_) { /* inactive pointer id */ } S.pointers.set(e.pointerId, toBoard(e)); if (S.phase === 'idle' || S.phase === 'over' || S.phase === 'paused') startOrResume(); });
