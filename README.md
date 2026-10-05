@@ -32,7 +32,7 @@ Toolity.in/
 │   ├── gif-to-video/
 │   ├── video-to-gif/
 │   └── image-to-favicon/
-├── formatters/             # Code beautifiers & syntax formatters
+├── visuals/                # Color & image tools (palette extractor…)
 ├── productivity/           # Workflow boosters & focus planners
 ├── web/                    # URL, metadata & link utilities
 │   ├── url-parameter-separator/

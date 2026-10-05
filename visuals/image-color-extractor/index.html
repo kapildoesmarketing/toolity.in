@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Image Color Extractor — Get a Palette from Any Image | Toolity.in</title>
+  <link rel="canonical" href="https://toolity.in/visuals/image-color-extractor/">
+  <meta name="description" content="Free image color extractor: upload a photo or logo and instantly get its dominant color palette as HEX, RGB or HSL, plus a pixel eyedropper. 100% in-browser, no upload.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Image Color Extractor — Toolity.in">
+  <meta property="og:description" content="Free image color extractor: upload a photo or logo and instantly get its dominant color palette as HEX, RGB or HSL, plus a pixel eyedropper. 100% in-browser, no upload.">
+  <meta property="og:url" content="https://toolity.in/visuals/image-color-extractor/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=2.7" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=2.7">
+  <link rel="stylesheet" href="/styles/tools/image-color-extractor.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Image Color Extractor",
+        "url": "https://toolity.in/visuals/image-color-extractor/",
+        "description": "Free image color extractor: upload a photo or logo and instantly get its dominant color palette as HEX, RGB or HSL, plus a pixel eyedropper. 100% in-browser, no upload.",
+        "applicationCategory": "DesignApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Visuals", "item": "https://toolity.in/visuals/" },
+          { "@type": "ListItem", "position": 3, "name": "Image Color Extractor", "item": "https://toolity.in/visuals/image-color-extractor/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Is my image uploaded anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. The image is drawn onto a canvas inside your browser and the colors are computed there with JavaScript. Nothing is sent to a server and nothing is stored." } },
+          { "@type": "Question", "name": "Which image formats are supported?", "acceptedAnswer": { "@type": "Answer", "text": "Any format your browser can display: PNG, JPG, WebP, GIF (first frame), BMP, AVIF and SVG. There is no file-size limit, but very large images are downscaled internally before analysis." } },
+          { "@type": "Question", "name": "How do I get the exact color of one spot in the image?", "acceptedAnswer": { "@type": "Answer", "text": "Click (or tap) anywhere on the preview. The eyedropper reads that pixel and shows its HEX, RGB and HSL values; click the swatch to copy it in your preferred format." } },
+          { "@type": "Question", "name": "Why does the palette not include white or black from my image?", "acceptedAnswer": { "@type": "Answer", "text": "By default near-white and near-black pixels are ignored so backgrounds and shadows do not crowd out the real colors. Turn off \"Ignore near-white and near-black\" in Options to include them." } },
+          { "@type": "Question", "name": "How are the dominant colors chosen?", "acceptedAnswer": { "@type": "Answer", "text": "The image is downscaled and its pixels are grouped with median-cut quantization into the number of colors you select. Each swatch is the average of its group and the percentage shows how much of the image it covers." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/visuals/" class="breadcrumb-link">Visuals</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Image Color Extractor</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Visuals</span>
+            <h1 class="page-title">Image Color Extractor</h1>
+            <p class="page-desc">Get the dominant color palette of any image and pick exact pixel colors as HEX, RGB or HSL — 100% in your browser.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" data-split="50/50" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <div class="segmented-group segmented-group-pill" id="seg-count" role="group" aria-label="Palette size">
+                <button type="button" class="seg-pill" data-value="4">4</button>
+                <button type="button" class="seg-pill active" data-value="6">6</button>
+                <button type="button" class="seg-pill" data-value="8">8</button>
+                <button type="button" class="seg-pill" data-value="12">12</button>
+              </div>
+              <span class="pane-badge" id="status-badge">colors</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy all palette colors" aria-label="Copy all palette colors" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <div class="dropdown-menu-wrapper" id="download-dropdown-wrap">
+                <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download-menu-toggle" aria-haspopup="true" aria-expanded="false" disabled>
+                  <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                  <span>Download</span>
+                  <iconify-icon icon="lucide:chevron-down" class="dropdown-arrow" width="13" height="13"></iconify-icon>
+                </button>
+                <div class="dropdown-popup" id="download-dropdown-menu" role="menu">
+                  <button type="button" class="dropdown-item" id="opt-dl-css" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:braces" width="14" height="14"></iconify-icon>
+                      <span>CSS variables</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" id="opt-dl-json" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:file-json" width="14" height="14"></iconify-icon>
+                      <span>JSON</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" id="opt-dl-png" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:image" width="14" height="14"></iconify-icon>
+                      <span>PNG swatch strip</span>
+                    </div>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Image</span>
+                <span class="pane-badge" id="input-badge">—</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content">
+                <div class="tool-dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload image">
+                  <iconify-icon icon="lucide:upload-cloud"></iconify-icon>
+                  <strong>Drop an image here, click to browse, or paste</strong>
+                  <small>PNG, JPG, WebP, GIF, SVG · Never uploaded — processed on your device</small>
+                  <input type="file" id="file-input" accept="image/*">
+                </div>
+                <div class="ice-preview-wrap" id="preview-wrap" hidden>
+                  <canvas id="preview-canvas" class="ice-preview-canvas" aria-label="Image preview. Click to pick a pixel color."></canvas>
+                  <div class="ice-crosshair" id="crosshair" hidden></div>
+                </div>
+                <div class="ice-pick" id="pick-row" hidden>
+                  <button type="button" class="ice-pick-swatch" id="pick-swatch" title="Copy picked color" aria-label="Copy picked color"></button>
+                  <div class="ice-pick-meta">
+                    <strong id="pick-hex">#000000</strong>
+                    <span id="pick-detail">rgb(0, 0, 0) · hsl(0, 0%, 0%)</span>
+                  </div>
+                </div>
+                <p class="ice-hint" id="pick-hint" hidden>Click or tap the image to pick a pixel color.</p>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Palette</span>
+                <span class="pane-badge" id="output-badge">—</span>
+              </div>
+              <div class="pane-empty" id="output-empty">
+                <iconify-icon icon="lucide:palette"></iconify-icon>
+                <span>Your image's dominant colors appear here. Click any swatch to copy it.</span>
+              </div>
+              <div class="pane-content" id="output-content" hidden>
+                <div class="ice-palette" id="palette" role="list"></div>
+                <p class="ice-hint" id="copy-status" aria-live="polite"></p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Options</span>
+                <span class="pane-badge" id="settings-summary">HEX · ignore extremes · by coverage</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item">
+                <label for="opt-format">Copy format</label>
+                <select id="opt-format" class="select-clean">
+                  <option value="hex" selected>HEX (#1a2b3c)</option>
+                  <option value="rgb">RGB (rgb(26, 43, 60))</option>
+                  <option value="hsl">HSL (hsl(210, 40%, 17%))</option>
+                </select>
+              </div>
+              <div class="control-item">
+                <label for="opt-sort">Sort palette by</label>
+                <select id="opt-sort" class="select-clean">
+                  <option value="coverage" selected>Coverage (most common first)</option>
+                  <option value="hue">Hue (rainbow order)</option>
+                  <option value="lightness">Lightness (dark to light)</option>
+                </select>
+              </div>
+              <div class="control-item">
+                <input type="checkbox" id="opt-ignore" checked>
+                <label for="opt-ignore">Ignore near-white and near-black pixels</label>
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Extract Colors from an Image in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Upload or Paste an Image</h3>
+              <p class="step-desc">Drop a photo, logo or screenshot onto the card, click to browse, or paste from your clipboard. The palette is extracted instantly on your device.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Pick the Palette Size</h3>
+              <p class="step-desc">Choose 4, 6, 8 or 12 colors. Each swatch shows its HEX value and how much of the image it covers. Click the preview to eyedrop any single pixel.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Copy or Download</h3>
+              <p class="step-desc">Click a swatch to copy one color, Copy for the whole list, or Download as CSS variables, JSON or a PNG swatch strip. Esc resets.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 4. REFERENCE ═══════════ -->
+        <section class="reference-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">Reference</span>
+            <h2 class="section-heading-sm">Color Formats &amp; Export Files</h2>
+          </div>
+          <div class="formats-table-card">
+            <table class="formats-table">
+              <thead><tr><th>Format</th><th>Example</th><th>Best for</th></tr></thead>
+              <tbody>
+                <tr><td><code>HEX</code></td><td><code>#f4511e</code></td><td>CSS, design tools, brand guidelines</td></tr>
+                <tr><td><code>RGB</code></td><td><code>rgb(244, 81, 30)</code></td><td>Canvas, image editors, transparency via <code>rgba()</code></td></tr>
+                <tr><td><code>HSL</code></td><td><code>hsl(15, 91%, 54%)</code></td><td>Tweaking lightness or saturation of a base color</td></tr>
+                <tr><td><code>.css</code></td><td><code>--color-1: #f4511e;</code></td><td>Drop-in design tokens for a stylesheet</td></tr>
+                <tr><td><code>.json</code></td><td><code>[{"hex":"#f4511e","coverage":0.31}]</code></td><td>Scripts, theming pipelines, Figma plugins</td></tr>
+                <tr><td><code>.png</code></td><td>Swatch strip with HEX labels</td><td>Mood boards, slides, sharing a palette</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Image Color Extractor — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Is my image uploaded anywhere?</summary>
+              <p>No. The image is drawn onto a canvas inside your browser and the colors are computed there with JavaScript. Nothing is sent to a server and nothing is stored.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Which image formats are supported?</summary>
+              <p>Any format your browser can display: PNG, JPG, WebP, GIF (first frame), BMP, AVIF and SVG. There is no file-size limit, but very large images are downscaled internally before analysis.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How do I get the exact color of one spot in the image?</summary>
+              <p>Click (or tap) anywhere on the preview. The eyedropper reads that pixel and shows its HEX, RGB and HSL values; click the swatch to copy it in your preferred format.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why does the palette not include white or black from my image?</summary>
+              <p>By default near-white and near-black pixels are ignored so backgrounds and shadows do not crowd out the real colors. Turn off "Ignore near-white and near-black" in Options to include them.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How are the dominant colors chosen?</summary>
+              <p>The image is downscaled and its pixels are grouped with median-cut quantization into the number of colors you select. Each swatch is the average of its group and the percentage shows how much of the image it covers.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="visuals"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=2.4"></script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="/visuals/image-color-extractor/image-color-extractor.js?v=1.0"></script>
+</body>
+</html>

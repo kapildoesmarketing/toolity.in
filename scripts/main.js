@@ -47,7 +47,7 @@
    */
   const CATEGORY_META = {
     convertors:   { label: 'Converter Workspace',    title: 'Explore All Converter Tools',       cta: 'Explore Converters',        desc: 'Client-side image, video and GIF converters that transcode media instantly without uploading a single byte.' },
-    formatters:   { label: 'Formatter Workspace',    title: 'Explore All Code Formatters',       cta: 'Explore Formatters',        desc: 'Beautify, minify and validate JSON, CSS, HTML and more — all processed locally in your browser.' },
+    visuals:      { label: 'Visuals',                title: 'Explore All Visual Tools',           cta: 'Explore Visuals',            desc: 'Color and image tools for designers and developers — palettes, pixel picking and more, all processed locally in your browser.' },
     productivity: { label: 'Productivity Workspace', title: 'Explore All Productivity Tools',    cta: 'Explore Productivity Tools', desc: 'Distraction-free notepads, planners and everyday workflow boosters that keep your data on your device.' },
     web:          { label: 'Web Workspace',          title: 'Explore All Web & URL Tools',       cta: 'Explore Web Tools',         desc: 'URL cleaners, parameter inspectors, favicon extractors and thumbnail downloaders for webmasters and marketers.' },
     fun:          { label: 'Fun & Games',            title: 'Explore All Games',                 cta: 'Play More Games',           desc: 'Quick browser games — classic arcade and puzzle titles that run instantly, no download or account.' },
@@ -296,12 +296,12 @@
         tags: ['convert', 'convertor', 'converter', 'units', 'image', 'video', 'gif', 'favicon', 'media']
       },
       {
-        id: 'cat-formatters',
-        title: 'Code Formatters',
-        category: 'Workspace',
-        url: 'formatters/',
-        icon: 'lucide:align-left',
-        tags: ['format', 'formatters', 'formatter', 'beautify', 'minify', 'sql', 'xml', 'html', 'json', 'css', 'prettier']
+        id: 'cat-visuals',
+        title: 'Visuals',
+        category: 'Category',
+        url: 'visuals/',
+        icon: 'lucide:palette',
+        tags: ['visuals', 'visual', 'color', 'colour', 'palette', 'image', 'design', 'picker', 'hex', 'rgb', 'hsl']
       },
       {
         id: 'cat-productivity',
@@ -318,6 +318,14 @@
         url: 'web/',
         icon: 'lucide:globe',
         tags: ['web', 'url', 'cleaner', 'parameter', 'query', 'separator', 'link', 'http', 'dns', 'favicon', 'thumbnail']
+      },
+      {
+        id: 'image-color-extractor',
+        title: 'Image Color Extractor',
+        category: 'Visuals',
+        url: 'visuals/image-color-extractor/',
+        icon: 'lucide:palette',
+        tags: ['color', 'colour', 'palette', 'extract', 'extractor', 'image colors', 'dominant color', 'color picker', 'eyedropper', 'hex', 'rgb', 'hsl', 'swatch', 'theme', 'brand colors', 'pipette']
       },
       {
         id: 'pong',
@@ -923,7 +931,7 @@
       const categories = [
         { title: 'Home', href: rootPrefix === '' ? './' : rootPrefix, icon: 'lucide:home', key: 'home' },
         { title: 'Convertors', href: `${rootPrefix}convertors/`, icon: 'lucide:arrow-left-right', key: 'convertors' },
-        { title: 'Formatters', href: `${rootPrefix}formatters/`, icon: 'lucide:align-left', key: 'formatters' },
+        { title: 'Visuals', href: `${rootPrefix}visuals/`, icon: 'lucide:palette', key: 'visuals' },
         { title: 'Productivity', href: `${rootPrefix}productivity/`, icon: 'lucide:check-square', key: 'productivity' },
         { title: 'Web', href: `${rootPrefix}web/`, icon: 'lucide:globe', key: 'web' },
         { title: 'Fun', href: `${rootPrefix}fun/`, icon: 'lucide:gamepad-2', key: 'fun' },
