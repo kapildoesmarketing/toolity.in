@@ -90,7 +90,8 @@
     const up1 = S.keys.has('KeyW') || (S.mode === 'cpu' && S.keys.has('ArrowUp')), dn1 = S.keys.has('KeyS') || (S.mode === 'cpu' && S.keys.has('ArrowDown'));
     if (up1) S.l.y -= sp; if (dn1) S.l.y += sp;
     if (S.mode === '2p') { if (S.keys.has('ArrowUp')) S.r.y -= sp; if (S.keys.has('ArrowDown')) S.r.y += sp; }
-    S.pointers.forEach((p) => { const pad = (S.mode === 'cpu' || p.x < W / 2) ? S.l : S.r; pad.y += (p.y - pad.y) * Math.min(1, 25 * dt); });
+    // Designed by Kapil Pidhwani: keyboard wins — pointer steering is ignored while any key is held, so a stale pointer can't pin the paddle.
+    if (!S.keys.size) S.pointers.forEach((p) => { const pad = (S.mode === 'cpu' || p.x < W / 2) ? S.l : S.r; pad.y += (p.y - pad.y) * Math.min(1, 25 * dt); });
     S.l.y = clamp(S.l.y, ph / 2, H - ph / 2); S.r.y = clamp(S.r.y, ph / 2, H - ph / 2);
     if (S.phase === 'serving' && S.t >= S.serveAt) S.phase = 'playing';
     if (S.phase !== 'playing' && S.phase !== 'serving') return;
@@ -198,7 +199,7 @@
   window.addEventListener('keyup', (e) => { const code = codeOf(e); if (code) S.keys.delete(code); });
   const toBoard = (e) => { const r = canvas.getBoundingClientRect(); return { x: (e.clientX - r.left) / r.width * W, y: (e.clientY - r.top) / r.height * H }; };
   canvas.addEventListener('pointerdown', (e) => { try { canvas.setPointerCapture(e.pointerId); } catch (_) { /* inactive pointer id */ } S.pointers.set(e.pointerId, toBoard(e)); if (S.phase === 'idle' || S.phase === 'over' || S.phase === 'paused') startOrResume(); });
-  canvas.addEventListener('pointermove', (e) => { if (S.pointers.has(e.pointerId)) S.pointers.set(e.pointerId, toBoard(e)); });
+  canvas.addEventListener('pointermove', (e) => { if (!S.pointers.has(e.pointerId)) return; if (e.pointerType === 'mouse' && !(e.buttons & 1)) S.pointers.delete(e.pointerId); else S.pointers.set(e.pointerId, toBoard(e)); });
   ['pointerup', 'pointercancel'].forEach((ev) => window.addEventListener(ev, (e) => S.pointers.delete(e.pointerId)));
   canvas.addEventListener('lostpointercapture', (e) => S.pointers.delete(e.pointerId));
   $('btn-play').addEventListener('click', togglePlay);
