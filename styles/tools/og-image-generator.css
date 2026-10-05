@@ -1,0 +1,25 @@
+/* Designed by Kapil Pidhwani: OG Image Generator — tool-only styles; adapts via @container (card is the container) */
+.og-controls { display: flex; flex-direction: column; gap: 1rem; }
+.og-title-input { font-weight: 600; font-size: 1rem; resize: vertical; min-height: 64px; }
+.og-drop { padding: 0.9rem 0.75rem; min-height: 0; gap: 0.2rem; }
+.og-drop iconify-icon { font-size: 22px; }
+.og-drop strong { font-size: 0.82rem; }
+.og-drop small { font-size: 0.7rem; }
+#logo-drop[hidden], #photo-drop[hidden], .og-file[hidden] { display: none; }
+.og-file { display: flex; align-items: center; gap: 0.5rem; padding: 0.4rem 0.5rem; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); min-width: 0; }
+.og-thumb { width: 40px; height: 40px; object-fit: contain; border-radius: 4px; background-color: var(--surface-elevated); background-image: linear-gradient(45deg, var(--border) 25%, transparent 25%, transparent 75%, var(--border) 75%), linear-gradient(45deg, var(--border) 25%, transparent 25%, transparent 75%, var(--border) 75%); background-size: 10px 10px; background-position: 0 0, 5px 5px; flex: 0 0 auto; }
+.og-file-name { flex: 1; min-width: 0; font-size: 0.78rem; color: var(--text-secondary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.og-file-remove { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: var(--radius-sm); border: 1px solid transparent; background: transparent; color: var(--text-secondary); cursor: pointer; flex: 0 0 auto; }
+.og-file-remove:hover { color: var(--brand); border-color: var(--border); background: var(--surface-elevated); }
+.og-preview-pane { display: flex; align-items: center; justify-content: center; min-height: 260px; }
+.og-preview-wrap { width: 100%; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--surface); padding: 0.75rem; overflow: hidden; }
+.og-preview-canvas { display: block; max-width: 100%; max-height: 460px; width: auto; height: auto; box-shadow: 0 2px 10px rgba(0,0,0,.14); border-radius: 4px; }
+.og-bg-item { flex-wrap: wrap; }
+.og-swatches { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.og-swatches .swatch { width: 26px; height: 26px; border-radius: 50%; border: 2px solid var(--border); cursor: pointer; padding: 0; transition: transform .12s, border-color .12s; }
+.og-swatches .swatch:hover { transform: scale(1.1); }
+.og-swatches .swatch[aria-checked="true"] { border-color: var(--brand); box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--brand); }
+.og-range { width: 120px; }
+@container (min-width: 900px) {
+  .og-preview-pane { min-height: 360px; }
+}

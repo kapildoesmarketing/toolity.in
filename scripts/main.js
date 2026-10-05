@@ -328,6 +328,14 @@
         tags: ['color', 'colour', 'palette', 'extract', 'extractor', 'image colors', 'dominant color', 'color picker', 'eyedropper', 'hex', 'rgb', 'hsl', 'swatch', 'theme', 'brand colors', 'pipette']
       },
       {
+        id: 'og-image-generator',
+        title: 'OG Image Generator',
+        category: 'Visuals',
+        url: 'visuals/og-image-generator/',
+        icon: 'lucide:share-2',
+        tags: ['og', 'open graph', 'og image', 'social', 'social preview', 'twitter card', 'link preview', 'meta image', 'facebook', 'linkedin', '1200x630', 'thumbnail', 'share image', 'seo']
+      },
+      {
         id: 'placeholder-image-generator',
         title: 'Placeholder Image Generator',
         category: 'Visuals',

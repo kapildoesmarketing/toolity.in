@@ -15,7 +15,6 @@ Visuals
 - Color Palette Generator
 - Contrast Checker
 - Color Converter
-- OG Image Generator
 - Pattern Background Generator
 - Image Resizer
 - Image Compressor
