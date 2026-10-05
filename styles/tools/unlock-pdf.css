@@ -1,0 +1,6 @@
+/* Designed by Kapil Pidhwani: Unlock PDF — password row under the source pane; everything else from main.css */
+.upd-fields { display: flex; flex-wrap: wrap; gap: 0.6rem 1rem; align-items: flex-end; margin-top: 0.75rem; }
+.upd-fields[hidden], .upd-locked[hidden] { display: none; }
+.upd-field { display: flex; flex-direction: column; gap: 0.25rem; font-size: 0.78rem; color: var(--text-secondary); flex: 1 1 200px; }
+.upd-field .input-clean { width: 100%; }
+.upd-show { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.78rem; color: var(--text-secondary); padding-bottom: 0.45rem; }
