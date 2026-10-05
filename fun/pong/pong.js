@@ -187,6 +187,7 @@
   /* ── Input ── */
   const GAME_KEYS = new Set(['ArrowUp', 'ArrowDown', 'KeyW', 'KeyS', 'Space']);
   const KEY_FALLBACK = { ArrowUp: 'ArrowUp', ArrowDown: 'ArrowDown', Up: 'ArrowUp', Down: 'ArrowDown', w: 'KeyW', W: 'KeyW', s: 'KeyS', S: 'KeyS', ' ': 'Space', Spacebar: 'Space' };
+  const OPPOSITE = { ArrowUp: 'ArrowDown', ArrowDown: 'ArrowUp', KeyW: 'KeyS', KeyS: 'KeyW' };
   // Designed by Kapil Pidhwani: `code` is blank/odd on some remapped Linux keyboards and IMEs — fall back to `key`.
   const codeOf = (e) => (GAME_KEYS.has(e.code) ? e.code : KEY_FALLBACK[e.key]);
   window.addEventListener('keydown', (e) => {
@@ -194,17 +195,23 @@
     const code = codeOf(e); if (!code) return;
     e.preventDefault();
     if (code === 'Space') { if (!e.repeat) togglePlay(); return; }
+    clearTimeout(S.keyTimers[code]); S.keys.delete(OPPOSITE[code]); // opposite released instantly → crisp direction change
+    // Designed by Kapil Pidhwani: remote-desktop/VNC setups deliver presses as instant down+up pairs, so a nudge on each fresh press
+    // guarantees visible motion; keyup is debounced (below) so repeat ticks chain into smooth held movement.
+    if (!S.keys.has(code)) nudge(code);
     S.keys.add(code);
-    // Designed by Kapil Pidhwani: also nudge immediately — remote-desktop/VNC setups deliver key presses as instant down+up pairs,
-    // which the frame loop never sees as "held". Non-repeat only, so a real held key isn't double-counted.
-    if (!e.repeat) nudge(code);
   });
   function nudge(code) {
     const dir = (code === 'ArrowUp' || code === 'KeyW') ? -1 : 1;
     const pad = (S.mode === '2p' && code.startsWith('Arrow')) ? S.r : S.l;
     pad.y = clamp(pad.y + dir * 4, paddleH() / 2, H - paddleH() / 2);
   }
-  window.addEventListener('keyup', (e) => { const code = codeOf(e); if (code) S.keys.delete(code); });
+  S.keyTimers = {};
+  window.addEventListener('keyup', (e) => {
+    const code = codeOf(e); if (!code) return;
+    clearTimeout(S.keyTimers[code]);
+    S.keyTimers[code] = setTimeout(() => S.keys.delete(code), 90); // > one auto-repeat interval (≈30–40 ms)
+  });
   const toBoard = (e) => { const r = canvas.getBoundingClientRect(); return { x: (e.clientX - r.left) / r.width * W, y: (e.clientY - r.top) / r.height * H }; };
   canvas.addEventListener('pointerdown', (e) => { try { canvas.setPointerCapture(e.pointerId); } catch (_) { /* inactive pointer id */ } S.pointers.set(e.pointerId, toBoard(e)); if (S.phase === 'idle' || S.phase === 'over' || S.phase === 'paused') startOrResume(); });
   canvas.addEventListener('pointermove', (e) => { if (!S.pointers.has(e.pointerId)) return; if (e.pointerType === 'mouse' && !(e.buttons & 1)) S.pointers.delete(e.pointerId); else S.pointers.set(e.pointerId, toBoard(e)); });
