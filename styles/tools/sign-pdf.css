@@ -1,0 +1,16 @@
+/* Designed by Kapil Pidhwani: Sign PDF — overlay layer, draggable signature images and the maker block; viewer/pager rules live in main.css */
+.spd-layer { position: absolute; inset: 0; }
+.spd-sig { position: absolute; height: auto; cursor: move; touch-action: none; user-select: none; outline: 2px dashed transparent; outline-offset: 2px; border-radius: 2px; }
+.spd-sig:hover, .spd-sig:focus-visible { outline-color: var(--brand-soft); }
+.spd-sig.is-active { outline-color: var(--brand); }
+.spd-sig[hidden] { display: none; }
+.spd-remove { margin-left: auto; }
+.spd-remove[disabled] { opacity: 0.5; cursor: default; }
+.spd-maker { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px dashed var(--border); }
+.spd-maker[hidden], .spd-mk[hidden] { display: none; }
+.spd-mk { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; }
+.spd-pad { width: 100%; max-width: 480px; aspect-ratio: 720 / 220; border: 1px dashed var(--border); border-radius: var(--radius-sm); background: #fff; touch-action: none; cursor: crosshair; }
+.spd-text { flex: 1 1 180px; }
+.spd-file { max-width: 240px; font-size: 0.8rem; }
+.spd-range { width: 140px; }
+#btn-add { align-self: flex-start; }
