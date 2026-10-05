@@ -1,0 +1,7 @@
+/* Designed by Kapil Pidhwani: PDF Compressor — tool-only styles; adapts via @container (card is the container) */
+.pdc-page { display: block; max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; background: #fff; box-shadow: var(--shadow-sm); }
+.pdc-page[hidden], .media-empty-placeholder[hidden], .control-item[hidden] { display: none; }
+.pdc-range { width: 120px; }
+#result-badge { font-weight: 600; }
+#result-badge.pdc-win { color: #15803d; background: rgba(22, 163, 74, 0.1); }
+[data-theme="dark"] #result-badge.pdc-win { color: #4ade80; }
