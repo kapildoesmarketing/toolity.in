@@ -1,0 +1,3 @@
+/* Designed by Kapil Pidhwani: Image Metadata tools — tool-only styles; shared .meta-* rules live in main.css */
+.media-preview-img.is-show { display: block; }
+.media-empty-placeholder[hidden] { display: none; }

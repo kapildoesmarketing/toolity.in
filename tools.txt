@@ -1,92 +1,185 @@
-Convertors
-- Video to Audio
-- Audio Converter
+Media
+Image Tools
+- Image Resizer
+- Image Cropper
 - HEIC to JPG
 - SVG to PNG
-- Images to GIF
+- Image to Base64
+- Image Negative Inverter
+- Rounded Corners Image Maker
+- Meme Generator
+- Twitter Header Generator
+- Image Watermarker
+
+Video Tools
+- Video Trimmer
+- Video Watermarker
+- Video Reverser
+- Video to Audio
 - Video to Image Frames
+- Video Merger
+- Video Cropper
+- Video Rotator
+- Video Looper
+- Screen Recorder
+
+GIF Tools
+- Images to GIF
+- GIF Trimmer
+- GIF Reverser
+- GIF Cropper
+- GIF Resizer
+- GIF Splitter
+- GIF Looper
+- GIF to PNG Frames
+- GIF Text Overlay
+- Boomerang Maker
+
+Audio Tools
+- Audio Converter
+- Audio Trimmer
+- Audio Merger
+- Audio Reverser
+- Audio Speed Changer
+- Volume Booster
+- Voice Recorder
+- Voice Changer
+- Audio Fade In Out
+- Silence Remover
+
+Docs
+PDF Tools
 - Images to PDF
 - PDF to Images
-- Image to Base64
-- WebP to JPG
+- PDF to Text
+- PDF Page Numberer
+- PDF Metadata Editor
+- PDF Cropper
+- PDF Page Resizer
+- PDF Form Filler
+- PDF Flattener
+- Grayscale PDF
 
-Visuals
+Text & Notes
+- Markdown Notepad
+- Word Counter
+- To-Do List
+- Checklist Maker
+- Sticky Notes Board
+- Daily Journal
+- Text Snippets Manager
+- Case Converter
+- Lorem Ipsum Generator
+- Text Diff
+
+Labs
+Generators & Links
+- vCard Generator
+- UTM Link Builder
+- Slug Generator
+- Social Share Link Generator
+- YouTube Timestamp Link Generator
+- YouTube Embed Code Generator
+- Calendar Event Link Generator
+- SMS Link Generator
+- Password Generator
+- Random Picker
+
+Web Utilities
+- Open Graph Preview
+- Meta Tag Extractor
+- URL Cleaner
+- URL Encoder Decoder
+- Redirect Checker
 - Gradient Generator
 - Color Palette Generator
 - Contrast Checker
 - Color Converter
-- Image Resizer
-- Image Cropper
-- Rounded Corners Image Maker
-- Favicon Generator
-- Twitter Header Generator
-- Meme Generator
-
-Productivity
-- Markdown Notepad
-- To-Do List
 - Pomodoro Timer
-- Word Counter
-- Daily Journal
-- Checklist Maker
-- Sticky Notes Board
-- Text Snippets Manager
-- Countdown Timer
-- Habit Tracker
-
-Web
-- Open Graph Preview
-- Meta Tag Extractor
-- UTM Link Builder
-- URL Cleaner
-- URL Encoder Decoder
-- YouTube Timestamp Link Generator
-- YouTube Embed Code Generator
-- Social Share Link Generator
-- Slug Generator
-- Redirect Checker
-
-Fun
-- Breakout
-- Space Invaders
-- Minesweeper
-- Whack-a-Mole
-- Memory Match
-- Sudoku
-- Typing Speed Test
-- Reaction Time Test
-- Connect Four
-- Wordle Clone
-
-Development
-- YAML Visualizer
-- XML Visualizer
-- CSV Table Viewer
-- JSON Diff
-- JSON to TypeScript
-- JSON Formatter
-- Regex Tester
-- Cron Expression Explainer
-- JWT Decoder
-- Base64 Encoder Decoder
-
-Utilities
-- Audio Trimmer
-- Video Trimmer
-- GIF Trimmer
-- Video Muter
-- Video Reverser
-- Image Metadata Remover
-- WiFi QR Code Generator
 
 Experiments
 - Green Screen Camera
 - Stop Motion Maker
 - Webcam Time-Lapse
-- Boomerang Maker
 - ASCII Webcam
 - Kaleidoscope Camera
 - Pixelate Camera
 - Face Mask Filter
 - Motion Detector
-- Voice Changer
+- Mirror Camera
+- Thermal Camera Filter
+
+Dev
+Formatters & Validators
+- JSON Formatter
+- YAML Visualizer
+- XML Visualizer
+- HTML Formatter
+- CSS Minifier
+- JavaScript Minifier
+- SQL Formatter
+- Markdown Previewer
+- JSON Schema Validator
+- HTML Validator
+
+Encoders & Inspectors
+- Base64 Encoder Decoder
+- JWT Decoder
+- Regex Tester
+- Cron Expression Explainer
+- Hash Generator
+- UUID Generator
+- Timestamp Converter
+- Color Code Converter
+- HTTP Status Code Lookup
+- User Agent Parser
+
+Data
+Parsers
+- CSV Table Viewer
+- JSON Diff
+- JSON Path Finder
+- Log Parser
+- Query String Builder
+- Email Extractor
+- Phone Number Extractor
+- Link Extractor
+- Number Extractor
+- Duplicate Line Remover
+
+Converters
+- JSON to CSV
+- CSV to JSON
+- JSON to TypeScript
+- JSON to YAML
+- YAML to JSON
+- XML to JSON
+- Markdown to HTML
+- HTML to Markdown
+- Table to Markdown
+- Unit Converter
+
+Games
+Arcade
+- Breakout
+- Space Invaders
+- Whack-a-Mole
+- Asteroids
+- Frogger
+- Dino Runner
+- Doodle Jump
+- Brick Shooter
+- Reaction Time Test
+- Typing Speed Test
+
+Puzzle & Board
+- Minesweeper
+- Sudoku
+- Memory Match
+- Connect Four
+- Wordle Clone
+- Checkers
+- Chess
+- Sliding Puzzle
+- Hangman
+- Solitaire

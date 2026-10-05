@@ -542,6 +542,70 @@
         tags: ['favicon', 'extractor', 'downloader', 'google', 'icon', 'website', 'touch icon', 'apple', 'grabber', 'pwa']
       },
       {
+        id: 'image-metadata-remover',
+        title: 'Image Metadata Remover',
+        category: 'Media',
+        url: 'media/image-metadata-remover/',
+        icon: 'lucide:shield-off',
+        tags: ['image', 'exif', 'remove exif', 'strip metadata', 'gps', 'location', 'privacy', 'clean photo', 'jpg', 'png', 'webp', 'scrub', 'anonymize']
+      },
+      {
+        id: 'image-metadata-viewer',
+        title: 'Image Metadata Viewer',
+        category: 'Media',
+        url: 'media/image-metadata-viewer/',
+        icon: 'lucide:scan-search',
+        tags: ['image', 'exif', 'exif viewer', 'metadata', 'gps', 'camera', 'photo info', 'inspect', 'xmp', 'iptc', 'jpg', 'png', 'webp']
+      },
+      {
+        id: 'video-metadata-remover',
+        title: 'Video Metadata Remover',
+        category: 'Media',
+        url: 'media/video-metadata-remover/',
+        icon: 'lucide:shield-off',
+        tags: ['video', 'metadata', 'remove', 'strip', 'gps', 'location', 'privacy', 'mp4', 'mov', 'webm', 'mkv', 'clean', 'anonymize']
+      },
+      {
+        id: 'video-metadata-viewer',
+        title: 'Video Metadata Viewer',
+        category: 'Media',
+        url: 'media/video-metadata-viewer/',
+        icon: 'lucide:scan-search',
+        tags: ['video', 'metadata', 'viewer', 'inspect', 'gps', 'codec', 'tracks', 'mp4', 'mov', 'webm', 'mkv', 'mediainfo']
+      },
+      {
+        id: 'audio-metadata-remover',
+        title: 'Audio Metadata Remover',
+        category: 'Media',
+        url: 'media/audio-metadata-remover/',
+        icon: 'lucide:shield-off',
+        tags: ['audio', 'id3', 'remove tags', 'strip', 'metadata', 'mp3', 'flac', 'wav', 'm4a', 'cover art', 'privacy', 'clean']
+      },
+      {
+        id: 'audio-metadata-viewer',
+        title: 'Audio Metadata Viewer',
+        category: 'Media',
+        url: 'media/audio-metadata-viewer/',
+        icon: 'lucide:scan-search',
+        tags: ['audio', 'id3', 'tag viewer', 'metadata', 'mp3', 'flac', 'wav', 'm4a', 'ogg', 'bitrate', 'inspect', 'cover art']
+      },
+      {
+        id: 'pdf-metadata-remover',
+        title: 'PDF Metadata Remover',
+        category: 'Docs',
+        url: 'docs/pdf-metadata-remover/',
+        icon: 'lucide:shield-off',
+        tags: ['pdf', 'metadata', 'remove author', 'strip', 'privacy', 'xmp', 'clean pdf', 'anonymize', 'document info']
+      },
+      {
+        id: 'pdf-metadata-viewer',
+        title: 'PDF Metadata Viewer',
+        category: 'Docs',
+        url: 'docs/pdf-metadata-viewer/',
+        icon: 'lucide:scan-search',
+        tags: ['pdf', 'metadata', 'viewer', 'author', 'producer', 'creator', 'inspect', 'document info', 'xmp', 'pdf properties']
+      },
+      {
         id: 'youtube-thumbnail-downloader',
         title: 'YouTube Thumbnail Downloader',
         category: 'Media',

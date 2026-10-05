@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online PDF Metadata Remover | Toolity Docs</title>
+  <link rel="canonical" href="https://toolity.in/docs/pdf-metadata-remover/">
+  <meta name="description" content="Free online PDF metadata remover: delete author, dates, creator app and XMP data from any PDF losslessly. Processed in your browser — nothing uploaded.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online PDF Metadata Remover | Toolity Docs">
+  <meta property="og:description" content="Free online PDF metadata remover: delete author, dates, creator app and XMP data from any PDF losslessly. Processed in your browser — nothing uploaded.">
+  <meta property="og:url" content="https://toolity.in/docs/pdf-metadata-remover/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=3.2" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=3.2">
+  <link rel="stylesheet" href="/styles/tools/pdf-metadata-remover.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "PDF Metadata Remover",
+        "url": "https://toolity.in/docs/pdf-metadata-remover/",
+        "description": "Free online PDF metadata remover: delete author, dates, creator app and XMP data from any PDF losslessly. Processed in your browser — nothing uploaded.",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Docs", "item": "https://toolity.in/docs/" },
+          { "@type": "ListItem", "position": 3, "name": "PDF Metadata Remover", "item": "https://toolity.in/docs/pdf-metadata-remover/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Is my PDF uploaded to a server?", "acceptedAnswer": { "@type": "Answer", "text": "No. The file is read with the FileReader API and parsed by JavaScript in your browser tab. Nothing is transmitted, logged or stored anywhere." } },
+          { "@type": "Question", "name": "What exactly is removed?", "acceptedAnswer": { "@type": "Answer", "text": "Every Document Info entry, the XMP metadata stream and app-private PieceInfo blobs. Pages, fonts, images, links, bookmarks, forms and attachments are left exactly as they were." } },
+          { "@type": "Question", "name": "Is the cleaning lossless?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — the document is re-serialised by pdf-lib without touching page content streams or images." } },
+          { "@type": "Question", "name": "Does this remove my name from the PDF text or watermark?", "acceptedAnswer": { "@type": "Answer", "text": "No. This tool only removes hidden metadata. Anything visible on the page — a name in the footer, a watermark, form field values — needs the Redact PDF tool." } },
+          { "@type": "Question", "name": "The tool says the PDF is encrypted.", "acceptedAnswer": { "@type": "Answer", "text": "Password-protected PDFs must be opened first. Run them through Unlock PDF, then come back." } },
+          { "@type": "Question", "name": "Can I see what will be removed before cleaning?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — the result pane lists everything that was inside, and the PDF Metadata Viewer shows the same data without changing the file." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/docs/" class="breadcrumb-link">Docs</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">PDF Metadata Remover</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Docs</span>
+            <h1 class="page-title">PDF Metadata Remover</h1>
+            <p class="page-desc">Strip author, dates, creator app and XMP from a PDF without re-encoding it — cleaned in your browser, nothing uploaded.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" data-split="40/60" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge" id="result-badge">Drop a file to begin</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset" aria-label="Reset">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy removal summary" aria-label="Copy removal summary" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download cleaned PDF" aria-label="Download cleaned PDF" disabled>
+                <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                <span>Download</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Original</span>
+                <span class="pane-badge" id="source-badge">No file loaded</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content pane-content-between">
+                <div class="media-canvas-viewport pdf-tall">
+                  <div id="dropzone" class="video-dropzone" tabindex="0" role="button" aria-label="Drop a PDF here or click to browse">
+                    <input type="file" id="file-input" accept="application/pdf, .pdf">
+                    <div class="video-drop-icon">
+                      <iconify-icon icon="lucide:upload-cloud" width="22" height="22"></iconify-icon>
+                    </div>
+                    <div class="video-drop-title">Drop a PDF here or click to browse</div>
+                    <div class="video-drop-subtitle">any PDF — up to 100 MB</div>
+                  </div>
+                  <canvas id="source-canvas" class="pdf-page-canvas" hidden aria-label="First page"></canvas>
+                </div>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Result</span>
+                <span class="pane-badge" id="output-badge">Awaiting file</span>
+              </div>
+              <div class="pane-content pane-content-between">
+                <div class="media-canvas-viewport meta-tall">
+                  <div id="output-empty" class="media-empty-placeholder">
+                    <iconify-icon icon="lucide:shield-check" width="32" height="32"></iconify-icon>
+                    <p>The cleaned file summary will appear here</p>
+                  </div>
+                  <div id="meta-out" class="meta-out" hidden></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Remove PDF Metadata in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Drop a PDF</h3>
+              <p class="step-desc">Drag any PDF onto the left pane. The file is parsed and cleaned immediately — no button to press.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Check the Summary</h3>
+              <p class="step-desc">See how many fields were found and removed, the before/after size, and the flags turning green. Expand "What was inside" to review exactly what was deleted.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Download</h3>
+              <p class="step-desc">Save the cleaned PDF with one click. The original on your disk is untouched. Curious first? Open the <a href="/docs/pdf-metadata-viewer/">PDF Metadata Viewer</a>.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 4. REFERENCE ═══════════ -->
+        <section class="reference-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">Reference</span>
+            <h2 class="section-heading-sm">Where PDF Metadata Hides</h2>
+          </div>
+          <div class="formats-table-card">
+            <table class="formats-table">
+              <thead><tr><th>Location</th><th>Typical contents</th><th>Removed?</th></tr></thead>
+              <tbody>
+                <tr><td>Info dictionary</td><td>Title, Author, Creator (e.g. Word), Producer, dates</td><td>Yes</td></tr>
+                <tr><td>XMP stream</td><td>dc:creator, xmp:CreatorTool, history, document IDs</td><td>Yes</td></tr>
+                <tr><td>PieceInfo</td><td>Illustrator/InDesign private data, sometimes file paths</td><td>Yes</td></tr>
+                <tr><td>Page content</td><td>Visible text, headers, footers, watermarks</td><td>No — use Redact PDF</td></tr>
+                <tr><td>Attachments / forms</td><td>Embedded files, form field values</td><td>No — kept intact</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">PDF Metadata Remover — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Is my PDF uploaded to a server?</summary>
+              <p>No. The file is read with the FileReader API and parsed by JavaScript in your browser tab. Nothing is transmitted, logged or stored anywhere.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What exactly is removed?</summary>
+              <p>Every Document Info entry, the XMP metadata stream and app-private PieceInfo blobs. Pages, fonts, images, links, bookmarks, forms and attachments are left exactly as they were.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is the cleaning lossless?</summary>
+              <p>Yes — the document is re-serialised by pdf-lib without touching page content streams or images.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Does this remove my name from the PDF text or watermark?</summary>
+              <p>No. This tool only removes hidden metadata. Anything visible on the page — a name in the footer, a watermark, form field values — needs the <a href="/docs/redact-pdf/">Redact PDF</a> tool.</p>
+            </details>
+            <details class="faq-item">
+              <summary>The tool says the PDF is encrypted.</summary>
+              <p>Password-protected PDFs must be opened first. Run them through <a href="/docs/unlock-pdf/">Unlock PDF</a>, then come back.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can I see what will be removed before cleaning?</summary>
+              <p>Yes — the result pane lists everything that was inside, and the <a href="/docs/pdf-metadata-viewer/">PDF Metadata Viewer</a> shows the same data without changing the file.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="docs"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=2.5"></script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@cantoo/pdf-lib@2.11.1/dist/pdf-lib.min.js" defer></script>
+  <script src="/scripts/pdf-common.js?v=1.0"></script>
+  <script src="/scripts/meta-common.js?v=1.0"></script>
+  <script src="/scripts/meta-pdf.js?v=1.0"></script>
+  <script src="/docs/pdf-metadata-remover/pdf-metadata-remover.js?v=1.0"></script>
+</body>
+</html>

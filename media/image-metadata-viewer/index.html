@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Image Metadata Viewer | Toolity Media</title>
+  <link rel="canonical" href="https://toolity.in/media/image-metadata-viewer/">
+  <meta name="description" content="Free online image metadata viewer: inspect EXIF, GPS coordinates, camera model, dates and XMP in JPG, PNG or WebP (HEIC: info only). 100% private — files never leave your device.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Image Metadata Viewer | Toolity Media">
+  <meta property="og:description" content="Free online image metadata viewer: inspect EXIF, GPS coordinates, camera model, dates and XMP in JPG, PNG or WebP (HEIC: info only). 100% private — files never leave your device.">
+  <meta property="og:url" content="https://toolity.in/media/image-metadata-viewer/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=3.2" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=3.2">
+  <link rel="stylesheet" href="/styles/tools/image-metadata-viewer.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Image Metadata Viewer",
+        "url": "https://toolity.in/media/image-metadata-viewer/",
+        "description": "Free online image metadata viewer: inspect EXIF, GPS coordinates, camera model, dates and XMP in JPG, PNG or WebP (HEIC: info only). 100% private — files never leave your device.",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Media", "item": "https://toolity.in/media/" },
+          { "@type": "ListItem", "position": 3, "name": "Image Metadata Viewer", "item": "https://toolity.in/media/image-metadata-viewer/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Is my image uploaded to a server?", "acceptedAnswer": { "@type": "Answer", "text": "No. The file is read with the FileReader API and parsed by JavaScript in your browser tab. Nothing is transmitted, logged or stored anywhere." } },
+          { "@type": "Question", "name": "What kind of metadata does the viewer show?", "acceptedAnswer": { "@type": "Answer", "text": "EXIF (camera make and model, lens, exposure, ISO, capture date and time, software), GPS coordinates with a map link, XMP (creator, copyright, edit history), IPTC captions, embedded thumbnails and colour profile." } },
+          { "@type": "Question", "name": "Why does it matter?", "acceptedAnswer": { "@type": "Answer", "text": "Metadata travels with the file. A photo can reveal where your home is, a PDF can reveal who wrote it and with what, an audio export can reveal the software and account used. Knowing what is inside lets you decide what to share — the Image Metadata Remover strips it in one step." } },
+          { "@type": "Question", "name": "My photo is sideways after cleaning — why?", "acceptedAnswer": { "@type": "Answer", "text": "Cameras often store photos rotated and rely on an EXIF orientation flag. The \"bake in rotation\" setting (on by default) physically rotates such photos before saving so they stay upright; turn it off only if you want a strictly byte-level strip." } },
+          { "@type": "Question", "name": "Can it also remove the metadata?", "acceptedAnswer": { "@type": "Answer", "text": "This page is read-only by design. Use the Image Metadata Remover — same parser, plus a lossless clean-up and download." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/media/" class="breadcrumb-link">Media</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Image Metadata Viewer</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Media</span>
+            <h1 class="page-title">Image Metadata Viewer</h1>
+            <p class="page-desc">See every hidden detail stored inside an image — camera, GPS location, dates, software — read entirely in your browser.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" data-split="40/60" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge" id="result-badge">Drop a file to begin</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset" aria-label="Reset">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy all metadata as text" aria-label="Copy all metadata as text" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download metadata as JSON" aria-label="Download metadata as JSON" disabled>
+                <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                <span>Download</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Original</span>
+                <span class="pane-badge" id="source-badge">No file loaded</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content pane-content-between">
+                <div class="media-canvas-viewport">
+                  <div id="dropzone" class="video-dropzone" tabindex="0" role="button" aria-label="Drop an image here or click to browse">
+                    <input type="file" id="file-input" accept="image/jpeg, image/png, image/webp, image/*, .heic, .heif, .avif">
+                    <div class="video-drop-icon">
+                      <iconify-icon icon="lucide:upload-cloud" width="22" height="22"></iconify-icon>
+                    </div>
+                    <div class="video-drop-title">Drop an image here or click to browse</div>
+                    <div class="video-drop-subtitle">JPG, PNG or WebP (HEIC: info only) — up to 50 MB</div>
+                  </div>
+                  <img id="source-img" alt="Original preview" class="media-preview-img" width="360" height="240">
+                </div>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Metadata</span>
+                <span class="pane-badge" id="output-badge">Awaiting file</span>
+              </div>
+              <div class="pane-content pane-content-between">
+                <div class="media-canvas-viewport meta-tall">
+                  <div id="output-empty" class="media-empty-placeholder">
+                    <iconify-icon icon="lucide:search" width="32" height="32"></iconify-icon>
+                    <p>Everything stored inside the file will be listed here</p>
+                  </div>
+                  <div id="meta-out" class="meta-out" hidden></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to View Image Metadata in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Drop an image</h3>
+              <p class="step-desc">Drag JPG, PNG or WebP onto the left pane or click to browse. Parsing happens instantly in your browser.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Read the Flags</h3>
+              <p class="step-desc">The coloured chips show at a glance whether the file carries location, dates, device, author or software information. Expand each section for the full key–value list.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Copy or Export</h3>
+              <p class="step-desc">Copy everything as plain text or download a JSON file. Want it gone? Use the <a href="/media/image-metadata-remover/">Image Metadata Remover</a>.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Image Metadata Viewer — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Is my image uploaded to a server?</summary>
+              <p>No. The file is read with the FileReader API and parsed by JavaScript in your browser tab. Nothing is transmitted, logged or stored anywhere.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What kind of metadata does the viewer show?</summary>
+              <p>EXIF (camera make and model, lens, exposure, ISO, capture date and time, software), GPS coordinates with a map link, XMP (creator, copyright, edit history), IPTC captions, embedded thumbnails and colour profile.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why does it matter?</summary>
+              <p>Metadata travels with the file. A photo can reveal where your home is, a PDF can reveal who wrote it and with what, an audio export can reveal the software and account used. Knowing what is inside lets you decide what to share — the <a href="/media/image-metadata-remover/">Image Metadata Remover</a> strips it in one step.</p>
+            </details>
+            <details class="faq-item">
+              <summary>My photo is sideways after cleaning — why?</summary>
+              <p>Cameras often store photos rotated and rely on an EXIF orientation flag. The "bake in rotation" setting (on by default) physically rotates such photos before saving so they stay upright; turn it off only if you want a strictly byte-level strip.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can it also remove the metadata?</summary>
+              <p>This page is read-only by design. Use the <a href="/media/image-metadata-remover/">Image Metadata Remover</a> — same parser, plus a lossless clean-up and download.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="media"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=2.5"></script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="/scripts/meta-common.js?v=1.0"></script>
+  <script src="/scripts/meta-image.js?v=1.0"></script>
+  <script src="/media/image-metadata-viewer/image-metadata-viewer.js?v=1.0"></script>
+</body>
+</html>

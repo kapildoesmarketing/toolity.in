@@ -149,17 +149,15 @@ body {
 }
 
 .site-header.scrolled {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--border);
-  box-shadow: var(--shadow-sm);
+  /* Designed by Kapil Pidhwani: header bar stays transparent on scroll — only the nav capsule, logo and buttons float.
+     pointer-events pass through the empty strip so content under it stays clickable. */
+  background: transparent;
+  pointer-events: none;
 }
 
-[data-theme="dark"] .site-header.scrolled {
-  background: rgba(13, 13, 13, 0.85);
-  border-bottom: 1px solid var(--border);
-}
+.site-header.scrolled .nav-left,
+.site-header.scrolled .nav-center,
+.site-header.scrolled .nav-right { pointer-events: auto; }
 
 .nav-container {
   width: 100%;
@@ -3863,3 +3861,34 @@ body {
 .tools-section-title { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.01em; color: var(--text-primary); margin: 0 0 1.25rem; }
 .tools-grid + .tools-section-title { margin-top: 3rem; }
 .section-wrapper.category-tools { border-top: none; padding-top: 3.5rem; }
+
+/* ─── Metadata tools (viewer + remover × image/audio/video/PDF) — shared by 8 pages ─── */
+.meta-out { width: 100%; height: 100%; overflow: auto; padding: 0.85rem; display: flex; flex-direction: column; gap: 0.75rem; align-self: stretch; text-align: left; }
+.meta-out[hidden] { display: none; }
+.meta-flags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.meta-flag { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.72rem; font-weight: 600; padding: 0.25rem 0.55rem; border-radius: 999px; border: 1px solid var(--border); color: var(--text-muted); background: var(--surface); }
+.meta-flag.is-hot { color: #b45309; background: rgba(245, 158, 11, 0.12); border-color: rgba(245, 158, 11, 0.35); }
+.meta-flag.is-clear { color: #15803d; background: rgba(22, 163, 74, 0.1); border-color: rgba(22, 163, 74, 0.3); text-decoration: line-through; }
+[data-theme="dark"] .meta-flag.is-hot { color: #fbbf24; }
+[data-theme="dark"] .meta-flag.is-clear { color: #4ade80; }
+.meta-section { border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface-elevated); overflow: hidden; }
+.meta-section > summary { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; padding: 0.55rem 0.75rem; font-size: 0.82rem; font-weight: 600; cursor: pointer; list-style: none; }
+.meta-section > summary::-webkit-details-marker { display: none; }
+.meta-section > summary::before { content: ''; width: 0.4rem; height: 0.4rem; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(-45deg); margin-right: 0.4rem; transition: transform 0.15s; flex: none; }
+.meta-section[open] > summary::before { transform: rotate(45deg); }
+.meta-section > summary > span:first-child { flex: 1; }
+.meta-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; table-layout: fixed; }
+.meta-table th, .meta-table td { padding: 0.4rem 0.75rem; border-top: 1px solid var(--border-subtle); vertical-align: top; text-align: left; overflow-wrap: anywhere; }
+.meta-table th { width: 38%; font-weight: 500; color: var(--text-secondary); }
+.meta-table td { font-family: var(--font-mono); color: var(--text-primary); }
+.meta-table a { color: var(--brand); text-decoration: none; }
+.meta-table a:hover { text-decoration: underline; }
+.meta-summary { display: flex; gap: 0.7rem; align-items: flex-start; padding: 0.8rem 0.9rem; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--surface-elevated); font-size: 0.82rem; }
+.meta-summary p { margin: 0.15rem 0 0; color: var(--text-secondary); font-size: 0.76rem; }
+.meta-summary iconify-icon { flex: none; margin-top: 0.1rem; color: var(--brand); }
+.meta-summary.is-ok iconify-icon { color: #15803d; }
+.meta-summary.is-warn iconify-icon { color: #b45309; }
+.meta-note, .meta-empty { margin: 0; font-size: 0.76rem; color: var(--text-muted); }
+.media-canvas-viewport.meta-tall { height: auto; min-height: 280px; max-height: 560px; align-items: stretch; justify-content: flex-start; }
+#result-badge.meta-hot { color: #b45309; background: rgba(245, 158, 11, 0.12); font-weight: 600; }
+[data-theme="dark"] #result-badge.meta-hot { color: #fbbf24; }
