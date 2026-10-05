@@ -1,2 +1,4 @@
 /* Designed by Kapil Pidhwani: PDF Page Rotator — tool-only styles; grid/thumb rules live in main.css */
 .pdf-thumb canvas { transform-origin: center; }
+.control-item:has(#seg-all) { flex-wrap: wrap; }
+#seg-all { flex-wrap: wrap; }

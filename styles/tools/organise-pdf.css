@@ -5,3 +5,5 @@
 .opd-grid .pdf-thumb.is-deleted { opacity: 0.45; border-style: dashed; }
 .opd-grid .pdf-thumb.is-deleted canvas { filter: grayscale(1); }
 .opd-grid .pdf-thumb.is-deleted .pdf-thumb-num { text-decoration: line-through; }
+.control-item:has(#seg-quick) { flex-wrap: wrap; }
+#seg-quick { flex-wrap: wrap; }

@@ -280,6 +280,78 @@
         tags: ['video', 'compress', 'compressor', 'shrink', 'reduce size', 'mp4', 'mov', 'webm', 'bitrate', '720p', '480p', 'whatsapp video', 'email video', 'target size']
       },
       {
+        id: 'organise-pdf',
+        title: 'Organise PDF',
+        category: 'Utilities',
+        url: 'utilities/organise-pdf/',
+        icon: 'lucide:layout-grid',
+        tags: ['pdf', 'organise', 'organize', 'reorder', 'rearrange', 'move pages', 'delete pages', 'rotate pages', 'sort pages']
+      },
+      {
+        id: 'pdf-merger',
+        title: 'PDF Merger',
+        category: 'Utilities',
+        url: 'utilities/pdf-merger/',
+        icon: 'lucide:files',
+        tags: ['pdf', 'merge', 'merger', 'combine', 'join', 'append', 'concatenate', 'multiple pdfs']
+      },
+      {
+        id: 'pdf-page-rotator',
+        title: 'PDF Page Rotator',
+        category: 'Utilities',
+        url: 'utilities/pdf-page-rotator/',
+        icon: 'lucide:rotate-cw',
+        tags: ['pdf', 'rotate', 'rotator', 'rotation', 'sideways', 'landscape', 'portrait', 'fix orientation', 'scan']
+      },
+      {
+        id: 'pdf-splitter',
+        title: 'PDF Splitter',
+        category: 'Utilities',
+        url: 'utilities/pdf-splitter/',
+        icon: 'lucide:scissors',
+        tags: ['pdf', 'split', 'splitter', 'extract pages', 'page range', 'separate', 'zip', 'every page', 'divide']
+      },
+      {
+        id: 'protect-pdf',
+        title: 'Protect PDF',
+        category: 'Utilities',
+        url: 'utilities/protect-pdf/',
+        icon: 'lucide:lock',
+        tags: ['pdf', 'protect', 'password', 'encrypt', 'lock', 'secure', 'aes', 'permissions', 'no copy', 'no print']
+      },
+      {
+        id: 'redact-pdf',
+        title: 'Redact PDF',
+        category: 'Utilities',
+        url: 'utilities/redact-pdf/',
+        icon: 'lucide:eye-off',
+        tags: ['pdf', 'redact', 'redaction', 'black out', 'censor', 'hide text', 'remove sensitive', 'blackout', 'flatten']
+      },
+      {
+        id: 'sign-pdf',
+        title: 'Sign PDF',
+        category: 'Utilities',
+        url: 'utilities/sign-pdf/',
+        icon: 'lucide:pen-line',
+        tags: ['pdf', 'sign', 'signature', 'esign', 'e-signature', 'draw signature', 'initials', 'date stamp', 'fill and sign']
+      },
+      {
+        id: 'unlock-pdf',
+        title: 'Unlock PDF',
+        category: 'Utilities',
+        url: 'utilities/unlock-pdf/',
+        icon: 'lucide:lock-open',
+        tags: ['pdf', 'unlock', 'remove password', 'decrypt', 'restrictions', 'owner password', 'open password', 'unprotect']
+      },
+      {
+        id: 'watermark-pdf',
+        title: 'Watermark PDF',
+        category: 'Utilities',
+        url: 'utilities/watermark-pdf/',
+        icon: 'lucide:stamp',
+        tags: ['pdf', 'watermark', 'stamp', 'confidential', 'draft', 'logo', 'tiled', 'overlay text', 'brand']
+      },
+      {
         id: 'mailto-generator',
         title: 'Mailto Link Creator',
         category: 'Utilities',

@@ -77,9 +77,6 @@ Utilities
 - Video Muter
 - Video Reverser
 - Image Metadata Remover
-- PDF Merger
-- PDF Splitter
-- PDF Page Rotator
 - WiFi QR Code Generator
 
 Experiments
