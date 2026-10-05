@@ -20,7 +20,10 @@
   }
 
   /* ── Viewer ── */
-  async function showPage(n) {
+  // Designed by Kapil Pidhwani: renders are queued so a double-click on ‹ › never races PDF.js on the same canvas.
+  let queue = Promise.resolve();
+  const showPage = (n) => (queue = queue.then(() => S.doc && renderPage(n)).catch(console.warn));
+  async function renderPage(n) {
     S.page = Math.min(Math.max(1, n), S.pages);
     const { vp } = await P.render(S.doc, S.page, 1.2, $('page-canvas')); S.vw = vp.width; S.vh = vp.height;
     $('pager-text').textContent = `Page ${S.page} / ${S.pages}`; $('btn-prev').disabled = S.page === 1; $('btn-next').disabled = S.page === S.pages;

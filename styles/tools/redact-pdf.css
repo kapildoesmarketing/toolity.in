@@ -1,0 +1,10 @@
+/* Designed by Kapil Pidhwani: Redact PDF — drawing layer and boxes; viewer/pager rules live in main.css */
+.rpd-layer { position: absolute; inset: 0; cursor: crosshair; touch-action: none; }
+.rpd-box { position: absolute; cursor: pointer; opacity: 0.85; outline: 2px solid transparent; outline-offset: 1px; }
+.rpd-box.is-draft { opacity: 0.5; pointer-events: none; }
+.rpd-box:hover, .rpd-box:focus-visible { outline-color: var(--brand-soft); }
+.rpd-box.is-active { outline-color: var(--brand); }
+.rpd-box[hidden] { display: none; }
+.rpd-count { color: var(--text-muted); }
+.rpd-remove { margin-left: auto; }
+.rpd-remove[disabled] { opacity: 0.5; cursor: default; }
