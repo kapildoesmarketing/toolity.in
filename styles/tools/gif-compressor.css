@@ -1,0 +1,9 @@
+/* Designed by Kapil Pidhwani: GIF Compressor — tool-only styles; adapts via @container (card is the container) */
+.media-preview-img.gfc-show { display: block; }
+.media-empty-placeholder[hidden] { display: none; }
+.control-item[hidden] { display: none; }
+.gfc-range { width: 140px; }
+.gfc-target { width: 90px; font-family: var(--font-mono); }
+#result-badge { font-weight: 600; }
+#result-badge.gfc-win { color: #15803d; background: rgba(22, 163, 74, 0.1); }
+[data-theme="dark"] #result-badge.gfc-win { color: #4ade80; }
