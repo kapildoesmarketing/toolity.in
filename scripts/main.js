@@ -336,6 +336,46 @@
         tags: ['placeholder', 'dummy image', 'mock image', 'image generator', 'blank image', 'sample image', 'png', 'jpg', 'webp', 'svg', 'banner', 'thumbnail', 'og image', 'lorem picsum', 'placehold']
       },
       {
+        id: '2048',
+        title: '2048',
+        category: 'Fun',
+        url: 'fun/2048/',
+        icon: 'lucide:grid-2x2',
+        tags: ['2048', 'puzzle', 'tiles', 'merge', 'numbers', 'slide', 'game', 'games', 'swipe']
+      },
+      {
+        id: 'flappy-bird',
+        title: 'Flappy Bird',
+        category: 'Fun',
+        url: 'fun/flappy-bird/',
+        icon: 'lucide:bird',
+        tags: ['flappy', 'flappy bird', 'bird', 'pipes', 'tap', 'arcade', 'game', 'games']
+      },
+      {
+        id: 'snake',
+        title: 'Snake',
+        category: 'Fun',
+        url: 'fun/snake/',
+        icon: 'lucide:worm',
+        tags: ['snake', 'nokia', 'arcade', 'grow', 'food', 'retro', 'game', 'games', 'swipe']
+      },
+      {
+        id: 'tetris',
+        title: 'Tetris',
+        category: 'Fun',
+        url: 'fun/tetris/',
+        icon: 'lucide:layout-grid',
+        tags: ['tetris', 'blocks', 'block puzzle', 'lines', 'tetromino', 'puzzle', 'game', 'games']
+      },
+      {
+        id: 'tic-tac-toe',
+        title: 'Tic Tac Toe',
+        category: 'Fun',
+        url: 'fun/tic-tac-toe/',
+        icon: 'lucide:hash',
+        tags: ['tic tac toe', 'tictactoe', 'noughts and crosses', 'xo', 'x and o', 'minimax', 'game', 'games', 'two player']
+      },
+      {
         id: 'pong',
         title: 'Pong',
         category: 'Fun',
