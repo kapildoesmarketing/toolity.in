@@ -1160,8 +1160,8 @@ body {
    ========================================================================== */
 #category-cards {
   display: grid;
-  /* Designed by Kapil Pidhwani: auto-fill with a 25% floor = 1→4 columns, never 5 on ultrawide */
-  grid-template-columns: repeat(auto-fill, minmax(max(250px, calc(25% - 9px)), 1fr));
+  /* Designed by Kapil Pidhwani: auto-fill with a 33% floor = 1→3 columns, so six categories sit in a neat 3×2 */
+  grid-template-columns: repeat(auto-fill, minmax(max(250px, calc(33.333% - 8px)), 1fr));
   gap: 12px;
   width: 100%;
 }
