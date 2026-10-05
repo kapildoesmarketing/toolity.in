@@ -1,0 +1,17 @@
+/* Designed by Kapil Pidhwani: Add to Calendar Link Creator — provider rows; shared form classes live in main.css */
+.cal-out { display: flex; flex-direction: column; }
+.cal-links { display: flex; flex-direction: column; gap: 0.6rem; }
+.cal-links[hidden], .media-empty-placeholder[hidden] { display: none; }
+.cal-row { display: flex; align-items: center; gap: 0.75rem; min-width: 0; padding: 0.7rem 0.9rem; background: var(--surface-elevated); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); }
+.cal-row iconify-icon:first-child { flex: none; }
+.cal-row-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 0.1rem; }
+.cal-row-text strong { font-size: 0.88rem; font-weight: 600; color: var(--text-primary); }
+.cal-row-hint { font-size: 0.74rem; color: var(--text-muted); }
+.cal-row-hint:empty { display: none; }
+.cal-row .btn-toolbar-sm { flex: none; padding-inline: 0.6rem; }
+.form-row-2col > .form-group { min-width: 0; }
+.form-row-2col .input-clean { min-width: 0; width: 100%; }
+.cal-desc { min-height: 96px; }
+.cal-num { width: 4.5rem; }
+.cal-date { width: auto; }
+.tool-settings-panel .control-item { flex-wrap: wrap; }

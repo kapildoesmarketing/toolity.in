@@ -606,6 +606,30 @@
         tags: ['pdf', 'metadata', 'viewer', 'author', 'producer', 'creator', 'inspect', 'document info', 'xmp', 'pdf properties']
       },
       {
+        id: 'google-maps-embed-creator',
+        title: 'Google Maps Embed Creator',
+        category: 'Labs',
+        url: 'labs/google-maps-embed-creator/',
+        icon: 'lucide:map-pin',
+        tags: ['google maps', 'embed', 'iframe', 'map', 'address', 'directions', 'responsive map', 'website map', 'location embed', 'no api key']
+      },
+      {
+        id: 'add-to-calendar-link-creator',
+        title: 'Add to Calendar Link Creator',
+        category: 'Labs',
+        url: 'labs/add-to-calendar-link-creator/',
+        icon: 'lucide:calendar-plus',
+        tags: ['calendar', 'add to calendar', 'google calendar link', 'outlook', 'office 365', 'yahoo', 'ics', 'ical', 'apple calendar', 'event link', 'invite', 'rrule']
+      },
+      {
+        id: 'image-background-remover',
+        title: 'Image Background Remover',
+        category: 'Media',
+        url: 'media/image-background-remover/',
+        icon: 'lucide:scissors',
+        tags: ['background remover', 'remove bg', 'transparent png', 'cut out', 'ai', 'matting', 'portrait', 'product photo', 'webgpu', 'transformers.js', 'modnet', 'birefnet']
+      },
+      {
         id: 'youtube-thumbnail-downloader',
         title: 'YouTube Thumbnail Downloader',
         category: 'Media',

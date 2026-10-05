@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Add to Calendar Link Creator | Toolity Labs</title>
+  <link rel="canonical" href="https://toolity.in/labs/add-to-calendar-link-creator/">
+  <meta name="description" content="Free add-to-calendar link generator: create Google Calendar, Outlook, Office 365 and Yahoo event links and download an .ics file for Apple Calendar. Repeat rules, reminders and time zones — nothing uploaded.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Add to Calendar Link Creator | Toolity Labs">
+  <meta property="og:description" content="Free add-to-calendar link generator: create Google Calendar, Outlook, Office 365 and Yahoo event links and download an .ics file for Apple Calendar. Repeat rules, reminders and time zones — nothing uploaded.">
+  <meta property="og:url" content="https://toolity.in/labs/add-to-calendar-link-creator/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=3.3" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=3.3">
+  <link rel="stylesheet" href="/styles/tools/add-to-calendar-link-creator.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Add to Calendar Link Creator",
+        "url": "https://toolity.in/labs/add-to-calendar-link-creator/",
+        "description": "Free add-to-calendar link generator: create Google Calendar, Outlook, Office 365 and Yahoo event links and download an .ics file for Apple Calendar. Repeat rules, reminders and time zones — nothing uploaded.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Labs", "item": "https://toolity.in/labs/" },
+          { "@type": "ListItem", "position": 3, "name": "Add to Calendar Link Creator", "item": "https://toolity.in/labs/add-to-calendar-link-creator/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Which calendars are supported?", "acceptedAnswer": { "@type": "Answer", "text": "Google Calendar, Outlook.com, Office 365 and Yahoo Calendar get a direct \"add event\" link. Apple Calendar, Outlook desktop, Thunderbird and every other app import the standard .ics file the tool generates." } },
+          { "@type": "Question", "name": "Is my event data stored or sent anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. The links and the .ics text are assembled with JavaScript in your browser. Nothing is uploaded to Toolity; the only data transfer happens when you or your recipient open a link to the calendar provider." } },
+          { "@type": "Question", "name": "How are time zones handled?", "acceptedAnswer": { "@type": "Answer", "text": "Times are interpreted in the time zone shown in Settings (India by default). Google and .ics links carry the zone name so the event lands correctly for guests elsewhere; Outlook and Yahoo links are converted to UTC, which they translate to each user's local time." } },
+          { "@type": "Question", "name": "Do repeat rules and reminders work everywhere?", "acceptedAnswer": { "@type": "Answer", "text": "Google Calendar and the .ics file support repeat rules (RRULE). Reminders are only part of the .ics file. Outlook, Office 365 and Yahoo links have no public parameter for either, so the event is added once and users set their own alert." } },
+          { "@type": "Question", "name": "Why is there no \"one link for all calendars\"?", "acceptedAnswer": { "@type": "Answer", "text": "A single universal link needs a hosted landing page that stores your event on someone's server. Toolity keeps everything client-side, so you get one link per calendar plus an .ics file — paste the ones your audience uses." } },
+          { "@type": "Question", "name": "Can I put these links in an email?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Link text such as \"Add to Google Calendar\" works in any HTML email or web page. For Apple Mail users attach the downloaded .ics file; most mail clients show an \"Add to Calendar\" button for it." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/labs/" class="breadcrumb-link">Labs</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Add to Calendar Link Creator</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Labs</span>
+            <h1 class="page-title">Add to Calendar Link Creator</h1>
+            <p class="page-desc">Turn one event into Google, Outlook, Office 365 and Yahoo links plus a universal .ics file — built in your browser, time zone aware.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" data-split="40/60" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge" id="result-badge">Add a title and start time</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy Google Calendar link" aria-label="Copy Google Calendar link" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download .ics file (Apple Calendar, Outlook desktop, Thunderbird)" aria-label="Download .ics file" disabled>
+                <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                <span>Download .ics</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-open" title="Open in Google Calendar" aria-label="Open in Google Calendar" disabled>
+                <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
+                <span>Open</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Event</span>
+                <span class="pane-badge" id="source-badge"></span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content pane-content-tall">
+                <div class="form-group">
+                  <label class="form-label" for="ev-title"><span>Title <span class="form-required">*</span></span></label>
+                  <input type="text" id="ev-title" class="input-clean" placeholder="Product launch call" autocomplete="off">
+                </div>
+                <div class="form-row-2col">
+                  <div class="form-group">
+                    <label class="form-label" for="ev-start"><span>Starts <span class="form-required">*</span></span></label>
+                    <input type="datetime-local" id="ev-start" class="input-clean">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="ev-end"><span>Ends</span><span class="form-label-desc">Blank = 1 hour</span></label>
+                    <input type="datetime-local" id="ev-end" class="input-clean">
+                  </div>
+                </div>
+                <div class="control-item">
+                  <input type="checkbox" id="ev-allday">
+                  <label for="ev-allday">All-day event</label>
+                </div>
+                <div class="form-row-2col">
+                  <div class="form-group">
+                    <label class="form-label" for="ev-location"><span>Location</span></label>
+                    <input type="text" id="ev-location" class="input-clean" placeholder="Zoom, office, or an address" autocomplete="off">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="ev-url"><span>Link</span></label>
+                    <input type="url" id="ev-url" class="input-clean" placeholder="https://meet.google.com/…" autocomplete="off" spellcheck="false">
+                  </div>
+                </div>
+                <div class="form-group form-group-grow">
+                  <label class="form-label" for="ev-desc"><span>Description</span></label>
+                  <textarea id="ev-desc" class="textarea-clean cal-desc" placeholder="Agenda, dial-in details, what to bring…"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Add-to-calendar links</span>
+                <span class="pane-badge" id="output-badge">Awaiting details</span>
+              </div>
+              <div class="pane-content cal-out">
+                <div id="output-empty" class="media-empty-placeholder">
+                  <iconify-icon icon="lucide:calendar-plus" width="32" height="32"></iconify-icon>
+                  <p>Links for Google, Outlook, Office 365, Yahoo and an .ics file appear here</p>
+                </div>
+                <div id="cal-links" class="cal-links" hidden>
+                  <div class="cal-row" data-provider="google">
+                    <iconify-icon icon="logos:google-calendar" width="22" height="22"></iconify-icon>
+                    <div class="cal-row-text"><strong>Google Calendar</strong><span class="cal-row-hint" id="hint-google"></span></div>
+                    <button type="button" class="btn-toolbar-sm" data-copy="google" title="Copy Google Calendar link" aria-label="Copy Google Calendar link"><iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon></button>
+                    <a class="btn-toolbar-sm" data-open="google" href="#" target="_blank" rel="noopener" title="Open in Google Calendar" aria-label="Open in Google Calendar"><iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon></a>
+                  </div>
+                  <div class="cal-row" data-provider="outlook">
+                    <iconify-icon icon="vscode-icons:file-type-outlook" width="22" height="22"></iconify-icon>
+                    <div class="cal-row-text"><strong>Outlook.com</strong><span class="cal-row-hint" id="hint-outlook"></span></div>
+                    <button type="button" class="btn-toolbar-sm" data-copy="outlook" title="Copy Outlook.com link" aria-label="Copy Outlook.com link"><iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon></button>
+                    <a class="btn-toolbar-sm" data-open="outlook" href="#" target="_blank" rel="noopener" title="Open in Outlook.com" aria-label="Open in Outlook.com"><iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon></a>
+                  </div>
+                  <div class="cal-row" data-provider="office">
+                    <iconify-icon icon="logos:microsoft-icon" width="22" height="22"></iconify-icon>
+                    <div class="cal-row-text"><strong>Office 365</strong><span class="cal-row-hint" id="hint-office"></span></div>
+                    <button type="button" class="btn-toolbar-sm" data-copy="office" title="Copy Office 365 link" aria-label="Copy Office 365 link"><iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon></button>
+                    <a class="btn-toolbar-sm" data-open="office" href="#" target="_blank" rel="noopener" title="Open in Office 365" aria-label="Open in Office 365"><iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon></a>
+                  </div>
+                  <div class="cal-row" data-provider="yahoo">
+                    <iconify-icon icon="logos:yahoo" width="22" height="22"></iconify-icon>
+                    <div class="cal-row-text"><strong>Yahoo Calendar</strong><span class="cal-row-hint" id="hint-yahoo"></span></div>
+                    <button type="button" class="btn-toolbar-sm" data-copy="yahoo" title="Copy Yahoo Calendar link" aria-label="Copy Yahoo Calendar link"><iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon></button>
+                    <a class="btn-toolbar-sm" data-open="yahoo" href="#" target="_blank" rel="noopener" title="Open in Yahoo Calendar" aria-label="Open in Yahoo Calendar"><iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon></a>
+                  </div>
+                  <div class="cal-row" data-provider="ics">
+                    <iconify-icon icon="lucide:calendar-check" width="22" height="22"></iconify-icon>
+                    <div class="cal-row-text"><strong>Apple Calendar / .ics file</strong><span class="cal-row-hint">Works with every calendar app, including repeat and reminder</span></div>
+                    <button type="button" class="btn-toolbar-sm" id="btn-ics-copy" title="Copy .ics text" aria-label="Copy .ics text"><iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon></button>
+                    <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-ics" title="Download .ics" aria-label="Download .ics"><iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary"></span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item">
+                <label for="ev-tz">Time zone</label>
+                <select id="ev-tz" class="select-clean"></select>
+              </div>
+              <div class="control-item">
+                <label for="ev-repeat">Repeat</label>
+                <select id="ev-repeat" class="select-clean">
+                  <option value="" selected>Does not repeat</option>
+                  <option value="DAILY">Daily</option>
+                  <option value="WEEKLY">Weekly</option>
+                  <option value="MONTHLY">Monthly</option>
+                  <option value="YEARLY">Yearly</option>
+                </select>
+                <label for="ev-interval">every</label>
+                <input type="number" id="ev-interval" class="input-clean cal-num" min="1" max="99" value="1" inputmode="numeric" aria-label="Repeat interval">
+                <label for="ev-until">until</label>
+                <input type="date" id="ev-until" class="input-clean cal-date" aria-label="Repeat until date">
+              </div>
+              <div class="control-item">
+                <label for="ev-alarm">Reminder (.ics only)</label>
+                <select id="ev-alarm" class="select-clean">
+                  <option value="" selected>None</option>
+                  <option value="PT0M">At time of event</option>
+                  <option value="-PT10M">10 minutes before</option>
+                  <option value="-PT30M">30 minutes before</option>
+                  <option value="-PT1H">1 hour before</option>
+                  <option value="-P1D">1 day before</option>
+                </select>
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Create Add-to-Calendar Links in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Describe the event</h3>
+              <p class="step-desc">Enter a title and start time — everything else is optional. Leave the end blank for a one-hour event or tick <em>All-day</em>.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Pick the extras</h3>
+              <p class="step-desc">Open Settings to change the time zone (your India (Asia/Calcutta) is pre-selected), add a repeat rule or a reminder for the .ics file.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Copy or download</h3>
+              <p class="step-desc">Every link updates as you type. Copy a provider link for your email or page, test it with <em>Open</em>, or download the .ics file for Apple Calendar and desktop apps.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Add to Calendar Link Creator — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Which calendars are supported?</summary>
+              <p>Google Calendar, Outlook.com, Office 365 and Yahoo Calendar get a direct "add event" link. Apple Calendar, Outlook desktop, Thunderbird and every other app import the standard .ics file the tool generates.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is my event data stored or sent anywhere?</summary>
+              <p>No. The links and the .ics text are assembled with JavaScript in your browser. Nothing is uploaded to Toolity; the only data transfer happens when you or your recipient open a link to the calendar provider.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How are time zones handled?</summary>
+              <p>Times are interpreted in the time zone shown in Settings (India by default). Google and .ics links carry the zone name so the event lands correctly for guests elsewhere; Outlook and Yahoo links are converted to UTC, which they translate to each user's local time.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Do repeat rules and reminders work everywhere?</summary>
+              <p>Google Calendar and the .ics file support repeat rules (RRULE). Reminders are only part of the .ics file. Outlook, Office 365 and Yahoo links have no public parameter for either, so the event is added once and users set their own alert.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why is there no &quot;one link for all calendars&quot;?</summary>
+              <p>A single universal link needs a hosted landing page that stores your event on someone's server. Toolity keeps everything client-side, so you get one link per calendar plus an .ics file — paste the ones your audience uses.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can I put these links in an email?</summary>
+              <p>Yes. Link text such as "Add to Google Calendar" works in any HTML email or web page. For Apple Mail users attach the downloaded .ics file; most mail clients show an "Add to Calendar" button for it.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="labs"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=2.6"></script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="/labs/add-to-calendar-link-creator/add-to-calendar-link-creator.js?v=1.0"></script>
+</body>
+</html>
