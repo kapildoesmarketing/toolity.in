@@ -1,0 +1,5 @@
+/* Designed by Kapil Pidhwani: PDF Merger — tool-only styles; adapts via @container (card is the container) */
+#tool-card .tool-pane:first-child .media-canvas-viewport { height: auto; min-height: 150px; }
+#tool-card .tool-pane:first-child .video-dropzone { padding: 1.25rem 1rem; }
+#file-list { max-height: 300px; margin-top: 0.75rem; padding: 0; }
+.pdf-file .pdf-thumb-btn:disabled { opacity: 0.35; cursor: not-allowed; }

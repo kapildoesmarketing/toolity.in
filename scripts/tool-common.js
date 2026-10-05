@@ -73,7 +73,7 @@
 
   /**
    * Wire a dropzone + hidden file input.
-   * bindDropzone(zoneEl, inputEl, onFile, { accept: 'image/' })
+   * bindDropzone(zoneEl, inputEl, onFile, { accept: 'image/', multiple: false })  — multiple:true passes an array of files
    * `accept` is a MIME prefix or exact type; rejects with a toast otherwise.
    */
   function bindDropzone(zone, input, onFile, opts = {}) {
@@ -88,10 +88,11 @@
     };
     ['dragenter', 'dragover'].forEach((ev) => zone.addEventListener(ev, (e) => { e.preventDefault(); zone.classList.add('dragover'); }));
     ['dragleave', 'drop'].forEach((ev) => zone.addEventListener(ev, (e) => { e.preventDefault(); zone.classList.remove('dragover'); }));
-    zone.addEventListener('drop', (e) => take(e.dataTransfer.files[0]));
+    const takeAll = (files) => (opts.multiple ? onFile([...files].filter((f) => !accept || f.type.startsWith(accept))) : take(files[0]));
+    zone.addEventListener('drop', (e) => takeAll(e.dataTransfer.files));
     zone.addEventListener('click', (e) => { if (e.target !== input) input.click(); });
     zone.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); input.click(); } });
-    input.addEventListener('change', () => { take(input.files[0]); input.value = ''; });
+    input.addEventListener('change', () => { takeAll(input.files); input.value = ''; });
   }
 
   /** Disable toolbar actions while a tool is processing. */
