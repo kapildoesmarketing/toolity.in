@@ -37,38 +37,68 @@
     if (device) return device;
     let ok = false;
     try { ok = !!(navigator.gpu && await navigator.gpu.requestAdapter()); } catch (e) { ok = false; }
-    return (device = ok ? 'webgpu' : 'wasm');
+    device = ok ? 'webgpu' : 'wasm';
+    $('opt-model').querySelector('[value="birefnet"]').disabled = device !== 'webgpu'; // HQ needs WebGPU — never run it on WASM (OOM)
+    return device;
   }
-  async function getModel(kind) {
-    if (models[kind]) return models[kind];
-    const tf = await getLib(), spec = SPECS[kind], dev = await pickDevice();
+  const withTimeout = (p, ms, what) => Promise.race([p, new Promise((_, rej) => setTimeout(() => rej(new Error(`${what} timed out`)), ms))]);
+  async function getModel(kind, dev) {
+    const key = kind + ':' + dev;
+    if (models[key]) return models[key];
+    const tf = await getLib(), spec = SPECS[kind];
     const progress_callback = (p) => {
       if (p.status === 'progress' && /\.onnx/.test(p.file || '')) { progress(p.progress); status(`Downloading ${spec.label.toLowerCase()}… ${Math.round(p.progress)}% of ${formatBytes(p.total)}`); }
     };
-    status('Preparing model…');
-    const load = async (d) => ({ model: await tf.AutoModel.from_pretrained(spec.id, { device: d, dtype: spec.dtype[d], progress_callback }), processor: await tf.AutoProcessor.from_pretrained(spec.id), spec });
-    try { models[kind] = await load(dev); }
-    catch (e) { if (dev === 'wasm') throw e; console.warn('WebGPU failed, retrying on WASM', e); device = 'wasm'; models[kind] = await load('wasm'); }
-    return models[kind];
+    status(`Preparing ${spec.label.toLowerCase()} (${dev === 'webgpu' ? 'WebGPU' : 'WebAssembly'})…`);
+    const model = await withTimeout(tf.AutoModel.from_pretrained(spec.id, { device: dev, dtype: spec.dtype[dev], progress_callback }), 180000, 'Model download');
+    const processor = await tf.AutoProcessor.from_pretrained(spec.id);
+    return (models[key] = { model, processor, spec });
   }
 
   /* ── Inference → base mask (full-res alpha canvas) ── */
-  async function matte(kind) {
+  // Designed by Kapil Pidhwani: fallback ladder — each rung is isolated so a WebGPU shader failure or a WASM OOM never surfaces as "Failed" while a smaller rung can still work.
+  function ladder(pick, dev) {
+    const rungs = [];
+    if (pick !== 'modnet' && dev === 'webgpu') rungs.push(['birefnet', 'webgpu']);
+    if (dev === 'webgpu') rungs.push(['modnet', 'webgpu']);
+    rungs.push(['modnet', 'wasm']);
+    return rungs;
+  }
+  async function matte(pick) {
+    const dev = await pickDevice();
+    let lastErr = null;
+    for (const [kind, d] of ladder(pick, dev)) {
+      try {
+        const mask = await withTimeout(inferOnce(kind, d), 180000, 'Background removal');
+        return { mask, kind, dev: d };
+      } catch (e) {
+        console.warn(`${kind}/${d} failed`, e); lastErr = e;
+        delete models[kind + ':' + d];
+        if (d === 'webgpu') device = 'wasm';
+        status(`${SPECS[kind].label} unavailable on this device — trying the next option…`);
+      }
+    }
+    throw lastErr || new Error('No model could run');
+  }
+  async function inferOnce(kind, dev) {
     const { RawImage } = await getLib();
-    const { model, processor, spec } = await getModel(kind);
+    const { model, processor, spec } = await getModel(kind, dev);
     const W = S.img.naturalWidth, H = S.img.naturalHeight, scale = Math.min(1, WORK_SIDE / Math.max(W, H));
     const work = document.createElement('canvas');
     work.width = Math.round(W * scale); work.height = Math.round(H * scale);
     work.getContext('2d').drawImage(S.img, 0, 0, work.width, work.height);
     const { pixel_values } = await processor(await RawImage.fromCanvas(work));
     const out = await model({ [spec.input]: pixel_values });
-    let t = out[spec.output][0];
-    if (spec.sigmoid) t = t.sigmoid();
-    const m = await RawImage.fromTensor(t.mul(255).to('uint8')).resize(work.width, work.height);
-    const mc = document.createElement('canvas'); mc.width = work.width; mc.height = work.height;
-    const id = mc.getContext('2d').createImageData(mc.width, mc.height);
-    for (let i = 0, j = 0; i < m.data.length; i++, j += 4) { id.data[j] = id.data[j + 1] = id.data[j + 2] = 255; id.data[j + 3] = m.data[i]; }
+    const t = out[spec.output];
+    const [mh, mw] = t.dims.slice(-2), data = t.data; // raw [1,1,h,w] — no fp16-sensitive tensor ops
+    const mc = document.createElement('canvas'); mc.width = mw; mc.height = mh;
+    const id = mc.getContext('2d').createImageData(mw, mh);
+    for (let i = 0, j = 0; i < mw * mh; i++, j += 4) {
+      let v = Number(data[i]); if (spec.sigmoid) v = 1 / (1 + Math.exp(-v));
+      id.data[j] = id.data[j + 1] = id.data[j + 2] = 255; id.data[j + 3] = Math.max(0, Math.min(255, Math.round(v * 255)));
+    }
     mc.getContext('2d').putImageData(id, 0, 0);
+    if (!id.data.some((v, i) => i % 4 === 3 && v > 8)) throw new Error('Empty mask'); // all-transparent result = broken run, try next rung
     const full = document.createElement('canvas'); full.width = W; full.height = H;
     const fx = full.getContext('2d'); fx.filter = 'blur(0.6px)'; fx.drawImage(mc, 0, 0, W, H); // light feather softens the upscaled edge
     return full;
@@ -121,13 +151,13 @@
     const t0 = performance.now();
     try {
       const pick = $('opt-model').value;
-      const kind = pick !== 'auto' ? pick : (await pickDevice()) === 'webgpu' ? 'birefnet' : 'modnet';
-      S.base = await matte(kind); S.usedKind = kind; S.strokes = [];
+      const r = await matte(pick);
+      S.base = r.mask; S.usedKind = r.kind; S.strokes = [];
       rebuildMask();
       status('Compositing…');
       await present();
       $('btn-compress-label').textContent = 'Run again';
-      status(`${SPECS[kind].label} · ${((performance.now() - t0) / 1000).toFixed(1)} s on ${device === 'webgpu' ? 'WebGPU' : 'WebAssembly'}${kind === 'modnet' && pick === 'auto' ? ' · HQ model needs WebGPU (Chrome/Edge)' : ''}`);
+      status(`${SPECS[r.kind].label} · ${((performance.now() - t0) / 1000).toFixed(1)} s on ${r.dev === 'webgpu' ? 'WebGPU' : 'WebAssembly'}${r.kind === 'modnet' && pick !== 'modnet' ? (r.dev === 'webgpu' ? ' · HQ model not supported on this GPU' : ' · HQ model needs WebGPU (Chrome/Edge)') : ''}`);
     } catch (e) {
       console.warn(e);
       showError(/fetch|network|Failed to/i.test(String(e)) ? "Couldn't download the model — check your connection and try again." : 'Background removal failed on this image. Try the other model in Settings.');
