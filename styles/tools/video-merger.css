@@ -1,0 +1,6 @@
+/* Designed by Kapil Pidhwani: Video Merger — clip list; adapts via @container (card is the container) */
+.vdm-list { margin-top: 0.7rem; padding: 0; max-height: 240px; }
+.vdm-list .pdf-file { gap: 0.4rem; }
+.vdm-idx { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted); min-width: 1.2rem; text-align: center; }
+.vdm-list .btn-toolbar-sm { padding: 0.25rem 0.4rem; min-height: 0; }
+.vdm-list .btn-toolbar-sm:disabled { opacity: 0.35; }

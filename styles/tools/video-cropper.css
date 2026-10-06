@@ -1,0 +1,10 @@
+/* Designed by Kapil Pidhwani: Video Cropper — crop overlay in viewport px (projected from video px by JS); adapts via @container */
+.vcr-box { position: absolute; box-sizing: border-box; border: 2px solid var(--brand); box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.45); cursor: move; touch-action: none; z-index: 2; }
+.vcr-box[hidden] { display: none; }
+.vcr-box::before, .vcr-box::after { content: ""; position: absolute; inset: 0; pointer-events: none; }
+.vcr-box::before { border-left: 1px solid rgba(255, 255, 255, 0.35); border-right: 1px solid rgba(255, 255, 255, 0.35); left: 33.33%; right: 33.33%; }
+.vcr-box::after { border-top: 1px solid rgba(255, 255, 255, 0.35); border-bottom: 1px solid rgba(255, 255, 255, 0.35); top: 33.33%; bottom: 33.33%; }
+.vcr-handle { position: absolute; right: -8px; bottom: -8px; width: 18px; height: 18px; border-radius: 50%; background: var(--brand); border: 2px solid #fff; cursor: nwse-resize; touch-action: none; }
+.vcr-nums { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.35rem; }
+.vcr-nums .input-clean { min-width: 0; font-family: var(--font-mono); padding-inline: 0.4rem; }
+.vcr-handle::after { content: ""; position: absolute; inset: -13px; } /* 44px touch target without enlarging the visible dot */

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Video to Audio Converter | Toolity Media</title>
+  <link rel="canonical" href="https://toolity.in/media/video-to-audio/">
+  <meta name="description" content="Free online video to audio converter. Extract the audio track from MP4, MOV or WebM as MP3 (128–320 kbps) or lossless WAV, optionally trimmed to a start and end time. Runs in your browser — no upload.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Video to Audio Converter | Toolity Media">
+  <meta property="og:description" content="Free online video to audio converter. Extract the audio track from MP4, MOV or WebM as MP3 (128–320 kbps) or lossless WAV, optionally trimmed to a start and end time. Runs in your browser — no upload.">
+  <meta property="og:url" content="https://toolity.in/media/video-to-audio/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=3.5" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=3.5">
+  <link rel="stylesheet" href="/styles/tools/video-to-audio.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Video to Audio Converter",
+        "url": "https://toolity.in/media/video-to-audio/",
+        "description": "Free online video to audio converter. Extract the audio track from MP4, MOV or WebM as MP3 (128–320 kbps) or lossless WAV, optionally trimmed to a start and end time. Runs in your browser — no upload.",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Media", "item": "https://toolity.in/media/" },
+          { "@type": "ListItem", "position": 3, "name": "Video to Audio Converter", "item": "https://toolity.in/media/video-to-audio/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Is my video uploaded anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. The clip is decoded by your browser's own video player, redrawn onto a canvas and re-encoded with the MediaRecorder API — all on your device. Nothing is sent to a server." } },
+          { "@type": "Question", "name": "How fast is it?", "acceptedAnswer": { "@type": "Answer", "text": "The audio track is decoded with the Web Audio API and encoded with the LAME MP3 encoder compiled to JavaScript — typically 10–20× faster than real time. If the browser cannot decode the container directly, the tool falls back to recording the audio while the video plays, which takes as long as the selection." } },
+          { "@type": "Question", "name": "What about M4A or AAC output?", "acceptedAnswer": { "@type": "Answer", "text": "Browsers cannot encode AAC on the page, so the choices are MP3 and WAV. Both play everywhere; MP3 is the one to pick for sharing." } },
+          { "@type": "Question", "name": "Does it keep stereo and sample rate?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — channels and sample rate are preserved from the source (stereo 48 kHz stays stereo 48 kHz). Only the bitrate you choose changes." } },
+          { "@type": "Question", "name": "The result is silent — why?", "acceptedAnswer": { "@type": "Answer", "text": "The video has no audio track, or it is muted in the file. Check the original plays with sound first; screen recordings without a microphone are a common cause." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/media/" class="breadcrumb-link">Media</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Video to Audio Converter</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Media</span>
+            <h1 class="page-title">Video to Audio Converter</h1>
+            <p class="page-desc">Pull the soundtrack out of a video as MP3 or WAV — pick just the part you need. No upload, no watermark.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" data-split="40/60" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge" id="result-badge">Drop a file to begin</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset" aria-label="Reset">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result summary" aria-label="Copy result summary" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download result" aria-label="Download result" disabled>
+                <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                <span>Download</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Original</span>
+                <span class="pane-badge" id="source-badge">No file loaded</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content pane-content-between">
+                <div class="media-canvas-viewport">
+                  <div id="dropzone" class="video-dropzone" tabindex="0" role="button" aria-label="Drop a video here or click to browse">
+                    <input type="file" id="file-input" accept="video/mp4, video/quicktime, video/webm, video/*">
+                    <div class="video-drop-icon">
+                      <iconify-icon icon="lucide:upload-cloud" width="22" height="22"></iconify-icon>
+                    </div>
+                    <div class="video-drop-title">Drop a video here or click to browse</div>
+                    <div class="video-drop-subtitle">MP4, MOV or WebM — up to 500 MB</div>
+                  </div>
+                  <video id="source-video" class="source-video-player" controls playsinline preload="metadata"></video>
+                </div>
+                <div class="vdt-range" id="rng-wrap" hidden>
+                  <div class="vdt-range-row">
+                    <label for="rng-start">Start</label>
+                    <input type="range" id="rng-start" class="range-slider-clean" min="0" max="0" step="0.1" value="0" aria-label="Start time">
+                    <span class="range-val-badge" id="rng-start-val">0:00.0</span>
+                    <button type="button" class="btn-toolbar-sm" id="btn-start-now" title="Set start to the player's current time">Playhead</button>
+                  </div>
+                  <div class="vdt-range-row">
+                    <label for="rng-end">End</label>
+                    <input type="range" id="rng-end" class="range-slider-clean" min="0" max="0" step="0.1" value="0" aria-label="End time">
+                    <span class="range-val-badge" id="rng-end-val">0:00.0</span>
+                    <button type="button" class="btn-toolbar-sm" id="btn-end-now" title="Set end to the player's current time">Playhead</button>
+                  </div>
+                  <div class="vdt-range-len">Selection <span id="rng-len">0:00.0</span></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Audio</span>
+                <span class="pane-badge" id="output-badge">Awaiting file</span>
+              </div>
+              <div class="pane-content pane-content-between">
+                <div class="media-canvas-viewport">
+                  <div id="output-empty" class="media-empty-placeholder">
+                    <iconify-icon icon="lucide:music" width="32" height="32"></iconify-icon>
+                    <p>The extracted audio appears here</p>
+                  </div>
+                  <div id="output-wrap" class="vta-out" hidden>
+                    <iconify-icon icon="lucide:file-audio" width="36" height="36"></iconify-icon>
+                    <span id="output-name" class="vta-name"></span>
+                    <audio id="output-audio" controls preload="metadata"></audio>
+                  </div>
+                </div>
+                <div>
+                  <button type="button" id="btn-compress" class="btn-toolbar-sm btn-brand-sm btn-primary-action" disabled>
+                    <iconify-icon icon="lucide:music" width="16" height="16"></iconify-icon>
+                    <span id="btn-compress-label">Extract audio</span>
+                  </button>
+                  <div class="slim-progress-bar" id="progress-bar">
+                    <div class="slim-progress-fill" id="progress-fill"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">MP3 · 128 kbps</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item">
+                <label for="opt-format">Format</label>
+                <select id="opt-format" class="select-clean">
+                  <option value="mp3-128" selected>MP3 · 128 kbps</option>
+                  <option value="mp3-192">MP3 · 192 kbps</option>
+                  <option value="mp3-320">MP3 · 320 kbps</option>
+                  <option value="wav">WAV · lossless</option>
+                </select>
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Extract Audio from a Video in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Drop a video</h3>
+              <p class="step-desc">Drag an MP4, MOV or WebM onto the left pane. Use the Start/End sliders if you only want part of the soundtrack — a song, a quote, a sound effect.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Pick a format</h3>
+              <p class="step-desc">MP3 at 128 kbps is small and fine for speech; 192–320 kbps for music. WAV is uncompressed (about 10 MB per minute) for editing.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Extract and download</h3>
+              <p class="step-desc">Click <strong>Extract audio</strong>. Decoding and MP3 encoding are much faster than real time, so even long videos finish in seconds. Play the result, then download.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Video to Audio Converter — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Is my video uploaded anywhere?</summary>
+              <p>No. The clip is decoded by your browser's own video player, redrawn onto a canvas and re-encoded with the MediaRecorder API — all on your device. Nothing is sent to a server.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How fast is it?</summary>
+              <p>The audio track is decoded with the Web Audio API and encoded with the LAME MP3 encoder compiled to JavaScript — typically 10–20× faster than real time. If the browser cannot decode the container directly, the tool falls back to recording the audio while the video plays, which takes as long as the selection.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What about M4A or AAC output?</summary>
+              <p>Browsers cannot encode AAC on the page, so the choices are MP3 and WAV. Both play everywhere; MP3 is the one to pick for sharing.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Does it keep stereo and sample rate?</summary>
+              <p>Yes — channels and sample rate are preserved from the source (stereo 48 kHz stays stereo 48 kHz). Only the bitrate you choose changes.</p>
+            </details>
+            <details class="faq-item">
+              <summary>The result is silent — why?</summary>
+              <p>The video has no audio track, or it is muted in the file. Check the original plays with sound first; screen recordings without a microphone are a common cause.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="media"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=2.8"></script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="/scripts/video-common.js?v=1.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lamejs@1.2.1/lame.all.js" defer></script>
+  <script src="/media/video-to-audio/video-to-audio.js?v=1.0"></script>
+</body>
+</html>

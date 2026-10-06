@@ -1,0 +1,5 @@
+/* Designed by Kapil Pidhwani: Video to Audio — output card; adapts via @container (card is the container) */
+.vta-out { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.6rem; width: 100%; padding: 1rem; color: var(--brand); }
+.vta-out[hidden] { display: none; }
+.vta-name { font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-secondary); max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.vta-out audio { width: 100%; max-width: 420px; }

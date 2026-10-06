@@ -638,6 +638,78 @@
         tags: ['pomodoro', 'timer', 'focus', 'productivity', 'tomato', 'study timer', 'work timer', 'break timer', 'task list', 'countdown']
       },
       {
+        id: 'video-cropper',
+        title: 'Video Cropper',
+        category: 'Media',
+        url: 'media/video-cropper/',
+        icon: 'lucide:crop',
+        tags: ['video', 'crop', 'cropper', 'aspect ratio', 'square', '9:16', 'reels', 'tiktok', 'shorts', 'instagram', '4:5', '16:9']
+      },
+      {
+        id: 'video-looper',
+        title: 'Video Looper',
+        category: 'Media',
+        url: 'media/video-looper/',
+        icon: 'lucide:repeat',
+        tags: ['video', 'loop', 'looper', 'repeat', 'boomerang', 'replay', 'seamless', 'gif-like']
+      },
+      {
+        id: 'video-merger',
+        title: 'Video Merger',
+        category: 'Media',
+        url: 'media/video-merger/',
+        icon: 'lucide:combine',
+        tags: ['video', 'merge', 'merger', 'join', 'combine', 'concatenate', 'stitch', 'clips', 'append']
+      },
+      {
+        id: 'video-reverser',
+        title: 'Video Reverser',
+        category: 'Media',
+        url: 'media/video-reverser/',
+        icon: 'lucide:rewind',
+        tags: ['video', 'reverse', 'reverser', 'backwards', 'rewind', 'boomerang', 'reverse audio', 'slow']
+      },
+      {
+        id: 'video-rotator',
+        title: 'Video Rotator',
+        category: 'Media',
+        url: 'media/video-rotator/',
+        icon: 'lucide:rotate-cw',
+        tags: ['video', 'rotate', 'rotator', '90 degrees', '180', 'flip', 'mirror', 'sideways', 'upside down', 'orientation']
+      },
+      {
+        id: 'video-to-audio',
+        title: 'Video to Audio Converter',
+        category: 'Media',
+        url: 'media/video-to-audio/',
+        icon: 'lucide:music',
+        tags: ['video to audio', 'video to mp3', 'extract audio', 'mp4 to mp3', 'mov to mp3', 'wav', 'soundtrack', 'audio extractor', 'rip audio']
+      },
+      {
+        id: 'video-to-image-frames',
+        title: 'Video to Image Frames',
+        category: 'Media',
+        url: 'media/video-to-image-frames/',
+        icon: 'lucide:images',
+        tags: ['video to image', 'frames', 'frame extractor', 'screenshot', 'stills', 'thumbnail', 'jpg', 'png', 'zip', 'contact sheet', 'video to jpg']
+      },
+      {
+        id: 'video-trimmer',
+        title: 'Video Trimmer',
+        category: 'Media',
+        url: 'media/video-trimmer/',
+        icon: 'lucide:scissors',
+        tags: ['video', 'trim', 'trimmer', 'cut', 'cutter', 'clip', 'shorten', 'start end', 'mp4 cutter', 'mov', 'webm']
+      },
+      {
+        id: 'video-watermarker',
+        title: 'Video Watermarker',
+        category: 'Media',
+        url: 'media/video-watermarker/',
+        icon: 'lucide:stamp',
+        tags: ['video', 'watermark', 'watermarker', 'logo', 'text overlay', 'brand', 'copyright', 'stamp', 'overlay', 'protect']
+      },
+      {
         id: 'youtube-thumbnail-downloader',
         title: 'YouTube Thumbnail Downloader',
         category: 'Media',
