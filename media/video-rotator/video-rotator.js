@@ -14,7 +14,7 @@
   function preview() {
     const S = T.S; if (!S.file || S.out) return;
     const [w, h] = V.fitBox(...outDims(S), 720); if (pv.width !== w || pv.height !== h) { pv.width = w; pv.height = h; }
-    draw(pctx, T.src, w, h); pv.classList.add('is-shown');
+    draw(pctx, T.src, w, h); pv.classList.add('is-shown'); $('output-empty').hidden = true;
   }
   const T = V.mount({
     actionLabel: 'Rotate video', verb: 'Rotating', suffix: 'rotated',

@@ -18,7 +18,7 @@
   function preview() {
     const S = T.S; if (!S.file || S.out) return;
     const [w, h] = V.fitBox(S.w, S.h, 720); if (pv.width !== w || pv.height !== h) { pv.width = w; pv.height = h; }
-    draw(pctx, T.src, w, h); pv.classList.add('is-shown');
+    draw(pctx, T.src, w, h); pv.classList.add('is-shown'); $('output-empty').hidden = true;
   }
   function onSetting(el) {
     if (el.id === 'opt-size') $('opt-size-val').textContent = `${el.value}%`;

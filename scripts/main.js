@@ -710,6 +710,78 @@
         tags: ['video', 'watermark', 'watermarker', 'logo', 'text overlay', 'brand', 'copyright', 'stamp', 'overlay', 'protect']
       },
       {
+        id: 'gif-cropper',
+        title: 'GIF Cropper',
+        category: 'Media',
+        url: 'media/gif-cropper/',
+        icon: 'lucide:crop',
+        tags: ['gif', 'crop', 'cropper', 'aspect ratio', 'square', '9:16', 'trim edges', 'animated']
+      },
+      {
+        id: 'gif-looper',
+        title: 'GIF Looper',
+        category: 'Media',
+        url: 'media/gif-looper/',
+        icon: 'lucide:repeat',
+        tags: ['gif', 'loop', 'looper', 'play once', 'repeat', 'loop count', 'netscape', 'infinite']
+      },
+      {
+        id: 'gif-resizer',
+        title: 'GIF Resizer',
+        category: 'Media',
+        url: 'media/gif-resizer/',
+        icon: 'lucide:scaling',
+        tags: ['gif', 'resize', 'resizer', 'scale', 'shrink', 'enlarge', 'width', 'height', 'percent', 'animated']
+      },
+      {
+        id: 'gif-reverser',
+        title: 'GIF Reverser',
+        category: 'Media',
+        url: 'media/gif-reverser/',
+        icon: 'lucide:rewind',
+        tags: ['gif', 'reverse', 'reverser', 'backwards', 'rewind', 'boomerang', 'loop']
+      },
+      {
+        id: 'gif-splitter',
+        title: 'GIF Splitter',
+        category: 'Media',
+        url: 'media/gif-splitter/',
+        icon: 'lucide:split',
+        tags: ['gif', 'split', 'splitter', 'cut', 'parts', 'chunks', 'divide', 'zip']
+      },
+      {
+        id: 'gif-text-overlay',
+        title: 'GIF Text Overlay',
+        category: 'Media',
+        url: 'media/gif-text-overlay/',
+        icon: 'lucide:type',
+        tags: ['gif', 'text', 'caption', 'meme', 'overlay', 'subtitle', 'impact', 'add text to gif', 'watermark']
+      },
+      {
+        id: 'gif-to-images',
+        title: 'GIF to Images',
+        category: 'Media',
+        url: 'media/gif-to-images/',
+        icon: 'lucide:images',
+        tags: ['gif', 'frames', 'gif to png', 'gif to jpg', 'extract frames', 'split frames', 'stills', 'zip', 'sprite']
+      },
+      {
+        id: 'gif-trimmer',
+        title: 'GIF Trimmer',
+        category: 'Media',
+        url: 'media/gif-trimmer/',
+        icon: 'lucide:scissors',
+        tags: ['gif', 'trim', 'trimmer', 'cut', 'shorten', 'frames', 'clip', 'animated']
+      },
+      {
+        id: 'images-to-gif',
+        title: 'Images to GIF Maker',
+        category: 'Media',
+        url: 'media/images-to-gif/',
+        icon: 'lucide:film',
+        tags: ['images to gif', 'gif maker', 'png to gif', 'jpg to gif', 'slideshow', 'animated gif', 'create gif', 'photos to gif']
+      },
+      {
         id: 'youtube-thumbnail-downloader',
         title: 'YouTube Thumbnail Downloader',
         category: 'Media',

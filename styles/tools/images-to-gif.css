@@ -1,0 +1,6 @@
+/* Designed by Kapil Pidhwani: Images to GIF — image list; adapts via @container (card is the container) */
+.gft-list { margin-top: 0.7rem; padding: 0; max-height: 240px; }
+.gft-list .pdf-file { gap: 0.4rem; }
+.gft-thumb { width: 40px; height: 30px; object-fit: cover; border-radius: 3px; background: var(--surface-elevated); flex: none; }
+.gft-list .btn-toolbar-sm { padding: 0.25rem 0.4rem; min-height: 0; }
+.gft-list .btn-toolbar-sm:disabled { opacity: 0.35; }
