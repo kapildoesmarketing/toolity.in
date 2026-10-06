@@ -42,11 +42,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="preload" href="/styles/main.css?v=3.3" as="style">
+  <link rel="preload" href="/styles/main.css?v=3.4" as="style">
   <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
   <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 
-  <link rel="stylesheet" href="/styles/main.css?v=3.3">
+  <link rel="stylesheet" href="/styles/main.css?v=3.4">
   <link rel="stylesheet" href="/styles/tools/image-background-remover.css?v=1.0">
 
   <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
@@ -62,26 +62,90 @@
         "applicationCategory": "MultimediaApplication",
         "operatingSystem": "Any",
         "browserRequirements": "Requires JavaScript",
-        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Kapil Pidhwani"
+        }
       },
       {
         "@type": "BreadcrumbList",
         "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
-          { "@type": "ListItem", "position": 2, "name": "Media", "item": "https://toolity.in/media/" },
-          { "@type": "ListItem", "position": 3, "name": "Image Background Remover", "item": "https://toolity.in/media/image-background-remover/" }
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://toolity.in/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Media",
+            "item": "https://toolity.in/media/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Image Background Remover",
+            "item": "https://toolity.in/media/image-background-remover/"
+          }
         ]
       },
       {
         "@type": "FAQPage",
         "mainEntity": [
-          { "@type": "Question", "name": "Is my photo uploaded to a server?", "acceptedAnswer": { "@type": "Answer", "text": "No. The neural network runs inside your browser with Transformers.js — on your graphics card via WebGPU where available, otherwise in WebAssembly. The only download is the model file itself, which comes from Hugging Face and is cached locally." } },
-          { "@type": "Question", "name": "Why does the first run take longer?", "acceptedAnswer": { "@type": "Answer", "text": "The model has to be downloaded once: about 26 MB for the Portrait model, 115 MB (WebGPU) or 224 MB (WebAssembly) for the Any-object model. Your browser caches it, so later images start instantly." } },
-          { "@type": "Question", "name": "Which model should I pick?", "acceptedAnswer": { "@type": "Answer", "text": "Portrait (MODNet) is tuned for people — hair, shoulders, selfies — and is small and fast. Any object (BiRefNet Lite) handles products, animals, cars, logos and complex scenes with cleaner edges, at the cost of a bigger download and more processing time." } },
-          { "@type": "Question", "name": "Can I get a white or coloured background instead of transparent?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Open Settings and choose White, Black or a custom colour. Transparent results are saved as PNG; with a solid fill you still get a PNG so edges stay crisp." } },
-          { "@type": "Question", "name": "What is the maximum image size?", "acceptedAnswer": { "@type": "Answer", "text": "Images up to 25 megapixels are accepted. Very large photos are processed at a reduced internal resolution and the mask is scaled back to the original size, so the download keeps your full dimensions." } },
-          { "@type": "Question", "name": "Why does it say WebGPU is unavailable?", "acceptedAnswer": { "@type": "Answer", "text": "Some browsers (older Safari, Firefox on Linux) or locked-down GPUs do not expose WebGPU. The tool automatically falls back to WebAssembly, which gives the same result, just more slowly." } }
+          {
+            "@type": "Question",
+            "name": "Is my photo uploaded to a server?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. The neural network runs inside your browser with Transformers.js — on your graphics card via WebGPU where available, otherwise in WebAssembly. The only download is the model file itself, which comes from Hugging Face and is cached locally."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why does the first run take longer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The model is downloaded once: about 115 MB for the HQ model on WebGPU (224 MB on WebAssembly) or 26 MB for the fast portrait model. Your browser caches it, so later images start instantly."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which model is used?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "On browsers with WebGPU (Chrome, Edge, recent Safari) the tool automatically uses BiRefNet Lite — a general-purpose model that handles people, products, animals, cars and logos with clean edges. Without WebGPU it falls back to the small, fast MODNet, which is tuned for portraits. You can force either one in Settings."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I get a white or coloured background instead of transparent?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Open Settings and choose White, Black, a custom colour or a blurred version of the original photo. Transparent results download as PNG; solid or blurred backgrounds download as a smaller JPG."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I fix parts the AI got wrong?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes — that is what the Restore and Erase brushes are for. Restore paints the original back in (hair, straps, glasses), Erase removes background the model kept. Strokes are soft-edged, work with mouse, pen or finger, and Undo steps back one stroke at a time. Images up to 25 megapixels are accepted."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why does it say WebGPU is unavailable?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Some browsers (older Safari, Firefox on Linux) or locked-down GPUs do not expose WebGPU. The tool automatically falls back to WebAssembly, which gives the same result, just more slowly."
+            }
+          }
         ]
       }
     ]
@@ -170,7 +234,14 @@
             <div class="tool-pane">
               <div class="pane-header">
                 <span>Result</span>
-                <span class="pane-badge" id="output-badge">Awaiting file</span>
+                <div class="bgr-head">
+                  <span class="pane-badge" id="output-badge">Awaiting file</span>
+                  <div class="segmented-group segmented-group-pill" id="seg-tool" role="group" aria-label="Edit tool" hidden>
+                    <button type="button" class="seg-pill active" data-value="view" title="Compare with the original">View</button>
+                    <button type="button" class="seg-pill" data-value="restore" title="Paint to bring back parts of the original">Restore</button>
+                    <button type="button" class="seg-pill" data-value="erase" title="Paint to remove more background">Erase</button>
+                  </div>
+                </div>
               </div>
               <div class="pane-content pane-content-between">
                 <div class="media-canvas-viewport bgr-tall">
@@ -179,12 +250,22 @@
                     <p>The cut-out appears here on a transparency grid</p>
                   </div>
                   <div id="bgr-out" class="bgr-stage" hidden>
-                    <img id="out-img" alt="Background removed" class="bgr-img" width="360" height="240">
+                    <canvas id="out-canvas" class="bgr-img" width="360" height="240" aria-label="Background removed result"></canvas>
                     <img id="cmp-img" alt="" aria-hidden="true" class="bgr-img bgr-cmp" width="360" height="240">
                     <input type="range" id="cmp-range" class="bgr-range" min="0" max="100" value="0" aria-label="Compare original and result">
+                    <div id="brush-cursor" class="bgr-cursor" hidden></div>
                   </div>
                 </div>
                 <div>
+                  <div class="bgr-brush-row" id="brush-row" hidden>
+                    <label for="brush-size" class="form-helper">Brush</label>
+                    <input type="range" id="brush-size" class="range-slider-clean" min="8" max="160" step="2" value="40" aria-label="Brush size">
+                    <span class="range-val-badge" id="brush-size-val">40</span>
+                    <button type="button" class="btn-toolbar-sm" id="btn-undo" title="Undo last stroke (Ctrl+Z)" aria-label="Undo last stroke" disabled>
+                      <iconify-icon icon="lucide:undo-2" width="14" height="14"></iconify-icon>
+                      <span>Undo</span>
+                    </button>
+                  </div>
                   <button type="button" id="btn-compress" class="btn-toolbar-sm btn-brand-sm btn-primary-action" disabled>
                     <iconify-icon icon="lucide:wand-sparkles" width="16" height="16"></iconify-icon>
                     <span id="btn-compress-label">Remove background</span>
@@ -204,7 +285,7 @@
               <div class="tool-settings-summary-left">
                 <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
                 <span>Settings</span>
-                <span class="pane-badge" id="settings-summary">Portrait model · Transparent</span>
+                <span class="pane-badge" id="settings-summary">Auto model · Transparent</span>
               </div>
               <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
             </summary>
@@ -212,8 +293,9 @@
               <div class="control-item">
                 <label for="opt-model">Model</label>
                 <select id="opt-model" class="select-clean">
-                  <option value="modnet" selected>Portrait — people &amp; selfies (26 MB, fast)</option>
-                  <option value="birefnet">Any object — products, pets, logos (115–224 MB, slower)</option>
+                  <option value="auto" selected>Auto — HQ on WebGPU, Fast elsewhere</option>
+                  <option value="birefnet">HQ — any object (BiRefNet Lite, 115–224 MB)</option>
+                  <option value="modnet">Fast — portraits only (MODNet, 26 MB)</option>
                 </select>
               </div>
               <div class="control-item">
@@ -223,6 +305,7 @@
                   <option value="#ffffff">White</option>
                   <option value="#000000">Black</option>
                   <option value="custom">Custom colour</option>
+                  <option value="blur">Blurred original</option>
                 </select>
                 <input type="color" id="opt-bg-color" value="#f4f1ea" aria-label="Custom background colour" hidden>
               </div>
@@ -242,17 +325,17 @@
             <div class="guide-step-card">
               <div class="step-num-badge">1</div>
               <h3 class="step-title">Drop a photo</h3>
-              <p class="step-desc">Drag a JPG, PNG or WebP onto the left pane. Portraits work best with the default model; switch to <em>Any object</em> in Settings for products, pets or logos.</p>
+              <p class="step-desc">Drag a JPG, PNG or WebP onto the left pane — the background is removed automatically. The first run downloads the AI model once; your browser caches it.</p>
             </div>
             <div class="guide-step-card">
               <div class="step-num-badge">2</div>
-              <h3 class="step-title">Remove the background</h3>
-              <p class="step-desc">Click <strong>Remove background</strong>. The first run downloads the AI model once (it is cached by your browser); after that it takes a few seconds per image, faster on devices with WebGPU.</p>
+              <h3 class="step-title">Touch up with the brush</h3>
+              <p class="step-desc">Switch to <strong>Restore</strong> to paint back anything the model cut away, or <strong>Erase</strong> to remove leftovers. Adjust the brush size, undo with <kbd>Ctrl</kbd>+<kbd>Z</kbd>.</p>
             </div>
             <div class="guide-step-card">
               <div class="step-num-badge">3</div>
               <h3 class="step-title">Compare and download</h3>
-              <p class="step-desc">Drag the slider over the result to compare with the original, pick a fill colour if you need one, then download a transparent PNG or copy it straight to the clipboard.</p>
+              <p class="step-desc">In <strong>View</strong> mode drag across the result to compare with the original. Pick a white, black, custom or blurred background in Settings, then download or copy.</p>
             </div>
           </div>
         </section>
@@ -270,19 +353,19 @@
             </details>
             <details class="faq-item">
               <summary>Why does the first run take longer?</summary>
-              <p>The model has to be downloaded once: about 26 MB for the Portrait model, 115 MB (WebGPU) or 224 MB (WebAssembly) for the Any-object model. Your browser caches it, so later images start instantly.</p>
+              <p>The model is downloaded once: about 115 MB for the HQ model on WebGPU (224 MB on WebAssembly) or 26 MB for the fast portrait model. Your browser caches it, so later images start instantly.</p>
             </details>
             <details class="faq-item">
-              <summary>Which model should I pick?</summary>
-              <p>Portrait (MODNet) is tuned for people — hair, shoulders, selfies — and is small and fast. Any object (BiRefNet Lite) handles products, animals, cars, logos and complex scenes with cleaner edges, at the cost of a bigger download and more processing time.</p>
+              <summary>Which model is used?</summary>
+              <p>On browsers with WebGPU (Chrome, Edge, recent Safari) the tool automatically uses BiRefNet Lite — a general-purpose model that handles people, products, animals, cars and logos with clean edges. Without WebGPU it falls back to the small, fast MODNet, which is tuned for portraits. You can force either one in Settings.</p>
             </details>
             <details class="faq-item">
               <summary>Can I get a white or coloured background instead of transparent?</summary>
-              <p>Yes. Open Settings and choose White, Black or a custom colour. Transparent results are saved as PNG; with a solid fill you still get a PNG so edges stay crisp.</p>
+              <p>Yes. Open Settings and choose White, Black, a custom colour or a blurred version of the original photo. Transparent results download as PNG; solid or blurred backgrounds download as a smaller JPG.</p>
             </details>
             <details class="faq-item">
-              <summary>What is the maximum image size?</summary>
-              <p>Images up to 25 megapixels are accepted. Very large photos are processed at a reduced internal resolution and the mask is scaled back to the original size, so the download keeps your full dimensions.</p>
+              <summary>Can I fix parts the AI got wrong?</summary>
+              <p>Yes — that is what the Restore and Erase brushes are for. Restore paints the original back in (hair, straps, glasses), Erase removes background the model kept. Strokes are soft-edged, work with mouse, pen or finger, and Undo steps back one stroke at a time. Images up to 25 megapixels are accepted.</p>
             </details>
             <details class="faq-item">
               <summary>Why does it say WebGPU is unavailable?</summary>
@@ -300,7 +383,7 @@
 
   <div data-include="/components/footer.html"></div>
 
-  <script src="/scripts/main.js?v=2.6"></script>
+  <script src="/scripts/main.js?v=2.7"></script>
   <script src="/scripts/tool-common.js?v=1.0"></script>
   <script src="/media/image-background-remover/image-background-remover.js?v=1.0"></script>
 </body>

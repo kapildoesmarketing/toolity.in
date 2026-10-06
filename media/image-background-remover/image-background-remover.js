@@ -1,25 +1,28 @@
-/* Designed by Kapil Pidhwani: Image Background Remover — Transformers.js (MODNet / BiRefNet Lite) on WebGPU or WASM, fully on-device */
+/* Designed by Kapil Pidhwani: Image Background Remover v2 — Transformers.js (BiRefNet Lite on WebGPU / MODNet on WASM), auto-run, Restore/Erase brush with stroke-replay undo, all on-device */
 (function () {
   'use strict';
-  const { copyBlob, downloadBlob, formatBytes, bindDropzone, bindShortcuts, setBusy, toast } = window.Toolity;
+  const { copyBlob, downloadBlob, formatBytes, bindDropzone, bindSegmented, bindShortcuts, setBusy, toast } = window.Toolity;
   const $ = (id) => document.getElementById(id);
   const LIB = 'https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.7.1/dist/transformers.min.js';
-  const MAX_PIXELS = 25e6, WORK_SIDE = 2048; // Designed by Kapil Pidhwani: images are matted at ≤2048 px and the mask is upscaled — fine for photos, soft on 8K line art.
+  const MAX_PIXELS = 25e6, WORK_SIDE = 2048; // Designed by Kapil Pidhwani: matting runs at ≤2048 px, the mask is upscaled — fine for photos, soft on 8K line art.
   const SPECS = {
-    modnet: { id: 'Xenova/modnet', input: 'input', output: 'output', sigmoid: false, dtype: { webgpu: 'fp32', wasm: 'fp32' }, label: 'Portrait model' },
-    birefnet: { id: 'onnx-community/BiRefNet_lite-ONNX', input: 'input_image', output: 'output_image', sigmoid: true, dtype: { webgpu: 'fp16', wasm: 'fp32' }, label: 'Any-object model' }
+    modnet: { id: 'Xenova/modnet', input: 'input', output: 'output', sigmoid: false, dtype: { webgpu: 'fp32', wasm: 'fp32' }, label: 'Fast model' },
+    birefnet: { id: 'onnx-community/BiRefNet_lite-ONNX', input: 'input_image', output: 'output_image', sigmoid: true, dtype: { webgpu: 'fp16', wasm: 'fp32' }, label: 'HQ model' }
   };
-  const S = { file: null, img: null, out: null, maskCanvas: null, busy: false };
+  const S = { file: null, img: null, out: null, base: null, mask: null, strokes: [], busy: false, tool: 'view', usedKind: '' };
   const models = {};
   let lib = null, device = null;
+  const outCanvas = $('out-canvas'), stage = $('bgr-out');
 
   const showError = (msg) => { const e = $('input-error'); e.hidden = !msg; e.querySelector('span').textContent = msg; };
   const status = (t) => { $('result-badge').textContent = t; };
   const progress = (pct) => { $('progress-bar').classList.toggle('active', pct != null); $('progress-fill').style.width = (pct || 0) + '%'; };
-  const bgColor = () => ($('opt-bg').value === 'custom' ? $('opt-bg-color').value : $('opt-bg').value);
+  const bgMode = () => $('opt-bg').value;
+  const bgColor = () => (bgMode() === 'custom' ? $('opt-bg-color').value : bgMode());
   const syncSummary = () => {
-    $('opt-bg-color').hidden = $('opt-bg').value !== 'custom';
-    $('settings-summary').textContent = `${SPECS[$('opt-model').value].label} · ${$('opt-bg').value ? 'Filled ' + bgColor() : 'Transparent'}`;
+    $('opt-bg-color').hidden = bgMode() !== 'custom';
+    const m = $('opt-model').value;
+    $('settings-summary').textContent = `${m === 'auto' ? 'Auto model' : SPECS[m].label} · ${bgMode() === 'blur' ? 'Blurred' : bgMode() ? 'Filled ' + bgColor() : 'Transparent'}`;
   };
 
   /* ── Model loading ── */
@@ -38,23 +41,18 @@
   }
   async function getModel(kind) {
     if (models[kind]) return models[kind];
-    const tf = await getLib(), spec = SPECS[kind];
-    const dev = await pickDevice();
+    const tf = await getLib(), spec = SPECS[kind], dev = await pickDevice();
     const progress_callback = (p) => {
-      if (p.status === 'progress' && /\.onnx/.test(p.file || '')) { progress(p.progress); status(`Downloading model… ${Math.round(p.progress)}% of ${formatBytes(p.total)}`); }
+      if (p.status === 'progress' && /\.onnx/.test(p.file || '')) { progress(p.progress); status(`Downloading ${spec.label.toLowerCase()}… ${Math.round(p.progress)}% of ${formatBytes(p.total)}`); }
     };
     status('Preparing model…');
-    const load = async (d) => {
-      const model = await tf.AutoModel.from_pretrained(spec.id, { device: d, dtype: spec.dtype[d], progress_callback });
-      const processor = await tf.AutoProcessor.from_pretrained(spec.id);
-      return { model, processor, spec, device: d };
-    };
+    const load = async (d) => ({ model: await tf.AutoModel.from_pretrained(spec.id, { device: d, dtype: spec.dtype[d], progress_callback }), processor: await tf.AutoProcessor.from_pretrained(spec.id), spec });
     try { models[kind] = await load(dev); }
     catch (e) { if (dev === 'wasm') throw e; console.warn('WebGPU failed, retrying on WASM', e); device = 'wasm'; models[kind] = await load('wasm'); }
     return models[kind];
   }
 
-  /* ── Inference ── */
+  /* ── Inference → base mask (full-res alpha canvas) ── */
   async function matte(kind) {
     const { RawImage } = await getLib();
     const { model, processor, spec } = await getModel(kind);
@@ -62,36 +60,59 @@
     const work = document.createElement('canvas');
     work.width = Math.round(W * scale); work.height = Math.round(H * scale);
     work.getContext('2d').drawImage(S.img, 0, 0, work.width, work.height);
-    const image = await RawImage.fromCanvas(work);
-    const { pixel_values } = await processor(image);
+    const { pixel_values } = await processor(await RawImage.fromCanvas(work));
     const out = await model({ [spec.input]: pixel_values });
     let t = out[spec.output][0];
     if (spec.sigmoid) t = t.sigmoid();
-    const mask = await RawImage.fromTensor(t.mul(255).to('uint8')).resize(work.width, work.height);
-    // alpha → canvas so the browser does the final upscale with smoothing
+    const m = await RawImage.fromTensor(t.mul(255).to('uint8')).resize(work.width, work.height);
     const mc = document.createElement('canvas'); mc.width = work.width; mc.height = work.height;
     const id = mc.getContext('2d').createImageData(mc.width, mc.height);
-    for (let i = 0, j = 0; i < mask.data.length; i++, j += 4) { id.data[j] = id.data[j + 1] = id.data[j + 2] = 255; id.data[j + 3] = mask.data[i]; }
+    for (let i = 0, j = 0; i < m.data.length; i++, j += 4) { id.data[j] = id.data[j + 1] = id.data[j + 2] = 255; id.data[j + 3] = m.data[i]; }
     mc.getContext('2d').putImageData(id, 0, 0);
-    return mc;
+    const full = document.createElement('canvas'); full.width = W; full.height = H;
+    const fx = full.getContext('2d'); fx.filter = 'blur(0.6px)'; fx.drawImage(mc, 0, 0, W, H); // light feather softens the upscaled edge
+    return full;
   }
+
+  /* ── Mask = base + replayed strokes (undo = pop + replay; no bitmap snapshots) ── */
+  function rebuildMask() {
+    const W = S.base.width, H = S.base.height;
+    if (!S.mask) { S.mask = document.createElement('canvas'); S.mask.width = W; S.mask.height = H; }
+    const ctx = S.mask.getContext('2d');
+    ctx.globalCompositeOperation = 'source-over'; ctx.clearRect(0, 0, W, H); ctx.drawImage(S.base, 0, 0);
+    S.strokes.forEach((st) => st.pts.forEach((p) => dab(ctx, st.mode, p.x, p.y, st.r)));
+    $('btn-undo').disabled = !S.strokes.length;
+  }
+  function dab(ctx, mode, x, y, r) {
+    const g = ctx.createRadialGradient(x, y, r * 0.55, x, y, r);
+    g.addColorStop(0, 'rgba(255,255,255,1)'); g.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.globalCompositeOperation = mode === 'erase' ? 'destination-out' : 'source-over';
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
+  }
+
+  /* ── Compose result ── */
   function compose() {
     const W = S.img.naturalWidth, H = S.img.naturalHeight;
-    const c = document.createElement('canvas'); c.width = W; c.height = H;
-    const ctx = c.getContext('2d');
-    ctx.drawImage(S.maskCanvas, 0, 0, W, H);           // alpha
-    ctx.globalCompositeOperation = 'source-in';
-    ctx.drawImage(S.img, 0, 0, W, H);                  // colour where alpha > 0
-    const fill = bgColor();
-    if (fill) { ctx.globalCompositeOperation = 'destination-over'; ctx.fillStyle = fill; ctx.fillRect(0, 0, W, H); }
-    return new Promise((res) => c.toBlob(res, 'image/png'));
+    if (outCanvas.width !== W) { outCanvas.width = W; outCanvas.height = H; }
+    const ctx = outCanvas.getContext('2d');
+    ctx.globalCompositeOperation = 'source-over'; ctx.filter = 'none'; ctx.clearRect(0, 0, W, H);
+    ctx.drawImage(S.mask, 0, 0);
+    ctx.globalCompositeOperation = 'source-in'; ctx.drawImage(S.img, 0, 0, W, H);
+    const mode = bgMode();
+    if (mode) {
+      ctx.globalCompositeOperation = 'destination-over';
+      if (mode === 'blur') { const b = Math.max(8, Math.round(Math.max(W, H) / 80)); ctx.filter = `blur(${b}px)`; ctx.drawImage(S.img, -b * 2, -b * 2, W + b * 4, H + b * 4); ctx.filter = 'none'; }
+      else { ctx.fillStyle = bgColor(); ctx.fillRect(0, 0, W, H); }
+    }
+    ctx.globalCompositeOperation = 'source-over';
   }
+  const outType = () => (bgMode() ? 'image/jpeg' : 'image/png');
+  const toBlob = () => new Promise((res) => outCanvas.toBlob(res, outType(), 0.92));
   async function present() {
-    S.out = await compose();
-    if ($('out-img').src) URL.revokeObjectURL($('out-img').src);
-    $('out-img').src = URL.createObjectURL(S.out);
-    $('bgr-out').hidden = false; $('output-empty').hidden = true;
-    $('output-badge').textContent = `${S.img.naturalWidth} × ${S.img.naturalHeight} · PNG · ${formatBytes(S.out.size)}`;
+    compose();
+    S.out = await toBlob();
+    stage.hidden = false; $('output-empty').hidden = true; $('seg-tool').hidden = false;
+    $('output-badge').textContent = `${S.img.naturalWidth} × ${S.img.naturalHeight} · ${bgMode() ? 'JPG' : 'PNG'} · ${formatBytes(S.out.size)}`;
     $('btn-download').disabled = false; $('btn-copy').disabled = false;
   }
   async function run() {
@@ -99,10 +120,14 @@
     S.busy = true; setBusy($('tool-card'), true); $('btn-compress').disabled = true; showError(''); progress(0);
     const t0 = performance.now();
     try {
-      S.maskCanvas = await matte($('opt-model').value);
+      const pick = $('opt-model').value;
+      const kind = pick !== 'auto' ? pick : (await pickDevice()) === 'webgpu' ? 'birefnet' : 'modnet';
+      S.base = await matte(kind); S.usedKind = kind; S.strokes = [];
+      rebuildMask();
       status('Compositing…');
       await present();
-      status(`Done in ${((performance.now() - t0) / 1000).toFixed(1)} s on ${device === 'webgpu' ? 'WebGPU' : 'WebAssembly'}`);
+      $('btn-compress-label').textContent = 'Run again';
+      status(`${SPECS[kind].label} · ${((performance.now() - t0) / 1000).toFixed(1)} s on ${device === 'webgpu' ? 'WebGPU' : 'WebAssembly'}${kind === 'modnet' && pick === 'auto' ? ' · HQ model needs WebGPU (Chrome/Edge)' : ''}`);
     } catch (e) {
       console.warn(e);
       showError(/fetch|network|Failed to/i.test(String(e)) ? "Couldn't download the model — check your connection and try again." : 'Background removal failed on this image. Try the other model in Settings.');
@@ -110,48 +135,90 @@
     } finally { S.busy = false; setBusy($('tool-card'), false); $('btn-compress').disabled = false; progress(null); }
   }
 
-  /* ── Load ── */
+  /* ── Brush (Pointer Events; coordinates mapped through object-fit: contain) ── */
+  let stroke = null, raf = 0;
+  function toImage(e) {
+    const r = stage.getBoundingClientRect(), W = S.img.naturalWidth, H = S.img.naturalHeight;
+    const sc = Math.min(r.width / W, r.height / H), ox = (r.width - W * sc) / 2, oy = (r.height - H * sc) / 2;
+    return { x: (e.clientX - r.left - ox) / sc, y: (e.clientY - r.top - oy) / sc, sc };
+  }
+  function moveCursor(e) {
+    const c = $('brush-cursor'), r = stage.getBoundingClientRect(), { sc } = toImage(e), d = +$('brush-size').value * sc;
+    c.style.width = c.style.height = d + 'px'; c.style.left = (e.clientX - r.left) + 'px'; c.style.top = (e.clientY - r.top) + 'px';
+  }
+  function paintTo(p) {
+    const ctx = S.mask.getContext('2d'), last = stroke.pts[stroke.pts.length - 1], r = stroke.r;
+    if (last) { const d = Math.hypot(p.x - last.x, p.y - last.y), n = Math.ceil(d / (r / 3)); for (let i = 1; i <= n; i++) { const q = { x: last.x + (p.x - last.x) * i / n, y: last.y + (p.y - last.y) * i / n }; stroke.pts.push(q); dab(ctx, stroke.mode, q.x, q.y, r); } }
+    else { stroke.pts.push(p); dab(ctx, stroke.mode, p.x, p.y, r); }
+    if (!raf) raf = requestAnimationFrame(() => { raf = 0; compose(); }); // Designed by Kapil Pidhwani: full-res recompose per frame; ~100 ms on 12 MP — acceptable, upgrade path is a display-res preview canvas.
+  }
+  stage.addEventListener('pointerdown', (e) => {
+    if (S.tool === 'view' || !S.mask || e.button > 0) return;
+    e.preventDefault(); stage.setPointerCapture(e.pointerId);
+    stroke = { mode: S.tool, r: +$('brush-size').value / 2, pts: [] }; paintTo(toImage(e));
+  });
+  stage.addEventListener('pointermove', (e) => { if (S.tool !== 'view') moveCursor(e); if (stroke) paintTo(toImage(e)); });
+  const endStroke = async () => { if (!stroke) return; S.strokes.push(stroke); stroke = null; $('btn-undo').disabled = false; await present(); };
+  stage.addEventListener('pointerup', endStroke); stage.addEventListener('pointercancel', endStroke);
+  stage.addEventListener('pointerenter', () => { $('brush-cursor').hidden = S.tool === 'view'; });
+  stage.addEventListener('pointerleave', () => { $('brush-cursor').hidden = true; });
+  async function undo() { if (!S.strokes.length) return; S.strokes.pop(); rebuildMask(); await present(); }
+  function setTool(t) {
+    S.tool = t;
+    stage.classList.toggle('bgr-painting', t !== 'view');
+    $('brush-row').hidden = t === 'view'; $('cmp-range').hidden = t !== 'view';
+    if (t !== 'view') { $('cmp-range').value = 0; stage.style.setProperty('--x', '0%'); }
+  }
+
+  /* ── Load / reset ── */
   function load(file) {
     const url = URL.createObjectURL(file), img = new Image();
     img.onload = () => {
       if (img.naturalWidth * img.naturalHeight > MAX_PIXELS) { URL.revokeObjectURL(url); return showError(`That image is ${(img.naturalWidth * img.naturalHeight / 1e6).toFixed(0)} MP — the limit is 25 MP.`); }
       clearOutput();
-      S.file = file; S.img = img; S.maskCanvas = null; showError('');
+      S.file = file; S.img = img; showError('');
       $('source-img').src = url; $('source-img').classList.add('bgr-show'); $('cmp-img').src = url; $('dropzone').hidden = true;
       $('source-badge').textContent = `${img.naturalWidth} × ${img.naturalHeight} · ${formatBytes(file.size)}`;
       $('btn-compress').disabled = false;
-      status('Ready — click Remove background');
+      run(); // remove.bg behaviour: no extra click
     };
     img.onerror = () => { URL.revokeObjectURL(url); showError("Couldn't decode that image. Try a JPG, PNG or WebP."); };
     img.src = url;
   }
   function clearOutput() {
-    S.out = null; $('bgr-out').hidden = true; $('output-empty').hidden = false;
-    $('output-badge').textContent = 'Awaiting file'; $('btn-download').disabled = true; $('btn-copy').disabled = true;
-    $('cmp-range').value = 0; $('bgr-out').style.setProperty('--x', '0%');
+    S.out = null; S.base = null; S.mask = null; S.strokes = []; stroke = null;
+    stage.hidden = true; $('output-empty').hidden = false; $('seg-tool').hidden = true;
+    $('output-badge').textContent = 'Awaiting file'; $('btn-download').disabled = true; $('btn-copy').disabled = true; $('btn-undo').disabled = true;
+    $('btn-compress-label').textContent = 'Remove background';
+    document.querySelectorAll('#seg-tool .seg-pill').forEach((b) => b.classList.toggle('active', b.dataset.value === 'view')); setTool('view');
+    $('cmp-range').value = 0; stage.style.setProperty('--x', '0%');
   }
   function reset() {
     clearOutput();
-    S.file = null; S.img = null; S.maskCanvas = null;
+    S.file = null; S.img = null;
     $('source-img').classList.remove('bgr-show'); $('source-img').removeAttribute('src'); $('dropzone').hidden = false; $('file-input').value = '';
     $('source-badge').textContent = 'No file loaded'; $('btn-compress').disabled = true; showError('');
-    $('opt-model').value = 'modnet'; $('opt-bg').value = ''; $('opt-bg-color').value = '#f4f1ea'; syncSummary();
+    $('opt-model').value = 'auto'; $('opt-bg').value = ''; $('opt-bg-color').value = '#f4f1ea'; $('brush-size').value = 40; $('brush-size-val').textContent = '40'; syncSummary();
     status('Drop an image to begin'); toast('Reset');
   }
   const baseName = () => (S.file ? S.file.name.replace(/\.[^.]+$/, '') : 'image');
-  const download = () => S.out && downloadBlob(S.out, `${baseName()}-no-bg.png`);
-  const copy = () => S.out && copyBlob(S.out, 'Image copied to clipboard (PNG)');
+  const download = () => S.out && downloadBlob(S.out, `${baseName()}-no-bg.${bgMode() ? 'jpg' : 'png'}`);
+  const copy = () => S.out && new Promise((res) => outCanvas.toBlob(res, 'image/png')).then((b) => copyBlob(b, 'Image copied to clipboard (PNG)'));
 
   bindDropzone($('dropzone'), $('file-input'), load, { accept: 'image/' });
+  bindSegmented($('seg-tool'), setTool);
   $('btn-compress').addEventListener('click', run);
   $('btn-reset').addEventListener('click', reset);
   $('btn-download').addEventListener('click', download);
   $('btn-copy').addEventListener('click', copy);
-  $('cmp-range').addEventListener('input', (e) => $('bgr-out').style.setProperty('--x', e.target.value + '%'));
-  $('opt-model').addEventListener('change', () => { syncSummary(); if (S.maskCanvas) { S.maskCanvas = null; clearOutput(); status('Model changed — click Remove background'); } });
-  $('opt-bg').addEventListener('change', () => { syncSummary(); if (S.maskCanvas) present(); });
-  $('opt-bg-color').addEventListener('input', () => { syncSummary(); if (S.maskCanvas) present(); });
+  $('btn-undo').addEventListener('click', undo);
+  $('brush-size').addEventListener('input', (e) => { $('brush-size-val').textContent = e.target.value; });
+  $('cmp-range').addEventListener('input', (e) => stage.style.setProperty('--x', e.target.value + '%'));
+  $('opt-model').addEventListener('change', () => { syncSummary(); if (S.base) { status('Model changed — click Run again'); } });
+  $('opt-bg').addEventListener('change', () => { syncSummary(); if (S.mask) present(); });
+  $('opt-bg-color').addEventListener('input', () => { syncSummary(); if (S.mask) present(); });
+  document.addEventListener('keydown', (e) => { if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z' && S.strokes.length && !/INPUT|TEXTAREA/.test(e.target.tagName)) { e.preventDefault(); undo(); } });
   bindShortcuts({ primary: download, reset });
   syncSummary();
-  window.__bgr = { run, load, S, pickDevice }; // self-check hook
+  window.__bgr = { run, load, S, pickDevice, dab, rebuildMask, present, setTool, undo }; // self-check hook
 })();

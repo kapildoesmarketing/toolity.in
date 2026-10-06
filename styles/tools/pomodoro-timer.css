@@ -1,0 +1,36 @@
+/* Designed by Kapil Pidhwani: Pomodoro Timer — ring, controls, task list, fullscreen focus mode; shared shell lives in main.css */
+.pm-center { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.1rem; min-height: 380px; text-align: center; }
+.pm-ring-wrap { position: relative; width: min(260px, 70cqw); aspect-ratio: 1; display: grid; place-items: center; }
+.pm-ring { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg); }
+.pm-ring-track { fill: none; stroke: var(--border); stroke-width: 6; }
+.pm-ring-fill { fill: none; stroke: var(--brand); stroke-width: 6; stroke-linecap: round; stroke-dasharray: 339.29; stroke-dashoffset: 0; transition: stroke-dashoffset 0.25s linear, stroke 0.3s ease; }
+#tool-card[data-mode="short"] .pm-ring-fill { stroke: #10B981; }
+#tool-card[data-mode="long"] .pm-ring-fill { stroke: #3B82F6; }
+.pm-time { position: relative; font-size: clamp(2.6rem, 14cqw, 3.6rem); font-weight: 600; letter-spacing: 0.02em; font-variant-numeric: tabular-nums; color: var(--text-primary); line-height: 1; }
+.pm-task-now { position: absolute; bottom: 20%; max-width: 70%; font-size: 0.8rem; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pm-controls { display: flex; align-items: center; gap: 0.6rem; }
+.pm-start { min-width: 9rem; justify-content: center; font-size: 0.95rem; padding-block: 0.7rem; }
+.pm-dots { display: flex; gap: 0.45rem; }
+.pm-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--border); }
+.pm-dot.done { background: var(--brand); }
+.pm-today { margin: 0; font-size: 0.82rem; color: var(--text-muted); }
+.pm-tasks { display: flex; flex-direction: column; gap: 0.75rem; min-height: 380px; }
+.pm-add { display: flex; gap: 0.5rem; min-width: 0; }
+.pm-add .input-clean { flex: 1; min-width: 0; }
+.pm-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.4rem; overflow: auto; max-height: 420px; }
+.pm-item { display: flex; align-items: center; gap: 0.6rem; padding: 0.55rem 0.7rem; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); background: var(--surface-elevated); min-width: 0; }
+.pm-item.active { border-color: var(--brand); box-shadow: inset 3px 0 0 var(--brand); }
+.pm-item.done .pm-item-name { text-decoration: line-through; color: var(--text-muted); }
+.pm-item input[type="checkbox"] { flex: none; width: 18px; height: 18px; accent-color: var(--brand); }
+.pm-item-name { flex: 1; min-width: 0; text-align: left; background: none; border: 0; padding: 0; font: inherit; font-size: 0.9rem; color: var(--text-primary); cursor: pointer; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pm-item-count { flex: none; font-size: 0.78rem; color: var(--text-secondary); font-variant-numeric: tabular-nums; }
+.pm-item-del { flex: none; display: inline-flex; background: none; border: 0; padding: 0.25rem; color: var(--text-muted); cursor: pointer; border-radius: var(--radius-xs); }
+.pm-item-del:hover { color: #EF4444; background: var(--surface); }
+.pm-empty { flex: 1; }
+.pm-empty[hidden], .pm-clear[hidden] { display: none; }
+.pm-clear { align-self: flex-start; }
+.pm-num { width: 4.2rem; }
+.tool-settings-panel .control-item { flex-wrap: wrap; }
+#tool-card:fullscreen { display: flex; flex-direction: column; justify-content: center; padding: clamp(1rem, 4vw, 3rem); background: var(--background); overflow: auto; }
+#tool-card:fullscreen .pm-ring-wrap { width: min(420px, 60cqw); }
+#tool-card:fullscreen .pm-time { font-size: clamp(3rem, 12cqw, 6rem); }

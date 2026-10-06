@@ -630,6 +630,14 @@
         tags: ['background remover', 'remove bg', 'transparent png', 'cut out', 'ai', 'matting', 'portrait', 'product photo', 'webgpu', 'transformers.js', 'modnet', 'birefnet']
       },
       {
+        id: 'pomodoro-timer',
+        title: 'Pomodoro Timer',
+        category: 'Labs',
+        url: 'labs/pomodoro-timer/',
+        icon: 'lucide:timer',
+        tags: ['pomodoro', 'timer', 'focus', 'productivity', 'tomato', 'study timer', 'work timer', 'break timer', 'task list', 'countdown']
+      },
+      {
         id: 'youtube-thumbnail-downloader',
         title: 'YouTube Thumbnail Downloader',
         category: 'Media',

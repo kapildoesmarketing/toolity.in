@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Pomodoro Timer | Toolity Labs</title>
+  <link rel="canonical" href="https://toolity.in/labs/pomodoro-timer/">
+  <meta name="description" content="Free online Pomodoro timer with task list, custom focus and break lengths, auto-start, long breaks, sound and desktop notifications. Keeps running in a background tab; progress is saved in your browser.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Pomodoro Timer | Toolity Labs">
+  <meta property="og:description" content="Free online Pomodoro timer with task list, custom focus and break lengths, auto-start, long breaks, sound and desktop notifications. Keeps running in a background tab; progress is saved in your browser.">
+  <meta property="og:url" content="https://toolity.in/labs/pomodoro-timer/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=3.4" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=3.4">
+  <link rel="stylesheet" href="/styles/tools/pomodoro-timer.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Pomodoro Timer",
+        "url": "https://toolity.in/labs/pomodoro-timer/",
+        "description": "Free online Pomodoro timer with task list, custom focus and break lengths, auto-start, long breaks, sound and desktop notifications. Keeps running in a background tab; progress is saved in your browser.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Labs", "item": "https://toolity.in/labs/" },
+          { "@type": "ListItem", "position": 3, "name": "Pomodoro Timer", "item": "https://toolity.in/labs/pomodoro-timer/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Does the timer keep running if I switch tabs or lock my laptop?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The end time is stored as a timestamp, so browser throttling or a sleeping laptop cannot make it drift — when you come back the ring shows the correct remaining time, and if the session already ended you get the chime and notification then." } },
+          { "@type": "Question", "name": "Where are my tasks and stats stored?", "acceptedAnswer": { "@type": "Answer", "text": "In your browser's local storage on this device. Nothing is sent to a server, there is no account, and clearing site data or pressing Reset wipes them." } },
+          { "@type": "Question", "name": "Why do I not get desktop notifications?", "acceptedAnswer": { "@type": "Answer", "text": "Enable them in Settings — your browser will ask for permission the first time. If you previously blocked notifications for toolity.in, re-allow them in the browser's site settings. Notifications also require the page to be open in a tab (it can be in the background)." } },
+          { "@type": "Question", "name": "Can I change the 25/5/15 lengths?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Settings lets you set focus (1–90 min), short break (1–30), long break (1–60) and how many focus sessions come before a long break. Changes apply to the next session." } },
+          { "@type": "Question", "name": "What is the Pomodoro Technique?", "acceptedAnswer": { "@type": "Answer", "text": "A time-management method by Francesco Cirillo: work in focused 25-minute blocks (\"pomodoros\") separated by 5-minute breaks, with a longer break after four. The short, fixed intervals make starting easier and keep fatigue down." } },
+          { "@type": "Question", "name": "Is there a sound file I need to allow?", "acceptedAnswer": { "@type": "Answer", "text": "No file is loaded — the chime is synthesised with the Web Audio API. Browsers only allow sound after you have interacted with the page, which pressing Start already counts as." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/labs/" class="breadcrumb-link">Labs</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Pomodoro Timer</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Labs</span>
+            <h1 class="page-title">Pomodoro Timer</h1>
+            <p class="page-desc">A focused 25/5 timer with a task list, auto-breaks, chimes and desktop notifications — your sessions stay on this device.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" data-split="40/60" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge" id="result-badge">Ready · Space to start</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset timer, tasks, today's stats and settings" aria-label="Reset timer, tasks, today's stats and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy today's summary" aria-label="Copy today's summary">
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-download" title="Download today's session log (.csv)" aria-label="Download today's session log as CSV" disabled>
+                <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                <span>Download</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-open" title="Fullscreen focus mode (F)" aria-label="Fullscreen focus mode">
+                <iconify-icon icon="lucide:maximize-2" width="14" height="14"></iconify-icon>
+                <span>Focus</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane pm-timer-pane">
+              <div class="pane-header">
+                <div class="segmented-group segmented-group-pill" id="seg-mode" role="group" aria-label="Timer mode">
+                  <button type="button" class="seg-pill active" data-value="focus">Focus</button>
+                  <button type="button" class="seg-pill" data-value="short">Short break</button>
+                  <button type="button" class="seg-pill" data-value="long">Long break</button>
+                </div>
+                <span class="pane-badge" id="source-badge">Round 1 of 4</span>
+              </div>
+              <div class="pane-content pm-center">
+                <div class="pm-ring-wrap">
+                  <svg class="pm-ring" viewBox="0 0 120 120" aria-hidden="true">
+                    <circle class="pm-ring-track" cx="60" cy="60" r="54"></circle>
+                    <circle class="pm-ring-fill" id="pm-ring" cx="60" cy="60" r="54"></circle>
+                  </svg>
+                  <div class="pm-time" id="pm-time" role="timer" aria-live="off">25:00</div>
+                  <div class="pm-task-now" id="pm-task-now">No task selected</div>
+                </div>
+                <div class="pm-controls">
+                  <button type="button" class="btn-toolbar-sm btn-brand-sm pm-start" id="btn-start" aria-label="Start timer">
+                    <iconify-icon icon="lucide:play" width="18" height="18" id="pm-start-icon"></iconify-icon>
+                    <span id="pm-start-label">Start</span>
+                  </button>
+                  <button type="button" class="btn-toolbar-sm" id="btn-skip" title="Skip to the next session" aria-label="Skip to the next session">
+                    <iconify-icon icon="lucide:skip-forward" width="16" height="16"></iconify-icon>
+                  </button>
+                </div>
+                <div class="pm-dots" id="pm-dots" aria-label="Focus sessions in this round"></div>
+                <p class="pm-today" id="pm-today">Today: 0 pomodoros · 0 min focused</p>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Tasks</span>
+                <span class="pane-badge" id="output-badge">0 open</span>
+              </div>
+              <div class="pane-content pm-tasks">
+                <form class="pm-add" id="task-form" autocomplete="off">
+                  <input type="text" id="task-input" class="input-clean" placeholder="What are you working on?" maxlength="120" aria-label="New task">
+                  <button type="submit" class="btn-toolbar-sm btn-brand-sm" aria-label="Add task">
+                    <iconify-icon icon="lucide:plus" width="16" height="16"></iconify-icon>
+                  </button>
+                </form>
+                <ul class="pm-list" id="task-list" aria-label="Task list"></ul>
+                <div id="output-empty" class="media-empty-placeholder pm-empty">
+                  <iconify-icon icon="lucide:list-todo" width="28" height="28"></iconify-icon>
+                  <p>Add a task and click it to make it the current focus</p>
+                </div>
+                <button type="button" class="btn-toolbar-sm pm-clear" id="btn-clear-done" hidden>
+                  <iconify-icon icon="lucide:check-check" width="14" height="14"></iconify-icon>
+                  <span>Clear completed</span>
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">25 / 5 / 15 · every 4</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item">
+                <label for="opt-focus">Focus</label>
+                <input type="number" id="opt-focus" class="input-clean pm-num" min="1" max="90" value="25" inputmode="numeric"> <span class="form-helper">min</span>
+                <label for="opt-short">Short break</label>
+                <input type="number" id="opt-short" class="input-clean pm-num" min="1" max="30" value="5" inputmode="numeric"> <span class="form-helper">min</span>
+                <label for="opt-long">Long break</label>
+                <input type="number" id="opt-long" class="input-clean pm-num" min="1" max="60" value="15" inputmode="numeric"> <span class="form-helper">min</span>
+                <label for="opt-every">Long break every</label>
+                <input type="number" id="opt-every" class="input-clean pm-num" min="2" max="8" value="4" inputmode="numeric"> <span class="form-helper">focus sessions</span>
+              </div>
+              <div class="control-item">
+                <input type="checkbox" id="opt-auto-break" checked>
+                <label for="opt-auto-break">Auto-start breaks</label>
+              </div>
+              <div class="control-item">
+                <input type="checkbox" id="opt-auto-focus">
+                <label for="opt-auto-focus">Auto-start the next focus session</label>
+              </div>
+              <div class="control-item">
+                <input type="checkbox" id="opt-sound" checked>
+                <label for="opt-sound">Chime when a session ends</label>
+              </div>
+              <div class="control-item">
+                <input type="checkbox" id="opt-notify">
+                <label for="opt-notify">Desktop notification when a session ends</label>
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Use the Pomodoro Timer in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Pick a task and start</h3>
+              <p class="step-desc">Add what you are working on, click it to make it current, then press <strong>Start</strong> (or <kbd>Space</kbd>). The ring counts down 25 minutes of focus.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Take the breaks</h3>
+              <p class="step-desc">When the chime sounds the timer rolls into a 5-minute break automatically; after four focus sessions you get a longer one. Skip any session with the ⏭ button.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Review your day</h3>
+              <p class="step-desc">Each finished focus session is tallied on its task and in today's total. Copy a summary, download the log as CSV, or use Focus mode for a distraction-free full screen.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Pomodoro Timer — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Does the timer keep running if I switch tabs or lock my laptop?</summary>
+              <p>Yes. The end time is stored as a timestamp, so browser throttling or a sleeping laptop cannot make it drift — when you come back the ring shows the correct remaining time, and if the session already ended you get the chime and notification then.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Where are my tasks and stats stored?</summary>
+              <p>In your browser's local storage on this device. Nothing is sent to a server, there is no account, and clearing site data or pressing Reset wipes them.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why do I not get desktop notifications?</summary>
+              <p>Enable them in Settings — your browser will ask for permission the first time. If you previously blocked notifications for toolity.in, re-allow them in the browser's site settings. Notifications also require the page to be open in a tab (it can be in the background).</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can I change the 25/5/15 lengths?</summary>
+              <p>Yes. Settings lets you set focus (1–90 min), short break (1–30), long break (1–60) and how many focus sessions come before a long break. Changes apply to the next session.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What is the Pomodoro Technique?</summary>
+              <p>A time-management method by Francesco Cirillo: work in focused 25-minute blocks ("pomodoros") separated by 5-minute breaks, with a longer break after four. The short, fixed intervals make starting easier and keep fatigue down.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is there a sound file I need to allow?</summary>
+              <p>No file is loaded — the chime is synthesised with the Web Audio API. Browsers only allow sound after you have interacted with the page, which pressing Start already counts as.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="labs"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=2.7"></script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="/labs/pomodoro-timer/pomodoro-timer.js?v=1.0"></script>
+</body>
+</html>
