@@ -3930,3 +3930,17 @@ body {
 .vdt-thumb { position: relative; margin: 0; border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; background: #000; cursor: pointer; aspect-ratio: 16 / 9; }
 .vdt-thumb img { width: 100%; height: 100%; object-fit: contain; display: block; }
 .vdt-thumb figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 0.1rem 0.3rem; font-size: 0.66rem; font-family: var(--font-mono); color: #fff; background: rgba(0, 0, 0, 0.55); }
+
+/* ==========================================================================
+   AUDIO TOOLS (shared by scripts/audio-common.js pages)
+   ========================================================================== */
+.aud-player { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.6rem; width: 100%; height: 100%; padding: 0.8rem; min-width: 0; }
+.aud-player[hidden] { display: none; }
+.aud-player audio { width: 100%; max-width: 420px; }
+.aud-wave { display: none; width: 100%; height: 72px; border-radius: var(--radius-sm); background: var(--surface-elevated); }
+.aud-wave.is-shown { display: block; }
+.aud-name { font-size: 0.78rem; color: var(--text-muted); font-family: var(--font-mono); max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.aud-meter { width: 100%; max-width: 420px; height: 6px; border-radius: 3px; background: var(--surface-elevated); overflow: hidden; }
+.aud-meter-fill { height: 100%; width: 0; background: var(--brand); transition: width 80ms linear; }
+.aud-clock { font-family: var(--font-mono); font-size: 1.6rem; font-variant-numeric: tabular-nums; }
+.aud-rec-row { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; }

@@ -1,0 +1,2 @@
+/* Designed by Kapil Pidhwani: voice-recorder — recorder controls and the take player share one viewport, so neither may claim 100 % height. */
+#rec-wrap, #source-wrap { height: auto; }

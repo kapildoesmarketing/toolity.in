@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Audio Converter | Toolity Media</title>
+  <link rel="canonical" href="https://toolity.in/media/audio-converter/">
+  <meta name="description" content="Free online audio converter. Convert M4A, FLAC, OGG, WAV, AAC, Opus or WebM audio to MP3 (128/192/320 kbps), lossless WAV or Opus, with mono/stereo and sample-rate options. Runs entirely in your browser — no upload.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Audio Converter | Toolity Media">
+  <meta property="og:description" content="Free online audio converter. Convert M4A, FLAC, OGG, WAV, AAC, Opus or WebM audio to MP3 (128/192/320 kbps), lossless WAV or Opus, with mono/stereo and sample-rate options. Runs entirely in your browser — no upload.">
+  <meta property="og:url" content="https://toolity.in/media/audio-converter/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=3.7" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=3.7">
+  <link rel="stylesheet" href="/styles/tools/audio-converter.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Audio Converter",
+        "url": "https://toolity.in/media/audio-converter/",
+        "description": "Free online audio converter. Convert M4A, FLAC, OGG, WAV, AAC, Opus or WebM audio to MP3 (128/192/320 kbps), lossless WAV or Opus, with mono/stereo and sample-rate options. Runs entirely in your browser — no upload.",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Media", "item": "https://toolity.in/media/" },
+          { "@type": "ListItem", "position": 3, "name": "Audio Converter", "item": "https://toolity.in/media/audio-converter/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Is my audio uploaded anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. The file is decoded by your browser's Web Audio engine, processed on your device and encoded to MP3 or WAV with an open-source encoder running in the page. Nothing is sent to a server." } },
+          { "@type": "Question", "name": "Can I convert to M4A, AAC or FLAC?", "acceptedAnswer": { "@type": "Answer", "text": "Not yet — browsers ship no AAC or FLAC encoder, and adding one would mean a multi-megabyte download. MP3 and WAV cover nearly every use; Opus is available for the smallest voice files." } },
+          { "@type": "Question", "name": "Why is Opus slower than MP3?", "acceptedAnswer": { "@type": "Answer", "text": "Opus uses the browser's built-in MediaRecorder, which only works in real time while the audio plays silently — so a 3-minute track takes 3 minutes. MP3 and WAV are encoded offline at about 15× real time." } },
+          { "@type": "Question", "name": "Does it lose quality?", "acceptedAnswer": { "@type": "Answer", "text": "Decoding to raw samples is lossless; the only loss is the final MP3 encode, and 192–320 kbps is transparent for most listeners. Choose WAV if you plan to edit the result again — re-encoding MP3 twice stacks artefacts." } },
+          { "@type": "Question", "name": "Is there a length or size limit?", "acceptedAnswer": { "@type": "Answer", "text": "Files up to 200 MB are accepted. Decoded audio lives in memory (about 10 MB per minute of stereo), so hour-long recordings work on a desktop but may be tight on a low-end phone." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/media/" class="breadcrumb-link">Media</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Audio Converter</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Media</span>
+            <h1 class="page-title">Audio Converter</h1>
+            <p class="page-desc">Convert any audio file to MP3, WAV or Opus — pick bitrate, channels and sample rate — privately in your browser.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" data-split="40/60" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge" id="result-badge">Drop a file to begin</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset" aria-label="Reset">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result summary" aria-label="Copy result summary" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download result" aria-label="Download result" disabled>
+                <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                <span>Download</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Source</span>
+                <span class="pane-badge" id="source-badge">No file loaded</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content pane-content-between">
+                <div class="media-canvas-viewport">
+                  <div id="dropzone" class="video-dropzone" tabindex="0" role="button" aria-label="Drop an audio file here or click to browse">
+                    <input type="file" id="file-input" accept="audio/*, .mp3, .wav, .m4a, .aac, .ogg, .opus, .flac, .weba, .webm">
+                    <div class="video-drop-icon">
+                      <iconify-icon icon="lucide:upload-cloud" width="22" height="22"></iconify-icon>
+                    </div>
+                    <div class="video-drop-title">Drop an audio file here or click to browse</div>
+                    <div class="video-drop-subtitle">MP3, WAV, M4A, OGG, FLAC — up to 200 MB</div>
+                  </div>
+                  <div id="source-wrap" class="aud-player" hidden>
+                    <canvas id="source-wave" class="aud-wave" aria-label="Source waveform"></canvas>
+                    <audio id="source-audio" controls preload="metadata"></audio>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Converted</span>
+                <span class="pane-badge" id="output-badge">Awaiting file</span>
+              </div>
+              <div class="pane-content pane-content-between">
+                <div class="media-canvas-viewport">
+                  <div id="output-empty" class="media-empty-placeholder">
+                    <iconify-icon icon="lucide:repeat" width="32" height="32"></iconify-icon>
+                    <p>The converted file appears here</p>
+                  </div>
+                  <div id="output-wrap" class="aud-player" hidden>
+                    <canvas id="output-wave" class="aud-wave" aria-label="Result waveform"></canvas>
+                    <audio id="output-audio" controls></audio>
+                  </div>
+                </div>
+                <div>
+                  <button type="button" id="btn-compress" class="btn-toolbar-sm btn-brand-sm btn-primary-action" disabled>
+                    <iconify-icon icon="lucide:repeat" width="16" height="16"></iconify-icon>
+                    <span id="btn-compress-label">Convert audio</span>
+                  </button>
+                  <div class="slim-progress-bar" id="progress-bar">
+                    <div class="slim-progress-fill" id="progress-fill"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">MP3 · 192 kbps · Keep channels · Keep sample rate</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item">
+                <label for="opt-out">Output format</label>
+                <select id="opt-out" class="select-clean">
+                  <option value="mp3-128">MP3 · 128 kbps</option>
+                  <option value="mp3-192" selected>MP3 · 192 kbps</option>
+                  <option value="mp3-320">MP3 · 320 kbps</option>
+                  <option value="wav">WAV · lossless</option>
+                  <option value="opus">Opus · 128 kbps (real-time)</option>
+                </select>
+                <span class="form-helper">Opus encodes in real time — a 3-minute file takes 3 minutes.</span>
+              </div>
+              <div class="control-item">
+                <label for="opt-ch">Channels</label>
+                <select id="opt-ch" class="select-clean">
+                  <option value="keep" selected>Keep</option>
+                  <option value="1">Mono</option>
+                  <option value="2">Stereo</option>
+                </select>
+              </div>
+              <div class="control-item">
+                <label for="opt-rate">Sample rate</label>
+                <select id="opt-rate" class="select-clean">
+                  <option value="keep" selected>Keep</option>
+                  <option value="48000">48 kHz</option>
+                  <option value="44100">44.1 kHz</option>
+                  <option value="32000">32 kHz</option>
+                  <option value="22050">22.05 kHz</option>
+                  <option value="16000">16 kHz (voice)</option>
+                </select>
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Convert an Audio File in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Drop an audio file</h3>
+              <p class="step-desc">Drag any MP3, M4A, FLAC, OGG, Opus or WAV onto the left pane. It is decoded on your device and a waveform with a player appears.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Choose the target</h3>
+              <p class="step-desc">Open Settings and pick MP3 (with bitrate), WAV or Opus. Optionally force mono/stereo or a new sample rate — 16 kHz mono is ideal for voice notes and transcription.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Convert and download</h3>
+              <p class="step-desc">Click <strong>Convert audio</strong>. The result plays on the right with its format, length and size, ready to download.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Audio Converter — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Is my audio uploaded anywhere?</summary>
+              <p>No. The file is decoded by your browser's Web Audio engine, processed on your device and encoded to MP3 or WAV with an open-source encoder running in the page. Nothing is sent to a server.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can I convert to M4A, AAC or FLAC?</summary>
+              <p>Not yet — browsers ship no AAC or FLAC encoder, and adding one would mean a multi-megabyte download. MP3 and WAV cover nearly every use; Opus is available for the smallest voice files.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why is Opus slower than MP3?</summary>
+              <p>Opus uses the browser's built-in MediaRecorder, which only works in real time while the audio plays silently — so a 3-minute track takes 3 minutes. MP3 and WAV are encoded offline at about 15× real time.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Does it lose quality?</summary>
+              <p>Decoding to raw samples is lossless; the only loss is the final MP3 encode, and 192–320 kbps is transparent for most listeners. Choose WAV if you plan to edit the result again — re-encoding MP3 twice stacks artefacts.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is there a length or size limit?</summary>
+              <p>Files up to 200 MB are accepted. Decoded audio lives in memory (about 10 MB per minute of stereo), so hour-long recordings work on a desktop but may be tight on a low-end phone.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="media"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=3.0"></script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="/scripts/audio-common.js?v=1.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lamejs@1.2.1/lame.all.js" defer></script>
+  <script src="/media/audio-converter/audio-converter.js?v=1.0"></script>
+</body>
+</html>

@@ -782,6 +782,86 @@
         tags: ['images to gif', 'gif maker', 'png to gif', 'jpg to gif', 'slideshow', 'animated gif', 'create gif', 'photos to gif']
       },
       {
+        id: 'audio-converter',
+        title: 'Audio Converter',
+        category: 'Media',
+        url: 'media/audio-converter/',
+        icon: 'lucide:repeat',
+        tags: ['audio', 'convert', 'converter', 'mp3', 'wav', 'm4a to mp3', 'flac to mp3', 'ogg', 'opus', 'sample rate', 'mono']
+      },
+      {
+        id: 'audio-trimmer',
+        title: 'Audio Trimmer',
+        category: 'Media',
+        url: 'media/audio-trimmer/',
+        icon: 'lucide:scissors',
+        tags: ['audio', 'trim', 'trimmer', 'cut', 'cutter', 'mp3 cutter', 'ringtone', 'clip', 'shorten']
+      },
+      {
+        id: 'audio-merger',
+        title: 'Audio Merger',
+        category: 'Media',
+        url: 'media/audio-merger/',
+        icon: 'lucide:combine',
+        tags: ['audio', 'merge', 'merger', 'join', 'joiner', 'combine', 'concatenate', 'mp3 joiner', 'playlist']
+      },
+      {
+        id: 'audio-reverser',
+        title: 'Audio Reverser',
+        category: 'Media',
+        url: 'media/audio-reverser/',
+        icon: 'lucide:rewind',
+        tags: ['audio', 'reverse', 'reverser', 'backwards', 'rewind', 'backmask', 'mp3']
+      },
+      {
+        id: 'audio-speed-changer',
+        title: 'Audio Speed Changer',
+        category: 'Media',
+        url: 'media/audio-speed-changer/',
+        icon: 'lucide:gauge',
+        tags: ['audio', 'speed', 'tempo', 'faster', 'slower', 'slow down', 'speed up', 'podcast', 'preserve pitch', 'time stretch']
+      },
+      {
+        id: 'volume-booster',
+        title: 'Volume Booster',
+        category: 'Media',
+        url: 'media/volume-booster/',
+        icon: 'lucide:volume-2',
+        tags: ['audio', 'volume', 'louder', 'boost', 'booster', 'normalize', 'normalise', 'gain', 'amplify', 'quiet']
+      },
+      {
+        id: 'voice-recorder',
+        title: 'Voice Recorder',
+        category: 'Media',
+        url: 'media/voice-recorder/',
+        icon: 'lucide:mic',
+        tags: ['voice', 'record', 'recorder', 'microphone', 'mic', 'dictation', 'memo', 'mp3 recorder', 'audio recorder']
+      },
+      {
+        id: 'voice-changer',
+        title: 'Voice Changer',
+        category: 'Media',
+        url: 'media/voice-changer/',
+        icon: 'lucide:wand-2',
+        tags: ['voice', 'changer', 'effects', 'pitch', 'deep voice', 'chipmunk', 'robot', 'echo', 'prank', 'disguise']
+      },
+      {
+        id: 'audio-fade-in-out',
+        title: 'Audio Fade In / Out',
+        category: 'Media',
+        url: 'media/audio-fade-in-out/',
+        icon: 'lucide:trending-down',
+        tags: ['audio', 'fade', 'fade in', 'fade out', 'crossfade', 'intro', 'outro', 'smooth ending', 'mp3']
+      },
+      {
+        id: 'silence-remover',
+        title: 'Silence Remover',
+        category: 'Media',
+        url: 'media/silence-remover/',
+        icon: 'lucide:audio-lines',
+        tags: ['audio', 'silence', 'remove silence', 'dead air', 'podcast', 'tighten', 'pauses', 'gaps', 'voice note', 'trim silence']
+      },
+      {
         id: 'youtube-thumbnail-downloader',
         title: 'YouTube Thumbnail Downloader',
         category: 'Media',
