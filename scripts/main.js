@@ -169,6 +169,13 @@
 
     // Initialize site-wide search (header popover + mobile drawer)
     initSiteSearch();
+
+    // WebMCP: expose Toolity to in-browser AI agents — loaded only when the browser supports it
+    if (document.modelContext || navigator.modelContext) {
+      const s = document.createElement('script');
+      s.src = '/scripts/webmcp.js?v=1.0';
+      document.head.appendChild(s);
+    }
   }
 
   document.addEventListener('DOMContentLoaded', () => {
@@ -204,8 +211,7 @@
   function initSiteSearch() {
     const panel = document.getElementById('site-search-panel');
     if (panel && !panel.firstElementChild) panel.innerHTML = SEARCH_HTML;
-    const roots = document.querySelectorAll('.site-search');
-    if (!roots.length) return;
+    const roots = document.querySelectorAll('.site-search'); // may be empty; registry is still exposed for WebMCP
 
     const REGISTRY = [
       {
@@ -889,6 +895,17 @@
         tags: ['youtube', 'thumbnail', 'downloader', 'hd', '1080p', 'image', 'cover', 'shorts', 'video', 'download']
       }
     ];
+
+    // Designed by Kapil Pidhwani: shared with /scripts/webmcp.js (agent tool search) — one registry, one scorer
+    window.ToolityRegistry = {
+      items: REGISTRY,
+      search: (q, n = 8) => REGISTRY
+        .map((item) => ({ item, score: calculateRelevanceScore(item, q) }))
+        .filter((r) => r.score > 0)
+        .sort((a, b) => b.score - a.score)
+        .slice(0, n)
+        .map((r) => r.item)
+    };
 
     /**
      * Stemming, spelling normalization, and synonym expansion dictionary

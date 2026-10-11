@@ -1574,27 +1574,6 @@ body {
   text-decoration: none;
 }
 
-.footer-creator {
-  margin-top: 1.25rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.85rem;
-  color: var(--text-muted);
-}
-
-.footer-creator a,
-.footer-creator a:visited {
-  color: var(--text-primary) !important;
-  font-weight: 500;
-  text-decoration: none;
-  transition: color 0.15s ease;
-}
-
-.footer-creator a:hover {
-  color: var(--brand) !important;
-}
-
 .footer-heading {
   font-size: 0.82rem;
   font-weight: 600;
@@ -1645,24 +1624,6 @@ body {
 
 .footer-copy {
   margin: 0;
-}
-
-.footer-meta {
-  display: inline-flex;
-  align-items: center;
-  gap: 1.25rem;
-}
-
-.footer-meta-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  color: var(--text-secondary) !important;
-  transition: color 0.15s ease;
-}
-
-.footer-meta-link:hover {
-  color: var(--brand) !important;
 }
 
 
