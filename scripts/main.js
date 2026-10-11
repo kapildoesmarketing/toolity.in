@@ -1404,7 +1404,8 @@
         { title: 'Labs', href: `${rootPrefix}labs/`, icon: 'lucide:flask-conical', key: 'labs' },
         { title: 'Dev', href: `${rootPrefix}dev/`, icon: 'lucide:code-2', key: 'dev' },
         { title: 'Data', href: `${rootPrefix}data/`, icon: 'lucide:database', key: 'data' },
-        { title: 'Games', href: `${rootPrefix}games/`, icon: 'lucide:gamepad-2', key: 'games' }
+        { title: 'Games', href: `${rootPrefix}games/`, icon: 'lucide:gamepad-2', key: 'games' },
+        { title: 'Widgets', href: `${rootPrefix}widgets/`, icon: 'lucide:layout-dashboard', key: 'widgets' }
       ];
 
       drawer = document.createElement('div');
