@@ -74,7 +74,7 @@
   const slug = seg[1];
   const title = clean((document.querySelector('h1') || {}).textContent) || slug;
   const metaDesc = (document.querySelector('meta[name="description"]') || {}).content || '';
-  const SKIP_BTN = /^(btn-reset|btn-copy|btn-download|btn-open|btn-paste|btn-download-menu-toggle|mobile-menu-toggle|theme-toggle|search-toggle)/;
+  const SKIP_BTN = /^(btn-reset|btn-copy|btn-copy-url-inline|btn-download|btn-open|btn-paste|btn-download-menu-toggle|mobile-menu-toggle|theme-toggle|search-toggle)/;
 
   const fileInput = () => root.querySelector('#file-input') || root.querySelector('input[type="file"]') || document.querySelector('main input[type="file"]');
   const errorText = () => [...document.querySelectorAll('main .pane-error, main [role="alert"]')].filter(visible).map((e) => clean(e.textContent)).filter(Boolean).join(' · ');

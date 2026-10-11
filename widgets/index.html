@@ -22,8 +22,8 @@
   <link rel="canonical" href="https://toolity.in/widgets/">
 
   <!-- SEO & Metadata -->
-  <meta name="description" content="Free embeddable widgets for Notion and any website — clocks, countdowns, progress bars and more. Free, instant and private — nothing is uploaded.">
-  <meta name="keywords" content="notion widgets, embeddable widgets, notion embed, website widgets, toolity">
+  <meta name="description" content="Free embeddable widgets for Notion and any website — flip clocks, countdown timers and more. Customise everything in the URL, no account required.">
+  <meta name="keywords" content="notion widgets, embeddable widgets, notion flip clock, notion countdown timer, website widgets, toolity">
   <meta name="author" content="Kapil Pidhwani">
   <!-- Favicons -->
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
@@ -36,14 +36,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Iconify Icon Component -->
   <!-- Preload Critical Assets -->
-  <link rel="preload" href="/styles/main.css?v=4.0" as="style">
+  <link rel="preload" href="/styles/main.css?v=4.1" as="style">
   <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
 
   <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 
-  <link rel="stylesheet" href="/styles/main.css?v=4.0">
+  <link rel="stylesheet" href="/styles/main.css?v=4.1">
 </head>
 
 <body>
@@ -64,11 +63,11 @@
           <div class="page-header-content">
             <span class="section-eyebrow">Toolity Widgets</span>
             <h1 class="page-title">Widgets</h1>
-            <p class="page-desc">Free embeddable widgets for Notion and any website — clocks, countdowns, progress bars and more.</p>
+            <p class="page-desc">Free embeddable widgets for Notion and any website — customise everything with a live preview, copy one URL, no account required.</p>
           </div>
           <div class="page-count-badge">
             <span class="status-dot"></span>
-            <span>Coming soon</span>
+            <span>2 Widgets Available</span>
           </div>
         </div>
       </div>
@@ -77,8 +76,54 @@
     <!-- Widgets, grouped by section (alphabetical within each) -->
     <section class="section-wrapper category-tools">
       <div class="container">
-        <!-- Designed by Kapil Pidhwani: placeholder until the first widget ships; replace with tools-section-title + tools-grid sections. -->
-        <h2 class="tools-section-title">Coming soon</h2>
+        <div class="widget-how-strip" aria-label="How embedding works">
+          <div class="widget-how-step">
+            <div class="step-num-badge">1</div>
+            <span><strong>Customise</strong> colours, fonts &amp; layout with a live preview</span>
+          </div>
+          <div class="widget-how-step">
+            <div class="step-num-badge">2</div>
+            <span><strong>Copy</strong> the single embed URL — all settings live in the link</span>
+          </div>
+          <div class="widget-how-step">
+            <div class="step-num-badge">3</div>
+            <span><strong>Paste</strong> with <code>/embed</code> in Notion or an <code>&lt;iframe&gt;</code> on any site</span>
+          </div>
+        </div>
+
+        <h2 class="tools-section-title">Time &amp; Focus</h2>
+        <div class="tools-grid">
+          <a href="countdown/" class="category-glow-card">
+            <div class="glow-card-content">
+              <div class="tool-card-icon-badge">
+                <iconify-icon icon="lucide:hourglass" width="20" height="20"></iconify-icon>
+              </div>
+              <div>
+                <h3 class="tool-card-title">Countdown Timer Widget</h3>
+                <p class="tool-card-desc">Count down to a launch, exam or trip with split-flap cards, custom time zones, colours and fonts — works in Notion.</p>
+              </div>
+              <div class="tool-card-action">
+                <span>Customise</span>
+                <iconify-icon icon="lucide:arrow-right" width="15" height="15"></iconify-icon>
+              </div>
+            </div>
+          </a>
+          <a href="flip-clock/" class="category-glow-card">
+            <div class="glow-card-content">
+              <div class="tool-card-icon-badge">
+                <iconify-icon icon="lucide:clock" width="20" height="20"></iconify-icon>
+              </div>
+              <div>
+                <h3 class="tool-card-title">Flip Clock Widget</h3>
+                <p class="tool-card-desc">Split-flap digital clock with 12/24-hour time, seconds, date, time zones and Notion-ready themes — all in one URL.</p>
+              </div>
+              <div class="tool-card-action">
+                <span>Customise</span>
+                <iconify-icon icon="lucide:arrow-right" width="15" height="15"></iconify-icon>
+              </div>
+            </div>
+          </a>
+        </div>
       </div>
     </section>
   </main>
@@ -86,7 +131,7 @@
   <!-- Global Multi-Column Footer -->
   <div data-include="/components/footer.html"></div>
 
-  <script src="/scripts/main.js?v=3.2"></script>
+  <script src="/scripts/main.js?v=3.3"></script>
 </body>
 
 </html>

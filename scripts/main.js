@@ -50,8 +50,9 @@
     docs:   { label: 'Toolity Docs', title: 'Explore All Docs Tools', cta: 'Explore Docs Tools', desc: 'Tools to compress, merge, convert and manage documents.' },
     labs:   { label: 'Toolity Labs', title: 'Explore All Labs Tools', cta: 'Explore Labs', desc: 'Quick everyday utilities — QR codes, link builders, converters and experiments.' },
     dev:    { label: 'Toolity Dev', title: 'Explore All Dev Tools', cta: 'Explore Dev Tools', desc: 'Tools for software engineers to format, minify, inspect and validate.' },
-    data:   { label: 'Toolity Data', title: 'Explore All Data Tools', cta: 'Explore Data Tools', desc: 'Tools to parse and manipulate data.' },
-    games:  { label: 'Toolity Games', title: 'Explore All Games', cta: 'Play More Games', desc: 'Quick browser games that run instantly — no download, no account.' }
+    data:    { label: 'Toolity Data', title: 'Explore All Data Tools', cta: 'Explore Data Tools', desc: 'Tools to parse and manipulate data.' },
+    games:   { label: 'Toolity Games', title: 'Explore All Games', cta: 'Play More Games', desc: 'Quick browser games that run instantly — no download, no account.' },
+    widgets: { label: 'Toolity Widgets', title: 'Explore All Widgets', cta: 'Explore Widgets', desc: 'Free embeddable widgets for Notion and websites — customise everything via URL parameters.' }
   };
 
   function fillToolCta(nodes, category) {
@@ -893,6 +894,30 @@
         url: 'media/youtube-thumbnail-downloader/',
         icon: 'lucide:youtube',
         tags: ['youtube', 'thumbnail', 'downloader', 'hd', '1080p', 'image', 'cover', 'shorts', 'video', 'download']
+      },
+      {
+        id: 'cat-widgets',
+        title: 'Widgets',
+        category: 'Category',
+        url: 'widgets/',
+        icon: 'lucide:layout-dashboard',
+        tags: ['widgets', 'notion', 'embed', 'notion widgets', 'iframe', 'flip clock', 'countdown', 'dashboard']
+      },
+      {
+        id: 'countdown',
+        title: 'Countdown Timer Widget',
+        category: 'Widgets',
+        url: 'widgets/countdown/',
+        icon: 'lucide:hourglass',
+        tags: ['countdown', 'timer', 'widget', 'notion', 'embed', 'notion countdown', 'days until', 'event timer', 'launch countdown', 'flip countdown']
+      },
+      {
+        id: 'flip-clock',
+        title: 'Flip Clock Widget',
+        category: 'Widgets',
+        url: 'widgets/flip-clock/',
+        icon: 'lucide:clock',
+        tags: ['flip clock', 'clock', 'widget', 'notion', 'embed', 'notion clock', 'digital clock', 'split flap', 'world clock', 'time']
       }
     ];
 

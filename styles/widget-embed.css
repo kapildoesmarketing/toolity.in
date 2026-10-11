@@ -1,0 +1,301 @@
+/* Designed by Kapil Pidhwani: Minimal, self-contained stylesheet for /widgets/<slug>/embed/ pages.
+ * Zero external frameworks; scales cleanly from a 300×120 Notion column to full-width via container queries.
+ */
+
+:root {
+  --bg: #FFFFFF;
+  --surface: #F7F7F5;
+  --surface-edge: #E8E8E6;
+  --fg: #17191C;
+  --muted: #62666B;
+  --accent: #F4511E;
+  --radius: 12px;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --scale: 1;
+}
+
+[data-theme="dark"] {
+  --bg: #0D0D0D;
+  --surface: #181818;
+  --surface-edge: #292B2E;
+  --fg: #F5F5F2;
+  --muted: #A5A7AA;
+  --accent: #FF6A2A;
+}
+
+[data-bg="transparent"] {
+  --bg: transparent;
+}
+
+[data-size="sm"] { --scale: 0.82; }
+[data-size="md"] { --scale: 1; }
+[data-size="lg"] { --scale: 1.18; }
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.w-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: clamp(8px, 3vmin, 24px);
+  container-type: size;
+  text-align: center;
+}
+
+[data-align="left"] .w-stage {
+  align-items: flex-start;
+  text-align: left;
+}
+
+.w-card-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(6px, 2.2cqmin, 16px);
+  max-width: 100%;
+  max-height: 100%;
+}
+
+[data-align="left"] .w-card-wrap {
+  align-items: flex-start;
+}
+
+.w-title {
+  font-size: calc(clamp(0.72rem, 3.6cqmin, 1.05rem) * var(--scale));
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent);
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.w-title[hidden],
+.w-sub[hidden],
+.w-badge[hidden] {
+  display: none !important;
+}
+
+.w-sub {
+  font-size: calc(clamp(0.7rem, 3.2cqmin, 0.95rem) * var(--scale));
+  font-weight: 500;
+  color: var(--muted);
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── Units row (Flip Clock & Countdown) ── */
+.w-units {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(4px, 1.8cqw, 14px);
+  max-width: 100%;
+  flex-wrap: nowrap;
+}
+
+.w-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(3px, 1.2cqmin, 8px);
+  min-width: 0;
+}
+
+.w-flip-tile {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: calc(clamp(42px, 17cqw, 108px) * var(--scale));
+  height: calc(clamp(44px, 42cqh, 116px) * var(--scale));
+  padding: 0 clamp(6px, 2cqw, 16px);
+  background: var(--surface);
+  border: 1px solid var(--surface-edge);
+  border-radius: var(--radius);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Split-flap horizontal crease line */
+.w-flip-tile::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: var(--surface-edge);
+  opacity: 0.75;
+  pointer-events: none;
+}
+
+.w-digit {
+  font-size: calc(clamp(1.35rem, 11cqw, 4.1rem) * var(--scale));
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--fg);
+  font-variant-numeric: tabular-nums;
+  z-index: 1;
+}
+
+@keyframes wFlipPulse {
+  0%   { transform: perspective(360px) rotateX(-16deg); opacity: 0.72; }
+  100% { transform: perspective(360px) rotateX(0deg); opacity: 1; }
+}
+
+.w-flip-tile.is-tick .w-digit {
+  animation: wFlipPulse 240ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .w-flip-tile.is-tick .w-digit {
+    animation: none;
+  }
+}
+
+.w-ampm {
+  position: absolute;
+  top: clamp(3px, 1.2cqmin, 7px);
+  right: clamp(4px, 1.4cqmin, 9px);
+  font-size: clamp(0.5rem, 2.2cqmin, 0.68rem);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+  text-transform: uppercase;
+  z-index: 2;
+}
+
+.w-sep {
+  font-size: calc(clamp(1.1rem, 8cqw, 2.8rem) * var(--scale));
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+  opacity: 0.85;
+  user-select: none;
+  padding-bottom: clamp(10px, 3cqmin, 20px);
+}
+
+.w-unit-label {
+  font-size: calc(clamp(0.54rem, 2.3cqmin, 0.74rem) * var(--scale));
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ── Minimal & Compact variants (Countdown / Clock) ── */
+[data-variant="minimal"] .w-flip-tile {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  height: auto;
+  min-width: calc(clamp(34px, 14cqw, 88px) * var(--scale));
+  padding: 2px 4px;
+}
+
+[data-variant="minimal"] .w-flip-tile::after {
+  display: none;
+}
+
+[data-variant="compact"] .w-units {
+  gap: clamp(6px, 2cqw, 12px);
+  background: var(--surface);
+  border: 1px solid var(--surface-edge);
+  border-radius: var(--radius);
+  padding: clamp(8px, 3cqmin, 16px) clamp(12px, 4cqw, 24px);
+}
+
+[data-variant="compact"] .w-flip-tile {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  height: auto;
+  min-width: auto;
+  padding: 0;
+}
+
+[data-variant="compact"] .w-flip-tile::after {
+  display: none;
+}
+
+[data-variant="compact"] .w-unit {
+  flex-direction: row;
+  align-items: baseline;
+  gap: 3px;
+}
+
+[data-variant="compact"] .w-sep {
+  padding-bottom: 0;
+  font-size: calc(clamp(0.9rem, 5cqw, 1.6rem) * var(--scale));
+}
+
+.w-done-msg {
+  font-size: calc(clamp(1rem, 6cqw, 2rem) * var(--scale));
+  font-weight: 700;
+  color: var(--accent);
+  padding: 0.4rem 0.8rem;
+}
+
+/* ── Attribution / Customise corner badge ── */
+.w-badge {
+  position: fixed;
+  right: 8px;
+  bottom: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--surface-edge);
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 500;
+  text-decoration: none;
+  opacity: 0.55;
+  transition: opacity 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  z-index: 10;
+}
+
+.w-badge:hover,
+.w-badge:focus-visible {
+  opacity: 1;
+  color: var(--accent);
+  border-color: var(--accent);
+  outline: none;
+}
+
+.w-badge-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+}

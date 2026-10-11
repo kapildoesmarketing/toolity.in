@@ -19,7 +19,7 @@ for f in $(find . -mindepth 3 -maxdepth 3 -name index.html -not -path './.git/*'
   grep -q 'class="faq-section"' "$f"                  || report "missing .faq-section"
   grep -q 'application/ld+json' "$f"                  || report "missing JSON-LD"
   grep -q 'property="og:title"' "$f"                  || report "missing Open Graph tags"
-  grep -qE '<title>Free Online .+ \| Toolity (Media|Docs|Labs|Dev|Data|Games)</title>' "$f" || report "title must be: Free Online {Tool} | Toolity {Category}"
+  grep -qE '<title>Free Online .+ \| Toolity (Media|Docs|Labs|Dev|Data|Games|Widgets)</title>' "$f" || report "title must be: Free Online {Tool} | Toolity {Category}"
   grep -q 'components/tool-cta.html' "$f"             || report "not using tool-cta.html partial"
   grep -q 'tool-settings-accordion" open\|tool-settings-accordion open' "$f" && report "settings accordion is open by default"
   [ "$(grep -c 'googletagmanager.com/gtm.js' "$f")" -gt 1 ] && report "GTM included more than once"

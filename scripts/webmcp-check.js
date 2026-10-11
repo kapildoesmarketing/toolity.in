@@ -71,6 +71,11 @@ const CASES = [
     const k = firstStringInput(); A(k, 'no text input found');
     const r = await call({ inputs: { [k]: '{"name":"toolity","tools":79}' } });
     A(/toolity/.test(txt(r)), 'JSON not reflected in result: ' + txt(r).slice(0, 200));`],
+  ['widget builder: countdown embed URL + credit', 'widgets/countdown/', `
+    A(pageTool() && pageTool().name === 'toolity_countdown', 'page tool missing');
+    const r = await call({ inputs: { 'opt-title': 'Diwali Launch', 'opt-to': '2027-11-01T09:00', 'opt-theme': 'dark' } });
+    A(/widgets\\/countdown\\/embed\\/\\?/.test(txt(r)) && /title=Diwali\\+Launch/.test(txt(r)), 'embed URL not returned: ' + txt(r).slice(0, 240));
+    A(/Done with Toolity\\.in/.test(txt(r)), 'missing credit');`],
 ];
 
 (async () => {
@@ -95,13 +100,14 @@ const CASES = [
 
   let fails = 0;
   for (const [name, path, expr] of CASES) {
+    if (process.env.ONLY && !path.includes(process.env.ONLY)) continue;
     const f = await run(path, expr);
     console.log((f.length ? '✗ ' : '✓ ') + name + (f.length ? '\n    ' + f.join('\n    ') : ''));
     if (f.length) fails++;
   }
 
   if (process.env.ALL) { // schema sweep: every non-game tool page registers 1 valid, serialisable page tool
-    const pages = execSync("find media docs labs dev data -mindepth 2 -maxdepth 2 -name index.html | sed 's|index.html$||' | sort", { encoding: 'utf8' }).trim().split('\n').filter((p) => !process.env.ONLY || p.includes(process.env.ONLY));
+    const pages = execSync("find media docs labs dev data widgets -mindepth 2 -maxdepth 2 -name index.html | sed 's|index.html$||' | sort", { encoding: 'utf8' }).trim().split('\n').filter((p) => !process.env.ONLY || p.includes(process.env.ONLY));
     let bad = 0;
     for (const p of pages) {
       const f = await run(p, `const t = pageTool(); A(names.length === 3 && t, 'expected 3 tools, got ' + names.length);

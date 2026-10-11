@@ -105,6 +105,11 @@
 - [Tetris](https://toolity.in/games/tetris/): Play Tetris online for free: 7-bag randomiser, ghost piece, hard drop, next-piece preview and classic scoring. Keyboard or touch, best score saved on your device. No download, no account.
 - [Tic Tac Toe](https://toolity.in/games/tic-tac-toe/): Play Tic Tac Toe online for free: challenge an unbeatable computer, an easy one, or a friend on the same device. Keyboard and touch friendly, no download, no account.
 
+## Widgets — embeddable widgets for Notion and websites
+
+- [Countdown Timer Widget](https://toolity.in/widgets/countdown/): Free embeddable Countdown Timer widget for Notion and websites. Count down to any date and time zone with custom colours, fonts and flip cards — all in the URL.
+- [Flip Clock Widget](https://toolity.in/widgets/flip-clock/): Free embeddable Flip Clock widget for Notion and any website. Customise 12/24-hour format, time zone, colours, fonts and transparency — instant URL, no account.
+
 ## Optional
 
 - [About](https://toolity.in/about/)

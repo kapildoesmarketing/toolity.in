@@ -3950,3 +3950,168 @@ body {
 .aud-meter-fill { height: 100%; width: 0; background: var(--brand); transition: width 80ms linear; }
 .aud-clock { font-family: var(--font-mono); font-size: 1.6rem; font-variant-numeric: tabular-nums; }
 .aud-rec-row { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; }
+
+/* ==========================================================================
+   WIDGET BUILDERS & LIVE PREVIEWS (shared by /widgets/* via scripts/widget-common.js)
+   ========================================================================== */
+.widget-preview-out {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  height: 100%;
+  min-width: 0;
+}
+
+.widget-stage-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.widget-preview-stage {
+  position: relative;
+  width: 100%;
+  min-height: 230px;
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background:
+    radial-gradient(circle at 1px 1px, var(--border) 1px, transparent 0) 0 0 / 16px 16px,
+    var(--surface);
+  overflow: hidden;
+  transition: background-color 0.2s ease;
+}
+
+.widget-preview-stage[data-canvas-bg="light"] {
+  background: #FFFFFF;
+}
+
+.widget-preview-stage[data-canvas-bg="dark"] {
+  background: #191919;
+  border-color: #2E2E2E;
+}
+
+.widget-preview-frame {
+  width: 100%;
+  height: 200px;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  transition: width 0.2s ease, height 0.2s ease;
+}
+
+.widget-preview-stage[data-canvas-size="half"] .widget-preview-frame {
+  width: min(100%, 380px);
+  height: 180px;
+}
+
+.widget-preview-stage[data-canvas-size="compact"] .widget-preview-frame {
+  width: min(100%, 300px);
+  height: 130px;
+}
+
+.widget-url-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding: 0.75rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  min-width: 0;
+}
+
+.widget-url-row {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-width: 0;
+}
+
+.widget-url-row .input-clean {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+}
+
+.widget-code-details {
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 0.45rem;
+}
+
+.widget-code-details > summary {
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  user-select: none;
+}
+
+.widget-code-pre {
+  margin-top: 0.4rem;
+  padding: 0.55rem 0.65rem;
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--border);
+  background: var(--surface-elevated);
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--text-secondary);
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.widget-color-field {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-width: 0;
+}
+
+.widget-color-picker {
+  width: 36px;
+  height: 36px;
+  padding: 2px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
+  background: var(--surface-elevated);
+  cursor: pointer;
+  flex: none;
+}
+
+.widget-checks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+  gap: 0.45rem 0.75rem;
+}
+
+.widget-how-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.85rem;
+  margin-bottom: 2.25rem;
+  padding: 1rem 1.15rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.widget-how-step {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+}
+
+.widget-how-step strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
