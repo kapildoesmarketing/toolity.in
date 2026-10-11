@@ -164,11 +164,11 @@
     // Initialize Hero Section Breathe Waves
     initHeroWaves();
 
-    // Initialize Hero Instant Search & Tool Finder
-    initHeroSearch();
-
-    // Initialize Mobile Hamburger Menu & Frosted Navigation Drawer
+    // Initialize Mobile Hamburger Menu & Frosted Navigation Drawer (creates the drawer search block)
     initMobileNavigation();
+
+    // Initialize site-wide search (header popover + mobile drawer)
+    initSiteSearch();
   }
 
   document.addEventListener('DOMContentLoaded', () => {
@@ -176,17 +176,36 @@
   });
 
   /**
-   * Deisgned by Kapil Pidhwani: Hero Minimalist Fast Search & Tool Launcher
-   * Background-free, ultra-fast top 3 results launcher with keyboard navigation.
+   * Designed by Kapil Pidhwani: one search block markup, injected into the header popover
+   * (#site-search-panel, desktop) and the top of the mobile drawer.
    */
-  function initHeroSearch() {
-    const searchContainer = document.getElementById('hero-search-container');
-    const searchInput = document.getElementById('hero-search-input');
-    const resultsDropdown = document.getElementById('hero-search-results');
-    const clearBtn = document.getElementById('search-clear-btn');
-    const searchBtn = document.getElementById('minimal-search-btn');
+  const SEARCH_HTML = `
+    <div class="site-search" role="search">
+      <div class="minimal-search-bar">
+        <input type="text" class="minimal-search-input" placeholder="Search for a tool or category..."
+          autocomplete="off" spellcheck="false" aria-label="Search tools">
+        <div class="minimal-search-actions">
+          <button type="button" class="minimal-action-btn minimal-clear-btn" aria-label="Clear search" title="Clear search" hidden>
+            <iconify-icon icon="lucide:x" width="16" height="16"></iconify-icon>
+          </button>
+          <button type="button" class="minimal-action-btn minimal-submit-btn" aria-label="Search" title="Search">
+            <iconify-icon icon="lucide:search" width="19" height="19"></iconify-icon>
+          </button>
+        </div>
+      </div>
+      <div class="minimal-search-results" role="listbox" hidden></div>
+    </div>`;
 
-    if (!searchInput || !resultsDropdown) return;
+  /**
+   * Deisgned by Kapil Pidhwani: Site-wide Minimalist Fast Search & Tool Launcher
+   * Top 3 results launcher with keyboard navigation; binds every .site-search block.
+   * Header panel uses the native Popover API (open/close, Esc, click-outside for free).
+   */
+  function initSiteSearch() {
+    const panel = document.getElementById('site-search-panel');
+    if (panel && !panel.firstElementChild) panel.innerHTML = SEARCH_HTML;
+    const roots = document.querySelectorAll('.site-search');
+    if (!roots.length) return;
 
     const REGISTRY = [
       {
@@ -1019,28 +1038,6 @@
       return totalTokenScore;
     }
 
-    let selectedIndex = -1;
-    let currentResults = [];
-
-    function openDropdown() {
-      resultsDropdown.style.display = 'flex';
-    }
-
-    function closeDropdown() {
-      resultsDropdown.style.display = 'none';
-      selectedIndex = -1;
-    }
-
-    function highlightSelected() {
-      const items = resultsDropdown.querySelectorAll('.minimal-result-item');
-      items.forEach((item, index) => {
-        item.classList.toggle('selected', index === selectedIndex);
-        if (index === selectedIndex) {
-          item.scrollIntoView({ block: 'nearest' });
-        }
-      });
-    }
-
     function escapeHtml(str) {
       return str
         .replace(/&/g, '&amp;')
@@ -1050,138 +1047,158 @@
         .replace(/'/g, '&#039;');
     }
 
-    function renderResults(items) {
-      currentResults = items;
-      selectedIndex = -1;
+    function bindSearch(root) {
+      const searchInput = root.querySelector('.minimal-search-input');
+      const resultsDropdown = root.querySelector('.minimal-search-results');
+      const clearBtn = root.querySelector('.minimal-clear-btn');
+      const searchBtn = root.querySelector('.minimal-submit-btn');
+      let selectedIndex = -1;
+      let currentResults = [];
 
-      if (items.length === 0) {
-        resultsDropdown.innerHTML = `
-          <div class="minimal-search-empty">
-            No tools found matching "<strong>${escapeHtml(searchInput.value)}</strong>"
-          </div>
-        `;
-        openDropdown();
-        return;
+      function openDropdown() { resultsDropdown.hidden = false; }
+
+      function closeDropdown() {
+        resultsDropdown.hidden = true;
+        selectedIndex = -1;
       }
 
-      let html = '';
-      items.forEach((item, index) => {
-        html += `
-          <a href="${item.url}" class="minimal-result-item" data-index="${index}">
+      function highlightSelected() {
+        resultsDropdown.querySelectorAll('.minimal-result-item').forEach((item, index) => {
+          item.classList.toggle('selected', index === selectedIndex);
+          if (index === selectedIndex) item.scrollIntoView({ block: 'nearest' });
+        });
+      }
+
+      function renderResults(items) {
+        currentResults = items;
+        selectedIndex = -1;
+
+        if (items.length === 0) {
+          resultsDropdown.innerHTML = `
+            <div class="minimal-search-empty">
+              No tools found matching "<strong>${escapeHtml(searchInput.value)}</strong>"
+            </div>
+          `;
+          openDropdown();
+          return;
+        }
+
+        // Registry URLs are root-relative ('media/x/'); prefix '/' so results work from any page
+        resultsDropdown.innerHTML = items.map((item, index) => `
+          <a href="/${item.url}" class="minimal-result-item" data-index="${index}">
             <div class="minimal-result-title">
               <iconify-icon icon="${item.icon}" width="16" height="16"></iconify-icon>
               <span>${escapeHtml(item.title)}</span>
             </div>
             <iconify-icon icon="lucide:arrow-right" class="minimal-result-arrow" width="15" height="15"></iconify-icon>
           </a>
-        `;
-      });
-
-      resultsDropdown.innerHTML = html;
-      openDropdown();
-    }
-
-    function handleSearch() {
-      const query = searchInput.value.trim().toLowerCase();
-      if (clearBtn) {
-        clearBtn.style.display = query.length > 0 ? 'flex' : 'none';
+        `).join('');
+        openDropdown();
       }
 
-      if (!query) {
-        closeDropdown();
-        currentResults = [];
-        return;
+      function handleSearch() {
+        const query = searchInput.value.trim().toLowerCase();
+        clearBtn.hidden = query.length === 0;
+
+        if (!query) {
+          closeDropdown();
+          currentResults = [];
+          return;
+        }
+
+        const results = REGISTRY
+          .map(item => ({ item, score: calculateRelevanceScore(item, query) }))
+          .filter(r => r.score > 0)
+          .sort((a, b) => b.score - a.score)
+          .map(r => r.item);
+
+        // Show strictly top 3 results
+        renderResults(results.slice(0, 3));
       }
 
-      const results = REGISTRY
-        .map(item => ({ item, score: calculateRelevanceScore(item, query) }))
-        .filter(r => r.score > 0)
-        .sort((a, b) => b.score - a.score)
-        .map(r => r.item);
+      searchInput.addEventListener('input', handleSearch);
+      searchInput.addEventListener('focus', () => { if (searchInput.value.trim()) handleSearch(); });
+      searchInput.addEventListener('click', () => { if (searchInput.value.trim()) handleSearch(); });
 
-      // Show strictly top 3 results
-      renderResults(results.slice(0, 3));
-    }
-
-    searchInput.addEventListener('input', handleSearch);
-    searchInput.addEventListener('focus', () => {
-      if (searchInput.value.trim().length > 0) {
-        handleSearch();
-      }
-    });
-    searchInput.addEventListener('click', () => {
-      if (searchInput.value.trim().length > 0) {
-        handleSearch();
-      }
-    });
-
-    if (clearBtn) {
       clearBtn.addEventListener('click', () => {
         searchInput.value = '';
-        clearBtn.style.display = 'none';
+        clearBtn.hidden = true;
         closeDropdown();
         searchInput.focus();
       });
-    }
 
-    function triggerNavigate() {
-      if (selectedIndex >= 0 && selectedIndex < currentResults.length) {
-        window.location.href = currentResults[selectedIndex].url;
-      } else if (currentResults.length > 0) {
-        window.location.href = currentResults[0].url;
-      } else if (searchInput.value.trim().length > 0) {
-        // Jump to explore categories if nothing matches
-        const categoriesSection = document.getElementById('categories');
-        if (categoriesSection) {
-          categoriesSection.scrollIntoView({ behavior: 'smooth' });
+      function triggerNavigate() {
+        if (selectedIndex >= 0 && selectedIndex < currentResults.length) {
+          window.location.href = '/' + currentResults[selectedIndex].url;
+        } else if (currentResults.length > 0) {
+          window.location.href = '/' + currentResults[0].url;
+        } else if (searchInput.value.trim().length > 0) {
+          // Nothing matches: jump to the category list (home page)
+          const categoriesSection = document.getElementById('categories');
+          if (categoriesSection) categoriesSection.scrollIntoView({ behavior: 'smooth' });
+          else window.location.href = '/#categories';
         }
       }
-    }
 
-    if (searchBtn) {
       searchBtn.addEventListener('click', triggerNavigate);
+
+      // Keyboard navigation
+      searchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          if (currentResults.length > 0) {
+            selectedIndex = (selectedIndex + 1) % currentResults.length;
+            highlightSelected();
+          }
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          if (currentResults.length > 0) {
+            selectedIndex = (selectedIndex - 1 + currentResults.length) % currentResults.length;
+            highlightSelected();
+          }
+        } else if (e.key === 'Enter') {
+          e.preventDefault();
+          triggerNavigate();
+        } else if (e.key === 'Escape') {
+          closeDropdown();
+          searchInput.blur();
+        }
+      });
+
+      // Close results on click outside this search block
+      document.addEventListener('click', (e) => {
+        if (!root.contains(e.target)) closeDropdown();
+      });
     }
 
-    // Keyboard navigation
-    searchInput.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowDown') {
-        e.preventDefault();
-        if (currentResults.length > 0) {
-          selectedIndex = (selectedIndex + 1) % currentResults.length;
-          highlightSelected();
-        }
-      } else if (e.key === 'ArrowUp') {
-        e.preventDefault();
-        if (currentResults.length > 0) {
-          selectedIndex = (selectedIndex - 1 + currentResults.length) % currentResults.length;
-          highlightSelected();
-        }
-      } else if (e.key === 'Enter') {
-        e.preventDefault();
-        triggerNavigate();
-      } else if (e.key === 'Escape') {
-        closeDropdown();
-        searchInput.blur();
-      }
-    });
+    roots.forEach(bindSearch);
 
-    // Close on click outside
-    document.addEventListener('click', (e) => {
-      if (searchContainer && !searchContainer.contains(e.target)) {
-        closeDropdown();
-      }
-    });
+    // Focus the header input whenever the popover opens (button click or shortcut)
+    if (panel) {
+      panel.addEventListener('toggle', (e) => {
+        if (e.newState === 'open') panel.querySelector('.minimal-search-input').focus();
+      });
+    }
 
-    // Global shortcut: ⌘K, Ctrl+K, or "/"
+    // Global shortcut: ⌘K, Ctrl+K, or "/" → header panel on desktop, drawer search on mobile
     window.addEventListener('keydown', (e) => {
+      const active = document.activeElement;
       const isCmdK = (e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k';
-      const isSlash = e.key === '/' && document.activeElement !== searchInput && !['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName);
+      const isSlash = e.key === '/' && !['INPUT', 'TEXTAREA', 'SELECT'].includes(active.tagName) && !active.isContentEditable;
+      if (!isCmdK && !isSlash) return;
+      e.preventDefault();
 
-      if (isCmdK || isSlash) {
-        e.preventDefault();
-        searchInput.focus();
-        searchInput.select();
+      const toggle = document.getElementById('search-toggle');
+      if (panel && toggle && toggle.offsetParent !== null) {
+        if (!panel.matches(':popover-open')) panel.showPopover();
+        else panel.querySelector('.minimal-search-input').focus();
+        return;
       }
+      const drawer = document.getElementById('mobile-nav-drawer');
+      const drawerInput = drawer && drawer.querySelector('.minimal-search-input');
+      if (!drawerInput) return;
+      if (!drawer.classList.contains('open')) document.getElementById('mobile-menu-toggle').click();
+      drawerInput.focus();
     });
   }
 
@@ -1433,6 +1450,7 @@
 
       drawer.innerHTML = `
         <div class="mobile-nav-content">
+          ${SEARCH_HTML}
           <div class="mobile-nav-grid">
             ${gridHtml}
           </div>

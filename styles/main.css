@@ -184,6 +184,7 @@ body {
 .nav-right {
   display: flex;
   align-items: center;
+  gap: 0.5rem;
   justify-self: end;
 }
 
@@ -872,16 +873,56 @@ body {
   margin: 0 auto 1.65rem;
 }
 
+/* CTA row inside content pages (Partner) */
+.prose-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+/* Hero CTAs: Explore Categories (primary) + Partner with Us (secondary) */
+.hero-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+/* Smooth-scroll target clears the fixed header */
+#categories { scroll-margin-top: var(--header-height); }
+
 /* ==========================================================================
-   Hero Minimalist Search & Top-3 Instant Tool Launcher
+   Site Search (header popover on desktop, top of mobile drawer) & Top-3 Launcher
    ========================================================================== */
-.hero-minimal-search {
+.search-popover {
+  /* Designed by Kapil Pidhwani: native [popover] — top layer, Esc + click-outside built in.
+     pointer-events re-enabled because .site-header.scrolled passes clicks through. */
+  position: fixed;
+  inset: calc(var(--header-height) - 0.25rem) clamp(1rem, 2.5vw, 2.5rem) auto auto;
+  margin: 0;
+  width: min(420px, calc(100vw - 2rem));
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-md);
+  pointer-events: auto;
+}
+
+.site-search {
   position: relative;
-  width: 100%;
-  max-width: 400px;
-  margin: 0 auto;
-  z-index: 30;
   text-align: left;
+}
+
+.mobile-nav-content .site-search {
+  margin-bottom: 1.25rem;
+}
+
+.minimal-clear-btn[hidden],
+.minimal-search-results[hidden] {
+  display: none;
 }
 
 .minimal-search-bar {
@@ -974,10 +1015,7 @@ body {
 
 /* Background-Free Minimalist Top-3 Results (Absolutely Positioned to Prevent Hero Layout Shift) */
 .minimal-search-results {
-  position: absolute;
-  top: calc(100% + 0.65rem);
-  left: 0;
-  right: 0;
+  margin-top: 0.65rem;
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
@@ -1053,48 +1091,6 @@ body {
   font-size: 0.88rem;
 }
 
-/* Circular Swipe Up / Scroll Indicator */
-.hero-scroll-indicator {
-  position: absolute;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius-pill);
-  background: var(--surface);
-  border: 1px solid var(--border);
-  color: var(--text-secondary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: var(--shadow-sm);
-  text-decoration: none;
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
-              color 0.2s ease,
-              border-color 0.2s ease,
-              background-color 0.2s ease;
-  animation: hero-bounce 2.2s infinite ease-in-out;
-  z-index: 10;
-}
-
-.hero-scroll-indicator:hover {
-  color: var(--brand);
-  border-color: var(--brand-peach);
-  background: var(--surface-elevated);
-  transform: translateX(-50%) translateY(2px);
-  animation-play-state: paused;
-}
-
-@keyframes hero-bounce {
-  0%, 100% {
-    transform: translateX(-50%) translateY(0);
-  }
-  50% {
-    transform: translateX(-50%) translateY(6px);
-  }
-}
-
 /* ==========================================================================
    Section Headers & Seamless Transitions
    ========================================================================== */
@@ -1102,6 +1098,7 @@ body {
   padding: 5.5rem 0;
   border-top: 1px solid var(--border);
 }
+
 
 .hero-section + .section-wrapper,
 #categories,
@@ -2736,7 +2733,8 @@ body {
     align-items: center;
   }
 
-  .nav-center {
+  .nav-center,
+  #search-toggle {
     display: none;
   }
 
@@ -2845,12 +2843,6 @@ body {
     min-height: 100dvh;
     height: 100dvh;
     padding: calc(var(--header-height) + 1rem) 0 3.5rem;
-  }
-
-  .hero-scroll-indicator {
-    bottom: 1.25rem;
-    width: 40px;
-    height: 40px;
   }
 
   .editorial-brand-card {
