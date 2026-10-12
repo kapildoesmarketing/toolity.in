@@ -1,0 +1,15 @@
+/* Sudoku — 9×9 grid with 3×3 box dividers & pencil notes. Container-relative only (rule 35). */
+.sdk-board { display: grid; grid-template-columns: repeat(9, 1fr); width: min(100%, 432px); aspect-ratio: 1; border: 2px solid var(--text-primary); border-radius: var(--radius-sm); overflow: hidden; background: var(--border); }
+.sdk-cell { position: relative; border: none; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--surface); color: var(--text-primary); font-family: var(--font-mono); font-size: clamp(1rem, 4.2cqw, 1.55rem); font-weight: 600; padding: 0; cursor: pointer; display: flex; align-items: center; justify-content: center; user-select: none; min-width: 0; min-height: 0; }
+.sdk-cell[data-c="2"], .sdk-cell[data-c="5"] { border-right: 2px solid var(--text-primary); }
+.sdk-cell[data-r="2"], .sdk-cell[data-r="5"] { border-bottom: 2px solid var(--text-primary); }
+.sdk-cell[data-c="8"] { border-right: none; }
+.sdk-cell[data-r="8"] { border-bottom: none; }
+.sdk-cell.is-given { color: var(--text-primary); font-weight: 700; }
+.sdk-cell.is-user { color: var(--brand); }
+.sdk-cell.is-peer { background: color-mix(in srgb, var(--text-primary) 5%, var(--surface)); }
+.sdk-cell.is-same { background: color-mix(in srgb, var(--brand) 16%, var(--surface)); }
+.sdk-cell.is-sel { background: color-mix(in srgb, var(--brand) 24%, var(--surface)); outline: 2px solid var(--brand); outline-offset: -2px; z-index: 1; }
+.sdk-cell.is-conflict { color: #dc2626; background: rgba(220, 38, 38, 0.14); }
+[data-theme="dark"] .sdk-cell.is-conflict { color: #f87171; }
+.sdk-notes { display: grid; grid-template-columns: repeat(3, 1fr); width: 100%; height: 100%; padding: 1px; font-size: clamp(0.45rem, 1.65cqw, 0.62rem); font-weight: 500; line-height: 1; color: var(--text-muted); place-items: center; pointer-events: none; }

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Sudoku | Toolity Games</title>
+  <link rel="canonical" href="https://toolity.in/games/sudoku/">
+  <meta name="description" content="Free online Sudoku: freshly generated Easy, Medium and Hard 9×9 puzzles with guaranteed unique solutions, pencil notes, conflict highlighting, undo and keyboard + touch numpad. Runs in your browser.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Sudoku | Toolity Games">
+  <meta property="og:description" content="Free online Sudoku: freshly generated Easy, Medium and Hard 9×9 puzzles with guaranteed unique solutions, pencil notes, conflict highlighting, undo and keyboard + touch numpad. Runs in your browser.">
+  <meta property="og:url" content="https://toolity.in/games/sudoku/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=4.4" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=4.4">
+  <link rel="stylesheet" href="/styles/tools/sudoku.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Sudoku",
+        "url": "https://toolity.in/games/sudoku/",
+        "description": "Free online Sudoku: freshly generated Easy, Medium and Hard 9×9 puzzles with guaranteed unique solutions, pencil notes, conflict highlighting, undo and keyboard + touch numpad. Runs in your browser.",
+        "applicationCategory": "GameApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Games", "item": "https://toolity.in/games/" },
+          { "@type": "ListItem", "position": 3, "name": "Sudoku", "item": "https://toolity.in/games/sudoku/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Does every puzzle have a unique solution?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The generator builds a complete valid grid and only removes a clue if the solver confirms there is still exactly one way to finish the board." } },
+          { "@type": "Question", "name": "Are there any “guess” moves required?", "acceptedAnswer": { "@type": "Answer", "text": "Easy and Medium puzzles are solvable with standard single-candidate and hidden-single logic. Hard puzzles may require pairs or box-line reductions, never blind guessing." } },
+          { "@type": "Question", "name": "What does highlighting show?", "acceptedAnswer": { "@type": "Answer", "text": "Selecting a cell softly tints its row, column and 3×3 box, and highlights every other cell holding the same digit so you can scan across boxes quickly." } },
+          { "@type": "Question", "name": "Can I play without conflict highlighting?", "acceptedAnswer": { "@type": "Answer", "text": "Open Game options and untick “Highlight conflicts” if you want a pure paper-style solve; the board is still checked when the last cell is filled." } },
+          { "@type": "Question", "name": "Is anything uploaded or tracked while I play?", "acceptedAnswer": { "@type": "Answer", "text": "No. The game runs entirely in your browser tab. Your best score or win tally is saved only in your browser’s localStorage and cleared when you press Reset." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/games/" class="breadcrumb-link">Games</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Sudoku</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Games</span>
+            <h1 class="page-title">Sudoku</h1>
+            <p class="page-desc">Freshly generated 9×9 Sudoku with a unique solution every time — play with keyboard or tap numpad.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="single" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <div class="segmented-group segmented-group-pill" id="seg-mode" role="group" aria-label="Difficulty">
+                <button type="button" class="seg-pill" data-value="easy">Easy</button>
+                <button type="button" class="seg-pill active" data-value="medium" data-default>Medium</button>
+                <button type="button" class="seg-pill" data-value="hard">Hard</button>
+              </div>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-undo" title="Undo last move" aria-label="Undo last move" disabled>
+                <iconify-icon icon="lucide:undo-2" width="14" height="14"></iconify-icon>
+                <span>Undo</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-play" aria-label="New puzzle">
+                <iconify-icon icon="lucide:play" width="14" height="14" id="play-icon"></iconify-icon>
+                <span id="play-label">New puzzle</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Game pane -->
+          <div class="split-pane-grid">
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Progress</span>
+                <span class="game-score" id="score" aria-live="polite"><span>left <b id="left-val">46</b></span><i>·</i><span>time <b id="time-val">0:00</b></span><i>·</i><span>best <b id="best-val">—</b></span></span>
+                <span id="status-badge" class="pane-badge">Select a cell</span>
+              </div>
+              <div class="pane-content game-pane-wrap">
+                <div class="game-stage" id="stage">
+                  <div class="sdk-board" id="board" role="grid" aria-label="Sudoku 9 by 9 board"></div>
+                  <div class="game-bar" id="numpad" role="group" aria-label="Number pad">
+                    <button type="button" class="game-key" data-num="1">1</button>
+                    <button type="button" class="game-key" data-num="2">2</button>
+                    <button type="button" class="game-key" data-num="3">3</button>
+                    <button type="button" class="game-key" data-num="4">4</button>
+                    <button type="button" class="game-key" data-num="5">5</button>
+                    <button type="button" class="game-key" data-num="6">6</button>
+                    <button type="button" class="game-key" data-num="7">7</button>
+                    <button type="button" class="game-key" data-num="8">8</button>
+                    <button type="button" class="game-key" data-num="9">9</button>
+                    <button type="button" class="game-key" id="btn-notes" title="Toggle pencil notes (N)" aria-pressed="false">Notes</button>
+                    <button type="button" class="game-key" id="btn-erase" title="Clear cell (Backspace)">Erase</button>
+                  </div>
+                  <div class="game-overlay" id="overlay" hidden>
+                    <strong id="overlay-title">Game over</strong>
+                    <span id="overlay-text">Press Space or New game to play again</span>
+                    <button type="button" class="btn-toolbar-sm" id="overlay-btn" hidden></button>
+                  </div>
+                </div>
+                <p class="form-helper game-hint" id="hint">Arrow keys / WASD to move · 1–9 to fill · N for pencil notes · Backspace to erase · Z to undo</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Game options</span>
+                <span class="pane-badge" id="settings-summary">Medium · conflicts on · auto-clear notes</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item">
+                <input type="checkbox" id="opt-conflicts" checked>
+                <label for="opt-conflicts">Highlight conflicts in row / column / box</label>
+              </div>
+              <div class="control-item">
+                <input type="checkbox" id="opt-autonotes" checked>
+                <label for="opt-autonotes">Auto-clear matching pencil notes</label>
+              </div>
+              <div class="control-item">
+                <input type="checkbox" id="opt-sound" checked>
+                <label for="opt-sound">Sound effects</label>
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+        <!-- ═══════════ 3. GUIDE ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Play Sudoku in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Pick a difficulty</h3>
+              <p class="step-desc"><strong>Easy</strong> removes ~36 numbers, <strong>Medium</strong> ~46 and <strong>Hard</strong> ~52. Every puzzle is generated on the spot and verified to have a single solution.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Fill & take notes</h3>
+              <p class="step-desc">Click a cell (or move with the arrow keys) and press <code>1–9</code>. Toggle <strong>Notes</strong> (<code>N</code>) to jot candidate digits inside a cell; placing a number automatically clears that digit’s notes in its row, column and 3×3 box.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Complete all 81 cells</h3>
+              <p class="step-desc">Duplicate digits in any row, column or box glow red so you can spot mistakes early. Fill every cell without conflicts to solve the puzzle.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 4. REFERENCE ═══════════ -->
+        <section class="reference-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">Reference</span>
+            <h2 class="section-heading-sm">Controls &amp; rules</h2>
+          </div>
+          <div class="formats-table-card">
+            <table class="formats-table">
+              <thead><tr><th>Action</th><th>Keyboard</th><th>Mouse / Touch</th></tr></thead>
+              <tbody>
+                <tr><td>Move selection</td><td><code>←</code> <code>→</code> <code>↑</code> <code>↓</code> or <code>W</code> <code>A</code> <code>S</code> <code>D</code></td><td>Tap any cell</td></tr>
+                <tr><td>Enter a digit</td><td><code>1</code>–<code>9</code></td><td>Tap 1–9 on the number bar</td></tr>
+                <tr><td>Toggle pencil notes</td><td><code>N</code></td><td>Tap Notes</td></tr>
+                <tr><td>Clear cell</td><td><code>Backspace</code> / <code>Delete</code> / <code>0</code></td><td>Tap Erase</td></tr>
+                <tr><td>Undo</td><td><code>Z</code></td><td>Tap Undo</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Sudoku — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Does every puzzle have a unique solution?</summary>
+              <p>Yes. The generator builds a complete valid grid and only removes a clue if the solver confirms there is still exactly one way to finish the board.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Are there any “guess” moves required?</summary>
+              <p>Easy and Medium puzzles are solvable with standard single-candidate and hidden-single logic. Hard puzzles may require pairs or box-line reductions, never blind guessing.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What does highlighting show?</summary>
+              <p>Selecting a cell softly tints its row, column and 3×3 box, and highlights every other cell holding the same digit so you can scan across boxes quickly.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can I play without conflict highlighting?</summary>
+              <p>Open <strong>Game options</strong> and untick “Highlight conflicts” if you want a pure paper-style solve; the board is still checked when the last cell is filled.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is anything uploaded or tracked while I play?</summary>
+              <p>No. The game runs entirely in your browser tab. Your best score or win tally is saved only in your browser’s <code>localStorage</code> and cleared when you press Reset.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="games"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=3.5"></script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="/scripts/game-common.js?v=1.0"></script>
+  <script src="/games/sudoku/sudoku.js?v=1.0"></script>
+</body>
+</html>
