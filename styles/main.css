@@ -4106,3 +4106,27 @@ body {
 .web-grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.6rem; }
 .web-stat { padding: 0.65rem 0.75rem; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); display: flex; flex-direction: column; gap: 0.3rem; font-size: 0.8rem; color: var(--text-secondary); }
 .web-stat strong { color: var(--text-primary); font-size: 0.86rem; }
+
+/* ═══════════ Games family — shared stage, score bar, overlay & board primitives ═══════════ */
+.game-pane-wrap { gap: 0.75rem; align-items: center; }
+.game-stage { position: relative; width: min(100%, 480px); display: flex; flex-direction: column; align-items: center; gap: 0.65rem; min-width: 0; }
+.game-stage-wide { width: min(100%, 720px); }
+.game-score { display: inline-flex; align-items: baseline; gap: 0.45rem; font-family: var(--font-mono); font-size: 0.92rem; font-weight: 600; color: var(--text-primary); flex-wrap: wrap; }
+.game-score i { font-style: normal; color: var(--text-muted); font-weight: 400; }
+.game-score span { color: var(--text-secondary); font-weight: 500; font-size: 0.82rem; }
+.game-score b { color: var(--text-primary); font-weight: 600; }
+.game-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.4rem; text-align: center; padding: 1.25rem; border-radius: var(--radius-md); background: color-mix(in srgb, var(--surface) 84%, transparent); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); z-index: 5; }
+.game-overlay[hidden] { display: none; }
+.game-overlay strong { font-size: clamp(1.35rem, 5cqw, 2.2rem); font-weight: 500; letter-spacing: -0.02em; color: var(--text-primary); }
+.game-overlay span { font-size: 0.86rem; color: var(--text-secondary); max-width: 38ch; }
+.game-hint { text-align: center; margin: 0; }
+.game-bar { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 0.4rem; width: 100%; min-width: 0; }
+.game-key { min-width: 38px; min-height: 38px; padding: 0.35rem 0.6rem; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); color: var(--text-primary); font-family: var(--font-mono); font-size: 0.92rem; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 0.3rem; transition: background-color .12s, border-color .12s, transform .08s; }
+.game-key:hover:not(:disabled) { background: var(--surface-elevated); border-color: var(--text-muted); }
+.game-key.is-on { border-color: var(--brand); color: var(--brand); background: color-mix(in srgb, var(--brand) 12%, var(--surface)); }
+.game-cell-focus:focus-visible, .game-key:focus-visible { outline: 2px solid var(--brand); outline-offset: -2px; }
+#status-badge.is-win { color: #15803d; background: rgba(22, 163, 74, 0.12); }
+[data-theme="dark"] #status-badge.is-win { color: #4ade80; }
+@media (pointer: coarse) {
+  .game-key { min-width: 44px; min-height: 44px; font-size: 1rem; }
+}
