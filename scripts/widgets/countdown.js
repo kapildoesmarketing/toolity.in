@@ -122,11 +122,12 @@
     const unitsRow = document.createElement('div');
     unitsRow.className = 'w-units';
 
+    const compact = state.variant === 'compact';
     const activeDefs = [];
-    if (state.days)    activeDefs.push({ key: 'd', label: 'DAYS', obj: createUnit('DAYS') });
-    if (state.hours)   activeDefs.push({ key: 'h', label: 'HRS',  obj: createUnit('HRS') });
-    if (state.minutes) activeDefs.push({ key: 'm', label: 'MIN',  obj: createUnit('MIN') });
-    if (state.seconds || !activeDefs.length) activeDefs.push({ key: 's', label: 'SEC', obj: createUnit('SEC') });
+    if (state.days)    activeDefs.push({ key: 'd', obj: createUnit(compact ? 'd' : 'DAYS') });
+    if (state.hours)   activeDefs.push({ key: 'h', obj: createUnit(compact ? 'h' : 'HRS') });
+    if (state.minutes) activeDefs.push({ key: 'm', obj: createUnit(compact ? 'm' : 'MIN') });
+    if (state.seconds || !activeDefs.length) activeDefs.push({ key: 's', obj: createUnit(compact ? 's' : 'SEC') });
 
     activeDefs.forEach((u, idx) => {
       if (idx > 0) unitsRow.appendChild(createSep());

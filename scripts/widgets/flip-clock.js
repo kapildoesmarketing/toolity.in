@@ -26,16 +26,12 @@
     digit.className = 'w-digit';
     digit.textContent = '00';
     tile.appendChild(digit);
-    const ampm = document.createElement('span');
-    ampm.className = 'w-ampm';
-    ampm.hidden = true;
-    tile.appendChild(ampm);
     const label = document.createElement('span');
     label.className = 'w-unit-label';
     label.textContent = unitName;
     unit.appendChild(tile);
     unit.appendChild(label);
-    return { unit, tile, digit, ampm, label };
+    return { unit, tile, digit, label };
   }
 
   function createSep() {
@@ -95,18 +91,21 @@
     unitsRow.className = 'w-units';
 
     const uHours = createUnit('HRS');
-    const sep1 = createSep();
     const uMins = createUnit('MIN');
-    const sep2 = createSep();
     const uSecs = createUnit('SEC');
 
     unitsRow.appendChild(uHours.unit);
-    unitsRow.appendChild(sep1);
+    unitsRow.appendChild(createSep());
     unitsRow.appendChild(uMins.unit);
     if (state.seconds) {
-      unitsRow.appendChild(sep2);
+      unitsRow.appendChild(createSep());
       unitsRow.appendChild(uSecs.unit);
     }
+    const is12 = state.format === '12';
+    const meridiem = document.createElement('span');
+    meridiem.className = 'w-meridiem';
+    meridiem.hidden = !(is12 && state.ampm);
+    unitsRow.appendChild(meridiem);
     wrap.appendChild(unitsRow);
 
     const dateEl = document.createElement('div');
@@ -116,9 +115,7 @@
 
     root.appendChild(wrap);
 
-    [uHours.label, uMins.label, uSecs.label].forEach((l) => {
-      l.hidden = !state.labels;
-    });
+    [uHours.label, uMins.label, uSecs.label].forEach((l) => { l.hidden = !state.labels; });
 
     const prev = { h: '', m: '', s: '' };
 
@@ -137,24 +134,14 @@
 
     function tick() {
       const { h24, m, s, dateStr } = getClockParts(state.tz);
-      const is12 = state.format === '12';
       const displayHour = is12 ? (h24 % 12 || 12) : h24;
       const period = h24 >= 12 ? 'PM' : 'AM';
 
       setDigit(uHours, 'h', pad2(displayHour));
       setDigit(uMins, 'm', pad2(m));
       if (state.seconds) setDigit(uSecs, 's', pad2(s));
-
-      if (is12 && state.ampm) {
-        uHours.ampm.hidden = false;
-        uHours.ampm.textContent = period;
-      } else {
-        uHours.ampm.hidden = true;
-      }
-
-      if (state.date) {
-        dateEl.textContent = dateStr;
-      }
+      if (!meridiem.hidden) meridiem.textContent = period;
+      if (state.date) dateEl.textContent = dateStr;
 
       root.setAttribute('aria-label', `${state.title ? state.title + ': ' : ''}${pad2(displayHour)}:${pad2(m)}${state.seconds ? ':' + pad2(s) : ''}${is12 ? ' ' + period : ''}`);
     }

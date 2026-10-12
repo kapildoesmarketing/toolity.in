@@ -253,12 +253,20 @@
     }
     setOrClear('--surface', state.surface);
     setOrClear('--fg', state.fg);
+  }
 
-    const badge = document.getElementById('w-badge');
-    if (badge) {
-      badge.hidden = !state.badge;
-      badge.href = buildBuilderUrl(slug, schema, state, location.origin);
-    }
+  /** Plain in-flow credit (never overlaps the widget). badge=0 hides it. */
+  function appendCredit(root, slug, schema, state) {
+    if (!state.badge) return;
+    const wrap = root.querySelector('.w-card-wrap') || root;
+    const a = document.createElement('a');
+    a.className = 'w-credit';
+    a.href = buildBuilderUrl(slug, schema, state, location.origin);
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.title = 'Customise this widget on Toolity.in';
+    a.textContent = 'toolity.in';
+    wrap.appendChild(a);
   }
 
   /**
@@ -280,6 +288,7 @@
         cleanup = null;
       }
       cleanup = def.render(root, currentState);
+      appendCredit(root, def.slug, schema, currentState);
     }
 
     renderNow(currentState);
@@ -358,9 +367,6 @@
     const frame = $('widget-preview-frame');
     const stage = $('widget-preview-stage');
     const urlOut = $('embed-url-output');
-    const codeOut = $('embed-code-output');
-    const statusBadge = $('status-badge');
-    const outBadge = $('output-badge');
     const settingsSummary = $('settings-summary');
     const errBox = $('input-error');
 
@@ -446,10 +452,7 @@
       const qs = toQuery(schema, state);
 
       if (urlOut) urlOut.value = embedUrl;
-      if (codeOut) codeOut.textContent = iframeSnippet(embedUrl);
 
-      if (outBadge) outBadge.textContent = `${embedUrl.length} chars · Ready for Notion`;
-      if (statusBadge) statusBadge.textContent = qs ? 'Customised' : 'Default style';
       if (settingsSummary) {
         const tLabel = state.theme === 'auto' ? 'Auto theme' : state.theme === 'dark' ? 'Dark' : 'Light';
         settingsSummary.textContent = `${tLabel} · #${cleanHex(state.accent) || 'F4511E'}`;
@@ -513,29 +516,21 @@
       }
     }
 
-    // Bind Style Preset chips (only changes style/colour keys, never user content — Rule 11)
-    const presetGroup = $('seg-presets');
-    if (presetGroup) {
-      presetGroup.addEventListener('click', (e) => {
-        const btn = e.target.closest('[data-preset]');
-        if (!btn) return;
-        const p = STYLE_PRESETS[btn.dataset.preset];
+    // Style preset <select>: only touches style/colour keys, never user content (Rule 11)
+    const presetSel = $('opt-preset');
+    if (presetSel) {
+      presetSel.addEventListener('change', () => {
+        const p = STYLE_PRESETS[presetSel.value];
         if (!p) return;
-        presetGroup.querySelectorAll('[data-preset]').forEach((b) => b.classList.toggle('active', b === btn));
         Object.assign(state, p.values);
         writeControlsFromState();
         syncOutputs(false);
       });
     }
 
-    // Bind Preview Stage Canvas background & size toggles
+    // Preview width toggle (Wide · Column · Mini) — shows how the embed sits in a Notion column
     if (bindSegmented && stage) {
-      bindSegmented($('seg-preview-bg'), (val) => {
-        stage.setAttribute('data-canvas-bg', val);
-      });
-      bindSegmented($('seg-preview-size'), (val) => {
-        stage.setAttribute('data-canvas-size', val);
-      });
+      bindSegmented($('seg-preview-size'), (val) => stage.setAttribute('data-canvas-size', val));
     }
 
     // Paste-to-edit existing embed URL or <iframe> snippet
@@ -565,9 +560,7 @@
     function resetAll() {
       state = parse(schema, '');
       if (pasteInput) pasteInput.value = '';
-      if (presetGroup) {
-        presetGroup.querySelectorAll('[data-preset]').forEach((b, i) => b.classList.toggle('active', i === 0));
-      }
+      if (presetSel) presetSel.value = 'toolity';
       writeControlsFromState();
       syncOutputs(false);
       if (toast) toast('Reset to defaults');
@@ -578,9 +571,6 @@
 
     const btnCopy = $('btn-copy');
     if (btnCopy) btnCopy.addEventListener('click', copyEmbed);
-
-    const btnCopyInline = $('btn-copy-url-inline');
-    if (btnCopyInline) btnCopyInline.addEventListener('click', copyEmbed);
 
     const btnOpen = $('btn-open');
     if (btnOpen) {

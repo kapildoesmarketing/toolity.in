@@ -1,5 +1,6 @@
 /* Designed by Kapil Pidhwani: Minimal, self-contained stylesheet for /widgets/<slug>/embed/ pages.
- * Zero external frameworks; scales cleanly from a 300×120 Notion column to full-width via container queries.
+ * No frameworks. One container query scale drives every size, so a widget fits a 300×120 Notion column and a
+ * full-width banner alike. Tiles size to their content (em units), so "1176" days fits as well as "09".
  */
 
 :root {
@@ -23,19 +24,13 @@
   --accent: #FF6A2A;
 }
 
-[data-bg="transparent"] {
-  --bg: transparent;
-}
+[data-bg="transparent"] { --bg: transparent; }
 
 [data-size="sm"] { --scale: 0.82; }
 [data-size="md"] { --scale: 1; }
 [data-size="lg"] { --scale: 1.18; }
 
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html, body {
   width: 100%;
@@ -45,46 +40,39 @@ html, body {
   color: var(--fg);
   font-family: var(--font);
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
+/* ── Stage: the only container; everything below sizes from --unit ── */
 .w-stage {
-  position: relative;
   width: 100%;
   height: 100%;
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  padding: clamp(8px, 3vmin, 24px);
+  justify-content: center;
+  padding: clamp(6px, 3cqmin, 20px);
   container-type: size;
   text-align: center;
 }
 
-[data-align="left"] .w-stage {
-  align-items: flex-start;
-  text-align: left;
-}
+[data-align="left"] .w-stage { justify-content: flex-start; text-align: left; }
 
 .w-card-wrap {
+  /* Digit size: scales with the smaller of width/height so neither axis overflows */
+  --unit: calc(clamp(1.25rem, min(9cqw, 34cqh), 4.2rem) * var(--scale));
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: clamp(6px, 2.2cqmin, 16px);
+  gap: calc(var(--unit) * 0.22);
   max-width: 100%;
-  max-height: 100%;
 }
 
-[data-align="left"] .w-card-wrap {
-  align-items: flex-start;
-}
+[data-align="left"] .w-card-wrap { align-items: flex-start; }
 
 .w-title {
-  font-size: calc(clamp(0.72rem, 3.6cqmin, 1.05rem) * var(--scale));
+  font-size: calc(var(--unit) * 0.3);
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--accent);
   max-width: 100%;
@@ -93,15 +81,8 @@ html, body {
   white-space: nowrap;
 }
 
-.w-title[hidden],
-.w-sub[hidden],
-.w-badge[hidden] {
-  display: none !important;
-}
-
 .w-sub {
-  font-size: calc(clamp(0.7rem, 3.2cqmin, 0.95rem) * var(--scale));
-  font-weight: 500;
+  font-size: calc(var(--unit) * 0.28);
   color: var(--muted);
   max-width: 100%;
   overflow: hidden;
@@ -109,21 +90,22 @@ html, body {
   white-space: nowrap;
 }
 
-/* ── Units row (Flip Clock & Countdown) ── */
+[hidden] { display: none !important; }
+
+/* ── Units row ── */
 .w-units {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  gap: clamp(4px, 1.8cqw, 14px);
+  gap: calc(var(--unit) * 0.18);
   max-width: 100%;
-  flex-wrap: nowrap;
 }
 
 .w-unit {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: clamp(3px, 1.2cqmin, 8px);
+  gap: calc(var(--unit) * 0.14);
   min-width: 0;
 }
 
@@ -132,9 +114,10 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: calc(clamp(42px, 17cqw, 108px) * var(--scale));
-  height: calc(clamp(44px, 42cqh, 116px) * var(--scale));
-  padding: 0 clamp(6px, 2cqw, 16px);
+  font-size: var(--unit);
+  min-width: 1.7em;        /* two digits; wider values grow the tile */
+  height: 1.55em;
+  padding: 0 0.28em;
   background: var(--surface);
   border: 1px solid var(--surface-edge);
   border-radius: var(--radius);
@@ -143,21 +126,18 @@ html, body {
   font-variant-numeric: tabular-nums;
 }
 
-/* Split-flap horizontal crease line */
+/* split-flap crease */
 .w-flip-tile::after {
   content: '';
   position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
+  left: 0; right: 0; top: 50%;
   height: 1px;
   background: var(--surface-edge);
-  opacity: 0.75;
   pointer-events: none;
 }
 
 .w-digit {
-  font-size: calc(clamp(1.35rem, 11cqw, 4.1rem) * var(--scale));
+  font-size: 1em;
   font-weight: 700;
   line-height: 1;
   letter-spacing: -0.03em;
@@ -166,136 +146,84 @@ html, body {
   z-index: 1;
 }
 
-@keyframes wFlipPulse {
-  0%   { transform: perspective(360px) rotateX(-16deg); opacity: 0.72; }
-  100% { transform: perspective(360px) rotateX(0deg); opacity: 1; }
+@keyframes wFlip {
+  from { transform: perspective(360px) rotateX(-18deg); opacity: 0.7; }
+  to   { transform: none; opacity: 1; }
 }
-
-.w-flip-tile.is-tick .w-digit {
-  animation: wFlipPulse 240ms cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .w-flip-tile.is-tick .w-digit {
-    animation: none;
-  }
-}
-
-.w-ampm {
-  position: absolute;
-  top: clamp(3px, 1.2cqmin, 7px);
-  right: clamp(4px, 1.4cqmin, 9px);
-  font-size: clamp(0.5rem, 2.2cqmin, 0.68rem);
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  color: var(--accent);
-  text-transform: uppercase;
-  z-index: 2;
-}
+.w-flip-tile.is-tick .w-digit { animation: wFlip 240ms cubic-bezier(0.2, 0.8, 0.2, 1); }
+@media (prefers-reduced-motion: reduce) { .w-flip-tile.is-tick .w-digit { animation: none; } }
 
 .w-sep {
-  font-size: calc(clamp(1.1rem, 8cqw, 2.8rem) * var(--scale));
+  font-size: var(--unit);
+  line-height: 1.55;      /* matches tile height so the colon sits on the digit midline */
   font-weight: 700;
   color: var(--accent);
-  line-height: 1;
   opacity: 0.85;
   user-select: none;
-  padding-bottom: clamp(10px, 3cqmin, 20px);
 }
 
 .w-unit-label {
-  font-size: calc(clamp(0.54rem, 2.3cqmin, 0.74rem) * var(--scale));
+  font-size: calc(var(--unit) * 0.22);
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--muted);
 }
 
-/* ── Minimal & Compact variants (Countdown / Clock) ── */
+/* AM/PM: a small unit after the time, never on top of it */
+.w-meridiem {
+  align-self: flex-start;
+  font-size: calc(var(--unit) * 0.3);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+  line-height: 1;
+  padding-top: calc(var(--unit) * 0.18);
+}
+
+/* ── Minimal: same layout, no surfaces ── */
 [data-variant="minimal"] .w-flip-tile {
   background: transparent;
   border-color: transparent;
   box-shadow: none;
-  height: auto;
-  min-width: calc(clamp(34px, 14cqw, 88px) * var(--scale));
-  padding: 2px 4px;
+  height: 1.15em;
+  min-width: 1.3em;
+  padding: 0 0.1em;
 }
+[data-variant="minimal"] .w-flip-tile::after { display: none; }
+[data-variant="minimal"] .w-sep { line-height: 1.15; }
+[data-variant="minimal"] .w-meridiem { padding-top: 0; }
 
-[data-variant="minimal"] .w-flip-tile::after {
-  display: none;
-}
-
-[data-variant="compact"] .w-units {
-  gap: clamp(6px, 2cqw, 12px);
-  background: var(--surface);
-  border: 1px solid var(--surface-edge);
-  border-radius: var(--radius);
-  padding: clamp(8px, 3cqmin, 16px) clamp(12px, 4cqw, 24px);
-}
-
+/* ── Compact: one quiet row  "1176 d · 19 h · 09 m · 30 s" ── */
+[data-variant="compact"] .w-units { align-items: baseline; gap: calc(var(--unit) * 0.3); }
+[data-variant="compact"] .w-unit { flex-direction: row; align-items: baseline; gap: 0.15em; }
 [data-variant="compact"] .w-flip-tile {
+  font-size: calc(var(--unit) * 0.7);
   background: transparent;
   border: none;
   box-shadow: none;
   height: auto;
-  min-width: auto;
+  min-width: 0;
   padding: 0;
 }
-
-[data-variant="compact"] .w-flip-tile::after {
-  display: none;
-}
-
-[data-variant="compact"] .w-unit {
-  flex-direction: row;
-  align-items: baseline;
-  gap: 3px;
-}
-
-[data-variant="compact"] .w-sep {
-  padding-bottom: 0;
-  font-size: calc(clamp(0.9rem, 5cqw, 1.6rem) * var(--scale));
-}
+[data-variant="compact"] .w-flip-tile::after { display: none; }
+[data-variant="compact"] .w-unit-label { font-size: calc(var(--unit) * 0.26); text-transform: lowercase; letter-spacing: 0; }
+[data-variant="compact"] .w-sep { display: none; }
+[data-variant="compact"] .w-meridiem { align-self: baseline; padding-top: 0; }
 
 .w-done-msg {
-  font-size: calc(clamp(1rem, 6cqw, 2rem) * var(--scale));
+  font-size: calc(var(--unit) * 0.6);
   font-weight: 700;
   color: var(--accent);
-  padding: 0.4rem 0.8rem;
 }
 
-/* ── Attribution / Customise corner badge ── */
-.w-badge {
-  position: fixed;
-  right: 8px;
-  bottom: 6px;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 3px 8px;
-  border-radius: 999px;
-  background: var(--surface);
-  border: 1px solid var(--surface-edge);
+/* ── Credit: plain in-flow text, never overlaps the widget ── */
+.w-credit {
+  font-size: calc(clamp(0.6rem, var(--unit) * 0.22, 0.75rem));
+  letter-spacing: 0.02em;
   color: var(--muted);
-  font-size: 10px;
-  font-weight: 500;
+  opacity: 0.7;
   text-decoration: none;
-  opacity: 0.55;
-  transition: opacity 0.15s ease, color 0.15s ease, border-color 0.15s ease;
-  z-index: 10;
+  transition: opacity 0.15s ease, color 0.15s ease;
 }
-
-.w-badge:hover,
-.w-badge:focus-visible {
-  opacity: 1;
-  color: var(--accent);
-  border-color: var(--accent);
-  outline: none;
-}
-
-.w-badge-dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--accent);
-}
+.w-credit:hover, .w-credit:focus-visible { opacity: 1; color: var(--accent); outline: none; }

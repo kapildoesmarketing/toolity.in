@@ -43,11 +43,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="preload" href="/styles/main.css?v=4.1" as="style">
+  <link rel="preload" href="/styles/main.css?v=4.2" as="style">
   <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
   <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 
-  <link rel="stylesheet" href="/styles/main.css?v=4.1">
+  <link rel="stylesheet" href="/styles/main.css?v=4.2">
 
   <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
   <script type="application/ld+json">
@@ -117,18 +117,8 @@
 
         <div class="tool-workspace-card" data-layout="split" data-split="40/60" id="tool-card">
 
-          <!-- 2a. Toolbar — LEFT: style presets · RIGHT: Reset · Copy · Download(▾) · Open -->
+          <!-- 2a. Toolbar — Reset · Copy · Download(▾) · Open -->
           <div class="tool-actions-toolbar">
-            <div class="toolbar-group">
-              <div class="segmented-group segmented-group-pill" id="seg-presets" role="group" aria-label="Style presets">
-                <button type="button" class="seg-pill active" data-preset="toolity">Toolity</button>
-                <button type="button" class="seg-pill" data-preset="notion-light">Notion Light</button>
-                <button type="button" class="seg-pill" data-preset="notion-dark">Notion Dark</button>
-                <button type="button" class="seg-pill" data-preset="minimal">Minimal</button>
-                <button type="button" class="seg-pill" data-preset="warm-cream">Warm</button>
-              </div>
-              <span class="pane-badge" id="status-badge">Default style</span>
-            </div>
             <div class="toolbar-group">
               <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
                 <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
@@ -146,24 +136,15 @@
                 </button>
                 <div class="dropdown-popup" id="download-dropdown-menu" role="menu">
                   <button type="button" class="dropdown-item" id="opt-copy-iframe" role="menuitem">
-                    <div class="dropdown-item-left">
-                      <iconify-icon icon="lucide:code" width="14" height="14"></iconify-icon>
-                      <span>Copy &lt;iframe&gt; HTML</span>
-                    </div>
+                    <div class="dropdown-item-left"><iconify-icon icon="lucide:code" width="14" height="14"></iconify-icon><span>Copy &lt;iframe&gt; HTML</span></div>
                     <span class="dropdown-item-badge">HTML</span>
                   </button>
                   <button type="button" class="dropdown-item" id="opt-dl-html" role="menuitem">
-                    <div class="dropdown-item-left">
-                      <iconify-icon icon="lucide:file-code" width="14" height="14"></iconify-icon>
-                      <span>Download .html file</span>
-                    </div>
+                    <div class="dropdown-item-left"><iconify-icon icon="lucide:file-code" width="14" height="14"></iconify-icon><span>Download .html file</span></div>
                     <span class="dropdown-item-badge">.html</span>
                   </button>
                   <button type="button" class="dropdown-item" id="opt-copy-md" role="menuitem">
-                    <div class="dropdown-item-left">
-                      <iconify-icon icon="lucide:file-text" width="14" height="14"></iconify-icon>
-                      <span>Copy Markdown link</span>
-                    </div>
+                    <div class="dropdown-item-left"><iconify-icon icon="lucide:file-text" width="14" height="14"></iconify-icon><span>Copy Markdown link</span></div>
                     <span class="dropdown-item-badge">.md</span>
                   </button>
                 </div>
@@ -175,13 +156,12 @@
             </div>
           </div>
 
-          <!-- 2b. Panes — Configuration LEFT, Live Preview & Embed URL RIGHT -->
+          <!-- 2b. Panes — settings LEFT, live preview + embed URL RIGHT -->
           <div class="split-pane-grid">
 
             <div class="tool-pane">
               <div class="pane-header">
-                <span>Countdown Details</span>
-                <span class="pane-badge" id="input-badge">Live sync</span>
+                <span>Countdown</span>
               </div>
               <div class="pane-error" id="input-error" role="alert" hidden>
                 <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
@@ -189,166 +169,124 @@
               </div>
               <div class="pane-content pane-content-tall">
                 <div class="form-group">
-                  <label class="form-label" for="opt-title">
-                    <span>Event title</span>
-                    <span class="form-label-desc">Shown above the timer</span>
-                  </label>
-                  <input type="text" id="opt-title" class="input-clean" placeholder="Product Launch · Exam Day · Trip to Tokyo" maxlength="80" autocomplete="off">
+                  <label class="form-label" for="opt-title"><span>Event title</span><span class="form-label-desc">Optional</span></label>
+                  <input type="text" id="opt-title" class="input-clean" placeholder="Product launch · Exam day · Trip to Tokyo" maxlength="80" autocomplete="off">
                 </div>
-
                 <div class="form-row-2col">
                   <div class="form-group">
-                    <label class="form-label" for="opt-to">
-                      <span>Target date &amp; time</span>
-                    </label>
+                    <label class="form-label" for="opt-to"><span>Target date &amp; time</span></label>
                     <input type="datetime-local" id="opt-to" class="input-clean">
                   </div>
                   <div class="form-group">
                     <label class="form-label" for="opt-tz"><span>Time zone</span></label>
-                    <select id="opt-tz" class="select-clean">
-                      <option value="local" selected>Visitor's local time</option>
-                    </select>
+                    <select id="opt-tz" class="select-clean"><option value="local" selected>Visitor's local time</option></select>
                   </div>
                 </div>
-
                 <div class="form-group">
                   <span class="form-label"><span>Display style</span></span>
                   <div class="segmented-group segmented-group-pill" id="seg-variant" role="group" aria-label="Display style">
                     <button type="button" class="seg-pill active" data-value="flip">Flip cards</button>
                     <button type="button" class="seg-pill" data-value="minimal">Minimal</button>
-                    <button type="button" class="seg-pill" data-value="compact">Compact pill</button>
+                    <button type="button" class="seg-pill" data-value="compact">Compact</button>
                   </div>
                 </div>
-
                 <div class="form-group">
-                  <span class="form-label"><span>Visible units</span></span>
+                  <span class="form-label"><span>Show</span></span>
                   <div class="widget-checks-grid">
-                    <div class="control-item">
-                      <input type="checkbox" id="opt-days" checked>
-                      <label for="opt-days">Days</label>
-                    </div>
-                    <div class="control-item">
-                      <input type="checkbox" id="opt-hours" checked>
-                      <label for="opt-hours">Hours</label>
-                    </div>
-                    <div class="control-item">
-                      <input type="checkbox" id="opt-minutes" checked>
-                      <label for="opt-minutes">Minutes</label>
-                    </div>
-                    <div class="control-item">
-                      <input type="checkbox" id="opt-seconds" checked>
-                      <label for="opt-seconds">Seconds</label>
-                    </div>
+                    <div class="control-item"><input type="checkbox" id="opt-days" checked><label for="opt-days">Days</label></div>
+                    <div class="control-item"><input type="checkbox" id="opt-hours" checked><label for="opt-hours">Hours</label></div>
+                    <div class="control-item"><input type="checkbox" id="opt-minutes" checked><label for="opt-minutes">Minutes</label></div>
+                    <div class="control-item"><input type="checkbox" id="opt-seconds" checked><label for="opt-seconds">Seconds</label></div>
+                    <div class="control-item"><input type="checkbox" id="opt-badge" checked><label for="opt-badge">Toolity link</label></div>
+                    <div class="control-item"><input type="checkbox" id="opt-transparent"><label for="opt-transparent">Transparent</label></div>
                   </div>
                 </div>
-
                 <div class="form-group">
-                  <label class="form-label" for="opt-done">
-                    <span>Completed message</span>
-                    <span class="form-label-desc">Optional text when timer reaches 0</span>
-                  </label>
+                  <label class="form-label" for="opt-done"><span>Message when it reaches zero</span><span class="form-label-desc">Optional</span></label>
                   <input type="text" id="opt-done" class="input-clean" placeholder="We are live!" maxlength="80" autocomplete="off">
                 </div>
-
-                <div class="form-group">
-                  <label class="form-label" for="paste-embed-url">
-                    <span>Paste existing widget URL</span>
-                    <span class="form-label-desc">Load a saved link to edit</span>
-                  </label>
-                  <input type="url" id="paste-embed-url" class="input-clean" placeholder="https://toolity.in/widgets/countdown/embed/?…" autocomplete="off" spellcheck="false">
+                <div class="form-row-2col">
+                  <div class="form-group">
+                    <label class="form-label" for="opt-theme"><span>Theme</span></label>
+                    <select id="opt-theme" class="select-clean">
+                      <option value="auto" selected>Auto (follows the page)</option>
+                      <option value="light">Light</option>
+                      <option value="dark">Dark</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="opt-preset"><span>Style preset</span></label>
+                    <select id="opt-preset" class="select-clean">
+                      <option value="toolity" selected>Toolity</option>
+                      <option value="notion-light">Notion Light</option>
+                      <option value="notion-dark">Notion Dark</option>
+                      <option value="minimal">Minimal (transparent)</option>
+                      <option value="warm-cream">Warm editorial</option>
+                    </select>
+                  </div>
                 </div>
               </div>
             </div>
 
             <div class="tool-pane">
               <div class="pane-header">
-                <span>Live Embed Preview</span>
-                <span class="pane-badge" id="output-badge">Ready for Notion</span>
+                <span>Live preview</span>
+                <div class="segmented-group segmented-group-pill" id="seg-preview-size" role="group" aria-label="Preview width">
+                  <button type="button" class="seg-pill active" data-value="full">Wide</button>
+                  <button type="button" class="seg-pill" data-value="half">Column</button>
+                  <button type="button" class="seg-pill" data-value="compact">Mini</button>
+                </div>
               </div>
               <div class="pane-content widget-preview-out">
-                <div class="widget-stage-toolbar">
-                  <div class="segmented-group segmented-group-pill" id="seg-preview-bg" role="group" aria-label="Preview canvas background">
-                    <button type="button" class="seg-pill active" data-value="auto">Grid</button>
-                    <button type="button" class="seg-pill" data-value="light">Notion Light</button>
-                    <button type="button" class="seg-pill" data-value="dark">Notion Dark</button>
-                  </div>
-                  <div class="segmented-group segmented-group-pill" id="seg-preview-size" role="group" aria-label="Preview container width">
-                    <button type="button" class="seg-pill active" data-value="full">Full width</button>
-                    <button type="button" class="seg-pill" data-value="half">Half column</button>
-                    <button type="button" class="seg-pill" data-value="compact">Compact</button>
-                  </div>
-                </div>
-
-                <div class="widget-preview-stage" id="widget-preview-stage" data-canvas-bg="auto" data-canvas-size="full">
+                <div class="widget-preview-stage" id="widget-preview-stage" data-canvas-size="full">
                   <iframe id="widget-preview-frame" class="widget-preview-frame" src="/widgets/countdown/embed/" title="Countdown Timer live preview"></iframe>
                 </div>
-
-                <div class="widget-url-box">
-                  <label class="form-label" for="embed-url-output">
-                    <span>Embed URL (paste into Notion with <code>/embed</code>)</span>
-                  </label>
-                  <div class="widget-url-row">
-                    <input type="text" id="embed-url-output" class="input-clean" readonly value="https://toolity.in/widgets/countdown/embed/">
-                    <button type="button" class="btn-toolbar-sm" id="btn-copy-url-inline" title="Copy embed URL" aria-label="Copy embed URL">
-                      <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
-                      <span>Copy URL</span>
-                    </button>
-                  </div>
-                  <details class="widget-code-details">
-                    <summary>Show &lt;iframe&gt; HTML snippet for websites</summary>
-                    <pre id="embed-code-output" class="widget-code-pre"></pre>
-                  </details>
+                <div class="form-group">
+                  <label class="form-label" for="embed-url-output"><span>Embed URL</span><span class="form-label-desc">Type <code>/embed</code> in Notion and paste</span></label>
+                  <input type="text" id="embed-url-output" class="input-clean widget-url-input" readonly value="https://toolity.in/widgets/countdown/embed/">
                 </div>
               </div>
             </div>
 
           </div>
 
-          <!-- 2c. Appearance & Custom Style Settings (closed by default per Rule 19) -->
+          <!-- 2c. Secondary settings — closed by default (Rule 19) -->
           <details class="tool-settings-accordion">
             <summary class="tool-settings-summary">
               <div class="tool-settings-summary-left">
                 <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
-                <span>Appearance, Colours &amp; Typography</span>
+                <span>Colours &amp; typography</span>
                 <span class="pane-badge" id="settings-summary">Auto theme · #F4511E</span>
               </div>
               <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
             </summary>
             <div class="tool-settings-panel">
               <div class="control-item">
-                <label for="opt-theme">Theme mode</label>
-                <select id="opt-theme" class="select-clean">
-                  <option value="auto" selected>Auto (follows OS theme)</option>
-                  <option value="light">Light mode</option>
-                  <option value="dark">Dark mode</option>
-                </select>
-              </div>
-              <div class="control-item">
-                <label for="opt-font">Font family</label>
+                <label for="opt-font">Font</label>
                 <select id="opt-font" class="select-clean">
-                  <option value="sans" selected>System Sans-Serif</option>
-                  <option value="serif">Editorial Serif</option>
-                  <option value="mono">System Monospace</option>
-                  <option value="inter">Inter (Google Font)</option>
-                  <option value="dm-sans">DM Sans (Google Font)</option>
-                  <option value="space-grotesk">Space Grotesk (Google Font)</option>
-                  <option value="jetbrains-mono">JetBrains Mono (Google Font)</option>
-                  <option value="playfair">Playfair Display (Google Font)</option>
+                  <option value="sans" selected>System sans-serif</option>
+                  <option value="serif">Serif</option>
+                  <option value="mono">Monospace</option>
+                  <option value="inter">Inter</option>
+                  <option value="dm-sans">DM Sans</option>
+                  <option value="space-grotesk">Space Grotesk</option>
+                  <option value="jetbrains-mono">JetBrains Mono</option>
+                  <option value="playfair">Playfair Display</option>
                 </select>
               </div>
               <div class="control-item">
-                <label for="opt-size">Widget scale</label>
+                <label for="opt-size">Size</label>
                 <select id="opt-size" class="select-clean">
-                  <option value="sm">Small (compact columns)</option>
-                  <option value="md" selected>Medium (default)</option>
-                  <option value="lg">Large (hero banners)</option>
+                  <option value="sm">Small</option>
+                  <option value="md" selected>Medium</option>
+                  <option value="lg">Large</option>
                 </select>
               </div>
               <div class="control-item">
                 <label for="opt-align">Alignment</label>
                 <select id="opt-align" class="select-clean">
                   <option value="center" selected>Centred</option>
-                  <option value="left">Left-aligned</option>
+                  <option value="left">Left</option>
                 </select>
               </div>
               <div class="control-item">
@@ -356,45 +294,42 @@
                 <input type="range" id="opt-radius" class="range-slider-clean" min="0" max="28" step="2" value="12">
               </div>
               <div class="control-item">
-                <label for="opt-accent">Accent colour</label>
+                <label for="opt-accent">Accent</label>
                 <div class="widget-color-field">
                   <input type="color" id="opt-accent-picker" class="widget-color-picker" value="#F4511E" aria-label="Pick accent colour">
                   <input type="text" id="opt-accent" class="input-clean" value="#F4511E" placeholder="#F4511E" maxlength="7">
                 </div>
               </div>
               <div class="control-item">
-                <label for="opt-bg">Background colour</label>
+                <label for="opt-bg">Background</label>
                 <div class="widget-color-field">
                   <input type="color" id="opt-bg-picker" class="widget-color-picker" value="#FFFFFF" aria-label="Pick background colour">
-                  <input type="text" id="opt-bg" class="input-clean" placeholder="Default theme bg" maxlength="7">
+                  <input type="text" id="opt-bg" class="input-clean" placeholder="Theme default" maxlength="7">
                 </div>
               </div>
               <div class="control-item">
-                <label for="opt-surface">Tile surface colour</label>
+                <label for="opt-surface">Tile</label>
                 <div class="widget-color-field">
-                  <input type="color" id="opt-surface-picker" class="widget-color-picker" value="#F7F7F5" aria-label="Pick tile surface colour">
-                  <input type="text" id="opt-surface" class="input-clean" placeholder="Default tile surface" maxlength="7">
+                  <input type="color" id="opt-surface-picker" class="widget-color-picker" value="#F7F7F5" aria-label="Pick tile colour">
+                  <input type="text" id="opt-surface" class="input-clean" placeholder="Theme default" maxlength="7">
                 </div>
               </div>
               <div class="control-item">
-                <label for="opt-fg">Text colour</label>
+                <label for="opt-fg">Text</label>
                 <div class="widget-color-field">
                   <input type="color" id="opt-fg-picker" class="widget-color-picker" value="#17191C" aria-label="Pick text colour">
-                  <input type="text" id="opt-fg" class="input-clean" placeholder="Default text colour" maxlength="7">
+                  <input type="text" id="opt-fg" class="input-clean" placeholder="Theme default" maxlength="7">
                 </div>
               </div>
               <div class="control-item">
-                <input type="checkbox" id="opt-transparent">
-                <label for="opt-transparent">Transparent background</label>
-              </div>
-              <div class="control-item">
-                <input type="checkbox" id="opt-badge" checked>
-                <label for="opt-badge">Show "Toolity · Customise" badge</label>
+                <label for="paste-embed-url">Edit an existing widget</label>
+                <input type="url" id="paste-embed-url" class="input-clean" placeholder="Paste its embed URL to load the settings" autocomplete="off" spellcheck="false">
               </div>
             </div>
           </details>
 
         </div>
+
 
         <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
         <section class="guide-section">
@@ -458,8 +393,8 @@
 
   <script src="/scripts/main.js?v=3.3"></script>
   <script src="/scripts/tool-common.js?v=1.0"></script>
-  <script src="/scripts/widget-common.js?v=1.0"></script>
-  <script src="/scripts/widgets/countdown.js?v=1.0"></script>
+  <script src="/scripts/widget-common.js?v=1.1"></script>
+  <script src="/scripts/widgets/countdown.js?v=1.1"></script>
 </body>
 
 </html>

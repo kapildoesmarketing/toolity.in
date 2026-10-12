@@ -102,7 +102,11 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
         const scriptCount = document.querySelectorAll('#widget-root script').length;
         const overflowX = document.scrollingElement.scrollWidth > innerWidth;
         const overflowY = document.scrollingElement.scrollHeight > innerHeight;
-        return { st, roundTripOk, scriptCount, overflowX, overflowY };
+        // credit must be in flow (below the widget), never over the digits/date
+        const credit = document.querySelector('.w-credit');
+        const units = document.querySelector('.w-units').getBoundingClientRect();
+        const creditOk = !!credit && credit.getBoundingClientRect().top >= units.bottom && !getComputedStyle(credit).position.match(/fixed|absolute/);
+        return { st, roundTripOk, scriptCount, overflowX, overflowY, creditOk };
       })()`);
       assert.strictEqual(res.st.title, '<script>alert(1)</script>');
       assert.strictEqual(res.scriptCount, 0, 'XSS script element was injected');
@@ -113,7 +117,8 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
       assert.strictEqual(res.roundTripOk, true, 'Flip clock schema round-trip failed');
       assert.strictEqual(res.overflowX, false, 'Flip clock embed overflowed horizontally at 300x120');
       assert.strictEqual(res.overflowY, false, 'Flip clock embed overflowed vertically at 300x120');
-      ok('flip-clock: schema round-trip, hostile param sanitization, and 300×120 zero-overflow');
+      assert.strictEqual(res.creditOk, true, 'Credit is missing or overlaps the widget');
+      ok('flip-clock: schema round-trip, hostile param sanitization, in-flow credit, and 300×120 zero-overflow');
     });
 
     await withTab(`${BASE}/widgets/countdown/embed/?to=2030-01-01T00:00&title=Launch+Day&variant=flip&theme=dark`, [300, 120], async (evalJs, errs) => {
@@ -168,8 +173,10 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
         titleIn.dispatchEvent(new Event('input', { bubbles: true }));
         toIn.value = '2028-06-15T09:00';
         toIn.dispatchEvent(new Event('input', { bubbles: true }));
-        // Click Notion Dark preset
-        document.querySelector('[data-preset="notion-dark"]').click();
+        // Apply the Notion Dark preset via the select
+        const presetSel = document.getElementById('opt-preset');
+        presetSel.value = 'notion-dark';
+        presetSel.dispatchEvent(new Event('change', { bubbles: true }));
         const outUrl = document.getElementById('embed-url-output').value;
         const builderSearch = location.search;
         const frameTitle = document.getElementById('widget-preview-frame').contentDocument.querySelector('.w-title').textContent;
