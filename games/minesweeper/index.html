@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Minesweeper | Toolity Games</title>
+  <link rel="canonical" href="https://toolity.in/games/minesweeper/">
+  <meta name="description" content="Free online Minesweeper: classic 9×9 Beginner, 16×16 Intermediate and 16×30 Expert boards with a guaranteed safe first click, chord-reveal, touch Flag mode, keyboard controls and best-time tracking. In your browser.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Minesweeper | Toolity Games">
+  <meta property="og:description" content="Free online Minesweeper: classic 9×9 Beginner, 16×16 Intermediate and 16×30 Expert boards with a guaranteed safe first click, chord-reveal, touch Flag mode, keyboard controls and best-time tracking. In your browser.">
+  <meta property="og:url" content="https://toolity.in/games/minesweeper/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=4.4" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=4.4">
+  <link rel="stylesheet" href="/styles/tools/minesweeper.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Minesweeper",
+        "url": "https://toolity.in/games/minesweeper/",
+        "description": "Free online Minesweeper: classic 9×9 Beginner, 16×16 Intermediate and 16×30 Expert boards with a guaranteed safe first click, chord-reveal, touch Flag mode, keyboard controls and best-time tracking. In your browser.",
+        "applicationCategory": "GameApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Games", "item": "https://toolity.in/games/" },
+          { "@type": "ListItem", "position": 3, "name": "Minesweeper", "item": "https://toolity.in/games/minesweeper/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Can I lose on the first click?", "acceptedAnswer": { "@type": "Answer", "text": "Never. Mines are placed only after your first click, and the clicked square plus its 8 immediate neighbours are kept mine-free so you always get a playable opening." } },
+          { "@type": "Question", "name": "What does Undo do in Minesweeper?", "acceptedAnswer": { "@type": "Answer", "text": "If you accidentally click a mine, pressing Undo (Z) steps back one move so you can finish a long Expert board without starting over." } },
+          { "@type": "Question", "name": "How do I flag on a phone or tablet?", "acceptedAnswer": { "@type": "Answer", "text": "Tap the Mode: Dig / Flag button below the board to switch your tap action between digging and flagging." } },
+          { "@type": "Question", "name": "How does the 16×30 Expert board fit on a phone?", "acceptedAnswer": { "@type": "Answer", "text": "On narrow screens the board wrapper scrolls horizontally inside the card so every cell stays large enough to tap accurately without zooming the page." } },
+          { "@type": "Question", "name": "Is anything uploaded or tracked while I play?", "acceptedAnswer": { "@type": "Answer", "text": "No. The game runs entirely in your browser tab. Your best score or win tally is saved only in your browser’s localStorage and cleared when you press Reset." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/games/" class="breadcrumb-link">Games</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Minesweeper</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Games</span>
+            <h1 class="page-title">Minesweeper</h1>
+            <p class="page-desc">Clear the minefield without detonating a mine — your first click is always a safe opening.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="single" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <div class="segmented-group segmented-group-pill" id="seg-mode" role="group" aria-label="Board size">
+                <button type="button" class="seg-pill active" data-value="easy" data-default>9×9 · 10</button>
+                <button type="button" class="seg-pill" data-value="medium">16×16 · 40</button>
+                <button type="button" class="seg-pill" data-value="hard">16×30 · 99</button>
+              </div>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-undo" title="Undo last move" aria-label="Undo last move" disabled>
+                <iconify-icon icon="lucide:undo-2" width="14" height="14"></iconify-icon>
+                <span>Undo</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-play" aria-label="New game">
+                <iconify-icon icon="lucide:play" width="14" height="14" id="play-icon"></iconify-icon>
+                <span id="play-label">New game</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Game pane -->
+          <div class="split-pane-grid">
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Field</span>
+                <span class="game-score" id="score" aria-live="polite"><span>mines <b id="mines-val">10</b></span><i>·</i><span>time <b id="time-val">0:00</b></span><i>·</i><span>best <b id="best-val">—</b></span></span>
+                <span id="status-badge" class="pane-badge">Click any square to start</span>
+              </div>
+              <div class="pane-content game-pane-wrap">
+                <div class="game-stage game-stage-wide" id="stage">
+                  <div class="ms-scroll"><div class="ms-board" id="board" role="grid" aria-label="Minesweeper board"></div></div>
+                  <div class="game-bar">
+                    <button type="button" class="game-key" id="btn-flag-mode" aria-pressed="false" title="Toggle flag mode for tap/click (F)">
+                      <iconify-icon icon="lucide:flag" width="14" height="14"></iconify-icon>
+                      <span id="flag-mode-label">Mode: Dig</span>
+                    </button>
+                  </div>
+                  <div class="game-overlay" id="overlay" hidden>
+                    <strong id="overlay-title">Game over</strong>
+                    <span id="overlay-text">Press Space or New game to play again</span>
+                    <button type="button" class="btn-toolbar-sm" id="overlay-btn" hidden></button>
+                  </div>
+                </div>
+                <p class="form-helper game-hint" id="hint">Click to dig · Right-click or F to flag · Click a satisfied number to chord · Arrow keys + Space / F</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Game options</span>
+                <span class="pane-badge" id="settings-summary">9×9 · safe opening · sound on</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item">
+                <input type="checkbox" id="opt-chord" checked>
+                <label for="opt-chord">Chord-reveal when a number’s flags match</label>
+              </div>
+              <div class="control-item">
+                <input type="checkbox" id="opt-sound" checked>
+                <label for="opt-sound">Sound effects</label>
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+        <!-- ═══════════ 3. GUIDE ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Play Minesweeper in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Make your opening click</h3>
+              <p class="step-desc">Your very first click is guaranteed never to be a mine — mines are laid <em>after</em> you click, leaving a safe 3×3 opening around your square.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Read the numbers & flag mines</h3>
+              <p class="step-desc">Each number tells you how many mines touch that square’s 8 neighbours. Right-click (or switch to <strong>Flag</strong> mode on touch, or press <code>F</code>) to mark suspected mines.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Chord to clear faster</h3>
+              <p class="step-desc">Once a numbered square has the right number of flags around it, click the number itself to reveal all its remaining neighbours at once. Reveal every non-mine square to win.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 4. REFERENCE ═══════════ -->
+        <section class="reference-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">Reference</span>
+            <h2 class="section-heading-sm">Controls &amp; rules</h2>
+          </div>
+          <div class="formats-table-card">
+            <table class="formats-table">
+              <thead><tr><th>Action</th><th>Keyboard</th><th>Mouse / Touch</th></tr></thead>
+              <tbody>
+                <tr><td>Dig a square</td><td><code>Space</code> / <code>Enter</code> on focused cell</td><td>Left-click (or tap in Dig mode)</td></tr>
+                <tr><td>Place / remove flag</td><td><code>F</code> on focused cell</td><td>Right-click, or tap in Flag mode</td></tr>
+                <tr><td>Chord neighbors</td><td><code>Space</code> on a revealed number</td><td>Click / tap a revealed number</td></tr>
+                <tr><td>Move focus</td><td><code>←</code> <code>→</code> <code>↑</code> <code>↓</code></td><td>—</td></tr>
+                <tr><td>Undo fatal click</td><td><code>Z</code></td><td>Tap Undo</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Minesweeper — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Can I lose on the first click?</summary>
+              <p>Never. Mines are placed only after your first click, and the clicked square plus its 8 immediate neighbours are kept mine-free so you always get a playable opening.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What does Undo do in Minesweeper?</summary>
+              <p>If you accidentally click a mine, pressing <strong>Undo</strong> (<code>Z</code>) steps back one move so you can finish a long Expert board without starting over.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How do I flag on a phone or tablet?</summary>
+              <p>Tap the <strong>Mode: Dig / Flag</strong> button below the board to switch your tap action between digging and flagging.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How does the 16×30 Expert board fit on a phone?</summary>
+              <p>On narrow screens the board wrapper scrolls horizontally inside the card so every cell stays large enough to tap accurately without zooming the page.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is anything uploaded or tracked while I play?</summary>
+              <p>No. The game runs entirely in your browser tab. Your best score or win tally is saved only in your browser’s <code>localStorage</code> and cleared when you press Reset.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="games"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=3.5"></script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="/scripts/game-common.js?v=1.0"></script>
+  <script src="/games/minesweeper/minesweeper.js?v=1.0"></script>
+</body>
+</html>
