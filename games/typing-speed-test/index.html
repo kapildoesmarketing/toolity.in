@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Typing Speed Test | Toolity Games</title>
+  <link rel="canonical" href="https://toolity.in/games/typing-speed-test/">
+  <meta name="description" content="Free online typing speed test: measure your WPM (words per minute), raw speed and accuracy across 15, 30 or 60 seconds with live character highlighting, optional punctuation and numbers, and personal best tracking. Runs in your browser.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Typing Speed Test | Toolity Games">
+  <meta property="og:description" content="Free online typing speed test: measure your WPM (words per minute), raw speed and accuracy across 15, 30 or 60 seconds with live character highlighting, optional punctuation and numbers, and personal best tracking. Runs in your browser.">
+  <meta property="og:url" content="https://toolity.in/games/typing-speed-test/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=4.4" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=4.4">
+  <link rel="stylesheet" href="/styles/tools/typing-speed-test.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Typing Speed Test",
+        "url": "https://toolity.in/games/typing-speed-test/",
+        "description": "Free online typing speed test: measure your WPM (words per minute), raw speed and accuracy across 15, 30 or 60 seconds with live character highlighting, optional punctuation and numbers, and personal best tracking. Runs in your browser.",
+        "applicationCategory": "GameApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Games", "item": "https://toolity.in/games/" },
+          { "@type": "ListItem", "position": 3, "name": "Typing Speed Test", "item": "https://toolity.in/games/typing-speed-test/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "How is WPM calculated?", "acceptedAnswer": { "@type": "Answer", "text": "Standard formula: one “word” equals 5 keystrokes. Net WPM counts only characters in correctly typed words ( plus correct characters in the word in progress ), divided by 5, divided by elapsed minutes. Raw WPM includes mistakes." } },
+          { "@type": "Question", "name": "Can I backspace into a previous word?", "acceptedAnswer": { "@type": "Answer", "text": "Backspace works within the current word so you can fix typos before pressing Space. Once you press Space the word is locked, matching standard competitive typing tests." } },
+          { "@type": "Question", "name": "Where do the words come from?", "acceptedAnswer": { "@type": "Answer", "text": "From a built-in list of the 200 most common English words, shuffled freshly for every test. Enabling punctuation or numbers mixes in realistic clauses and figures." } },
+          { "@type": "Question", "name": "Does each duration keep its own personal best?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Your best net WPM is stored separately for 15s, 30s and 60s in your browser’s local storage." } },
+          { "@type": "Question", "name": "Is anything uploaded or tracked while I play?", "acceptedAnswer": { "@type": "Answer", "text": "No. The game runs entirely in your browser tab. Your best score or win tally is saved only in your browser’s localStorage and cleared when you press Reset." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/games/" class="breadcrumb-link">Games</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Typing Speed Test</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Games</span>
+            <h1 class="page-title">Typing Speed Test</h1>
+            <p class="page-desc">Test your typing speed and accuracy in 15, 30 or 60 seconds — start typing to begin the clock.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="single" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <div class="segmented-group segmented-group-pill" id="seg-mode" role="group" aria-label="Duration">
+                <button type="button" class="seg-pill" data-value="15">15s</button>
+                <button type="button" class="seg-pill active" data-value="30" data-default>30s</button>
+                <button type="button" class="seg-pill" data-value="60">60s</button>
+              </div>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result to clipboard" aria-label="Copy result to clipboard" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-play" aria-label="Restart">
+                <iconify-icon icon="lucide:play" width="14" height="14" id="play-icon"></iconify-icon>
+                <span id="play-label">Restart</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Game pane -->
+          <div class="split-pane-grid">
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Live stats</span>
+                <span class="game-score" id="score" aria-live="polite"><span>WPM <b id="wpm-val">0</b></span><i>·</i><span>acc <b id="acc-val">100%</b></span><i>·</i><span>time <b id="time-val">0:30</b></span><i>·</i><span>best <b id="best-val">0</b></span></span>
+                <span id="status-badge" class="pane-badge">Start typing to begin</span>
+              </div>
+              <div class="pane-content game-pane-wrap">
+                <div class="game-stage game-stage-wide" id="stage">
+                  <div class="tst-box" id="tst-box" tabindex="0" role="region" aria-label="Typing prompt — click or start typing">
+                    <div class="tst-words" id="tst-words" aria-live="off"></div>
+                    <input type="text" id="typing-input" class="tst-input" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Type the words shown">
+                  </div>
+                  <div class="game-overlay" id="overlay" hidden>
+                    <strong id="overlay-title">Game over</strong>
+                    <span id="overlay-text">Press Space or New game to play again</span>
+                    <button type="button" class="btn-toolbar-sm" id="overlay-btn" hidden></button>
+                  </div>
+                </div>
+                <p class="form-helper game-hint" id="hint">Just start typing — timer starts on first keystroke · Space advances word · Backspace fixes inside current word · Esc resets</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Game options</span>
+                <span class="pane-badge" id="settings-summary">30s · lowercase words · sound on</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item">
+                <input type="checkbox" id="opt-punct">
+                <label for="opt-punct">Include punctuation</label>
+              </div>
+              <div class="control-item">
+                <input type="checkbox" id="opt-nums">
+                <label for="opt-nums">Include numbers</label>
+              </div>
+              <div class="control-item">
+                <input type="checkbox" id="opt-sound" checked>
+                <label for="opt-sound">Sound effects</label>
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+        <!-- ═══════════ 3. GUIDE ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Play Typing Speed Test in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Pick a duration</h3>
+              <p class="step-desc">Choose <strong>15s</strong>, <strong>30s</strong> or <strong>60s</strong> in the toolbar. Optionally enable punctuation or numbers in Game options.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Start typing</h3>
+              <p class="step-desc">The countdown begins on your very first keystroke. Green characters are correct, red are mistakes; press Space to commit each word and move on.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Read & copy your WPM</h3>
+              <p class="step-desc">When time runs out, you get net WPM, raw WPM, accuracy and character counts. Press <strong>Copy</strong> to copy a one-line summary or <strong>Restart</strong> for a fresh passage.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 4. REFERENCE ═══════════ -->
+        <section class="reference-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">Reference</span>
+            <h2 class="section-heading-sm">Controls &amp; rules</h2>
+          </div>
+          <div class="formats-table-card">
+            <table class="formats-table">
+              <thead><tr><th>Action</th><th>Keyboard</th><th>Mouse / Touch</th></tr></thead>
+              <tbody>
+                <tr><td>Type characters</td><td>Any letter / number / symbol key</td><td>Tap the prompt box to open the on-screen keyboard</td></tr>
+                <tr><td>Next word</td><td><code>Space</code></td><td>Space key</td></tr>
+                <tr><td>Fix current word</td><td><code>Backspace</code></td><td>Backspace key</td></tr>
+                <tr><td>New passage</td><td><code>Tab</code> or <code>Space</code> (when finished)</td><td>Tap Restart</td></tr>
+                <tr><td>Reset best & options</td><td><code>Esc</code></td><td>Tap Reset</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Typing Speed Test — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>How is WPM calculated?</summary>
+              <p>Standard formula: one “word” equals 5 keystrokes. <strong>Net WPM</strong> counts only characters in correctly typed words ( plus correct characters in the word in progress ), divided by 5, divided by elapsed minutes. <strong>Raw WPM</strong> includes mistakes.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can I backspace into a previous word?</summary>
+              <p>Backspace works within the current word so you can fix typos before pressing Space. Once you press Space the word is locked, matching standard competitive typing tests.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Where do the words come from?</summary>
+              <p>From a built-in list of the 200 most common English words, shuffled freshly for every test. Enabling punctuation or numbers mixes in realistic clauses and figures.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Does each duration keep its own personal best?</summary>
+              <p>Yes. Your best net WPM is stored separately for 15s, 30s and 60s in your browser’s local storage.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is anything uploaded or tracked while I play?</summary>
+              <p>No. The game runs entirely in your browser tab. Your best score or win tally is saved only in your browser’s <code>localStorage</code> and cleared when you press Reset.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="games"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=3.5"></script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="/scripts/game-common.js?v=1.0"></script>
+  <script src="/games/typing-speed-test/typing-speed-test.js?v=1.0"></script>
+</body>
+</html>
