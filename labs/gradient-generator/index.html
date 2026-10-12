@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Gradient Generator | Toolity Labs</title>
+  <link rel="canonical" href="https://toolity.in/labs/gradient-generator/">
+  <meta name="description" content="Free online CSS gradient generator: build linear, radial and conic gradients with unlimited colour stops, live preview, CSS / Tailwind / SVG output and PNG export. Runs in your browser.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Gradient Generator | Toolity Labs">
+  <meta property="og:description" content="Free online CSS gradient generator: build linear, radial and conic gradients with unlimited colour stops, live preview, CSS / Tailwind / SVG output and PNG export. Runs in your browser.">
+  <meta property="og:url" content="https://toolity.in/labs/gradient-generator/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=4.3" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=4.3">
+  <link rel="stylesheet" href="/styles/tools/gradient-generator.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Gradient Generator",
+        "url": "https://toolity.in/labs/gradient-generator/",
+        "description": "Free online CSS gradient generator: build linear, radial and conic gradients with unlimited colour stops, live preview, CSS / Tailwind / SVG output and PNG export. Runs in your browser.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Labs", "item": "https://toolity.in/labs/" },
+          { "@type": "ListItem", "position": 3, "name": "Gradient Generator", "item": "https://toolity.in/labs/gradient-generator/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Which browsers support these gradients?", "acceptedAnswer": { "@type": "Answer", "text": "Linear and radial gradients work everywhere. Conic gradients work in all current browsers (Chrome 69+, Firefox 83+, Safari 12.1+). No vendor prefixes are needed today, so none are added." } },
+          { "@type": "Question", "name": "What does “Include fallback” do?", "acceptedAnswer": { "@type": "Answer", "text": "It adds a plain background-color line with the first stop’s colour before the gradient, so very old browsers or email clients that ignore gradients still show something sensible." } },
+          { "@type": "Question", "name": "How does the PNG export render?", "acceptedAnswer": { "@type": "Answer", "text": "The same stops are painted on a canvas with the browser’s own gradient engine at the chosen size, so the PNG matches the preview. Angles and positions are honoured; the image is opaque unless a stop is transparent." } },
+          { "@type": "Question", "name": "Can I use hsl() or named colours?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — type any CSS colour into a stop’s text field (names, rgb(), hsl(), oklch()…). The picker beside it syncs to the parsed value." } },
+          { "@type": "Question", "name": "Is my input sent anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. Everything is computed by JavaScript in your browser tab. Nothing is uploaded, logged or stored by Toolity." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/labs/" class="breadcrumb-link">Labs</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Gradient Generator</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Labs</span>
+            <h1 class="page-title">Gradient Generator</h1>
+            <p class="page-desc">Design linear, radial and conic gradients with any number of stops — copy the CSS or export a PNG.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" data-split="40/60" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge web-status-badge" id="status-badge">Adjust stops to design</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result" aria-label="Copy result" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <div class="dropdown-menu-wrapper" id="download-dropdown-wrap">
+                <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download result" aria-label="Download result" aria-haspopup="true" disabled>
+                  <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                  <span>Download</span>
+                  <iconify-icon icon="lucide:chevron-down" class="dropdown-arrow" width="13" height="13"></iconify-icon>
+                </button>
+                <div class="dropdown-popup" role="menu">
+                  <button type="button" class="dropdown-item" data-format="png-wide" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:image" width="14" height="14"></iconify-icon>
+                      <span>PNG · 1920 × 1080</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="png-og" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:image" width="14" height="14"></iconify-icon>
+                      <span>PNG · 1200 × 630</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="png-square" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:image" width="14" height="14"></iconify-icon>
+                      <span>PNG · 1080 × 1080</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="css" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:file-code" width="14" height="14"></iconify-icon>
+                      <span>CSS file</span>
+                    </div>
+                  </button>
+                </div>
+              </div>
+              <button type="button" class="btn-toolbar-sm" id="btn-open" title="Open result in a new tab" aria-label="Open result in a new tab" disabled>
+                <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
+                <span>Open</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Design</span>
+                <span class="pane-badge" id="input-badge">—</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content web-form">
+                <div class="segmented-group segmented-group-pill" id="seg-type" role="group" aria-label="Gradient type">
+                  <button type="button" class="seg-pill active" data-value="linear">Linear</button>
+                  <button type="button" class="seg-pill" data-value="radial">Radial</button>
+                  <button type="button" class="seg-pill" data-value="conic">Conic</button>
+                </div>
+                <div class="form-group" id="angle-group">
+                  <label class="form-label" for="opt-angle"><span>Angle</span><span class="form-label-desc"><span id="opt-angle-val">90°</span></span></label>
+                  <input type="range" id="opt-angle" min="0" max="360" step="1" value="90" data-unit="°">
+                </div>
+                <div class="form-group">
+                  <div class="form-label"><span>Colour stops</span><span class="form-label-desc">Colour · position %</span></div>
+                  <div class="web-rows" id="stops"></div>
+                  <button type="button" class="btn-toolbar-sm" id="btn-add-stop"><iconify-icon icon="lucide:plus" width="14" height="14"></iconify-icon><span>Add stop</span></button>
+                </div>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Preview & CSS</span>
+                <span class="pane-badge" id="output-badge">—</span>
+              </div>
+              <div class="pane-content web-output-pane">
+                <div class="pane-empty" id="output-empty">
+                  <iconify-icon icon="lucide:blend"></iconify-icon>
+                  <span>Your gradient will appear here</span>
+                </div>
+                <div class="web-output" id="output-content" hidden>
+                  <div class="web-preview gradient-preview" id="output-preview" role="img" aria-label="Gradient preview"></div>
+                  <pre class="web-code" id="output-css" aria-live="polite"></pre>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">CSS · hex colours · no fallback</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item">
+                <label for="opt-format">Output</label>
+                <select id="opt-format" class="select-clean">
+                  <option value="css" selected>CSS background</option>
+                  <option value="tailwind">Tailwind arbitrary class</option>
+                  <option value="svg">SVG</option>
+                </select>
+              </div>
+              <div class="control-item">
+                <label for="opt-space">Colours as</label>
+                <select id="opt-space" class="select-clean">
+                  <option value="hex" selected>hex</option>
+                  <option value="rgb">rgb()</option>
+                  <option value="hsl">hsl()</option>
+                </select>
+              </div>
+              <div class="control-item"><input type="checkbox" id="opt-fallback"><label for="opt-fallback">Include solid-colour fallback line</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-repeat"><label for="opt-repeat">Repeating gradient</label></div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Use Gradient Generator in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Pick a type and stops</h3>
+              <p class="step-desc">Linear, radial or conic. Each stop has a colour and a position; add as many as you like, remove any beyond two, and drag the angle slider for linear and conic.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Watch the preview</h3>
+              <p class="step-desc">The preview and the code update live. Switch the output to Tailwind or SVG in Settings, or choose rgb()/hsl() colours.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Copy or export</h3>
+              <p class="step-desc">Copy the code, download it as a .css file, or export the gradient as a PNG in 1920×1080, 1200×630 (social) or 1080×1080.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Gradient Generator — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Which browsers support these gradients?</summary>
+              <p>Linear and radial gradients work everywhere. Conic gradients work in all current browsers (Chrome 69+, Firefox 83+, Safari 12.1+). No vendor prefixes are needed today, so none are added.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What does “Include fallback” do?</summary>
+              <p>It adds a plain <code>background-color</code> line with the first stop’s colour before the gradient, so very old browsers or email clients that ignore gradients still show something sensible.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How does the PNG export render?</summary>
+              <p>The same stops are painted on a canvas with the browser’s own gradient engine at the chosen size, so the PNG matches the preview. Angles and positions are honoured; the image is opaque unless a stop is transparent.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can I use hsl() or named colours?</summary>
+              <p>Yes — type any CSS colour into a stop’s text field (names, rgb(), hsl(), oklch()…). The picker beside it syncs to the parsed value.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is my input sent anywhere?</summary>
+              <p>No. Everything is computed by JavaScript in your browser tab. Nothing is uploaded, logged or stored by Toolity.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="labs"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=3.4"></script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="/scripts/color-common.js?v=1.0"></script>
+  <script src="/scripts/web-common.js?v=1.0"></script>
+  <script src="/labs/gradient-generator/gradient-generator.js?v=1.0"></script>
+</body>
+</html>

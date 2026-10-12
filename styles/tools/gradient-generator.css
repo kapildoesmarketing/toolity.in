@@ -1,0 +1,12 @@
+/* Gradient Generator — stop rows and preview. Container-relative only (rule 35). */
+.gs-row { grid-template-columns: 44px minmax(0, 1fr) 76px 44px; }
+.gs-hex { font-family: var(--font-mono); font-size: 0.84rem; }
+.gs-pos { font-family: var(--font-mono); font-size: 0.84rem; padding-inline: 0.5rem; }
+.web-row-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+.gradient-preview { min-height: 260px; flex: 1; background-color: var(--surface); }
+
+@container (max-width: 420px) {
+  .gs-row { grid-template-columns: 44px minmax(0, 1fr) 44px; }
+  .gs-pos { grid-column: 2; grid-row: 2; }
+  .gs-row .web-row-btn { grid-row: 1 / span 2; grid-column: 3; height: auto; }
+}
