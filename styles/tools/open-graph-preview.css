@@ -1,0 +1,33 @@
+/* Open Graph Preview — social card mock-ups. Adapts to the card container (rule 35), never the viewport. */
+.og-card { border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; background: var(--surface); max-width: 520px; width: 100%; font-family: var(--font-family); }
+.og-card-img { display: block; width: 100%; aspect-ratio: 1.91 / 1; object-fit: cover; background: var(--background); }
+.og-card-img[hidden] { display: none; }
+.og-card-noimg { aspect-ratio: 1.91 / 1; display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 0.82rem; background: repeating-linear-gradient(45deg, var(--background) 0 10px, var(--surface) 10px 20px); }
+.og-card-noimg[hidden] { display: none; }
+.og-card-body { padding: 0.65rem 0.85rem 0.8rem; display: flex; flex-direction: column; gap: 0.2rem; min-width: 0; }
+.og-card-domain { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.02em; color: var(--text-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.og-card-title { font-size: 0.95rem; font-weight: 600; color: var(--text-primary); line-height: 1.3; overflow-wrap: anywhere; }
+.og-card-desc { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.og-card-desc[hidden] { display: none; }
+
+/* Facebook: grey body, domain above title */
+.og-card[data-platform="facebook"] { border-radius: 0; }
+.og-card[data-platform="facebook"] .og-card-body { background: #f0f2f5; }
+[data-theme="dark"] .og-card[data-platform="facebook"] .og-card-body { background: #3a3b3c; }
+
+/* X: rounded 16px, domain below, image-dominant */
+.og-card[data-platform="x"] { border-radius: 16px; }
+.og-card[data-platform="x"] .og-card-body { flex-direction: column-reverse; }
+.og-card[data-platform="x"] .og-card-domain { text-transform: none; }
+
+/* LinkedIn: no description, bolder title */
+.og-card[data-platform="linkedin"] { border-radius: 2px; }
+.og-card[data-platform="linkedin"] .og-card-title { font-size: 1rem; font-weight: 600; }
+
+/* Slack: left accent bar, small square thumbnail on the right of the text */
+.og-card[data-platform="slack"] { border: none; border-left: 4px solid #ddd; border-radius: 0; background: transparent; display: grid; grid-template-columns: minmax(0, 1fr) 80px; gap: 0.6rem; align-items: start; padding-left: 0.75rem; }
+.og-card[data-platform="slack"] .og-card-img, .og-card[data-platform="slack"] .og-card-noimg { grid-column: 2; grid-row: 1; aspect-ratio: 1; border-radius: 8px; font-size: 0.65rem; text-align: center; }
+.og-card[data-platform="slack"] .og-card-body { grid-column: 1; grid-row: 1; padding: 0; }
+.og-card[data-platform="slack"] .og-card-domain { order: -1; text-transform: none; font-weight: 600; color: var(--text-secondary); }
+.og-card[data-platform="slack"] .og-card-title { color: #1264a3; }
+[data-theme="dark"] .og-card[data-platform="slack"] .og-card-title { color: #1d9bd1; }
