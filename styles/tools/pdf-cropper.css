@@ -22,7 +22,7 @@
 
 .pdf-crop-handle {
   position: absolute;
-  width: 22px;   /* touch-friendly on every pointer; no @media in tool CSS (rule 35) */
+  width: 22px;   /* touch-friendly on every pointer; viewport rules stay in main.css (rule 35) */
   height: 22px;
   background: var(--surface-elevated);
   border: 2px solid var(--brand);
