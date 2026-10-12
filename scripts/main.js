@@ -544,6 +544,70 @@
         tags: ['pong', 'game', 'games', 'arcade', 'ping pong', 'paddle', 'retro', 'two player', '2 player', 'play', 'fun']
       },
       {
+        id: 'typing-speed-test',
+        title: 'Typing Speed Test',
+        category: 'Games',
+        url: 'games/typing-speed-test/',
+        icon: 'lucide:keyboard',
+        tags: ["typing speed test","wpm test","typing test","words per minute","keyboard speed","touch typing","game","games"]
+      },
+      {
+        id: 'sudoku',
+        title: 'Sudoku',
+        category: 'Games',
+        url: 'games/sudoku/',
+        icon: 'lucide:grid-3x3',
+        tags: ["sudoku","number puzzle","9x9 sudoku","logic puzzle","daily sudoku","game","games"]
+      },
+      {
+        id: 'minesweeper',
+        title: 'Minesweeper',
+        category: 'Games',
+        url: 'games/minesweeper/',
+        icon: 'lucide:bomb',
+        tags: ["minesweeper","mine sweeper","logic game","puzzle game","windows minesweeper","game","games"]
+      },
+      {
+        id: 'connect-four',
+        title: 'Connect Four',
+        category: 'Games',
+        url: 'games/connect-four/',
+        icon: 'lucide:circle-dot',
+        tags: ["connect four","connect 4","four in a row","board game","2 player game","game","games"]
+      },
+      {
+        id: 'checkers',
+        title: 'Checkers',
+        category: 'Games',
+        url: 'games/checkers/',
+        icon: 'lucide:disc-2',
+        tags: ["checkers","draughts","board game","american checkers","2 player board game","game","games"]
+      },
+      {
+        id: 'chess',
+        title: 'Chess',
+        category: 'Games',
+        url: 'games/chess/',
+        icon: 'lucide:crown',
+        tags: ["chess","online chess","play chess vs computer","2 player chess","chess board","game","games"]
+      },
+      {
+        id: 'sliding-puzzle',
+        title: 'Sliding Puzzle',
+        category: 'Games',
+        url: 'games/sliding-puzzle/',
+        icon: 'lucide:layout-grid',
+        tags: ["sliding puzzle","15 puzzle","8 puzzle","tile puzzle","number slide game","game","games"]
+      },
+      {
+        id: 'solitaire',
+        title: 'Solitaire',
+        category: 'Games',
+        url: 'games/solitaire/',
+        icon: 'lucide:spade',
+        tags: ["solitaire","klondike solitaire","patience card game","playing cards","windows solitaire","game","games"]
+      },
+      {
         id: 'photo-booth',
         title: 'Photo Booth',
         category: 'Labs',

@@ -118,11 +118,19 @@
 ## Games
 
 - [2048](https://toolity.in/games/2048/): Play 2048 online for free: slide tiles with the arrow keys or a swipe, merge equal numbers and reach 2048. Undo, 3×3 / 4×4 / 5×5 boards and a saved best score — no download, no account.
+- [Checkers](https://toolity.in/games/checkers/): Free online Checkers (draughts): 8×8 American rules with mandatory jumps, multi-jump chains, king crowning, α–β computer opponent and 2-player pass-and-play. Runs in your browser.
+- [Chess](https://toolity.in/games/chess/): Free online Chess: play against a fast in-browser α–β engine or 2-player pass-and-play with full legal rules — castling, en passant, pawn promotion, check, checkmate, stalemate and move history. No account, no server.
+- [Connect Four](https://toolity.in/games/connect-four/): Free online Connect Four: drop discs on a 7×6 grid against a smart minimax computer (Easy, Medium, Hard) or pass-and-play with two players. Keyboard columns 1–7, undo and score tally. Runs in your browser.
 - [Flappy Bird](https://toolity.in/games/flappy-bird/): Play Flappy Bird online for free: tap, click or press Space to flap through the pipes. Three difficulties, best score saved on your device. No download, no account — runs in your browser.
+- [Minesweeper](https://toolity.in/games/minesweeper/): Free online Minesweeper: classic 9×9 Beginner, 16×16 Intermediate and 16×30 Expert boards with a guaranteed safe first click, chord-reveal, touch Flag mode, keyboard controls and best-time tracking. In your browser.
 - [Pong](https://toolity.in/games/pong/): Play Pong online for free: vs the computer on three difficulties or two players on one keyboard or touchscreen. First to 5, 7 or 11. No download, no account — runs instantly in your browser.
+- [Sliding Puzzle](https://toolity.in/games/sliding-puzzle/): Free online 15-puzzle (sliding tile puzzle): 3×3 (8-puzzle), 4×4 (15-puzzle) and 5×5 (24-puzzle) boards with guaranteed solvable scrambles, multi-tile slide on click, keyboard controls, move counter and best records. In your browser.
 - [Snake](https://toolity.in/games/snake/): Play Snake online for free: eat, grow and avoid your own tail. Three speeds, solid or wrap-around walls, keyboard or swipe controls, best score saved on your device. No download, no account.
+- [Solitaire](https://toolity.in/games/solitaire/): Free online Klondike Solitaire: classic 7-column patience with Draw 1 or Draw 3, one-click smart move, auto-finish when all cards are face-up, unlimited undo and score/time tracking. Runs in your browser.
+- [Sudoku](https://toolity.in/games/sudoku/): Free online Sudoku: freshly generated Easy, Medium and Hard 9×9 puzzles with guaranteed unique solutions, pencil notes, conflict highlighting, undo and keyboard + touch numpad. Runs in your browser.
 - [Tetris](https://toolity.in/games/tetris/): Play Tetris online for free: 7-bag randomiser, ghost piece, hard drop, next-piece preview and classic scoring. Keyboard or touch, best score saved on your device. No download, no account.
 - [Tic Tac Toe](https://toolity.in/games/tic-tac-toe/): Play Tic Tac Toe online for free: challenge an unbeatable computer, an easy one, or a friend on the same device. Keyboard and touch friendly, no download, no account.
+- [Typing Speed Test](https://toolity.in/games/typing-speed-test/): Free online typing speed test: measure your WPM (words per minute), raw speed and accuracy across 15, 30 or 60 seconds with live character highlighting, optional punctuation and numbers, and personal best tracking. Runs in your browser.
 
 ## Widgets — embeddable widgets for Notion and websites
 
