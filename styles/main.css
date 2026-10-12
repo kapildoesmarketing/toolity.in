@@ -3880,6 +3880,14 @@ body {
 .pdf-result-badge { font-weight: 600; }
 .pdf-result-badge.is-win { color: #15803d; background: rgba(22, 163, 74, 0.1); }
 [data-theme="dark"] .pdf-result-badge.is-win { color: #4ade80; }
+/* PDF batch 2: Images to PDF list thumbs · PDF to Text output · Metadata / Form Filler inline forms · custom size row */
+.pdf-file-thumb { width: 36px; height: 36px; object-fit: cover; border-radius: var(--radius-xs); background: var(--surface-elevated); flex: none; }
+.pdf-text-out { width: 100%; flex: 1 1 auto; min-height: 280px; max-height: 520px; padding: 0.85rem 1rem; border: none; resize: vertical; background: var(--background); color: var(--text-primary); font-family: var(--font-mono); font-size: 0.84rem; line-height: 1.55; outline: none; white-space: pre-wrap; }
+.pdf-text-out[hidden], .pdf-meta-form[hidden], #output-img[hidden] { display: none; }
+.pdf-meta-form { width: 100%; padding: 0.85rem; display: flex; flex-direction: column; gap: 0.85rem; overflow: auto; align-self: stretch; text-align: left; }
+.pdf-two-inputs { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0.5rem; }
+#output-img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; background: #fff; box-shadow: var(--shadow-sm); }
+.pdf-files + #output-img, #output-img + .pdf-files { margin-top: 0.5rem; }
 
 /* ─── Category pages: section headings between tool grids ─── */
 .tools-section-title { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.01em; color: var(--text-primary); margin: 0 0 1.25rem; }

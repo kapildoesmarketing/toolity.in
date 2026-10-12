@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online PDF Cropper | Toolity Docs</title>
+  <link rel="canonical" href="https://toolity.in/docs/pdf-cropper/">
+  <meta name="description" content="Free online PDF cropper: drag a box over a page to trim margins or isolate a region, apply it to one page, a range or the whole document — lossless, in your browser, nothing uploaded.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online PDF Cropper | Toolity Docs">
+  <meta property="og:description" content="Free online PDF cropper: drag a box over a page to trim margins or isolate a region, apply it to one page, a range or the whole document — lossless, in your browser, nothing uploaded.">
+  <meta property="og:url" content="https://toolity.in/docs/pdf-cropper/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=4.2" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=4.2">
+  <link rel="stylesheet" href="/styles/tools/pdf-cropper.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "PDF Cropper",
+        "url": "https://toolity.in/docs/pdf-cropper/",
+        "description": "Free online PDF cropper: drag a box over a page to trim margins or isolate a region, apply it to one page, a range or the whole document — lossless, in your browser, nothing uploaded.",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Docs", "item": "https://toolity.in/docs/" },
+          { "@type": "ListItem", "position": 3, "name": "PDF Cropper", "item": "https://toolity.in/docs/pdf-cropper/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Is cropping lossless?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The tool sets each page's /CropBox, which tells viewers and printers what to show. Content outside stays in the file (hidden); quality and text are untouched." } },
+          { "@type": "Question", "name": "Can I permanently delete what is outside the box?", "acceptedAnswer": { "@type": "Answer", "text": "Not with a lossless crop. If you need the hidden area gone (for privacy), crop here and then run PDF Flattener in Everything mode, which re-renders only the visible region." } },
+          { "@type": "Question", "name": "The pages have different sizes — what does All pages do?", "acceptedAnswer": { "@type": "Answer", "text": "The box is stored as a fraction of the page, so a 10 % margin trim applies proportionally to every page regardless of size or orientation." } },
+          { "@type": "Question", "name": "Why is the box clamped?", "acceptedAnswer": { "@type": "Answer", "text": "A crop box must stay inside the page and be at least 20 pt wide and tall; the handles stop there so you cannot produce an empty page." } },
+          { "@type": "Question", "name": "The tool says my PDF is encrypted — what now?", "acceptedAnswer": { "@type": "Answer", "text": "Password-protected PDFs must be opened with their password before they can be edited. Run them through Unlock PDF first, then come back." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/docs/" class="breadcrumb-link">Docs</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">PDF Cropper</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Docs</span>
+            <h1 class="page-title">PDF Cropper</h1>
+            <p class="page-desc">Drag a crop box over any page and apply it to one page or the whole PDF — lossless margins trimming in your browser.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" data-split="40/60" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge pdf-result-badge" id="result-badge">Drop a PDF to begin</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result" aria-label="Copy result" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download result" aria-label="Download result" disabled>
+                <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                <span>Download</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-open" title="Open result in a new tab" aria-label="Open result in a new tab" disabled>
+                <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
+                <span>Open</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Page</span>
+                <span class="pane-badge" id="source-badge">No file loaded</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content pane-content-between">
+                <div class="media-canvas-viewport pdf-tall">
+                  <div id="dropzone" class="video-dropzone" tabindex="0" role="button" aria-label="Drop PDF here or click to browse">
+                    <input type="file" id="file-input" accept="application/pdf, .pdf">
+                    <div class="video-drop-icon">
+                      <iconify-icon icon="lucide:upload-cloud" width="22" height="22"></iconify-icon>
+                    </div>
+                    <div class="video-drop-title">Drop PDF here or click to browse</div>
+                    <div class="video-drop-subtitle">Any PDF — up to 100 MB</div>
+                  </div>
+                  <div class="pdf-crop-stage" id="crop-stage" hidden>
+                    <canvas id="source-canvas" class="pdf-page-canvas" aria-label="Page preview"></canvas>
+                    <div class="pdf-crop-box" id="crop-box" role="img" aria-label="Crop area">
+                      <span class="pdf-crop-handle" data-h="nw"></span><span class="pdf-crop-handle" data-h="ne"></span>
+                      <span class="pdf-crop-handle" data-h="sw"></span><span class="pdf-crop-handle" data-h="se"></span>
+                    </div>
+                  </div>
+                  <div class="pdf-pager" id="crop-pager" hidden>
+                    <button type="button" class="pdf-thumb-btn" id="btn-prev" aria-label="Previous page"><iconify-icon icon="lucide:chevron-left" width="14" height="14"></iconify-icon></button>
+                    <span id="crop-page-label">Page 1 of 1</span>
+                    <button type="button" class="pdf-thumb-btn" id="btn-next" aria-label="Next page"><iconify-icon icon="lucide:chevron-right" width="14" height="14"></iconify-icon></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Cropped PDF</span>
+                <span class="pane-badge" id="output-badge">Awaiting file</span>
+              </div>
+              <div class="pane-content pane-content-between">
+                <div class="media-canvas-viewport">
+                  <div id="output-empty" class="media-empty-placeholder">
+                    <iconify-icon icon="lucide:file-check" width="32" height="32"></iconify-icon>
+                    <p>The cropped page will appear here</p>
+                  </div>
+                  <canvas id="output-canvas" class="pdf-page-canvas" hidden aria-label="First page of result"></canvas>
+                </div>
+                <div>
+                  <button type="button" id="btn-compress" class="btn-toolbar-sm btn-brand-sm btn-primary-action" disabled>
+                    <iconify-icon icon="lucide:crop" width="16" height="16"></iconify-icon>
+                    <span id="btn-compress-label">Crop</span>
+                  </button>
+                  <div class="slim-progress-bar" id="progress-bar">
+                    <div class="slim-progress-fill" id="progress-fill"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">Apply to all pages · free ratio</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item">
+                <span>Apply to</span>
+                <div class="segmented-group segmented-group-pill" id="seg-scope" role="group" aria-label="Apply crop to">
+                  <button type="button" class="seg-pill active" data-value="all">All pages</button>
+                  <button type="button" class="seg-pill" data-value="this">This page</button>
+                  <button type="button" class="seg-pill" data-value="range">Range</button>
+                </div>
+              </div>
+              
+              <div class="control-item">
+                <label for="opt-pages">Range</label>
+                <input type="text" id="opt-pages" class="input-clean" placeholder="e.g. 2-5, 9" autocomplete="off">
+              </div>
+              <div class="control-item">
+                <label for="opt-ratio">Aspect ratio</label>
+                <select id="opt-ratio" class="select-clean">
+                  <option value="free" selected>Free</option>
+                  <option value="a">A-series (1 : 1.414)</option>
+                  <option value="letter">Letter (8.5 : 11)</option>
+                  <option value="1">Square</option>
+                  <option value="1.7778">16 : 9</option>
+                  <option value="1.3333">4 : 3</option>
+                </select>
+              </div>
+              <div class="control-item">
+                <button type="button" class="btn-toolbar-sm" id="btn-auto" title="Detect the content bounds on this page and set the box to them">
+                  <iconify-icon icon="lucide:scan" width="14" height="14"></iconify-icon><span>Auto-detect margins</span>
+                </button>
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Use PDF Cropper in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Drop a PDF</h3>
+              <p class="step-desc">The first page renders with a crop box over it. Use ‹ › to move to another page; the box keeps its relative position.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Draw the Crop</h3>
+              <p class="step-desc">Drag the box or its corners. Auto-detect margins in Settings snaps the box to the content on the current page — ideal for scans with wide white borders.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Apply & Download</h3>
+              <p class="step-desc">Choose All pages, This page or a Range, then click Crop. The page's crop box is set — nothing is re-rendered, so text stays sharp and selectable.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">PDF Cropper — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Is cropping lossless?</summary>
+              <p>Yes. The tool sets each page's /CropBox, which tells viewers and printers what to show. Content outside stays in the file (hidden); quality and text are untouched.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can I permanently delete what is outside the box?</summary>
+              <p>Not with a lossless crop. If you need the hidden area gone (for privacy), crop here and then run PDF Flattener in Everything mode, which re-renders only the visible region.</p>
+            </details>
+            <details class="faq-item">
+              <summary>The pages have different sizes — what does All pages do?</summary>
+              <p>The box is stored as a fraction of the page, so a 10 % margin trim applies proportionally to every page regardless of size or orientation.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why is the box clamped?</summary>
+              <p>A crop box must stay inside the page and be at least 20 pt wide and tall; the handles stop there so you cannot produce an empty page.</p>
+            </details>
+            <details class="faq-item">
+              <summary>The tool says my PDF is encrypted — what now?</summary>
+              <p>Password-protected PDFs must be opened with their password before they can be edited. Run them through Unlock PDF first, then come back.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="docs"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=3.3"></script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@cantoo/pdf-lib@2.11.1/dist/pdf-lib.min.js" defer></script>
+  <script src="/scripts/pdf-common.js?v=1.1"></script>
+  <script src="/docs/pdf-cropper/pdf-cropper.js?v=1.0"></script>
+</body>
+</html>

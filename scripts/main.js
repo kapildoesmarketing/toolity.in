@@ -896,6 +896,86 @@
         tags: ['youtube', 'thumbnail', 'downloader', 'hd', '1080p', 'image', 'cover', 'shorts', 'video', 'download']
       },
       {
+        id: 'images-to-pdf',
+        title: 'Images to PDF',
+        category: 'Docs',
+        url: 'docs/images-to-pdf/',
+        icon: 'lucide:images',
+        tags: ['images to pdf', 'jpg to pdf', 'png to pdf', 'photo to pdf', 'webp to pdf', 'combine images', 'scan to pdf', 'picture to pdf', 'convert']
+      },
+      {
+        id: 'pdf-to-images',
+        title: 'PDF to Images',
+        category: 'Docs',
+        url: 'docs/pdf-to-images/',
+        icon: 'lucide:image-down',
+        tags: ['pdf to images', 'pdf to png', 'pdf to jpg', 'pdf to webp', 'export pages', 'render pdf', 'convert pdf', 'pdf to image']
+      },
+      {
+        id: 'pdf-to-text',
+        title: 'PDF to Text',
+        category: 'Docs',
+        url: 'docs/pdf-to-text/',
+        icon: 'lucide:file-type',
+        tags: ['pdf to text', 'extract text', 'pdf to txt', 'copy text from pdf', 'text layer', 'convert pdf to text', 'pdf text extractor']
+      },
+      {
+        id: 'pdf-page-numberer',
+        title: 'PDF Page Numberer',
+        category: 'Docs',
+        url: 'docs/pdf-page-numberer/',
+        icon: 'lucide:list-ordered',
+        tags: ['page numbers', 'number pages', 'pdf page numberer', 'add page numbers to pdf', 'pagination', 'footer', 'stamp numbers']
+      },
+      {
+        id: 'pdf-metadata-editor',
+        title: 'PDF Metadata Editor',
+        category: 'Docs',
+        url: 'docs/pdf-metadata-editor/',
+        icon: 'lucide:file-pen-line',
+        tags: ['pdf metadata editor', 'edit pdf title', 'change author', 'pdf properties', 'document info', 'keywords', 'xmp', 'edit metadata']
+      },
+      {
+        id: 'pdf-cropper',
+        title: 'PDF Cropper',
+        category: 'Docs',
+        url: 'docs/pdf-cropper/',
+        icon: 'lucide:crop',
+        tags: ['pdf cropper', 'crop pdf', 'trim margins', 'cropbox', 'cut pdf page', 'remove white space', 'crop pages']
+      },
+      {
+        id: 'pdf-page-resizer',
+        title: 'PDF Page Resizer',
+        category: 'Docs',
+        url: 'docs/pdf-page-resizer/',
+        icon: 'lucide:scaling',
+        tags: ['pdf page resizer', 'resize pdf', 'a4 to letter', 'letter to a4', 'change page size', 'scale pdf', 'paper size', 'a5 to a4']
+      },
+      {
+        id: 'pdf-form-filler',
+        title: 'PDF Form Filler',
+        category: 'Docs',
+        url: 'docs/pdf-form-filler/',
+        icon: 'lucide:clipboard-pen',
+        tags: ['pdf form filler', 'fill pdf form', 'acroform', 'fillable pdf', 'checkbox', 'dropdown', 'complete form', 'flatten form']
+      },
+      {
+        id: 'pdf-flattener',
+        title: 'PDF Flattener',
+        category: 'Docs',
+        url: 'docs/pdf-flattener/',
+        icon: 'lucide:layers',
+        tags: ['pdf flattener', 'flatten pdf', 'flatten form', 'merge annotations', 'rasterize pdf', 'lock pdf', 'non editable', 'print safe']
+      },
+      {
+        id: 'grayscale-pdf',
+        title: 'Grayscale PDF',
+        category: 'Docs',
+        url: 'docs/grayscale-pdf/',
+        icon: 'lucide:contrast',
+        tags: ['grayscale pdf', 'greyscale pdf', 'black and white pdf', 'convert pdf to grayscale', 'desaturate', 'monochrome', 'print friendly']
+      },
+      {
         id: 'cat-widgets',
         title: 'Widgets',
         category: 'Category',

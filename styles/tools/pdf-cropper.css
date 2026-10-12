@@ -1,0 +1,37 @@
+/* PDF Cropper — page stage + draggable crop box. Container-adaptive (rule 35); JS sets the box geometry (live values only). */
+.pdf-crop-stage {
+  position: relative;
+  display: inline-block;
+  line-height: 0;
+  max-width: 100%;
+  margin: 0 auto;
+  user-select: none;
+  touch-action: none;
+}
+.pdf-crop-stage[hidden] { display: none; }
+.pdf-crop-stage .pdf-page-canvas { display: block; max-width: 100%; height: auto; max-height: 440px; }
+
+.pdf-crop-box {
+  position: absolute;
+  border: 2px solid var(--brand);
+  box-shadow: 0 0 0 9999px rgba(23, 25, 28, 0.38);
+  cursor: move;
+  box-sizing: border-box;
+}
+[data-theme="dark"] .pdf-crop-box { box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.55); }
+
+.pdf-crop-handle {
+  position: absolute;
+  width: 22px;   /* touch-friendly on every pointer; no @media in tool CSS (rule 35) */
+  height: 22px;
+  background: var(--surface-elevated);
+  border: 2px solid var(--brand);
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+.pdf-crop-handle[data-h="nw"] { top: -12px; left: -12px; cursor: nwse-resize; }
+.pdf-crop-handle[data-h="ne"] { top: -12px; right: -12px; cursor: nesw-resize; }
+.pdf-crop-handle[data-h="sw"] { bottom: -12px; left: -12px; cursor: nesw-resize; }
+.pdf-crop-handle[data-h="se"] { bottom: -12px; right: -12px; cursor: nwse-resize; }
+
+.pdf-crop-stage + .pdf-pager { padding-top: 0.6rem; }
