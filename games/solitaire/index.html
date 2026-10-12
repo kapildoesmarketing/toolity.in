@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Solitaire | Toolity Games</title>
+  <link rel="canonical" href="https://toolity.in/games/solitaire/">
+  <meta name="description" content="Free online Klondike Solitaire: classic 7-column patience with Draw 1 or Draw 3, one-click smart move, auto-finish when all cards are face-up, unlimited undo and score/time tracking. Runs in your browser.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Solitaire | Toolity Games">
+  <meta property="og:description" content="Free online Klondike Solitaire: classic 7-column patience with Draw 1 or Draw 3, one-click smart move, auto-finish when all cards are face-up, unlimited undo and score/time tracking. Runs in your browser.">
+  <meta property="og:url" content="https://toolity.in/games/solitaire/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=4.4" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=4.4">
+  <link rel="stylesheet" href="/styles/tools/solitaire.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Solitaire",
+        "url": "https://toolity.in/games/solitaire/",
+        "description": "Free online Klondike Solitaire: classic 7-column patience with Draw 1 or Draw 3, one-click smart move, auto-finish when all cards are face-up, unlimited undo and score/time tracking. Runs in your browser.",
+        "applicationCategory": "GameApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Games", "item": "https://toolity.in/games/" },
+          { "@type": "ListItem", "position": 3, "name": "Solitaire", "item": "https://toolity.in/games/solitaire/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "How does one-click smart move decide where a card goes?", "acceptedAnswer": { "@type": "Answer", "text": "For a single top card, it checks if a tableau column (preferring non-empty columns over empty spaces for Kings) or its suit’s foundation can take it; clicking a deeper face-up card moves the whole run starting at that card to a legal tableau column. You can still select-then-click manually if two destinations are legal." } },
+          { "@type": "Question", "name": "What is the difference between Draw 1 and Draw 3?", "acceptedAnswer": { "@type": "Answer", "text": "Draw 1 turns over one stock card at a time, making most deals winnable. Draw 3 turns over three cards in a fan where only the top card is playable — the classic harder rule." } },
+          { "@type": "Question", "name": "When does Auto-finish appear?", "acceptedAnswer": { "@type": "Answer", "text": "The moment the stock and waste are empty (or all remaining cards are face-up in the tableau), every deal is trivially won; pressing Auto-finish animates the rest of the cards up to the foundations." } },
+          { "@type": "Question", "name": "Is every deal guaranteed winnable?", "acceptedAnswer": { "@type": "Answer", "text": "Deals use a true 52-card Fisher–Yates shuffle, matching classic Windows Solitaire — roughly 80% of Draw 1 deals are theoretically solvable." } },
+          { "@type": "Question", "name": "Is anything uploaded or tracked while I play?", "acceptedAnswer": { "@type": "Answer", "text": "No. The game runs entirely in your browser tab. Your best score or win tally is saved only in your browser’s localStorage and cleared when you press Reset." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/games/" class="breadcrumb-link">Games</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Solitaire</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Games</span>
+            <h1 class="page-title">Solitaire</h1>
+            <p class="page-desc">Classic Klondike Solitaire — click a card to send it to the best legal pile, or auto-finish once every card is face-up.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="single" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <div class="segmented-group segmented-group-pill" id="seg-mode" role="group" aria-label="Draw rule">
+                <button type="button" class="seg-pill active" data-value="1" data-default>Draw 1</button>
+                <button type="button" class="seg-pill" data-value="3">Draw 3</button>
+              </div>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-undo" title="Undo last move" aria-label="Undo last move" disabled>
+                <iconify-icon icon="lucide:undo-2" width="14" height="14"></iconify-icon>
+                <span>Undo</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-play" aria-label="New deal">
+                <iconify-icon icon="lucide:play" width="14" height="14" id="play-icon"></iconify-icon>
+                <span id="play-label">New deal</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Game pane -->
+          <div class="split-pane-grid">
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Table</span>
+                <span class="game-score" id="score" aria-live="polite"><span>moves <b id="moves-val">0</b></span><i>·</i><span>time <b id="time-val">0:00</b></span><i>·</i><span>wins <b id="wins-val">0</b></span></span>
+                <span id="status-badge" class="pane-badge">Build A → K by suit</span>
+              </div>
+              <div class="pane-content game-pane-wrap">
+                <div class="game-stage game-stage-wide" id="stage">
+                  <div class="sol-top">
+                    <div class="sol-stock-waste">
+                      <button type="button" class="sol-pile sol-stock" id="stock" aria-label="Stock pile — click to draw"></button>
+                      <div class="sol-pile sol-waste" id="waste" aria-label="Waste pile"></div>
+                    </div>
+                    <div class="sol-foundations" id="foundations" role="group" aria-label="Foundation piles"></div>
+                  </div>
+                  <div class="sol-tableau" id="tableau" role="group" aria-label="Tableau columns"></div>
+                  <div class="game-bar">
+                    <button type="button" class="game-key" id="btn-auto" hidden>Auto-finish</button>
+                  </div>
+                  <div class="game-overlay" id="overlay" hidden>
+                    <strong id="overlay-title">Game over</strong>
+                    <span id="overlay-text">Press Space or New game to play again</span>
+                    <button type="button" class="btn-toolbar-sm" id="overlay-btn" hidden></button>
+                  </div>
+                </div>
+                <p class="form-helper game-hint" id="hint">Click any playable card to move it automatically (or click source then destination) · D draws from stock · Z to undo</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Game options</span>
+                <span class="pane-badge" id="settings-summary">Draw 1 · smart click · unlimited stock passes</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item">
+                <input type="checkbox" id="opt-smart" checked>
+                <label for="opt-smart">One-click smart move (auto-picks destination)</label>
+              </div>
+              <div class="control-item">
+                <input type="checkbox" id="opt-onepass">
+                <label for="opt-onepass">Single pass through stock (Vegas style)</label>
+              </div>
+              <div class="control-item">
+                <input type="checkbox" id="opt-sound" checked>
+                <label for="opt-sound">Sound effects</label>
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+        <!-- ═══════════ 3. GUIDE ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Play Solitaire in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Build descending alternating columns</h3>
+              <p class="step-desc">In the 7 tableau columns, stack cards downward in alternating colours (red on black, black on red). Only a <strong>King</strong> can fill an empty column.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Send Aces up to the four foundations</h3>
+              <p class="step-desc">The four top-right foundations build upward by suit from <strong>Ace to King</strong>. With smart click on, clicking a card sends a single card to its foundation or a legal tableau column in one tap.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Flip every face-down card to unlock Auto-finish</h3>
+              <p class="step-desc">Draw from the top-left stock when stuck (<code>D</code>). As soon as all face-down tableau cards are turned over, the <strong>Auto-finish</strong> button appears to sweep every remaining card home.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 4. REFERENCE ═══════════ -->
+        <section class="reference-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">Reference</span>
+            <h2 class="section-heading-sm">Controls &amp; rules</h2>
+          </div>
+          <div class="formats-table-card">
+            <table class="formats-table">
+              <thead><tr><th>Action</th><th>Keyboard</th><th>Mouse / Touch</th></tr></thead>
+              <tbody>
+                <tr><td>Smart-move a card / stack</td><td>—</td><td>Click / tap the card once</td></tr>
+                <tr><td>Manual two-step move</td><td>—</td><td>Untick Smart move in options, or click card then target pile</td></tr>
+                <tr><td>Draw from stock / recycle waste</td><td><code>D</code></td><td>Click / tap the top-left stock pile</td></tr>
+                <tr><td>Auto-finish open board</td><td><code>A</code></td><td>Tap Auto-finish</td></tr>
+                <tr><td>Undo last move</td><td><code>Z</code></td><td>Tap Undo</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Solitaire — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>How does one-click smart move decide where a card goes?</summary>
+              <p>For a single top card, it checks if a tableau column (preferring non-empty columns over empty spaces for Kings) or its suit’s foundation can take it; clicking a deeper face-up card moves the whole run starting at that card to a legal tableau column. You can still select-then-click manually if two destinations are legal.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What is the difference between Draw 1 and Draw 3?</summary>
+              <p><strong>Draw 1</strong> turns over one stock card at a time, making most deals winnable. <strong>Draw 3</strong> turns over three cards in a fan where only the top card is playable — the classic harder rule.</p>
+            </details>
+            <details class="faq-item">
+              <summary>When does Auto-finish appear?</summary>
+              <p>The moment the stock and waste are empty (or all remaining cards are face-up in the tableau), every deal is trivially won; pressing <strong>Auto-finish</strong> animates the rest of the cards up to the foundations.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is every deal guaranteed winnable?</summary>
+              <p>Deals use a true 52-card Fisher–Yates shuffle, matching classic Windows Solitaire — roughly 80% of Draw 1 deals are theoretically solvable.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is anything uploaded or tracked while I play?</summary>
+              <p>No. The game runs entirely in your browser tab. Your best score or win tally is saved only in your browser’s <code>localStorage</code> and cleared when you press Reset.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="games"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=3.5"></script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="/scripts/game-common.js?v=1.0"></script>
+  <script src="/games/solitaire/solitaire.js?v=1.0"></script>
+</body>
+</html>
