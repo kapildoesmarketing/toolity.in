@@ -76,6 +76,16 @@ const CASES = [
     const r = await call({ inputs: { 'opt-title': 'Diwali Launch', 'opt-to': '2027-11-01T09:00', 'opt-theme': 'dark' } });
     A(/widgets\\/countdown\\/embed\\/\\?/.test(txt(r)) && /title=Diwali\\+Launch/.test(txt(r)), 'embed URL not returned: ' + txt(r).slice(0, 240));
     A(/Done with Toolity\\.in/.test(txt(r)), 'missing credit');`],
+  ['web family: URL cleaner (live)', 'labs/url-cleaner/', `
+    A(pageTool() && pageTool().name === 'toolity_url_cleaner', 'page tool missing');
+    const r = await call({ inputs: { 'url-input': 'https://example.com/a?utm_source=x&id=1' } });
+    A(/https:\\/\\/example\\.com\\/a\\?id=1(\\s|$)/.test(txt(r)) && !/\\?utm_source|&utm_source/.test(txt(r)), 'clean URL not in result: ' + txt(r).slice(0, 240));`],
+  ['web family: contrast checker (colour inputs)', 'labs/contrast-checker/', `
+    const r = await call({ inputs: { 'fg-input': '#777777', 'bg-input': '#ffffff' } });
+    A(/4\\.48:1/.test(txt(r)), 'ratio not in result: ' + txt(r).slice(0, 240));`],
+  ['web family: meta tag extractor (paste + action)', 'labs/meta-tag-extractor/', `
+    const r = await call({ inputs: { 'html-input': '<html lang="en"><head><title>Agent Fixture</title><meta name="description" content="d"></head></html>' } });
+    A(/Agent Fixture/.test(txt(r)), 'title not extracted: ' + txt(r).slice(0, 240));`],
 ];
 
 (async () => {

@@ -38,12 +38,12 @@
 
   <!-- Iconify Icon Component -->
     <!-- Preload Critical Assets -->
-  <link rel="preload" href="/styles/main.css?v=4.2" as="style">
+  <link rel="preload" href="/styles/main.css?v=4.3" as="style">
   <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
 
   <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 
-  <link rel="stylesheet" href="/styles/main.css?v=4.2">
+  <link rel="stylesheet" href="/styles/main.css?v=4.3">
 </head>
 
 <body>
@@ -112,6 +112,9 @@
             <li><strong>Google Tag Manager / Analytics:</strong> We collect anonymous, aggregated page-view statistics (which tools are popular, device type, country) to decide what to build next. This never includes the content you process in a tool. You can block it with any standard content blocker without affecting the tools.</li>
           </ul>
           <p class="prose-text">
+            <strong>Read-only fetch relays (a few Labs tools only):</strong> browsers do not let a page read another website directly. Open Graph Preview, Meta Tag Extractor and Redirect Checker therefore first try a direct request and, when the target site blocks it, send <em>only the URL you typed</em> to a public read-only relay — <a href="https://allorigins.win" target="_blank" rel="noopener noreferrer">allorigins.win</a>, then <a href="https://codetabs.com" target="_blank" rel="noopener noreferrer">codetabs.com</a> — which fetches the page and returns its HTML. The Website Favicon Extractor and YouTube Thumbnail Downloader use <a href="https://images.weserv.nl" target="_blank" rel="noopener noreferrer">images.weserv.nl</a> and allorigins.win the same way to download an image. Those services see the URL and your IP address under their own privacy terms; Toolity sends nothing else and keeps no record. Every one of these tools also works with pasted HTML, which never leaves your browser.
+          </p>
+          <p class="prose-text">
             <strong>AI agents (WebMCP):</strong> if your browser has a built-in AI agent, Toolity tools can be operated by it. Tools still run locally; when an agent passes a file by URL, your browser fetches it directly. Results you ask the agent to read are shared with that agent under its own provider's privacy terms, not Toolity's.
           </p>
         </div>
@@ -151,7 +154,7 @@
   <!-- Global Multi-Column Footer -->
   <div data-include="/components/footer.html"></div>
 
-  <script src="/scripts/main.js?v=3.3"></script>
+  <script src="/scripts/main.js?v=3.4"></script>
 </body>
 
 </html>

@@ -976,6 +976,78 @@
         tags: ['grayscale pdf', 'greyscale pdf', 'black and white pdf', 'convert pdf to grayscale', 'desaturate', 'monochrome', 'print friendly']
       },
       {
+        id: 'url-cleaner',
+        title: 'URL Cleaner',
+        category: 'Labs',
+        url: 'labs/url-cleaner/',
+        icon: 'lucide:eraser',
+        tags: ['url cleaner', 'remove utm', 'strip tracking parameters', 'fbclid', 'gclid', 'clean link', 'unshorten']
+      },
+      {
+        id: 'url-encoder-decoder',
+        title: 'URL Encoder Decoder',
+        category: 'Labs',
+        url: 'labs/url-encoder-decoder/',
+        icon: 'lucide:code-2',
+        tags: ['url encode', 'url decode', 'percent encoding', 'encodeURIComponent', 'urlencode', 'escape']
+      },
+      {
+        id: 'open-graph-preview',
+        title: 'Open Graph Preview',
+        category: 'Labs',
+        url: 'labs/open-graph-preview/',
+        icon: 'lucide:share-2',
+        tags: ['open graph preview', 'og preview', 'social share preview', 'twitter card', 'link preview', 'og:image', 'unfurl']
+      },
+      {
+        id: 'meta-tag-extractor',
+        title: 'Meta Tag Extractor',
+        category: 'Labs',
+        url: 'labs/meta-tag-extractor/',
+        icon: 'lucide:tags',
+        tags: ['meta tag extractor', 'meta tags checker', 'seo meta tags', 'canonical', 'robots meta', 'og tags', 'twitter card tags']
+      },
+      {
+        id: 'redirect-checker',
+        title: 'Redirect Checker',
+        category: 'Labs',
+        url: 'labs/redirect-checker/',
+        icon: 'lucide:corner-down-right',
+        tags: ['redirect checker', 'unshorten url', 'link expander', 'bit.ly expander', 'final url', '301 302 check', 'where does this link go']
+      },
+      {
+        id: 'gradient-generator',
+        title: 'Gradient Generator',
+        category: 'Labs',
+        url: 'labs/gradient-generator/',
+        icon: 'lucide:blend',
+        tags: ['gradient generator', 'css gradient', 'linear gradient', 'radial gradient', 'conic gradient', 'tailwind gradient', 'gradient png']
+      },
+      {
+        id: 'color-palette-generator',
+        title: 'Color Palette Generator',
+        category: 'Labs',
+        url: 'labs/color-palette-generator/',
+        icon: 'lucide:palette',
+        tags: ['color palette generator', 'colour palette', 'complementary colors', 'analogous', 'triadic', 'shades tints', 'css variables palette']
+      },
+      {
+        id: 'contrast-checker',
+        title: 'Contrast Checker',
+        category: 'Labs',
+        url: 'labs/contrast-checker/',
+        icon: 'lucide:contrast',
+        tags: ['contrast checker', 'wcag contrast', 'color contrast ratio', 'accessibility', 'aa aaa', 'a11y colors']
+      },
+      {
+        id: 'color-converter',
+        title: 'Color Converter',
+        category: 'Labs',
+        url: 'labs/color-converter/',
+        icon: 'lucide:pipette',
+        tags: ['color converter', 'hex to rgb', 'rgb to hex', 'hsl to hex', 'cmyk', 'oklch', 'hwb', 'color code converter']
+      },
+      {
         id: 'cat-widgets',
         title: 'Widgets',
         category: 'Category',
