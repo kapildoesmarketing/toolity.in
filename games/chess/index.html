@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Chess | Toolity Games</title>
+  <link rel="canonical" href="https://toolity.in/games/chess/">
+  <meta name="description" content="Free online Chess: play against a fast in-browser α–β engine or 2-player pass-and-play with full legal rules — castling, en passant, pawn promotion, check, checkmate, stalemate and move history. No account, no server.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Chess | Toolity Games">
+  <meta property="og:description" content="Free online Chess: play against a fast in-browser α–β engine or 2-player pass-and-play with full legal rules — castling, en passant, pawn promotion, check, checkmate, stalemate and move history. No account, no server.">
+  <meta property="og:url" content="https://toolity.in/games/chess/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=4.4" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=4.4">
+  <link rel="stylesheet" href="/styles/tools/chess.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Chess",
+        "url": "https://toolity.in/games/chess/",
+        "description": "Free online Chess: play against a fast in-browser α–β engine or 2-player pass-and-play with full legal rules — castling, en passant, pawn promotion, check, checkmate, stalemate and move history. No account, no server.",
+        "applicationCategory": "GameApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Games", "item": "https://toolity.in/games/" },
+          { "@type": "ListItem", "position": 3, "name": "Chess", "item": "https://toolity.in/games/chess/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Are all official chess rules enforced?", "acceptedAnswer": { "@type": "Answer", "text": "Yes: king safety (no moving into or leaving yourself in check), kingside and queenside castling (blocked if the king is in check, passes through check, or either piece has moved), en passant, pawn promotion to Q/R/B/N, checkmate, stalemate and the 50-move / threefold-repetition draw rules." } },
+          { "@type": "Question", "name": "How does the computer evaluate positions?", "acceptedAnswer": { "@type": "Answer", "text": "It uses material balance plus piece-square tables (encouraging centre control, knight outposts, king safety and advanced pawns) searched with alpha–beta pruning and capture ordering — all in ~150 lines of JavaScript with no external engine." } },
+          { "@type": "Question", "name": "Can I play as Black?", "acceptedAnswer": { "@type": "Answer", "text": "Open Game options and set “Play as” to Black; the board flips automatically so your pieces sit at the bottom." } },
+          { "@type": "Question", "name": "Why can’t I castle right now?", "acceptedAnswer": { "@type": "Answer", "text": "Castling is legal only when neither the king nor the chosen rook has moved, every square between them is empty, the king is not currently in check, and the king does not pass through or land on an attacked square." } },
+          { "@type": "Question", "name": "Is anything uploaded or tracked while I play?", "acceptedAnswer": { "@type": "Answer", "text": "No. The game runs entirely in your browser tab. Your best score or win tally is saved only in your browser’s localStorage and cleared when you press Reset." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/games/" class="breadcrumb-link">Games</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Chess</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Games</span>
+            <h1 class="page-title">Chess</h1>
+            <p class="page-desc">Full legal chess in your browser — castling, en passant, promotion, checkmate — against the computer or a friend.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="single" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <div class="segmented-group segmented-group-pill" id="seg-mode" role="group" aria-label="Players">
+                <button type="button" class="seg-pill active" data-value="cpu" data-default>1P vs CPU</button>
+                <button type="button" class="seg-pill" data-value="2p">2 Players</button>
+              </div>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-undo" title="Undo last move" aria-label="Undo last move" disabled>
+                <iconify-icon icon="lucide:undo-2" width="14" height="14"></iconify-icon>
+                <span>Undo</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-play" aria-label="New game">
+                <iconify-icon icon="lucide:play" width="14" height="14" id="play-icon"></iconify-icon>
+                <span id="play-label">New game</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Game pane -->
+          <div class="split-pane-grid">
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Match</span>
+                <span class="game-score" id="score" aria-live="polite"><span id="cap-w" title="Captured by White"></span><i>·</i><span id="cap-b" title="Captured by Black"></span><i>·</i><span>move <b id="move-val">1</b></span></span>
+                <span id="status-badge" class="pane-badge">White to move</span>
+              </div>
+              <div class="pane-content game-pane-wrap">
+                <div class="game-stage game-stage-wide" id="stage">
+                  <div class="chess-layout">
+                    <div class="chess-board-wrap">
+                      <div class="chess-board" id="board" role="grid" aria-label="Chess 8 by 8 board"></div>
+                      <div class="chess-promo" id="promo" hidden role="dialog" aria-label="Promote pawn to">
+                        <span>Promote to:</span>
+                        <button type="button" class="game-key" data-promo="q" title="Queen">♕</button>
+                        <button type="button" class="game-key" data-promo="r" title="Rook">♖</button>
+                        <button type="button" class="game-key" data-promo="b" title="Bishop">♗</button>
+                        <button type="button" class="game-key" data-promo="n" title="Knight">♘</button>
+                      </div>
+                    </div>
+                    <div class="chess-side">
+                      <div class="chess-side-head">Moves</div>
+                      <ol class="chess-moves" id="moves"></ol>
+                    </div>
+                  </div>
+                  <div class="game-overlay" id="overlay" hidden>
+                    <strong id="overlay-title">Game over</strong>
+                    <span id="overlay-text">Press Space or New game to play again</span>
+                    <button type="button" class="btn-toolbar-sm" id="overlay-btn" hidden></button>
+                  </div>
+                </div>
+                <p class="form-helper game-hint" id="hint">Click a piece to see its legal moves · Click a highlighted square to move · Arrow keys + Space/Enter · Z to undo</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Game options</span>
+                <span class="pane-badge" id="settings-summary">1P vs CPU · Club · play as White</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item">
+                <label for="opt-diff">Computer</label>
+                <select id="opt-diff" class="select-clean">
+                  <option value="1">Casual (fast)</option>
+                  <option value="2">Standard</option>
+                  <option value="3" selected>Club (3-ply)</option>
+                </select>
+              </div>
+              <div class="control-item">
+                <label for="opt-side">Play as</label>
+                <select id="opt-side" class="select-clean">
+                  <option value="w" selected>White</option>
+                  <option value="b">Black</option>
+                </select>
+              </div>
+              <div class="control-item">
+                <input type="checkbox" id="opt-flip">
+                <label for="opt-flip">Flip board (Black at bottom)</label>
+              </div>
+              <div class="control-item">
+                <input type="checkbox" id="opt-sound" checked>
+                <label for="opt-sound">Sound effects</label>
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+        <!-- ═══════════ 3. GUIDE ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Play Chess in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Select a piece</h3>
+              <p class="step-desc">Click any of your pieces to see every strictly legal destination — moves that would leave your king in check are filtered out automatically.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Play special moves naturally</h3>
+              <p class="step-desc">Castle by moving your king two squares toward the rook; capture <em>en passant</em> by moving your pawn diagonally into the passed square; promote a pawn on the 8th rank by choosing Queen, Rook, Bishop or Knight.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Read the move list & undo</h3>
+              <p class="step-desc">Every move is recorded in algebraic notation beside the board. Press <strong>Undo</strong> (<code>Z</code>) to take back a full turn at any time.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 4. REFERENCE ═══════════ -->
+        <section class="reference-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">Reference</span>
+            <h2 class="section-heading-sm">Controls &amp; rules</h2>
+          </div>
+          <div class="formats-table-card">
+            <table class="formats-table">
+              <thead><tr><th>Action</th><th>Keyboard</th><th>Mouse / Touch</th></tr></thead>
+              <tbody>
+                <tr><td>Select & move</td><td><code>←</code> <code>→</code> <code>↑</code> <code>↓</code> then <code>Space</code> / <code>Enter</code></td><td>Click / tap piece, then destination</td></tr>
+                <tr><td>Castle</td><td>Select King → move 2 squares left or right</td><td>Click King, then g1/c1 (or g8/c8)</td></tr>
+                <tr><td>Promote pawn</td><td>Click ♕ ♖ ♗ ♘ in the promotion bar</td><td>Tap desired piece</td></tr>
+                <tr><td>Undo turn</td><td><code>Z</code></td><td>Tap Undo</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Chess — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Are all official chess rules enforced?</summary>
+              <p>Yes: king safety (no moving into or leaving yourself in check), kingside and queenside castling (blocked if the king is in check, passes through check, or either piece has moved), en passant, pawn promotion to Q/R/B/N, checkmate, stalemate and the 50-move / threefold-repetition draw rules.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How does the computer evaluate positions?</summary>
+              <p>It uses material balance plus piece-square tables (encouraging centre control, knight outposts, king safety and advanced pawns) searched with alpha–beta pruning and capture ordering — all in ~150 lines of JavaScript with no external engine.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can I play as Black?</summary>
+              <p>Open <strong>Game options</strong> and set “Play as” to Black; the board flips automatically so your pieces sit at the bottom.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why can’t I castle right now?</summary>
+              <p>Castling is legal only when neither the king nor the chosen rook has moved, every square between them is empty, the king is not currently in check, and the king does not pass through or land on an attacked square.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is anything uploaded or tracked while I play?</summary>
+              <p>No. The game runs entirely in your browser tab. Your best score or win tally is saved only in your browser’s <code>localStorage</code> and cleared when you press Reset.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="games"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=3.5"></script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="/scripts/game-common.js?v=1.0"></script>
+  <script src="/games/chess/chess.js?v=1.0"></script>
+</body>
+</html>
