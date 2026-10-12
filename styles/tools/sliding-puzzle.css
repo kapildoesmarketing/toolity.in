@@ -1,0 +1,65 @@
+/* Sliding Puzzle — 3×3 / 4×4 / 5×5 grid */
+
+.sp-board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.45rem;
+  width: 100%;
+  max-width: 340px;
+  aspect-ratio: 1;
+  padding: 0.55rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  user-select: none;
+  touch-action: manipulation;
+}
+.sp-board[data-n="3"] { grid-template-columns: repeat(3, 1fr); max-width: 300px; }
+.sp-board[data-n="4"] { grid-template-columns: repeat(4, 1fr); max-width: 340px; }
+.sp-board[data-n="5"] { grid-template-columns: repeat(5, 1fr); max-width: 360px; gap: 0.35rem; padding: 0.45rem; }
+
+.sp-tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: clamp(1rem, 3.6cqi, 1.35rem);
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: var(--shadow-xs);
+  transition: transform 90ms var(--ease-out), background 120ms var(--ease-out), border-color 120ms var(--ease-out), color 120ms var(--ease-out);
+  padding: 0;
+}
+.sp-board[data-n="5"] .sp-tile {
+  font-size: clamp(0.875rem, 3cqi, 1.1rem);
+}
+.sp-tile:hover:not(.is-gap) {
+  border-color: var(--brand-primary);
+  transform: translateY(-1px);
+}
+.sp-tile:focus-visible {
+  outline: 2px solid var(--brand-primary);
+  outline-offset: -2px;
+}
+.sp-tile.is-home {
+  background: var(--brand-subtle);
+  border-color: var(--brand-border);
+  color: var(--brand-primary);
+}
+.sp-tile.is-gap {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  cursor: default;
+  pointer-events: none;
+}
+
+@container (max-width: 400px) {
+  .sp-board[data-n="5"] { gap: 0.25rem; padding: 0.35rem; }
+}
