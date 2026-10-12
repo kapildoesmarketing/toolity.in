@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Contrast Checker | Toolity Labs</title>
+  <link rel="canonical" href="https://toolity.in/labs/contrast-checker/">
+  <meta name="description" content="Free online WCAG contrast checker: enter a text and background colour to get the contrast ratio, AA/AAA pass-fail for normal text, large text and UI components, a live sample and an automatic fix suggestion. In your browser.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Contrast Checker | Toolity Labs">
+  <meta property="og:description" content="Free online WCAG contrast checker: enter a text and background colour to get the contrast ratio, AA/AAA pass-fail for normal text, large text and UI components, a live sample and an automatic fix suggestion. In your browser.">
+  <meta property="og:url" content="https://toolity.in/labs/contrast-checker/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=4.3" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=4.3">
+  <link rel="stylesheet" href="/styles/tools/contrast-checker.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Contrast Checker",
+        "url": "https://toolity.in/labs/contrast-checker/",
+        "description": "Free online WCAG contrast checker: enter a text and background colour to get the contrast ratio, AA/AAA pass-fail for normal text, large text and UI components, a live sample and an automatic fix suggestion. In your browser.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Labs", "item": "https://toolity.in/labs/" },
+          { "@type": "ListItem", "position": 3, "name": "Contrast Checker", "item": "https://toolity.in/labs/contrast-checker/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "What do the thresholds mean?", "acceptedAnswer": { "@type": "Answer", "text": "WCAG 2.2: normal text needs 4.5:1 for AA and 7:1 for AAA; large text (≥24px, or ≥19px bold) needs 3:1 for AA and 4.5:1 for AAA; non-text UI parts such as input borders and icons need 3:1. The ratio is computed from relative luminance exactly as the spec defines." } },
+          { "@type": "Question", "name": "Does semi-transparent text work?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. A text colour with alpha is composited over the background first, then measured — the same thing your screen does. Transparent backgrounds are composited over white." } },
+          { "@type": "Question", "name": "How is the fix colour chosen?", "acceptedAnswer": { "@type": "Answer", "text": "The hue and saturation stay the same; lightness is moved step by step away from the background until the target ratio is met. It is the smallest change that passes, not necessarily the prettiest — treat it as a starting point." } },
+          { "@type": "Question", "name": "Is passing AA enough?", "acceptedAnswer": { "@type": "Answer", "text": "AA is the legal baseline in most jurisdictions. AAA is recommended for body text people read for long stretches. Also remember contrast is only one check — colour should never be the only way information is conveyed." } },
+          { "@type": "Question", "name": "Is my input sent anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. Everything is computed by JavaScript in your browser tab. Nothing is uploaded, logged or stored by Toolity." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/labs/" class="breadcrumb-link">Labs</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Contrast Checker</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Labs</span>
+            <h1 class="page-title">Contrast Checker</h1>
+            <p class="page-desc">Check text and background colours against WCAG AA and AAA — ratio, pass/fail for every size, and a one-click fix.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" data-split="40/60" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge web-status-badge" id="status-badge">Enter two colours</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result" aria-label="Copy result" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download result" aria-label="Download result" disabled>
+                <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                <span>Download</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-open" title="Open result in a new tab" aria-label="Open result in a new tab" disabled>
+                <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
+                <span>Open</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Colours</span>
+                <span class="pane-badge" id="input-badge">—</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content web-form">
+                <div class="form-group">
+                  <label class="form-label" for="fg-input"><span>Text colour</span></label>
+                  <div class="web-inline">
+                    <input type="text" id="fg-input" class="input-clean" placeholder="#333333, rgb(…), hsl(…), navy…" spellcheck="false" autocomplete="off" autocapitalize="off">
+                    <input type="color" id="fg-pick" class="web-color-input" aria-label="Text colour picker" value="#000000">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="bg-input"><span>Background colour</span></label>
+                  <div class="web-inline">
+                    <input type="text" id="bg-input" class="input-clean" placeholder="#ffffff, white…" spellcheck="false" autocomplete="off" autocapitalize="off">
+                    <input type="color" id="bg-pick" class="web-color-input" aria-label="Background colour picker" value="#000000">
+                  </div>
+                </div>
+                <button type="button" class="btn-toolbar-sm" id="btn-swap"><iconify-icon icon="lucide:arrow-up-down" width="14" height="14"></iconify-icon><span>Swap colours</span></button>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Result</span>
+                <span class="pane-badge" id="output-badge">—</span>
+              </div>
+              <div class="pane-content web-output-pane">
+                <div class="pane-empty" id="output-empty">
+                  <iconify-icon icon="lucide:contrast"></iconify-icon>
+                  <span>The contrast ratio and WCAG results will appear here</span>
+                </div>
+                <div class="web-output" id="output-content" hidden>
+                  <div class="web-preview" id="output-sample" aria-label="Sample text preview">
+                    <p class="cc-sample-large" id="sample-large">Large text — 24px regular or 19px bold</p>
+                    <p class="cc-sample-normal" id="sample-normal">Normal body text at 16px. The quick brown fox jumps over the lazy dog, 0123456789.</p>
+                    <span class="cc-sample-ui" id="sample-ui">UI component</span>
+                  </div>
+                  <div class="web-inline">
+                    <div class="web-big" id="output-ratio">—</div>
+                    <span class="web-tag" id="output-grade"></span>
+                  </div>
+                  <div class="web-grid-2" id="output-grid"></div>
+                  <div class="web-stat" id="output-fix" hidden></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">Fix targets AA</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item">
+                <label for="opt-target">Suggested fix should reach</label>
+                <select id="opt-target" class="select-clean">
+                  <option value="4.5" selected>AA normal text (4.5:1)</option>
+                  <option value="7">AAA normal text (7:1)</option>
+                  <option value="3">AA large text / UI (3:1)</option>
+                </select>
+              </div>
+              <div class="control-item">
+                <label for="opt-fix-side">Adjust</label>
+                <select id="opt-fix-side" class="select-clean">
+                  <option value="fg" selected>text colour</option>
+                  <option value="bg">background colour</option>
+                </select>
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Use Contrast Checker in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Enter both colours</h3>
+              <p class="step-desc">Text colour and background — any CSS colour string or the picker. The sample on the right repaints instantly.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Read the verdict</h3>
+              <p class="step-desc">The ratio is shown big, with pass/fail badges for AA and AAA at normal text, large text and UI component thresholds (4.5:1, 3:1, 7:1).</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Apply the fix</h3>
+              <p class="step-desc">If it fails, a nearest passing colour is suggested — same hue, lightness nudged until it meets the target in Settings. Press <strong>Use this</strong> to apply it.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Contrast Checker — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>What do the thresholds mean?</summary>
+              <p>WCAG 2.2: normal text needs 4.5:1 for AA and 7:1 for AAA; large text (≥24px, or ≥19px bold) needs 3:1 for AA and 4.5:1 for AAA; non-text UI parts such as input borders and icons need 3:1. The ratio is computed from relative luminance exactly as the spec defines.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Does semi-transparent text work?</summary>
+              <p>Yes. A text colour with alpha is composited over the background first, then measured — the same thing your screen does. Transparent backgrounds are composited over white.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How is the fix colour chosen?</summary>
+              <p>The hue and saturation stay the same; lightness is moved step by step away from the background until the target ratio is met. It is the smallest change that passes, not necessarily the prettiest — treat it as a starting point.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is passing AA enough?</summary>
+              <p>AA is the legal baseline in most jurisdictions. AAA is recommended for body text people read for long stretches. Also remember contrast is only one check — colour should never be the only way information is conveyed.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is my input sent anywhere?</summary>
+              <p>No. Everything is computed by JavaScript in your browser tab. Nothing is uploaded, logged or stored by Toolity.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="labs"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=3.4"></script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="/scripts/color-common.js?v=1.0"></script>
+  <script src="/scripts/web-common.js?v=1.0"></script>
+  <script src="/labs/contrast-checker/contrast-checker.js?v=1.0"></script>
+</body>
+</html>
