@@ -1,0 +1,7 @@
+/* Connect Four — 7×6 disc grid. Container-relative only (rule 35). */
+.c4-board { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; width: min(100%, 448px); aspect-ratio: 7 / 6; padding: 10px; border-radius: var(--radius-md); background: var(--border); }
+.c4-cell { border: none; border-radius: 50%; background: var(--surface); cursor: pointer; padding: 0; position: relative; transition: transform .12s, background-color .15s; box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.14); }
+.c4-cell.is-aim { box-shadow: inset 0 0 0 2px var(--brand); }
+.c4-cell[data-p="1"] { background: #ef4444; box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.22); }
+.c4-cell[data-p="2"] { background: #facc15; box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.22); }
+.c4-cell.is-win { outline: 3px solid var(--text-primary); outline-offset: 2px; transform: scale(1.05); }
