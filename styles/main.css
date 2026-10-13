@@ -4143,3 +4143,15 @@ body {
 @media (pointer: coarse) {
   .game-key { min-width: 44px; min-height: 44px; font-size: 1rem; }
 }
+
+/* ═══════════ Scrollbars — thin brand-orange thumb on a clear track, every inner scroll area (EQ bank, lists, tables, panes) ═══════════
+ * Designed by Kapil Pidhwani: standard scrollbar-color/-width (Chrome 121+, Firefox) with the ::-webkit-scrollbar fallback for Safari.
+ * Pills/tabs that hide their bar (.segmented-group, .type-tabs-scrollable) keep scrollbar-width: none — their class rules win on specificity.
+ * The page's own scrollbar is left native. */
+body * { scrollbar-width: thin; scrollbar-color: color-mix(in srgb, var(--brand) 55%, transparent) transparent; }
+body *:hover { scrollbar-color: var(--brand) transparent; }
+body *::-webkit-scrollbar { width: 6px; height: 6px; }
+body *::-webkit-scrollbar-track { background: transparent; }
+body *::-webkit-scrollbar-thumb { background: color-mix(in srgb, var(--brand) 55%, transparent); border-radius: 999px; }
+body *::-webkit-scrollbar-thumb:hover { background: var(--brand); }
+body *::-webkit-scrollbar-corner { background: transparent; }

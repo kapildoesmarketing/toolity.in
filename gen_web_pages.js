@@ -9,7 +9,7 @@ const only = process.argv[2];
 const CAT = 'labs', CAT_LABEL = 'Labs';
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const jsonStr = (s) => JSON.stringify(String(s).replace(/<[^>]+>/g, ''));
-const MAIN_V = '3.6', CSS_V = '4.5';
+const MAIN_V = '3.6', CSS_V = '4.6';
 const LIBS = { color: '  <script src="/scripts/color-common.js?v=1.0"></script>\n' };
 
 function downloadBtn(t) {
