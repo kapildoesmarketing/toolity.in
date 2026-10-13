@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Beat / BPM Detector | Toolity Media</title>
+  <link rel="canonical" href="https://toolity.in/media/bpm-detector/">
+  <meta name="description" content="Free online BPM detector: find the tempo of any song in beats per minute from an MP3, WAV or M4A, check it with a click track or tap tempo, and download the click mix. In your browser — no upload.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Beat / BPM Detector | Toolity Media">
+  <meta property="og:description" content="Free online BPM detector: find the tempo of any song in beats per minute from an MP3, WAV or M4A, check it with a click track or tap tempo, and download the click mix. In your browser — no upload.">
+  <meta property="og:url" content="https://toolity.in/media/bpm-detector/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=4.5" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=4.5">
+  <link rel="stylesheet" href="/styles/tools/bpm-detector.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Beat / BPM Detector",
+        "url": "https://toolity.in/media/bpm-detector/",
+        "description": "Free online BPM detector: find the tempo of any song in beats per minute from an MP3, WAV or M4A, check it with a click track or tap tempo, and download the click mix. In your browser — no upload.",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Media", "item": "https://toolity.in/media/" },
+          { "@type": "ListItem", "position": 3, "name": "Beat / BPM Detector", "item": "https://toolity.in/media/bpm-detector/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Is my audio uploaded anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. The file is decoded by your browser's Web Audio engine, processed on your device and encoded in the page. Nothing is sent to a server." } },
+          { "@type": "Question", "name": "How is the tempo detected?", "acceptedAnswer": { "@type": "Answer", "text": "The tool builds an onset curve (where the energy jumps — kicks, snares, strums), then autocorrelates it to find the most regular beat spacing, refined to a decimal." } },
+          { "@type": "Question", "name": "Why is the result half or double the real BPM?", "acceptedAnswer": { "@type": "Answer", "text": "A 70 BPM song and a 140 BPM song share the same beat grid. Pick the expected range in Settings to tell the detector which one you mean." } },
+          { "@type": "Question", "name": "How accurate is it?", "acceptedAnswer": { "@type": "Answer", "text": "Songs with a steady drum beat are usually within ±0.5 BPM. Live recordings with drifting tempo, rubato classical music or beatless ambient tracks are unreliable — the confidence score drops for those." } },
+          { "@type": "Question", "name": "What is the click track for?", "acceptedAnswer": { "@type": "Answer", "text": "It is the song with a metronome mixed on top at the detected tempo and phase. If the clicks line up you can trust the number; you can download it for practice." } },
+          { "@type": "Question", "name": "How does tap tempo work?", "acceptedAnswer": { "@type": "Answer", "text": "Tap the button (or press T) on each beat. After four taps it averages the gaps; stop for 2 seconds to start over." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/media/" class="breadcrumb-link">Media</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Beat / BPM Detector</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Media</span>
+            <h1 class="page-title">Beat / BPM Detector</h1>
+            <p class="page-desc">Find a song's tempo in seconds, hear a click track laid over it to confirm, or tap along — all in your browser.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" data-split="40/60" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge" id="result-badge">Drop a file to begin</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy the BPM" aria-label="Copy the BPM" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download the song with the click track" aria-label="Download the song with the click track" disabled>
+                <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                <span>Download</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Source</span>
+                <span class="pane-badge" id="source-badge">No file loaded</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content pane-content-between">
+                <div class="media-canvas-viewport">
+                  <div id="dropzone" class="video-dropzone" tabindex="0" role="button" aria-label="Drop an audio file here or click to browse">
+                    <input type="file" id="file-input" accept="audio/*, .mp3, .wav, .m4a, .aac, .ogg, .opus, .flac, .weba, .webm">
+                    <div class="video-drop-icon">
+                      <iconify-icon icon="lucide:upload-cloud" width="22" height="22"></iconify-icon>
+                    </div>
+                    <div class="video-drop-title">Drop an audio file here or click to browse</div>
+                    <div class="video-drop-subtitle">MP3, WAV, M4A, OGG, FLAC — up to 200 MB</div>
+                  </div>
+                  <div id="source-wrap" class="aud-player" hidden>
+                    <canvas id="source-wave" class="aud-wave" aria-label="Source waveform"></canvas>
+                    <audio id="source-audio" controls preload="metadata"></audio>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Tempo</span>
+                <span class="pane-badge" id="output-badge">Awaiting file</span>
+              </div>
+              <div class="pane-content pane-content-between">
+                <div class="media-canvas-viewport">
+                  <div id="output-empty" class="media-empty-placeholder">
+                    <iconify-icon icon="lucide:activity" width="32" height="32"></iconify-icon>
+                    <p>The tempo appears here</p>
+                  </div>
+                  <div id="output-wrap" class="aud-player" hidden>
+                    <div class="bpm-readout"><strong id="bpm-value">—</strong><span>BPM</span></div>
+                    <div class="bpm-sub" id="bpm-sub"></div>
+                    <audio id="output-audio" controls></audio>
+                  </div>
+                </div>
+                <div>
+                  <div class="bpm-tap-row">
+                    <button type="button" class="btn-toolbar-sm" id="btn-tap" title="Tap along to the beat (or press T)">Tap tempo</button>
+                    <span class="pane-badge" id="tap-badge">Tap 4+ times</span>
+                  </div>
+                  <button type="button" id="btn-compress" class="btn-toolbar-sm btn-brand-sm btn-primary-action" disabled>
+                    <iconify-icon icon="lucide:activity" width="16" height="16"></iconify-icon>
+                    <span id="btn-compress-label">Detect BPM</span>
+                  </button>
+                  <div class="slim-progress-bar" id="progress-bar">
+                    <div class="slim-progress-fill" id="progress-fill"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">80–160 BPM · Click −6 dB · MP3 · 192 kbps</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item">
+                <label for="opt-range">Expected tempo</label>
+                <select id="opt-range" class="select-clean">
+                  <option value="60">60–120 BPM (ballads, hip-hop)</option>
+                  <option value="80" selected>80–160 BPM (most music)</option>
+                  <option value="100">100–200 BPM (dance, drum & bass)</option>
+                </select>
+              </div>
+              <div class="control-item">
+                <label for="opt-click">Click track level</label>
+                <input type="range" id="opt-click" class="range-slider-clean" min="-24" max="0" step="1" value="-6">
+                <span class="range-val-badge" id="opt-click-val">−6 dB</span>
+              </div>
+              <div class="control-item">
+                <label for="opt-out">Output format</label>
+                <select id="opt-out" class="select-clean">
+                  <option value="mp3-128">MP3 · 128 kbps</option>
+                  <option value="mp3-192" selected>MP3 · 192 kbps</option>
+                  <option value="mp3-320">MP3 · 320 kbps</option>
+                  <option value="wav">WAV · lossless</option>
+                </select>
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Use Beat / BPM Detector in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Drop a song</h3>
+              <p class="step-desc">Drag an MP3, WAV, M4A or FLAC onto the left pane.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Detect</h3>
+              <p class="step-desc">Click <strong>Detect BPM</strong>. The tempo appears with a confidence score and a click track laid over the song.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Confirm</h3>
+              <p class="step-desc">Play the click mix — if the clicks sit on the beat, the BPM is right. Not sure? Tap along with <strong>Tap tempo</strong>.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Beat / BPM Detector — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Is my audio uploaded anywhere?</summary>
+              <p>No. The file is decoded by your browser's Web Audio engine, processed on your device and encoded in the page. Nothing is sent to a server.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How is the tempo detected?</summary>
+              <p>The tool builds an onset curve (where the energy jumps — kicks, snares, strums), then autocorrelates it to find the most regular beat spacing, refined to a decimal.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why is the result half or double the real BPM?</summary>
+              <p>A 70 BPM song and a 140 BPM song share the same beat grid. Pick the expected range in Settings to tell the detector which one you mean.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How accurate is it?</summary>
+              <p>Songs with a steady drum beat are usually within ±0.5 BPM. Live recordings with drifting tempo, rubato classical music or beatless ambient tracks are unreliable — the confidence score drops for those.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What is the click track for?</summary>
+              <p>It is the song with a metronome mixed on top at the detected tempo and phase. If the clicks line up you can trust the number; you can download it for practice.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How does tap tempo work?</summary>
+              <p>Tap the button (or press T) on each beat. After four taps it averages the gaps; stop for 2 seconds to start over.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="media"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=3.6"></script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="/scripts/audio-common.js?v=1.1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lamejs@1.2.1/lame.all.js" defer></script>
+  <script src="/media/bpm-detector/bpm-detector.js?v=1.0"></script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+/* Designed by Kapil Pidhwani: BPM Detector — big tempo readout above the click-track player, tap row under the viewport */
+.bpm-readout { display: flex; align-items: baseline; gap: 0.4rem; color: var(--text-primary); }
+.bpm-readout strong { font-size: clamp(2.6rem, 9cqi, 4rem); line-height: 1; font-variant-numeric: tabular-nums; color: var(--brand); }
+.bpm-readout span { font-size: 0.9rem; font-weight: 600; color: var(--text-muted); }
+.bpm-sub { font-size: 0.78rem; color: var(--text-muted); text-align: center; font-family: var(--font-mono); }
+.bpm-tap-row { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.75rem; }
