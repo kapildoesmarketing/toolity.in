@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Audio Normalizer (LUFS) | Toolity Media</title>
+  <link rel="canonical" href="https://toolity.in/media/audio-normalizer/">
+  <meta name="description" content="Free online LUFS audio normalizer: measure integrated loudness (ITU-R BS.1770 / EBU R128) and normalize MP3, WAV or M4A to −14 LUFS for Spotify and YouTube, −16 for podcasts or −23 for broadcast, with a true-peak ceiling. In your browser — no upload.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Audio Normalizer (LUFS) | Toolity Media">
+  <meta property="og:description" content="Free online LUFS audio normalizer: measure integrated loudness (ITU-R BS.1770 / EBU R128) and normalize MP3, WAV or M4A to −14 LUFS for Spotify and YouTube, −16 for podcasts or −23 for broadcast, with a true-peak ceiling. In your browser — no upload.">
+  <meta property="og:url" content="https://toolity.in/media/audio-normalizer/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=4.5" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=4.5">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Audio Normalizer (LUFS)",
+        "url": "https://toolity.in/media/audio-normalizer/",
+        "description": "Free online LUFS audio normalizer: measure integrated loudness (ITU-R BS.1770 / EBU R128) and normalize MP3, WAV or M4A to −14 LUFS for Spotify and YouTube, −16 for podcasts or −23 for broadcast, with a true-peak ceiling. In your browser — no upload.",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Media", "item": "https://toolity.in/media/" },
+          { "@type": "ListItem", "position": 3, "name": "Audio Normalizer (LUFS)", "item": "https://toolity.in/media/audio-normalizer/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Is my audio uploaded anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. The file is decoded by your browser's Web Audio engine, processed on your device and encoded in the page. Nothing is sent to a server." } },
+          { "@type": "Question", "name": "What is LUFS?", "acceptedAnswer": { "@type": "Answer", "text": "Loudness Units relative to Full Scale — a measure of how loud audio sounds, not just its peak. It follows ITU-R BS.1770: K-weighting, 400 ms blocks, and gating that ignores silence and quiet passages." } },
+          { "@type": "Question", "name": "Which target should I use?", "acceptedAnswer": { "@type": "Answer", "text": "−14 LUFS for Spotify, YouTube, Tidal and Amazon; −16 for Apple Music and most podcasts; −23 for EBU broadcast. Streaming platforms turn louder tracks down anyway, so −14 is a safe default." } },
+          { "@type": "Question", "name": "What does the true-peak ceiling do?", "acceptedAnswer": { "@type": "Answer", "text": "Raising loudness can push peaks above 0 dB, which clips after MP3/AAC encoding. The tool measures inter-sample (4× oversampled) peaks and, if needed, uses less gain so the ceiling is never crossed — the badge then shows the loudest level that fit." } },
+          { "@type": "Question", "name": "Why is my quiet recording below the target?", "acceptedAnswer": { "@type": "Answer", "text": "This is pure gain with no compression or limiting, so dynamics are kept. When a peak would cross the ceiling, the target cannot be reached without a limiter — set the ceiling to Off only if you accept clipping." } },
+          { "@type": "Question", "name": "Are mono files measured correctly?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — per BS.1770 a mono channel is weighted 1.0, so a mono file reads about 3 LU quieter than the same audio as dual-mono stereo, matching broadcast meters." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/media/" class="breadcrumb-link">Media</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Audio Normalizer (LUFS)</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Media</span>
+            <h1 class="page-title">Audio Normalizer (LUFS)</h1>
+            <p class="page-desc">Measure loudness the way Spotify, YouTube and broadcasters do, then hit your target LUFS with a safe true-peak ceiling — privately in your browser.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" data-split="40/60" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge" id="result-badge">Drop a file to begin</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result" aria-label="Copy result" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download result" aria-label="Download result" disabled>
+                <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                <span>Download</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Source</span>
+                <span class="pane-badge" id="source-badge">No file loaded</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content pane-content-between">
+                <div class="media-canvas-viewport">
+                  <div id="dropzone" class="video-dropzone" tabindex="0" role="button" aria-label="Drop an audio file here or click to browse">
+                    <input type="file" id="file-input" accept="audio/*, .mp3, .wav, .m4a, .aac, .ogg, .opus, .flac, .weba, .webm">
+                    <div class="video-drop-icon">
+                      <iconify-icon icon="lucide:upload-cloud" width="22" height="22"></iconify-icon>
+                    </div>
+                    <div class="video-drop-title">Drop an audio file here or click to browse</div>
+                    <div class="video-drop-subtitle">MP3, WAV, M4A, OGG, FLAC — up to 200 MB</div>
+                  </div>
+                  <div id="source-wrap" class="aud-player" hidden>
+                    <canvas id="source-wave" class="aud-wave" aria-label="Source waveform"></canvas>
+                    <audio id="source-audio" controls preload="metadata"></audio>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Normalized</span>
+                <span class="pane-badge" id="output-badge">Awaiting file</span>
+              </div>
+              <div class="pane-content pane-content-between">
+                <div class="media-canvas-viewport">
+                  <div id="output-empty" class="media-empty-placeholder">
+                    <iconify-icon icon="lucide:gauge" width="32" height="32"></iconify-icon>
+                    <p>The normalized audio appears here</p>
+                  </div>
+                  <div id="output-wrap" class="aud-player" hidden>
+                    <canvas id="output-wave" class="aud-wave" aria-label="Result waveform"></canvas>
+                    <audio id="output-audio" controls></audio>
+                  </div>
+                </div>
+                <div>
+                  <button type="button" id="btn-compress" class="btn-toolbar-sm btn-brand-sm btn-primary-action" disabled>
+                    <iconify-icon icon="lucide:gauge" width="16" height="16"></iconify-icon>
+                    <span id="btn-compress-label">Normalize</span>
+                  </button>
+                  <div class="slim-progress-bar" id="progress-bar">
+                    <div class="slim-progress-fill" id="progress-fill"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">−14 LUFS · −1 dBTP · MP3 · 192 kbps</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item">
+                <label for="opt-target">Target loudness</label>
+                <select id="opt-target" class="select-clean">
+                  <option value="-9">−9 LUFS · loud / club</option>
+                  <option value="-11">−11 LUFS · loud streaming</option>
+                  <option value="-14" selected>−14 LUFS · Spotify, YouTube, Tidal</option>
+                  <option value="-16">−16 LUFS · Apple Music, podcasts</option>
+                  <option value="-18">−18 LUFS · audiobooks (ACX range)</option>
+                  <option value="-23">−23 LUFS · EBU R128 broadcast</option>
+                  <option value="-24">−24 LUFS · ATSC A/85 (US TV)</option>
+                </select>
+              </div>
+              <div class="control-item">
+                <label for="opt-ceiling">True-peak ceiling</label>
+                <select id="opt-ceiling" class="select-clean">
+                  <option value="-1" selected>−1 dBTP (recommended)</option>
+                  <option value="-2">−2 dBTP (safer for MP3/AAC)</option>
+                  <option value="-0.1">−0.1 dBTP</option>
+                  <option value="off">Off — allow clipping</option>
+                </select>
+              </div>
+              <div class="control-item">
+                <label for="opt-out">Output format</label>
+                <select id="opt-out" class="select-clean">
+                  <option value="mp3-128">MP3 · 128 kbps</option>
+                  <option value="mp3-192" selected>MP3 · 192 kbps</option>
+                  <option value="mp3-320">MP3 · 320 kbps</option>
+                  <option value="wav">WAV · lossless</option>
+                </select>
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Use Audio Normalizer (LUFS) in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Drop an audio file</h3>
+              <p class="step-desc">Drag a song, podcast or voice-over onto the left pane. Its integrated loudness is measured straight away.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Pick a target</h3>
+              <p class="step-desc">Open Settings to choose a platform target (−14 LUFS is the streaming standard) and a true-peak ceiling.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Normalize and download</h3>
+              <p class="step-desc">Click <strong>Normalize</strong>. The badge shows measured → final LUFS; play and download the result.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Audio Normalizer (LUFS) — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Is my audio uploaded anywhere?</summary>
+              <p>No. The file is decoded by your browser's Web Audio engine, processed on your device and encoded in the page. Nothing is sent to a server.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What is LUFS?</summary>
+              <p>Loudness Units relative to Full Scale — a measure of how loud audio <em>sounds</em>, not just its peak. It follows ITU-R BS.1770: K-weighting, 400 ms blocks, and gating that ignores silence and quiet passages.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Which target should I use?</summary>
+              <p>−14 LUFS for Spotify, YouTube, Tidal and Amazon; −16 for Apple Music and most podcasts; −23 for EBU broadcast. Streaming platforms turn louder tracks down anyway, so −14 is a safe default.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What does the true-peak ceiling do?</summary>
+              <p>Raising loudness can push peaks above 0 dB, which clips after MP3/AAC encoding. The tool measures inter-sample (4× oversampled) peaks and, if needed, uses less gain so the ceiling is never crossed — the badge then shows the loudest level that fit.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why is my quiet recording below the target?</summary>
+              <p>This is pure gain with no compression or limiting, so dynamics are kept. When a peak would cross the ceiling, the target cannot be reached without a limiter — set the ceiling to Off only if you accept clipping.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Are mono files measured correctly?</summary>
+              <p>Yes — per BS.1770 a mono channel is weighted 1.0, so a mono file reads about 3 LU quieter than the same audio as dual-mono stereo, matching broadcast meters.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="media"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=3.6"></script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="/scripts/audio-common.js?v=1.1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lamejs@1.2.1/lame.all.js" defer></script>
+  <script src="/media/audio-normalizer/audio-normalizer.js?v=1.0"></script>
+</body>
+</html>
