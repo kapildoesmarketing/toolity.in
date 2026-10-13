@@ -1,0 +1,6 @@
+/* Designed by Kapil Pidhwani: Audio Equalizer — 10 native vertical range inputs (writing-mode), scrolls sideways on narrow cards */
+.eq-bank { display: grid; grid-template-columns: repeat(10, minmax(34px, 1fr)); gap: 0.25rem; overflow-x: auto; min-width: 0; max-width: 100%; padding-block: 0.25rem; }
+.eq-band { display: flex; flex-direction: column; align-items: center; gap: 0.2rem; font-size: 0.7rem; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+.eq-slider { writing-mode: vertical-lr; direction: rtl; width: 28px; height: 130px; accent-color: var(--brand); cursor: pointer; }
+.eq-band span { font-family: var(--font-mono); color: var(--text-primary); }
+.eq-band small { font-size: 0.66rem; }

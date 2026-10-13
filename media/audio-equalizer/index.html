@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Audio Equalizer | Toolity Media</title>
+  <link rel="canonical" href="https://toolity.in/media/audio-equalizer/">
+  <meta name="description" content="Free online audio equalizer: boost bass, clear up vocals or tame harsh treble with a 10-band graphic EQ and presets. Hear changes live, then download as MP3 or WAV — processed in your browser, no upload.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Audio Equalizer | Toolity Media">
+  <meta property="og:description" content="Free online audio equalizer: boost bass, clear up vocals or tame harsh treble with a 10-band graphic EQ and presets. Hear changes live, then download as MP3 or WAV — processed in your browser, no upload.">
+  <meta property="og:url" content="https://toolity.in/media/audio-equalizer/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=4.5" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=4.5">
+  <link rel="stylesheet" href="/styles/tools/audio-equalizer.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Audio Equalizer",
+        "url": "https://toolity.in/media/audio-equalizer/",
+        "description": "Free online audio equalizer: boost bass, clear up vocals or tame harsh treble with a 10-band graphic EQ and presets. Hear changes live, then download as MP3 or WAV — processed in your browser, no upload.",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Media", "item": "https://toolity.in/media/" },
+          { "@type": "ListItem", "position": 3, "name": "Audio Equalizer", "item": "https://toolity.in/media/audio-equalizer/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Is my audio uploaded anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. The file is decoded by your browser's Web Audio engine, processed on your device and encoded in the page. Nothing is sent to a server." } },
+          { "@type": "Question", "name": "Can I hear the EQ before applying it?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The source player runs through the same filters in real time, so every slider move is heard instantly — exactly what will be rendered." } },
+          { "@type": "Question", "name": "What do the bands do?", "acceptedAnswer": { "@type": "Answer", "text": "31–125 Hz is sub-bass and kick, 250–500 Hz warmth (and mud), 1–4 kHz presence and vocals, 8–16 kHz air and sparkle. Each slider is a peaking filter of ±12 dB." } },
+          { "@type": "Question", "name": "Why does my boosted track sound quieter?", "acceptedAnswer": { "@type": "Answer", "text": "Boosting can push peaks over 0 dB. With Prevent clipping on, the whole track is lowered just enough to avoid distortion. Cutting the frequencies you don't want often works better than boosting." } },
+          { "@type": "Question", "name": "Which formats can I open and save?", "acceptedAnswer": { "@type": "Answer", "text": "Open anything your browser plays: MP3, WAV, M4A/AAC, OGG, Opus, FLAC and WebM audio. Save as MP3 (128, 192 or 320 kbps) or lossless 16-bit WAV — pick under Settings." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/media/" class="breadcrumb-link">Media</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Audio Equalizer</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Media</span>
+            <h1 class="page-title">Audio Equalizer</h1>
+            <p class="page-desc">Shape any track with a 10-band EQ and presets, hear every change live, then download the result — all in your browser.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" data-split="40/60" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge" id="result-badge">Drop a file to begin</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result" aria-label="Copy result" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download result" aria-label="Download result" disabled>
+                <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                <span>Download</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Source</span>
+                <span class="pane-badge" id="source-badge">No file loaded</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content pane-content-between">
+                <div class="media-canvas-viewport">
+                  <div id="dropzone" class="video-dropzone" tabindex="0" role="button" aria-label="Drop an audio file here or click to browse">
+                    <input type="file" id="file-input" accept="audio/*, .mp3, .wav, .m4a, .aac, .ogg, .opus, .flac, .weba, .webm">
+                    <div class="video-drop-icon">
+                      <iconify-icon icon="lucide:upload-cloud" width="22" height="22"></iconify-icon>
+                    </div>
+                    <div class="video-drop-title">Drop an audio file here or click to browse</div>
+                    <div class="video-drop-subtitle">MP3, WAV, M4A, OGG, FLAC — up to 200 MB</div>
+                  </div>
+                  <div id="source-wrap" class="aud-player" hidden>
+                    <canvas id="source-wave" class="aud-wave" aria-label="Source waveform"></canvas>
+                    <audio id="source-audio" controls preload="metadata"></audio>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Equalized</span>
+                <span class="pane-badge" id="output-badge">Awaiting file</span>
+              </div>
+              <div class="pane-content pane-content-between">
+                <div class="media-canvas-viewport">
+                  <div id="output-empty" class="media-empty-placeholder">
+                    <iconify-icon icon="lucide:sliders-vertical" width="32" height="32"></iconify-icon>
+                    <p>The equalized audio appears here</p>
+                  </div>
+                  <div id="output-wrap" class="aud-player" hidden>
+                    <canvas id="output-wave" class="aud-wave" aria-label="Result waveform"></canvas>
+                    <audio id="output-audio" controls></audio>
+                  </div>
+                </div>
+                <div>
+                  <button type="button" id="btn-compress" class="btn-toolbar-sm btn-brand-sm btn-primary-action" disabled>
+                    <iconify-icon icon="lucide:sliders-vertical" width="16" height="16"></iconify-icon>
+                    <span id="btn-compress-label">Apply EQ</span>
+                  </button>
+                  <div class="slim-progress-bar" id="progress-bar">
+                    <div class="slim-progress-fill" id="progress-fill"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">Flat · MP3 · 192 kbps</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item">
+                <label for="opt-preset">Preset</label>
+                <select id="opt-preset" class="select-clean">
+                  <option value="flat" selected>Flat</option>
+                  <option value="bass">Bass boost</option>
+                  <option value="bassx">Bass reducer</option>
+                  <option value="treble">Treble boost</option>
+                  <option value="vocal">Vocal clarity</option>
+                  <option value="podcast">Podcast / voice</option>
+                  <option value="loud">Loudness (smile)</option>
+                  <option value="lofi">Lo-fi / telephone</option>
+                  <option value="custom">Custom</option>
+                </select>
+              </div>
+              <div class="control-item eq-bank" role="group" aria-label="10-band equalizer">
+                <label class="eq-band" for="eq-0"><input type="range" id="eq-0" class="eq-slider" min="-12" max="12" step="0.5" value="0" aria-label="31 Hz gain"><span id="eq-0-val">0</span><small>31</small></label>
+                <label class="eq-band" for="eq-1"><input type="range" id="eq-1" class="eq-slider" min="-12" max="12" step="0.5" value="0" aria-label="62 Hz gain"><span id="eq-1-val">0</span><small>62</small></label>
+                <label class="eq-band" for="eq-2"><input type="range" id="eq-2" class="eq-slider" min="-12" max="12" step="0.5" value="0" aria-label="125 Hz gain"><span id="eq-2-val">0</span><small>125</small></label>
+                <label class="eq-band" for="eq-3"><input type="range" id="eq-3" class="eq-slider" min="-12" max="12" step="0.5" value="0" aria-label="250 Hz gain"><span id="eq-3-val">0</span><small>250</small></label>
+                <label class="eq-band" for="eq-4"><input type="range" id="eq-4" class="eq-slider" min="-12" max="12" step="0.5" value="0" aria-label="500 Hz gain"><span id="eq-4-val">0</span><small>500</small></label>
+                <label class="eq-band" for="eq-5"><input type="range" id="eq-5" class="eq-slider" min="-12" max="12" step="0.5" value="0" aria-label="1k Hz gain"><span id="eq-5-val">0</span><small>1k</small></label>
+                <label class="eq-band" for="eq-6"><input type="range" id="eq-6" class="eq-slider" min="-12" max="12" step="0.5" value="0" aria-label="2k Hz gain"><span id="eq-6-val">0</span><small>2k</small></label>
+                <label class="eq-band" for="eq-7"><input type="range" id="eq-7" class="eq-slider" min="-12" max="12" step="0.5" value="0" aria-label="4k Hz gain"><span id="eq-7-val">0</span><small>4k</small></label>
+                <label class="eq-band" for="eq-8"><input type="range" id="eq-8" class="eq-slider" min="-12" max="12" step="0.5" value="0" aria-label="8k Hz gain"><span id="eq-8-val">0</span><small>8k</small></label>
+                <label class="eq-band" for="eq-9"><input type="range" id="eq-9" class="eq-slider" min="-12" max="12" step="0.5" value="0" aria-label="16k Hz gain"><span id="eq-9-val">0</span><small>16k</small></label>
+              </div>
+              <div class="control-item">
+                <input type="checkbox" id="opt-safe" checked>
+                <label for="opt-safe">Prevent clipping (auto-lower the level if boosts overload)</label>
+              </div>
+              <div class="control-item">
+                <label for="opt-out">Output format</label>
+                <select id="opt-out" class="select-clean">
+                  <option value="mp3-128">MP3 · 128 kbps</option>
+                  <option value="mp3-192" selected>MP3 · 192 kbps</option>
+                  <option value="mp3-320">MP3 · 320 kbps</option>
+                  <option value="wav">WAV · lossless</option>
+                </select>
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Use Audio Equalizer in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Drop an audio file</h3>
+              <p class="step-desc">Drag a song or recording onto the left pane and press play.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Shape the sound</h3>
+              <p class="step-desc">Open Settings, pick a preset or drag the 10 sliders. Changes are heard live in the player.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Apply and download</h3>
+              <p class="step-desc">Click <strong>Apply EQ</strong> to render the full file with your curve, then download it.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Audio Equalizer — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Is my audio uploaded anywhere?</summary>
+              <p>No. The file is decoded by your browser's Web Audio engine, processed on your device and encoded in the page. Nothing is sent to a server.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can I hear the EQ before applying it?</summary>
+              <p>Yes. The source player runs through the same filters in real time, so every slider move is heard instantly — exactly what will be rendered.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What do the bands do?</summary>
+              <p>31–125 Hz is sub-bass and kick, 250–500 Hz warmth (and mud), 1–4 kHz presence and vocals, 8–16 kHz air and sparkle. Each slider is a peaking filter of ±12 dB.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why does my boosted track sound quieter?</summary>
+              <p>Boosting can push peaks over 0 dB. With <em>Prevent clipping</em> on, the whole track is lowered just enough to avoid distortion. Cutting the frequencies you don't want often works better than boosting.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Which formats can I open and save?</summary>
+              <p>Open anything your browser plays: MP3, WAV, M4A/AAC, OGG, Opus, FLAC and WebM audio. Save as MP3 (128, 192 or 320 kbps) or lossless 16-bit WAV — pick under Settings.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="media"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=3.6"></script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="/scripts/audio-common.js?v=1.1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lamejs@1.2.1/lame.all.js" defer></script>
+  <script src="/media/audio-equalizer/audio-equalizer.js?v=1.0"></script>
+</body>
+</html>
