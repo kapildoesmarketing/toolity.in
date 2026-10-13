@@ -1,0 +1,5 @@
+/* Designed by Kapil Pidhwani: Image to Base64 — paste box under the source, monospace output filling the result viewport */
+.b64-paste { margin-top: 0.75rem; }
+.b64-paste .textarea-clean { font-family: var(--font-mono); font-size: 0.8rem; resize: vertical; }
+.b64-out { width: 100%; min-height: 280px; max-height: 280px; resize: none; padding: 0.8rem 0.9rem; font-size: 0.78rem; }
+.b64-out[hidden] { display: none; }
