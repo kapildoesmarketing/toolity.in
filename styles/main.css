@@ -3947,6 +3947,19 @@ body {
 .vdt-thumb figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 0.1rem 0.3rem; font-size: 0.66rem; font-family: var(--font-mono); color: #fff; background: rgba(0, 0, 0, 0.55); }
 
 /* ==========================================================================
+   CROP OVERLAY (shared by GIF, Video and Image Cropper) — viewport px projected from source px by JS
+   ========================================================================== */
+.vcr-box { position: absolute; box-sizing: border-box; border: 2px solid var(--brand); box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.45); cursor: move; touch-action: none; z-index: 2; }
+.vcr-box[hidden] { display: none; }
+.vcr-box::before, .vcr-box::after { content: ""; position: absolute; inset: 0; pointer-events: none; }
+.vcr-box::before { border-left: 1px solid rgba(255, 255, 255, 0.35); border-right: 1px solid rgba(255, 255, 255, 0.35); left: 33.33%; right: 33.33%; }
+.vcr-box::after { border-top: 1px solid rgba(255, 255, 255, 0.35); border-bottom: 1px solid rgba(255, 255, 255, 0.35); top: 33.33%; bottom: 33.33%; }
+.vcr-handle { position: absolute; right: -8px; bottom: -8px; width: 18px; height: 18px; border-radius: 50%; background: var(--brand); border: 2px solid #fff; cursor: nwse-resize; touch-action: none; }
+.vcr-handle::after { content: ""; position: absolute; inset: -13px; } /* 44px touch target without enlarging the visible dot */
+.vcr-nums { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.35rem; }
+.vcr-nums .input-clean { min-width: 0; font-family: var(--font-mono); padding-inline: 0.4rem; }
+
+/* ==========================================================================
    AUDIO TOOLS (shared by scripts/audio-common.js pages)
    ========================================================================== */
 .aud-player { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.6rem; width: 100%; height: 100%; padding: 0.8rem; min-width: 0; }

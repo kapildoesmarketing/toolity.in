@@ -189,7 +189,7 @@
       } finally { S.busy = false; setBusy(card, false); $('btn-compress').disabled = !S.buf && !T.multiple && !T.noFile; setTimeout(() => $('progress-bar').classList.remove('active'), 800); }
     }
     $('btn-compress').addEventListener('click', run);
-    const outName = () => `${stem(S.file ? S.file.name : 'audio')}-${T.suffix}.${extFor(S.fmt, S.out && S.out.type)}`;
+    const outName = () => `${stem(S.file ? S.file.name : 'audio')}-${T.suffix}.${T.outExt ? T.outExt(S) : extFor(S.fmt, S.out && S.out.type)}`;
     $('btn-download').addEventListener('click', () => S.out && downloadBlob(S.out, outName()));
     $('btn-copy').addEventListener('click', () => S.out && (T.copy ? T.copy(S) : copyText(`${outName()} · ${$('output-badge').textContent}`, 'Summary copied')));
     function reset() {
