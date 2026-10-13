@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Image Cropper | Toolity Media</title>
+  <link rel="canonical" href="https://toolity.in/media/image-cropper/">
+  <meta name="description" content="Free online image cropper: drag a crop box over a JPG, PNG or WebP, lock an aspect ratio (1:1, 16:9, 4:5…), rotate or flip, and download the cropped image — processed in your browser, no upload.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Image Cropper | Toolity Media">
+  <meta property="og:description" content="Free online image cropper: drag a crop box over a JPG, PNG or WebP, lock an aspect ratio (1:1, 16:9, 4:5…), rotate or flip, and download the cropped image — processed in your browser, no upload.">
+  <meta property="og:url" content="https://toolity.in/media/image-cropper/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=4.5" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=4.5">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Image Cropper",
+        "url": "https://toolity.in/media/image-cropper/",
+        "description": "Free online image cropper: drag a crop box over a JPG, PNG or WebP, lock an aspect ratio (1:1, 16:9, 4:5…), rotate or flip, and download the cropped image — processed in your browser, no upload.",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Media", "item": "https://toolity.in/media/" },
+          { "@type": "ListItem", "position": 3, "name": "Image Cropper", "item": "https://toolity.in/media/image-cropper/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Is my image uploaded anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. The image is decoded and processed on a canvas in your browser tab. Nothing is sent to a server, and nothing is kept after you close the page." } },
+          { "@type": "Question", "name": "Is the crop done at full resolution?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The box is drawn on a scaled preview but the crop is taken from the original pixels, so a 4000 px photo stays sharp." } },
+          { "@type": "Question", "name": "How do I make a perfect square or Instagram crop?", "acceptedAnswer": { "@type": "Answer", "text": "Open Settings and pick Square 1:1 or Instagram 4:5. The box keeps that shape while you drag and resize." } },
+          { "@type": "Question", "name": "Can I rotate or mirror as well?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — rotation and flip are applied after cropping, so the box always matches what you see on the left." } },
+          { "@type": "Question", "name": "Does it keep transparency?", "acceptedAnswer": { "@type": "Answer", "text": "PNG and WebP keep transparent areas. JPG has no transparency, so they are filled with white." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/media/" class="breadcrumb-link">Media</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Image Cropper</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Media</span>
+            <h1 class="page-title">Image Cropper</h1>
+            <p class="page-desc">Drag a box, lock a ratio, rotate or flip — then download exactly the part of the photo you want, privately in your browser.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" data-split="40/60" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge" id="result-badge">Drop a file to begin</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result" aria-label="Copy result" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download result" aria-label="Download result" disabled>
+                <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                <span>Download</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Source</span>
+                <span class="pane-badge" id="source-badge">No file loaded</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content pane-content-between">
+                <div class="media-canvas-viewport">
+                  <div id="dropzone" class="video-dropzone" tabindex="0" role="button" aria-label="Drop an image here or click to browse">
+                    <input type="file" id="file-input" accept="image/*">
+                    <div class="video-drop-icon">
+                      <iconify-icon icon="lucide:upload-cloud" width="22" height="22"></iconify-icon>
+                    </div>
+                    <div class="video-drop-title">Drop an image here or click to browse</div>
+                    <div class="video-drop-subtitle">JPG, PNG, WebP, GIF, AVIF, BMP — up to 50 MB</div>
+                  </div>
+                  <canvas id="stage" class="media-preview-canvas gif-stage" width="360" height="240" aria-label="Image to crop"></canvas>
+                  <div id="crop-box" class="vcr-box" hidden aria-hidden="true"><span class="vcr-handle"></span></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Cropped</span>
+                <span class="pane-badge" id="output-badge">Awaiting file</span>
+              </div>
+              <div class="pane-content pane-content-between">
+                <div class="media-canvas-viewport">
+                  <div id="output-empty" class="media-empty-placeholder">
+                    <iconify-icon icon="lucide:crop" width="32" height="32"></iconify-icon>
+                    <p>The cropped image appears here</p>
+                  </div>
+                  <img id="output-img" alt="Cropped image" class="media-preview-img" width="360" height="240">
+                </div>
+                <div>
+                  <button type="button" id="btn-compress" class="btn-toolbar-sm btn-brand-sm btn-primary-action" disabled>
+                    <iconify-icon icon="lucide:crop" width="16" height="16"></iconify-icon>
+                    <span id="btn-compress-label">Crop image</span>
+                  </button>
+                  <div class="slim-progress-bar" id="progress-bar">
+                    <div class="slim-progress-fill" id="progress-fill"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">Free</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item">
+                <label for="opt-aspect">Aspect ratio</label>
+                <select id="opt-aspect" class="select-clean">
+                  <option value="free" selected>Free</option>
+                  <option value="1:1">Square 1:1</option>
+                  <option value="16:9">Landscape 16:9</option>
+                  <option value="9:16">Portrait 9:16</option>
+                  <option value="4:3">Classic 4:3</option>
+                  <option value="3:4">Portrait 3:4</option>
+                  <option value="4:5">Instagram 4:5</option>
+                  <option value="3:2">Photo 3:2</option>
+                </select>
+              </div>
+              <div class="control-item">
+                <label for="crop-x">Crop (px)</label>
+                <div class="vcr-nums">
+                  <input type="number" id="crop-x" class="input-clean" min="0" step="1" aria-label="Crop X" placeholder="X">
+                  <input type="number" id="crop-y" class="input-clean" min="0" step="1" aria-label="Crop Y" placeholder="Y">
+                  <input type="number" id="crop-w" class="input-clean" min="1" step="1" aria-label="Crop width" placeholder="W">
+                  <input type="number" id="crop-h" class="input-clean" min="1" step="1" aria-label="Crop height" placeholder="H">
+                </div>
+              </div>
+              <div class="control-item">
+                <label for="opt-rot">Rotate</label>
+                <select id="opt-rot" class="select-clean">
+                  <option value="0" selected>None</option>
+                  <option value="90">90° clockwise</option>
+                  <option value="180">180°</option>
+                  <option value="270">90° anticlockwise</option>
+                </select>
+              </div>
+              <div class="control-item">
+                <label for="opt-flip">Flip</label>
+                <select id="opt-flip" class="select-clean">
+                  <option value="none" selected>None</option>
+                  <option value="h">Mirror horizontally</option>
+                  <option value="v">Flip vertically</option>
+                  <option value="hv">Both</option>
+                </select>
+              </div>
+              <div class="control-item">
+                <label for="opt-format">Output format</label>
+                <select id="opt-format" class="select-clean">
+                  <option value="auto" selected>Same as original</option>
+                  <option value="image/png">PNG</option>
+                  <option value="image/jpeg">JPG</option>
+                  <option value="image/webp">WebP</option>
+                </select>
+              </div>
+              <div class="control-item">
+                <label for="opt-quality">Quality (JPG / WebP)</label>
+                <input type="range" id="opt-quality" class="range-slider-clean" min="40" max="100" step="1" value="92">
+                <span class="range-val-badge" id="opt-quality-val">92</span>
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Use Image Cropper in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Drop an image</h3>
+              <p class="step-desc">Drag a photo onto the left pane. A crop box appears over it.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Drag the box</h3>
+              <p class="step-desc">Move it, pull the corner handle to resize, or open Settings for a fixed ratio, exact pixels, rotation and flip.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Crop and download</h3>
+              <p class="step-desc">Click <strong>Crop image</strong>. The result appears on the right at full resolution.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Image Cropper — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Is my image uploaded anywhere?</summary>
+              <p>No. The image is decoded and processed on a canvas in your browser tab. Nothing is sent to a server, and nothing is kept after you close the page.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is the crop done at full resolution?</summary>
+              <p>Yes. The box is drawn on a scaled preview but the crop is taken from the original pixels, so a 4000 px photo stays sharp.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How do I make a perfect square or Instagram crop?</summary>
+              <p>Open Settings and pick <em>Square 1:1</em> or <em>Instagram 4:5</em>. The box keeps that shape while you drag and resize.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can I rotate or mirror as well?</summary>
+              <p>Yes — rotation and flip are applied after cropping, so the box always matches what you see on the left.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Does it keep transparency?</summary>
+              <p>PNG and WebP keep transparent areas. JPG has no transparency, so they are filled with white.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="media"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=3.6"></script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="/scripts/image-common.js?v=1.0"></script>
+  <script src="/media/image-cropper/image-cropper.js?v=1.0"></script>
+</body>
+</html>
