@@ -1112,6 +1112,142 @@
         tags: ['color converter', 'hex to rgb', 'rgb to hex', 'hsl to hex', 'cmyk', 'oklch', 'hwb', 'color code converter']
       },
       {
+        id: 'image-resizer',
+        title: 'Image Resizer',
+        category: 'Media',
+        url: 'media/image-resizer/',
+        icon: 'lucide:scaling',
+        tags: ['image', 'resize', 'resizer', 'scale', 'dimensions', 'pixels', 'photo', 'shrink', 'enlarge', 'width', 'height', 'jpg', 'png', 'webp', 'instagram']
+      },
+      {
+        id: 'image-cropper',
+        title: 'Image Cropper',
+        category: 'Media',
+        url: 'media/image-cropper/',
+        icon: 'lucide:crop',
+        tags: ['image', 'crop', 'cropper', 'cut', 'trim', 'aspect ratio', 'square', 'photo', 'rotate', 'flip', 'instagram', 'profile picture']
+      },
+      {
+        id: 'image-to-base64',
+        title: 'Image to Base64',
+        category: 'Media',
+        url: 'media/image-to-base64/',
+        icon: 'lucide:binary',
+        tags: ['base64', 'data uri', 'data url', 'image to base64', 'encode', 'decode', 'base64 to image', 'css', 'html', 'embed', 'inline image', 'svg']
+      },
+      {
+        id: 'image-negative-inverter',
+        title: 'Image Negative Inverter',
+        category: 'Media',
+        url: 'media/image-negative-inverter/',
+        icon: 'lucide:contrast',
+        tags: ['invert', 'negative', 'inverter', 'invert colors', 'colour', 'photo negative', 'film negative', 'image', 'filter', 'grayscale', 'opposite colors']
+      },
+      {
+        id: 'video-muter',
+        title: 'Video Muter',
+        category: 'Media',
+        url: 'media/video-muter/',
+        icon: 'lucide:volume-x',
+        tags: ['video', 'mute', 'muter', 'remove audio', 'remove sound', 'silent video', 'no sound', 'strip audio', 'mp4', 'mov', 'webm', 'lossless']
+      },
+      {
+        id: 'gif-rotator',
+        title: 'GIF Rotator',
+        category: 'Media',
+        url: 'media/gif-rotator/',
+        icon: 'lucide:rotate-cw',
+        tags: ['gif', 'rotate', 'rotator', 'flip', 'mirror', 'turn', 'sideways', 'upside down', '90 degrees', 'animated gif', 'orientation']
+      },
+      {
+        id: 'audio-normalizer',
+        title: 'Audio Normalizer (LUFS)',
+        category: 'Media',
+        url: 'media/audio-normalizer/',
+        icon: 'lucide:gauge',
+        tags: ['lufs', 'normalize', 'normalizer', 'loudness', 'ebu r128', 'bs.1770', 'spotify', 'youtube', 'podcast', 'true peak', 'volume', 'mastering', 'gain']
+      },
+      {
+        id: 'audio-equalizer',
+        title: 'Audio Equalizer',
+        category: 'Media',
+        url: 'media/audio-equalizer/',
+        icon: 'lucide:sliders-vertical',
+        tags: ['equalizer', 'eq', 'bass boost', 'treble', 'vocals', 'frequency', 'audio', 'graphic eq', '10 band', 'tone', 'mp3', 'sound']
+      },
+      {
+        id: 'audio-pitch-shifter',
+        title: 'Audio Pitch Shifter',
+        category: 'Media',
+        url: 'media/audio-pitch-shifter/',
+        icon: 'lucide:music-2',
+        tags: ['pitch', 'pitch shifter', 'key change', 'transpose', 'semitone', 'cents', 'tuning', 'karaoke', 'voice', 'chipmunk', 'deep voice', 'audio']
+      },
+      {
+        id: 'noise-reducer',
+        title: 'Noise Reducer',
+        category: 'Media',
+        url: 'media/noise-reducer/',
+        icon: 'lucide:audio-waveform',
+        tags: ['noise', 'noise reduction', 'noise reducer', 'denoise', 'hiss', 'hum', 'background noise', 'podcast', 'voice', 'clean audio', 'remove noise', 'fan noise']
+      },
+      {
+        id: 'audio-splitter',
+        title: 'Audio Splitter',
+        category: 'Media',
+        url: 'media/audio-splitter/',
+        icon: 'lucide:split',
+        tags: ['split', 'splitter', 'cut', 'audio splitter', 'chunks', 'segments', 'silence', 'mp3 splitter', 'divide', 'zip', 'podcast', 'audiobook']
+      },
+      {
+        id: 'audio-crossfader',
+        title: 'Audio Crossfader',
+        category: 'Media',
+        url: 'media/audio-crossfader/',
+        icon: 'lucide:blend',
+        tags: ['crossfade', 'crossfader', 'blend', 'mix', 'transition', 'dj', 'fade', 'join songs', 'merge', 'audio', 'mixtape', 'segue']
+      },
+      {
+        id: 'bpm-detector',
+        title: 'Beat / BPM Detector',
+        category: 'Media',
+        url: 'media/bpm-detector/',
+        icon: 'lucide:activity',
+        tags: ['bpm', 'tempo', 'beat', 'bpm detector', 'beats per minute', 'tap tempo', 'dj', 'metronome', 'click track', 'song tempo', 'music', 'beat finder']
+      },
+      {
+        id: 'audio-spectrum-visualizer',
+        title: 'Audio Spectrum Visualizer',
+        category: 'Media',
+        url: 'media/audio-spectrum-visualizer/',
+        icon: 'lucide:bar-chart-3',
+        tags: ['spectrum', 'visualizer', 'audio visualizer', 'spectrogram', 'frequency', 'analyzer', 'fft', 'music video', 'waveform', 'equalizer bars', 'audiogram', 'video']
+      },
+      {
+        id: 'text-to-speech',
+        title: 'Text to Speech',
+        category: 'Media',
+        url: 'media/text-to-speech/',
+        icon: 'lucide:speech',
+        tags: ['text to speech', 'tts', 'read aloud', 'voice', 'speech', 'ai voice', 'narration', 'voiceover', 'mp3', 'kokoro', 'speak', 'audio']
+      },
+      {
+        id: 'audio-waveform-image-generator',
+        title: 'Audio Waveform Image Generator',
+        category: 'Media',
+        url: 'media/audio-waveform-image-generator/',
+        icon: 'lucide:audio-lines',
+        tags: ['waveform', 'waveform image', 'audio waveform', 'soundwave', 'png', 'svg', 'podcast art', 'audiogram', 'music art', 'visualization', 'sound wave', 'generator']
+      },
+      {
+        id: 'camera',
+        title: 'Camera',
+        category: 'Labs',
+        url: 'labs/camera/',
+        icon: 'lucide:camera',
+        tags: ['camera', 'webcam', 'take photo', 'selfie', 'record video', 'webcam recorder', 'online camera', 'front camera', 'mirror', 'timer', 'snapshot', 'phone camera']
+      },
+      {
         id: 'cat-widgets',
         title: 'Widgets',
         category: 'Category',
