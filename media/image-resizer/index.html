@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Image Resizer | Toolity Media</title>
+  <link rel="canonical" href="https://toolity.in/media/image-resizer/">
+  <meta name="description" content="Free online image resizer: change the width and height of JPG, PNG and WebP images in pixels or percent, keep the aspect ratio, use social presets and download — all in your browser, no upload.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Image Resizer | Toolity Media">
+  <meta property="og:description" content="Free online image resizer: change the width and height of JPG, PNG and WebP images in pixels or percent, keep the aspect ratio, use social presets and download — all in your browser, no upload.">
+  <meta property="og:url" content="https://toolity.in/media/image-resizer/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=4.5" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=4.5">
+  <link rel="stylesheet" href="/styles/tools/image-resizer.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Image Resizer",
+        "url": "https://toolity.in/media/image-resizer/",
+        "description": "Free online image resizer: change the width and height of JPG, PNG and WebP images in pixels or percent, keep the aspect ratio, use social presets and download — all in your browser, no upload.",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Media", "item": "https://toolity.in/media/" },
+          { "@type": "ListItem", "position": 3, "name": "Image Resizer", "item": "https://toolity.in/media/image-resizer/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Is my image uploaded anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. The image is decoded and processed on a canvas in your browser tab. Nothing is sent to a server, and nothing is kept after you close the page." } },
+          { "@type": "Question", "name": "Does shrinking lose quality?", "acceptedAnswer": { "@type": "Answer", "text": "Large reductions are done in halving steps with high-quality smoothing, which avoids the jagged, shimmering edges of a single big downscale. Enlarging cannot add detail — it only interpolates." } },
+          { "@type": "Question", "name": "What happens when the preset has a different shape?", "acceptedAnswer": { "@type": "Answer", "text": "Pick under Settings: Stretch distorts to the exact size, Crop to fill trims the edges to keep proportions, Fit inside keeps everything and pads with transparency (white for JPG)." } },
+          { "@type": "Question", "name": "Is the photo rotated correctly?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — phone photos are turned upright using their EXIF orientation before resizing. EXIF metadata is not copied to the new file." } },
+          { "@type": "Question", "name": "What is the maximum size?", "acceptedAnswer": { "@type": "Answer", "text": "Up to 16,384 px per side and 50 MB per file. Very large canvases may fail on phones with little memory." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/media/" class="breadcrumb-link">Media</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Image Resizer</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Media</span>
+            <h1 class="page-title">Image Resizer</h1>
+            <p class="page-desc">Resize any photo to exact pixels or a percentage, with the aspect ratio locked and a high-quality downscale — privately in your browser.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" data-split="40/60" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge" id="result-badge">Drop a file to begin</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result" aria-label="Copy result" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download result" aria-label="Download result" disabled>
+                <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                <span>Download</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Source</span>
+                <span class="pane-badge" id="source-badge">No file loaded</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content pane-content-between">
+                <div class="media-canvas-viewport">
+                  <div id="dropzone" class="video-dropzone" tabindex="0" role="button" aria-label="Drop an image here or click to browse">
+                    <input type="file" id="file-input" accept="image/*">
+                    <div class="video-drop-icon">
+                      <iconify-icon icon="lucide:upload-cloud" width="22" height="22"></iconify-icon>
+                    </div>
+                    <div class="video-drop-title">Drop an image here or click to browse</div>
+                    <div class="video-drop-subtitle">JPG, PNG, WebP, GIF, AVIF, BMP — up to 50 MB</div>
+                  </div>
+                  <img id="source-img" alt="Original image" class="media-preview-img" width="360" height="240">
+                </div>
+                <div class="img-size-row" id="size-row" hidden>
+                  <label class="img-size-field" for="opt-w"><span>Width</span><input type="number" id="opt-w" class="input-clean" min="1" max="16384" step="1" inputmode="numeric" placeholder="px"></label>
+                  <button type="button" class="btn-toolbar-sm img-lock is-locked" id="btn-lock" aria-pressed="true" title="Keep aspect ratio" aria-label="Keep aspect ratio"><iconify-icon icon="lucide:link" width="14" height="14"></iconify-icon></button>
+                  <label class="img-size-field" for="opt-h"><span>Height</span><input type="number" id="opt-h" class="input-clean" min="1" max="16384" step="1" inputmode="numeric" placeholder="px"></label>
+                  <label class="img-size-field" for="opt-pct"><span>%</span><input type="number" id="opt-pct" class="input-clean" min="1" max="800" step="1" inputmode="numeric" placeholder="100"></label>
+                </div>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Resized</span>
+                <span class="pane-badge" id="output-badge">Awaiting file</span>
+              </div>
+              <div class="pane-content pane-content-between">
+                <div class="media-canvas-viewport">
+                  <div id="output-empty" class="media-empty-placeholder">
+                    <iconify-icon icon="lucide:scaling" width="32" height="32"></iconify-icon>
+                    <p>The resized image appears here</p>
+                  </div>
+                  <img id="output-img" alt="Result image" class="media-preview-img" width="360" height="240">
+                </div>
+                <div>
+                  <button type="button" id="btn-compress" class="btn-toolbar-sm btn-brand-sm btn-primary-action" disabled>
+                    <iconify-icon icon="lucide:scaling" width="16" height="16"></iconify-icon>
+                    <span id="btn-compress-label">Resize image</span>
+                  </button>
+                  <div class="slim-progress-bar" id="progress-bar">
+                    <div class="slim-progress-fill" id="progress-fill"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">Same format</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item">
+                <label for="opt-preset">Preset</label>
+                <select id="opt-preset" class="select-clean">
+                  <option value="" selected>Custom</option>
+                  <option value="1080x1080">Instagram post · 1080 × 1080</option>
+                  <option value="1080x1350">Instagram portrait · 1080 × 1350</option>
+                  <option value="1080x1920">Story / Reel · 1080 × 1920</option>
+                  <option value="1200x630">Open Graph / Facebook · 1200 × 630</option>
+                  <option value="1500x500">X / Twitter header · 1500 × 500</option>
+                  <option value="1280x720">HD 720p · 1280 × 720</option>
+                  <option value="1920x1080">Full HD · 1920 × 1080</option>
+                  <option value="3840x2160">4K · 3840 × 2160</option>
+                </select>
+              </div>
+              <div class="control-item">
+                <label for="opt-fit">When the shape differs</label>
+                <select id="opt-fit" class="select-clean">
+                  <option value="stretch" selected>Stretch to fit</option>
+                  <option value="cover">Crop to fill (cover)</option>
+                  <option value="contain">Fit inside (pad)</option>
+                </select>
+              </div>
+              <div class="control-item">
+                <label for="opt-format">Output format</label>
+                <select id="opt-format" class="select-clean">
+                  <option value="auto" selected>Same as original</option>
+                  <option value="image/png">PNG</option>
+                  <option value="image/jpeg">JPG</option>
+                  <option value="image/webp">WebP</option>
+                </select>
+              </div>
+              <div class="control-item">
+                <label for="opt-quality">Quality (JPG / WebP)</label>
+                <input type="range" id="opt-quality" class="range-slider-clean" min="40" max="100" step="1" value="92">
+                <span class="range-val-badge" id="opt-quality-val">92</span>
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Use Image Resizer in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Drop an image</h3>
+              <p class="step-desc">Drag a JPG, PNG, WebP, GIF or AVIF onto the left pane. Its size appears under the preview.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Type the new size</h3>
+              <p class="step-desc">Enter a width, height or percentage — the other side follows while the link is on. Presets and format live in Settings.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Resize and download</h3>
+              <p class="step-desc">Click <strong>Resize image</strong>, check the result on the right and download it.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Image Resizer — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Is my image uploaded anywhere?</summary>
+              <p>No. The image is decoded and processed on a canvas in your browser tab. Nothing is sent to a server, and nothing is kept after you close the page.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Does shrinking lose quality?</summary>
+              <p>Large reductions are done in halving steps with high-quality smoothing, which avoids the jagged, shimmering edges of a single big downscale. Enlarging cannot add detail — it only interpolates.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What happens when the preset has a different shape?</summary>
+              <p>Pick under Settings: <em>Stretch</em> distorts to the exact size, <em>Crop to fill</em> trims the edges to keep proportions, <em>Fit inside</em> keeps everything and pads with transparency (white for JPG).</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is the photo rotated correctly?</summary>
+              <p>Yes — phone photos are turned upright using their EXIF orientation before resizing. EXIF metadata is not copied to the new file.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What is the maximum size?</summary>
+              <p>Up to 16,384 px per side and 50 MB per file. Very large canvases may fail on phones with little memory.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="media"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=3.6"></script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="/scripts/image-common.js?v=1.0"></script>
+  <script src="/media/image-resizer/image-resizer.js?v=1.0"></script>
+</body>
+</html>

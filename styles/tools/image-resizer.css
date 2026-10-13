@@ -1,0 +1,8 @@
+/* Designed by Kapil Pidhwani: Image Resizer — W · lock · H · % row under the preview; wraps on narrow cards via @container */
+.img-size-row { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) minmax(0, 0.7fr); align-items: end; gap: 0.5rem; margin-top: 0.75rem; min-width: 0; }
+.img-size-row[hidden] { display: none; }
+.img-size-field { display: flex; flex-direction: column; gap: 0.25rem; font-size: 0.75rem; color: var(--text-muted); min-width: 0; }
+.img-size-field .input-clean { min-width: 0; font-family: var(--font-mono); }
+.img-lock { height: 38px; justify-content: center; }
+.img-lock.is-locked { color: var(--brand); border-color: var(--brand); }
+@container (max-width: 380px) { .img-size-row { grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); } .img-size-field:last-child { grid-column: 1 / -1; } }
