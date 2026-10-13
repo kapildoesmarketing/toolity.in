@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Audio Waveform Image Generator | Toolity Media</title>
+  <link rel="canonical" href="https://toolity.in/media/audio-waveform-image-generator/">
+  <meta name="description" content="Free online audio waveform image generator: turn an MP3, WAV or M4A into a PNG or SVG waveform with bars, mirrored or line styles, custom colours and a transparent background. In your browser — no upload.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Audio Waveform Image Generator | Toolity Media">
+  <meta property="og:description" content="Free online audio waveform image generator: turn an MP3, WAV or M4A into a PNG or SVG waveform with bars, mirrored or line styles, custom colours and a transparent background. In your browser — no upload.">
+  <meta property="og:url" content="https://toolity.in/media/audio-waveform-image-generator/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=4.5" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=4.5">
+  <link rel="stylesheet" href="/styles/tools/audio-waveform-image-generator.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Audio Waveform Image Generator",
+        "url": "https://toolity.in/media/audio-waveform-image-generator/",
+        "description": "Free online audio waveform image generator: turn an MP3, WAV or M4A into a PNG or SVG waveform with bars, mirrored or line styles, custom colours and a transparent background. In your browser — no upload.",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Media", "item": "https://toolity.in/media/" },
+          { "@type": "ListItem", "position": 3, "name": "Audio Waveform Image Generator", "item": "https://toolity.in/media/audio-waveform-image-generator/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Is my audio uploaded anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. The file is decoded by your browser's Web Audio engine, processed on your device and encoded in the page. Nothing is sent to a server." } },
+          { "@type": "Question", "name": "PNG or SVG?", "acceptedAnswer": { "@type": "Answer", "text": "PNG is a ready-to-post image at the chosen size. SVG is a vector file that stays sharp at any size and can be recoloured in Figma, Illustrator or CSS." } },
+          { "@type": "Question", "name": "How is the waveform drawn?", "acceptedAnswer": { "@type": "Answer", "text": "Each bar (or point) is the peak level of its slice of the track across all channels, scaled so the loudest moment fills the height." } },
+          { "@type": "Question", "name": "Can I make it match my brand?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — pick any wave colour and background, or keep the background transparent to place it over artwork." } },
+          { "@type": "Question", "name": "Does it work on long files?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Hour-long podcasts render in a second or two because only peaks are measured." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/media/" class="breadcrumb-link">Media</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Audio Waveform Image Generator</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Media</span>
+            <h1 class="page-title">Audio Waveform Image Generator</h1>
+            <p class="page-desc">Turn any track into a clean waveform graphic — bars, mirrored or line, your colours, PNG or SVG.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" data-split="40/60" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge" id="result-badge">Drop a file to begin</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy the image (PNG) or SVG markup" aria-label="Copy the image (PNG) or SVG markup" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download result" aria-label="Download result" disabled>
+                <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                <span>Download</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Source</span>
+                <span class="pane-badge" id="source-badge">No file loaded</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content pane-content-between">
+                <div class="media-canvas-viewport">
+                  <div id="dropzone" class="video-dropzone" tabindex="0" role="button" aria-label="Drop an audio file here or click to browse">
+                    <input type="file" id="file-input" accept="audio/*, .mp3, .wav, .m4a, .aac, .ogg, .opus, .flac, .weba, .webm">
+                    <div class="video-drop-icon">
+                      <iconify-icon icon="lucide:upload-cloud" width="22" height="22"></iconify-icon>
+                    </div>
+                    <div class="video-drop-title">Drop an audio file here or click to browse</div>
+                    <div class="video-drop-subtitle">MP3, WAV, M4A, OGG, FLAC — up to 200 MB</div>
+                  </div>
+                  <div id="source-wrap" class="aud-player" hidden>
+                    <canvas id="source-wave" class="aud-wave" aria-label="Source waveform"></canvas>
+                    <audio id="source-audio" controls preload="metadata"></audio>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Waveform image</span>
+                <span class="pane-badge" id="output-badge">Awaiting file</span>
+              </div>
+              <div class="pane-content pane-content-between">
+                <div class="media-canvas-viewport">
+                  <div id="output-empty" class="media-empty-placeholder">
+                    <iconify-icon icon="lucide:audio-lines" width="32" height="32"></iconify-icon>
+                    <p>The waveform image appears here</p>
+                  </div>
+                  <img id="output-img" alt="Waveform image" class="media-preview-img wfi-img" width="600" height="150">
+                </div>
+                <div>
+                  <button type="button" id="btn-compress" class="btn-toolbar-sm btn-brand-sm btn-primary-action" disabled>
+                    <iconify-icon icon="lucide:audio-lines" width="16" height="16"></iconify-icon>
+                    <span id="btn-compress-label">Generate image</span>
+                  </button>
+                  <div class="slim-progress-bar" id="progress-bar">
+                    <div class="slim-progress-fill" id="progress-fill"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">Bars · 1800 × 400 · PNG</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item">
+                <label for="opt-style">Style</label>
+                <select id="opt-style" class="select-clean">
+                  <option value="bars" selected>Rounded bars</option>
+                  <option value="mirror">Mirrored (filled)</option>
+                  <option value="line">Line</option>
+                </select>
+              </div>
+              <div class="control-item">
+                <label for="opt-size">Size</label>
+                <select id="opt-size" class="select-clean">
+                  <option value="1800x400" selected>Banner · 1800 × 400</option>
+                  <option value="1200x300">Wide · 1200 × 300</option>
+                  <option value="1080x1080">Square · 1080 × 1080</option>
+                  <option value="1920x1080">Full HD · 1920 × 1080</option>
+                  <option value="3000x600">Print · 3000 × 600</option>
+                </select>
+              </div>
+              <div class="control-item">
+                <label for="opt-bar">Bar width</label>
+                <input type="range" id="opt-bar" class="range-slider-clean" min="1" max="24" step="1" value="6">
+                <span class="range-val-badge" id="opt-bar-val">6 px</span>
+              </div>
+              <div class="control-item">
+                <label for="opt-gap">Gap</label>
+                <input type="range" id="opt-gap" class="range-slider-clean" min="0" max="12" step="1" value="3">
+                <span class="range-val-badge" id="opt-gap-val">3 px</span>
+              </div>
+              <div class="control-item">
+                <label for="opt-color">Wave colour</label>
+                <input type="color" id="opt-color" value="#e8590c">
+              </div>
+              <div class="control-item">
+                <label for="opt-bg">Background</label>
+                <input type="color" id="opt-bg" value="#ffffff">
+              </div>
+              <div class="control-item">
+                <input type="checkbox" id="opt-transparent" checked>
+                <label for="opt-transparent">Transparent background</label>
+              </div>
+              <div class="control-item">
+                <label for="opt-format">File type</label>
+                <select id="opt-format" class="select-clean">
+                  <option value="png" selected>PNG image</option>
+                  <option value="svg">SVG (vector)</option>
+                </select>
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Use Audio Waveform Image Generator in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Drop an audio file</h3>
+              <p class="step-desc">Drag a song, podcast or voice note onto the left pane. A waveform image appears immediately.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Style it</h3>
+              <p class="step-desc">Open Settings to change the style, size, bar width, colours and transparency — the preview updates live.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Download</h3>
+              <p class="step-desc">Save as PNG for social posts or SVG for print and web, or copy it straight into a design tool.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Audio Waveform Image Generator — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Is my audio uploaded anywhere?</summary>
+              <p>No. The file is decoded by your browser's Web Audio engine, processed on your device and encoded in the page. Nothing is sent to a server.</p>
+            </details>
+            <details class="faq-item">
+              <summary>PNG or SVG?</summary>
+              <p>PNG is a ready-to-post image at the chosen size. SVG is a vector file that stays sharp at any size and can be recoloured in Figma, Illustrator or CSS.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How is the waveform drawn?</summary>
+              <p>Each bar (or point) is the peak level of its slice of the track across all channels, scaled so the loudest moment fills the height.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can I make it match my brand?</summary>
+              <p>Yes — pick any wave colour and background, or keep the background transparent to place it over artwork.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Does it work on long files?</summary>
+              <p>Yes. Hour-long podcasts render in a second or two because only peaks are measured.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="media"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=3.6"></script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="/scripts/audio-common.js?v=1.1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lamejs@1.2.1/lame.all.js" defer></script>
+  <script src="/media/audio-waveform-image-generator/audio-waveform-image-generator.js?v=1.0"></script>
+</body>
+</html>
