@@ -4144,14 +4144,14 @@ body {
   .game-key { min-width: 44px; min-height: 44px; font-size: 1rem; }
 }
 
-/* ═══════════ Scrollbars — thin brand-orange thumb on a clear track, every inner scroll area (EQ bank, lists, tables, panes) ═══════════
+/* ═══════════ Scrollbars — thin brand-orange thumb on a clear track: the page itself + every inner scroll area (EQ bank, lists, tables, panes) ═══════════
  * Designed by Kapil Pidhwani: standard scrollbar-color/-width (Chrome 121+, Firefox) with the ::-webkit-scrollbar fallback for Safari.
  * Pills/tabs that hide their bar (.segmented-group, .type-tabs-scrollable) keep scrollbar-width: none — their class rules win on specificity.
- * The page's own scrollbar is left native. */
-body * { scrollbar-width: thin; scrollbar-color: color-mix(in srgb, var(--brand) 55%, transparent) transparent; }
+ * The page scrollbar (html) matches; it skips the :hover brighten because the page is always hovered — Safari still brightens via the webkit thumb. */
+html, body * { scrollbar-width: thin; scrollbar-color: color-mix(in srgb, var(--brand) 55%, transparent) transparent; }
 body *:hover { scrollbar-color: var(--brand) transparent; }
-body *::-webkit-scrollbar { width: 6px; height: 6px; }
-body *::-webkit-scrollbar-track { background: transparent; }
-body *::-webkit-scrollbar-thumb { background: color-mix(in srgb, var(--brand) 55%, transparent); border-radius: 999px; }
-body *::-webkit-scrollbar-thumb:hover { background: var(--brand); }
-body *::-webkit-scrollbar-corner { background: transparent; }
+html::-webkit-scrollbar, body *::-webkit-scrollbar { width: 6px; height: 6px; }
+html::-webkit-scrollbar-track, body *::-webkit-scrollbar-track { background: transparent; }
+html::-webkit-scrollbar-thumb, body *::-webkit-scrollbar-thumb { background: color-mix(in srgb, var(--brand) 55%, transparent); border-radius: 999px; }
+html::-webkit-scrollbar-thumb:hover, body *::-webkit-scrollbar-thumb:hover { background: var(--brand); }
+html::-webkit-scrollbar-corner, body *::-webkit-scrollbar-corner { background: transparent; }
