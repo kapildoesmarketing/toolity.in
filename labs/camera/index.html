@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Camera | Toolity Labs</title>
+  <link rel="canonical" href="https://toolity.in/labs/camera/">
+  <meta name="description" content="Free online camera: take photos and record videos with your webcam or phone camera in the browser — switch front/back, self-timer, grid, mirror and resolution, then download. Nothing is uploaded.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Camera | Toolity Labs">
+  <meta property="og:description" content="Free online camera: take photos and record videos with your webcam or phone camera in the browser — switch front/back, self-timer, grid, mirror and resolution, then download. Nothing is uploaded.">
+  <meta property="og:url" content="https://toolity.in/labs/camera/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=4.5" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=4.5">
+  <link rel="stylesheet" href="/styles/tools/camera.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Camera",
+        "url": "https://toolity.in/labs/camera/",
+        "description": "Free online camera: take photos and record videos with your webcam or phone camera in the browser — switch front/back, self-timer, grid, mirror and resolution, then download. Nothing is uploaded.",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Labs", "item": "https://toolity.in/labs/" },
+          { "@type": "ListItem", "position": 3, "name": "Camera", "item": "https://toolity.in/labs/camera/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Are my photos uploaded?", "acceptedAnswer": { "@type": "Answer", "text": "No. The camera feed is shown and captured inside your browser tab. Shots exist only in this page's memory until you download them — closing the tab discards them." } },
+          { "@type": "Question", "name": "Why does it ask for permission?", "acceptedAnswer": { "@type": "Answer", "text": "Browsers never let a page use the camera or microphone without your consent. You can revoke it at any time from the padlock icon in the address bar." } },
+          { "@type": "Question", "name": "Why are my selfies mirrored?", "acceptedAnswer": { "@type": "Answer", "text": "Mirroring makes the preview behave like a mirror, which feels natural. Turn it off in Settings if you want text and logos to read correctly in photos." } },
+          { "@type": "Question", "name": "What format are videos saved in?", "acceptedAnswer": { "@type": "Answer", "text": "Your browser's recorder decides: WebM (VP8/VP9 + Opus) in Chrome, Edge and Firefox; MP4 in Safari. Use the Video Converter for other formats." } },
+          { "@type": "Question", "name": "How is this different from the Photo Booth?", "acceptedAnswer": { "@type": "Answer", "text": "The Photo Booth makes decorated photo strips. Camera is a plain, full-resolution camera for single photos and videos." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/labs/" class="breadcrumb-link">Labs</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Camera</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Labs</span>
+            <h1 class="page-title">Camera</h1>
+            <p class="page-desc">Take photos and record videos with your webcam or phone camera — timer, grid, mirror and front/back switch. Everything stays on your device.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" data-split="40/60" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge" id="result-badge">Camera off</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy the selected photo" aria-label="Copy the selected photo" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download the selected shot" aria-label="Download the selected shot" disabled>
+                <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                <span>Download</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Camera</span>
+                <span class="pane-badge" id="source-badge">Off</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content pane-content-between">
+                <div class="media-canvas-viewport">
+                  <video id="cam-video" class="source-video-player cam-video" playsinline muted aria-label="Live camera"></video>
+                  <div id="cam-grid" class="cam-grid" hidden aria-hidden="true"></div>
+                  <div id="cam-count" class="cam-count" hidden aria-live="assertive"></div>
+                  <div id="cam-flash" class="cam-flash" aria-hidden="true"></div>
+                  <div id="cam-rec" class="cam-rec" hidden><span class="status-dot"></span><span id="cam-rec-time">0:00</span></div>
+                </div>
+                <div class="cam-bar">
+                  <div class="segmented-group" id="cam-mode" role="group" aria-label="Capture mode">
+                    <button type="button" class="seg-pill active" data-value="photo">Photo</button>
+                    <button type="button" class="seg-pill" data-value="video">Video</button>
+                  </div>
+                  <button type="button" class="btn-toolbar-sm" id="btn-flip" title="Switch between front and back camera" aria-label="Switch camera" disabled><iconify-icon icon="lucide:switch-camera" width="16" height="16"></iconify-icon></button>
+                </div>
+                <div>
+                  <button type="button" id="btn-compress" class="btn-toolbar-sm btn-brand-sm btn-primary-action">
+                    <iconify-icon icon="lucide:camera" width="16" height="16"></iconify-icon>
+                    <span id="btn-compress-label">Start camera</span>
+                  </button>
+                  <div class="slim-progress-bar" id="progress-bar">
+                    <div class="slim-progress-fill" id="progress-fill"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Shots</span>
+                <span class="pane-badge" id="output-badge">None yet</span>
+              </div>
+              <div class="pane-content pane-content-between">
+                <div class="media-canvas-viewport">
+                  <div id="output-empty" class="media-empty-placeholder">
+                    <iconify-icon icon="lucide:images" width="32" height="32"></iconify-icon>
+                    <p>Your photos and videos appear here</p>
+                  </div>
+                  <img id="output-img" alt="Selected photo" class="media-preview-img">
+                  <video id="output-video" class="video-converted-preview" controls playsinline></video>
+                </div>
+                <div>
+                <div class="thumb-rail cam-rail" id="cam-rail" aria-label="Captured shots"></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">No timer · 1080p · Mirrored</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item">
+                <label for="opt-timer">Self-timer</label>
+                <select id="opt-timer" class="select-clean">
+                  <option value="0" selected>Off</option>
+                  <option value="3">3 seconds</option>
+                  <option value="10">10 seconds</option>
+                </select>
+              </div>
+              <div class="control-item">
+                <label for="opt-res">Resolution</label>
+                <select id="opt-res" class="select-clean">
+                  <option value="720">720p (HD)</option>
+                  <option value="1080" selected>1080p (Full HD)</option>
+                  <option value="2160">4K (if the camera supports it)</option>
+                </select>
+              </div>
+              <div class="control-item">
+                <input type="checkbox" id="opt-mirror" checked>
+                <label for="opt-mirror">Mirror the preview and photos (selfie view)</label>
+              </div>
+              <div class="control-item">
+                <input type="checkbox" id="opt-grid">
+                <label for="opt-grid">Show rule-of-thirds grid</label>
+              </div>
+              <div class="control-item">
+                <input type="checkbox" id="opt-audio" checked>
+                <label for="opt-audio">Record sound with videos</label>
+              </div>
+              <div class="control-item">
+                <label for="opt-format">Photo format</label>
+                <select id="opt-format" class="select-clean">
+                  <option value="image/jpeg" selected>JPG</option>
+                  <option value="image/png">PNG</option>
+                  <option value="image/webp">WebP</option>
+                </select>
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Use Camera in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Start the camera</h3>
+              <p class="step-desc">Click <strong>Start camera</strong> and allow access. On phones, use the switch button for the front or back camera.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Shoot</h3>
+              <p class="step-desc">Choose Photo or Video, then press the button. Settings has a self-timer, grid, mirror, resolution and sound.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Keep the best</h3>
+              <p class="step-desc">Shots collect on the right. Click one to view it, then download or copy it.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Camera — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Are my photos uploaded?</summary>
+              <p>No. The camera feed is shown and captured inside your browser tab. Shots exist only in this page's memory until you download them — closing the tab discards them.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why does it ask for permission?</summary>
+              <p>Browsers never let a page use the camera or microphone without your consent. You can revoke it at any time from the padlock icon in the address bar.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why are my selfies mirrored?</summary>
+              <p>Mirroring makes the preview behave like a mirror, which feels natural. Turn it off in Settings if you want text and logos to read correctly in photos.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What format are videos saved in?</summary>
+              <p>Your browser's recorder decides: WebM (VP8/VP9 + Opus) in Chrome, Edge and Firefox; MP4 in Safari. Use the Video Converter for other formats.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How is this different from the Photo Booth?</summary>
+              <p>The Photo Booth makes decorated photo strips. Camera is a plain, full-resolution camera for single photos and videos.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="labs"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=3.6"></script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="/labs/camera/camera.js?v=1.0"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+/* Designed by Kapil Pidhwani: Camera — overlays (grid, countdown, REC badge, shutter flash) stacked on the live preview */
+.cam-video.cam-mirror { transform: scaleX(-1); }
+.cam-grid, .cam-count, .cam-flash { position: absolute; inset: 0; pointer-events: none; }
+.cam-grid[hidden], .cam-count[hidden], .cam-rec[hidden] { display: none; }
+.cam-grid { background: linear-gradient(90deg, transparent calc(33.33% - 0.5px), rgba(255, 255, 255, 0.45) 0, rgba(255, 255, 255, 0.45) calc(33.33% + 0.5px), transparent 0, transparent calc(66.66% - 0.5px), rgba(255, 255, 255, 0.45) 0, rgba(255, 255, 255, 0.45) calc(66.66% + 0.5px), transparent 0), linear-gradient(180deg, transparent calc(33.33% - 0.5px), rgba(255, 255, 255, 0.45) 0, rgba(255, 255, 255, 0.45) calc(33.33% + 0.5px), transparent 0, transparent calc(66.66% - 0.5px), rgba(255, 255, 255, 0.45) 0, rgba(255, 255, 255, 0.45) calc(66.66% + 0.5px), transparent 0); }
+.cam-count { display: flex; align-items: center; justify-content: center; font-size: clamp(3rem, 18cqi, 6rem); font-weight: 700; color: #fff; text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6); }
+.cam-flash { background: #fff; opacity: 0; }
+.cam-flash.is-on { animation: cam-flash 0.35s ease-out; }
+@keyframes cam-flash { from { opacity: 0.85; } to { opacity: 0; } }
+.cam-rec { position: absolute; top: 0.6rem; left: 0.6rem; display: flex; align-items: center; gap: 0.35rem; padding: 0.2rem 0.55rem; border-radius: var(--radius-pill); background: rgba(0, 0, 0, 0.6); color: #fff; font-family: var(--font-mono); font-size: 0.8rem; }
+.cam-rec .status-dot { background: #ef4444; animation: cam-blink 1s steps(2) infinite; }
+@keyframes cam-blink { 50% { opacity: 0.2; } }
+.cam-bar { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; margin-top: 0.75rem; min-width: 0; }
+.cam-bar .segmented-group { min-width: 0; max-width: 100%; }
+.cam-rail { margin: 0.75rem 0 0; max-height: 180px; overflow-y: auto; }
+.cam-rail .thumb-slot.is-next { border-width: 2px; }
