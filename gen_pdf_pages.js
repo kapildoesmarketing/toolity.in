@@ -7,7 +7,7 @@ const TOOLS = require('./cfg_pdf_tools.js');
 const only = process.argv[2];
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const jsonStr = (s) => JSON.stringify(String(s).replace(/<[^>]+>/g, ''));
-const MAIN_V = '3.7', CSS_V = '4.8';
+const MAIN_V = '3.8', CSS_V = '4.8';
 
 function sourcePane(t) {
   const drop = `

@@ -1248,6 +1248,14 @@
         tags: ['camera', 'webcam', 'take photo', 'selfie', 'record video', 'webcam recorder', 'online camera', 'front camera', 'mirror', 'timer', 'snapshot', 'phone camera']
       },
       {
+        id: 'blob-maker',
+        title: 'Blob Maker',
+        category: 'Labs',
+        url: 'labs/blob-maker/',
+        icon: 'lucide:shapes',
+        tags: ['blob maker', 'blob generator', 'svg blob', 'organic shape', 'animated blob', 'blob animation', 'svg shape', 'css blob', 'clip-path', 'background shape', 'hero background', 'morphing shape']
+      },
+      {
         id: 'cat-widgets',
         title: 'Widgets',
         category: 'Category',

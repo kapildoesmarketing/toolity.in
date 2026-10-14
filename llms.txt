@@ -106,6 +106,7 @@
 ## Labs — links, QR codes and everyday utilities
 
 - [Add to Calendar Link Creator](https://toolity.in/labs/add-to-calendar-link-creator/): Free add-to-calendar link generator: create Google Calendar, Outlook, Office 365 and Yahoo event links and download an .ics file for Apple Calendar. Repeat rules, reminders and time zones — nothing uploaded.
+- [Blob Maker](https://toolity.in/labs/blob-maker/): Free online blob maker: design organic SVG blob shapes with full control over points, randomness, smoothness, gradients, background, layers, blur, grain and animation. Export SVG, animated SVG, CSS, PNG, GIF or video — all in your browser.
 - [Camera](https://toolity.in/labs/camera/): Free online camera: take photos and record videos with your webcam or phone camera in the browser — switch front/back, self-timer, grid, mirror and resolution, then download. Nothing is uploaded.
 - [Color Converter](https://toolity.in/labs/color-converter/): Free online colour converter: turn any CSS colour — hex, RGB, HSL, HWB, CMYK, OKLCH, named — into every other format at once, with alpha, uppercase hex and copy buttons. In your browser.
 - [Color Palette Generator](https://toolity.in/labs/color-palette-generator/): Free online colour palette generator: enter one colour and get complementary, analogous, triadic, tetradic, split-complementary, shades and tints palettes as hex, RGB or HSL — exported as CSS variables, JSON or PNG. In your browser.
