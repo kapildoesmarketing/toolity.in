@@ -1270,6 +1270,22 @@
         url: 'widgets/flip-clock/',
         icon: 'lucide:clock',
         tags: ['flip clock', 'clock', 'widget', 'notion', 'embed', 'notion clock', 'digital clock', 'split flap', 'world clock', 'time']
+      },
+      {
+        id: 'sunrise-sunset',
+        title: 'Sunrise & Sunset Widget',
+        category: 'Widgets',
+        url: 'widgets/sunrise-sunset/',
+        icon: 'lucide:sunrise',
+        tags: ['sunrise', 'sunset', 'sun', 'day length', 'golden hour', 'twilight', 'widget', 'notion', 'embed', 'notion widget', 'daylight', 'weather']
+      },
+      {
+        id: 'timer',
+        title: 'Timer Widget',
+        category: 'Widgets',
+        url: 'widgets/timer/',
+        icon: 'lucide:timer',
+        tags: ['timer', 'pomodoro', 'stopwatch', 'days since', 'focus timer', 'count up', 'widget', 'notion', 'embed', 'notion timer', 'study timer', 'lap timer']
       }
     ];
 

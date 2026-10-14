@@ -153,6 +153,8 @@
 
 - [Countdown Timer Widget](https://toolity.in/widgets/countdown/): Free embeddable Countdown Timer widget for Notion and websites. Count down to any date and time zone with custom colours, fonts and flip cards — all in the URL.
 - [Flip Clock Widget](https://toolity.in/widgets/flip-clock/): Free embeddable Flip Clock widget for Notion and any website. Customise 12/24-hour format, time zone, colours, fonts and transparency — instant URL, no account.
+- [Sunrise & Sunset Widget](https://toolity.in/widgets/sunrise-sunset/): Free embeddable Sunrise & Sunset widget for Notion and websites. Shows today's sunrise, sunset, day length and a live sun arc for any city — calculated in the browser, no account.
+- [Timer Widget](https://toolity.in/widgets/timer/): Free embeddable Timer widget for Notion and websites: a Pomodoro focus timer, a stopwatch with laps, or a "days since" counter. Keeps running after a refresh — no account, all in the URL.
 
 ## Optional
 
