@@ -116,6 +116,10 @@
         const n = Number(raw);
         if (!Number.isFinite(n)) out[f.key] = f.default;
         else out[f.key] = Math.min(f.max ?? 9999, Math.max(f.min ?? -9999, Math.round(n)));
+      } else if (f.type === 'decimal') {
+        // Coordinates etc.: finite, clamped, rounded to f.decimals (default 2 ≈ 1 km for lat/lon)
+        const n = Number(raw), k = 10 ** (f.decimals ?? 2);
+        out[f.key] = Number.isFinite(n) ? Math.round(Math.min(f.max ?? 9999, Math.max(f.min ?? -9999, n)) * k) / k : f.default;
       } else if (f.type === 'enum') {
         out[f.key] = Array.isArray(f.options) && f.options.includes(raw) ? raw : f.default;
       } else if (f.type === 'color') {
@@ -162,6 +166,26 @@
     }
     const qs = sp.toString();
     return qs ? `${qs}&v=1` : '';
+  }
+
+  /**
+   * Wall-clock "YYYY-MM-DDTHH:mm" in an IANA zone (or 'local') → epoch ms. Shared by Countdown and Timer (days since).
+   * Designed by Kapil Pidhwani: Intl offset probing, no Moment/Luxon. Ceiling: an ambiguous DST fold hour picks the first
+   * offset; upgrade path: Temporal.ZonedDateTime once it is baseline.
+   */
+  function zonedMs(str, tz) {
+    const m = /^(\d{4})-(\d{2})-(\d{2})(?:T(\d{2}):(\d{2}))?/.exec(str || '');
+    if (!m) return NaN;
+    const Y = +m[1], M = +m[2], D = +m[3], h = +(m[4] || 0), min = +(m[5] || 0);
+    if (!tz || tz === 'local') return new Date(Y, M - 1, D, h, min, 0).getTime();
+    try {
+      const guess = Date.UTC(Y, M - 1, D, h, min, 0), parts = {};
+      for (const p of new Intl.DateTimeFormat('en-US', { timeZone: tz, hour12: false, year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }).formatToParts(new Date(guess))) parts[p.type] = p.value;
+      const asUtc = Date.UTC(+parts.year, +parts.month - 1, +parts.day, (+parts.hour) % 24, +parts.minute, +parts.second);
+      return guess - (asUtc - guess);
+    } catch (e) {
+      return new Date(Y, M - 1, D, h, min, 0).getTime();
+    }
   }
 
   function buildEmbedUrl(slug, schema, state, origin) {
@@ -443,7 +467,7 @@
     }
 
     function iframeSnippet(embedUrl) {
-      return `<iframe src="${embedUrl}" width="100%" height="180" frameborder="0" loading="lazy" allowtransparency="true" title="Toolity ${def.title}"></iframe>`;
+      return `<iframe src="${embedUrl}" width="100%" height="${def.height || 180}" frameborder="0" loading="lazy" allowtransparency="true" title="Toolity ${def.title}"></iframe>`;
     }
 
     function syncOutputs(updateIframeSrc) {
@@ -669,6 +693,8 @@
     buildEmbedUrl,
     buildBuilderUrl,
     contrastRatio,
+    zonedMs,
+    populateTimezoneSelect,
     mountEmbed,
     mountBuilder,
     register

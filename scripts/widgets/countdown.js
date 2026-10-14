@@ -43,42 +43,14 @@
     return sep;
   }
 
-  /**
-   * Convert a wall-clock YYYY-MM-DDTHH:mm string in a specific IANA timezone to epoch ms.
-   * Designed by Kapil Pidhwani: uses Intl.DateTimeFormat offset probing without Moment/Luxon.
-   * Ceiling: ambiguous DST fold hour picks the first offset; upgrade path: Temporal.ZonedDateTime when baseline.
-   */
+  /* Wall-clock → epoch ms now lives in widget-common (ToolityWidgets.zonedMs), shared with the Timer widget. */
   function parseTargetMs(toStr, tz) {
     if (!toStr) {
       // Smart fallback for empty preview: next Jan 1 at 00:00 local time
-      const nextYear = new Date().getFullYear() + 1;
-      return new Date(nextYear, 0, 1, 0, 0, 0).getTime();
+      return new Date(new Date().getFullYear() + 1, 0, 1, 0, 0, 0).getTime();
     }
-    const m = /^(\d{4})-(\d{2})-(\d{2})(?:T(\d{2}):(\d{2}))?/.exec(toStr);
-    if (!m) return Date.now();
-    const Y = +m[1], M = +m[2], D = +m[3], h = +(m[4] || 0), min = +(m[5] || 0);
-    if (!tz || tz === 'local') {
-      return new Date(Y, M - 1, D, h, min, 0).getTime();
-    }
-    try {
-      const utcGuess = Date.UTC(Y, M - 1, D, h, min, 0);
-      const dtf = new Intl.DateTimeFormat('en-US', {
-        timeZone: tz,
-        hour12: false,
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit'
-      });
-      const parts = {};
-      for (const p of dtf.formatToParts(new Date(utcGuess))) parts[p.type] = p.value;
-      const tzAsUtc = Date.UTC(+parts.year, +parts.month - 1, +parts.day, (+parts.hour) % 24, +parts.minute, +parts.second);
-      return utcGuess - (tzAsUtc - utcGuess);
-    } catch (e) {
-      return new Date(Y, M - 1, D, h, min, 0).getTime();
-    }
+    const ms = window.ToolityWidgets.zonedMs(toStr, tz);
+    return Number.isNaN(ms) ? Date.now() : ms;
   }
 
   function formatTargetLabel(toStr, tz) {
