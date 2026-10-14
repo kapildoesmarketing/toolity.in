@@ -4,10 +4,17 @@
 #motion-group { display: flex; flex-direction: column; gap: inherit; }
 .blob-colors { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem; }
 .blob-colors[hidden] { display: none; }
-.blob-color { display: flex; align-items: center; gap: 0.5rem; min-width: 0; font-size: 0.82rem; color: var(--text-secondary); cursor: pointer; }
+.blob-color { display: flex; align-items: center; gap: 0.5rem; min-width: 0; }
+.blob-hex { min-width: 0; flex: 1; font-family: var(--font-mono); font-size: 0.84rem; text-transform: lowercase; }
 .blob-stage { display: flex; align-items: center; justify-content: center; padding: 0.75rem; min-height: 280px; overflow: hidden; }
 .blob-stage.is-transparent { background: repeating-conic-gradient(var(--surface-elevated) 0 25%, var(--surface) 0 50%) 0 0 / 18px 18px; }
 .blob-stage canvas { display: block; max-width: 100%; max-height: 440px; width: auto; height: auto; border-radius: calc(var(--radius-sm) - 2px); box-shadow: var(--shadow-sm); }
 .blob-actions { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; flex-wrap: wrap; }
-.blob-code { max-height: 220px; font-size: 0.74rem; }
+.blob-code { max-height: 220px; font-size: 0.74rem; margin-top: 0.5rem; }
+.blob-code-wrap summary { cursor: pointer; font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); padding: 0.25rem 0; }
+.blob-code-wrap summary:hover { color: var(--brand); }
+/* Split card: the preview pane stays in view while the long control column scrolls (UX audit #3) */
+@container (min-width: 820px) { .split-pane-grid > .tool-pane:last-child { position: sticky; top: 84px; align-self: start; } }
+/* Stacked card (phones): result first, controls after (UX audit #4, rule 38) */
+@container (max-width: 819px) { .split-pane-grid > .tool-pane:last-child { order: -1; } .blob-stage { min-height: 220px; } .blob-stage canvas { max-height: 320px; } }
 @container (max-width: 420px) { .blob-colors { grid-template-columns: minmax(0, 1fr); } }

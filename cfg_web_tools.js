@@ -309,7 +309,7 @@ module.exports = [
     cardDesc: 'Design and animate organic blobs — export SVG, CSS, PNG, GIF or video.', tags: ['blob maker', 'blob generator', 'svg blob', 'organic shape', 'animated blob', 'blob animation', 'svg shape', 'css blob', 'clip-path', 'background shape', 'hero background', 'morphing shape'],
     idle: 'Shape your blob', split: '40/60',
     sourceLabel: 'Design', outputLabel: 'Preview & code', outputIcon: 'lucide:shapes', outputEmpty: 'Your blob will appear here',
-    downloads: [['svg', 'SVG · still', 'lucide:file-image'], ['svg-anim', 'SVG · animated', 'lucide:sparkles'], ['css', 'CSS · clip-path', 'lucide:file-code'], ['png', 'PNG · 1×', 'lucide:image'], ['png-2x', 'PNG · 2×', 'lucide:image'], ['png-4x', 'PNG · 4×', 'lucide:image'], ['webp', 'WebP', 'lucide:image'], ['jpg', 'JPG', 'lucide:image'], ['gif', 'GIF · animated loop', 'lucide:film'], ['webm', 'Video · WebM', 'lucide:video'], ['mp4', 'Video · MP4', 'lucide:video']],
+    downloads: [['svg', 'SVG · still', 'lucide:file-image'], ['svg-anim', 'SVG · animated (needs movement)', 'lucide:sparkles'], ['css', 'CSS · clip-path', 'lucide:file-code'], ['png', 'PNG · 1×', 'lucide:image'], ['png-2x', 'PNG · 2×', 'lucide:image'], ['png-4x', 'PNG · 4×', 'lucide:image'], ['webp', 'WebP', 'lucide:image'], ['jpg', 'JPG', 'lucide:image'], ['gif', 'GIF · loop (needs movement)', 'lucide:film'], ['webm', 'Video · WebM (needs movement)', 'lucide:video'], ['mp4', 'Video · MP4 (needs movement)', 'lucide:video']],
     sourceHtml: `
                 <div class="form-group">
                   <label class="form-label" for="opt-preset"><span>Start from a preset</span><span class="form-label-desc">Changes style, keeps your canvas</span></label>
@@ -369,9 +369,9 @@ module.exports = [
                     <button type="button" class="seg-pill" data-value="solid">Solid</button>
                   </div>
                 </div>
-                <div class="blob-colors">
-                  <label class="blob-color" for="opt-c1"><input type="color" id="opt-c1" class="web-color-input" value="#ff6a2a"><span>Colour 1</span></label>
-                  <label class="blob-color" id="c2-wrap" for="opt-c2"><input type="color" id="opt-c2" class="web-color-input" value="#ffc14d"><span>Colour 2</span></label>
+                <div class="blob-colors" role="group" aria-label="Blob colours">
+                  <div class="blob-color"><input type="color" id="opt-c1" class="web-color-input" value="#ff6a2a" aria-label="Colour 1"><input type="text" id="opt-c1-hex" class="input-clean blob-hex" value="#ff6a2a" maxlength="7" spellcheck="false" autocomplete="off" aria-label="Colour 1 hex"></div>
+                  <div class="blob-color" id="c2-wrap"><input type="color" id="opt-c2" class="web-color-input" value="#ffc14d" aria-label="Colour 2"><input type="text" id="opt-c2-hex" class="input-clean blob-hex" value="#ffc14d" maxlength="7" spellcheck="false" autocomplete="off" aria-label="Colour 2 hex"></div>
                 </div>
                 <div class="form-group" id="angle-group">
                   <label class="form-label" for="opt-angle"><span>Gradient angle</span><span class="form-label-desc"><span id="opt-angle-val">135°</span></span></label>
@@ -391,15 +391,15 @@ module.exports = [
                   </div>
                 </div>
                 <div class="blob-colors" id="bg-colors">
-                  <label class="blob-color" for="opt-bg1"><input type="color" id="opt-bg1" class="web-color-input" value="#fff4ec"><span>Colour 1</span></label>
-                  <label class="blob-color" id="bg2-wrap" for="opt-bg2"><input type="color" id="opt-bg2" class="web-color-input" value="#ffe0cc"><span>Colour 2</span></label>
+                  <div class="blob-color"><input type="color" id="opt-bg1" class="web-color-input" value="#fff4ec" aria-label="Colour 1"><input type="text" id="opt-bg1-hex" class="input-clean blob-hex" value="#fff4ec" maxlength="7" spellcheck="false" autocomplete="off" aria-label="Colour 1 hex"></div>
+                  <div class="blob-color" id="bg2-wrap"><input type="color" id="opt-bg2" class="web-color-input" value="#ffe0cc" aria-label="Colour 2"><input type="text" id="opt-bg2-hex" class="input-clean blob-hex" value="#ffe0cc" maxlength="7" spellcheck="false" autocomplete="off" aria-label="Colour 2 hex"></div>
                 </div>
                 <h3 class="blob-h">Movement</h3>
                 <div class="form-group">
                   <span class="form-label"><span>Movement</span></span>
                   <div class="segmented-group segmented-group-pill" id="seg-motion" role="group" aria-label="Movement">
-                    <button type="button" class="seg-pill active" data-value="off">Off</button>
-                    <button type="button" class="seg-pill" data-value="morph">Morph</button>
+                    <button type="button" class="seg-pill" data-value="off">Off</button>
+                    <button type="button" class="seg-pill active" data-value="morph" data-default>Morph</button>
                     <button type="button" class="seg-pill" data-value="float">Float</button>
                     <button type="button" class="seg-pill" data-value="spin">Spin</button>
                     <button type="button" class="seg-pill" data-value="pulse">Pulse</button>
@@ -420,10 +420,14 @@ module.exports = [
                     <canvas id="blob-canvas" width="1000" height="1000" role="img" aria-label="Blob preview"></canvas>
                   </div>
                   <div class="blob-actions">
+                    <button type="button" class="btn-toolbar-sm" id="btn-play" aria-pressed="true"><iconify-icon icon="lucide:pause" width="14" height="14"></iconify-icon><span>Pause</span></button>
                     <button type="button" class="btn-toolbar-sm" id="btn-share"><iconify-icon icon="lucide:link" width="14" height="14"></iconify-icon><span>Copy share link</span></button>
                     <span class="pane-badge" id="blob-size"></span>
                   </div>
-                  <pre class="web-code blob-code" id="output-code" aria-label="Generated code"></pre>`,
+                  <details class="blob-code-wrap">
+                    <summary>Show code</summary>
+                    <pre class="web-code blob-code" id="output-code" aria-label="Generated code"></pre>
+                  </details>`,
     settingsSummary: '1:1 · 1 layer · no effects',
     settings: `
               <div class="control-item">
@@ -469,7 +473,7 @@ module.exports = [
                   <option value="css">CSS (clip-path)</option>
                 </select>
               </div>`,
-    guide: [['Shape it', 'Pick a style, then drag Points, Randomness and Smoothness — or hit <strong>Randomise</strong> for a new seed. Presets give you a styled starting point.'], ['Colour and move it', 'Choose a solid, linear or radial fill, a background (or transparent) and a movement: morph, float, spin or pulse. Layers, blur, grain and shadow live in Settings.'], ['Export', 'Copy the SVG or CSS, or use Download for SVG, animated SVG, PNG up to 4×, WebP, JPG, a looping GIF or a WebM/MP4 video. Copy share link saves the design in a URL.']],
+    guide: [['Shape it', 'Pick a style, then drag Points, Randomness and Smoothness — or hit <strong>Randomise</strong> for a new seed. The preview stays in view while you scroll the controls. Presets give you a styled starting point.'], ['Colour and move it', 'Choose a solid, linear or radial fill, a background (or transparent) and a movement: morph, float, spin or pulse. Layers, blur, grain and shadow live in Settings.'], ['Export', 'Copy the SVG or CSS, or use Download for SVG, animated SVG, PNG up to 4×, WebP, JPG, a looping GIF or a WebM/MP4 video. Copy share link saves the design in a URL.']],
     faq: [['Which export should I use?', '<strong>SVG</strong> for websites and design tools (Figma, Illustrator) — tiny and sharp at any size. <strong>Animated SVG</strong> plays by itself in any browser via an &lt;img&gt; tag. <strong>CSS</strong> gives a clip-path you can put on any element. <strong>PNG/WebP</strong> for slides and social posts, <strong>GIF</strong> for chats and email, <strong>WebM/MP4</strong> for video editors and reels.'], ['Do the animations loop seamlessly?', 'Yes. Every movement is built on one loop of the length you set, so the last frame flows straight back into the first — in the animated SVG, the GIF and the video alike.'], ['Why does the video take as long as the loop?', 'Browsers record video in real time, so a 6-second loop takes about 6 seconds to export. Keep the tab visible while it records. GIFs are rendered frame by frame instead and are usually quicker.'], ['Will blur and grain look the same everywhere?', 'In browsers, yes. Design tools sometimes render SVG filters (blur, grain, shadow) differently or ignore them; export a PNG if you need an exact match there. Safari before version 18 shows the live preview without blur, but the SVG export keeps it.'], ['Can I come back to a design later?', 'Yes — every setting is saved in the page link. Use <strong>Copy share link</strong> and open it any time; nothing is stored on a server.'], PRIVACY_FAQ]
   }
 ];

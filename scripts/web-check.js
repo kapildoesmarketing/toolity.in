@@ -133,6 +133,12 @@ const CASES = [
     A(B.svg(B.cfg(T), false) === B.svg(B.cfg(T), false), 'same seed + settings must give the same SVG');
     const d0 = B.pathD([[0, 0], [10, 0], [10, 10]], 0); A(d0 === 'M0 0C0 0 10 0 10 0C10 0 10 10 10 10C10 10 0 0 0 0Z', 'smoothness 0 should give straight segments: ' + d0);
     set('opt-seed', 99); await settle(); A(out().text !== first, 'seed did not change the shape');
+    const cvh = () => { const cv = $('blob-canvas'), d = cv.getContext('2d').getImageData(0, 0, cv.width, cv.height).data; let h = 0; for (let i = 0; i < d.length; i += 97) h = (h * 31 + d[i]) | 0; return h; };
+    A(document.querySelector('#seg-motion .seg-pill.active').dataset.value === 'morph' && !$('btn-play').hidden, 'Morph should be the default movement with a Play/Pause button');
+    const h1 = cvh(); await tick(600); A(cvh() !== h1, 'preview canvas should animate');
+    $('btn-play').click(); const h2 = cvh(); await tick(500); A(cvh() === h2 && $('btn-play').textContent.includes('Play'), 'Pause should freeze the preview');
+    $('btn-play').click(); await tick(400); A(cvh() !== h2, 'Play should resume the preview');
+    set('opt-c1-hex', '00aaff'); await settle(); A($('opt-c1').value === '#00aaff', 'hex field should drive the picker: ' + $('opt-c1').value);
     pill('seg-motion', 'morph'); set('opt-layers', 3); set('opt-loop', 2); await settle();
     const doc = new DOMParser().parseFromString(out().text, 'image/svg+xml'), an = doc.querySelectorAll('animate');
     A(!doc.querySelector('parsererror') && an.length === 3, 'animated SVG should parse with one <animate> per layer: ' + an.length);
@@ -148,11 +154,11 @@ const CASES = [
     A(gce === 50, 'GIF frames for a 2 s loop at 25 fps: ' + gce);
     const v = await T.T.download('webm', T); A(v && v.blob.size > 1000 && /webm/.test(v.blob.type), 'WebM export ' + (v && v.blob.type + ' ' + v.blob.size));
     const c1 = await T.T.download('css', T); A(c1 && /clip-path: path\\('M/.test(c1.text) && /@keyframes blob-move/.test(c1.text), 'CSS clip-path + keyframes');
-    const h = location.hash; A(/seed=99/.test(h) && /motion=morph/.test(h), 'share hash: ' + h);
+    const h = location.hash; A(/seed=99/.test(h) && /layers=3/.test(h) && /c1=00aaff/.test(h) && !/motion=/.test(h), 'share hash (Morph is default, so omitted): ' + h);
     set('opt-seed', 5); await settle(); history.replaceState(null, '', h); B.readHash(); A($('opt-seed').value === '99', 'hash should restore the seed');
     pill('seg-motion', 'off'); await settle(); const r0 = await T.T.download('gif', T); A(r0 === null && !$('input-error').hidden, 'a still blob must not export a GIF');
     set('opt-preset', 'aurora'); await settle(); A($('opt-layers').value === '5' && document.querySelector('#seg-bg .seg-pill.active').dataset.value === 'gradient', 'preset applied');
-    $('btn-reset').click(); await settle(); A(location.hash === '' && $('opt-seed').value === '1234' && $('opt-preset').value === '', 'reset: ' + location.hash);`]
+    $('btn-reset').click(); await settle(); A(location.hash === '' && $('opt-seed').value === '1234' && $('opt-preset').value === '' && $('opt-c1-hex').value === '#ff6a2a' && document.querySelector('#seg-motion .seg-pill.active').dataset.value === 'morph', 'reset: ' + location.hash);`]
 ];
 
 (async () => {

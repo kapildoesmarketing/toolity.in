@@ -140,13 +140,20 @@
 
   /* ── Live preview ── */
   const pv = $('blob-canvas'), pctx = pv.getContext('2d'), still = matchMedia('(prefers-reduced-motion: reduce)');
-  let C = null, raf = 0, t0 = performance.now();
+  // Designed by Kapil Pidhwani: the preview honours prefers-reduced-motion by *starting* paused, but never silently — the Play/Pause
+  // button says so, and picking a movement (an explicit request) always plays. Exports never depend on this.
+  let C = null, raf = 0, t0 = performance.now(), play = !still.matches;
+  const moving = () => C && C.motion !== 'off' && play;
+  function paintPlay() {
+    const b = $('btn-play'), on = C && C.motion !== 'off'; b.hidden = !on; b.setAttribute('aria-pressed', String(play));
+    b.querySelector('span').textContent = play ? 'Pause' : 'Play preview'; b.querySelector('iconify-icon').setAttribute('icon', play ? 'lucide:pause' : 'lucide:play');
+  }
   function preview() {
-    cancelAnimationFrame(raf); if (!C) return;
+    cancelAnimationFrame(raf); if (!C) return; paintPlay();
     const s = Math.min(2, devicePixelRatio || 1) * Math.min(1, 700 / Math.max(C.W, C.H));
     if (pv.width !== Math.round(C.W * s) || pv.height !== Math.round(C.H * s)) { pv.width = Math.round(C.W * s); pv.height = Math.round(C.H * s); }
     $('output-preview').classList.toggle('is-transparent', C.bg === 'none');
-    const frame = () => { draw(pctx, C, C.motion === 'off' || still.matches ? 0 : (((performance.now() - t0) / 1000) % C.loop) / C.loop, s); if (C.motion !== 'off' && !still.matches) raf = requestAnimationFrame(frame); };
+    const frame = () => { draw(pctx, C, moving() ? (((performance.now() - t0) / 1000) % C.loop) / C.loop : pausedAt, s); if (moving()) raf = requestAnimationFrame(frame); };
     frame();
   }
 
@@ -220,7 +227,7 @@
   function writeHash() {
     const q = new URLSearchParams();
     for (const k of KEYS) { const el = $(`opt-${k}`); if (!el) continue; const v = el.type === 'checkbox' ? (el.checked ? '1' : '0') : el.value, d = el.type === 'checkbox' ? (el.defaultChecked ? '1' : '0') : el.tagName === 'SELECT' ? ([...el.options].find((o) => o.defaultSelected) || el.options[0]).value : el.defaultValue; if (v !== d) q.set(k, v.replace(/^#/, '')); }
-    for (const [k, gid] of Object.entries(PILLS)) { const act = $(gid).querySelector('.seg-pill.active'), first = $(gid).querySelector('.seg-pill'); if (act && act !== first) q.set(k, act.dataset.value); }
+    for (const [k, gid] of Object.entries(PILLS)) { const act = $(gid).querySelector('.seg-pill.active'), def = $(gid).querySelector('[data-default]') || $(gid).querySelector('.seg-pill'); if (act && act !== def) q.set(k, act.dataset.value); }
     const qs = q.toString(); try { history.replaceState(null, '', qs ? `#${qs}` : location.pathname + location.search); } catch (e) { /* sandboxed iframe */ }
   }
   function readHash() {
@@ -241,19 +248,31 @@
   readHash();
   $('btn-random').addEventListener('click', () => { $('opt-seed').value = 1 + Math.floor(Math.random() * 999998); $('opt-seed').dispatchEvent(new Event('input', { bubbles: true })); });
   $('btn-share').addEventListener('click', () => copyText(location.href, 'Share link copied'));
-  still.addEventListener('change', preview);
+  let pausedAt = 0; // the frame shown while paused
+  const noteFor = (c) => (c.motion === 'off' ? 'Blob ready' : play ? 'Animating' : still.matches ? 'Paused — your system asks for reduced motion · press Play preview' : 'Paused');
+  $('btn-play').addEventListener('click', () => {
+    if (play) pausedAt = C ? (((performance.now() - t0) / 1000) % C.loop) / C.loop : 0; else t0 = performance.now() - pausedAt * (C ? C.loop : 1) * 1000;
+    play = !play; preview(); if (C) window.ToolityWebTool.status(noteFor(C), true);
+  });
+  // Hex fields mirror the pickers so brand colours can be typed or pasted; invalid text is ignored until it parses.
+  const syncHex = () => document.querySelectorAll('.blob-hex').forEach((h) => { const pk = $(h.id.replace(/-hex$/, '')); if (document.activeElement !== h) h.value = pk.value; });
+  document.querySelectorAll('.blob-hex').forEach((h) => h.addEventListener('input', () => {
+    let v = h.value.trim(); if (/^[0-9a-f]{6}$/i.test(v)) v = `#${v}`;
+    if (HEX.test(v)) { const pk = $(h.id.replace(/-hex$/, '')); pk.value = v.toLowerCase(); pk.dispatchEvent(new Event('input', { bubbles: true })); }
+  }));
+  document.querySelectorAll('.blob-colors .web-color-input').forEach((pk) => pk.addEventListener('input', () => { $(`${pk.id}-hex`).value = pk.value; }));
 
   mount({
     slug: 'blob-maker', idle: 'Shape your blob', filename: () => 'blob', debounce: 60,
     onInput: (el) => { if (el.id === 'opt-preset' && PRESETS[el.value]) applySet(PRESETS[el.value]); else if (el.id !== 'opt-preset' && el.id !== 'opt-code') $('opt-preset').value = ''; },
-    onPill: () => { $('opt-preset').value = ''; },
+    onPill: (g) => { $('opt-preset').value = ''; if (g.id === 'seg-motion') { play = true; t0 = performance.now(); } },
     summary: (api) => { const c = cfg(api); return [c.W === c.H ? '1:1' : $('opt-ratio').value, `${c.layers} layer${c.layers > 1 ? 's' : ''}`, [c.blur && 'blur', c.grain && 'grain', c.shadow && 'shadow', c.outline && 'outline'].filter(Boolean).join(' + ') || 'no effects'].join(' · '); },
     run(api) {
-      const c = cfg(api); C = c; vis(c); preview(); writeHash();
+      const c = cfg(api); C = c; vis(c); syncHex(); preview(); writeHash();
       const anim = svg(c, true), text = c.code === 'css' ? css(c) : anim;
       $('output-code').textContent = text;
       $('blob-size').textContent = `SVG ${(new Blob([anim]).size / 1024).toFixed(1)} KB`;
-      return { text, blob: new Blob([anim], { type: 'image/svg+xml' }), ext: c.code === 'css' ? 'css' : 'svg', copyMsg: c.code === 'css' ? 'CSS copied' : 'SVG copied', badge: `${c.W} × ${c.H} · ${c.motion === 'off' ? 'still' : `${c.motion} · ${c.loop} s loop`}`, note: c.motion === 'off' ? 'Blob ready' : still.matches ? 'Blob ready · preview paused (reduced motion)' : 'Blob ready · animating', ok: true };
+      return { text, blob: new Blob([anim], { type: 'image/svg+xml' }), ext: c.code === 'css' ? 'css' : 'svg', copyMsg: c.code === 'css' ? 'CSS copied' : 'SVG copied', badge: `${c.W} × ${c.H} · ${c.motion === 'off' ? 'still' : `${c.motion} · ${c.loop} s loop`}`, note: noteFor(c), ok: true };
     },
     async download(fmt, api) {
       const c = cfg(api), moving = c.motion !== 'off';
@@ -271,7 +290,7 @@
       } catch (e) { console.warn(e); api.showError(e.message || 'Export failed — try another format.'); api.status('Export failed'); return null; }
       finally { setBusy(api.card, false); }
     },
-    onReset: () => { t0 = performance.now(); }
+    onReset: () => { t0 = performance.now(); pausedAt = 0; play = !still.matches; }
   });
   window.__blob = { cfg, shape, layersAt, pathD, svg, css, draw, raster, gif, video, PRESETS, readHash, writeHash };
 })();

@@ -150,7 +150,7 @@
                   <button type="button" class="dropdown-item" data-format="svg-anim" role="menuitem">
                     <div class="dropdown-item-left">
                       <iconify-icon icon="lucide:sparkles" width="14" height="14"></iconify-icon>
-                      <span>SVG · animated</span>
+                      <span>SVG · animated (needs movement)</span>
                     </div>
                   </button>
                   <button type="button" class="dropdown-item" data-format="css" role="menuitem">
@@ -192,19 +192,19 @@
                   <button type="button" class="dropdown-item" data-format="gif" role="menuitem">
                     <div class="dropdown-item-left">
                       <iconify-icon icon="lucide:film" width="14" height="14"></iconify-icon>
-                      <span>GIF · animated loop</span>
+                      <span>GIF · loop (needs movement)</span>
                     </div>
                   </button>
                   <button type="button" class="dropdown-item" data-format="webm" role="menuitem">
                     <div class="dropdown-item-left">
                       <iconify-icon icon="lucide:video" width="14" height="14"></iconify-icon>
-                      <span>Video · WebM</span>
+                      <span>Video · WebM (needs movement)</span>
                     </div>
                   </button>
                   <button type="button" class="dropdown-item" data-format="mp4" role="menuitem">
                     <div class="dropdown-item-left">
                       <iconify-icon icon="lucide:video" width="14" height="14"></iconify-icon>
-                      <span>Video · MP4</span>
+                      <span>Video · MP4 (needs movement)</span>
                     </div>
                   </button>
                 </div>
@@ -287,9 +287,9 @@
                     <button type="button" class="seg-pill" data-value="solid">Solid</button>
                   </div>
                 </div>
-                <div class="blob-colors">
-                  <label class="blob-color" for="opt-c1"><input type="color" id="opt-c1" class="web-color-input" value="#ff6a2a"><span>Colour 1</span></label>
-                  <label class="blob-color" id="c2-wrap" for="opt-c2"><input type="color" id="opt-c2" class="web-color-input" value="#ffc14d"><span>Colour 2</span></label>
+                <div class="blob-colors" role="group" aria-label="Blob colours">
+                  <div class="blob-color"><input type="color" id="opt-c1" class="web-color-input" value="#ff6a2a" aria-label="Colour 1"><input type="text" id="opt-c1-hex" class="input-clean blob-hex" value="#ff6a2a" maxlength="7" spellcheck="false" autocomplete="off" aria-label="Colour 1 hex"></div>
+                  <div class="blob-color" id="c2-wrap"><input type="color" id="opt-c2" class="web-color-input" value="#ffc14d" aria-label="Colour 2"><input type="text" id="opt-c2-hex" class="input-clean blob-hex" value="#ffc14d" maxlength="7" spellcheck="false" autocomplete="off" aria-label="Colour 2 hex"></div>
                 </div>
                 <div class="form-group" id="angle-group">
                   <label class="form-label" for="opt-angle"><span>Gradient angle</span><span class="form-label-desc"><span id="opt-angle-val">135°</span></span></label>
@@ -309,15 +309,15 @@
                   </div>
                 </div>
                 <div class="blob-colors" id="bg-colors">
-                  <label class="blob-color" for="opt-bg1"><input type="color" id="opt-bg1" class="web-color-input" value="#fff4ec"><span>Colour 1</span></label>
-                  <label class="blob-color" id="bg2-wrap" for="opt-bg2"><input type="color" id="opt-bg2" class="web-color-input" value="#ffe0cc"><span>Colour 2</span></label>
+                  <div class="blob-color"><input type="color" id="opt-bg1" class="web-color-input" value="#fff4ec" aria-label="Colour 1"><input type="text" id="opt-bg1-hex" class="input-clean blob-hex" value="#fff4ec" maxlength="7" spellcheck="false" autocomplete="off" aria-label="Colour 1 hex"></div>
+                  <div class="blob-color" id="bg2-wrap"><input type="color" id="opt-bg2" class="web-color-input" value="#ffe0cc" aria-label="Colour 2"><input type="text" id="opt-bg2-hex" class="input-clean blob-hex" value="#ffe0cc" maxlength="7" spellcheck="false" autocomplete="off" aria-label="Colour 2 hex"></div>
                 </div>
                 <h3 class="blob-h">Movement</h3>
                 <div class="form-group">
                   <span class="form-label"><span>Movement</span></span>
                   <div class="segmented-group segmented-group-pill" id="seg-motion" role="group" aria-label="Movement">
-                    <button type="button" class="seg-pill active" data-value="off">Off</button>
-                    <button type="button" class="seg-pill" data-value="morph">Morph</button>
+                    <button type="button" class="seg-pill" data-value="off">Off</button>
+                    <button type="button" class="seg-pill active" data-value="morph" data-default>Morph</button>
                     <button type="button" class="seg-pill" data-value="float">Float</button>
                     <button type="button" class="seg-pill" data-value="spin">Spin</button>
                     <button type="button" class="seg-pill" data-value="pulse">Pulse</button>
@@ -351,10 +351,14 @@
                     <canvas id="blob-canvas" width="1000" height="1000" role="img" aria-label="Blob preview"></canvas>
                   </div>
                   <div class="blob-actions">
+                    <button type="button" class="btn-toolbar-sm" id="btn-play" aria-pressed="true"><iconify-icon icon="lucide:pause" width="14" height="14"></iconify-icon><span>Pause</span></button>
                     <button type="button" class="btn-toolbar-sm" id="btn-share"><iconify-icon icon="lucide:link" width="14" height="14"></iconify-icon><span>Copy share link</span></button>
                     <span class="pane-badge" id="blob-size"></span>
                   </div>
-                  <pre class="web-code blob-code" id="output-code" aria-label="Generated code"></pre>
+                  <details class="blob-code-wrap">
+                    <summary>Show code</summary>
+                    <pre class="web-code blob-code" id="output-code" aria-label="Generated code"></pre>
+                  </details>
                 </div>
               </div>
             </div>
@@ -431,7 +435,7 @@
             <div class="guide-step-card">
               <div class="step-num-badge">1</div>
               <h3 class="step-title">Shape it</h3>
-              <p class="step-desc">Pick a style, then drag Points, Randomness and Smoothness — or hit <strong>Randomise</strong> for a new seed. Presets give you a styled starting point.</p>
+              <p class="step-desc">Pick a style, then drag Points, Randomness and Smoothness — or hit <strong>Randomise</strong> for a new seed. The preview stays in view while you scroll the controls. Presets give you a styled starting point.</p>
             </div>
             <div class="guide-step-card">
               <div class="step-num-badge">2</div>
