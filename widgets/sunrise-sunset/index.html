@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Sunrise & Sunset Widget | Toolity Widgets</title>
+  <link rel="canonical" href="https://toolity.in/widgets/sunrise-sunset/">
+  <meta name="description" content="Free embeddable Sunrise &amp; Sunset widget for Notion and websites. Shows today's sunrise, sunset, day length and a live sun arc for any city — calculated in the browser, no account.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Sunrise & Sunset Widget | Toolity Widgets">
+  <meta property="og:description" content="Free embeddable Sunrise &amp; Sunset widget for Notion and websites. Shows today's sunrise, sunset, day length and a live sun arc for any city — calculated in the browser, no account.">
+  <meta property="og:url" content="https://toolity.in/widgets/sunrise-sunset/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=4.7" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=4.7">
+  <link rel="stylesheet" href="/styles/tools/sunrise-sunset.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Sunrise & Sunset Widget",
+        "url": "https://toolity.in/widgets/sunrise-sunset/",
+        "description": "Free embeddable Sunrise & Sunset widget for Notion and websites. Shows today's sunrise, sunset, day length and a live sun arc for any city — calculated in the browser, no account.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Widgets", "item": "https://toolity.in/widgets/" },
+          { "@type": "ListItem", "position": 3, "name": "Sunrise & Sunset Widget", "item": "https://toolity.in/widgets/sunrise-sunset/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "How do I embed this widget in Notion?", "acceptedAnswer": { "@type": "Answer", "text": "Click Copy in the toolbar to copy the embed URL, open your Notion page, type /embed, paste the link and press Enter. Drag the block handles to fit your column." } },
+          { "@type": "Question", "name": "How accurate are the times?", "acceptedAnswer": { "@type": "Answer", "text": "They are calculated with the standard NOAA solar model and are usually within a minute for most places. Close to the poles, or when the sun only just skims the horizon, they can be a few minutes off." } },
+          { "@type": "Question", "name": "Does it ask visitors for their location?", "acceptedAnswer": { "@type": "Answer", "text": "No. You choose the location once in the builder; it is saved in the link, rounded to about 1 km. \"Use my location\" runs only on your device and nothing is sent to a server." } },
+          { "@type": "Question", "name": "What happens near the poles?", "acceptedAnswer": { "@type": "Answer", "text": "When the sun never sets or never rises that day, the widget says \"Sun up all day\" or \"No sunrise today\" instead of showing times." } },
+          { "@type": "Question", "name": "Where are my settings saved?", "acceptedAnswer": { "@type": "Answer", "text": "Every setting is encoded in the embed URL itself. No account or database is needed, and the link keeps working on any device." } },
+          { "@type": "Question", "name": "Does the embedded widget track visitors?", "acceptedAnswer": { "@type": "Answer", "text": "No. The /embed/ page loads no analytics or third-party scripts and runs entirely in the visitor's browser." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/widgets/" class="breadcrumb-link">Widgets</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Sunrise & Sunset Widget</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Widgets</span>
+            <h1 class="page-title">Sunrise & Sunset Widget</h1>
+            <p class="page-desc">Show today's sunrise, sunset and day length for any place, with a live sun arc — one URL for Notion or any website.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" data-split="40/60" id="tool-card">
+
+          <!-- 2a. Toolbar — Reset · Copy · Download(▾) · Open -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-copy" title="Copy embed URL for Notion" aria-label="Copy embed URL for Notion">
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <div class="dropdown-menu-wrapper" id="download-dropdown-wrap">
+                <button type="button" class="btn-toolbar-sm" id="btn-download-menu-toggle" aria-haspopup="true" aria-expanded="false" title="Download or copy embed code" aria-label="Download or copy embed code">
+                  <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                  <span>Download</span>
+                  <iconify-icon icon="lucide:chevron-down" class="dropdown-arrow" width="13" height="13"></iconify-icon>
+                </button>
+                <div class="dropdown-popup" id="download-dropdown-menu" role="menu">
+                  <button type="button" class="dropdown-item" id="opt-copy-iframe" role="menuitem">
+                    <div class="dropdown-item-left"><iconify-icon icon="lucide:code" width="14" height="14"></iconify-icon><span>Copy &lt;iframe&gt; HTML</span></div>
+                    <span class="dropdown-item-badge">HTML</span>
+                  </button>
+                  <button type="button" class="dropdown-item" id="opt-dl-html" role="menuitem">
+                    <div class="dropdown-item-left"><iconify-icon icon="lucide:file-code" width="14" height="14"></iconify-icon><span>Download .html file</span></div>
+                    <span class="dropdown-item-badge">.html</span>
+                  </button>
+                  <button type="button" class="dropdown-item" id="opt-copy-md" role="menuitem">
+                    <div class="dropdown-item-left"><iconify-icon icon="lucide:file-text" width="14" height="14"></iconify-icon><span>Copy Markdown link</span></div>
+                    <span class="dropdown-item-badge">.md</span>
+                  </button>
+                </div>
+              </div>
+              <button type="button" class="btn-toolbar-sm" id="btn-open" title="Open live widget in a new tab" aria-label="Open live widget in a new tab">
+                <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
+                <span>Open</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes — settings LEFT, live preview + embed URL RIGHT -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Sun</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content pane-content-tall">
+                <div class="form-group">
+                  <label class="form-label" for="opt-title"><span>Header label</span><span class="form-label-desc">Optional</span></label>
+                  <input type="text" id="opt-title" class="input-clean" placeholder="Golden hour at home" maxlength="60" autocomplete="off">
+                </div>
+                <div class="form-group">
+                  <span class="form-label"><span>Location</span><span class="form-label-desc">Saved in the link · about 1 km precision</span></span>
+                  <div class="widget-loc-row">
+                    <select id="city-pick" class="select-clean" aria-label="Pick a city"><option value="">Pick a city…</option></select>
+                    <button type="button" class="btn-toolbar-sm" id="btn-geo"><iconify-icon icon="lucide:locate-fixed" width="14" height="14"></iconify-icon><span>Use my location</span></button>
+                  </div>
+                  <p class="form-helper" id="geo-note" aria-live="polite"></p>
+                </div>
+                <div class="form-row-2col">
+                <div class="form-group">
+                  <label class="form-label" for="opt-lat"><span>Latitude</span></label>
+                  <input type="number" id="opt-lat" class="input-clean" min="-90" max="90" step="0.01" placeholder="19.08" inputmode="decimal">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="opt-lon"><span>Longitude</span></label>
+                  <input type="number" id="opt-lon" class="input-clean" min="-180" max="180" step="0.01" placeholder="72.88" inputmode="decimal">
+                </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="opt-place"><span>Place name</span><span class="form-label-desc">Shown as the header if no label</span></label>
+                  <input type="text" id="opt-place" class="input-clean" placeholder="Mumbai" maxlength="40" autocomplete="off">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="opt-tz"><span>Time zone for the times</span></label>
+                  <select id="opt-tz" class="select-clean"><option value="local" selected>Visitor's local time</option></select>
+                </div>
+                <div class="form-row-2col">
+                <div class="form-group">
+                  <span class="form-label"><span>Time format</span></span>
+                  <div class="segmented-group segmented-group-pill" id="seg-format" role="group" aria-label="Time format">
+                    <button type="button" class="seg-pill active" data-value="12">12-hour</button>
+                    <button type="button" class="seg-pill" data-value="24">24-hour</button>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <span class="form-label"><span>Display style</span></span>
+                  <div class="segmented-group segmented-group-pill" id="seg-variant" role="group" aria-label="Display style">
+                    <button type="button" class="seg-pill active" data-value="arc">Arc</button>
+                    <button type="button" class="seg-pill" data-value="minimal">Minimal</button>
+                    <button type="button" class="seg-pill" data-value="compact">Compact</button>
+                  </div>
+                </div>
+                </div>
+                <div class="form-group">
+                  <span class="form-label"><span>Show</span></span>
+                  <div class="widget-checks-grid">
+                    <div class="control-item"><input type="checkbox" id="opt-daylen" checked><label for="opt-daylen">Day length</label></div>
+                    <div class="control-item"><input type="checkbox" id="opt-next" checked><label for="opt-next">Next sunrise / sunset</label></div>
+                    <div class="control-item"><input type="checkbox" id="opt-golden"><label for="opt-golden">Golden hour</label></div>
+                    <div class="control-item"><input type="checkbox" id="opt-twilight"><label for="opt-twilight">Twilight</label></div>
+                    <div class="control-item"><input type="checkbox" id="opt-badge" checked><label for="opt-badge">Toolity link</label></div>
+                    <div class="control-item"><input type="checkbox" id="opt-transparent"><label for="opt-transparent">Transparent</label></div>
+                  </div>
+                </div>
+                <div class="form-row-2col">
+                <div class="form-group">
+                  <label class="form-label" for="opt-theme"><span>Theme</span></label>
+                  <select id="opt-theme" class="select-clean">
+                    <option value="auto" selected>Auto (follows the page)</option>
+                    <option value="light">Light</option>
+                    <option value="dark">Dark</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="opt-preset"><span>Style preset</span></label>
+                  <select id="opt-preset" class="select-clean">
+                    <option value="toolity" selected>Toolity</option>
+                    <option value="notion-light">Notion Light</option>
+                    <option value="notion-dark">Notion Dark</option>
+                    <option value="minimal">Minimal (transparent)</option>
+                    <option value="warm-cream">Warm editorial</option>
+                  </select>
+                </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Live preview</span>
+                <div class="segmented-group segmented-group-pill" id="seg-preview-size" role="group" aria-label="Preview width">
+                  <button type="button" class="seg-pill active" data-value="full">Wide</button>
+                  <button type="button" class="seg-pill" data-value="half">Column</button>
+                  <button type="button" class="seg-pill" data-value="compact">Mini</button>
+                </div>
+              </div>
+              <div class="pane-content widget-preview-out">
+                <div class="widget-preview-stage" id="widget-preview-stage" data-canvas-size="full">
+                  <iframe id="widget-preview-frame" class="widget-preview-frame" src="/widgets/sunrise-sunset/embed/" title="Sunrise &amp; Sunset live preview"></iframe>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="embed-url-output"><span>Embed URL</span><span class="form-label-desc">Type <code>/embed</code> in Notion and paste</span></label>
+                  <input type="text" id="embed-url-output" class="input-clean widget-url-input" readonly value="https://toolity.in/widgets/sunrise-sunset/embed/">
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Secondary settings — closed by default (Rule 19) -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Colours &amp; typography</span>
+                <span class="pane-badge" id="settings-summary">Auto theme · #F4511E</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item">
+                <label for="opt-font">Font</label>
+                <select id="opt-font" class="select-clean">
+                  <option value="sans" selected>System sans-serif</option>
+                  <option value="serif">Serif</option>
+                  <option value="mono">Monospace</option>
+                  <option value="inter">Inter</option>
+                  <option value="dm-sans">DM Sans</option>
+                  <option value="space-grotesk">Space Grotesk</option>
+                  <option value="jetbrains-mono">JetBrains Mono</option>
+                  <option value="playfair">Playfair Display</option>
+                </select>
+              </div>
+              <div class="control-item">
+                <label for="opt-size">Size</label>
+                <select id="opt-size" class="select-clean">
+                  <option value="sm">Small</option>
+                  <option value="md" selected>Medium</option>
+                  <option value="lg">Large</option>
+                </select>
+              </div>
+              <div class="control-item">
+                <label for="opt-align">Alignment</label>
+                <select id="opt-align" class="select-clean">
+                  <option value="center" selected>Centred</option>
+                  <option value="left">Left</option>
+                </select>
+              </div>
+              <div class="control-item">
+                <label for="opt-radius">Corner radius (<span id="opt-radius-val">12px</span>)</label>
+                <input type="range" id="opt-radius" class="range-slider-clean" min="0" max="28" step="2" value="12">
+              </div>
+              <div class="control-item">
+                <label for="opt-accent">Accent</label>
+                <div class="widget-color-field">
+                  <input type="color" id="opt-accent-picker" class="widget-color-picker" value="#F4511E" aria-label="Pick accent colour">
+                  <input type="text" id="opt-accent" class="input-clean" value="#F4511E" placeholder="#F4511E" maxlength="7">
+                </div>
+              </div>
+              <div class="control-item">
+                <label for="opt-bg">Background</label>
+                <div class="widget-color-field">
+                  <input type="color" id="opt-bg-picker" class="widget-color-picker" value="#FFFFFF" aria-label="Pick background colour">
+                  <input type="text" id="opt-bg" class="input-clean" placeholder="Theme default" maxlength="7">
+                </div>
+              </div>
+              <div class="control-item">
+                <label for="opt-surface">Tile</label>
+                <div class="widget-color-field">
+                  <input type="color" id="opt-surface-picker" class="widget-color-picker" value="#F7F7F5" aria-label="Pick tile colour">
+                  <input type="text" id="opt-surface" class="input-clean" placeholder="Theme default" maxlength="7">
+                </div>
+              </div>
+              <div class="control-item">
+                <label for="opt-fg">Text</label>
+                <div class="widget-color-field">
+                  <input type="color" id="opt-fg-picker" class="widget-color-picker" value="#17191C" aria-label="Pick text colour">
+                  <input type="text" id="opt-fg" class="input-clean" placeholder="Theme default" maxlength="7">
+                </div>
+              </div>
+              <div class="control-item">
+                <label for="paste-embed-url">Edit an existing widget</label>
+                <input type="url" id="paste-embed-url" class="input-clean" placeholder="Paste its embed URL to load the settings" autocomplete="off" spellcheck="false">
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Embed a Sunrise & Sunset Widget in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Choose the place</h3>
+              <p class="step-desc">Pick one of 130 cities, tap <strong>Use my location</strong>, or type coordinates. Set the time zone the times should show in.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Style it</h3>
+              <p class="step-desc">Pick Arc, Minimal or Compact, switch golden hour and twilight on if you want them, and match your page with a preset or theme.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Copy and embed</h3>
+              <p class="step-desc">Click Copy, type <code>/embed</code> in Notion and paste. The widget updates by itself every day.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ (mirrored in JSON-LD) ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Sunrise & Sunset Widget — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>How do I embed this widget in Notion?</summary>
+              <p>Click Copy in the toolbar to copy the embed URL, open your Notion page, type <code>/embed</code>, paste the link and press Enter. Drag the block handles to fit your column.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How accurate are the times?</summary>
+              <p>They are calculated with the standard NOAA solar model and are usually within a minute for most places. Close to the poles, or when the sun only just skims the horizon, they can be a few minutes off.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Does it ask visitors for their location?</summary>
+              <p>No. You choose the location once in the builder; it is saved in the link, rounded to about 1 km. "Use my location" runs only on your device and nothing is sent to a server.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What happens near the poles?</summary>
+              <p>When the sun never sets or never rises that day, the widget says "Sun up all day" or "No sunrise today" instead of showing times.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Where are my settings saved?</summary>
+              <p>Every setting is encoded in the embed URL itself. No account or database is needed, and the link keeps working on any device.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Does the embedded widget track visitors?</summary>
+              <p>No. The <code>/embed/</code> page loads no analytics or third-party scripts and runs entirely in the visitor's browser.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="widgets"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=3.7"></script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="/scripts/widget-common.js?v=1.2"></script>
+  <script src="/scripts/widgets/sunrise-sunset.js?v=1.0"></script>
+</body>
+
+</html>

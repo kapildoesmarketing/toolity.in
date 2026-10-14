@@ -1,0 +1,5 @@
+/* Designed by Kapil Pidhwani: Sunrise & Sunset builder — city picker + "Use my location" on one row, wrapping on narrow cards */
+.widget-loc-row { display: flex; gap: 0.5rem; flex-wrap: wrap; min-width: 0; }
+.widget-loc-row .select-clean { flex: 1 1 12rem; min-width: 0; }
+.widget-loc-row .btn-toolbar-sm { flex: 0 0 auto; }
+#geo-note:empty { display: none; }
