@@ -4155,3 +4155,8 @@ html::-webkit-scrollbar-track, body *::-webkit-scrollbar-track { background: tra
 html::-webkit-scrollbar-thumb, body *::-webkit-scrollbar-thumb { background: color-mix(in srgb, var(--brand) 55%, transparent); border-radius: 999px; }
 html::-webkit-scrollbar-thumb:hover, body *::-webkit-scrollbar-thumb:hover { background: var(--brand); }
 html::-webkit-scrollbar-corner, body *::-webkit-scrollbar-corner { background: transparent; }
+
+/* ═══════════ Text selection — brand orange instead of the browser's blue ═══════════
+ * Designed by Kapil Pidhwani: translucent brand tint, text keeps its own colour, so contrast holds in light and dark themes
+ * (white-on-orange would fall to ~3:1). Applies to page text, inputs and textareas alike. */
+::selection { background: color-mix(in srgb, var(--brand) 30%, transparent); }
