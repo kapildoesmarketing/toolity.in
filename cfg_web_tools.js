@@ -301,5 +301,175 @@ module.exports = [
               <div class="control-item"><input type="checkbox" id="opt-modern"><label for="opt-modern">Modern syntax — rgb(30 136 229 / 50%)</label></div>`,
     guide: [['Enter a colour', 'Type anything a browser understands — <code>#1e88e5</code>, <code>1e88e5</code>, <code>rgb(30,136,229)</code>, <code>hsl(207 77% 51%)</code>, <code>oklch(60% 0.15 250)</code>, <code>dodgerblue</code> — or use the picker.'], ['Read every format', 'HEX, RGB, HSL, HWB, CMYK and OKLCH are listed together with a live swatch. Drag Opacity to add alpha to all of them.'], ['Copy what you need', 'Each row has its own copy button; the toolbar Copy grabs all formats as text and Download saves them as JSON.']],
     faq: [['Which input formats are accepted?', 'Anything valid in CSS Color Level 4: hex (3/4/6/8 digits, with or without #), rgb()/rgba(), hsl()/hsla(), hwb(), lab(), lch(), oklab(), oklch(), color(), the 148 named colours and <code>transparent</code>. Parsing is done by the browser itself, so it is always up to date.'], ['How accurate is CMYK?', 'CMYK here is the simple formula print designers use for a quick look (no ICC profile). Real print conversion depends on the paper and press profile — use your print software for final values.'], ['What is OKLCH and why include it?', 'OKLCH is the perceptually uniform colour space now supported in all modern browsers. Equal steps in L look equally bright, which makes it the best space for building palettes and dark-mode variants. Values are rounded to what CSS tools normally display.'], ['Why did my 8-digit hex lose its alpha?', 'Opacity is controlled by the slider so every output stays in sync. Pasting <code>#1e88e580</code> sets the slider to 50% automatically; move it to change the alpha in all formats at once.'], PRIVACY_FAQ]
+  },
+  {
+    slug: 'blob-maker', name: 'Blob Maker', icon: 'lucide:shapes', css: true,
+    desc: 'Free online blob maker: design organic SVG blob shapes with full control over points, randomness, smoothness, gradients, background, layers, blur, grain and animation. Export SVG, animated SVG, CSS, PNG, GIF or video — all in your browser.',
+    lead: 'Shape, colour and animate organic blobs — then export SVG, animated SVG, CSS, PNG, GIF or video. Everything runs in your browser.',
+    cardDesc: 'Design and animate organic blobs — export SVG, CSS, PNG, GIF or video.', tags: ['blob maker', 'blob generator', 'svg blob', 'organic shape', 'animated blob', 'blob animation', 'svg shape', 'css blob', 'clip-path', 'background shape', 'hero background', 'morphing shape'],
+    idle: 'Shape your blob', split: '40/60',
+    sourceLabel: 'Design', outputLabel: 'Preview & code', outputIcon: 'lucide:shapes', outputEmpty: 'Your blob will appear here',
+    downloads: [['svg', 'SVG · still', 'lucide:file-image'], ['svg-anim', 'SVG · animated', 'lucide:sparkles'], ['css', 'CSS · clip-path', 'lucide:file-code'], ['png', 'PNG · 1×', 'lucide:image'], ['png-2x', 'PNG · 2×', 'lucide:image'], ['png-4x', 'PNG · 4×', 'lucide:image'], ['webp', 'WebP', 'lucide:image'], ['jpg', 'JPG', 'lucide:image'], ['gif', 'GIF · animated loop', 'lucide:film'], ['webm', 'Video · WebM', 'lucide:video'], ['mp4', 'Video · MP4', 'lucide:video']],
+    sourceHtml: `
+                <div class="form-group">
+                  <label class="form-label" for="opt-preset"><span>Start from a preset</span><span class="form-label-desc">Changes style, keeps your canvas</span></label>
+                  <select id="opt-preset" class="select-clean">
+                    <option value="" selected>Custom</option>
+                    <option value="sunset">Sunset hero</option>
+                    <option value="pastel">Pastel scene</option>
+                    <option value="aurora">Aurora glow</option>
+                    <option value="mint">Mint pebble</option>
+                    <option value="candy">Candy splash</option>
+                    <option value="outline">Outline sticker</option>
+                    <option value="mono">Monochrome</option>
+                  </select>
+                </div>
+                <h3 class="blob-h">Shape</h3>
+                <div class="form-group">
+                  <span class="form-label"><span>Style</span></span>
+                  <div class="segmented-group segmented-group-pill" id="seg-style" role="group" aria-label="Style">
+                    <button type="button" class="seg-pill active" data-value="organic">Organic</button>
+                    <button type="button" class="seg-pill" data-value="flower">Flower</button>
+                    <button type="button" class="seg-pill" data-value="wave">Wave</button>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="opt-points"><span>Points</span><span class="form-label-desc"><span id="opt-points-val">7</span></span></label>
+                  <input type="range" id="opt-points" class="range-slider-clean" min="3" max="20" step="1" value="7" data-unit="">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="opt-random"><span>Randomness</span><span class="form-label-desc"><span id="opt-random-val">45%</span></span></label>
+                  <input type="range" id="opt-random" class="range-slider-clean" min="0" max="100" step="1" value="45" data-unit="%">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="opt-smooth"><span>Smoothness</span><span class="form-label-desc"><span id="opt-smooth-val">80%</span></span></label>
+                  <input type="range" id="opt-smooth" class="range-slider-clean" min="0" max="100" step="1" value="80" data-unit="%">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="opt-size"><span>Size</span><span class="form-label-desc"><span id="opt-size-val">72%</span></span></label>
+                  <input type="range" id="opt-size" class="range-slider-clean" min="20" max="100" step="1" value="72" data-unit="%">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="opt-rotate"><span>Rotation</span><span class="form-label-desc"><span id="opt-rotate-val">0°</span></span></label>
+                  <input type="range" id="opt-rotate" class="range-slider-clean" min="0" max="359" step="1" value="0" data-unit="°">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="opt-seed"><span>Seed</span><span class="form-label-desc">Same seed + settings = same blob</span></label>
+                  <div class="web-inline">
+                    <input type="number" id="opt-seed" class="input-clean" min="1" max="999999" step="1" value="1234" inputmode="numeric">
+                    <button type="button" class="btn-toolbar-sm" id="btn-random"><iconify-icon icon="lucide:dices" width="14" height="14"></iconify-icon><span>Randomise</span></button>
+                  </div>
+                </div>
+                <h3 class="blob-h">Colour</h3>
+                <div class="form-group">
+                  <span class="form-label"><span>Blob fill</span></span>
+                  <div class="segmented-group segmented-group-pill" id="seg-fill" role="group" aria-label="Blob fill">
+                    <button type="button" class="seg-pill active" data-value="linear">Linear</button>
+                    <button type="button" class="seg-pill" data-value="radial">Radial</button>
+                    <button type="button" class="seg-pill" data-value="solid">Solid</button>
+                  </div>
+                </div>
+                <div class="blob-colors">
+                  <label class="blob-color" for="opt-c1"><input type="color" id="opt-c1" class="web-color-input" value="#ff6a2a"><span>Colour 1</span></label>
+                  <label class="blob-color" id="c2-wrap" for="opt-c2"><input type="color" id="opt-c2" class="web-color-input" value="#ffc14d"><span>Colour 2</span></label>
+                </div>
+                <div class="form-group" id="angle-group">
+                  <label class="form-label" for="opt-angle"><span>Gradient angle</span><span class="form-label-desc"><span id="opt-angle-val">135°</span></span></label>
+                  <input type="range" id="opt-angle" class="range-slider-clean" min="0" max="359" step="1" value="135" data-unit="°">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="opt-opacity"><span>Opacity</span><span class="form-label-desc"><span id="opt-opacity-val">100%</span></span></label>
+                  <input type="range" id="opt-opacity" class="range-slider-clean" min="10" max="100" step="1" value="100" data-unit="%">
+                </div>
+                <h3 class="blob-h">Background</h3>
+                <div class="form-group">
+                  <span class="form-label"><span>Background</span></span>
+                  <div class="segmented-group segmented-group-pill" id="seg-bg" role="group" aria-label="Background">
+                    <button type="button" class="seg-pill active" data-value="solid">Solid</button>
+                    <button type="button" class="seg-pill" data-value="gradient">Gradient</button>
+                    <button type="button" class="seg-pill" data-value="none">Transparent</button>
+                  </div>
+                </div>
+                <div class="blob-colors" id="bg-colors">
+                  <label class="blob-color" for="opt-bg1"><input type="color" id="opt-bg1" class="web-color-input" value="#fff4ec"><span>Colour 1</span></label>
+                  <label class="blob-color" id="bg2-wrap" for="opt-bg2"><input type="color" id="opt-bg2" class="web-color-input" value="#ffe0cc"><span>Colour 2</span></label>
+                </div>
+                <h3 class="blob-h">Movement</h3>
+                <div class="form-group">
+                  <span class="form-label"><span>Movement</span></span>
+                  <div class="segmented-group segmented-group-pill" id="seg-motion" role="group" aria-label="Movement">
+                    <button type="button" class="seg-pill active" data-value="off">Off</button>
+                    <button type="button" class="seg-pill" data-value="morph">Morph</button>
+                    <button type="button" class="seg-pill" data-value="float">Float</button>
+                    <button type="button" class="seg-pill" data-value="spin">Spin</button>
+                    <button type="button" class="seg-pill" data-value="pulse">Pulse</button>
+                  </div>
+                </div>
+                <div id="motion-group">
+                <div class="form-group">
+                  <label class="form-label" for="opt-loop"><span>Loop length</span><span class="form-label-desc"><span id="opt-loop-val">6 s</span></span></label>
+                  <input type="range" id="opt-loop" class="range-slider-clean" min="2" max="20" step="1" value="6" data-unit=" s">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="opt-amount"><span>Intensity</span><span class="form-label-desc"><span id="opt-amount-val">60%</span></span></label>
+                  <input type="range" id="opt-amount" class="range-slider-clean" min="10" max="100" step="1" value="60" data-unit="%">
+                </div>
+                </div>`,
+    outputHtml: `
+                  <div class="web-preview blob-stage" id="output-preview">
+                    <canvas id="blob-canvas" width="1000" height="1000" role="img" aria-label="Blob preview"></canvas>
+                  </div>
+                  <div class="blob-actions">
+                    <button type="button" class="btn-toolbar-sm" id="btn-share"><iconify-icon icon="lucide:link" width="14" height="14"></iconify-icon><span>Copy share link</span></button>
+                    <span class="pane-badge" id="blob-size"></span>
+                  </div>
+                  <pre class="web-code blob-code" id="output-code" aria-label="Generated code"></pre>`,
+    settingsSummary: '1:1 · 1 layer · no effects',
+    settings: `
+              <div class="control-item">
+                <label for="opt-ratio">Canvas</label>
+                <select id="opt-ratio" class="select-clean">
+                  <option value="1:1" selected>Square 1:1 · 1000 × 1000</option>
+                  <option value="16:9">Landscape 16:9 · 1600 × 900</option>
+                  <option value="9:16">Story 9:16 · 900 × 1600</option>
+                  <option value="4:5">Portrait 4:5 · 1000 × 1250</option>
+                  <option value="3:2">Photo 3:2 · 1500 × 1000</option>
+                </select>
+              </div>
+              <div class="control-item">
+                <label for="opt-layers">Layers (<span id="opt-layers-val">1</span>)</label>
+                <input type="range" id="opt-layers" class="range-slider-clean" min="1" max="5" step="1" value="1" data-unit="">
+              </div>
+              <div class="control-item">
+                <label for="opt-lstep">Layer shrink (<span id="opt-lstep-val">14%</span>)</label>
+                <input type="range" id="opt-lstep" class="range-slider-clean" min="0" max="30" step="1" value="14" data-unit="%">
+              </div>
+              <div class="control-item">
+                <label for="opt-loffset">Layer offset (<span id="opt-loffset-val">6%</span>)</label>
+                <input type="range" id="opt-loffset" class="range-slider-clean" min="0" max="30" step="1" value="6" data-unit="%">
+              </div>
+              <div class="control-item">
+                <label for="opt-blur">Blur / glow (<span id="opt-blur-val">0%</span>)</label>
+                <input type="range" id="opt-blur" class="range-slider-clean" min="0" max="100" step="1" value="0" data-unit="%">
+              </div>
+              <div class="control-item">
+                <label for="opt-grain">Grain (<span id="opt-grain-val">0%</span>)</label>
+                <input type="range" id="opt-grain" class="range-slider-clean" min="0" max="100" step="1" value="0" data-unit="%">
+              </div>
+              <div class="control-item"><input type="checkbox" id="opt-shadow"><label for="opt-shadow">Drop shadow</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-outline"><label for="opt-outline">Outline only (no fill)</label></div>
+              <div class="control-item">
+                <label for="opt-stroke">Outline width (<span id="opt-stroke-val">8 px</span>)</label>
+                <input type="range" id="opt-stroke" class="range-slider-clean" min="1" max="40" step="1" value="8" data-unit=" px">
+              </div>
+              <div class="control-item">
+                <label for="opt-code">Code shows</label>
+                <select id="opt-code" class="select-clean">
+                  <option value="svg" selected>SVG (animated when moving)</option>
+                  <option value="css">CSS (clip-path)</option>
+                </select>
+              </div>`,
+    guide: [['Shape it', 'Pick a style, then drag Points, Randomness and Smoothness — or hit <strong>Randomise</strong> for a new seed. Presets give you a styled starting point.'], ['Colour and move it', 'Choose a solid, linear or radial fill, a background (or transparent) and a movement: morph, float, spin or pulse. Layers, blur, grain and shadow live in Settings.'], ['Export', 'Copy the SVG or CSS, or use Download for SVG, animated SVG, PNG up to 4×, WebP, JPG, a looping GIF or a WebM/MP4 video. Copy share link saves the design in a URL.']],
+    faq: [['Which export should I use?', '<strong>SVG</strong> for websites and design tools (Figma, Illustrator) — tiny and sharp at any size. <strong>Animated SVG</strong> plays by itself in any browser via an &lt;img&gt; tag. <strong>CSS</strong> gives a clip-path you can put on any element. <strong>PNG/WebP</strong> for slides and social posts, <strong>GIF</strong> for chats and email, <strong>WebM/MP4</strong> for video editors and reels.'], ['Do the animations loop seamlessly?', 'Yes. Every movement is built on one loop of the length you set, so the last frame flows straight back into the first — in the animated SVG, the GIF and the video alike.'], ['Why does the video take as long as the loop?', 'Browsers record video in real time, so a 6-second loop takes about 6 seconds to export. Keep the tab visible while it records. GIFs are rendered frame by frame instead and are usually quicker.'], ['Will blur and grain look the same everywhere?', 'In browsers, yes. Design tools sometimes render SVG filters (blur, grain, shadow) differently or ignore them; export a PNG if you need an exact match there. Safari before version 18 shows the live preview without blur, but the SVG export keeps it.'], ['Can I come back to a design later?', 'Yes — every setting is saved in the page link. Use <strong>Copy share link</strong> and open it any time; nothing is stored on a server.'], PRIVACY_FAQ]
   }
 ];

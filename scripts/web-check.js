@@ -127,6 +127,32 @@ const CASES = [
     set('color-input', 'oklch(70% 0.1 150)'); await settle(); A(out() && /^#[0-9A-F]{6}80$/.test(v().HEX), 'oklch in: ' + v().HEX);
     set('color-input', 'tomato'); set('opt-alpha', '100'); await settle(); A(v().HEX === '#FF6347', 'named: ' + v().HEX);
     const d = await T.T.download(undefined, T); A(JSON.parse(d.text).hex === '#FF6347', 'json download');`],
+  ['blob-maker', `
+    await settle(); A(out() && out().text.startsWith('<svg'), 'no initial SVG');
+    const B = window.__blob, first = out().text;
+    A(B.svg(B.cfg(T), false) === B.svg(B.cfg(T), false), 'same seed + settings must give the same SVG');
+    const d0 = B.pathD([[0, 0], [10, 0], [10, 10]], 0); A(d0 === 'M0 0C0 0 10 0 10 0C10 0 10 10 10 10C10 10 0 0 0 0Z', 'smoothness 0 should give straight segments: ' + d0);
+    set('opt-seed', 99); await settle(); A(out().text !== first, 'seed did not change the shape');
+    pill('seg-motion', 'morph'); set('opt-layers', 3); set('opt-loop', 2); await settle();
+    const doc = new DOMParser().parseFromString(out().text, 'image/svg+xml'), an = doc.querySelectorAll('animate');
+    A(!doc.querySelector('parsererror') && an.length === 3, 'animated SVG should parse with one <animate> per layer: ' + an.length);
+    const vals = an[0].getAttribute('values').split(';'); A(vals.length === 25 && vals[0] === vals[vals.length - 1], 'morph loop must be seamless (first frame === last)');
+    pill('seg-bg', 'none'); await settle();
+    const png = await T.T.download('png-2x', T); A(png && png.blob.type === 'image/png', 'PNG export');
+    const bmp = await createImageBitmap(png.blob), cv = document.createElement('canvas'); cv.width = bmp.width; cv.height = bmp.height; const cx = cv.getContext('2d'); cx.drawImage(bmp, 0, 0);
+    A(bmp.width === 2000 && bmp.height === 2000, 'PNG 2× size ' + bmp.width); A(cx.getImageData(2, 2, 1, 1).data[3] === 0, 'transparent PNG corner should be clear');
+    const jpg = await T.T.download('jpg', T); A(jpg && jpg.blob.type === 'image/jpeg', 'JPG export');
+    const g = await T.T.download('gif', T); A(g && g.blob.type === 'image/gif', 'GIF export');
+    const gb = new Uint8Array(await g.blob.arrayBuffer()), gs = String.fromCharCode(...gb.subarray(0, 6)); const dec = new ImageDecoder({ data: gb, type: 'image/gif' }); await dec.tracks.ready; const gce = dec.tracks.selectedTrack.frameCount; // real decoder — raw 21 F9 byte pairs also occur inside LZW data
+    A(gs === 'GIF89a' && new TextDecoder().decode(gb.subarray(0, 2000)).includes('NETSCAPE2.0'), 'GIF header / loop block');
+    A(gce === 50, 'GIF frames for a 2 s loop at 25 fps: ' + gce);
+    const v = await T.T.download('webm', T); A(v && v.blob.size > 1000 && /webm/.test(v.blob.type), 'WebM export ' + (v && v.blob.type + ' ' + v.blob.size));
+    const c1 = await T.T.download('css', T); A(c1 && /clip-path: path\\('M/.test(c1.text) && /@keyframes blob-move/.test(c1.text), 'CSS clip-path + keyframes');
+    const h = location.hash; A(/seed=99/.test(h) && /motion=morph/.test(h), 'share hash: ' + h);
+    set('opt-seed', 5); await settle(); history.replaceState(null, '', h); B.readHash(); A($('opt-seed').value === '99', 'hash should restore the seed');
+    pill('seg-motion', 'off'); await settle(); const r0 = await T.T.download('gif', T); A(r0 === null && !$('input-error').hidden, 'a still blob must not export a GIF');
+    set('opt-preset', 'aurora'); await settle(); A($('opt-layers').value === '5' && document.querySelector('#seg-bg .seg-pill.active').dataset.value === 'gradient', 'preset applied');
+    $('btn-reset').click(); await settle(); A(location.hash === '' && $('opt-seed').value === '1234' && $('opt-preset').value === '', 'reset: ' + location.hash);`]
 ];
 
 (async () => {

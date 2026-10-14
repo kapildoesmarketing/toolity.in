@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Blob Maker | Toolity Labs</title>
+  <link rel="canonical" href="https://toolity.in/labs/blob-maker/">
+  <meta name="description" content="Free online blob maker: design organic SVG blob shapes with full control over points, randomness, smoothness, gradients, background, layers, blur, grain and animation. Export SVG, animated SVG, CSS, PNG, GIF or video — all in your browser.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Blob Maker | Toolity Labs">
+  <meta property="og:description" content="Free online blob maker: design organic SVG blob shapes with full control over points, randomness, smoothness, gradients, background, layers, blur, grain and animation. Export SVG, animated SVG, CSS, PNG, GIF or video — all in your browser.">
+  <meta property="og:url" content="https://toolity.in/labs/blob-maker/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=4.8" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=4.8">
+  <link rel="stylesheet" href="/styles/tools/blob-maker.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Blob Maker",
+        "url": "https://toolity.in/labs/blob-maker/",
+        "description": "Free online blob maker: design organic SVG blob shapes with full control over points, randomness, smoothness, gradients, background, layers, blur, grain and animation. Export SVG, animated SVG, CSS, PNG, GIF or video — all in your browser.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Labs", "item": "https://toolity.in/labs/" },
+          { "@type": "ListItem", "position": 3, "name": "Blob Maker", "item": "https://toolity.in/labs/blob-maker/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Which export should I use?", "acceptedAnswer": { "@type": "Answer", "text": "SVG for websites and design tools (Figma, Illustrator) — tiny and sharp at any size. Animated SVG plays by itself in any browser via an &lt;img&gt; tag. CSS gives a clip-path you can put on any element. PNG/WebP for slides and social posts, GIF for chats and email, WebM/MP4 for video editors and reels." } },
+          { "@type": "Question", "name": "Do the animations loop seamlessly?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Every movement is built on one loop of the length you set, so the last frame flows straight back into the first — in the animated SVG, the GIF and the video alike." } },
+          { "@type": "Question", "name": "Why does the video take as long as the loop?", "acceptedAnswer": { "@type": "Answer", "text": "Browsers record video in real time, so a 6-second loop takes about 6 seconds to export. Keep the tab visible while it records. GIFs are rendered frame by frame instead and are usually quicker." } },
+          { "@type": "Question", "name": "Will blur and grain look the same everywhere?", "acceptedAnswer": { "@type": "Answer", "text": "In browsers, yes. Design tools sometimes render SVG filters (blur, grain, shadow) differently or ignore them; export a PNG if you need an exact match there. Safari before version 18 shows the live preview without blur, but the SVG export keeps it." } },
+          { "@type": "Question", "name": "Can I come back to a design later?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — every setting is saved in the page link. Use Copy share link and open it any time; nothing is stored on a server." } },
+          { "@type": "Question", "name": "Is my input sent anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. Everything is computed by JavaScript in your browser tab. Nothing is uploaded, logged or stored by Toolity." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/labs/" class="breadcrumb-link">Labs</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Blob Maker</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Labs</span>
+            <h1 class="page-title">Blob Maker</h1>
+            <p class="page-desc">Shape, colour and animate organic blobs — then export SVG, animated SVG, CSS, PNG, GIF or video. Everything runs in your browser.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" data-split="40/60" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge web-status-badge" id="status-badge">Shape your blob</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result" aria-label="Copy result" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <div class="dropdown-menu-wrapper" id="download-dropdown-wrap">
+                <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download result" aria-label="Download result" aria-haspopup="true" disabled>
+                  <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                  <span>Download</span>
+                  <iconify-icon icon="lucide:chevron-down" class="dropdown-arrow" width="13" height="13"></iconify-icon>
+                </button>
+                <div class="dropdown-popup" role="menu">
+                  <button type="button" class="dropdown-item" data-format="svg" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:file-image" width="14" height="14"></iconify-icon>
+                      <span>SVG · still</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="svg-anim" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:sparkles" width="14" height="14"></iconify-icon>
+                      <span>SVG · animated</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="css" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:file-code" width="14" height="14"></iconify-icon>
+                      <span>CSS · clip-path</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="png" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:image" width="14" height="14"></iconify-icon>
+                      <span>PNG · 1×</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="png-2x" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:image" width="14" height="14"></iconify-icon>
+                      <span>PNG · 2×</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="png-4x" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:image" width="14" height="14"></iconify-icon>
+                      <span>PNG · 4×</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="webp" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:image" width="14" height="14"></iconify-icon>
+                      <span>WebP</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="jpg" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:image" width="14" height="14"></iconify-icon>
+                      <span>JPG</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="gif" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:film" width="14" height="14"></iconify-icon>
+                      <span>GIF · animated loop</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="webm" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:video" width="14" height="14"></iconify-icon>
+                      <span>Video · WebM</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="mp4" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:video" width="14" height="14"></iconify-icon>
+                      <span>Video · MP4</span>
+                    </div>
+                  </button>
+                </div>
+              </div>
+              <button type="button" class="btn-toolbar-sm" id="btn-open" title="Open result in a new tab" aria-label="Open result in a new tab" disabled>
+                <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
+                <span>Open</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Design</span>
+                <span class="pane-badge" id="input-badge">—</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content web-form">
+                <div class="form-group">
+                  <label class="form-label" for="opt-preset"><span>Start from a preset</span><span class="form-label-desc">Changes style, keeps your canvas</span></label>
+                  <select id="opt-preset" class="select-clean">
+                    <option value="" selected>Custom</option>
+                    <option value="sunset">Sunset hero</option>
+                    <option value="pastel">Pastel scene</option>
+                    <option value="aurora">Aurora glow</option>
+                    <option value="mint">Mint pebble</option>
+                    <option value="candy">Candy splash</option>
+                    <option value="outline">Outline sticker</option>
+                    <option value="mono">Monochrome</option>
+                  </select>
+                </div>
+                <h3 class="blob-h">Shape</h3>
+                <div class="form-group">
+                  <span class="form-label"><span>Style</span></span>
+                  <div class="segmented-group segmented-group-pill" id="seg-style" role="group" aria-label="Style">
+                    <button type="button" class="seg-pill active" data-value="organic">Organic</button>
+                    <button type="button" class="seg-pill" data-value="flower">Flower</button>
+                    <button type="button" class="seg-pill" data-value="wave">Wave</button>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="opt-points"><span>Points</span><span class="form-label-desc"><span id="opt-points-val">7</span></span></label>
+                  <input type="range" id="opt-points" class="range-slider-clean" min="3" max="20" step="1" value="7" data-unit="">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="opt-random"><span>Randomness</span><span class="form-label-desc"><span id="opt-random-val">45%</span></span></label>
+                  <input type="range" id="opt-random" class="range-slider-clean" min="0" max="100" step="1" value="45" data-unit="%">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="opt-smooth"><span>Smoothness</span><span class="form-label-desc"><span id="opt-smooth-val">80%</span></span></label>
+                  <input type="range" id="opt-smooth" class="range-slider-clean" min="0" max="100" step="1" value="80" data-unit="%">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="opt-size"><span>Size</span><span class="form-label-desc"><span id="opt-size-val">72%</span></span></label>
+                  <input type="range" id="opt-size" class="range-slider-clean" min="20" max="100" step="1" value="72" data-unit="%">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="opt-rotate"><span>Rotation</span><span class="form-label-desc"><span id="opt-rotate-val">0°</span></span></label>
+                  <input type="range" id="opt-rotate" class="range-slider-clean" min="0" max="359" step="1" value="0" data-unit="°">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="opt-seed"><span>Seed</span><span class="form-label-desc">Same seed + settings = same blob</span></label>
+                  <div class="web-inline">
+                    <input type="number" id="opt-seed" class="input-clean" min="1" max="999999" step="1" value="1234" inputmode="numeric">
+                    <button type="button" class="btn-toolbar-sm" id="btn-random"><iconify-icon icon="lucide:dices" width="14" height="14"></iconify-icon><span>Randomise</span></button>
+                  </div>
+                </div>
+                <h3 class="blob-h">Colour</h3>
+                <div class="form-group">
+                  <span class="form-label"><span>Blob fill</span></span>
+                  <div class="segmented-group segmented-group-pill" id="seg-fill" role="group" aria-label="Blob fill">
+                    <button type="button" class="seg-pill active" data-value="linear">Linear</button>
+                    <button type="button" class="seg-pill" data-value="radial">Radial</button>
+                    <button type="button" class="seg-pill" data-value="solid">Solid</button>
+                  </div>
+                </div>
+                <div class="blob-colors">
+                  <label class="blob-color" for="opt-c1"><input type="color" id="opt-c1" class="web-color-input" value="#ff6a2a"><span>Colour 1</span></label>
+                  <label class="blob-color" id="c2-wrap" for="opt-c2"><input type="color" id="opt-c2" class="web-color-input" value="#ffc14d"><span>Colour 2</span></label>
+                </div>
+                <div class="form-group" id="angle-group">
+                  <label class="form-label" for="opt-angle"><span>Gradient angle</span><span class="form-label-desc"><span id="opt-angle-val">135°</span></span></label>
+                  <input type="range" id="opt-angle" class="range-slider-clean" min="0" max="359" step="1" value="135" data-unit="°">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="opt-opacity"><span>Opacity</span><span class="form-label-desc"><span id="opt-opacity-val">100%</span></span></label>
+                  <input type="range" id="opt-opacity" class="range-slider-clean" min="10" max="100" step="1" value="100" data-unit="%">
+                </div>
+                <h3 class="blob-h">Background</h3>
+                <div class="form-group">
+                  <span class="form-label"><span>Background</span></span>
+                  <div class="segmented-group segmented-group-pill" id="seg-bg" role="group" aria-label="Background">
+                    <button type="button" class="seg-pill active" data-value="solid">Solid</button>
+                    <button type="button" class="seg-pill" data-value="gradient">Gradient</button>
+                    <button type="button" class="seg-pill" data-value="none">Transparent</button>
+                  </div>
+                </div>
+                <div class="blob-colors" id="bg-colors">
+                  <label class="blob-color" for="opt-bg1"><input type="color" id="opt-bg1" class="web-color-input" value="#fff4ec"><span>Colour 1</span></label>
+                  <label class="blob-color" id="bg2-wrap" for="opt-bg2"><input type="color" id="opt-bg2" class="web-color-input" value="#ffe0cc"><span>Colour 2</span></label>
+                </div>
+                <h3 class="blob-h">Movement</h3>
+                <div class="form-group">
+                  <span class="form-label"><span>Movement</span></span>
+                  <div class="segmented-group segmented-group-pill" id="seg-motion" role="group" aria-label="Movement">
+                    <button type="button" class="seg-pill active" data-value="off">Off</button>
+                    <button type="button" class="seg-pill" data-value="morph">Morph</button>
+                    <button type="button" class="seg-pill" data-value="float">Float</button>
+                    <button type="button" class="seg-pill" data-value="spin">Spin</button>
+                    <button type="button" class="seg-pill" data-value="pulse">Pulse</button>
+                  </div>
+                </div>
+                <div id="motion-group">
+                <div class="form-group">
+                  <label class="form-label" for="opt-loop"><span>Loop length</span><span class="form-label-desc"><span id="opt-loop-val">6 s</span></span></label>
+                  <input type="range" id="opt-loop" class="range-slider-clean" min="2" max="20" step="1" value="6" data-unit=" s">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="opt-amount"><span>Intensity</span><span class="form-label-desc"><span id="opt-amount-val">60%</span></span></label>
+                  <input type="range" id="opt-amount" class="range-slider-clean" min="10" max="100" step="1" value="60" data-unit="%">
+                </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Preview & code</span>
+                <span class="pane-badge" id="output-badge">—</span>
+              </div>
+              <div class="pane-content web-output-pane">
+                <div class="pane-empty" id="output-empty">
+                  <iconify-icon icon="lucide:shapes"></iconify-icon>
+                  <span>Your blob will appear here</span>
+                </div>
+                <div class="web-output" id="output-content" hidden>
+                  <div class="web-preview blob-stage" id="output-preview">
+                    <canvas id="blob-canvas" width="1000" height="1000" role="img" aria-label="Blob preview"></canvas>
+                  </div>
+                  <div class="blob-actions">
+                    <button type="button" class="btn-toolbar-sm" id="btn-share"><iconify-icon icon="lucide:link" width="14" height="14"></iconify-icon><span>Copy share link</span></button>
+                    <span class="pane-badge" id="blob-size"></span>
+                  </div>
+                  <pre class="web-code blob-code" id="output-code" aria-label="Generated code"></pre>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">1:1 · 1 layer · no effects</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item">
+                <label for="opt-ratio">Canvas</label>
+                <select id="opt-ratio" class="select-clean">
+                  <option value="1:1" selected>Square 1:1 · 1000 × 1000</option>
+                  <option value="16:9">Landscape 16:9 · 1600 × 900</option>
+                  <option value="9:16">Story 9:16 · 900 × 1600</option>
+                  <option value="4:5">Portrait 4:5 · 1000 × 1250</option>
+                  <option value="3:2">Photo 3:2 · 1500 × 1000</option>
+                </select>
+              </div>
+              <div class="control-item">
+                <label for="opt-layers">Layers (<span id="opt-layers-val">1</span>)</label>
+                <input type="range" id="opt-layers" class="range-slider-clean" min="1" max="5" step="1" value="1" data-unit="">
+              </div>
+              <div class="control-item">
+                <label for="opt-lstep">Layer shrink (<span id="opt-lstep-val">14%</span>)</label>
+                <input type="range" id="opt-lstep" class="range-slider-clean" min="0" max="30" step="1" value="14" data-unit="%">
+              </div>
+              <div class="control-item">
+                <label for="opt-loffset">Layer offset (<span id="opt-loffset-val">6%</span>)</label>
+                <input type="range" id="opt-loffset" class="range-slider-clean" min="0" max="30" step="1" value="6" data-unit="%">
+              </div>
+              <div class="control-item">
+                <label for="opt-blur">Blur / glow (<span id="opt-blur-val">0%</span>)</label>
+                <input type="range" id="opt-blur" class="range-slider-clean" min="0" max="100" step="1" value="0" data-unit="%">
+              </div>
+              <div class="control-item">
+                <label for="opt-grain">Grain (<span id="opt-grain-val">0%</span>)</label>
+                <input type="range" id="opt-grain" class="range-slider-clean" min="0" max="100" step="1" value="0" data-unit="%">
+              </div>
+              <div class="control-item"><input type="checkbox" id="opt-shadow"><label for="opt-shadow">Drop shadow</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-outline"><label for="opt-outline">Outline only (no fill)</label></div>
+              <div class="control-item">
+                <label for="opt-stroke">Outline width (<span id="opt-stroke-val">8 px</span>)</label>
+                <input type="range" id="opt-stroke" class="range-slider-clean" min="1" max="40" step="1" value="8" data-unit=" px">
+              </div>
+              <div class="control-item">
+                <label for="opt-code">Code shows</label>
+                <select id="opt-code" class="select-clean">
+                  <option value="svg" selected>SVG (animated when moving)</option>
+                  <option value="css">CSS (clip-path)</option>
+                </select>
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Use Blob Maker in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Shape it</h3>
+              <p class="step-desc">Pick a style, then drag Points, Randomness and Smoothness — or hit <strong>Randomise</strong> for a new seed. Presets give you a styled starting point.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Colour and move it</h3>
+              <p class="step-desc">Choose a solid, linear or radial fill, a background (or transparent) and a movement: morph, float, spin or pulse. Layers, blur, grain and shadow live in Settings.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Export</h3>
+              <p class="step-desc">Copy the SVG or CSS, or use Download for SVG, animated SVG, PNG up to 4×, WebP, JPG, a looping GIF or a WebM/MP4 video. Copy share link saves the design in a URL.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Blob Maker — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Which export should I use?</summary>
+              <p><strong>SVG</strong> for websites and design tools (Figma, Illustrator) — tiny and sharp at any size. <strong>Animated SVG</strong> plays by itself in any browser via an &lt;img&gt; tag. <strong>CSS</strong> gives a clip-path you can put on any element. <strong>PNG/WebP</strong> for slides and social posts, <strong>GIF</strong> for chats and email, <strong>WebM/MP4</strong> for video editors and reels.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Do the animations loop seamlessly?</summary>
+              <p>Yes. Every movement is built on one loop of the length you set, so the last frame flows straight back into the first — in the animated SVG, the GIF and the video alike.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why does the video take as long as the loop?</summary>
+              <p>Browsers record video in real time, so a 6-second loop takes about 6 seconds to export. Keep the tab visible while it records. GIFs are rendered frame by frame instead and are usually quicker.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Will blur and grain look the same everywhere?</summary>
+              <p>In browsers, yes. Design tools sometimes render SVG filters (blur, grain, shadow) differently or ignore them; export a PNG if you need an exact match there. Safari before version 18 shows the live preview without blur, but the SVG export keeps it.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can I come back to a design later?</summary>
+              <p>Yes — every setting is saved in the page link. Use <strong>Copy share link</strong> and open it any time; nothing is stored on a server.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is my input sent anywhere?</summary>
+              <p>No. Everything is computed by JavaScript in your browser tab. Nothing is uploaded, logged or stored by Toolity.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="labs"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=3.8"></script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="/scripts/web-common.js?v=1.0"></script>
+  <script src="/labs/blob-maker/blob-maker.js?v=1.0"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+/* Designed by Kapil Pidhwani: Blob Maker — grouped controls, checkerboard behind transparent canvases, compact code box. Container-relative only (rule 35). */
+.blob-h { margin: 0.4rem 0 -0.1rem; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--brand); }
+#tool-card .form-group[hidden], .blob-color[hidden], #motion-group[hidden] { display: none; }
+#motion-group { display: flex; flex-direction: column; gap: inherit; }
+.blob-colors { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem; }
+.blob-colors[hidden] { display: none; }
+.blob-color { display: flex; align-items: center; gap: 0.5rem; min-width: 0; font-size: 0.82rem; color: var(--text-secondary); cursor: pointer; }
+.blob-stage { display: flex; align-items: center; justify-content: center; padding: 0.75rem; min-height: 280px; overflow: hidden; }
+.blob-stage.is-transparent { background: repeating-conic-gradient(var(--surface-elevated) 0 25%, var(--surface) 0 50%) 0 0 / 18px 18px; }
+.blob-stage canvas { display: block; max-width: 100%; max-height: 440px; width: auto; height: auto; border-radius: calc(var(--radius-sm) - 2px); box-shadow: var(--shadow-sm); }
+.blob-actions { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; flex-wrap: wrap; }
+.blob-code { max-height: 220px; font-size: 0.74rem; }
+@container (max-width: 420px) { .blob-colors { grid-template-columns: minmax(0, 1fr); } }
