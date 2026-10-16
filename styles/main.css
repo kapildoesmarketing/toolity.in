@@ -1568,12 +1568,6 @@ body {
   color: var(--text-secondary);
 }
 
-.site-footer a,
-.site-footer a:visited {
-  color: inherit;
-  text-decoration: none;
-}
-
 .footer-heading {
   font-size: 0.82rem;
   font-weight: 600;
