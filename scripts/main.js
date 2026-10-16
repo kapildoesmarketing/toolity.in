@@ -171,6 +171,18 @@
     // Initialize site-wide search (header popover + mobile drawer)
     initSiteSearch();
 
+    // /tools/ A–Z index (no-op on every other page)
+    initToolsIndex();
+
+    // Designed by Kapil Pidhwani: any <button data-copy="text"> copies its value (Contact, Press). One delegated listener.
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-copy]');
+      if (!btn) return;
+      navigator.clipboard.writeText(btn.dataset.copy)
+        .then(() => showGlobalToast('Copied: ' + btn.dataset.copy))
+        .catch(() => showGlobalToast(btn.dataset.copy));
+    });
+
     // WebMCP: expose Toolity to in-browser AI agents — loaded only when the browser supports it
     if (document.modelContext || navigator.modelContext) {
       const s = document.createElement('script');
@@ -1874,9 +1886,18 @@
           </div>
           <div class="mobile-nav-footer-links">
             <a href="${rootPrefix}about/" class="mobile-nav-sublink">About</a>
+            <a href="${rootPrefix}blog/" class="mobile-nav-sublink">Blog</a>
+            <a href="${rootPrefix}careers/" class="mobile-nav-sublink">Careers</a>
+            <a href="${rootPrefix}contact/" class="mobile-nav-sublink">Contact</a>
+            <a href="${rootPrefix}faq/" class="mobile-nav-sublink">FAQ</a>
+            <a href="${rootPrefix}tools/" class="mobile-nav-sublink">All Tools</a>
             <a href="${rootPrefix}privacy/" class="mobile-nav-sublink">Privacy</a>
             <a href="${rootPrefix}terms/" class="mobile-nav-sublink">Terms</a>
-            <a href="${rootPrefix}credits/" class="mobile-nav-sublink">Credits</a>
+          </div>
+          <div class="mobile-nav-footer-links mobile-nav-social">
+            <a href="https://www.instagram.com/toolity.in" target="_blank" rel="noopener" class="mobile-nav-sublink" aria-label="Toolity on Instagram"><iconify-icon icon="lucide:instagram" width="18" height="18"></iconify-icon></a>
+            <a href="https://www.linkedin.com/company/toolity-in" target="_blank" rel="noopener" class="mobile-nav-sublink" aria-label="Toolity on LinkedIn"><iconify-icon icon="lucide:linkedin" width="18" height="18"></iconify-icon></a>
+            <a href="mailto:hello@toolity.in" class="mobile-nav-sublink" aria-label="Email Toolity"><iconify-icon icon="lucide:mail" width="18" height="18"></iconify-icon></a>
           </div>
         </div>
       `;
@@ -2016,6 +2037,53 @@
         showGlobalToast('Link: ' + window.location.href);
       });
     }
+  }
+
+  /**
+   * Designed by Kapil Pidhwani: /tools/ A–Z index, rendered from the search REGISTRY so every new tool
+   * appears automatically. Ceiling: links exist only after JS runs (Google renders JS; <noscript> points to
+   * /sitemap.xml). Upgrade path if indexing suffers: a 20-line script that bakes this list into the HTML.
+   */
+  function initToolsIndex() {
+    const root = document.getElementById('tools-index');
+    if (!root || !window.ToolityRegistry) return;
+    const filter = document.getElementById('tools-index-filter');
+    const chips = document.getElementById('tools-index-chips');
+    const count = document.getElementById('tools-index-count');
+    const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    const tools = window.ToolityRegistry.items
+      .filter((t) => t.category !== 'Category')
+      .sort((a, b) => a.title.localeCompare(b.title));
+    const cats = [...new Set(tools.map((t) => t.category))].sort();
+    let cat = '';
+
+    chips.innerHTML = ['All', ...cats].map((c, i) =>
+      `<button type="button" class="tools-index-chip" data-cat="${i ? esc(c) : ''}" aria-pressed="${!i}">${esc(c)}</button>`).join('');
+    chips.addEventListener('click', (e) => {
+      const b = e.target.closest('[data-cat]');
+      if (!b) return;
+      cat = b.dataset.cat;
+      chips.querySelectorAll('[data-cat]').forEach((x) => x.setAttribute('aria-pressed', x === b));
+      render();
+    });
+    filter.addEventListener('input', render);
+
+    function render() {
+      const q = filter.value.trim().toLowerCase();
+      const list = tools.filter((t) => (!cat || t.category === cat) &&
+        (!q || t.title.toLowerCase().includes(q) || t.tags.some((g) => g.includes(q))));
+      const groups = {};
+      list.forEach((t) => { const k = /[a-z]/i.test(t.title[0]) ? t.title[0].toUpperCase() : '#'; (groups[k] = groups[k] || []).push(t); });
+      count.textContent = `${list.length} of ${tools.length} tools`;
+      root.innerHTML = list.length ? Object.keys(groups).map((k) => `
+        <section class="tools-index-group" aria-labelledby="letter-${k}">
+          <h2 class="tools-index-letter" id="letter-${k}">${k}</h2>
+          <ul class="tools-index-list">${groups[k].map((t) => `
+            <li><a href="/${t.url}"><iconify-icon icon="${t.icon}" width="16" height="16" aria-hidden="true"></iconify-icon>${esc(t.title)}<span class="tools-index-cat">${esc(t.category)}</span></a></li>`).join('')}
+          </ul>
+        </section>`).join('') : '<p class="prose-text">No tools match. <a href="/contact/">Request one</a>.</p>';
+    }
+    render();
   }
 
   /**

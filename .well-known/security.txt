@@ -1,0 +1,5 @@
+Contact: mailto:hello@toolity.in
+Expires: 2027-10-16T00:00:00.000Z
+Policy: https://toolity.in/security/
+Preferred-Languages: en
+Canonical: https://toolity.in/.well-known/security.txt

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+  <title>All Free Online Tools A–Z | Toolity</title>
+  <link rel="canonical" href="https://toolity.in/tools/">
+
+  <!-- SEO & Metadata -->
+  <meta name="description" content="Every free Toolity tool in one A–Z list — media, PDF, labs, developer, data tools, games and widgets. Filter by name or category.">
+  <meta name="author" content="Kapil Pidhwani">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://toolity.in/tools/">
+  <meta property="og:title" content="All Free Online Tools A–Z | Toolity">
+  <meta property="og:description" content="Every free Toolity tool in one A–Z list — media, PDF, labs, developer, data tools, games and widgets. Filter by name or category.">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary">
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Preload Critical Assets -->
+  <link rel="preload" href="/styles/main.css?v=4.9" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=4.9">
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- Page Hero Header -->
+    <section class="content-page-hero">
+      <div class="container">
+        <div class="breadcrumbs">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">All Tools</span>
+        </div>
+        <h1 class="content-page-title">All Tools A–Z</h1>
+        <p class="content-page-desc">
+          Every tool on Toolity in one place. Filter by name or jump to a category.
+        </p>
+      </div>
+    </section>
+
+    <!-- Main Prose Content -->
+    <div class="container prose-container">
+      <article class="prose-card prose-card-wide">
+        <div class="tools-index-controls">
+          <label for="tools-index-filter" class="visually-hidden">Filter tools</label>
+          <input type="search" id="tools-index-filter" class="tools-index-filter" placeholder="Filter tools, e.g. pdf, gif, qr…" autocomplete="off" spellcheck="false">
+          <div id="tools-index-chips" class="tools-index-chips" role="group" aria-label="Filter by category"></div>
+          <p id="tools-index-count" class="tools-index-count" aria-live="polite"></p>
+        </div>
+        <div id="tools-index"></div>
+        <noscript><p class="prose-text">This list needs JavaScript. Browse the <a href="/sitemap.xml">sitemap</a> or the category pages instead.</p></noscript>
+      </article>
+    </div>
+  </main>
+
+  <!-- Global Multi-Column Footer -->
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=3.9"></script>
+</body>
+
+</html>

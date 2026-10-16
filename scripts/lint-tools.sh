@@ -8,7 +8,7 @@ cd "$(dirname "$0")/.." || exit 1
 fail=0
 report() { echo "  ✗ $1"; fail=1; }
 
-for f in $(find . -mindepth 3 -maxdepth 3 -name index.html -not -path './.git/*' -not -path './templates/*' | sort); do
+for f in $(find . -mindepth 3 -maxdepth 3 -name index.html -not -path './.git/*' -not -path './templates/*' -not -path './blog/*' | sort); do
   echo "$f"
   grep -q '<style' "$f"                               && report "has <style> block (move to /styles/tools/)"
   grep -q ' style="' "$f"                             && report "has inline style=\"\" ($(grep -c ' style="' "$f")x)"

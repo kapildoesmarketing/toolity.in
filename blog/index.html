@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+  <title>Toolity Blog — Guides, Tips &amp; Updates | Toolity</title>
+  <link rel="canonical" href="https://toolity.in/blog/">
+
+  <!-- SEO & Metadata -->
+  <meta name="description" content="Guides, tips and product updates from Toolity — fast, free, privacy-first browser tools.">
+  <meta name="author" content="Kapil Pidhwani">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://toolity.in/blog/">
+  <meta property="og:title" content="Toolity Blog — Guides, Tips &amp; Updates | Toolity">
+  <meta property="og:description" content="Guides, tips and product updates from Toolity — fast, free, privacy-first browser tools.">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary">
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Preload Critical Assets -->
+  <link rel="preload" href="/styles/main.css?v=4.9" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=4.9">
+  <script type="application/ld+json">
+  {"@context": "https://schema.org", "@type": "Blog", "name": "Toolity Blog", "url": "https://toolity.in/blog/", "publisher": {"@type": "Organization", "name": "Toolity", "url": "https://toolity.in"}}
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- Page Hero Header -->
+    <section class="content-page-hero">
+      <div class="container">
+        <div class="breadcrumbs">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Blog</span>
+        </div>
+        <h1 class="content-page-title">Blog</h1>
+        <p class="content-page-desc">
+          Guides, how-tos and updates on the tools we build — and why they run in your browser.
+        </p>
+      </div>
+    </section>
+
+    <!-- Main Prose Content -->
+    <div class="container prose-container">
+      <article class="prose-card">
+        <!-- Designed by Kapil Pidhwani: add one <li> per post (newest first) using the card below. Keep the <ul> free of
+             whitespace while empty — the "coming soon" block hides itself via .blog-list:not(:empty).
+             <li><a class="blog-card" href="/blog/POST-SLUG/"><time datetime="YYYY-MM-DD">DD Month YYYY</time><h2>Post title</h2><p>One-line summary.</p></a></li>
+             Full steps: /templates/blog-post.html -->
+        <ul class="blog-list"></ul>
+        <div class="blog-empty">
+        <div class="prose-section">
+          <h2 class="prose-heading">
+            <iconify-icon icon="lucide:pen-line" width="22" height="22"></iconify-icon>
+            First posts coming soon
+          </h2>
+          <p class="prose-text">We're writing practical guides on compressing media, working with PDFs and building faster, more private workflows. Follow us to hear when the first post goes live.</p>
+          <div class="prose-cta-row">
+            <a href="https://www.instagram.com/toolity.in" class="btn-pill btn-secondary-neutral" target="_blank" rel="noopener">
+              <iconify-icon icon="lucide:instagram" width="18" height="18"></iconify-icon>
+              Instagram
+            </a>
+            <a href="https://www.linkedin.com/company/toolity-in" class="btn-pill btn-secondary-neutral" target="_blank" rel="noopener">
+              <iconify-icon icon="lucide:linkedin" width="18" height="18"></iconify-icon>
+              LinkedIn
+            </a>
+          </div>
+
+        </div>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <!-- Global Multi-Column Footer -->
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=3.9"></script>
+</body>
+
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+  <title>Accessibility Statement | Toolity</title>
+  <link rel="canonical" href="https://toolity.in/accessibility/">
+
+  <!-- SEO & Metadata -->
+  <meta name="description" content="Toolity aims to meet WCAG 2.2 Level AA. Learn what we support, known limitations and how to report an accessibility barrier.">
+  <meta name="author" content="Kapil Pidhwani">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://toolity.in/accessibility/">
+  <meta property="og:title" content="Accessibility Statement | Toolity">
+  <meta property="og:description" content="Toolity aims to meet WCAG 2.2 Level AA. Learn what we support, known limitations and how to report an accessibility barrier.">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary">
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Preload Critical Assets -->
+  <link rel="preload" href="/styles/main.css?v=4.9" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=4.9">
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- Page Hero Header -->
+    <section class="content-page-hero">
+      <div class="container">
+        <div class="breadcrumbs">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Accessibility</span>
+        </div>
+        <h1 class="content-page-title">Accessibility Statement</h1>
+        <p class="content-page-desc">
+          Useful tools should be usable by everyone. Here is where we stand and how to tell us when we fall short.
+        </p>
+      </div>
+    </section>
+
+    <!-- Main Prose Content -->
+    <div class="container prose-container">
+      <article class="prose-card">
+        <div class="prose-section">
+          <h2 class="prose-heading">
+            <iconify-icon icon="lucide:target" width="22" height="22"></iconify-icon>
+            Our goal
+          </h2>
+          <p class="prose-text">We aim to conform to the <a href="https://www.w3.org/TR/WCAG22/" target="_blank" rel="noopener">Web Content Accessibility Guidelines (WCAG) 2.2, Level AA</a> across the site.</p>
+
+        </div>
+        <div class="prose-section">
+          <h2 class="prose-heading">
+            <iconify-icon icon="lucide:check-circle" width="22" height="22"></iconify-icon>
+            What we have in place
+          </h2>
+          <ul class="prose-list">
+            <li>Keyboard access to navigation, search and tool controls, with visible focus outlines.</li>
+            <li>Labelled form controls and descriptive buttons for screen readers.</li>
+            <li>Light and dark themes that follow your system setting, with contrast checked in both.</li>
+            <li>Respect for <code>prefers-reduced-motion</code> — animations calm down when you ask your system for less motion.</li>
+            <li>Touch targets of at least 44&nbsp;px on touch screens, and layouts that reflow from phone to widescreen.</li>
+            <li>Native HTML elements (buttons, details, dialogs) wherever possible, so assistive technology works as expected.</li>
+          </ul>
+
+        </div>
+        <div class="prose-section">
+          <h2 class="prose-heading">
+            <iconify-icon icon="lucide:alert-triangle" width="22" height="22"></iconify-icon>
+            Known limitations
+          </h2>
+          <ul class="prose-list">
+            <li>Some games (for example Pong, Tetris and Flappy Bird) rely on fast visual feedback and may be hard to play with a screen reader.</li>
+            <li>Visual tools such as image editors, colour pickers and previews depend on sight for parts of their output; we provide text values (sizes, hex codes) wherever we can.</li>
+            <li>A few tools load third-party libraries whose interfaces we don't fully control.</li>
+          </ul>
+
+        </div>
+        <div class="prose-section">
+          <h2 class="prose-heading">
+            <iconify-icon icon="lucide:mail" width="22" height="22"></iconify-icon>
+            Report a barrier
+          </h2>
+          <p class="prose-text">If something stops you from using Toolity, email <a href="mailto:hello@toolity.in?subject=Accessibility%20issue%3A%20">hello@toolity.in</a> with the page, your browser and any assistive technology you use. We read every report and prioritise fixes.</p>
+
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <!-- Global Multi-Column Footer -->
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=3.9"></script>
+</body>
+
+</html>

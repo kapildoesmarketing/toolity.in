@@ -162,3 +162,13 @@
 - [About](https://toolity.in/about/)
 - [Partner with Toolity](https://toolity.in/partner/): branded Toolity for your team
 - [Privacy](https://toolity.in/privacy/)
+- [Contact](https://toolity.in/contact/): hello@toolity.in — bugs, tool requests, partnerships, press
+- [All tools A–Z](https://toolity.in/tools/)
+- [FAQ](https://toolity.in/faq/)
+- [Blog](https://toolity.in/blog/)
+- [Careers](https://toolity.in/careers/)
+- [Press & media kit](https://toolity.in/press/)
+- [Accessibility](https://toolity.in/accessibility/)
+- [Cookie Policy](https://toolity.in/cookies/)
+- [Disclaimer](https://toolity.in/disclaimer/)
+- [Security](https://toolity.in/security/)

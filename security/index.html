@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+  <title>Security &amp; Responsible Disclosure | Toolity</title>
+  <link rel="canonical" href="https://toolity.in/security/">
+
+  <!-- SEO & Metadata -->
+  <meta name="description" content="How to report a security vulnerability in Toolity responsibly, what is in scope, and what we commit to in return.">
+  <meta name="author" content="Kapil Pidhwani">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://toolity.in/security/">
+  <meta property="og:title" content="Security &amp; Responsible Disclosure | Toolity">
+  <meta property="og:description" content="How to report a security vulnerability in Toolity responsibly, what is in scope, and what we commit to in return.">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary">
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Preload Critical Assets -->
+  <link rel="preload" href="/styles/main.css?v=4.9" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=4.9">
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- Page Hero Header -->
+    <section class="content-page-hero">
+      <div class="container">
+        <div class="breadcrumbs">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Security</span>
+        </div>
+        <h1 class="content-page-title">Security</h1>
+        <p class="content-page-desc">
+          Found a security issue? Thank you — here is how to report it safely.
+        </p>
+      </div>
+    </section>
+
+    <!-- Main Prose Content -->
+    <div class="container prose-container">
+      <article class="prose-card">
+        <div class="prose-section">
+          <h2 class="prose-heading">
+            <iconify-icon icon="lucide:shield" width="22" height="22"></iconify-icon>
+            Our approach
+          </h2>
+          <p class="prose-text">Toolity is a static website: tools run in your browser and we hold no user accounts or uploaded files. That keeps the attack surface small, but we still take every report seriously.</p>
+
+        </div>
+        <div class="prose-section">
+          <h2 class="prose-heading">
+            <iconify-icon icon="lucide:crosshair" width="22" height="22"></iconify-icon>
+            In scope
+          </h2>
+          <ul class="prose-list">
+            <li>toolity.in and all its pages and scripts.</li>
+            <li>Cross-site scripting (XSS), injection through tool inputs, URL parameters or shared links.</li>
+            <li>Anything that would cause a tool to send user files or text off the device without the user knowing.</li>
+            <li>Embeddable widgets served from toolity.in.</li>
+          </ul>
+
+        </div>
+        <div class="prose-section">
+          <h2 class="prose-heading">
+            <iconify-icon icon="lucide:ban" width="22" height="22"></iconify-icon>
+            Out of scope
+          </h2>
+          <ul class="prose-list">
+            <li>Third-party services we link to or use (GitHub Pages, Google, Iconify, public relays) — please report to them directly.</li>
+            <li>Denial-of-service, spam, social engineering or physical attacks.</li>
+            <li>Reports from automated scanners without a demonstrated impact, or missing best-practice headers that GitHub Pages does not let us set.</li>
+          </ul>
+
+        </div>
+        <div class="prose-section">
+          <h2 class="prose-heading">
+            <iconify-icon icon="lucide:send" width="22" height="22"></iconify-icon>
+            How to report
+          </h2>
+          <p class="prose-text">Email <a href="mailto:hello@toolity.in?subject=Security%20report%3A%20">hello@toolity.in</a> with the affected page, steps to reproduce and the impact. Please give us a reasonable time to fix the issue before sharing it publicly, and don't access or change other people's data while testing.</p>
+
+        </div>
+        <div class="prose-section">
+          <h2 class="prose-heading">
+            <iconify-icon icon="lucide:handshake" width="22" height="22"></iconify-icon>
+            Our commitment
+          </h2>
+          <ul class="prose-list">
+            <li>We'll acknowledge your report and keep you updated while we fix it.</li>
+            <li>We won't take legal action against good-faith research that follows this policy.</li>
+            <li>With your permission, we'll thank you by name on this page once the issue is fixed.</li>
+          </ul>
+
+        </div>
+          <p class="prose-text">Machine-readable contact: <a href="/.well-known/security.txt">/.well-known/security.txt</a></p>
+      </article>
+    </div>
+  </main>
+
+  <!-- Global Multi-Column Footer -->
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=3.9"></script>
+</body>
+
+</html>
