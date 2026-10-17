@@ -473,7 +473,7 @@
         category: 'Category',
         url: 'data/',
         icon: 'lucide:database',
-        tags: ['data', 'parse', 'url', 'parameters', 'query', 'csv', 'table']
+        tags: ['data', 'parse', 'url', 'parameters', 'query', 'csv', 'table', 'json', 'yaml', 'xml', 'convert', 'units', 'logs', 'extract']
       },
       {
         id: 'cat-games',
@@ -1266,6 +1266,46 @@
         url: 'labs/blob-maker/',
         icon: 'lucide:shapes',
         tags: ['blob maker', 'blob generator', 'svg blob', 'organic shape', 'animated blob', 'blob animation', 'svg shape', 'css blob', 'clip-path', 'background shape', 'hero background', 'morphing shape']
+      },
+      {
+        id: 'json-converter',
+        title: 'JSON Converter',
+        category: 'Data',
+        url: 'data/json-converter/',
+        icon: 'lucide:braces',
+        tags: ['json converter', 'json to csv', 'csv to json', 'json to yaml', 'yaml to json', 'xml to json', 'json to xml', 'toml', 'json to typescript', 'zod schema', 'markdown table', 'query string']
+      },
+      {
+        id: 'unit-converter',
+        title: 'Unit Converter',
+        category: 'Data',
+        url: 'data/unit-converter/',
+        icon: 'lucide:ruler',
+        tags: ['unit converter', 'length converter', 'weight converter', 'temperature converter', 'celsius to fahrenheit', 'km to miles', 'kg to lbs', 'mb to gb', 'area', 'volume', 'speed']
+      },
+      {
+        id: 'csv-viewer-editor',
+        title: 'CSV Viewer & Editor',
+        category: 'Data',
+        url: 'data/csv-viewer-editor/',
+        icon: 'lucide:table',
+        tags: ['csv viewer', 'csv editor', 'open csv online', 'csv to excel', 'csv to json', 'tsv viewer', 'remove duplicate rows', 'csv table', 'xlsx']
+      },
+      {
+        id: 'text-extractor',
+        title: 'Text Extractor',
+        category: 'Data',
+        url: 'data/text-extractor/',
+        icon: 'lucide:scan-text',
+        tags: ['email extractor', 'extract emails from text', 'phone number extractor', 'url extractor', 'link extractor', 'number extractor', 'hashtag extractor', 'text extractor']
+      },
+      {
+        id: 'log-parser',
+        title: 'Log Parser',
+        category: 'Data',
+        url: 'data/log-parser/',
+        icon: 'lucide:scroll-text',
+        tags: ['log parser', 'log viewer', 'log analyzer', 'nginx log analyzer', 'apache access log', 'syslog viewer', 'json logs', 'filter logs by level', 'log file viewer']
       },
       {
         id: 'cat-widgets',

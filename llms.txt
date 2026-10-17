@@ -131,6 +131,11 @@
 
 ## Data — parse and manipulate
 
+- [CSV Viewer & Editor](https://toolity.in/data/csv-viewer-editor/): Free online CSV viewer and editor: open CSV or TSV files as a table, sort, filter, edit cells, add or delete rows, remove duplicates and export to CSV, JSON or Excel (.xlsx). Runs in your browser — nothing uploaded.
+- [JSON Converter](https://toolity.in/data/json-converter/): Free online JSON converter: convert between JSON, CSV, YAML, TOML, XML, query strings and Markdown tables, or generate TypeScript interfaces and Zod schemas from JSON. Live, in your browser — nothing uploaded.
+- [Log Parser](https://toolity.in/data/log-parser/): Free online log parser and viewer: auto-detects JSON lines, Apache/Nginx access logs, syslog and timestamped app logs; filter by level, time and text, see stats, top messages and export. In your browser.
+- [Text Extractor](https://toolity.in/data/text-extractor/): Free online text extractor: pull emails, phone numbers, links, numbers and hashtags out of any text or file, remove duplicates, sort and export as TXT or CSV. Runs in your browser — nothing uploaded.
+- [Unit Converter](https://toolity.in/data/unit-converter/): Free online unit converter for length, weight, temperature, area, volume, speed, data size and time. Convert to one unit or see every unit at once, with precise factors — in your browser.
 - [URL Parameter Separator & Cleaner](https://toolity.in/data/url-parameter-separator/): Free, instant URL Parameter Separator and Link Cleaner. Paste any URL, inspect query parameters individually, strip tracking IDs (UTM, fbclid, gclid), and research unfamiliar parameters with one click.
 
 ## Games

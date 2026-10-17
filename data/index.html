@@ -38,12 +38,12 @@
 
   <!-- Iconify Icon Component -->
   <!-- Preload Critical Assets -->
-  <link rel="preload" href="/styles/main.css?v=5.3" as="style">
+  <link rel="preload" href="/styles/main.css?v=5.4" as="style">
   <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
 
   <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 
-  <link rel="stylesheet" href="/styles/main.css?v=5.3">
+  <link rel="stylesheet" href="/styles/main.css?v=5.4">
 </head>
 
 <body>
@@ -68,7 +68,7 @@
           </div>
           <div class="page-count-badge">
             <span class="status-dot"></span>
-            <span>1 Tool Available</span>
+            <span>6 Tools Available</span>
           </div>
         </div>
       </div>
@@ -77,8 +77,86 @@
     <!-- Tools, grouped by section (alphabetical within each) -->
     <section class="section-wrapper category-tools">
       <div class="container">
+        <h2 class="tools-section-title">Converters</h2>
+        <div class="tools-grid">
+          <a href="json-converter/" class="category-glow-card">
+            <div class="glow-card-content">
+              <div class="tool-card-icon-badge">
+                <iconify-icon icon="lucide:braces" width="20" height="20"></iconify-icon>
+              </div>
+              <div>
+                <h3 class="tool-card-title">JSON Converter</h3>
+                <p class="tool-card-desc">JSON ⇄ CSV, YAML, TOML, XML, Markdown — plus TypeScript types.</p>
+              </div>
+              <div class="tool-card-action">
+                <span>Open</span>
+                <iconify-icon icon="lucide:arrow-right" width="15" height="15"></iconify-icon>
+              </div>
+            </div>
+          </a>
+          <a href="unit-converter/" class="category-glow-card">
+            <div class="glow-card-content">
+              <div class="tool-card-icon-badge">
+                <iconify-icon icon="lucide:ruler" width="20" height="20"></iconify-icon>
+              </div>
+              <div>
+                <h3 class="tool-card-title">Unit Converter</h3>
+                <p class="tool-card-desc">Length, weight, temperature, area, volume, speed, data size and time.</p>
+              </div>
+              <div class="tool-card-action">
+                <span>Open</span>
+                <iconify-icon icon="lucide:arrow-right" width="15" height="15"></iconify-icon>
+              </div>
+            </div>
+          </a>
+        </div>
         <h2 class="tools-section-title">Parsers</h2>
         <div class="tools-grid">
+          <a href="csv-viewer-editor/" class="category-glow-card">
+            <div class="glow-card-content">
+              <div class="tool-card-icon-badge">
+                <iconify-icon icon="lucide:table" width="20" height="20"></iconify-icon>
+              </div>
+              <div>
+                <h3 class="tool-card-title">CSV Viewer &amp; Editor</h3>
+                <p class="tool-card-desc">Sort, filter, edit and dedupe CSV — export to CSV, JSON or Excel.</p>
+              </div>
+              <div class="tool-card-action">
+                <span>Open</span>
+                <iconify-icon icon="lucide:arrow-right" width="15" height="15"></iconify-icon>
+              </div>
+            </div>
+          </a>
+          <a href="log-parser/" class="category-glow-card">
+            <div class="glow-card-content">
+              <div class="tool-card-icon-badge">
+                <iconify-icon icon="lucide:scroll-text" width="20" height="20"></iconify-icon>
+              </div>
+              <div>
+                <h3 class="tool-card-title">Log Parser</h3>
+                <p class="tool-card-desc">Filter JSON, Nginx and syslog logs by level and time, with stats.</p>
+              </div>
+              <div class="tool-card-action">
+                <span>Open</span>
+                <iconify-icon icon="lucide:arrow-right" width="15" height="15"></iconify-icon>
+              </div>
+            </div>
+          </a>
+          <a href="text-extractor/" class="category-glow-card">
+            <div class="glow-card-content">
+              <div class="tool-card-icon-badge">
+                <iconify-icon icon="lucide:scan-text" width="20" height="20"></iconify-icon>
+              </div>
+              <div>
+                <h3 class="tool-card-title">Text Extractor</h3>
+                <p class="tool-card-desc">Pull emails, phone numbers, links and hashtags out of any text.</p>
+              </div>
+              <div class="tool-card-action">
+                <span>Open</span>
+                <iconify-icon icon="lucide:arrow-right" width="15" height="15"></iconify-icon>
+              </div>
+            </div>
+          </a>
           <a href="url-parameter-separator/" class="category-glow-card">
             <div class="glow-card-content">
               <div class="tool-card-icon-badge">
@@ -102,7 +180,7 @@
   <!-- Global Multi-Column Footer -->
   <div data-include="/components/footer.html"></div>
 
-  <script src="/scripts/main.js?v=4.0"></script>
+  <script src="/scripts/main.js?v=4.1"></script>
 </body>
 
 </html>

@@ -4109,6 +4109,14 @@ body {
 .web-grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.6rem; }
 .web-stat { padding: 0.65rem 0.75rem; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); display: flex; flex-direction: column; gap: 0.3rem; font-size: 0.8rem; color: var(--text-secondary); }
 .web-stat strong { color: var(--text-primary); font-size: 0.86rem; }
+.web-file-row { display: flex; align-items: center; flex-wrap: wrap; gap: 0.6rem; min-width: 0; }
+.tool-pane.dragover { outline: 2px dashed var(--brand); outline-offset: -4px; }
+.web-group { display: flex; flex-direction: column; gap: 0.5rem; min-width: 0; }
+.web-convert-row { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: end; gap: 0.5rem; min-width: 0; }
+.web-convert-row-2 { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.web-checks { display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; min-width: 0; }
+.web-checks .control-item { margin: 0; }
+.web-group-head { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); }
 
 /* ═══════════ Games family — shared stage, score bar, overlay & board primitives ═══════════ */
 .game-pane-wrap { gap: 0.75rem; align-items: center; }
