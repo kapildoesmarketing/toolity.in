@@ -1570,6 +1570,14 @@ body {
   color: var(--text-secondary);
 }
 
+/* Designed by Kapil Pidhwani: SumoDir badge (markup must stay verbatim, so all sizing lives here). The PNG has ~20.6% transparent
+   padding on the left; the negative margin lines the visible pill up with the mission text. Ceiling: tied to this exact image — if
+   SumoDir changes badge.png, re-measure or drop the margin. */
+.footer-badge { margin-top: 1rem; line-height: 0; }
+.footer-badge a { display: inline-block; opacity: 0.9; transition: opacity .15s; }
+.footer-badge a:hover, .footer-badge a:focus-visible { opacity: 1; }
+.footer-badge img { width: 220px; height: auto; margin-left: -45px; }
+
 .footer-heading {
   font-size: 0.82rem;
   font-weight: 600;

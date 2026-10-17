@@ -10,7 +10,7 @@ const only = process.argv[2];
 const CAT_LABEL = { media: 'Media', labs: 'Labs' };
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const jsonStr = (s) => JSON.stringify(String(s).replace(/<[^>]+>/g, ''));
-const MAIN_V = '4.1', CSS_V = '5.4';
+const MAIN_V = '4.1', CSS_V = '5.5';
 const RUNTIME = {
   audio: '  <script src="/scripts/audio-common.js?v=1.1"></script>\n  <script src="https://cdn.jsdelivr.net/npm/lamejs@1.2.1/lame.all.js" defer></script>\n',
   gif: '  <script src="/scripts/gif-common.js?v=1.0"></script>\n',
