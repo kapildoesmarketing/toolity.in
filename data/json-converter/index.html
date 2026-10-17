@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online JSON Converter | Toolity Data</title>
+  <link rel="canonical" href="https://toolity.in/data/json-converter/">
+  <meta name="description" content="Free online JSON converter: convert between JSON, CSV, YAML, TOML, XML, query strings and Markdown tables, or generate TypeScript interfaces and Zod schemas from JSON. Live, in your browser — nothing uploaded.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online JSON Converter | Toolity Data">
+  <meta property="og:description" content="Free online JSON converter: convert between JSON, CSV, YAML, TOML, XML, query strings and Markdown tables, or generate TypeScript interfaces and Zod schemas from JSON. Live, in your browser — nothing uploaded.">
+  <meta property="og:url" content="https://toolity.in/data/json-converter/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=5.4" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=5.4">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "JSON Converter",
+        "url": "https://toolity.in/data/json-converter/",
+        "description": "Free online JSON converter: convert between JSON, CSV, YAML, TOML, XML, query strings and Markdown tables, or generate TypeScript interfaces and Zod schemas from JSON. Live, in your browser — nothing uploaded.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Data", "item": "https://toolity.in/data/" },
+          { "@type": "ListItem", "position": 3, "name": "JSON Converter", "item": "https://toolity.in/data/json-converter/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "How are nested objects turned into CSV?", "acceptedAnswer": { "@type": "Answer", "text": "With “Flatten” on (default), nested keys become dot columns — {\"a\":{\"b\":1}} becomes a column a.b. Arrays inside a row are written as JSON text. Turn Flatten off to keep whole objects as JSON in one cell." } },
+          { "@type": "Question", "name": "Which libraries are used for YAML and TOML?", "acceptedAnswer": { "@type": "Answer", "text": "YAML uses js-yaml and TOML uses smol-toml. Both are downloaded from a pinned CDN link only when you pick that format, then run in your browser. Every other format is converted with built-in browser features." } },
+          { "@type": "Question", "name": "How does XML map to JSON?", "acceptedAnswer": { "@type": "Answer", "text": "Elements become keys, repeated elements become arrays, attributes become @name keys and mixed text becomes #text. Converting back follows the same rules, so a round trip keeps attributes." } },
+          { "@type": "Question", "name": "How good are the TypeScript and Zod types?", "acceptedAnswer": { "@type": "Answer", "text": "Types are inferred from your sample: fields missing from some array items become optional, mixed values become unions and null is kept. They describe the data you pasted — give a representative sample for the best result." } },
+          { "@type": "Question", "name": "Why does TOML say it needs an object?", "acceptedAnswer": { "@type": "Answer", "text": "A TOML document is always a table of keys. Arrays or plain values at the top level, and null values, cannot be written as TOML — wrap the array in a key such as {\"items\": [...]}." } },
+          { "@type": "Question", "name": "Is my data uploaded anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. Parsing and converting happen in JavaScript inside your browser tab. Your text and files are never sent to Toolity or anyone else." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/data/" class="breadcrumb-link">Data</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">JSON Converter</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Data</span>
+            <h1 class="page-title">JSON Converter</h1>
+            <p class="page-desc">Paste JSON, CSV, YAML, TOML, XML or a query string — get it back in any other format, or as TypeScript and Zod types.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" data-split="40/60" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge web-status-badge" id="status-badge">Paste data to begin</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result" aria-label="Copy result" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download result" aria-label="Download result" disabled>
+                <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                <span>Download</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-open" title="Open result in a new tab" aria-label="Open result in a new tab" disabled>
+                <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
+                <span>Open</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Input</span>
+                <span class="pane-badge" id="input-badge">—</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content web-form">
+                <div class="web-file-row">
+                  <button type="button" class="btn-toolbar-sm" id="btn-file" title="Open a file from your device" aria-label="Open a file from your device">
+                    <iconify-icon icon="lucide:folder-open" width="14" height="14"></iconify-icon>
+                    <span>Open file</span>
+                  </button>
+                  <input type="file" id="file-input" accept=".json,.csv,.tsv,.yaml,.yml,.toml,.xml,.md,.txt" hidden>
+                  <span class="web-muted" id="file-name">or drop a file here</span>
+                </div>
+                <div class="web-convert-row">
+                  <div class="form-group">
+                    <label class="form-label" for="opt-from"><span>From</span></label>
+                    <select id="opt-from" class="select-clean"><option value="auto" selected>Auto-detect</option><option value="json">JSON</option><option value="csv">CSV / TSV</option><option value="yaml">YAML</option><option value="toml">TOML</option><option value="xml">XML</option><option value="query">Query string</option><option value="markdown">Markdown table</option></select>
+                  </div>
+                  <button type="button" class="web-row-btn" id="btn-swap" title="Swap From and To" aria-label="Swap From and To">
+                    <iconify-icon icon="lucide:arrow-left-right" width="16" height="16"></iconify-icon>
+                  </button>
+                  <div class="form-group">
+                    <label class="form-label" for="opt-to"><span>To</span></label>
+                    <select id="opt-to" class="select-clean"><option value="json" selected>JSON</option><option value="csv">CSV / TSV</option><option value="yaml">YAML</option><option value="toml">TOML</option><option value="xml">XML</option><option value="query">Query string</option><option value="markdown">Markdown table</option><option value="typescript">TypeScript types</option><option value="zod">Zod schema</option></select>
+                  </div>
+                </div>
+                <div class="form-group form-group-grow">
+                  <label class="form-label" for="text-input"><span>Data</span><span class="form-label-desc" id="input-count"></span></label>
+                  <textarea id="text-input" class="textarea-clean" rows="12" placeholder="{ &quot;name&quot;: &quot;Ada&quot;, &quot;langs&quot;: [&quot;en&quot;, &quot;fr&quot;] }  — or CSV, YAML, TOML, XML, a=1&amp;b=2…" spellcheck="false" autocapitalize="off" data-file-target></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Output</span>
+                <span class="pane-badge" id="output-badge">—</span>
+              </div>
+              <div class="pane-content web-output-pane">
+                <div class="pane-empty" id="output-empty">
+                  <iconify-icon icon="lucide:braces"></iconify-icon>
+                  <span>Converted output will appear here</span>
+                </div>
+                <div class="web-output" id="output-content" hidden>
+                  <pre class="web-code" id="output-text" aria-live="polite"></pre>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">2-space indent · comma · flatten</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item">
+                <label for="opt-indent">Indent</label>
+                <select id="opt-indent" class="select-clean"><option value="2" selected>2 spaces</option><option value="4">4 spaces</option><option value="tab">Tab</option><option value="0">Minified (JSON only)</option></select>
+              </div>
+              <div class="control-item">
+                <label for="opt-delim">CSV delimiter (output)</label>
+                <select id="opt-delim" class="select-clean"><option value="," selected>Comma</option><option value=";">Semicolon</option><option value="\t">Tab</option><option value="|">Pipe</option></select>
+              </div>
+              <div class="control-item"><input type="checkbox" id="opt-flatten" checked><label for="opt-flatten">Flatten nested objects into dot.columns (CSV / Markdown)</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-types" checked><label for="opt-types">Detect numbers and true/false in CSV, Markdown and query strings</label></div>
+              <div class="control-item">
+                <label for="opt-root">Root type name (TypeScript / Zod)</label>
+                <input type="text" id="opt-root" class="input-clean" placeholder="Root" autocomplete="off" spellcheck="false">
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Use JSON Converter in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Paste or open your data</h3>
+              <p class="step-desc">Drop a .json, .csv, .yaml, .toml or .xml file, or paste text. The input format is detected automatically — pick it under <em>From</em> if the guess is wrong.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Pick the output</h3>
+              <p class="step-desc">Choose JSON, CSV, YAML, TOML, XML, query string, Markdown table, TypeScript types or a Zod schema. The result updates as you type; ⇄ swaps the direction.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Copy or download</h3>
+              <p class="step-desc">Copy the result or download it with the right file extension. Settings cover indentation, CSV delimiter, flattening and type names.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">JSON Converter — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>How are nested objects turned into CSV?</summary>
+              <p>With “Flatten” on (default), nested keys become dot columns — <code>{"a":{"b":1}}</code> becomes a column <code>a.b</code>. Arrays inside a row are written as JSON text. Turn Flatten off to keep whole objects as JSON in one cell.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Which libraries are used for YAML and TOML?</summary>
+              <p>YAML uses <a href="https://github.com/nodeca/js-yaml" target="_blank" rel="noopener">js-yaml</a> and TOML uses <a href="https://github.com/squirrelchat/smol-toml" target="_blank" rel="noopener">smol-toml</a>. Both are downloaded from a pinned CDN link only when you pick that format, then run in your browser. Every other format is converted with built-in browser features.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How does XML map to JSON?</summary>
+              <p>Elements become keys, repeated elements become arrays, attributes become <code>@name</code> keys and mixed text becomes <code>#text</code>. Converting back follows the same rules, so a round trip keeps attributes.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How good are the TypeScript and Zod types?</summary>
+              <p>Types are inferred from your sample: fields missing from some array items become optional, mixed values become unions and <code>null</code> is kept. They describe the data you pasted — give a representative sample for the best result.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why does TOML say it needs an object?</summary>
+              <p>A TOML document is always a table of keys. Arrays or plain values at the top level, and <code>null</code> values, cannot be written as TOML — wrap the array in a key such as <code>{"items": [...]}</code>.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is my data uploaded anywhere?</summary>
+              <p>No. Parsing and converting happen in JavaScript inside your browser tab. Your text and files are never sent to Toolity or anyone else.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="data"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=4.1"></script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="/scripts/web-common.js?v=1.1"></script>
+  <script src="/data/json-converter/json-converter.js?v=1.0"></script>
+</body>
+</html>
