@@ -1826,9 +1826,9 @@
       toggleBtn.id = 'mobile-menu-toggle';
       toggleBtn.className = 'btn-icon-pill';
       toggleBtn.type = 'button';
-      toggleBtn.setAttribute('aria-label', 'Toggle mobile navigation menu');
+      toggleBtn.setAttribute('aria-label', 'Search tools and browse categories');
       toggleBtn.setAttribute('aria-expanded', 'false');
-      toggleBtn.innerHTML = '<iconify-icon id="mobile-menu-icon" icon="lucide:menu" width="18" height="18"></iconify-icon>';
+      toggleBtn.innerHTML = '<iconify-icon id="mobile-menu-icon" icon="lucide:search" width="18" height="18"></iconify-icon>';
       navRight.appendChild(toggleBtn);
     }
 
@@ -1924,7 +1924,7 @@
       drawer.classList.remove('open');
       backdrop.classList.remove('open');
       toggleBtn.setAttribute('aria-expanded', 'false');
-      if (menuIcon) menuIcon.setAttribute('icon', 'lucide:menu');
+      if (menuIcon) menuIcon.setAttribute('icon', 'lucide:search');
       document.body.style.overflow = '';
     }
 
@@ -1964,7 +1964,7 @@
 
   /**
    * Designed by Kapil Pidhwani: Mobile Floating Bottom Pill Nav (Non-Home Pages)
-   * Provides quick thumb-friendly actions: 1. Home, 2. Tools drawer (toggle), 3. Share URL, 4. Scroll to Top.
+   * Provides quick thumb-friendly actions: 1. Home, 2. Search drawer (search + categories, toggle), 3. Share URL, 4. Scroll to Top.
    */
   function initMobileBottomNav(toggleMenuFn) {
     const pathname = window.location.pathname;
@@ -1981,9 +1981,9 @@
         <iconify-icon icon="lucide:home"></iconify-icon>
         <span>Home</span>
       </a>
-      <button type="button" class="pill-nav-item" id="pill-nav-tools" aria-label="Toggle Tools Menu">
-        <iconify-icon icon="lucide:layout-grid"></iconify-icon>
-        <span>Tools</span>
+      <button type="button" class="pill-nav-item" id="pill-nav-tools" aria-label="Search tools and browse categories">
+        <iconify-icon icon="lucide:search"></iconify-icon>
+        <span>Search</span>
       </button>
       <button type="button" class="pill-nav-item" id="pill-nav-share" aria-label="Share this tool">
         <iconify-icon icon="lucide:share-2"></iconify-icon>

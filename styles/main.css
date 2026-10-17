@@ -4150,11 +4150,6 @@ html::-webkit-scrollbar-corner, body *::-webkit-scrollbar-corner { background: t
 ::selection { background: color-mix(in srgb, var(--brand) 30%, transparent); }
 
 /* ═══════════ Platform pages: footer socials · contact · blog · careers · press · tools A–Z ═══════════ */
-@media (min-width: 1101px) { .footer-grid { grid-template-columns: minmax(0, 1.6fr) repeat(4, minmax(0, 1fr)); } }
-@media (min-width: 769px) and (max-width: 1100px) {
-  .footer-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  .footer-col-brand { grid-column: 1 / -1; max-width: 100%; }
-}
 .footer-social, .mobile-nav-social { display: flex; gap: 0.5rem; }
 .footer-legal { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.35rem 1.25rem; }
 .footer-legal a { color: var(--text-muted); transition: color .15s; }
