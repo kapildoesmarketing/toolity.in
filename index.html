@@ -272,7 +272,9 @@
   </main>
 
   <!-- Global Multi-Column Footer -->
-  <div data-include="/components/footer.html"></div>
+  <!-- Designed by Kapil Pidhwani: SumoDir's verifier reads raw HTML (no JS), so the badge sits inside the placeholder; main.js swaps the placeholder for
+       footer.html (same badge), so users see exactly one. Ceiling: if the include system is ever replaced by static footers, delete this copy. -->
+  <div data-include="/components/footer.html"><a href="https://sumodir.com" target="_blank" rel="dofollow"><img src="https://sumodir.com/badge.png" alt="Featured on SumoDir" width="200" height="54" /></a></div>
 
   <script src="/scripts/main.js?v=4.1"></script>
 </body>
