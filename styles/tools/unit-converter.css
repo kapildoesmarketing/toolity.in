@@ -1,0 +1,10 @@
+/* Unit Converter — result rows and single answer (layout-only one-offs; tokens from main.css) */
+.unit-single { display: flex; flex-direction: column; gap: 0.6rem; padding: 1.25rem; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); }
+.unit-single[hidden] { display: none; }
+.unit-single .web-big { font-size: clamp(1.6rem, 6cqw, 2.6rem); overflow-wrap: anywhere; }
+.unit-row { padding: 0.45rem 0.5rem 0.45rem 0.85rem; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); }
+.unit-cell { display: flex; align-items: baseline; justify-content: space-between; gap: 0.75rem; min-width: 0; flex-wrap: wrap; }
+.unit-name { font-size: 0.8rem; color: var(--text-secondary); }
+.unit-val { font-family: var(--font-mono); font-size: 0.92rem; color: var(--text-primary); overflow-wrap: anywhere; text-align: right; }
+.unit-row .web-row-btn { width: 36px; height: 36px; }
+@container (max-width: 480px) { .unit-cell { flex-direction: column; align-items: flex-start; gap: 0.15rem; } .unit-val { text-align: left; } }
