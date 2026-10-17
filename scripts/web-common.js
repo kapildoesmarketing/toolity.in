@@ -156,6 +156,30 @@
     }
     $('btn-reset').addEventListener('click', reset);
     bindShortcuts({ primary: press, reset });
+
+    /* Designed by Kapil Pidhwani: text-file input for tools generated with `file: {accept}` — Open file or drop on the input
+     * pane; the text lands in [data-file-target] and the normal input pipeline runs. Ceiling: whole file read into memory
+     * (50 MB cap) — fine for CSV/logs a browser tab can render anyway. */
+    const fileIn = $('file-input'), fileName = $('file-name');
+    if (fileIn) {
+      const target = card.querySelector('[data-file-target]'), pane = fileIn.closest('.tool-pane'), idleName = fileName.textContent;
+      const load = (f) => {
+        if (!f) return;
+        if (f.size > 50e6) return showError('That file is larger than 50 MB — split it first.');
+        f.text().then((txt) => {
+          target.value = txt; fileName.textContent = `${f.name} · ${window.Toolity.formatBytes(f.size)}`;
+          if (T.onFile) T.onFile(f, api);
+          target.dispatchEvent(new Event('input', { bubbles: true }));
+        }).catch(() => showError('Could not read that file.'));
+      };
+      $('btn-file').addEventListener('click', () => fileIn.click());
+      fileIn.addEventListener('change', () => { load(fileIn.files[0]); fileIn.value = ''; });
+      const isFile = (e) => e.dataTransfer && [...e.dataTransfer.types].includes('Files');
+      ['dragenter', 'dragover'].forEach((ev) => pane.addEventListener(ev, (e) => { if (isFile(e)) { e.preventDefault(); pane.classList.add('dragover'); } }));
+      pane.addEventListener('dragleave', (e) => { if (!pane.contains(e.relatedTarget)) pane.classList.remove('dragover'); });
+      pane.addEventListener('drop', (e) => { if (!isFile(e)) return; e.preventDefault(); pane.classList.remove('dragover'); load(e.dataTransfer.files[0]); });
+      $('btn-reset').addEventListener('click', () => { fileName.textContent = idleName; });
+    }
     run();
     window.ToolityWebTool = Object.assign(api, { run, reset, clear, present, T });
     return api;

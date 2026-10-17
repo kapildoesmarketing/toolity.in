@@ -1,0 +1,224 @@
+/* Designed by Kapil Pidhwani: the Data batch. Same contract as cfg_web_tools.js (see its header) plus `section` (category
+ * heading on /data/), `layout` ('stacked' for wide tables) and `file` { accept } (Open file + drop, handled by web-common).
+ * Build: node gen_web_pages.js --cfg=cfg_data_tools.js --cat=data   ·   Wire: python3 wire_data.py */
+const PRIVACY_FAQ = ['Is my data uploaded anywhere?', 'No. Parsing and converting happen in JavaScript inside your browser tab. Your text and files are never sent to Toolity or anyone else.'];
+const TEXTAREA = (label, placeholder, rows = 10) => `
+                <div class="form-group form-group-grow">
+                  <label class="form-label" for="text-input"><span>${label}</span><span class="form-label-desc" id="input-count"></span></label>
+                  <textarea id="text-input" class="textarea-clean" rows="${rows}" placeholder="${placeholder}" spellcheck="false" autocapitalize="off" data-file-target></textarea>
+                </div>`;
+const FORMATS = [['json', 'JSON'], ['csv', 'CSV / TSV'], ['yaml', 'YAML'], ['toml', 'TOML'], ['xml', 'XML'], ['query', 'Query string'], ['markdown', 'Markdown table']];
+const opts = (list, sel) => list.map(([v, l]) => `<option value="${v}"${v === sel ? ' selected' : ''}>${l}</option>`).join('');
+
+module.exports = [
+  {
+    slug: 'json-converter', name: 'JSON Converter', icon: 'lucide:braces', section: 'Converters',
+    desc: 'Free online JSON converter: convert between JSON, CSV, YAML, TOML, XML, query strings and Markdown tables, or generate TypeScript interfaces and Zod schemas from JSON. Live, in your browser — nothing uploaded.',
+    lead: 'Paste JSON, CSV, YAML, TOML, XML or a query string — get it back in any other format, or as TypeScript and Zod types.',
+    cardDesc: 'JSON ⇄ CSV, YAML, TOML, XML, Markdown — plus TypeScript types.',
+    tags: ['json converter', 'json to csv', 'csv to json', 'json to yaml', 'yaml to json', 'xml to json', 'json to xml', 'toml', 'json to typescript', 'zod schema', 'markdown table', 'query string'],
+    idle: 'Paste data to begin', sourceLabel: 'Input', outputLabel: 'Output', outputIcon: 'lucide:braces', outputEmpty: 'Converted output will appear here',
+    file: { accept: '.json,.csv,.tsv,.yaml,.yml,.toml,.xml,.md,.txt' },
+    sourceHtml: `
+                <div class="web-convert-row">
+                  <div class="form-group">
+                    <label class="form-label" for="opt-from"><span>From</span></label>
+                    <select id="opt-from" class="select-clean"><option value="auto" selected>Auto-detect</option>${opts(FORMATS)}</select>
+                  </div>
+                  <button type="button" class="web-row-btn" id="btn-swap" title="Swap From and To" aria-label="Swap From and To">
+                    <iconify-icon icon="lucide:arrow-left-right" width="16" height="16"></iconify-icon>
+                  </button>
+                  <div class="form-group">
+                    <label class="form-label" for="opt-to"><span>To</span></label>
+                    <select id="opt-to" class="select-clean">${opts(FORMATS, 'json')}<option value="typescript">TypeScript types</option><option value="zod">Zod schema</option></select>
+                  </div>
+                </div>${TEXTAREA('Data', '{ &quot;name&quot;: &quot;Ada&quot;, &quot;langs&quot;: [&quot;en&quot;, &quot;fr&quot;] }  — or CSV, YAML, TOML, XML, a=1&amp;b=2…', 12)}`,
+    outputHtml: `
+                  <pre class="web-code" id="output-text" aria-live="polite"></pre>`,
+    settingsSummary: '2-space indent · comma · flatten',
+    settings: `
+              <div class="control-item">
+                <label for="opt-indent">Indent</label>
+                <select id="opt-indent" class="select-clean">${opts([['2', '2 spaces'], ['4', '4 spaces'], ['tab', 'Tab'], ['0', 'Minified (JSON only)']], '2')}</select>
+              </div>
+              <div class="control-item">
+                <label for="opt-delim">CSV delimiter (output)</label>
+                <select id="opt-delim" class="select-clean">${opts([[',', 'Comma'], [';', 'Semicolon'], ['\\t', 'Tab'], ['|', 'Pipe']], ',')}</select>
+              </div>
+              <div class="control-item"><input type="checkbox" id="opt-flatten" checked><label for="opt-flatten">Flatten nested objects into dot.columns (CSV / Markdown)</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-types" checked><label for="opt-types">Detect numbers and true/false in CSV, Markdown and query strings</label></div>
+              <div class="control-item">
+                <label for="opt-root">Root type name (TypeScript / Zod)</label>
+                <input type="text" id="opt-root" class="input-clean" placeholder="Root" autocomplete="off" spellcheck="false">
+              </div>`,
+    guide: [['Paste or open your data', 'Drop a .json, .csv, .yaml, .toml or .xml file, or paste text. The input format is detected automatically — pick it under <em>From</em> if the guess is wrong.'], ['Pick the output', 'Choose JSON, CSV, YAML, TOML, XML, query string, Markdown table, TypeScript types or a Zod schema. The result updates as you type; ⇄ swaps the direction.'], ['Copy or download', 'Copy the result or download it with the right file extension. Settings cover indentation, CSV delimiter, flattening and type names.']],
+    faq: [['How are nested objects turned into CSV?', 'With “Flatten” on (default), nested keys become dot columns — <code>{"a":{"b":1}}</code> becomes a column <code>a.b</code>. Arrays inside a row are written as JSON text. Turn Flatten off to keep whole objects as JSON in one cell.'], ['Which libraries are used for YAML and TOML?', 'YAML uses <a href="https://github.com/nodeca/js-yaml" target="_blank" rel="noopener">js-yaml</a> and TOML uses <a href="https://github.com/squirrelchat/smol-toml" target="_blank" rel="noopener">smol-toml</a>. Both are downloaded from a pinned CDN link only when you pick that format, then run in your browser. Every other format is converted with built-in browser features.'], ['How does XML map to JSON?', 'Elements become keys, repeated elements become arrays, attributes become <code>@name</code> keys and mixed text becomes <code>#text</code>. Converting back follows the same rules, so a round trip keeps attributes.'], ['How good are the TypeScript and Zod types?', 'Types are inferred from your sample: fields missing from some array items become optional, mixed values become unions and <code>null</code> is kept. They describe the data you pasted — give a representative sample for the best result.'], ['Why does TOML say it needs an object?', 'A TOML document is always a table of keys. Arrays or plain values at the top level, and <code>null</code> values, cannot be written as TOML — wrap the array in a key such as <code>{"items": [...]}</code>.'], PRIVACY_FAQ]
+  },
+  {
+    slug: 'unit-converter', name: 'Unit Converter', icon: 'lucide:ruler', section: 'Converters', css: true,
+    desc: 'Free online unit converter for length, weight, temperature, area, volume, speed, data size and time. Convert to one unit or see every unit at once, with precise factors — in your browser.',
+    lead: 'Convert length, weight, temperature, area, volume, speed, data size and time — to one unit or all of them at once.',
+    cardDesc: 'Length, weight, temperature, area, volume, speed, data size and time.',
+    tags: ['unit converter', 'length converter', 'weight converter', 'temperature converter', 'celsius to fahrenheit', 'km to miles', 'kg to lbs', 'mb to gb', 'area', 'volume', 'speed'],
+    idle: 'Enter a value to begin', sourceLabel: 'Convert', outputLabel: 'Result', outputIcon: 'lucide:ruler', outputEmpty: 'Converted values will appear here', split: '40/60',
+    sourceHtml: `
+                <div class="segmented-group segmented-group-pill" id="seg-cat" role="group" aria-label="Quantity">
+                  <button type="button" class="seg-pill active" data-value="length">Length</button>
+                  <button type="button" class="seg-pill" data-value="weight">Weight</button>
+                  <button type="button" class="seg-pill" data-value="temperature">Temperature</button>
+                  <button type="button" class="seg-pill" data-value="area">Area</button>
+                  <button type="button" class="seg-pill" data-value="volume">Volume</button>
+                  <button type="button" class="seg-pill" data-value="speed">Speed</button>
+                  <button type="button" class="seg-pill" data-value="data">Data size</button>
+                  <button type="button" class="seg-pill" data-value="time">Time</button>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="value-input"><span>Value</span></label>
+                  <input type="text" id="value-input" class="input-clean" inputmode="decimal" placeholder="e.g. 42 or 1.5e3" autocomplete="off" spellcheck="false">
+                </div>
+                <div class="web-convert-row">
+                  <div class="form-group">
+                    <label class="form-label" for="opt-from"><span>From</span></label>
+                    <select id="opt-from" class="select-clean"></select>
+                  </div>
+                  <button type="button" class="web-row-btn" id="btn-swap" title="Swap From and To" aria-label="Swap From and To">
+                    <iconify-icon icon="lucide:arrow-left-right" width="16" height="16"></iconify-icon>
+                  </button>
+                  <div class="form-group">
+                    <label class="form-label" for="opt-to"><span>To</span></label>
+                    <select id="opt-to" class="select-clean"></select>
+                  </div>
+                </div>`,
+    outputHtml: `
+                  <div class="unit-single" id="output-single" hidden>
+                    <div class="web-big" id="output-value"></div>
+                    <div class="web-muted" id="output-formula"></div>
+                  </div>
+                  <div class="web-rows" id="output-list"></div>`,
+    settingsSummary: 'Auto precision · separators',
+    settings: `
+              <div class="control-item">
+                <label for="opt-precision">Precision</label>
+                <select id="opt-precision" class="select-clean">${opts([['auto', 'Auto (10 significant digits)'], ['0', '0 decimals'], ['2', '2 decimals'], ['4', '4 decimals'], ['6', '6 decimals'], ['10', '10 decimals']], 'auto')}</select>
+              </div>
+              <div class="control-item"><input type="checkbox" id="opt-group" checked><label for="opt-group">Thousands separators (1,000,000)</label></div>`,
+    guide: [['Pick a quantity', 'Length, weight, temperature, area, volume, speed, data size or time. The unit lists change to match.'], ['Type a value and its unit', 'Enter any number (decimals and 1.5e3-style exponents work) and choose the unit it is in under <em>From</em>.'], ['Read one or all', 'Leave <em>To</em> on “All units” to see every conversion with its own copy button, or pick one unit for a big single answer and its formula.']],
+    faq: [['How precise are the conversions?', 'Exact definitions are used where they exist (1 inch = 2.54 cm, 1 lb = 0.45359237 kg, 1 US gallon = 3.785411784 L). Results show up to 10 significant digits by default; choose fixed decimals in Settings.'], ['How is temperature handled?', 'Temperature uses formulas, not a single factor, so offsets are correct: °F = °C × 9/5 + 32, K = °C + 273.15, °R = K × 9/5. Values below absolute zero are flagged.'], ['Why are there both MB and MiB?', 'Storage makers use decimal units (1 MB = 1,000,000 bytes); operating systems and RAM often use binary units (1 MiB = 1,048,576 bytes). Both are listed so you can compare a “500 GB” drive with what your computer reports.'], ['How long is a month or a year here?', 'An average Gregorian month (30.436875 days) and year (365.2425 days). For calendar dates, use a date calculator instead.'], ['Does it convert currencies?', 'No — exchange rates change constantly and need a live server, which Toolity tools do not use. Everything here uses fixed, published factors.'], PRIVACY_FAQ]
+  },
+  {
+    slug: 'csv-viewer-editor', name: 'CSV Viewer & Editor', icon: 'lucide:table', section: 'Parsers', layout: 'stacked', css: true,
+    desc: 'Free online CSV viewer and editor: open CSV or TSV files as a table, sort, filter, edit cells, add or delete rows, remove duplicates and export to CSV, JSON or Excel (.xlsx). Runs in your browser — nothing uploaded.',
+    lead: 'Open a CSV or TSV as a table — sort, filter, edit, remove duplicates, then export to CSV, JSON or Excel.',
+    cardDesc: 'Sort, filter, edit and dedupe CSV — export to CSV, JSON or Excel.',
+    tags: ['csv viewer', 'csv editor', 'open csv online', 'csv to excel', 'csv to json', 'tsv viewer', 'remove duplicate rows', 'csv table', 'xlsx'],
+    idle: 'Open or paste a CSV to begin', sourceLabel: 'CSV source', outputLabel: 'Table', outputIcon: 'lucide:table', outputEmpty: 'Your table will appear here',
+    file: { accept: '.csv,.tsv,.txt' },
+    downloads: [['csv', 'CSV', 'lucide:file-text'], ['json', 'JSON', 'lucide:braces'], ['xlsx', 'Excel (.xlsx)', 'lucide:sheet']],
+    sourceHtml: `${TEXTAREA('Paste CSV', 'name,email,city&#10;Ada,ada@example.com,London&#10;Linus,linus@example.com,Helsinki', 5)}`,
+    outputHtml: `
+                  <div class="csv-bar">
+                    <label class="visually-hidden" for="csv-filter">Filter rows</label>
+                    <input type="search" id="csv-filter" class="input-clean" placeholder="Filter rows…" autocomplete="off" spellcheck="false">
+                    <button type="button" class="btn-toolbar-sm" id="btn-add-row" title="Add an empty row at the end"><iconify-icon icon="lucide:plus" width="14" height="14"></iconify-icon><span>Add row</span></button>
+                    <button type="button" class="btn-toolbar-sm" id="btn-dedupe" title="Remove rows that exactly repeat an earlier row"><iconify-icon icon="lucide:copy-minus" width="14" height="14"></iconify-icon><span>Remove duplicates</span></button>
+                  </div>
+                  <div class="web-table-wrap csv-wrap">
+                    <table class="csv-table" id="output-table"></table>
+                  </div>
+                  <div class="csv-pager" id="csv-pager" hidden>
+                    <button type="button" class="btn-toolbar-sm" id="btn-prev" aria-label="Previous page"><iconify-icon icon="lucide:chevron-left" width="14" height="14"></iconify-icon></button>
+                    <span class="web-muted" id="csv-page"></span>
+                    <button type="button" class="btn-toolbar-sm" id="btn-next" aria-label="Next page"><iconify-icon icon="lucide:chevron-right" width="14" height="14"></iconify-icon></button>
+                  </div>`,
+    settingsSummary: 'Auto delimiter · header row',
+    settings: `
+              <div class="control-item">
+                <label for="opt-delim">Delimiter</label>
+                <select id="opt-delim" class="select-clean">${opts([['auto', 'Auto-detect'], [',', 'Comma'], [';', 'Semicolon'], ['\\t', 'Tab'], ['|', 'Pipe']], 'auto')}</select>
+              </div>
+              <div class="control-item"><input type="checkbox" id="opt-header" checked><label for="opt-header">First row is a header</label></div>`,
+    guide: [['Open your CSV', 'Drop a .csv or .tsv file, use Open file, or paste the text. The delimiter (comma, semicolon, tab or pipe) is detected automatically.'], ['Sort, filter and edit', 'Click a column header to sort, type in the filter box to narrow rows, click any cell to edit it. Add rows, delete rows with ×, or remove exact duplicates in one click.'], ['Export', 'Download what you see — current sort and filter — as CSV, JSON or a real Excel .xlsx file, or copy it as CSV.']],
+    faq: [['How large a file can it open?', 'Files up to 50 MB load; the table shows 500 rows per page so the browser stays fast. Sorting, filtering and export always cover every row, not just the page you are on.'], ['Are my edits saved to the file?', 'Edits update the CSV source box straight away, so Copy and Download include them. Nothing is saved on a server — download before you close the tab.'], ['What exactly does the export contain?', 'The rows you can currently see, across all pages: the filter and sort order are applied. Clear the filter to export everything.'], ['Is the Excel file a real .xlsx?', 'Yes — a genuine Office Open XML workbook built in your browser with <a href="https://stuk.github.io/jszip/" target="_blank" rel="noopener">JSZip</a> (loaded only when you choose Excel). Numbers are stored as numbers, everything else as text; there are no formulas or formatting.'], ['How are quotes and line breaks inside cells handled?', 'Fields follow RFC 4180: values in double quotes can contain the delimiter, line breaks and escaped quotes (<code>""</code>). Exported CSV quotes any field that needs it.'], PRIVACY_FAQ]
+  },
+  {
+    slug: 'text-extractor', name: 'Text Extractor', icon: 'lucide:scan-text', section: 'Parsers',
+    desc: 'Free online text extractor: pull emails, phone numbers, links, numbers and hashtags out of any text or file, remove duplicates, sort and export as TXT or CSV. Runs in your browser — nothing uploaded.',
+    lead: 'Paste any text and pull out the emails, phone numbers, links, numbers or hashtags — de-duplicated and ready to copy.',
+    cardDesc: 'Pull emails, phone numbers, links and hashtags out of any text.',
+    tags: ['email extractor', 'extract emails from text', 'phone number extractor', 'url extractor', 'link extractor', 'number extractor', 'hashtag extractor', 'text extractor'],
+    idle: 'Paste text to begin', sourceLabel: 'Text', outputLabel: 'Extracted', outputIcon: 'lucide:scan-text', outputEmpty: 'Found items will appear here',
+    file: { accept: '.txt,.csv,.md,.html,.htm,.json,.log,.xml' },
+    downloads: [['txt', 'Text (.txt)', 'lucide:file-text'], ['csv', 'CSV (type,value)', 'lucide:sheet']],
+    sourceHtml: `
+                <div class="web-checks" role="group" aria-label="What to extract">
+                  <div class="control-item"><input type="checkbox" id="opt-email" checked><label for="opt-email">Emails</label></div>
+                  <div class="control-item"><input type="checkbox" id="opt-phone" checked><label for="opt-phone">Phone numbers</label></div>
+                  <div class="control-item"><input type="checkbox" id="opt-url" checked><label for="opt-url">Links</label></div>
+                  <div class="control-item"><input type="checkbox" id="opt-number"><label for="opt-number">Numbers</label></div>
+                  <div class="control-item"><input type="checkbox" id="opt-hashtag"><label for="opt-hashtag">Hashtags</label></div>
+                </div>${TEXTAREA('Text', 'Paste an email thread, a web page, a spreadsheet export…', 12)}`,
+    outputHtml: `
+                  <div class="web-rows" id="output-groups"></div>`,
+    settingsSummary: 'Unique · original order · one per line',
+    settings: `
+              <div class="control-item"><input type="checkbox" id="opt-unique" checked><label for="opt-unique">Remove duplicates</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-sort"><label for="opt-sort">Sort A → Z (numbers by value)</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-lower"><label for="opt-lower">Lowercase emails</label></div>
+              <div class="control-item">
+                <label for="opt-sep">Separate items with</label>
+                <select id="opt-sep" class="select-clean">${opts([['\\n', 'New line'], [', ', 'Comma + space'], [',', 'Comma'], ['; ', 'Semicolon']], '\\n')}</select>
+              </div>`,
+    guide: [['Paste or open text', 'Anything works: an email thread, a copied web page, a CSV or log file. Drop a file or use Open file.'], ['Choose what to find', 'Tick emails, phone numbers, links, numbers or hashtags. Results appear instantly, grouped by type with a count.'], ['Copy or export', 'Copy one group with its button, copy everything from the toolbar, or download a .txt or a type,value CSV. Settings control duplicates, sorting and separators.']],
+    faq: [['How are phone numbers detected?', 'By pattern: 7 to 15 digits, optionally starting with +, with spaces, dashes, dots or brackets between them. Dates such as 2024-05-01 are skipped. It does not check whether a number really exists in its country.'], ['Will it find links without https://?', 'Yes for links that start with <code>www.</code>. Bare domains like <code>example.com</code> are not matched, because too many ordinary words with a dot would be picked up.'], ['Why are numbers not taken from phone numbers or links?', 'Emails, links and phone numbers are matched first and masked, so the numbers list contains real standalone numbers (including 1,234.56 and negatives) rather than pieces of other items.'], ['Are duplicates removed case-insensitively?', 'Emails and links are compared without regard to case, so <code>Ada@Example.com</code> and <code>ada@example.com</code> count once — the first spelling is kept unless “Lowercase emails” is on.'], PRIVACY_FAQ]
+  },
+  {
+    slug: 'log-parser', name: 'Log Parser', icon: 'lucide:scroll-text', section: 'Parsers', css: true,
+    desc: 'Free online log parser and viewer: auto-detects JSON lines, Apache/Nginx access logs, syslog and timestamped app logs; filter by level, time and text, see stats, top messages and export. In your browser.',
+    lead: 'Drop a log file — get levels, a timeline, the top repeated messages and filters by level, time and text.',
+    cardDesc: 'Filter JSON, Nginx and syslog logs by level and time, with stats.',
+    tags: ['log parser', 'log viewer', 'log analyzer', 'nginx log analyzer', 'apache access log', 'syslog viewer', 'json logs', 'filter logs by level', 'log file viewer'],
+    idle: 'Open or paste a log to begin', sourceLabel: 'Log', outputLabel: 'Analysis', outputIcon: 'lucide:scroll-text', outputEmpty: 'Stats and matching lines will appear here', split: '35/65',
+    file: { accept: '.log,.txt,.jsonl,.ndjson,.json,.out' },
+    downloads: [['txt', 'Matching lines (.log)', 'lucide:file-text'], ['csv', 'CSV (time,level,message)', 'lucide:sheet'], ['json', 'JSON', 'lucide:braces']],
+    sourceHtml: `${TEXTAREA('Log lines', '2024-05-01T10:15:02Z ERROR db: connection refused&#10;127.0.0.1 - - [01/May/2024:10:15:03 +0000] &quot;GET / HTTP/1.1&quot; 200 512', 9)}
+                <div class="web-checks" role="group" aria-label="Levels">
+                  <div class="control-item"><input type="checkbox" id="lvl-error" checked><label for="lvl-error">Error</label></div>
+                  <div class="control-item"><input type="checkbox" id="lvl-warn" checked><label for="lvl-warn">Warn</label></div>
+                  <div class="control-item"><input type="checkbox" id="lvl-info" checked><label for="lvl-info">Info</label></div>
+                  <div class="control-item"><input type="checkbox" id="lvl-debug" checked><label for="lvl-debug">Debug</label></div>
+                  <div class="control-item"><input type="checkbox" id="lvl-other" checked><label for="lvl-other">Other</label></div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="search-input"><span>Search</span></label>
+                  <input type="search" id="search-input" class="input-clean" placeholder="timeout, /api/, user=42…" autocomplete="off" spellcheck="false">
+                </div>
+                <div class="web-convert-row web-convert-row-2">
+                  <div class="form-group">
+                    <label class="form-label" for="time-from"><span>From</span></label>
+                    <input type="datetime-local" id="time-from" class="input-clean" step="1">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="time-to"><span>To</span></label>
+                    <input type="datetime-local" id="time-to" class="input-clean" step="1">
+                  </div>
+                </div>`,
+    outputHtml: `
+                  <div class="web-grid-2" id="output-stats"></div>
+                  <div class="log-chart" id="output-chart" role="img"></div>
+                  <div class="web-grid-2" id="output-tops"></div>
+                  <div class="web-table-wrap">
+                    <table class="web-table log-table" id="output-table"></table>
+                  </div>
+                  <div class="web-muted" id="output-note"></div>`,
+    settingsSummary: 'Auto format · plain search',
+    settings: `
+              <div class="control-item">
+                <label for="opt-format">Log format</label>
+                <select id="opt-format" class="select-clean">${opts([['auto', 'Auto-detect'], ['json', 'JSON lines'], ['access', 'Apache / Nginx access log'], ['syslog', 'Syslog'], ['generic', 'Timestamp + level text']], 'auto')}</select>
+              </div>
+              <div class="control-item"><input type="checkbox" id="opt-regex"><label for="opt-regex">Search is a regular expression</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-case"><label for="opt-case">Case-sensitive search</label></div>`,
+    guide: [['Open a log', 'Drop a .log, .txt or .jsonl file, or paste lines. JSON lines, Apache/Nginx access logs, syslog and “timestamp LEVEL message” logs are recognised automatically; stack traces stay attached to their line.'], ['Filter', 'Untick levels you do not need, search for text (or a regex), and narrow to a time window with From and To.'], ['Read and export', 'See counts per level, a timeline, the most repeated messages (and status codes, paths and IPs for access logs). Download the matching lines as a log, CSV or JSON.']],
+    faq: [['Which log formats are supported?', 'JSON lines (level/msg/time fields, including pino and bunyan numeric levels), Apache and Nginx common/combined access logs, syslog (RFC 3164 and 5424) and any text log that starts lines with a timestamp and a level word. Lines that match nothing are kept as “Other”.'], ['How are access-log levels decided?', 'Access logs have no level, so status codes are mapped: 5xx = Error, 4xx = Warn, everything else = Info. Filter by level to jump straight to failures.'], ['How are “top messages” counted?', 'Messages are grouped after replacing numbers, hex ids and UUIDs with #, so “user 41 timed out” and “user 97 timed out” count as one repeated message.'], ['Why do some lines have no time?', 'If a line has no recognisable timestamp it is still shown and counted, but a From/To time filter hides it. Syslog lines without a year are assumed to be in the current year.'], ['How big a log can it handle?', 'Up to 50 MB. All lines are parsed and counted; the table shows the first 1,000 matching lines to stay fast, and downloads include every match.'], PRIVACY_FAQ]
+  }
+];

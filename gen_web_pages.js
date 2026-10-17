@@ -1,15 +1,17 @@
 #!/usr/bin/env node
 /* Designed by Kapil Pidhwani: cfg_web_tools.js → /labs/<slug>/index.html, mirroring templates/tool-page.html (rule 47).
  * Form-input variant of gen_pdf_pages.js: no dropzone, optional primary button (#btn-run), optional Download dropdown.
- * Usage: node gen_web_pages.js [slug]   — idempotent; re-run after editing the config. */
+ * Per-tool options: layout ('split' default | 'stacked'), file { accept } (Open-file button + drop-on-pane, read by web-common).
+ * Usage: node gen_web_pages.js [slug] [--cfg=cfg_data_tools.js --cat=data]   — idempotent; defaults = Labs batch. */
 const fs = require('fs');
 const path = require('path');
-const TOOLS = require('./cfg_web_tools.js');
-const only = process.argv[2];
-const CAT = 'labs', CAT_LABEL = 'Labs';
+const arg = (k, d) => (process.argv.find((a) => a.startsWith(`--${k}=`)) || `=${d}`).split('=')[1];
+const TOOLS = require('./' + arg('cfg', 'cfg_web_tools.js'));
+const only = process.argv.slice(2).find((a) => !a.startsWith('--'));
+const CAT = arg('cat', 'labs'), CAT_LABEL = CAT[0].toUpperCase() + CAT.slice(1);
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const jsonStr = (s) => JSON.stringify(String(s).replace(/<[^>]+>/g, ''));
-const MAIN_V = '4.0', CSS_V = '5.3';
+const MAIN_V = '4.1', CSS_V = '5.4';
 const LIBS = { color: '  <script src="/scripts/color-common.js?v=1.0"></script>\n' };
 
 function downloadBtn(t) {
@@ -35,6 +37,19 @@ function downloadBtn(t) {
                 <div class="dropdown-popup" role="menu">${items}
                 </div>
               </div>`;
+}
+
+function fileRow(t) {
+  if (!t.file) return '';
+  return `
+                <div class="web-file-row">
+                  <button type="button" class="btn-toolbar-sm" id="btn-file" title="Open a file from your device" aria-label="Open a file from your device">
+                    <iconify-icon icon="lucide:folder-open" width="14" height="14"></iconify-icon>
+                    <span>Open file</span>
+                  </button>
+                  <input type="file" id="file-input" accept="${t.file.accept}" hidden>
+                  <span class="web-muted" id="file-name">or drop a file here</span>
+                </div>`;
 }
 
 function settings(t) {
@@ -189,7 +204,7 @@ ${faqLd}
     <section class="section-wrapper tool-section">
       <div class="container">
 
-        <div class="tool-workspace-card" data-layout="split" data-split="${t.split || '40/60'}" id="tool-card">
+        <div class="tool-workspace-card" data-layout="${t.layout || 'split'}"${(t.layout || 'split') === 'split' ? ` data-split="${t.split || '40/60'}"` : ''} id="tool-card">
 
           <!-- 2a. Toolbar -->
           <div class="tool-actions-toolbar">
@@ -224,7 +239,7 @@ ${faqLd}
                 <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
                 <span></span>
               </div>
-              <div class="pane-content web-form">${t.sourceHtml}${action}
+              <div class="pane-content web-form">${fileRow(t)}${t.sourceHtml}${action}
               </div>
             </div>
 
@@ -281,7 +296,7 @@ ${faqHtml}
 
   <script src="/scripts/main.js?v=${MAIN_V}"></script>
   <script src="/scripts/tool-common.js?v=1.0"></script>
-${libs}  <script src="/scripts/web-common.js?v=1.0"></script>
+${libs}  <script src="/scripts/web-common.js?v=1.1"></script>
   <script src="/${CAT}/${t.slug}/${t.slug}.js?v=1.0"></script>
 </body>
 </html>

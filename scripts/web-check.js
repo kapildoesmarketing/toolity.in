@@ -158,7 +158,119 @@ const CASES = [
     set('opt-seed', 5); await settle(); history.replaceState(null, '', h); B.readHash(); A($('opt-seed').value === '99', 'hash should restore the seed');
     pill('seg-motion', 'off'); await settle(); const r0 = await T.T.download('gif', T); A(r0 === null && !$('input-error').hidden, 'a still blob must not export a GIF');
     set('opt-preset', 'aurora'); await settle(); A($('opt-layers').value === '5' && document.querySelector('#seg-bg .seg-pill.active').dataset.value === 'gradient', 'preset applied');
-    $('btn-reset').click(); await settle(); A(location.hash === '' && $('opt-seed').value === '1234' && $('opt-preset').value === '' && $('opt-c1-hex').value === '#ff6a2a' && document.querySelector('#seg-motion .seg-pill.active').dataset.value === 'morph', 'reset: ' + location.hash);`]
+    $('btn-reset').click(); await settle(); A(location.hash === '' && $('opt-seed').value === '1234' && $('opt-preset').value === '' && $('opt-c1-hex').value === '#ff6a2a' && document.querySelector('#seg-motion .seg-pill.active').dataset.value === 'morph', 'reset: ' + location.hash);`],
+  ['data/json-converter', `
+    const NL = String.fromCharCode(10);
+    const J = '[{"name":"Ada","age":36,"tags":["x","y"],"addr":{"city":"London"}},{"name":"Linus","age":28,"addr":{"city":"Helsinki"},"vip":true}]';
+    set('text-input', J); set('opt-to', 'csv'); await settle();
+    A(out() && out().text.split(NL)[0] === 'name,age,tags,addr.city,vip', 'csv head: ' + (out() && out().text.split(NL)[0]));
+    A(out().text.split(NL)[1] === 'Ada,36,"[""x"",""y""]",London,', 'csv row1: ' + out().text.split(NL)[1]);
+    A(/JSON → CSV/.test($('output-badge').textContent), 'badge: ' + $('output-badge').textContent);
+    const csv = out().text; set('text-input', csv); set('opt-to', 'json'); await settle();
+    const back = JSON.parse(out().text); A(back[0].addr.city === 'London' && back[0].age === 36 && back[1].vip === true, 'csv→json unflatten/types: ' + out().text.slice(0, 120));
+    A(/detected CSV/.test($('input-count').textContent), 'auto-detect csv: ' + $('input-count').textContent);
+    set('text-input', J); set('opt-to', 'yaml'); await settle(); A(out() && /- name: Ada/.test(out().text), 'yaml out: ' + (out() && out().text.slice(0, 60)) + $('input-error').textContent);
+    const y = out().text; set('text-input', y); set('opt-from', 'auto'); set('opt-to', 'json'); await settle(); A(out() && JSON.parse(out().text)[1].addr.city === 'Helsinki', 'yaml→json');
+    set('text-input', '{"title":"T","owner":{"name":"Tom"},"ports":[8000,8001]}'); set('opt-to', 'toml'); await settle(); A(out() && /title = "T"/.test(out().text) && /\\[owner\\]/.test(out().text), 'toml out: ' + (out() && out().text) + $('input-error').textContent);
+    const tm = out().text; set('text-input', tm); set('opt-to', 'json'); await settle(); A(out() && JSON.parse(out().text).ports[1] === 8001, 'toml→json ' + $('input-count').textContent);
+    set('text-input', '[1,2]'); set('opt-to', 'toml'); await settle(); A(!out() && /TOML needs an object/.test($('input-error').textContent), 'toml array error');
+    set('text-input', '<cat id="7"><name>Tom</name><toy>ball</toy><toy>yarn</toy></cat>'); set('opt-to', 'json'); await settle();
+    const x = JSON.parse(out().text); A(x.cat['@id'] === '7' && x.cat.toy.length === 2 && x.cat.name === 'Tom', 'xml→json: ' + out().text);
+    set('text-input', out().text); set('opt-to', 'xml'); await settle(); A(/<cat id="7">/.test(out().text) && (out().text.match(/<toy>/g) || []).length === 2, 'json→xml: ' + out().text);
+    set('text-input', 'https://x.com/p?a=1&b[c]=two&t[]=x&t[]=y'); set('opt-to', 'json'); await settle(); const q = JSON.parse(out().text); A(q.a === 1 && q.b.c === 'two' && q.t.join() === 'x,y', 'query→json: ' + out().text);
+    set('text-input', '| a | b |' + NL + '|---|---|' + NL + '| 1 | x |'); set('opt-to', 'json'); await settle(); A(JSON.parse(out().text)[0].a === 1, 'md→json: ' + out().text);
+    set('text-input', J); set('opt-to', 'markdown'); await settle(); A(out().text.split(NL)[1].startsWith('| --- |'), 'json→md');
+    set('opt-to', 'typescript'); await settle(); A(/export type Root = RootItem\\[\\];/.test(out().text) && /vip\\?: boolean;/.test(out().text) && /addr: Addr;/.test(out().text) && /tags\\?: string\\[\\];/.test(out().text), 'ts: ' + out().text);
+    set('opt-to', 'zod'); await settle(); A(/z\\.array\\(z\\.object\\(/.test(out().text) && /vip: z\\.boolean\\(\\)\\.optional\\(\\)/.test(out().text), 'zod: ' + out().text);
+    set('text-input', '{bad'); set('opt-from', 'json'); await settle(); A(!out() && /^JSON:/.test($('input-error').querySelector('span').textContent), 'json error: ' + $('input-error').textContent);
+    set('opt-from', 'auto'); set('text-input', '{"a":1}'); set('opt-to', 'yaml'); await settle(); $('btn-swap').click(); await settle(); A($('opt-from').value === 'yaml' && $('opt-to').value === 'json' && JSON.parse(out().text).a === 1, 'swap');
+    $('btn-reset').click(); await settle(); A(!out() && $('text-input').value === '' && $('opt-to').value === 'json' && $('opt-from').value === 'auto', 'reset');`],
+  ['data/unit-converter', `
+    set('value-input', '100'); pill('seg-cat', 'temperature'); await settle();
+    A(out() && $('output-list').children.length === 3, 'temp all rows: ' + $('output-list').children.length);
+    A(/212 °F/.test($('output-list').textContent) && /373\\.15 K/.test($('output-list').textContent), 'temp values: ' + $('output-list').textContent);
+    set('opt-to', 'f'); await settle(); A($('output-value').textContent === '212 °F' && !$('output-single').hidden && $('output-list').children.length === 0, 'single: ' + $('output-value').textContent);
+    $('btn-swap').click(); await settle(); A($('opt-from').value === 'f' && $('opt-to').value === 'c' && $('output-value').textContent === '37.77777778 °C', 'swap: ' + $('output-value').textContent);
+    set('value-input', '-500'); await settle(); A(/absolute zero/.test($('status-badge').textContent), 'below zero');
+    pill('seg-cat', 'length'); set('value-input', '1'); set('opt-from', 'mi'); set('opt-to', 'km'); await settle(); A($('output-value').textContent === '1.609344 km', 'mile: ' + $('output-value').textContent);
+    pill('seg-cat', 'data'); set('opt-from', 'gib'); set('opt-to', 'mib'); await settle(); A($('output-value').textContent === '1,024 MiB', 'gib: ' + $('output-value').textContent);
+    set('opt-group', false); set('value-input', '1.5e3'); set('opt-to', 'mib'); await settle(); A($('output-value').textContent === '1536000 MiB', 'exp + no grouping: ' + $('output-value').textContent);
+    pill('seg-cat', 'weight'); set('value-input', '1'); set('opt-from', 'lb'); await settle(); A($('opt-to').value === 'all' && /0\\.45359237 kg/.test($('output-list').textContent), 'lb→kg all: ' + $('output-list').textContent.slice(0, 80));
+    set('opt-precision', '2'); await settle(); A(/453\\.59 g/.test($('output-list').textContent), 'precision 2');
+    set('value-input', 'abc'); await settle(); A(!out() && /number/.test($('status-badge').textContent), 'not a number');
+    $('btn-reset').click(); await settle(); A(document.querySelector('#seg-cat .seg-pill.active').dataset.value === 'length' && $('opt-from').value === 'm' && $('value-input').value === '' && $('opt-precision').value === 'auto', 'reset');`],
+  ['data/csv-viewer-editor', `
+    const NL = String.fromCharCode(10);
+    const CSV = 'name;city;n' + NL + '"Smith; John";"Lon' + NL + 'don";10' + NL + 'Ada;Paris;9' + NL + 'Ada;Paris;9' + NL + 'Bob;"Say ""hi""";100';
+    set('text-input', CSV); await settle();
+    A(out() && /4 rows × 3 cols/.test($('output-badge').textContent), 'badge: ' + $('output-badge').textContent + ' ' + $('input-error').textContent);
+    A(/semicolon/.test($('status-badge').textContent), 'delimiter detected: ' + $('status-badge').textContent);
+    const cells = () => [...$('output-table').querySelectorAll('tbody tr')].map((r) => [...r.querySelectorAll('td[data-col]')].map((c) => c.textContent));
+    A(cells()[0][0] === 'Smith; John' && cells()[0][1] === 'Lon' + NL + 'don' && cells()[3][1] === 'Say "hi"', 'quoted fields: ' + JSON.stringify(cells()[0]));
+    $('output-table').querySelector('.csv-sort[data-col="2"]').click(); await tick(); A(cells().map((r) => r[2]).join() === '9,9,10,100', 'numeric sort asc: ' + cells().map((r) => r[2]).join());
+    $('output-table').querySelector('.csv-sort[data-col="2"]').click(); await tick(); A(cells()[0][2] === '100', 'sort desc');
+    $('csv-filter').value = 'ada'; $('csv-filter').dispatchEvent(new Event('input', { bubbles: true })); await tick(400); A(cells().length === 2 && /Showing 2 of 4/.test($('status-badge').textContent), 'filter: ' + cells().length);
+    A(out().text.split(NL).length === 3, 'copy = filtered view: ' + out().text);
+    $('csv-filter').value = ''; $('csv-filter').dispatchEvent(new Event('input', { bubbles: true })); await tick(400);
+    $('btn-dedupe').click(); await tick(); A(cells().length === 3 && !/Ada;Paris;9[\\s\\S]*Ada;Paris;9/.test($('text-input').value), 'dedupe writes back');
+    const td = $('output-table').querySelector('tbody tr td[data-col="0"]'); td.textContent = 'Zed'; td.dispatchEvent(new Event('input', { bubbles: true })); await tick();
+    A($('text-input').value.includes('Zed') && out().text.includes('Zed'), 'edit writes back');
+    $('btn-add-row').click(); await tick(); A(cells().length === 4, 'add row');
+    $('output-table').querySelector('tbody tr:last-child .csv-del').click(); await tick(); A(cells().length === 3, 'delete row');
+    const j = await T.T.download('json', T); const arr = JSON.parse(j.text); A(arr.length === 3 && 'city' in arr[0], 'json export');
+    const xb = await T.T.download('xlsx', T); A(xb && xb.blob && xb.blob.size > 300, 'xlsx blob');
+    const z = await JSZip.loadAsync(xb.blob); const sh = await z.file('xl/worksheets/sheet1.xml').async('string');
+    A(/<v>100<\\/v>/.test(sh) && /Say "hi"/.test(sh) && Object.keys(z.files).includes('[Content_Types].xml'), 'xlsx content: ' + sh.slice(0, 200));
+    set('opt-header', false); await settle(); A(/4 rows/.test($('output-badge').textContent), 'no header → header becomes a row');
+    let big = 'a,b'; for (let i = 0; i < 1200; i++) big += NL + i + ',x'; set('opt-header', true); set('text-input', big); await settle();
+    A(!$('csv-pager').hidden && cells().length === 500 && /Page 1 of 3/.test($('csv-page').textContent), 'paging');
+    $('btn-next').click(); A(cells()[0][0] === '500', 'next page: ' + cells()[0][0]);
+    $('btn-reset').click(); await settle(); A(!out() && $('text-input').value === '' && $('output-table').children.length === 0, 'reset');`],
+  ['data/text-extractor', `
+    const NL = String.fromCharCode(10);
+    const TXT = 'Mail Ada@Example.com or ada@example.com, see https://example.com/a(b) and www.test.org/x. Call +1 (555) 123-4567 or 020 7946 0958 on 2024-05-01. Total 1,234.56 and -7 items #launch #2024 &#39; #café';
+    set('text-input', TXT); await settle();
+    A(out(), 'no output ' + $('input-error').textContent);
+    const grp = () => [...$('output-groups').children].map((g) => g.querySelector('.web-group-head span').textContent + '=' + g.querySelector('pre').textContent);
+    const G = grp(); A(G[0] === 'Emails · 1=Ada@Example.com', 'emails: ' + G[0]);
+    A(G[1] === 'Phone numbers · 2=+1 (555) 123-4567' + NL + '020 7946 0958', 'phones: ' + G[1]);
+    A(G[2] === 'Links · 2=https://example.com/a(b)' + NL + 'www.test.org/x', 'links: ' + G[2]);
+    set('opt-number', true); set('opt-hashtag', true); await settle();
+    const G2 = grp(); A(G2[3] === 'Numbers · 2=1,234.56' + NL + '-7', 'numbers: ' + G2[3]);
+    A(G2[4] === 'Hashtags · 2=#launch' + NL + '#café', 'hashtags: ' + G2[4]);
+    set('opt-unique', false); set('opt-lower', true); await settle(); A(grp()[0] === 'Emails · 2=ada@example.com' + NL + 'ada@example.com', 'no dedupe + lower: ' + grp()[0]);
+    set('opt-sep', ', '); await settle(); A(grp()[0].endsWith('ada@example.com, ada@example.com'), 'separator');
+    const c = await T.T.download('csv', T); A(c.text.split(NL)[0] === 'type,value' && /phone,\\+1 \\(555\\) 123-4567/.test(c.text), 'csv: ' + c.text.slice(0, 100));
+    ['email', 'phone', 'url', 'number', 'hashtag'].forEach((k) => set('opt-' + k, false)); await settle(); A(!out() && /Tick/.test($('status-badge').textContent), 'none ticked');
+    $('btn-reset').click(); await settle(); A(!out() && $('opt-email').checked && !$('opt-number').checked && $('opt-unique').checked, 'reset');`],
+  ['data/log-parser', `
+    const NL = String.fromCharCode(10);
+    const GEN = ['2024-05-01T10:00:01Z INFO server started', '2024-05-01T10:05:00Z WARN slow query 812ms', '2024-05-01T11:00:00Z ERROR db: connection refused id=41', 'java.lang.Exception: boom', '    at Foo.bar(Foo.java:10)', '2024-05-01T11:30:00Z ERROR db: connection refused id=97', '2024-05-01T12:00:00Z DEBUG cache hit', 'garbage line'].join(NL);
+    set('text-input', GEN); await settle();
+    A(out() && /text log/.test($('input-count').textContent), 'format: ' + $('input-count').textContent + $('input-error').textContent);
+    const stat = (i) => $('output-stats').children[i].querySelector('strong').textContent;
+    A(stat(0) === '6 of 6' && stat(1) === '2' && stat(2) === '1', 'counts: ' + [0, 1, 2].map(stat).join('|'));
+    A($('output-table').querySelectorAll('tbody tr')[2].querySelector('.log-msg').textContent.includes('at Foo.bar'), 'stack trace folded');
+    A(/db: connection refused id=#/.test($('output-tops').textContent) && /2/.test($('output-tops').textContent), 'top messages normalised');
+    A($('output-chart').children.length >= 2, 'chart bars: ' + $('output-chart').children.length);
+    set('lvl-info', false); set('lvl-debug', false); set('lvl-other', false); await settle(); A(stat(0) === '3 of 6', 'level filter: ' + stat(0));
+    set('search-input', 'ID=97'); await settle(); A(stat(0) === '1 of 6', 'search case-insensitive: ' + stat(0));
+    set('opt-regex', true); set('search-input', 'id=(41|97)'); await settle(); A(stat(0) === '2 of 6', 'regex: ' + stat(0));
+    set('search-input', '('); await settle(); A(!out() && /Search:/.test($('input-error').textContent), 'bad regex error');
+    set('search-input', ''); set('opt-regex', false);
+    ['info', 'debug', 'other'].forEach((l) => set('lvl-' + l, true));
+    const d = new Date('2024-05-01T11:15:00Z'); const loc = new Date(d - d.getTimezoneOffset() * 60000).toISOString().slice(0, 19);
+    set('time-from', loc); await settle(); A(stat(0) === '2 of 6', 'time from: ' + stat(0));
+    set('time-from', '');
+    const ACC = ['10.0.0.1 - - [01/May/2024:10:15:03 +0000] "GET /a?x=1 HTTP/1.1" 200 512 "-" "curl"', '10.0.0.2 - - [01/May/2024:10:16:03 +0000] "POST /b HTTP/1.1" 500 0', '10.0.0.1 - - [01/May/2024:10:17:03 +0000] "GET /a HTTP/1.1" 404 9'].join(NL);
+    set('text-input', ACC); await settle(); A(/access log/.test($('input-count').textContent) && stat(1) === '1' && stat(2) === '1', 'access: ' + $('input-count').textContent + ' ' + stat(1));
+    A(/Top paths/.test($('output-tops').textContent) && /\\/a2/.test($('output-tops').textContent.replace(/\\s/g, '')), 'access tops: ' + $('output-tops').textContent);
+    const JL = ['{"level":50,"time":1714557600000,"msg":"pino fail"}', '{"level":"warn","timestamp":"2024-05-01T10:00:00Z","message":"careful"}'].join(NL);
+    set('text-input', JL); await settle(); A(/JSON lines/.test($('input-count').textContent) && stat(1) === '1' && stat(2) === '1', 'json lines: ' + $('input-count').textContent);
+    const SYS = '<11>May  1 10:00:00 host sshd[12]: Failed password' + NL + 'May  1 10:01:00 host cron[5]: job ok';
+    set('text-input', SYS); await settle(); A(/syslog/.test($('input-count').textContent) && stat(1) === '1', 'syslog: ' + $('input-count').textContent + ' ' + stat(1));
+    const csv = await T.T.download('csv', T); A(csv.text.split(NL)[0] === 'time,level,message' && csv.text.split(NL).length === 3, 'csv export');
+    $('btn-reset').click(); await settle(); A(!out() && $('text-input').value === '' && $('lvl-info').checked, 'reset');`]
 ];
 
 (async () => {
@@ -174,7 +286,7 @@ const CASES = [
     ws.onmessage = (m) => { const d = JSON.parse(m.data); if (d.id && pending[d.id]) { pending[d.id](d.result); delete pending[d.id]; } if (d.method === 'Runtime.exceptionThrown') errs.push(d.params.exceptionDetails.exception?.description?.split('\n')[0] || d.params.exceptionDetails.text); };
     await send('Page.enable'); await send('Runtime.enable');
     await send('Emulation.setDeviceMetricsOverride', { width: 1366, height: 900, deviceScaleFactor: 1, mobile: false });
-    await send('Page.navigate', { url: `${BASE}labs/${slug}/` }); await sleep(1500);
+    await send('Page.navigate', { url: `${BASE}${slug.includes('/') ? slug : 'labs/' + slug}/` }); await sleep(1500);
     const r = await send('Runtime.evaluate', { expression: `(async () => { ${HELPERS} try { ${expr} } catch (e) { f.push('threw: ' + (e && e.message || e)); } return f; })()`, returnByValue: true, awaitPromise: true, timeout: 120000 });
     ws.close(); await getJson(`http://127.0.0.1:${port}/json/close/${t.id}`).catch(() => {});
     return (r?.result?.value || ['eval failed: ' + JSON.stringify(r?.exceptionDetails?.exception?.description || r)]).concat(errs.map(e => 'JS error: ' + e));
