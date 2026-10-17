@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Log Parser | Toolity Data</title>
+  <link rel="canonical" href="https://toolity.in/data/log-parser/">
+  <meta name="description" content="Free online log parser and viewer: auto-detects JSON lines, Apache/Nginx access logs, syslog and timestamped app logs; filter by level, time and text, see stats, top messages and export. In your browser.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Log Parser | Toolity Data">
+  <meta property="og:description" content="Free online log parser and viewer: auto-detects JSON lines, Apache/Nginx access logs, syslog and timestamped app logs; filter by level, time and text, see stats, top messages and export. In your browser.">
+  <meta property="og:url" content="https://toolity.in/data/log-parser/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=5.4" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=5.4">
+  <link rel="stylesheet" href="/styles/tools/log-parser.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Log Parser",
+        "url": "https://toolity.in/data/log-parser/",
+        "description": "Free online log parser and viewer: auto-detects JSON lines, Apache/Nginx access logs, syslog and timestamped app logs; filter by level, time and text, see stats, top messages and export. In your browser.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Data", "item": "https://toolity.in/data/" },
+          { "@type": "ListItem", "position": 3, "name": "Log Parser", "item": "https://toolity.in/data/log-parser/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Which log formats are supported?", "acceptedAnswer": { "@type": "Answer", "text": "JSON lines (level/msg/time fields, including pino and bunyan numeric levels), Apache and Nginx common/combined access logs, syslog (RFC 3164 and 5424) and any text log that starts lines with a timestamp and a level word. Lines that match nothing are kept as “Other”." } },
+          { "@type": "Question", "name": "How are access-log levels decided?", "acceptedAnswer": { "@type": "Answer", "text": "Access logs have no level, so status codes are mapped: 5xx = Error, 4xx = Warn, everything else = Info. Filter by level to jump straight to failures." } },
+          { "@type": "Question", "name": "How are “top messages” counted?", "acceptedAnswer": { "@type": "Answer", "text": "Messages are grouped after replacing numbers, hex ids and UUIDs with #, so “user 41 timed out” and “user 97 timed out” count as one repeated message." } },
+          { "@type": "Question", "name": "Why do some lines have no time?", "acceptedAnswer": { "@type": "Answer", "text": "If a line has no recognisable timestamp it is still shown and counted, but a From/To time filter hides it. Syslog lines without a year are assumed to be in the current year." } },
+          { "@type": "Question", "name": "How big a log can it handle?", "acceptedAnswer": { "@type": "Answer", "text": "Up to 50 MB. All lines are parsed and counted; the table shows the first 1,000 matching lines to stay fast, and downloads include every match." } },
+          { "@type": "Question", "name": "Is my data uploaded anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. Parsing and converting happen in JavaScript inside your browser tab. Your text and files are never sent to Toolity or anyone else." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/data/" class="breadcrumb-link">Data</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Log Parser</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Data</span>
+            <h1 class="page-title">Log Parser</h1>
+            <p class="page-desc">Drop a log file — get levels, a timeline, the top repeated messages and filters by level, time and text.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" data-split="35/65" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge web-status-badge" id="status-badge">Open or paste a log to begin</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result" aria-label="Copy result" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <div class="dropdown-menu-wrapper" id="download-dropdown-wrap">
+                <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download result" aria-label="Download result" aria-haspopup="true" disabled>
+                  <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                  <span>Download</span>
+                  <iconify-icon icon="lucide:chevron-down" class="dropdown-arrow" width="13" height="13"></iconify-icon>
+                </button>
+                <div class="dropdown-popup" role="menu">
+                  <button type="button" class="dropdown-item" data-format="txt" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:file-text" width="14" height="14"></iconify-icon>
+                      <span>Matching lines (.log)</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="csv" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:sheet" width="14" height="14"></iconify-icon>
+                      <span>CSV (time,level,message)</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="json" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:braces" width="14" height="14"></iconify-icon>
+                      <span>JSON</span>
+                    </div>
+                  </button>
+                </div>
+              </div>
+              <button type="button" class="btn-toolbar-sm" id="btn-open" title="Open result in a new tab" aria-label="Open result in a new tab" disabled>
+                <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
+                <span>Open</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Log</span>
+                <span class="pane-badge" id="input-badge">—</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content web-form">
+                <div class="web-file-row">
+                  <button type="button" class="btn-toolbar-sm" id="btn-file" title="Open a file from your device" aria-label="Open a file from your device">
+                    <iconify-icon icon="lucide:folder-open" width="14" height="14"></iconify-icon>
+                    <span>Open file</span>
+                  </button>
+                  <input type="file" id="file-input" accept=".log,.txt,.jsonl,.ndjson,.json,.out" hidden>
+                  <span class="web-muted" id="file-name">or drop a file here</span>
+                </div>
+                <div class="form-group form-group-grow">
+                  <label class="form-label" for="text-input"><span>Log lines</span><span class="form-label-desc" id="input-count"></span></label>
+                  <textarea id="text-input" class="textarea-clean" rows="9" placeholder="2024-05-01T10:15:02Z ERROR db: connection refused&#10;127.0.0.1 - - [01/May/2024:10:15:03 +0000] &quot;GET / HTTP/1.1&quot; 200 512" spellcheck="false" autocapitalize="off" data-file-target></textarea>
+                </div>
+                <div class="web-checks" role="group" aria-label="Levels">
+                  <div class="control-item"><input type="checkbox" id="lvl-error" checked><label for="lvl-error">Error</label></div>
+                  <div class="control-item"><input type="checkbox" id="lvl-warn" checked><label for="lvl-warn">Warn</label></div>
+                  <div class="control-item"><input type="checkbox" id="lvl-info" checked><label for="lvl-info">Info</label></div>
+                  <div class="control-item"><input type="checkbox" id="lvl-debug" checked><label for="lvl-debug">Debug</label></div>
+                  <div class="control-item"><input type="checkbox" id="lvl-other" checked><label for="lvl-other">Other</label></div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="search-input"><span>Search</span></label>
+                  <input type="search" id="search-input" class="input-clean" placeholder="timeout, /api/, user=42…" autocomplete="off" spellcheck="false">
+                </div>
+                <div class="web-convert-row web-convert-row-2">
+                  <div class="form-group">
+                    <label class="form-label" for="time-from"><span>From</span></label>
+                    <input type="datetime-local" id="time-from" class="input-clean" step="1">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="time-to"><span>To</span></label>
+                    <input type="datetime-local" id="time-to" class="input-clean" step="1">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Analysis</span>
+                <span class="pane-badge" id="output-badge">—</span>
+              </div>
+              <div class="pane-content web-output-pane">
+                <div class="pane-empty" id="output-empty">
+                  <iconify-icon icon="lucide:scroll-text"></iconify-icon>
+                  <span>Stats and matching lines will appear here</span>
+                </div>
+                <div class="web-output" id="output-content" hidden>
+                  <div class="web-grid-2" id="output-stats"></div>
+                  <div class="log-chart" id="output-chart" role="img"></div>
+                  <div class="web-grid-2" id="output-tops"></div>
+                  <div class="web-table-wrap">
+                    <table class="web-table log-table" id="output-table"></table>
+                  </div>
+                  <div class="web-muted" id="output-note"></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">Auto format · plain search</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item">
+                <label for="opt-format">Log format</label>
+                <select id="opt-format" class="select-clean"><option value="auto" selected>Auto-detect</option><option value="json">JSON lines</option><option value="access">Apache / Nginx access log</option><option value="syslog">Syslog</option><option value="generic">Timestamp + level text</option></select>
+              </div>
+              <div class="control-item"><input type="checkbox" id="opt-regex"><label for="opt-regex">Search is a regular expression</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-case"><label for="opt-case">Case-sensitive search</label></div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Use Log Parser in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Open a log</h3>
+              <p class="step-desc">Drop a .log, .txt or .jsonl file, or paste lines. JSON lines, Apache/Nginx access logs, syslog and “timestamp LEVEL message” logs are recognised automatically; stack traces stay attached to their line.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Filter</h3>
+              <p class="step-desc">Untick levels you do not need, search for text (or a regex), and narrow to a time window with From and To.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Read and export</h3>
+              <p class="step-desc">See counts per level, a timeline, the most repeated messages (and status codes, paths and IPs for access logs). Download the matching lines as a log, CSV or JSON.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Log Parser — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Which log formats are supported?</summary>
+              <p>JSON lines (level/msg/time fields, including pino and bunyan numeric levels), Apache and Nginx common/combined access logs, syslog (RFC 3164 and 5424) and any text log that starts lines with a timestamp and a level word. Lines that match nothing are kept as “Other”.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How are access-log levels decided?</summary>
+              <p>Access logs have no level, so status codes are mapped: 5xx = Error, 4xx = Warn, everything else = Info. Filter by level to jump straight to failures.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How are “top messages” counted?</summary>
+              <p>Messages are grouped after replacing numbers, hex ids and UUIDs with #, so “user 41 timed out” and “user 97 timed out” count as one repeated message.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why do some lines have no time?</summary>
+              <p>If a line has no recognisable timestamp it is still shown and counted, but a From/To time filter hides it. Syslog lines without a year are assumed to be in the current year.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How big a log can it handle?</summary>
+              <p>Up to 50 MB. All lines are parsed and counted; the table shows the first 1,000 matching lines to stay fast, and downloads include every match.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is my data uploaded anywhere?</summary>
+              <p>No. Parsing and converting happen in JavaScript inside your browser tab. Your text and files are never sent to Toolity or anyone else.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="data"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=4.1"></script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="/scripts/web-common.js?v=1.1"></script>
+  <script src="/data/log-parser/log-parser.js?v=1.0"></script>
+</body>
+</html>

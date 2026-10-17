@@ -1,0 +1,22 @@
+/* Log Parser — timeline bars, top lists, level colours */
+.log-chart { display: flex; align-items: flex-end; gap: 2px; height: 96px; padding: 0.5rem; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); }
+.log-chart[hidden] { display: none; }
+.log-bar { flex: 1; min-width: 2px; border-radius: 2px 2px 0 0; background: linear-gradient(to top, #dc2626 var(--err, 0%), color-mix(in srgb, var(--brand) 55%, transparent) var(--err, 0%)); }
+.log-top ol { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 0.3rem; }
+.log-top li { display: flex; justify-content: space-between; gap: 0.75rem; min-width: 0; }
+.log-top-k { font-family: var(--font-mono); font-size: 0.76rem; color: var(--text-primary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+.log-top-n { font-variant-numeric: tabular-nums; color: var(--text-muted); flex-shrink: 0; }
+.log-stat-error strong { color: #dc2626; }
+.log-stat-warn strong { color: #a16207; }
+[data-theme="dark"] .log-stat-error strong { color: #f87171; }
+[data-theme="dark"] .log-stat-warn strong { color: #facc15; }
+.log-table { table-layout: auto; }
+.log-table th { width: auto; }
+.log-table .log-time { white-space: nowrap; color: var(--text-muted); font-size: 0.76rem; }
+.log-table .log-msg { white-space: pre-wrap; }
+.log-lvl-error { color: #b91c1c; background: rgba(220, 38, 38, 0.1); border-color: transparent; }
+.log-lvl-warn { color: #a16207; background: rgba(202, 138, 4, 0.12); border-color: transparent; }
+.log-lvl-info { color: #1d4ed8; background: rgba(37, 99, 235, 0.1); border-color: transparent; }
+[data-theme="dark"] .log-lvl-error { color: #f87171; }
+[data-theme="dark"] .log-lvl-warn { color: #facc15; }
+[data-theme="dark"] .log-lvl-info { color: #93c5fd; }
