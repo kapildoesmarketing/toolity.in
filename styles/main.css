@@ -1545,8 +1545,10 @@ body {
 
 .footer-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.6fr) repeat(3, minmax(0, 1fr));
-  gap: 2.5rem 3rem;
+  /* Designed by Kapil Pidhwani: brand absorbs the free space (left); link columns size to content so the
+     group sits flush right, on the same edge as the bottom-bar socials. ≤768px switches to 2 columns below. */
+  grid-template-columns: minmax(0, 1fr) repeat(3, max-content);
+  gap: 2.5rem clamp(2.5rem, 5vw, 5rem);
   padding-bottom: 3rem;
   border-bottom: 1px solid var(--border);
 }
@@ -4158,6 +4160,7 @@ html::-webkit-scrollbar-corner, body *::-webkit-scrollbar-corner { background: t
 .footer-social a { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid var(--border); border-radius: var(--radius-pill); color: var(--text-secondary); transition: color .15s, border-color .15s; }
 .footer-social a:hover { color: var(--brand); border-color: var(--brand); }
 .mobile-nav-social { padding-top: 0.75rem; }
+@media (min-width: 769px) { .footer-bottom .footer-social { margin-left: auto; } } /* stays on the right edge even when the bar wraps */
 @media (pointer: coarse) { .footer-social a { width: var(--touch); height: var(--touch); } }
 
 /* Contact: email row + topic cards */
