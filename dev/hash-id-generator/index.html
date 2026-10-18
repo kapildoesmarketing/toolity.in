@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Hash & ID Generator | Toolity Dev</title>
+  <link rel="canonical" href="https://toolity.in/dev/hash-id-generator/">
+  <meta name="description" content="Free online hash and ID generator: MD5, SHA-1, SHA-256, SHA-384 and SHA-512 (with HMAC) for text or files, checksum verification, plus UUID v4 / v7, ULID, nanoid and short IDs in bulk — all generated in your browser with Web Crypto.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Hash & ID Generator | Toolity Dev">
+  <meta property="og:description" content="Free online hash and ID generator: MD5, SHA-1, SHA-256, SHA-384 and SHA-512 (with HMAC) for text or files, checksum verification, plus UUID v4 / v7, ULID, nanoid and short IDs in bulk — all generated in your browser with Web Crypto.">
+  <meta property="og:url" content="https://toolity.in/dev/hash-id-generator/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=6.1" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=6.1">
+  <link rel="stylesheet" href="/styles/tools/hash-id-generator.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Hash & ID Generator",
+        "url": "https://toolity.in/dev/hash-id-generator/",
+        "description": "Free online hash and ID generator: MD5, SHA-1, SHA-256, SHA-384 and SHA-512 (with HMAC) for text or files, checksum verification, plus UUID v4 / v7, ULID, nanoid and short IDs in bulk — all generated in your browser with Web Crypto.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Dev", "item": "https://toolity.in/dev/" },
+          { "@type": "ListItem", "position": 3, "name": "Hash & ID Generator", "item": "https://toolity.in/dev/hash-id-generator/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Is MD5 safe to use?", "acceptedAnswer": { "@type": "Answer", "text": "For checksums (did my download arrive intact?) and non-security fingerprints, yes. For passwords, signatures or anything an attacker could tamper with, no — MD5 and SHA-1 are broken for collision resistance; use SHA-256 or better, and for passwords use a dedicated slow hash (bcrypt, scrypt, Argon2) on the server." } },
+          { "@type": "Question", "name": "How are the hashes computed?", "acceptedAnswer": { "@type": "Answer", "text": "SHA-1/256/384/512 and HMAC use the browser’s native crypto.subtle; MD5 is a small built-in implementation (Web Crypto deliberately omits it), checked against the RFC 1321 test vectors. Files are read into memory and hashed in one call — fine up to the 50 MB limit." } },
+          { "@type": "Question", "name": "UUID v4 or v7?", "acceptedAnswer": { "@type": "Answer", "text": "v4 is 122 random bits — use it when ordering doesn’t matter. v7 puts a millisecond timestamp in the first 48 bits, so ids generated later sort later: much friendlier for database indexes and logs. ULID is the same idea in a shorter, case-insensitive base32 form. All three are generated with crypto.getRandomValues." } },
+          { "@type": "Question", "name": "How random are nanoids and short ids?", "acceptedAnswer": { "@type": "Answer", "text": "They use crypto.getRandomValues with rejection sampling, so every character is uniformly random — no modulo bias. A 21-character nanoid (the default) has the same collision resistance as a UUID v4; the length box lets you trade length for safety." } },
+          { "@type": "Question", "name": "Why can’t I see the file’s hash while typing?", "acceptedAnswer": { "@type": "Answer", "text": "Dropping a file replaces the text — the hash is of the file’s bytes, not its name. To hash text again, clear the box or press Reset." } },
+          { "@type": "Question", "name": "Is my code uploaded anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. Formatting and minifying run in JavaScript inside your browser tab. The formatter libraries are downloaded once from a CDN; your code never leaves the page." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/dev/" class="breadcrumb-link">Dev</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Hash & ID Generator</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Dev</span>
+            <h1 class="page-title">Hash & ID Generator</h1>
+            <p class="page-desc">Hash text or a file with MD5 / SHA-1 / SHA-256 / SHA-384 / SHA-512 (optionally HMAC), verify a checksum, or generate UUIDs, ULIDs and nanoids in bulk.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" data-split="40/60" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge web-status-badge" id="status-badge">Enter text, drop a file, or switch to IDs</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result" aria-label="Copy result" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <div class="dropdown-menu-wrapper" id="download-dropdown-wrap">
+                <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download result" aria-label="Download result" aria-haspopup="true" disabled>
+                  <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                  <span>Download</span>
+                  <iconify-icon icon="lucide:chevron-down" class="dropdown-arrow" width="13" height="13"></iconify-icon>
+                </button>
+                <div class="dropdown-popup" role="menu">
+                  <button type="button" class="dropdown-item" data-format="txt" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:file-text" width="14" height="14"></iconify-icon>
+                      <span>Text (.txt)</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="json" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:braces" width="14" height="14"></iconify-icon>
+                      <span>JSON (.json)</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="csv" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:table" width="14" height="14"></iconify-icon>
+                      <span>CSV (.csv)</span>
+                    </div>
+                  </button>
+                </div>
+              </div>
+              <button type="button" class="btn-toolbar-sm" id="btn-open" title="Open result in a new tab" aria-label="Open result in a new tab" disabled>
+                <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
+                <span>Open</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Input</span>
+                <span class="pane-badge" id="input-badge">—</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content web-form">
+                <div class="web-file-row">
+                  <button type="button" class="btn-toolbar-sm" id="btn-file" title="Open a file from your device" aria-label="Open a file from your device">
+                    <iconify-icon icon="lucide:folder-open" width="14" height="14"></iconify-icon>
+                    <span>Open file</span>
+                  </button>
+                  <input type="file" id="file-input" accept="*/*" hidden>
+                  <span class="web-muted" id="file-name">or drop a file here</span>
+                </div>
+                <div class="form-group">
+                  <span class="form-label"><span>Mode</span></span>
+                  <div class="segmented-group segmented-group-pill" id="seg-mode" role="group" aria-label="Mode">
+                    <button type="button" class="seg-pill active" data-value="hash">Hash</button>
+                    <button type="button" class="seg-pill" data-value="ids">IDs</button>
+                  </div>
+                </div>
+                <div class="web-group" id="hash-pane">
+                  <div class="form-group form-group-grow">
+                    <label class="form-label" for="text-input"><span>Text</span><span class="form-label-desc" id="input-count"></span></label>
+                    <textarea id="text-input" class="textarea-clean" rows="6" placeholder="Type or paste text — or open / drop a file above" spellcheck="false" autocapitalize="off" data-file-target></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="hash-key"><span>HMAC key (optional)</span><span class="form-label-desc">turns SHA-* into HMAC-SHA-*</span></label>
+                    <input type="text" id="hash-key" class="input-clean" placeholder="secret" spellcheck="false" autocomplete="off" autocapitalize="off">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="hash-expect"><span>Verify against (optional)</span><span class="form-label-desc">paste an expected checksum</span></label>
+                    <input type="text" id="hash-expect" class="input-clean" placeholder="e.g. the sha256 from a download page" spellcheck="false" autocomplete="off" autocapitalize="off">
+                  </div>
+                </div>
+                <div class="web-group" id="ids-pane" hidden>
+                  <div class="web-convert-row web-convert-row-2">
+                    <div class="form-group">
+                      <label class="form-label" for="id-type"><span>ID type</span></label>
+                      <select id="id-type" class="select-clean"><option value="uuid4" selected>UUID v4 (random)</option><option value="uuid7">UUID v7 (time-ordered)</option><option value="ulid">ULID</option><option value="nanoid">nanoid</option><option value="cuid">CUID2-style</option><option value="short">Short ID (base62)</option><option value="otp">Numeric code (OTP)</option></select>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label" for="id-count"><span>How many</span></label>
+                      <input type="number" id="id-count" class="input-clean" min="1" max="1000" value="10" inputmode="numeric">
+                    </div>
+                  </div>
+                  <div class="web-convert-row web-convert-row-2">
+                    <div class="form-group">
+                      <label class="form-label" for="id-len"><span>Length</span><span class="form-label-desc">nanoid · short · OTP</span></label>
+                      <input type="number" id="id-len" class="input-clean" min="4" max="64" value="21" inputmode="numeric">
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label" for="id-format"><span>UUID format</span></label>
+                      <select id="id-format" class="select-clean"><option value="plain" selected>lowercase</option><option value="upper">UPPERCASE</option><option value="nodash">no dashes</option><option value="braces">{braces}</option></select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="id-decode"><span>Decode a UUID v7 / ULID</span><span class="form-label-desc">shows the embedded time</span></label>
+                    <input type="text" id="id-decode" class="input-clean" placeholder="paste an id" spellcheck="false" autocomplete="off" autocapitalize="off">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Result</span>
+                <span class="pane-badge" id="output-badge">—</span>
+              </div>
+              <div class="pane-content web-output-pane">
+                <div class="pane-empty" id="output-empty">
+                  <iconify-icon icon="lucide:fingerprint"></iconify-icon>
+                  <span>Hashes or IDs will appear here</span>
+                </div>
+                <div class="web-output" id="output-content" hidden>
+                  <div class="hash-rows" id="output-rows"></div>
+                  <pre class="web-code" id="output-text" hidden></pre>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">Hex · lowercase</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item">
+                <label for="opt-enc">Hash encoding</label>
+                <select id="opt-enc" class="select-clean"><option value="hex" selected>Hex</option><option value="base64">Base64</option><option value="base64url">Base64url</option></select>
+              </div>
+              <div class="control-item"><input type="checkbox" id="opt-upper"><label for="opt-upper">Uppercase hex</label></div>
+              <div class="control-item">
+                <label for="opt-alpha">nanoid alphabet</label>
+                <select id="opt-alpha" class="select-clean"><option value="url" selected>A–Z a–z 0–9 _ - (URL-safe, default)</option><option value="alnum">A–Z a–z 0–9</option><option value="lower">a–z 0–9</option><option value="hex">0–9 a–f</option><option value="nolook">No look-alikes (no 0 O 1 l I)</option></select>
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Use Hash & ID Generator in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Hash text or a file</h3>
+              <p class="step-desc">Type text or drop any file (up to 50 MB) — MD5, SHA-1, SHA-256, SHA-384 and SHA-512 are computed at once with the browser’s Web Crypto. Add an HMAC key to get keyed hashes; paste an expected checksum into <strong>Verify against</strong> and the matching algorithm lights up green (or red).</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Generate IDs</h3>
+              <p class="step-desc">Switch to <strong>IDs</strong>: UUID v4 for random identifiers, UUID v7 or ULID when you want them to sort by creation time, nanoid for short URL-safe tokens, or a numeric code. Set how many (up to 1,000) and the format; paste a v7 / ULID into the decode box to read its timestamp.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Copy or export</h3>
+              <p class="step-desc">Click any row to copy that value, or use Copy for all of them. Download as text, JSON or CSV.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Hash & ID Generator — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Is MD5 safe to use?</summary>
+              <p>For checksums (did my download arrive intact?) and non-security fingerprints, yes. For passwords, signatures or anything an attacker could tamper with, no — MD5 and SHA-1 are broken for collision resistance; use SHA-256 or better, and for passwords use a dedicated slow hash (bcrypt, scrypt, Argon2) on the server.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How are the hashes computed?</summary>
+              <p>SHA-1/256/384/512 and HMAC use the browser’s native <code>crypto.subtle</code>; MD5 is a small built-in implementation (Web Crypto deliberately omits it), checked against the RFC 1321 test vectors. Files are read into memory and hashed in one call — fine up to the 50 MB limit.</p>
+            </details>
+            <details class="faq-item">
+              <summary>UUID v4 or v7?</summary>
+              <p>v4 is 122 random bits — use it when ordering doesn’t matter. v7 puts a millisecond timestamp in the first 48 bits, so ids generated later sort later: much friendlier for database indexes and logs. ULID is the same idea in a shorter, case-insensitive base32 form. All three are generated with <code>crypto.getRandomValues</code>.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How random are nanoids and short ids?</summary>
+              <p>They use <code>crypto.getRandomValues</code> with rejection sampling, so every character is uniformly random — no modulo bias. A 21-character nanoid (the default) has the same collision resistance as a UUID v4; the length box lets you trade length for safety.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why can’t I see the file’s hash while typing?</summary>
+              <p>Dropping a file replaces the text — the hash is of the file’s bytes, not its name. To hash text again, clear the box or press Reset.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is my code uploaded anywhere?</summary>
+              <p>No. Formatting and minifying run in JavaScript inside your browser tab. The formatter libraries are downloaded once from a CDN; your code never leaves the page.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="dev"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=4.5"></script>
+  <script src="/scripts/tool-common.js?v=1.1"></script>
+  <script src="/scripts/web-common.js?v=1.2"></script>
+  <script src="/dev/hash-id-generator/hash-id-generator.js?v=1.0"></script>
+</body>
+</html>

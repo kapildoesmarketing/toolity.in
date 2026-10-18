@@ -1,0 +1,11 @@
+/* Hash & ID Generator — hash rows (click to copy) and ID list. */
+.hash-rows { display: flex; flex-direction: column; gap: 0.4rem; min-width: 0; }
+.hash-rows[hidden], #hash-pane[hidden], #ids-pane[hidden] { display: none; }
+.hash-row { display: grid; grid-template-columns: 92px minmax(0, 1fr) auto; align-items: center; gap: 0.6rem; width: 100%; padding: 0.5rem 0.7rem; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); font: inherit; color: inherit; text-align: left; cursor: pointer; transition: border-color 0.15s ease; min-width: 0; }
+.hash-row:hover { border-color: var(--brand); }
+.hash-row.is-pass { border-color: rgba(22, 163, 74, 0.5); background: rgba(22, 163, 74, 0.06); color: #15803d; }
+.hash-row.is-fail { opacity: 0.6; }
+.hash-row.is-fail iconify-icon { color: #b91c1c; }
+.hash-name { font-size: 0.74rem; font-weight: 600; letter-spacing: 0.03em; color: var(--text-secondary); white-space: nowrap; }
+.hash-row code { font-family: var(--font-mono); font-size: 0.8rem; overflow-wrap: anywhere; color: var(--text-primary); }
+#output-text { font-family: var(--font-mono); max-height: 520px; }

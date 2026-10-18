@@ -534,7 +534,124 @@ const CASES = [
     set('text-input', '# Heading\\n\\nSome **bold** text with a [link](https://x.y). Another line.'); await settle(); A(out().res.nW === 9 && !/https/.test($('output-highlight').textContent), 'markdown stripped: ' + out().res.nW);
     const j = JSON.parse((await T.T.download('json', T)).text); A(typeof j.fre === 'number' && j.nW === 9 && !('html' in j), 'json report');
     A(/Flesch Reading Ease:/.test(out().text) && /Words: 9/.test(out().text), 'txt report');
-    $('btn-reset').click(); await settle(); A(!out() && $('text-input').value === '' && $('opt-passive').checked, 'reset');`]
+    $('btn-reset').click(); await settle(); A(!out() && $('text-input').value === '' && $('opt-passive').checked, 'reset');`],
+  ['text-to-handwriting', `
+    set('text-input', 'The quick brown fox jumps over the lazy dog. '.repeat(40) + '\\n---\\nSecond page here.');
+    A(await waitFor(() => out() && /[2-4] pages/.test($('output-badge').textContent), 30000), 'pages: ' + $('output-badge').textContent);
+    const cv = $('hw-canvas'); A(cv.width === 1654 && cv.height === 2339, 'a4 size: ' + cv.width + 'x' + cv.height);
+    const inked = () => { const d = cv.getContext('2d').getImageData(0, 0, cv.width, cv.height).data; let n = 0; for (let i = 0; i < d.length; i += 160) if (d[i] < 120 && d[i + 2] > 100) n++; return n; };
+    A(inked() > 200, 'blue ink drawn: ' + inked());
+    A(/Page 1 of [2-4]/.test($('hw-pager').textContent), 'pager: ' + $('hw-pager').textContent);
+    $('hw-pager').querySelector('[data-go="1"]').click(); await tick(100); A(/Page 2 of/.test($('hw-pager').textContent), 'next page');
+    set('opt-page', 'a5'); await settle(); A(await waitFor(() => cv.width === 1166, 10000), 'a5 size: ' + cv.width);
+    set('hw-ink', '#1a1a1a'); set('opt-scan', true); await settle(); await tick(300); A(out() && /A5/.test($('output-badge').textContent), 'scan + black ok');
+    const png = await T.T.download('png', T); A(png.blob && png.blob.type === 'image/png' && png.blob.size > 20000, 'png: ' + (png.blob && png.blob.size));
+    const pdf = await T.T.download('pdf', T); A(pdf.blob && pdf.blob.size > 50000 && /\\.pdf$/.test(pdf.name), 'pdf: ' + (pdf.blob && pdf.blob.size));
+    const zip = await T.T.download('zip', T); A(zip.blob && zip.blob.size > 40000 && /\\.zip$/.test(zip.name), 'zip: ' + (zip.blob && zip.blob.size));
+    set('hw-font', 'custom'); await settle(); A(/Upload a font file first/.test($('status-badge').textContent), 'custom font gate: ' + $('status-badge').textContent);
+    $('btn-reset').click(); await settle(); A(!out() && $('text-input').value === '' && $('hw-pager').innerHTML === '' && $('hw-font').value === 'homemade-apple', 'reset');`],
+  ['countdown-page-maker', `
+    set('cd-title', 'Launch day'); set('cd-to', '2030-01-01T09:00'); set('cd-tz', 'Asia/Kolkata'); set('cd-done', 'We are live'); await settle();
+    const u = new URL($('cd-link').value); A(u.pathname === '/widgets/countdown/embed/' && u.searchParams.get('title') === 'Launch day' && u.searchParams.get('to') === '2030-01-01T09:00' && u.searchParams.get('tz') === 'Asia/Kolkata' && u.searchParams.get('size') === 'lg' && u.searchParams.get('theme') === 'dark', 'link: ' + u.href);
+    A($('cd-frame').src === u.href && $('cd-open').href === u.href, 'preview + open');
+    A(/days to go/.test($('output-badge').textContent), 'badge: ' + $('output-badge').textContent);
+    A($('cd-share-links').querySelectorAll('a').length === 4 && /wa\\.me/.test($('cd-share-links').querySelector('a').href), 'share chips');
+    A(location.hash.includes('title=Launch+day'), 'deep link hash: ' + location.hash);
+    pill('seg-variant', 'minimal'); set('opt-seconds', false); await settle(); const u2 = new URL($('cd-link').value); A(u2.searchParams.get('variant') === 'minimal' && u2.searchParams.get('seconds') === '0', 'variant + units: ' + u2.search);
+    set('cd-accent-input', '#00AA55'); await settle(); A(new URL($('cd-link').value).searchParams.get('accent') === '00aa55', 'accent');
+    const ics = await T.T.download('ics', T); A(/BEGIN:VCALENDAR/.test(ics.text) && /SUMMARY:Launch day/.test(ics.text) && /DTSTART:20300101T033000Z/.test(ics.text) && ics.name === 'launch-day.ics', 'ics: ' + ics.text);
+    const qr = await T.T.download('qr', T); A(qr.blob && qr.blob.type === 'image/png' && qr.blob.size > 500, 'qr png');
+    $('btn-reset').click(); await settle(); A(!out() && $('cd-title').value === '' && !$('cd-frame').getAttribute('src') && location.hash === '', 'reset');`],
+  ['schema-markup-generator', `
+    await settle(); A($('sc-type').value === 'Article' && $('f-headline') && $('f-datePublished'), 'article form rendered');
+    A(!out(), 'no output while empty');
+    set('f-headline', 'Hello World'); set('f-image', 'not a url'); await settle();
+    let j = () => JSON.parse(out().text.replace(/^<script[^>]*>\\n|\\n<\\/script>$/g, ''));
+    A(out() && j()['@type'] === 'Article' && j().headline === 'Hello World' && j()['@context'] === 'https://schema.org', 'article json: ' + out().text);
+    let iss = $('output-issues').textContent; A(/Image URL must be an absolute/.test(iss) && /Published is required/.test(iss) && /Author name is required/.test(iss), 'issues: ' + iss);
+    set('f-image', 'https://example.com/a.png'); set('f-datePublished', '2026-10-18T09:30'); set('f-author', 'Kapil'); set('f-publisher', 'Toolity'); set('f-kind', 'BlogPosting'); await settle();
+    A(j()['@type'] === 'BlogPosting' && /^2026-10-18T09:30:00[+-]\\d{2}:\\d{2}$/.test(j().datePublished) && j().author.name === 'Kapil' && j().publisher['@type'] === 'Organization' && !('description' in j()), 'filled: ' + out().text);
+    A(/All required fields present/.test($('output-issues').textContent) && /valid/.test($('output-badge').textContent), 'valid badge: ' + $('output-badge').textContent);
+    set('sc-type', 'FAQPage'); await settle(); A($('sc-fields').querySelectorAll('.sc-row').length === 1, 'faq one row');
+    $('sc-fields').querySelector('.sc-add').click(); await settle(); const rows = $('sc-fields').querySelectorAll('.sc-row'); A(rows.length === 2, 'faq add row');
+    const setIn = (el, v) => { el.value = v; el.dispatchEvent(new Event('input', { bubbles: true })); };
+    setIn(rows[0].querySelector('[data-key="q"]'), 'Is it free?'); setIn(rows[0].querySelector('[data-key="a"]'), 'Yes.'); setIn(rows[1].querySelector('[data-key="q"]'), 'Offline?'); setIn(rows[1].querySelector('[data-key="a"]'), 'Mostly.'); await settle();
+    A(j().mainEntity.length === 2 && j().mainEntity[1].acceptedAnswer.text === 'Mostly.', 'faq json: ' + out().text);
+    rows[0].querySelector('.sc-del').click(); await settle(); A(j().mainEntity.length === 1 && j().mainEntity[0].name === 'Offline?', 'faq remove');
+    set('sc-type', 'Product'); await settle(); set('f-name', 'Widget'); set('f-image', 'https://x.y/p.png'); set('f-price', '9.99'); set('f-ratingValue', '7'); await settle();
+    A(/Rating \\(1–5\\) must be 1–5/.test($('output-issues').textContent) && j().offers.price === '9.99' && j().offers.priceCurrency === 'INR', 'product: ' + out().text);
+    set('opt-indent', '0'); await settle(); A(!/\\n  /.test(out().json), 'minified');
+    const dl = await T.T.download('json', T); A(/\\.json$/.test(dl.name) && JSON.parse(dl.text)['@type'] === 'Product', 'json download');
+    $('btn-reset').click(); await settle(); A(!out() && $('sc-type').value === 'Article' && $('f-headline') && $('f-headline').value === '', 'reset');`],
+  ['dev/html-css-js-playground', `
+    set('pg-html', '<h1 id="t">Hi</h1>'); set('pg-css', 'h1 { color: rgb(255, 0, 0); }'); set('pg-js', 'console.log("hello", {a:1}); console.warn("careful"); document.getElementById("t").textContent = "Changed"; setTimeout(() => { throw new Error("boom"); }, 10);');
+    A(await waitFor(() => out() && $('pg-frame').srcdoc.includes('Hi'), 10000), 'ran');
+    A(await waitFor(() => $('pg-console').querySelectorAll('.pg-log').length >= 3, 8000), 'console count: ' + $('pg-console').textContent);
+    const logs = [...$('pg-console').querySelectorAll('.pg-log')].map(l => l.className + ':' + l.textContent);
+    A(logs.some(l => /pg-log:hello/.test(l) && /"a": 1/.test(l)) && logs.some(l => /pg-warn:careful/.test(l)) && logs.some(l => /pg-error:.*boom.*line 1/.test(l)), 'console: ' + logs.join(' | '));
+    A(await waitFor(() => /#h=[A-Za-z0-9_-]{10,}/.test($('pg-link').value), 5000), 'share link: ' + $('pg-link').value);
+    const link = $('pg-link').value;
+    A(/<style>\\nh1 \\{ color/.test(out().text) && /<script>\\nconsole\\.log/.test(out().text) && !/postMessage/.test(out().text), 'single html clean');
+    set('opt-tailwind', true); await settle(); await tick(700); A(/cdn\\.tailwindcss\\.com/.test($('pg-frame').srcdoc), 'tailwind toggle');
+    const zip = await T.T.download('zip', T); A(zip.blob && zip.blob.size > 300 && zip.name === 'playground.zip', 'zip');
+    const ta = $('pg-js'); ta.focus(); ta.setSelectionRange(0, 0); ta.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab', bubbles: true, cancelable: true })); A(ta.value.startsWith('  console'), 'tab indent: ' + JSON.stringify(ta.value.slice(0, 10)));
+    const dec = await window.ToolityPlayground.decode(link.split('#h=')[1]); A(dec[0] === '<h1 id="t">Hi</h1>' && /rgb\\(255, 0, 0\\)/.test(dec[1]) && /boom/.test(dec[2]), 'link round-trip: ' + JSON.stringify(dec[0]));
+    $('btn-reset').click(); await settle(); A(!out() && $('pg-html').value === '' && $('pg-console').innerHTML === '' && $('pg-link').value === '', 'reset');`],
+  ['dev/config-converter', `
+    const until = async (re, ms = 30000) => { const ok = await waitFor(() => out() && re.test(out().text) && !/Converting/.test($('status-badge').textContent), ms); return ok; };
+    const ENV = 'DATABASE__HOST=db.local\\nDATABASE__PORT=5432\\nDEBUG=true\\nAPP_NAME="My App" # trailing\\nAPI_TOKEN=abc\\nMULTI="line1\\\\nline2"\\n# comment\\nEMPTY=';
+    set('text-input', ENV); A(await until(/DATABASE/), 'json out');
+    let j = JSON.parse(out().text); A(j.DATABASE.HOST === 'db.local' && j.DATABASE.PORT === 5432 && j.DEBUG === true && j.APP_NAME === 'My App' && j.MULTI === 'line1\\nline2' && j.EMPTY === '', 'env→json: ' + out().text);
+    A(/Detected \\.env → JSON/.test($('status-badge').textContent) && /secrets \\(API_TOKEN\\)/.test($('output-issues').textContent), 'detect + secret warn: ' + $('status-badge').textContent + ' ' + $('output-issues').textContent);
+    set('opt-types', false); A(await until(/"PORT": "5432"/), 'untyped'); j = JSON.parse(out().text); A(j.DEBUG === 'true', 'untyped bool');
+    set('opt-to', 'yaml'); A(await until(/^DATABASE:\\n  HOST: "?db\\.local"?/m), 'yaml: ' + out().text);
+    set('opt-to', 'configmap'); A(await until(/kind: "?ConfigMap"?/), 'configmap kind'); A(/DATABASE__HOST: "db\\.local"/.test(out().text), 'configmap data: ' + out().text);
+    set('opt-secret', true); A(await until(/kind: "?Secret"?/), 'secret kind'); A(/DATABASE__HOST: "ZGIubG9jYWw="/.test(out().text), 'secret b64: ' + out().text);
+    set('opt-secret', false); set('opt-to', 'compose'); A(await until(/^environment:\\n  DATABASE__HOST: "db\\.local"/m), 'compose: ' + out().text);
+    set('text-input', '{"server":{"port":8080,"name":"api x"},"debug":false,"tags":["a","b"]}'); set('opt-to', 'env'); A(await until(/^SERVER__PORT/m), 'json→env wait');
+    A(out().text === 'SERVER__PORT=8080\\nSERVER__NAME="api x"\\nDEBUG=false\\nTAGS="[\\\\"a\\\\",\\\\"b\\\\"]"\\n', 'json→env: ' + JSON.stringify(out().text));
+    set('opt-nest', '.'); A(await until(/^SERVER\\.PORT=8080/m), 'dot rule: ' + out().text);
+    set('opt-case', 'keep'); A(await until(/^server\\.port=8080/m), 'keep case: ' + out().text);
+    set('opt-nest', '__'); set('opt-case', 'upper'); set('opt-to', 'toml'); set('text-input', '[database]\\nhost = "db"\\nport = 5432\\n\\n[cache]\\nttl = 60');
+    A(await until(/\\[database\\]\\nhost = "db"\\nport = 5432/), 'toml round trip: ' + out().text); A(/Detected TOML/.test($('status-badge').textContent), 'toml detected: ' + $('status-badge').textContent);
+    set('opt-to', 'ini'); A(await until(/\\[database\\]\\nhost = db\\nport = 5432/), 'ini: ' + out().text);
+    set('opt-case', 'keep'); set('text-input', 'A=1\\nA=2\\nbad-key=3'); set('opt-to', 'export'); A(await until(/^export A=2$/m), 'export wait');
+    A(/Duplicate key/.test($('output-issues').textContent) && /Invalid key.*bad-key/.test($('output-issues').textContent), 'dups + invalid: ' + $('output-issues').textContent);
+    set('opt-case', 'upper'); A(await until(/^export BAD_KEY=3$/m), 'upper fixes key'); A(!/Invalid key/.test($('output-issues').textContent), 'no invalid after upper');
+    set('text-input', 'services:\\n  web:\\n    environment:\\n      - PORT=80\\n      - MODE=prod\\n  db:\\n    environment:\\n      PG_USER: admin'); set('opt-to', 'json'); set('opt-types', true); A(await until(/PG_USER/), 'compose wait');
+    A(/Detected compose/.test($('status-badge').textContent) && JSON.parse(out().text).PORT === 80 && JSON.parse(out().text).PG_USER === 'admin', 'compose in: ' + $('status-badge').textContent + ' ' + out().text);
+    set('text-input', 'spring.datasource.url=jdbc:x\\nspring.profiles.active=dev'); set('opt-nest', '.'); A(await until(/datasource/), 'props wait');
+    A(/Detected \\.properties/.test($('status-badge').textContent) && JSON.parse(out().text).spring.datasource.url === 'jdbc:x', 'properties: ' + $('status-badge').textContent + ' ' + out().text);
+    $('btn-swap').click(); A(await until(/^spring\\.datasource\\.url=jdbc:x$/m), 'swap: ' + $('opt-from').value + '→' + $('opt-to').value + ' ' + out().text); A($('opt-to').value === 'properties' && $('opt-from').value === 'json', 'swap selects');
+    set('text-input', '{bad'); set('opt-from', 'json'); A(await waitFor(() => !$('input-error').hidden, 8000), 'json error shown');
+    $('btn-reset').click(); await settle(); A(!out() && $('text-input').value === '' && $('opt-to').value === 'json' && $('opt-nest').value === '__', 'reset');`],
+  ['dev/hash-id-generator', `
+    set('text-input', 'abc'); A(await waitFor(() => out() && out().rows && out().rows.length === 5, 10000), 'hashes computed');
+    const row = (n) => out().rows.find(r => r.name === n).v;
+    A(row('MD5') === '900150983cd24fb0d6963f7d28e17f72' && row('SHA-1') === 'a9993e364706816aba3e25717850c26c9cd0d89d' && row('SHA-256') === 'ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad', 'vectors: ' + row('MD5') + ' ' + row('SHA-256'));
+    A(row('SHA-512').length === 128 && row('SHA-384').length === 96, 'lengths');
+    set('hash-expect', 'BA7816BF 8F01CFEA 414140DE 5DAE2223 B00361A3 96177A9C B410FF61 F20015AD'); await settle(); await tick(200);
+    A(/Matches SHA-256/.test($('output-badge').textContent) && $('output-rows').querySelector('.hash-row.is-pass .hash-name').textContent === 'SHA-256', 'verify: ' + $('output-badge').textContent);
+    set('hash-expect', 'deadbeef'); await settle(); await tick(200); A(/No match/.test($('output-badge').textContent), 'no match');
+    set('hash-expect', ''); set('hash-key', 'key'); set('text-input', 'The quick brown fox jumps over the lazy dog'); await settle(); await tick(300);
+    A(row('MD5') === '80070713463e7749b90c2dc24911e275' && row('SHA-256') === 'f7bc83f430538424b13298e6aa6fb143ef4d59a14946175997479dbc2d1a3cd8', 'hmac: ' + row('MD5') + ' ' + row('SHA-256'));
+    set('hash-key', ''); set('opt-enc', 'base64'); await settle(); await tick(300); A(row('SHA-256') === '16j7swfXgJRpypq8sAguT41WUeRtPNt2LQLQvzfJ5ZI=', 'base64: ' + row('SHA-256'));
+    set('opt-enc', 'hex'); set('opt-upper', true); await settle(); await tick(300); A(/^[0-9A-F]+$/.test(row('MD5')), 'upper');
+    const dt = new DataTransfer(); dt.items.add(new File([new Uint8Array([0, 255, 10, 13, 128])], 'bin.dat')); $('file-input').files = dt.files; $('file-input').dispatchEvent(new Event('change', { bubbles: true }));
+    A(await waitFor(() => /bin\\.dat/.test($('input-count').textContent) && out() && out().rows, 5000), 'file loaded: ' + $('input-count').textContent);
+    await tick(300); A(row('MD5').toLowerCase() === '9e1daf0b7f744ffd0870b4bb64237f10', 'file md5: ' + row('MD5'));
+    A($('text-input').value === '' && row('MD5').length === 32, 'file replaces text');
+    pill('seg-mode', 'ids'); await settle(); A($('hash-pane').hidden && !$('ids-pane').hidden && !$('output-text').hidden, 'ids pane');
+    A(out().list.length === 10 && out().list.every(x => /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/.test(x)), 'uuid4: ' + out().list[0]);
+    set('id-type', 'uuid7'); set('id-count', '50'); set('id-format', 'upper'); await settle();
+    const l = out().list; A(l.length === 50 && l.every(x => /^[0-9A-F]{8}-[0-9A-F]{4}-7[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/.test(x)) && l.map(x => x.slice(0, 13)).every((v, i, a) => !i || v >= a[i - 1]), 'uuid7 time-ordered: ' + l[0]);
+    set('id-decode', l[0]); await settle(); A(/UUID v7/.test($('output-rows').textContent) && Math.abs(new Date($('output-rows').textContent.match(/\\d{4}-\\d{2}-\\d{2}T[^ ]+Z/)[0]) - Date.now()) < 120000, 'decode v7: ' + $('output-rows').textContent);
+    set('id-type', 'ulid'); set('id-count', '3'); await settle(); A(out().list.every(x => /^[0-9A-HJKMNP-TV-Z]{26}$/.test(x)), 'ulid: ' + out().list[0]);
+    set('id-decode', out().list[0]); await settle(); A(/ULID/.test($('output-rows').textContent), 'decode ulid');
+    set('id-type', 'nanoid'); set('id-len', '12'); set('opt-alpha', 'nolook'); set('id-count', '200'); await settle(); A(out().list.every(x => x.length === 12 && !/[0OIl1]/.test(x)) && new Set(out().list).size === 200, 'nanoid nolook unique');
+    set('id-type', 'otp'); set('id-len', '6'); await settle(); A(out().list.every(x => /^\\d{6}$/.test(x)), 'otp');
+    const csv = await T.T.download('csv', T); A(csv.text.startsWith('id\\n') && csv.text.split('\\n').length === 201, 'csv');
+    $('btn-reset').click(); await settle(); A(!out() && !$('hash-pane').hidden && $('id-count').value === '10' && $('text-input').value === '', 'reset');`]
 ];
 
 (async () => {
