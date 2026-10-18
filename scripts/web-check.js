@@ -12,8 +12,7 @@ const HELPERS = `
   const tick = (ms = 200) => new Promise(r => setTimeout(r, ms));
   const f = []; const A = (c, m) => { if (!c) f.push(m); };
   const $ = (id) => document.getElementById(id);
-  for (let i = 0; i < 60 && !window.ToolityWebTool; i++) await tick(100);
-  A(window.ToolityWebTool, 'page did not mount');
+  if (!window.__raw) { for (let i = 0; i < 60 && !window.ToolityWebTool; i++) await tick(100); A(window.ToolityWebTool, 'page did not mount'); }
   const T = window.ToolityWebTool;
   const waitFor = async (cond, ms = 20000) => { const end = Date.now() + ms; while (Date.now() < end) { if (cond()) return true; await tick(); } return false; };
   const set = (id, v) => { const el = $(id); if (el.type === 'checkbox') el.checked = v; else el.value = v; el.dispatchEvent(new Event('input', { bubbles: true })); el.dispatchEvent(new Event('change', { bubbles: true })); };
@@ -243,6 +242,11 @@ const CASES = [
     const c = await T.T.download('csv', T); A(c.text.split(NL)[0] === 'type,value' && /phone,\\+1 \\(555\\) 123-4567/.test(c.text), 'csv: ' + c.text.slice(0, 100));
     ['email', 'phone', 'url', 'number', 'hashtag'].forEach((k) => set('opt-' + k, false)); await settle(); A(!out() && /Tick/.test($('status-badge').textContent), 'none ticked');
     $('btn-reset').click(); await settle(); A(!out() && $('opt-email').checked && !$('opt-number').checked && $('opt-unique').checked, 'reset');`],
+  ['qr-code-generator', `
+    A(typeof QRCodeGenerator === 'function', 'shared qr-engine.js not loaded');
+    const inp = $('input-url'); inp.value = 'https://toolity.in/'; inp.dispatchEvent(new Event('input', { bubbles: true }));
+    A(await waitFor(() => $('qr-render-target').querySelector('canvas, svg, img'), 5000), 'QR not rendered');
+    const q = new QRCodeGenerator(0, QRErrorCorrectLevel.M); q.addData('https://toolity.in/'); q.make(); A(q.getModuleCount() === 25, 'module count ' + q.getModuleCount());`, true],
   ['data/log-parser', `
     const NL = String.fromCharCode(10);
     const GEN = ['2024-05-01T10:00:01Z INFO server started', '2024-05-01T10:05:00Z WARN slow query 812ms', '2024-05-01T11:00:00Z ERROR db: connection refused id=41', 'java.lang.Exception: boom', '    at Foo.bar(Foo.java:10)', '2024-05-01T11:30:00Z ERROR db: connection refused id=97', '2024-05-01T12:00:00Z DEBUG cache hit', 'garbage line'].join(NL);
@@ -278,7 +282,7 @@ const CASES = [
   const port = 9800 + Math.floor(Math.random() * 100);
   const chrome = spawn('google-chrome', ['--headless=new', '--disable-gpu', '--no-sandbox', `--remote-debugging-port=${port}`, 'about:blank'], { stdio: 'ignore' });
   for (let i = 0; i < 20; i++) { await sleep(500); try { await getJson(`http://127.0.0.1:${port}/json/version`); break; } catch (e) {} }
-  const run = async (slug, expr) => {
+  const run = async (slug, expr, raw) => {
     const t = await new Promise((res, rej) => { const q = http.request({ host: '127.0.0.1', port, path: '/json/new?about:blank', method: 'PUT' }, r => { let b = ''; r.on('data', d => b += d); r.on('end', () => res(JSON.parse(b))); }); q.on('error', rej); q.end(); });
     const ws = new WebSocket(t.webSocketDebuggerUrl); await new Promise(r => ws.onopen = r);
     let id = 0; const pending = {}; const errs = [];
@@ -287,14 +291,14 @@ const CASES = [
     await send('Page.enable'); await send('Runtime.enable');
     await send('Emulation.setDeviceMetricsOverride', { width: 1366, height: 900, deviceScaleFactor: 1, mobile: false });
     await send('Page.navigate', { url: `${BASE}${slug.includes('/') ? slug : 'labs/' + slug}/` }); await sleep(1500);
-    const r = await send('Runtime.evaluate', { expression: `(async () => { ${HELPERS} try { ${expr} } catch (e) { f.push('threw: ' + (e && e.message || e)); } return f; })()`, returnByValue: true, awaitPromise: true, timeout: 120000 });
+    const r = await send('Runtime.evaluate', { expression: `(async () => { window.__raw = ${!!raw}; ${HELPERS} try { ${expr} } catch (e) { f.push('threw: ' + (e && e.message || e)); } return f; })()`, returnByValue: true, awaitPromise: true, timeout: 120000 });
     ws.close(); await getJson(`http://127.0.0.1:${port}/json/close/${t.id}`).catch(() => {});
     return (r?.result?.value || ['eval failed: ' + JSON.stringify(r?.exceptionDetails?.exception?.description || r)]).concat(errs.map(e => 'JS error: ' + e));
   };
   let fails = 0, n = 0;
-  for (const [slug, expr] of CASES) {
+  for (const [slug, expr, raw] of CASES) {
     if (only && slug !== only) continue; n++;
-    const f = await run(slug, expr);
+    const f = await run(slug, expr, raw);
     console.log((f.length ? '✗ ' : '✓ ') + slug + (f.length ? '\n    ' + f.join('\n    ') : ''));
     if (f.length) fails++;
   }
