@@ -202,6 +202,151 @@ const SEO_TOOLS = [
   }
 ];
 
+/* Handy batch (Oct 2026, part 2): Text to Handwriting + Countdown Page Maker (Generators & Links), Schema Markup Generator (SEO). */
+const HW_FONTS = [['caveat', 'Caveat', 30], ['homemade-apple', 'Homemade Apple', 22], ['indie-flower', 'Indie Flower', 26], ['shadows-into-light', 'Shadows Into Light', 28], ['reenie-beanie', 'Reenie Beanie', 30], ['kalam', 'Kalam', 26], ['patrick-hand', 'Patrick Hand', 27], ['dancing-script', 'Dancing Script', 28], ['gloria-hallelujah', 'Gloria Hallelujah', 24], ['nothing-you-could-do', 'Nothing You Could Do', 24], ['zeyada', 'Zeyada', 30], ['liu-jian-mao-cao', 'Liu Jian Mao Cao', 30]];
+const SCHEMA_TYPES = [['Organization', 'Organization'], ['LocalBusiness', 'Local Business'], ['Person', 'Person'], ['WebSite', 'Website (+ search box)'], ['Article', 'Article / Blog post'], ['Product', 'Product (+ offer, rating)'], ['FAQPage', 'FAQ page'], ['HowTo', 'How-to'], ['Event', 'Event'], ['BreadcrumbList', 'Breadcrumbs'], ['Recipe', 'Recipe'], ['VideoObject', 'Video'], ['JobPosting', 'Job posting']];
+const HANDY_TOOLS = [
+  {
+    slug: 'text-to-handwriting', name: 'Text to Handwriting', icon: 'lucide:pen-line', section: 'Generators & Links', split: '40/60', css: true,
+    desc: 'Free online text to handwriting converter: turn typed text into realistic handwritten pages — 12 handwriting fonts or your own, ruled / grid / blank paper, ink colours, pen-pressure jitter and a scanner effect. Download as PNG or multi-page PDF. Runs in your browser.',
+    lead: 'Type or paste text and get realistic handwritten pages — pick a hand, paper and ink, add natural jitter, then download PNG or a multi-page PDF.',
+    cardDesc: '12 handwriting fonts or your own, ruled paper, ink & jitter — PNG / PDF.',
+    tags: ['text to handwriting', 'handwriting converter', 'handwritten assignment', 'text to handwritten notes', 'handwriting generator', 'fake handwriting', 'handwriting font', 'ruled paper pdf', 'assignment writer', 'handwritten pdf'],
+    idle: 'Type something to write it by hand', sourceLabel: 'Text & style', outputLabel: 'Pages', outputIcon: 'lucide:pen-line', outputEmpty: 'Your handwritten page will appear here',
+    file: { accept: '.txt,.md' },
+    downloads: [['png', 'This page (PNG)', 'lucide:image'], ['zip', 'All pages (PNG, .zip)', 'lucide:file-archive'], ['pdf', 'All pages (PDF)', 'lucide:file-text']],
+    sourceHtml: `
+                <div class="form-group form-group-grow">
+                  <label class="form-label" for="text-input"><span>Text</span><span class="form-label-desc" id="input-count"></span></label>
+                  <textarea id="text-input" class="textarea-clean" rows="9" placeholder="Paste your notes, essay or assignment. Blank lines start a new paragraph; a line of --- starts a new page." spellcheck="true" data-file-target></textarea>
+                </div>${FIELD('hw-header', 'Header line (optional)', 'type="text" placeholder="Name · Roll no · Date" autocomplete="off"', 'top-right of page 1')}
+                <div class="web-convert-row web-convert-row-2">
+                  <div class="form-group">
+                    <label class="form-label" for="hw-font"><span>Handwriting</span></label>
+                    <select id="hw-font" class="select-clean">${OPTS(HW_FONTS.map(([v, l]) => [v, l]), 'homemade-apple')}<option value="custom">Your font (upload below)</option></select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="hw-ink"><span>Ink</span></label>
+                    <div class="web-inline">
+                      <select id="hw-ink" class="select-clean">${OPTS([['#1f3a93', 'Blue'], ['#1a1a1a', 'Black'], ['#b3261e', 'Red'], ['#1b5e20', 'Green'], ['#4a2c2a', 'Brown'], ['custom', 'Custom']], '#1f3a93')}</select>
+                      <input type="color" id="hw-ink-pick" class="web-color-input" aria-label="Custom ink colour" value="#1f3a93">
+                    </div>
+                  </div>
+                </div>
+                <div class="web-file-row">
+                  <button type="button" class="btn-toolbar-sm" id="btn-font-file"><iconify-icon icon="lucide:type" width="14" height="14"></iconify-icon><span>Upload your handwriting font</span></button>
+                  <input type="file" id="font-input" accept=".ttf,.otf,.woff,.woff2" hidden>
+                  <span class="web-muted" id="font-name">.ttf / .otf · stays in your browser</span>
+                </div>
+                <div class="web-convert-row web-convert-row-2">
+                  <div class="form-group">
+                    <label class="form-label" for="hw-paper"><span>Paper</span></label>
+                    <select id="hw-paper" class="select-clean">${OPTS([['ruled-margin', 'Ruled with margin'], ['ruled', 'Ruled'], ['grid', 'Grid'], ['blank', 'Blank']], 'ruled-margin')}</select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="hw-paper-color"><span>Paper colour</span></label>
+                    <select id="hw-paper-color" class="select-clean">${OPTS([['#ffffff', 'White'], ['#fbf7ec', 'Cream'], ['#fff8c4', 'Yellow pad'], ['#f3f4f6', 'Light grey']], '#ffffff')}</select>
+                  </div>
+                </div>${RANGE('hw-size', 'Font size', 16, 48, 24, 'px')}${RANGE('hw-jitter', 'Pen pressure & jitter', 0, 100, 40, '%')}`,
+    outputHtml: `
+                  <div class="hw-pager" id="hw-pager"></div>
+                  <div class="hw-stage" id="hw-stage"><canvas id="hw-canvas" aria-label="Handwritten page preview"></canvas></div>`,
+    settingsSummary: 'A4 · line height 1.7 · scanner off',
+    settings: `
+              <div class="control-item">
+                <label for="opt-page">Page size</label>
+                <select id="opt-page" class="select-clean">${OPTS([['a4', 'A4'], ['letter', 'US Letter'], ['a5', 'A5']], 'a4')}</select>
+              </div>
+              <div class="control-item">
+                <label for="opt-lh">Line height</label>
+                <select id="opt-lh" class="select-clean">${OPTS([['1.5', 'Tight (1.5)'], ['1.7', 'Normal (1.7)'], ['2', 'Loose (2.0)']], '1.7')}</select>
+              </div>
+              <div class="control-item">
+                <label for="opt-margin">Margins</label>
+                <select id="opt-margin" class="select-clean">${OPTS([['narrow', 'Narrow'], ['normal', 'Normal'], ['wide', 'Wide']], 'normal')}</select>
+              </div>${RANGE('opt-lspace', 'Letter spacing', -2, 6, 0, 'px')}${RANGE('opt-wspace', 'Word spacing', -4, 16, 2, 'px')}${CHECK('opt-scan', 'Scanner effect (paper grain, soft shadow, slight skew)', false)}`,
+    guide: [['Write or paste', 'Type your text, or drop a .txt / .md file. Blank lines make paragraphs; a line containing only <code>---</code> forces a page break. Add an optional header line (name, roll number, date) for page 1.'], ['Pick the hand, paper and ink', 'Choose one of 12 handwriting styles — or upload your own .ttf/.otf — set the ink colour, paper type and size. Raise <strong>Pen pressure &amp; jitter</strong> for natural variation: every letter gets a tiny rotation, baseline wobble and ink-density change, so no two lines look identical. Settings hold line height, spacing, margins and the scanner effect.'], ['Download', 'Pages paginate automatically; flick through them above the preview. Download the current page as PNG, every page as a ZIP of PNGs, or everything as one PDF sized exactly A4 / Letter / A5 — ready to print or submit.']],
+    faq: [['How do I make it look less like a font?', 'Three things matter: jitter (40–70 % is the sweet spot), a hand that is a little irregular (Homemade Apple, Nothing You Could Do, Zeyada), and the scanner effect, which adds paper grain, a soft page shadow and a slight skew like a phone photo of a notebook. Blue ink on ruled paper with the text sitting on the lines completes it.'], ['Can I use my own handwriting?', 'Yes — upload a .ttf or .otf font of your handwriting (free services like Calligraphr turn a scanned sample into a font). The file is loaded with the browser’s FontFace API and never leaves your device. It is not saved between visits.'], ['Why are some characters boxes or in a different style?', 'Decorative handwriting fonts often cover only Latin letters. Characters outside the font (Devanagari, CJK, some symbols) fall back to a system font. Use the upload option with a font that covers your script.'], ['What resolution are the downloads?', 'Pages render at 200 dpi (A4 = 1654 × 2339 px), which prints crisply. The PDF embeds those images at true A4 / Letter / A5 size using <a href="https://github.com/parallax/jsPDF" target="_blank" rel="noopener">jsPDF</a>, loaded only when you download a PDF.'], ['Is there a length limit?', 'No fixed limit — a 50-page essay works, but each page is rendered as an image, so very long documents take a few seconds to export and the ZIP/PDF grows by roughly 300–500 KB per page.'], PRIVACY_FAQ]
+  },
+  {
+    slug: 'countdown-page-maker', name: 'Countdown Page Maker', icon: 'lucide:timer', section: 'Generators & Links', split: '40/60', css: true, libs: ['qr'],
+    desc: 'Free online countdown page maker: create a full-screen countdown to any event — launch, exam, wedding, sale — with your title, colours and time zone, and share it as a link or QR code. No account, nothing stored; the page lives in the link. Add the event to your calendar in one click.',
+    lead: 'Name the event, set the date and colours — get a full-screen countdown page you can share as a link or QR, plus a calendar file.',
+    cardDesc: 'Full-screen shareable countdown — link, QR code and .ics in one click.',
+    tags: ['countdown page', 'countdown timer link', 'event countdown', 'shareable countdown', 'launch countdown', 'exam countdown', 'wedding countdown', 'countdown qr code', 'countdown maker', 'days until'],
+    idle: 'Name the event and pick a date', sourceLabel: 'Event', outputLabel: 'Your page', outputIcon: 'lucide:timer', outputEmpty: 'The live countdown page will appear here',
+    downloads: [['qr', 'QR code (PNG)', 'lucide:qr-code'], ['ics', 'Calendar event (.ics)', 'lucide:calendar-plus'], ['txt', 'Link (.txt)', 'lucide:link']],
+    sourceHtml: `${FIELD('cd-title', 'Event title', 'type="text" placeholder="Product launch" maxlength="80" autocomplete="off"')}
+                <div class="web-convert-row web-convert-row-2">${FIELD('cd-to', 'Date & time', 'type="datetime-local"')}
+                  <div class="form-group">
+                    <label class="form-label" for="cd-tz"><span>Time zone</span></label>
+                    <select id="cd-tz" class="select-clean"><option value="local" selected>Viewer’s local time</option></select>
+                  </div>
+                </div>${FIELD('cd-done', 'Message when it ends', 'type="text" placeholder="We’re live!" maxlength="80" autocomplete="off"')}
+                <div class="form-group">
+                  <span class="form-label"><span>Style</span></span>
+                  <div class="segmented-group segmented-group-pill" id="seg-variant" role="group" aria-label="Style">
+                    <button type="button" class="seg-pill active" data-value="flip">Flip clock</button>
+                    <button type="button" class="seg-pill" data-value="minimal">Minimal</button>
+                    <button type="button" class="seg-pill" data-value="compact">Compact</button>
+                  </div>
+                </div>
+                <div class="web-convert-row web-convert-row-2">
+                  <div class="form-group">
+                    <label class="form-label" for="cd-theme"><span>Theme</span></label>
+                    <select id="cd-theme" class="select-clean">${OPTS([['dark', 'Dark'], ['light', 'Light'], ['auto', 'Match viewer']], 'dark')}</select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="cd-font"><span>Font</span></label>
+                    <select id="cd-font" class="select-clean">${OPTS([['inter', 'Inter'], ['space-grotesk', 'Space Grotesk'], ['dm-sans', 'DM Sans'], ['playfair', 'Playfair Display'], ['jetbrains-mono', 'JetBrains Mono'], ['serif', 'System serif'], ['mono', 'System mono']], 'inter')}</select>
+                  </div>
+                </div>
+                <div class="web-convert-row web-convert-row-2">${COLOR_INPUT('cd-accent', 'Accent colour', '#F4511E')}${COLOR_INPUT('cd-bg', 'Background (optional)', 'theme default')}
+                </div>`,
+    outputHtml: `
+                  <div class="cd-frame-wrap"><iframe id="cd-frame" class="cd-frame" title="Countdown page preview" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe></div>
+                  <div class="form-group">
+                    <label class="form-label" for="cd-link"><span>Shareable link</span><span class="form-label-desc">everything lives in the URL</span></label>
+                    <div class="web-inline"><input type="text" id="cd-link" class="input-clean" readonly><a id="cd-open" class="web-row-btn" href="#" target="_blank" rel="noopener" title="Open full screen" aria-label="Open full screen"><iconify-icon icon="lucide:maximize-2" width="16" height="16"></iconify-icon></a></div>
+                  </div>
+                  <div class="cd-share">
+                    <canvas id="cd-qr" class="cd-qr" width="160" height="160" aria-label="QR code for the countdown link"></canvas>
+                    <div class="web-tags" id="cd-share-links"></div>
+                  </div>`,
+    settingsSummary: 'days · hours · minutes · seconds · Toolity badge',
+    settings: `${CHECK('opt-days', 'Show days', true)}${CHECK('opt-hours', 'Show hours', true)}${CHECK('opt-minutes', 'Show minutes', true)}${CHECK('opt-seconds', 'Show seconds', true)}${CHECK('opt-badge', 'Show the small “Toolity” badge on the page', true)}`,
+    guide: [['Describe the event', 'Give it a title, a date and time, and — if the audience is spread out — a time zone so everyone counts down to the same instant. Add the message that replaces the clock when it hits zero.'], ['Style the page', 'Pick flip-clock, minimal or compact, dark or light, a font and an accent colour. The preview on the right is the real page, so what you see is what people get.'], ['Share it', 'Copy the link, open it full screen for a projector or lobby display, download the QR code for posters, or send it with the share chips. The .ics file adds the event to Google / Apple / Outlook calendars. Nothing is stored anywhere — the link <em>is</em> the page.']],
+    faq: [['Where is the countdown stored?', 'Nowhere. Every setting is encoded in the link itself, so it works forever, needs no account and cannot expire. The page is served by Toolity’s static site, which has no database — if you lose the link, make a new one in seconds.'], ['How do time zones work?', '“Viewer’s local time” means the date you entered is interpreted in each viewer’s own zone (good for “midnight on New Year’s Eve wherever you are”). Pick a specific zone for a single global moment such as a product launch at 9:00 IST — every visitor then sees the same remaining time.'], ['Can I embed it in my website or Notion?', 'Yes — the same page is the Countdown widget. Paste the link into an iframe, or open the <a href="/widgets/countdown/">Countdown Widget</a> builder for ready-made embed code with the same settings.'], ['What happens when it reaches zero?', 'The clock is replaced by your end message (or “Time’s up” if you left it blank). The page keeps working after the date, so a “days since” style page is just a countdown to a past date.'], ['Does the QR code expire?', 'No — it encodes the link, nothing else. Print it on a poster or invite; it keeps working as long as toolity.in does.'], PRIVACY_FAQ]
+  },
+  {
+    slug: 'schema-markup-generator', name: 'Schema Markup Generator', icon: 'lucide:braces', section: 'SEO & Site Helpers', split: '50/50', css: true,
+    desc: 'Free online schema markup generator: build valid JSON-LD structured data for Organization, Local Business, Article, Product, FAQ, How-to, Event, Breadcrumbs, Recipe, Video, Job posting, Person and Website — with required-field checks — and copy the script tag. Runs in your browser.',
+    lead: 'Pick a type, fill in the fields, copy the JSON-LD — with required fields and formats checked before you paste it into your page.',
+    cardDesc: 'JSON-LD for 13 schema.org types with required-field checks.',
+    tags: ['schema markup generator', 'json-ld generator', 'structured data generator', 'faq schema', 'article schema', 'product schema', 'local business schema', 'breadcrumb schema', 'rich results', 'schema.org'],
+    idle: 'Pick a type and fill the required fields', sourceLabel: 'Fields', outputLabel: 'JSON-LD', outputIcon: 'lucide:braces', outputEmpty: 'Your structured data will appear here',
+    downloads: [['html', 'Script tag (.html)', 'lucide:code-xml'], ['json', 'JSON only (.json)', 'lucide:braces']],
+    sourceHtml: `
+                <div class="form-group">
+                  <label class="form-label" for="sc-type"><span>Schema type</span></label>
+                  <select id="sc-type" class="select-clean">${OPTS(SCHEMA_TYPES, 'Article')}</select>
+                </div>
+                <div class="web-group" id="sc-fields"></div>`,
+    outputHtml: `
+                  <div class="web-tags" id="output-issues"></div>
+                  <pre class="web-code" id="output-text"></pre>
+                  <p class="web-muted">Validate it with <a href="https://search.google.com/test/rich-results" target="_blank" rel="noopener">Google’s Rich Results Test</a> or the <a href="https://validator.schema.org/" target="_blank" rel="noopener">Schema.org validator</a> — paste the code there; nothing is sent from here.</p>`,
+    settingsSummary: '2-space indent · with @context',
+    settings: `
+              <div class="control-item">
+                <label for="opt-indent">Indent</label>
+                <select id="opt-indent" class="select-clean">${OPTS([['2', '2 spaces'], ['4', '4 spaces'], ['0', 'Minified']], '2')}</select>
+              </div>${CHECK('opt-context', 'Include "@context": "https://schema.org"', true)}${CHECK('opt-id', 'Add an @id based on the URL field', false)}`,
+    guide: [['Choose the type', 'Article for posts, Product for shop pages, FAQ and How-to for help content, Event, Local Business, Recipe, Video, Job posting, Breadcrumbs, Website (adds the sitelinks search box), Organization or Person. The form changes to the fields that type needs; required ones are marked.'], ['Fill it in', 'Repeatable sections (FAQ questions, How-to steps, breadcrumb items) have Add / remove buttons. Dates use the picker (ISO 8601 comes out), prices and ratings are checked for range, URLs must be absolute. Warnings appear above the code as you type.'], ['Paste and test', 'Copy the <code>&lt;script type="application/ld+json"&gt;</code> block into your page’s <code>&lt;head&gt;</code> (or before <code>&lt;/body&gt;</code>), publish, then test the live URL in Google’s Rich Results Test. One block per entity — repeat for other types on the same page.']],
+    faq: [['Which types can show rich results in Google?', 'Article, Product, FAQ, How-to, Event, Local Business, Recipe, Video, Job posting and Breadcrumbs are all documented Google rich-result types (eligibility rules change — FAQ rich results, for example, are now limited to authoritative government and health sites). Organization, Person and Website feed the Knowledge Panel and sitelinks search box rather than a visible snippet.'], ['Do I need every field?', 'Only the ones marked required — those are what Google lists as required for the rich result. Recommended fields raise the chance of a richer display; leave the rest blank and they are simply omitted from the output.'], ['Where exactly does the code go?', 'Anywhere in the HTML, but <code>&lt;head&gt;</code> is conventional. JSON-LD does not need to wrap visible content, unlike Microdata, which is why Google recommends it. If your CMS has a “custom head code” field, paste it there.'], ['Can I combine several types in one script?', 'Yes — put them in a JSON array or an <code>@graph</code>. This tool outputs one entity at a time to keep the form manageable; generate each, then combine. Reference one from another with the <code>@id</code> option (e.g. an Article’s publisher pointing at your Organization).'], ['Why does my FAQ schema not show up?', 'Since 2023 Google shows FAQ rich results only for well-known authoritative sites, and How-to results only on desktop. Valid markup is still useful for other search engines and AI assistants, but do not expect the dropdown in Google for a typical site.'], PRIVACY_FAQ]
+  }
+];
+
 const GEN_TOOLS = [
   {
     slug: 'share-link-generator', name: 'Share & Message Link Generator', icon: 'lucide:share-2', section: 'Generators & Links',
@@ -839,5 +984,6 @@ module.exports = [
     faq: [['Which export should I use?', '<strong>SVG</strong> for websites and design tools (Figma, Illustrator) — tiny and sharp at any size. <strong>Animated SVG</strong> plays by itself in any browser via an &lt;img&gt; tag. <strong>CSS</strong> gives a clip-path you can put on any element. <strong>PNG/WebP</strong> for slides and social posts, <strong>GIF</strong> for chats and email, <strong>WebM/MP4</strong> for video editors and reels.'], ['Do the animations loop seamlessly?', 'Yes. Every movement is built on one loop of the length you set, so the last frame flows straight back into the first — in the animated SVG, the GIF and the video alike.'], ['Why does the video take as long as the loop?', 'Browsers record video in real time, so a 6-second loop takes about 6 seconds to export. Keep the tab visible while it records. GIFs are rendered frame by frame instead and are usually quicker.'], ['Will blur and grain look the same everywhere?', 'In browsers, yes. Design tools sometimes render SVG filters (blur, grain, shadow) differently or ignore them; export a PNG if you need an exact match there. Safari before version 18 shows the live preview without blur, but the SVG export keeps it.'], ['Can I come back to a design later?', 'Yes — every setting is saved in the page link. Use <strong>Copy share link</strong> and open it any time; nothing is stored on a server.'], PRIVACY_FAQ]
   },
   ...GEN_TOOLS,
-  ...SEO_TOOLS
+  ...SEO_TOOLS,
+  ...HANDY_TOOLS
 ];

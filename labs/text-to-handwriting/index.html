@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Text to Handwriting | Toolity Labs</title>
+  <link rel="canonical" href="https://toolity.in/labs/text-to-handwriting/">
+  <meta name="description" content="Free online text to handwriting converter: turn typed text into realistic handwritten pages — 12 handwriting fonts or your own, ruled / grid / blank paper, ink colours, pen-pressure jitter and a scanner effect. Download as PNG or multi-page PDF. Runs in your browser.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Text to Handwriting | Toolity Labs">
+  <meta property="og:description" content="Free online text to handwriting converter: turn typed text into realistic handwritten pages — 12 handwriting fonts or your own, ruled / grid / blank paper, ink colours, pen-pressure jitter and a scanner effect. Download as PNG or multi-page PDF. Runs in your browser.">
+  <meta property="og:url" content="https://toolity.in/labs/text-to-handwriting/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=6.1" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=6.1">
+  <link rel="stylesheet" href="/styles/tools/text-to-handwriting.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Text to Handwriting",
+        "url": "https://toolity.in/labs/text-to-handwriting/",
+        "description": "Free online text to handwriting converter: turn typed text into realistic handwritten pages — 12 handwriting fonts or your own, ruled / grid / blank paper, ink colours, pen-pressure jitter and a scanner effect. Download as PNG or multi-page PDF. Runs in your browser.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Labs", "item": "https://toolity.in/labs/" },
+          { "@type": "ListItem", "position": 3, "name": "Text to Handwriting", "item": "https://toolity.in/labs/text-to-handwriting/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "How do I make it look less like a font?", "acceptedAnswer": { "@type": "Answer", "text": "Three things matter: jitter (40–70 % is the sweet spot), a hand that is a little irregular (Homemade Apple, Nothing You Could Do, Zeyada), and the scanner effect, which adds paper grain, a soft page shadow and a slight skew like a phone photo of a notebook. Blue ink on ruled paper with the text sitting on the lines completes it." } },
+          { "@type": "Question", "name": "Can I use my own handwriting?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — upload a .ttf or .otf font of your handwriting (free services like Calligraphr turn a scanned sample into a font). The file is loaded with the browser’s FontFace API and never leaves your device. It is not saved between visits." } },
+          { "@type": "Question", "name": "Why are some characters boxes or in a different style?", "acceptedAnswer": { "@type": "Answer", "text": "Decorative handwriting fonts often cover only Latin letters. Characters outside the font (Devanagari, CJK, some symbols) fall back to a system font. Use the upload option with a font that covers your script." } },
+          { "@type": "Question", "name": "What resolution are the downloads?", "acceptedAnswer": { "@type": "Answer", "text": "Pages render at 200 dpi (A4 = 1654 × 2339 px), which prints crisply. The PDF embeds those images at true A4 / Letter / A5 size using jsPDF, loaded only when you download a PDF." } },
+          { "@type": "Question", "name": "Is there a length limit?", "acceptedAnswer": { "@type": "Answer", "text": "No fixed limit — a 50-page essay works, but each page is rendered as an image, so very long documents take a few seconds to export and the ZIP/PDF grows by roughly 300–500 KB per page." } },
+          { "@type": "Question", "name": "Is my input sent anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. Everything is computed by JavaScript in your browser tab. Nothing is uploaded, logged or stored by Toolity." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/labs/" class="breadcrumb-link">Labs</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Text to Handwriting</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Labs</span>
+            <h1 class="page-title">Text to Handwriting</h1>
+            <p class="page-desc">Type or paste text and get realistic handwritten pages — pick a hand, paper and ink, add natural jitter, then download PNG or a multi-page PDF.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" data-split="40/60" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge web-status-badge" id="status-badge">Type something to write it by hand</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result" aria-label="Copy result" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <div class="dropdown-menu-wrapper" id="download-dropdown-wrap">
+                <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download result" aria-label="Download result" aria-haspopup="true" disabled>
+                  <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                  <span>Download</span>
+                  <iconify-icon icon="lucide:chevron-down" class="dropdown-arrow" width="13" height="13"></iconify-icon>
+                </button>
+                <div class="dropdown-popup" role="menu">
+                  <button type="button" class="dropdown-item" data-format="png" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:image" width="14" height="14"></iconify-icon>
+                      <span>This page (PNG)</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="zip" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:file-archive" width="14" height="14"></iconify-icon>
+                      <span>All pages (PNG, .zip)</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="pdf" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:file-text" width="14" height="14"></iconify-icon>
+                      <span>All pages (PDF)</span>
+                    </div>
+                  </button>
+                </div>
+              </div>
+              <button type="button" class="btn-toolbar-sm" id="btn-open" title="Open result in a new tab" aria-label="Open result in a new tab" disabled>
+                <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
+                <span>Open</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Text & style</span>
+                <span class="pane-badge" id="input-badge">—</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content web-form">
+                <div class="web-file-row">
+                  <button type="button" class="btn-toolbar-sm" id="btn-file" title="Open a file from your device" aria-label="Open a file from your device">
+                    <iconify-icon icon="lucide:folder-open" width="14" height="14"></iconify-icon>
+                    <span>Open file</span>
+                  </button>
+                  <input type="file" id="file-input" accept=".txt,.md" hidden>
+                  <span class="web-muted" id="file-name">or drop a file here</span>
+                </div>
+                <div class="form-group form-group-grow">
+                  <label class="form-label" for="text-input"><span>Text</span><span class="form-label-desc" id="input-count"></span></label>
+                  <textarea id="text-input" class="textarea-clean" rows="9" placeholder="Paste your notes, essay or assignment. Blank lines start a new paragraph; a line of --- starts a new page." spellcheck="true" data-file-target></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="hw-header"><span>Header line (optional)</span><span class="form-label-desc">top-right of page 1</span></label>
+                  <input id="hw-header" class="input-clean" autocomplete="off" type="text" placeholder="Name · Roll no · Date" autocomplete="off">
+                </div>
+                <div class="web-convert-row web-convert-row-2">
+                  <div class="form-group">
+                    <label class="form-label" for="hw-font"><span>Handwriting</span></label>
+                    <select id="hw-font" class="select-clean"><option value="caveat">Caveat</option><option value="homemade-apple" selected>Homemade Apple</option><option value="indie-flower">Indie Flower</option><option value="shadows-into-light">Shadows Into Light</option><option value="reenie-beanie">Reenie Beanie</option><option value="kalam">Kalam</option><option value="patrick-hand">Patrick Hand</option><option value="dancing-script">Dancing Script</option><option value="gloria-hallelujah">Gloria Hallelujah</option><option value="nothing-you-could-do">Nothing You Could Do</option><option value="zeyada">Zeyada</option><option value="liu-jian-mao-cao">Liu Jian Mao Cao</option><option value="custom">Your font (upload below)</option></select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="hw-ink"><span>Ink</span></label>
+                    <div class="web-inline">
+                      <select id="hw-ink" class="select-clean"><option value="#1f3a93" selected>Blue</option><option value="#1a1a1a">Black</option><option value="#b3261e">Red</option><option value="#1b5e20">Green</option><option value="#4a2c2a">Brown</option><option value="custom">Custom</option></select>
+                      <input type="color" id="hw-ink-pick" class="web-color-input" aria-label="Custom ink colour" value="#1f3a93">
+                    </div>
+                  </div>
+                </div>
+                <div class="web-file-row">
+                  <button type="button" class="btn-toolbar-sm" id="btn-font-file"><iconify-icon icon="lucide:type" width="14" height="14"></iconify-icon><span>Upload your handwriting font</span></button>
+                  <input type="file" id="font-input" accept=".ttf,.otf,.woff,.woff2" hidden>
+                  <span class="web-muted" id="font-name">.ttf / .otf · stays in your browser</span>
+                </div>
+                <div class="web-convert-row web-convert-row-2">
+                  <div class="form-group">
+                    <label class="form-label" for="hw-paper"><span>Paper</span></label>
+                    <select id="hw-paper" class="select-clean"><option value="ruled-margin" selected>Ruled with margin</option><option value="ruled">Ruled</option><option value="grid">Grid</option><option value="blank">Blank</option></select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="hw-paper-color"><span>Paper colour</span></label>
+                    <select id="hw-paper-color" class="select-clean"><option value="#ffffff" selected>White</option><option value="#fbf7ec">Cream</option><option value="#fff8c4">Yellow pad</option><option value="#f3f4f6">Light grey</option></select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="hw-size"><span>Font size</span><span class="form-label-desc"><span id="hw-size-val">24px</span></span></label>
+                  <input type="range" id="hw-size" min="16" max="48" step="1" value="24" data-unit="px">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="hw-jitter"><span>Pen pressure & jitter</span><span class="form-label-desc"><span id="hw-jitter-val">40%</span></span></label>
+                  <input type="range" id="hw-jitter" min="0" max="100" step="1" value="40" data-unit="%">
+                </div>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Pages</span>
+                <span class="pane-badge" id="output-badge">—</span>
+              </div>
+              <div class="pane-content web-output-pane">
+                <div class="pane-empty" id="output-empty">
+                  <iconify-icon icon="lucide:pen-line"></iconify-icon>
+                  <span>Your handwritten page will appear here</span>
+                </div>
+                <div class="web-output" id="output-content" hidden>
+                  <div class="hw-pager" id="hw-pager"></div>
+                  <div class="hw-stage" id="hw-stage"><canvas id="hw-canvas" aria-label="Handwritten page preview"></canvas></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">A4 · line height 1.7 · scanner off</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item">
+                <label for="opt-page">Page size</label>
+                <select id="opt-page" class="select-clean"><option value="a4" selected>A4</option><option value="letter">US Letter</option><option value="a5">A5</option></select>
+              </div>
+              <div class="control-item">
+                <label for="opt-lh">Line height</label>
+                <select id="opt-lh" class="select-clean"><option value="1.5">Tight (1.5)</option><option value="1.7" selected>Normal (1.7)</option><option value="2">Loose (2.0)</option></select>
+              </div>
+              <div class="control-item">
+                <label for="opt-margin">Margins</label>
+                <select id="opt-margin" class="select-clean"><option value="narrow">Narrow</option><option value="normal" selected>Normal</option><option value="wide">Wide</option></select>
+              </div>
+                <div class="form-group">
+                  <label class="form-label" for="opt-lspace"><span>Letter spacing</span><span class="form-label-desc"><span id="opt-lspace-val">0px</span></span></label>
+                  <input type="range" id="opt-lspace" min="-2" max="6" step="1" value="0" data-unit="px">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="opt-wspace"><span>Word spacing</span><span class="form-label-desc"><span id="opt-wspace-val">2px</span></span></label>
+                  <input type="range" id="opt-wspace" min="-4" max="16" step="1" value="2" data-unit="px">
+                </div>
+              <div class="control-item"><input type="checkbox" id="opt-scan"><label for="opt-scan">Scanner effect (paper grain, soft shadow, slight skew)</label></div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Use Text to Handwriting in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Write or paste</h3>
+              <p class="step-desc">Type your text, or drop a .txt / .md file. Blank lines make paragraphs; a line containing only <code>---</code> forces a page break. Add an optional header line (name, roll number, date) for page 1.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Pick the hand, paper and ink</h3>
+              <p class="step-desc">Choose one of 12 handwriting styles — or upload your own .ttf/.otf — set the ink colour, paper type and size. Raise <strong>Pen pressure &amp; jitter</strong> for natural variation: every letter gets a tiny rotation, baseline wobble and ink-density change, so no two lines look identical. Settings hold line height, spacing, margins and the scanner effect.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Download</h3>
+              <p class="step-desc">Pages paginate automatically; flick through them above the preview. Download the current page as PNG, every page as a ZIP of PNGs, or everything as one PDF sized exactly A4 / Letter / A5 — ready to print or submit.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Text to Handwriting — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>How do I make it look less like a font?</summary>
+              <p>Three things matter: jitter (40–70 % is the sweet spot), a hand that is a little irregular (Homemade Apple, Nothing You Could Do, Zeyada), and the scanner effect, which adds paper grain, a soft page shadow and a slight skew like a phone photo of a notebook. Blue ink on ruled paper with the text sitting on the lines completes it.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can I use my own handwriting?</summary>
+              <p>Yes — upload a .ttf or .otf font of your handwriting (free services like Calligraphr turn a scanned sample into a font). The file is loaded with the browser’s FontFace API and never leaves your device. It is not saved between visits.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why are some characters boxes or in a different style?</summary>
+              <p>Decorative handwriting fonts often cover only Latin letters. Characters outside the font (Devanagari, CJK, some symbols) fall back to a system font. Use the upload option with a font that covers your script.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What resolution are the downloads?</summary>
+              <p>Pages render at 200 dpi (A4 = 1654 × 2339 px), which prints crisply. The PDF embeds those images at true A4 / Letter / A5 size using <a href="https://github.com/parallax/jsPDF" target="_blank" rel="noopener">jsPDF</a>, loaded only when you download a PDF.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is there a length limit?</summary>
+              <p>No fixed limit — a 50-page essay works, but each page is rendered as an image, so very long documents take a few seconds to export and the ZIP/PDF grows by roughly 300–500 KB per page.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is my input sent anywhere?</summary>
+              <p>No. Everything is computed by JavaScript in your browser tab. Nothing is uploaded, logged or stored by Toolity.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="labs"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=4.5"></script>
+  <script src="/scripts/tool-common.js?v=1.1"></script>
+  <script src="/scripts/web-common.js?v=1.2"></script>
+  <script src="/labs/text-to-handwriting/text-to-handwriting.js?v=1.0"></script>
+</body>
+</html>
