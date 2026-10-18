@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Markdown Studio | Toolity Dev</title>
+  <link rel="canonical" href="https://toolity.in/dev/markdown-studio/">
+  <meta name="description" content="Free online Markdown editor with live preview: convert Markdown to HTML or HTML to Markdown, GitHub-flavoured tables and task lists, then export as HTML, Markdown or PDF. Runs in your browser — nothing uploaded.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Markdown Studio | Toolity Dev">
+  <meta property="og:description" content="Free online Markdown editor with live preview: convert Markdown to HTML or HTML to Markdown, GitHub-flavoured tables and task lists, then export as HTML, Markdown or PDF. Runs in your browser — nothing uploaded.">
+  <meta property="og:url" content="https://toolity.in/dev/markdown-studio/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=5.6" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=5.6">
+  <link rel="stylesheet" href="/styles/tools/markdown-studio.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Markdown Studio",
+        "url": "https://toolity.in/dev/markdown-studio/",
+        "description": "Free online Markdown editor with live preview: convert Markdown to HTML or HTML to Markdown, GitHub-flavoured tables and task lists, then export as HTML, Markdown or PDF. Runs in your browser — nothing uploaded.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Dev", "item": "https://toolity.in/dev/" },
+          { "@type": "ListItem", "position": 3, "name": "Markdown Studio", "item": "https://toolity.in/dev/markdown-studio/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Which Markdown features are supported?", "acceptedAnswer": { "@type": "Answer", "text": "Everything in CommonMark plus GitHub extensions: tables, task lists, strikethrough, fenced code blocks and automatic links. Rendering uses marked; HTML → Markdown uses Turndown. Both download once, on first use." } },
+          { "@type": "Question", "name": "Why did my &lt;script&gt; or &lt;iframe&gt; disappear from the preview?", "acceptedAnswer": { "@type": "Answer", "text": "The preview is sanitised with DOMPurify so pasted content can never run code in your tab. Scripts, iframes, inline event handlers and javascript: links are removed from the rendered output and from the downloaded HTML." } },
+          { "@type": "Question", "name": "How does the PDF export work?", "acceptedAnswer": { "@type": "Answer", "text": "It renders the document into a hidden page and opens your browser’s print dialog. Choose “Save as PDF” (built into Chrome, Edge, Safari and Firefox). Page size and margins come from the print dialog; the document uses clean, print-friendly typography." } },
+          { "@type": "Question", "name": "Can I convert a whole web page to Markdown?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — view the page source (Ctrl/⌘+U), copy the part you want (usually the &lt;article&gt; or &lt;main&gt;), paste it in HTML → Markdown mode. Navigation, scripts and styles are dropped; headings, lists, links, images, tables and code are kept." } },
+          { "@type": "Question", "name": "Does it save my document?", "acceptedAnswer": { "@type": "Answer", "text": "No. Nothing is stored — the text lives only in the box until you reload. Download the Markdown or HTML if you want to keep it." } },
+          { "@type": "Question", "name": "Is my code uploaded anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. Formatting and minifying run in JavaScript inside your browser tab. The formatter libraries are downloaded once from a CDN; your code never leaves the page." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/dev/" class="breadcrumb-link">Dev</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Markdown Studio</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Dev</span>
+            <h1 class="page-title">Markdown Studio</h1>
+            <p class="page-desc">Write or paste Markdown and watch it render live — or paste HTML and get clean Markdown back. Export HTML, Markdown or PDF.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" data-split="50/50" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge web-status-badge" id="status-badge">Paste Markdown to begin</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result" aria-label="Copy result" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <div class="dropdown-menu-wrapper" id="download-dropdown-wrap">
+                <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download result" aria-label="Download result" aria-haspopup="true" disabled>
+                  <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                  <span>Download</span>
+                  <iconify-icon icon="lucide:chevron-down" class="dropdown-arrow" width="13" height="13"></iconify-icon>
+                </button>
+                <div class="dropdown-popup" role="menu">
+                  <button type="button" class="dropdown-item" data-format="html" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:code" width="14" height="14"></iconify-icon>
+                      <span>HTML</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="md" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:file-text" width="14" height="14"></iconify-icon>
+                      <span>Markdown</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="pdf" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:printer" width="14" height="14"></iconify-icon>
+                      <span>PDF (print)</span>
+                    </div>
+                  </button>
+                </div>
+              </div>
+              <button type="button" class="btn-toolbar-sm" id="btn-open" title="Open result in a new tab" aria-label="Open result in a new tab" disabled>
+                <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
+                <span>Open</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Input</span>
+                <span class="pane-badge" id="input-badge">—</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content web-form">
+                <div class="web-file-row">
+                  <button type="button" class="btn-toolbar-sm" id="btn-file" title="Open a file from your device" aria-label="Open a file from your device">
+                    <iconify-icon icon="lucide:folder-open" width="14" height="14"></iconify-icon>
+                    <span>Open file</span>
+                  </button>
+                  <input type="file" id="file-input" accept=".md,.markdown,.mdown,.html,.htm,.txt" hidden>
+                  <span class="web-muted" id="file-name">or drop a file here</span>
+                </div>
+                <div class="form-group">
+                  <span class="form-label"><span>Direction</span></span>
+                  <div class="segmented-group segmented-group-pill" id="seg-mode" role="group" aria-label="Direction">
+                    <button type="button" class="seg-pill active" data-value="md2html">Markdown → HTML</button>
+                    <button type="button" class="seg-pill" data-value="html2md">HTML → Markdown</button>
+                  </div>
+                </div>
+                <div class="form-group form-group-grow">
+                  <label class="form-label" for="text-input"><span id="input-label">Markdown</span><span class="form-label-desc" id="input-count"></span></label>
+                  <textarea id="text-input" class="textarea-clean" rows="16" placeholder="# Title&#10;&#10;Some **bold** text, a [link](https://example.com) and a list:&#10;&#10;- item one&#10;- item two" spellcheck="false" autocapitalize="off" data-file-target></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Output</span>
+                <span class="pane-badge" id="output-badge">—</span>
+              </div>
+              <div class="pane-content web-output-pane">
+                <div class="pane-empty" id="output-empty">
+                  <iconify-icon icon="lucide:notebook-text"></iconify-icon>
+                  <span>The rendered preview will appear here</span>
+                </div>
+                <div class="web-output" id="output-content" hidden>
+                  <div class="segmented-group segmented-group-pill" id="seg-view" role="group" aria-label="Output view">
+                    <button type="button" class="seg-pill active" data-value="preview">Preview</button>
+                    <button type="button" class="seg-pill" data-value="code">Code</button>
+                  </div>
+                  <div class="md-preview" id="output-preview" aria-live="polite"></div>
+                  <pre class="web-code" id="output-text" hidden></pre>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">GFM · heading ids · full HTML page</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item"><input type="checkbox" id="opt-gfm" checked><label for="opt-gfm">GitHub-flavoured Markdown (tables, task lists, strikethrough, autolinks)</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-breaks"><label for="opt-breaks">Single line breaks become &lt;br&gt;</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-ids" checked><label for="opt-ids">Add id attributes to headings (anchor links)</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-fulldoc" checked><label for="opt-fulldoc">Download HTML as a complete page (with &lt;head&gt; and print styles)</label></div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Use Markdown Studio in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Paste or write</h3>
+              <p class="step-desc">Type Markdown on the left or drop a .md file — the preview on the right updates as you type. Switch to <strong>HTML → Markdown</strong> to paste HTML (from a web page or a CMS) and get Markdown back.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Check Preview or Code</h3>
+              <p class="step-desc"><strong>Preview</strong> shows the rendered result; <strong>Code</strong> shows the generated HTML (or Markdown). Headings get anchor ids, tables and task lists render in GitHub style.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Export</h3>
+              <p class="step-desc"><strong>Copy</strong> grabs the code. <strong>Download</strong> gives HTML (optionally a complete, print-ready page), Markdown, or PDF — the PDF option opens your browser’s print dialog with the rendered document, where “Save as PDF” is one click.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Markdown Studio — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Which Markdown features are supported?</summary>
+              <p>Everything in CommonMark plus GitHub extensions: tables, task lists, strikethrough, fenced code blocks and automatic links. Rendering uses <a href="https://marked.js.org" target="_blank" rel="noopener">marked</a>; HTML → Markdown uses <a href="https://github.com/mixmark-io/turndown" target="_blank" rel="noopener">Turndown</a>. Both download once, on first use.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why did my &lt;script&gt; or &lt;iframe&gt; disappear from the preview?</summary>
+              <p>The preview is sanitised with DOMPurify so pasted content can never run code in your tab. Scripts, iframes, inline event handlers and javascript: links are removed from the rendered output and from the downloaded HTML.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How does the PDF export work?</summary>
+              <p>It renders the document into a hidden page and opens your browser’s print dialog. Choose “Save as PDF” (built into Chrome, Edge, Safari and Firefox). Page size and margins come from the print dialog; the document uses clean, print-friendly typography.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can I convert a whole web page to Markdown?</summary>
+              <p>Yes — view the page source (Ctrl/⌘+U), copy the part you want (usually the &lt;article&gt; or &lt;main&gt;), paste it in HTML → Markdown mode. Navigation, scripts and styles are dropped; headings, lists, links, images, tables and code are kept.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Does it save my document?</summary>
+              <p>No. Nothing is stored — the text lives only in the box until you reload. Download the Markdown or HTML if you want to keep it.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is my code uploaded anywhere?</summary>
+              <p>No. Formatting and minifying run in JavaScript inside your browser tab. The formatter libraries are downloaded once from a CDN; your code never leaves the page.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="dev"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=4.3"></script>
+  <script src="/scripts/tool-common.js?v=1.1"></script>
+  <script src="/scripts/web-common.js?v=1.2"></script>
+  <script src="/dev/markdown-studio/markdown-studio.js?v=1.0"></script>
+</body>
+</html>

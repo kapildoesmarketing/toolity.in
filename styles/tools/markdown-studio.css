@@ -1,0 +1,25 @@
+/* Markdown Studio — rendered preview typography + the off-screen print frame. */
+.md-preview { padding: 1rem 1.15rem; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); color: var(--text-primary); font-size: 0.92rem; line-height: 1.65; max-height: 520px; overflow: auto; overflow-wrap: anywhere; min-width: 0; }
+.md-preview[hidden] { display: none; }
+.md-preview > :first-child { margin-top: 0; }
+.md-preview > :last-child { margin-bottom: 0; }
+.md-preview h1, .md-preview h2, .md-preview h3, .md-preview h4, .md-preview h5, .md-preview h6 { margin: 1.4em 0 0.5em; line-height: 1.25; font-weight: 600; letter-spacing: -0.01em; }
+.md-preview h1 { font-size: 1.7rem; }
+.md-preview h2 { font-size: 1.35rem; padding-bottom: 0.25em; border-bottom: 1px solid var(--border); }
+.md-preview h3 { font-size: 1.12rem; }
+.md-preview h4 { font-size: 1rem; }
+.md-preview p, .md-preview ul, .md-preview ol, .md-preview blockquote, .md-preview pre, .md-preview table { margin: 0 0 0.9em; }
+.md-preview ul, .md-preview ol { padding-left: 1.5em; }
+.md-preview li + li { margin-top: 0.2em; }
+.md-preview li > input[type="checkbox"] { margin: 0 0.4em 0 -1.3em; vertical-align: middle; pointer-events: none; }
+.md-preview a { color: var(--brand); text-decoration: underline; text-underline-offset: 2px; }
+.md-preview code { font-family: var(--font-mono); font-size: 0.88em; padding: 0.1em 0.35em; border-radius: 4px; background: var(--surface-elevated); border: 1px solid var(--border-subtle); }
+.md-preview pre { padding: 0.8rem 0.95rem; border-radius: var(--radius-sm); background: var(--surface-elevated); border: 1px solid var(--border); overflow: auto; }
+.md-preview pre code { padding: 0; border: 0; background: none; font-size: 0.84rem; line-height: 1.55; }
+.md-preview blockquote { padding: 0.2rem 1rem; border-left: 3px solid var(--border); color: var(--text-secondary); }
+.md-preview table { border-collapse: collapse; width: 100%; font-size: 0.86rem; display: block; overflow-x: auto; }
+.md-preview th, .md-preview td { padding: 0.4rem 0.6rem; border: 1px solid var(--border); text-align: left; }
+.md-preview th { background: var(--surface-elevated); font-weight: 600; }
+.md-preview img { max-width: 100%; height: auto; border-radius: var(--radius-xs); }
+.md-preview hr { border: 0; border-top: 1px solid var(--border); margin: 1.5em 0; }
+.md-print-frame { position: fixed; right: 0; bottom: 0; width: 0; height: 0; border: 0; opacity: 0; pointer-events: none; }
