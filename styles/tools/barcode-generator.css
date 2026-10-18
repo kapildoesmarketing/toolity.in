@@ -1,0 +1,7 @@
+/* Barcode Generator — white tiles so barcodes scan in dark mode too (tokens from main.css) */
+.bc-list { display: grid; grid-template-columns: 1fr; gap: 0.75rem; min-width: 0; }
+.bc-list.is-batch { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+.bc-tile { display: flex; flex-direction: column; align-items: center; gap: 0.35rem; padding: 0.75rem; border: 1px solid var(--border); border-radius: var(--radius-sm); background: #fff; min-width: 0; overflow: hidden; }
+.bc-tile svg { max-width: 100%; height: auto; display: block; }
+.bc-cap { font-size: 0.72rem; color: #555; font-family: var(--font-mono); overflow-wrap: anywhere; text-align: center; }
+.bc-more { grid-column: 1 / -1; }
