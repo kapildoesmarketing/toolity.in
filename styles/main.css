@@ -936,16 +936,70 @@ body {
   margin-top: 1.5rem;
 }
 
-/* Hero CTAs: Explore Categories (orange, = tool Download button) + View All Tools (= tool Reset button) */
+/* Hero CTAs: Explore Categories (solid brand) + View All Tools (quiet ghost) */
 .hero-cta-row {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 0.75rem;
+  align-items: center;
+  gap: 0.85rem;
 }
-/* Designed by Kapil Pidhwani: same classes as the tool toolbar, scaled up for the hero; scoped so `a:visited` can't recolour them. */
-.hero-cta-row .btn-toolbar-sm { gap: 0.5rem; min-height: var(--touch); padding: 0.7rem 1.35rem; font-size: 0.95rem; font-weight: 600; color: var(--text-primary); }
-.hero-cta-row .btn-toolbar-sm.btn-brand-sm { color: #FFFFFF; }
+/* Designed by Kapil Pidhwani: hero-only buttons. 12px radius (not the nav's pill), one solid primary with a
+   soft brand glow, one ghost secondary with no fill/glass so it can't be mistaken for the header capsule. */
+.hero-btn,
+.hero-btn:visited {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: 48px;
+  padding: 0 1.5rem;
+  border-radius: var(--radius-md);
+  border: 1.5px solid transparent;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color .2s ease, border-color .2s ease, color .2s ease, box-shadow .25s ease, transform .2s cubic-bezier(.16, 1, .3, 1);
+}
+.hero-btn iconify-icon { transition: transform .2s cubic-bezier(.16, 1, .3, 1); }
+.hero-btn:active { transform: translateY(0) scale(.985); }
+.hero-btn:focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; }
+
+.hero-btn-primary,
+.hero-btn-primary:visited {
+  background: var(--brand);
+  color: #FFFFFF;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .12), 0 10px 28px -10px color-mix(in srgb, var(--brand) 70%, transparent);
+}
+.hero-btn-primary:hover {
+  background: var(--brand-hover);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 16px 36px -12px color-mix(in srgb, var(--brand) 85%, transparent);
+}
+.hero-btn-primary:hover iconify-icon { transform: translateY(3px); }
+
+.hero-btn-ghost,
+.hero-btn-ghost:visited {
+  background: transparent;
+  color: var(--text-primary);
+  border-color: color-mix(in srgb, var(--text-primary) 22%, transparent);
+}
+.hero-btn-ghost:hover {
+  color: var(--text-primary);
+  border-color: color-mix(in srgb, var(--text-primary) 55%, transparent);
+  background: color-mix(in srgb, var(--text-primary) 6%, transparent);
+  transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-btn, .hero-btn iconify-icon { transition: none; }
+  .hero-btn:hover, .hero-btn:hover iconify-icon { transform: none; }
+}
 
 /* Smooth-scroll target clears the fixed header */
 #categories { scroll-margin-top: var(--header-height); }
