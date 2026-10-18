@@ -1,0 +1,31 @@
+/* Readability Scorer — hero score, grade cards, highlighted text. */
+.rd-hero { display: flex; align-items: center; gap: 1.1rem; padding: 0.9rem 1.1rem; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--surface); min-width: 0; flex-wrap: wrap; }
+.rd-hero:empty { display: none; }
+.rd-fre-score { display: flex; flex-direction: column; align-items: center; min-width: 88px; }
+.rd-fre-score b { font-size: 2.6rem; font-weight: 700; line-height: 1; letter-spacing: -0.03em; font-family: var(--font-mono); color: var(--text-primary); }
+.rd-fre-score span { font-size: 0.68rem; color: var(--text-muted); text-align: center; margin-top: 0.25rem; }
+.rd-hero[data-band="good"] .rd-fre-score b { color: #15803d; }
+.rd-hero[data-band="mid"] .rd-fre-score b { color: #a16207; }
+.rd-hero[data-band="bad"] .rd-fre-score b { color: #b91c1c; }
+[data-theme="dark"] .rd-hero[data-band="good"] .rd-fre-score b { color: #4ade80; }
+[data-theme="dark"] .rd-hero[data-band="mid"] .rd-fre-score b { color: #facc15; }
+[data-theme="dark"] .rd-hero[data-band="bad"] .rd-fre-score b { color: #f87171; }
+.rd-fre-band { display: flex; flex-direction: column; gap: 0.15rem; font-size: 0.86rem; color: var(--text-secondary); min-width: 0; }
+.rd-fre-band strong { font-size: 1.1rem; color: var(--text-primary); }
+.rd-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
+.rd-grid:empty { display: none; }
+.rd-counts .web-stat strong { font-family: var(--font-mono); }
+.rd-legend { display: flex; flex-wrap: wrap; gap: 0.4rem 0.9rem; font-size: 0.76rem; color: var(--text-secondary); }
+.rd-legend:empty { display: none; }
+.rd-key { display: inline-flex; align-items: center; gap: 0.35rem; }
+.rd-key::before { content: ''; width: 12px; height: 12px; border-radius: 3px; }
+.rd-key-long::before { background: rgba(244, 81, 30, 0.22); box-shadow: inset 0 0 0 1px rgba(244, 81, 30, 0.5); }
+.rd-key-passive::before { background: rgba(37, 99, 235, 0.22); box-shadow: inset 0 0 0 1px rgba(37, 99, 235, 0.5); }
+.rd-key-adverb::before { background: rgba(202, 138, 4, 0.25); box-shadow: inset 0 0 0 1px rgba(202, 138, 4, 0.6); }
+.rd-text { padding: 0.9rem 1.05rem; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); font-size: 0.92rem; line-height: 1.75; color: var(--text-primary); max-height: 520px; overflow: auto; overflow-wrap: anywhere; white-space: pre-wrap; }
+.rd-text:empty { display: none; }
+.rd-s.rd-long { background: rgba(244, 81, 30, 0.12); box-shadow: 0 0 0 1px rgba(244, 81, 30, 0.25); border-radius: 3px; }
+.rd-s.rd-vlong { background: rgba(244, 81, 30, 0.22); box-shadow: 0 0 0 1px rgba(244, 81, 30, 0.45); border-radius: 3px; }
+.rd-text mark { color: inherit; border-radius: 3px; padding: 0 0.1em; }
+.rd-text .rd-passive { background: rgba(37, 99, 235, 0.2); box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.35); }
+.rd-text .rd-adverb { background: rgba(202, 138, 4, 0.25); box-shadow: 0 0 0 1px rgba(202, 138, 4, 0.45); }

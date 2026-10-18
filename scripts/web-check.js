@@ -442,7 +442,99 @@ const CASES = [
     const js = JSON.parse((await T.T.download('json', T)).text); A(js.length === 2 && js[0].city === 'London' && js[0].id === 1, 'json download: ' + JSON.stringify(js));
     const dbf = await T.T.download('db', T); A(dbf.blob && dbf.blob.size > 4096 && dbf.name === 'tables.db', 'db export');
     $('sql-tables').querySelector('.sql-col').click(); await tick(100); A(/"?id"?$/.test($('sql-input').value), 'column insert: ' + $('sql-input').value);
-    $('btn-reset').click(); await settle(); A(!out() && $('sql-tables').hidden && $('sql-input').value === '' && $('text-input').value === '', 'reset');`]
+    $('btn-reset').click(); await settle(); A(!out() && $('sql-tables').hidden && $('sql-input').value === '' && $('text-input').value === '', 'reset');`],
+  ['robots-sitemap-generator', `
+    await settle(); A(out() && /^User-agent: \\*\\nDisallow:\\n$/.test(out().text), 'default allow-all: ' + JSON.stringify(out() && out().text));
+    document.querySelector('[data-preset="ai"]').click(); await settle();
+    A(/User-agent: GPTBot\\nUser-agent: ChatGPT-User/.test(out().text) && /Disallow: \\/\\n\\nUser-agent: \\*\\nDisallow:\\n$/.test(out().text), 'ai preset: ' + out().text);
+    set('site-url', 'example.com'); await settle(); A(/\\nSitemap: https:\\/\\/example.com\\/sitemap.xml\\n$/.test(out().text), 'sitemap line: ' + out().text);
+    $('btn-add-group').click(); await tick(100); const g = $('rb-groups').lastElementChild;
+    g.querySelector('.rb-ua').value = 'Bingbot, DuckDuckBot'; g.querySelector('.rb-dis').value = 'admin/\\n/private'; g.querySelector('.rb-allow').value = '/admin/public'; g.querySelector('.rb-delay').value = '5';
+    g.querySelector('.rb-ua').dispatchEvent(new Event('input', { bubbles: true })); await settle();
+    A(/User-agent: Bingbot\\nUser-agent: DuckDuckBot\\nDisallow: \\/admin\\/\\nDisallow: \\/private\\nAllow: \\/admin\\/public\\nCrawl-delay: 5/.test(out().text), 'custom group: ' + out().text);
+    A(/3 groups · 4 rules/.test($('output-badge').textContent), 'badge: ' + $('output-badge').textContent);
+    g.querySelector('.rb-del').click(); await settle(); A(/2 groups/.test($('output-badge').textContent), 'remove group');
+    pill('seg-mode', 'sitemap'); A($('rb-pane').hidden && !$('sm-pane').hidden, 'pane switch');
+    set('text-input', '/\\n/about\\n/blog/post-1, 2026-01-15, monthly, 0.8\\nhttps://other.com/x\\n/about\\nnot a url ::\\n/bad, 15/01/2026'); await settle();
+    const xml = out().text; A(/<loc>https:\\/\\/example.com\\/<\\/loc>/.test(xml) && /<loc>https:\\/\\/example.com\\/about<\\/loc>/.test(xml), 'resolved urls: ' + xml);
+    A(/<lastmod>2026-01-15<\\/lastmod>\\s*<changefreq>monthly<\\/changefreq>\\s*<priority>0.8<\\/priority>/.test(xml), 'overrides: ' + xml);
+    A((xml.match(/<url>/g) || []).length === 5 && /5 URLs/.test($('output-badge').textContent), 'url count: ' + (xml.match(/<url>/g) || []).length);
+    const iss = $('output-issues').textContent; A(/Different host/.test(iss) && /Duplicate removed/.test(iss) && /Bad lastmod/.test(iss) && /Not a URL/.test(iss), 'issues: ' + iss);
+    A(/<lastmod>\\d{4}-\\d{2}-\\d{2}<\\/lastmod>/.test(xml), 'default lastmod today');
+    set('opt-lastmod', 'none'); await settle(); A((out().text.match(/<lastmod>/g) || []).length === 1, 'lastmod omitted by default');
+    const r = await T.T.download('robots', T); A(r.name === 'robots.txt' && /User-agent/.test(r.text), 'robots download from sitemap mode');
+    $('btn-reset').click(); await settle(); A(out() && /^User-agent: \\*\\nDisallow:\\n$/.test(out().text) && $('rb-groups').children.length === 1 && !$('rb-pane').hidden, 'reset');`],
+  ['serp-snippet-preview', `
+    set('f-title', 'Free Online Image Compressor | Toolity'); set('f-desc', 'Compress JPG, PNG and WebP images in your browser — no upload, no sign-up, no limits on how many files you process.'); set('f-url', 'https://toolity.in/media/image-compressor/'); await settle();
+    A(out() && $('serp-title').textContent === 'Free Online Image Compressor | Toolity', 'title: ' + $('serp-title').textContent);
+    A($('serp-url').textContent === 'toolity.in › media › image-compressor' && $('serp-name').textContent === 'toolity.in', 'breadcrumb: ' + $('serp-url').textContent);
+    A(/\\d+ \\/ 600 px/.test($('m-title-val').textContent) && parseFloat($('m-title').style.width) > 20, 'title meter: ' + $('m-title-val').textContent);
+    A(/Fits desktop/.test($('output-issues').textContent), 'issues: ' + $('output-issues').textContent);
+    set('f-title', 'An Extremely Long Title That Keeps Going And Going Well Past What Google Will Ever Show In Results Anywhere'); await settle();
+    A(/\\.\\.\\.$/.test($('serp-title').textContent) && /truncated/i.test($('output-issues').textContent) && $('m-title').classList.contains('is-over'), 'truncation: ' + $('serp-title').textContent);
+    pill('seg-device', 'mobile'); await settle(); A($('output-card').dataset.device === 'mobile' && /\\/ 920 px/.test($('m-title-val').textContent), 'mobile limits: ' + $('m-title-val').textContent);
+    set('f-date', '2026-10-18'); await settle(); A(/^18 Oct 2026 — /.test($('serp-desc-text').textContent), 'date prefix: ' + $('serp-desc-text').textContent);
+    set('html-input', HTML); set('url-input', ''); $('btn-run').click(); await tick(150); await settle();
+    A($('f-title').value === 'Fixture Page Title' && $('f-desc').value === 'A fixture description.' && $('f-url').value === 'https://example.com/fixture', 'import: ' + $('f-title').value + ' | ' + $('f-url').value);
+    const png = await T.T.download('png', T); A(png.blob && png.blob.type === 'image/png' && png.blob.size > 2000, 'png export');
+    $('btn-reset').click(); await settle(); A(!out() && $('f-title').value === '' && $('html-input').value === '', 'reset');`],
+  ['meta-tag-generator', `
+    set('f-title', 'Free Online Image Compressor | Toolity'); set('f-desc', 'Compress JPG, PNG and WebP images in your browser.'); set('f-canonical', 'https://toolity.in/media/image-compressor/'); await settle();
+    let c = out().text;
+    A(/^<meta charset="UTF-8">\\n<meta name="viewport"/.test(c) && /<title>Free Online Image Compressor \\| Toolity<\\/title>/.test(c), 'head start: ' + c);
+    A(/<link rel="canonical" href="https:\\/\\/toolity.in\\/media\\/image-compressor\\/">/.test(c) && /<meta property="og:url" content="https:\\/\\/toolity.in\\/media\\/image-compressor\\/">/.test(c), 'canonical + og:url');
+    A(/<meta property="og:locale" content="en_US">/.test(c) && /<meta name="twitter:card" content="summary_large_image">/.test(c) && !/og:image/.test(c) && /<meta name="robots" content="index, follow, max-image-preview:large">/.test(c), 'defaults: ' + c);
+    A(/Large-image card without an image/.test($('output-issues').textContent), 'image warning');
+    set('f-image', 'https://toolity.in/og.png'); set('f-imagealt', 'Toolity'); set('f-index', false); set('f-twsite', '@toolity'); await settle(); c = out().text;
+    A(/<meta property="og:image" content="https:\\/\\/toolity.in\\/og.png">\\n<meta property="og:image:alt" content="Toolity">/.test(c) && /<meta name="twitter:image"/.test(c) && /<meta name="twitter:site" content="@toolity">/.test(c), 'image tags: ' + c);
+    A(/<meta name="robots" content="noindex, follow, max-image-preview:large">/.test(c) && /noindex/.test($('output-issues').textContent), 'robots: ' + c);
+    set('f-canonical', 'not a url'); await settle(); A(/Canonical must be an absolute/.test($('output-issues').textContent) && !/rel="canonical"/.test(out().text), 'bad canonical');
+    set('f-canonical', ''); set('opt-boiler', false); set('f-twcard', ''); await settle(); c = out().text;
+    A(!/charset/.test(c) && !/twitter:/.test(c) && /^<title>/.test(c), 'toggles off: ' + c);
+    A(/serp-snippet-preview\\/#t=Free\\+Online/.test($('serp-link').href), 'serp link: ' + $('serp-link').href);
+    set('f-desc', '<b>x</b> & "y"'); await settle(); A(/content="&lt;b&gt;x&lt;\\/b&gt; &amp; &quot;y&quot;"/.test(out().text), 'escaping: ' + out().text);
+    const dl = await T.T.download('html', T); A(dl.name === 'head.html' && dl.text === out().text, 'download');
+    $('btn-reset').click(); await settle(); A(!out() && $('f-title').value === '' && $('f-index').checked && $('opt-boiler').checked, 'reset');`],
+  ['docs/diff-checker', `
+    set('text-a', 'line one\\nline two\\nline three\\nline four'); set('text-b', 'line one\\nline 2\\nline three\\nline five\\nline six');
+    A(await waitFor(() => out() && /\\+1 −0 ~2/.test($('output-badge').textContent), 30000), 'badge: ' + $('output-badge').textContent);
+    const rows = () => [...$('output-table').querySelectorAll('tr')];
+    A(rows().length === 5 && rows()[1].classList.contains('diff-chg') && rows()[3].classList.contains('diff-chg') && rows()[4].classList.contains('diff-add'), 'side rows: ' + rows().map(r => r.className).join(','));
+    A(rows()[1].querySelector('.diff-l em') && rows()[1].querySelector('.diff-l em').textContent === 'two' && rows()[1].querySelector('.diff-r em').textContent === '2', 'word highlight');
+    A(/^Index: original|^={3,}|^--- original/m.test(out().text) && /^-line two$/m.test(out().text) && /^\\+line 2$/m.test(out().text), 'patch: ' + out().text);
+    A($('output-table').querySelectorAll('tr[data-change]').length === 2 && /2 changes/.test($('diff-pos').textContent), 'change count: ' + $('diff-pos').textContent);
+    $('btn-next-change').click(); await tick(100); A(/1 \\/ 2/.test($('diff-pos').textContent) && rows()[1].classList.contains('is-current'), 'nav');
+    pill('seg-view', 'inline'); await settle(); A(rows().length === 7 && rows()[1].classList.contains('diff-del') && rows()[2].classList.contains('diff-add'), 'inline rows: ' + rows().map(r => r.className).join(','));
+    set('opt-context', '0'); await settle(); A(rows().some(r => r.classList.contains('diff-skip')) && !rows().some(r => r.classList.contains('diff-same')), 'changes only');
+    set('opt-context', 'all'); pill('seg-view', 'side'); set('opt-ws', true); set('text-a', 'a  b\\n\\tc'); set('text-b', 'a b\\nc');
+    A(await waitFor(() => out() && /No differences/.test($('output-badge').textContent), 20000), 'ignore ws: ' + $('output-badge').textContent);
+    set('opt-ws', false); set('opt-case', true); set('text-a', 'Hello'); set('text-b', 'hello'); A(await waitFor(() => /No differences/.test($('output-badge').textContent), 20000), 'ignore case');
+    set('opt-case', false); pill('seg-mode', 'json'); set('text-a', '{"b":1,"a":{"y":2,"x":[1,2]}}'); set('text-b', '{\\n "a": {"x": [1,2], "y": 2},\\n "b": 1\\n}');
+    A(await waitFor(() => /No differences/.test($('output-badge').textContent), 20000), 'json canonical: ' + $('output-badge').textContent);
+    set('text-b', '{"b":2,"a":{"y":2,"x":[1,2]}}'); A(await waitFor(() => /~1/.test($('output-badge').textContent), 20000), 'json change: ' + $('output-badge').textContent);
+    set('text-b', '{bad'); await tick(600); A(await waitFor(() => !$('input-error').hidden && /Changed is not valid JSON/.test($('input-error').textContent), 10000), 'json error: ' + $('input-error').textContent);
+    pill('seg-mode', 'text'); set('text-a', 'x'); set('text-b', 'y'); await waitFor(() => out() && /~1/.test($('output-badge').textContent), 20000);
+    const dt = new DataTransfer(); dt.items.add(new File(['f1'], 'a.txt')); dt.items.add(new File(['f2'], 'b.txt')); $('file-input').files = dt.files; $('file-input').dispatchEvent(new Event('change', { bubbles: true }));
+    A(await waitFor(() => $('text-a').value === 'f1' && $('text-b').value === 'f2', 5000), 'two files');
+    const h = await T.T.download('html', T); A(/<!doctype html>/.test(h.text) && /diff-chg/.test(h.text), 'html export');
+    $('btn-reset').click(); await settle(); A(!out() && $('text-a').value === '' && $('output-table').innerHTML === '', 'reset');`],
+  ['docs/readability-scorer', `
+    const EASY = 'The cat sat on the mat. It was warm. The sun was out. We went to the park. It was a good day.';
+    set('text-input', EASY); await settle(); let r = out().res;
+    A(r.nS === 5 && r.nW === 23 && r.fre > 90, 'easy: ' + JSON.stringify([r.nS, r.nW, r.fre]));
+    A(/FRE 1\\d\\d|FRE 9\\d/.test($('output-badge').textContent) && $('output-fre').dataset.band === 'good', 'badge: ' + $('output-badge').textContent);
+    const HARD = 'Notwithstanding the aforementioned considerations, the implementation of comprehensive organisational restructuring initiatives necessitates extraordinarily meticulous evaluation of multidimensional stakeholder perspectives, which was subsequently approved by the committee after the proposal had been reviewed carefully by external consultants.';
+    set('text-input', HARD); await settle(); r = out().res;
+    A(r.nS === 1 && r.fre < 10 && r.consensus > 16 && r.longS === 1, 'hard: ' + JSON.stringify([r.nS, r.fre, r.consensus, r.longS]));
+    A($('output-highlight').querySelector('.rd-s.rd-long') && $('output-highlight').querySelectorAll('.rd-passive').length >= 2 && $('output-highlight').querySelectorAll('.rd-adverb').length >= 2, 'highlights: ' + $('output-highlight').querySelectorAll('.rd-passive').length + ' passive, ' + $('output-highlight').querySelectorAll('.rd-adverb').length + ' adverbs');
+    A($('output-fre').dataset.band === 'bad' && /Very hard/.test($('output-fre').textContent), 'band: ' + $('output-fre').textContent);
+    set('opt-passive', false); set('opt-adverb', false); await settle(); A(!$('output-highlight').querySelector('.rd-passive, .rd-adverb'), 'toggles off');
+    set('text-input', 'Dr. Smith arrived at 3.5 p.m. He left, e.g. quickly. Fine!'); await settle(); A(out().res.nS === 3, 'abbrev sentences: ' + out().res.nS);
+    set('text-input', '<h1>Title</h1><p>This is <b>html</b> text. It has two sentences.</p><script>var x = 1;</script>'); await settle(); A(out().res.nS === 3 && !/var x/.test($('output-highlight').textContent), 'html stripped: ' + out().res.nS);
+    set('text-input', '# Heading\\n\\nSome **bold** text with a [link](https://x.y). Another line.'); await settle(); A(out().res.nW === 9 && !/https/.test($('output-highlight').textContent), 'markdown stripped: ' + out().res.nW);
+    const j = JSON.parse((await T.T.download('json', T)).text); A(typeof j.fre === 'number' && j.nW === 9 && !('html' in j), 'json report');
+    A(/Flesch Reading Ease:/.test(out().text) && /Words: 9/.test(out().text), 'txt report');
+    $('btn-reset').click(); await settle(); A(!out() && $('text-input').value === '' && $('opt-passive').checked, 'reset');`]
 ];
 
 (async () => {
