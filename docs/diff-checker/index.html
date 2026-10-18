@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Diff Checker | Toolity Docs</title>
+  <link rel="canonical" href="https://toolity.in/docs/diff-checker/">
+  <meta name="description" content="Free online diff checker: compare two texts or JSON documents side by side or inline, with line and word-level highlighting, ignore-whitespace and ignore-case options, and a downloadable unified patch. Runs in your browser — nothing uploaded.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Diff Checker | Toolity Docs">
+  <meta property="og:description" content="Free online diff checker: compare two texts or JSON documents side by side or inline, with line and word-level highlighting, ignore-whitespace and ignore-case options, and a downloadable unified patch. Runs in your browser — nothing uploaded.">
+  <meta property="og:url" content="https://toolity.in/docs/diff-checker/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=5.9" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=5.9">
+  <link rel="stylesheet" href="/styles/tools/diff-checker.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Diff Checker",
+        "url": "https://toolity.in/docs/diff-checker/",
+        "description": "Free online diff checker: compare two texts or JSON documents side by side or inline, with line and word-level highlighting, ignore-whitespace and ignore-case options, and a downloadable unified patch. Runs in your browser — nothing uploaded.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Docs", "item": "https://toolity.in/docs/" },
+          { "@type": "ListItem", "position": 3, "name": "Diff Checker", "item": "https://toolity.in/docs/diff-checker/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "What algorithm does it use?", "acceptedAnswer": { "@type": "Answer", "text": "The line diff comes from jsdiff (Myers’ algorithm, the same family git uses); changed lines are then diffed again word by word for the inline highlights. The library (about 8 KB) downloads once on first use." } },
+          { "@type": "Question", "name": "How does JSON mode work?", "acceptedAnswer": { "@type": "Answer", "text": "Both sides are parsed, object keys are sorted recursively and the result is pretty-printed with two-space indentation before comparing. Different key order, indentation or trailing whitespace therefore produce no differences — only real value changes. Arrays keep their order (reordering an array is a change). Invalid JSON is reported with the side and the parser’s message." } },
+          { "@type": "Question", "name": "What do “Ignore whitespace” and “Ignore case” do?", "acceptedAnswer": { "@type": "Answer", "text": "Ignore whitespace treats lines as equal when they differ only in spaces, tabs or trailing whitespace (indentation changes vanish). Ignore case compares Hello and hello as the same. The patch export always uses the original text, so the diff you download still applies cleanly." } },
+          { "@type": "Question", "name": "Is there a size limit?", "acceptedAnswer": { "@type": "Answer", "text": "Files up to 50 MB load; the diff itself is computed on all lines but the table draws at most 20,000 rows to keep the page responsive — the patch download is always complete. Very large, almost entirely different files can take a few seconds." } },
+          { "@type": "Question", "name": "Can I apply the downloaded patch?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — it is a standard unified diff with the file names original and changed. Run patch original &lt; changes.diff or git apply changes.diff after renaming the headers to your real paths." } },
+          { "@type": "Question", "name": "Is my text uploaded anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. Everything runs in JavaScript inside your browser tab. Your text and files are never sent to Toolity or anyone else." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/docs/" class="breadcrumb-link">Docs</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Diff Checker</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Docs</span>
+            <h1 class="page-title">Diff Checker</h1>
+            <p class="page-desc">Paste or drop two versions — see every added, removed and changed line side by side or inline, down to the word. JSON is compared by meaning, not formatting.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="stacked" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge web-status-badge" id="status-badge">Paste the original and the changed text</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result" aria-label="Copy result" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <div class="dropdown-menu-wrapper" id="download-dropdown-wrap">
+                <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download result" aria-label="Download result" aria-haspopup="true" disabled>
+                  <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                  <span>Download</span>
+                  <iconify-icon icon="lucide:chevron-down" class="dropdown-arrow" width="13" height="13"></iconify-icon>
+                </button>
+                <div class="dropdown-popup" role="menu">
+                  <button type="button" class="dropdown-item" data-format="diff" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:file-diff" width="14" height="14"></iconify-icon>
+                      <span>Unified patch (.diff)</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="html" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:code" width="14" height="14"></iconify-icon>
+                      <span>Rendered diff (.html)</span>
+                    </div>
+                  </button>
+                </div>
+              </div>
+              <button type="button" class="btn-toolbar-sm" id="btn-open" title="Open result in a new tab" aria-label="Open result in a new tab" disabled>
+                <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
+                <span>Open</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Original · Changed</span>
+                <span class="pane-badge" id="input-badge">—</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content web-form">
+                <div class="web-file-row">
+                  <button type="button" class="btn-toolbar-sm" id="btn-file" title="Open a file from your device" aria-label="Open a file from your device">
+                    <iconify-icon icon="lucide:folder-open" width="14" height="14"></iconify-icon>
+                    <span>Open file</span>
+                  </button>
+                  <input type="file" id="file-input" accept=".txt,.md,.json,.csv,.html,.css,.js,.ts,.py,.xml,.yaml,.yml,.log" multiple hidden>
+                  <span class="web-muted" id="file-name">or drop files here</span>
+                </div>
+                <div class="diff-inputs">
+                  <div class="form-group form-group-grow">
+                    <label class="form-label" for="text-a"><span>Original</span><span class="form-label-desc" id="count-a"></span></label>
+                    <textarea id="text-a" class="textarea-clean" rows="10" placeholder="Paste the original text or JSON, or drop a file…" spellcheck="false" autocapitalize="off" data-file-target></textarea>
+                  </div>
+                  <div class="form-group form-group-grow">
+                    <label class="form-label" for="text-b"><span>Changed</span><span class="form-label-desc" id="count-b"></span></label>
+                    <textarea id="text-b" class="textarea-clean" rows="10" placeholder="Paste the changed version, or drop a second file…" spellcheck="false" autocapitalize="off"></textarea>
+                  </div>
+                </div>
+                <div class="web-convert-row web-convert-row-2">
+                  <div class="form-group">
+                    <span class="form-label"><span>Compare as</span></span>
+                    <div class="segmented-group segmented-group-pill" id="seg-mode" role="group" aria-label="Compare as">
+                      <button type="button" class="seg-pill active" data-value="text">Text</button>
+                      <button type="button" class="seg-pill" data-value="json">JSON</button>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <span class="form-label"><span>View</span></span>
+                    <div class="segmented-group segmented-group-pill" id="seg-view" role="group" aria-label="View">
+                      <button type="button" class="seg-pill active" data-value="side">Side by side</button>
+                      <button type="button" class="seg-pill" data-value="inline">Inline</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Differences</span>
+                <span class="pane-badge" id="output-badge">—</span>
+              </div>
+              <div class="pane-content web-output-pane">
+                <div class="pane-empty" id="output-empty">
+                  <iconify-icon icon="lucide:git-compare"></iconify-icon>
+                  <span>Added, removed and changed lines will appear here</span>
+                </div>
+                <div class="web-output" id="output-content" hidden>
+                  <div class="diff-bar">
+                    <span class="diff-stats" id="diff-stats"></span>
+                    <span class="diff-nav">
+                      <button type="button" class="btn-toolbar-sm" id="btn-prev-change" title="Previous change"><iconify-icon icon="lucide:chevron-up" width="14" height="14"></iconify-icon></button>
+                      <span class="web-muted" id="diff-pos">—</span>
+                      <button type="button" class="btn-toolbar-sm" id="btn-next-change" title="Next change"><iconify-icon icon="lucide:chevron-down" width="14" height="14"></iconify-icon></button>
+                    </span>
+                  </div>
+                  <div class="web-table-wrap diff-wrap" id="diff-wrap">
+                    <table class="diff-table" id="output-table"></table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">Word highlights · all context</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item"><input type="checkbox" id="opt-words" checked><label for="opt-words">Highlight changed words inside changed lines</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-ws"><label for="opt-ws">Ignore whitespace differences</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-case"><label for="opt-case">Ignore case</label></div>
+              <div class="control-item">
+                <label for="opt-context">Unchanged lines shown</label>
+                <select id="opt-context" class="select-clean"><option value="all" selected>All</option><option value="3">3 around each change</option><option value="0">Changes only</option></select>
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Use Diff Checker in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Add both versions</h3>
+              <p class="step-desc">Paste the original on the left and the changed version on the right, or drop two files onto the card — the first fills Original, the second Changed. Choose <strong>JSON</strong> to compare documents by content: keys are sorted and both sides are pretty-printed before diffing, so formatting differences disappear.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Read the differences</h3>
+              <p class="step-desc">Removed lines are red, added lines green, and changed lines show the exact words that differ. Use <strong>Side by side</strong> for prose and configs, <strong>Inline</strong> for a patch-style view. The arrows jump between changes; the badge counts them.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Export</h3>
+              <p class="step-desc">Copy or download a standard unified <code>.diff</code> that <code>git apply</code> and <code>patch</code> understand, or download the coloured diff as a standalone HTML page to attach to a review or email.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Diff Checker — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>What algorithm does it use?</summary>
+              <p>The line diff comes from <a href="https://github.com/kpdecker/jsdiff" target="_blank" rel="noopener">jsdiff</a> (Myers’ algorithm, the same family git uses); changed lines are then diffed again word by word for the inline highlights. The library (about 8 KB) downloads once on first use.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How does JSON mode work?</summary>
+              <p>Both sides are parsed, object keys are sorted recursively and the result is pretty-printed with two-space indentation before comparing. Different key order, indentation or trailing whitespace therefore produce no differences — only real value changes. Arrays keep their order (reordering an array is a change). Invalid JSON is reported with the side and the parser’s message.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What do “Ignore whitespace” and “Ignore case” do?</summary>
+              <p>Ignore whitespace treats lines as equal when they differ only in spaces, tabs or trailing whitespace (indentation changes vanish). Ignore case compares <code>Hello</code> and <code>hello</code> as the same. The patch export always uses the original text, so the diff you download still applies cleanly.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is there a size limit?</summary>
+              <p>Files up to 50 MB load; the diff itself is computed on all lines but the table draws at most 20,000 rows to keep the page responsive — the patch download is always complete. Very large, almost entirely different files can take a few seconds.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can I apply the downloaded patch?</summary>
+              <p>Yes — it is a standard unified diff with the file names <code>original</code> and <code>changed</code>. Run <code>patch original &lt; changes.diff</code> or <code>git apply changes.diff</code> after renaming the headers to your real paths.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is my text uploaded anywhere?</summary>
+              <p>No. Everything runs in JavaScript inside your browser tab. Your text and files are never sent to Toolity or anyone else.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="docs"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=4.4"></script>
+  <script src="/scripts/tool-common.js?v=1.1"></script>
+  <script src="/scripts/web-common.js?v=1.2"></script>
+  <script src="/docs/diff-checker/diff-checker.js?v=1.0"></script>
+</body>
+</html>
