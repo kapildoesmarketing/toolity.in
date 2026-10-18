@@ -1636,6 +1636,12 @@ body {
 
 /* Social links sit under the mission text in the brand column (they used to live in the bottom bar) */
 .footer-col-brand .footer-social { margin-top: 1rem; }
+/* FoundrList badge: right edge of the bottom bar (where the socials used to be); centred under the legal links on phones */
+.footer-badge { line-height: 0; }
+.footer-badge a { display: inline-block; opacity: 0.9; transition: opacity 0.15s; }
+.footer-badge a:hover, .footer-badge a:focus-visible { opacity: 1; }
+.footer-badge img { width: 150px; height: auto; }
+@media (min-width: 769px) { .footer-bottom .footer-badge { margin-left: auto; } }
 
 .footer-heading {
   font-size: 0.82rem;
