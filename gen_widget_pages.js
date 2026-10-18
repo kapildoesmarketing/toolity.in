@@ -7,7 +7,7 @@
 const fs = require('fs');
 const path = require('path');
 const only = process.argv[2];
-const MAIN_V = '4.3', CSS_V = '5.6', WC_V = '1.2', EMBED_CSS_V = '1.2';
+const MAIN_V = '4.4', CSS_V = '5.9', WC_V = '1.2', EMBED_CSS_V = '5.9';
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const jsonStr = (s) => JSON.stringify(String(s).replace(/<[^>]+>/g, ''));
 

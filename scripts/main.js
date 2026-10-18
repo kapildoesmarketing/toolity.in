@@ -1380,6 +1380,46 @@
         tags: ['sql on csv', 'query csv with sql', 'csv sql', 'sqlite online', 'run sql on csv file', 'join csv files', 'csv group by', 'json sql query', 'csv to sqlite', 'sql playground']
       },
       {
+        id: 'robots-sitemap-generator',
+        title: 'Robots.txt & Sitemap Generator',
+        category: 'Labs',
+        url: 'labs/robots-sitemap-generator/',
+        icon: 'lucide:bot',
+        tags: ['robots.txt generator', 'sitemap generator', 'sitemap.xml', 'block ai crawlers', 'gptbot robots.txt', 'disallow', 'crawl-delay', 'xml sitemap', 'seo tools', 'robots txt']
+      },
+      {
+        id: 'serp-snippet-preview',
+        title: 'SERP Snippet Preview',
+        category: 'Labs',
+        url: 'labs/serp-snippet-preview/',
+        icon: 'lucide:search',
+        tags: ['serp preview', 'google snippet preview', 'meta title length', 'meta description length', 'title tag pixel width', 'serp simulator', 'search result preview', 'seo title checker', 'snippet optimizer']
+      },
+      {
+        id: 'meta-tag-generator',
+        title: 'Meta Tag Generator',
+        category: 'Labs',
+        url: 'labs/meta-tag-generator/',
+        icon: 'lucide:code-xml',
+        tags: ['meta tag generator', 'open graph generator', 'twitter card generator', 'meta tags', 'og tags', 'canonical tag', 'robots meta', 'head tags', 'seo meta tags', 'html meta generator']
+      },
+      {
+        id: 'diff-checker',
+        title: 'Diff Checker',
+        category: 'Docs',
+        url: 'docs/diff-checker/',
+        icon: 'lucide:git-compare',
+        tags: ['diff checker', 'text compare', 'compare two files', 'json diff', 'online diff tool', 'text difference', 'unified diff', 'side by side diff', 'compare text online', 'patch file']
+      },
+      {
+        id: 'readability-scorer',
+        title: 'Readability Scorer',
+        category: 'Docs',
+        url: 'docs/readability-scorer/',
+        icon: 'lucide:glasses',
+        tags: ['readability score', 'flesch reading ease', 'flesch kincaid grade', 'gunning fog', 'smog index', 'readability checker', 'reading level', 'passive voice checker', 'reading time calculator', 'text analysis']
+      },
+      {
         id: 'cat-widgets',
         title: 'Widgets',
         category: 'Category',
