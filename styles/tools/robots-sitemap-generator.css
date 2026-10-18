@@ -1,0 +1,15 @@
+/* Robots.txt & Sitemap Generator — rule-group cards and preset chips. */
+.rb-presets .web-tag { cursor: pointer; padding: 0.3rem 0.7rem; transition: all 0.15s ease; }
+.rb-presets .web-tag:hover { border-color: var(--brand); color: var(--brand-hover); background: var(--brand-soft); }
+.rb-group { display: flex; flex-direction: column; gap: 0.5rem; padding: 0.75rem 0.85rem; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); min-width: 0; }
+.rb-group-head { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
+.rb-group-head .form-label { margin: 0; }
+.rb-del { width: 32px; height: 32px; flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); color: var(--text-muted); cursor: pointer; transition: all 0.15s ease; }
+.rb-del:hover { color: #dc2626; border-color: #dc2626; background: rgba(220, 38, 38, 0.08); }
+.rb-paths { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.5rem; min-width: 0; }
+.rb-paths .form-group { margin: 0; min-width: 0; }
+.rb-paths textarea, .rb-ua { font-family: var(--font-mono); font-size: 0.86rem; }
+.rb-delay-row { margin: 0; }
+.rb-delay-row .input-clean { max-width: 160px; }
+#rb-pane[hidden], #sm-pane[hidden] { display: none; }
+#rb-pane #btn-add-group { align-self: flex-start; }

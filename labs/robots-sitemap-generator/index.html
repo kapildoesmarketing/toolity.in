@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Robots.txt & Sitemap Generator | Toolity Labs</title>
+  <link rel="canonical" href="https://toolity.in/labs/robots-sitemap-generator/">
+  <meta name="description" content="Free online robots.txt and sitemap.xml generator: build crawler rules with presets (allow all, block all, block AI bots, WordPress), add Allow / Disallow paths and crawl-delay, and turn a list of URLs into a valid XML sitemap. Runs in your browser — nothing crawled or uploaded.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Robots.txt & Sitemap Generator | Toolity Labs">
+  <meta property="og:description" content="Free online robots.txt and sitemap.xml generator: build crawler rules with presets (allow all, block all, block AI bots, WordPress), add Allow / Disallow paths and crawl-delay, and turn a list of URLs into a valid XML sitemap. Runs in your browser — nothing crawled or uploaded.">
+  <meta property="og:url" content="https://toolity.in/labs/robots-sitemap-generator/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=5.9" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=5.9">
+  <link rel="stylesheet" href="/styles/tools/robots-sitemap-generator.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Robots.txt & Sitemap Generator",
+        "url": "https://toolity.in/labs/robots-sitemap-generator/",
+        "description": "Free online robots.txt and sitemap.xml generator: build crawler rules with presets (allow all, block all, block AI bots, WordPress), add Allow / Disallow paths and crawl-delay, and turn a list of URLs into a valid XML sitemap. Runs in your browser — nothing crawled or uploaded.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Labs", "item": "https://toolity.in/labs/" },
+          { "@type": "ListItem", "position": 3, "name": "Robots.txt & Sitemap Generator", "item": "https://toolity.in/labs/robots-sitemap-generator/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Does blocking AI crawlers in robots.txt actually work?", "acceptedAnswer": { "@type": "Answer", "text": "Reputable crawlers (GPTBot, ClaudeBot, Google-Extended, CCBot, PerplexityBot, Bytespider and others in the preset) state that they honour robots.txt. It is a request, not a lock — content stays publicly reachable, and bots that ignore the standard are not stopped. The preset list is current as of October 2026; add or remove agents freely." } },
+          { "@type": "Question", "name": "Why is there an empty Disallow: line?", "acceptedAnswer": { "@type": "Answer", "text": "A group with a user-agent and an empty Disallow is the standard way to say “this agent may crawl everything”. Omitting the line entirely is ambiguous to some crawlers, so the generator always writes it." } },
+          { "@type": "Question", "name": "Why not just crawl my site to build the sitemap?", "acceptedAnswer": { "@type": "Answer", "text": "Toolity runs entirely in your browser and has no server, so it cannot crawl. Paste the URLs from your CMS, an export, or your existing sitemap. Up to 50,000 URLs per file (the sitemap protocol limit); split larger sites into several files and list them in a sitemap index." } },
+          { "@type": "Question", "name": "What do lastmod, changefreq and priority do?", "acceptedAnswer": { "@type": "Answer", "text": "lastmod (YYYY-MM-DD) is the one search engines actually use — keep it honest. changefreq and priority are hints that Google ignores; they are omitted by default and only written when you set them." } },
+          { "@type": "Question", "name": "Do the files need to be at a specific location?", "acceptedAnswer": { "@type": "Answer", "text": "Yes: https://your-site.com/robots.txt — exactly at the root of the host. The sitemap can live anywhere on the same host, but the root is conventional and is what the Sitemap: line points to." } },
+          { "@type": "Question", "name": "Is my input sent anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. Everything is computed by JavaScript in your browser tab. Nothing is uploaded, logged or stored by Toolity." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/labs/" class="breadcrumb-link">Labs</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Robots.txt & Sitemap Generator</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Labs</span>
+            <h1 class="page-title">Robots.txt & Sitemap Generator</h1>
+            <p class="page-desc">Build a correct robots.txt with presets and rule groups, and turn a list of URLs into a valid sitemap.xml — both ready to download.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" data-split="50/50" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge web-status-badge" id="status-badge">Add a rule group or paste URLs</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result" aria-label="Copy result" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <div class="dropdown-menu-wrapper" id="download-dropdown-wrap">
+                <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download result" aria-label="Download result" aria-haspopup="true" disabled>
+                  <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                  <span>Download</span>
+                  <iconify-icon icon="lucide:chevron-down" class="dropdown-arrow" width="13" height="13"></iconify-icon>
+                </button>
+                <div class="dropdown-popup" role="menu">
+                  <button type="button" class="dropdown-item" data-format="robots" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:bot" width="14" height="14"></iconify-icon>
+                      <span>robots.txt</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="sitemap" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:map" width="14" height="14"></iconify-icon>
+                      <span>sitemap.xml</span>
+                    </div>
+                  </button>
+                </div>
+              </div>
+              <button type="button" class="btn-toolbar-sm" id="btn-open" title="Open result in a new tab" aria-label="Open result in a new tab" disabled>
+                <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
+                <span>Open</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Builder</span>
+                <span class="pane-badge" id="input-badge">—</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content web-form">
+                <div class="form-group">
+                  <span class="form-label"><span>File</span></span>
+                  <div class="segmented-group segmented-group-pill" id="seg-mode" role="group" aria-label="File">
+                    <button type="button" class="seg-pill active" data-value="robots">robots.txt</button>
+                    <button type="button" class="seg-pill" data-value="sitemap">sitemap.xml</button>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="site-url"><span>Site URL</span><span class="form-label-desc">adds the Sitemap: line · resolves relative paths</span></label>
+                  <input id="site-url" class="input-clean" autocomplete="off" type="url" placeholder="https://example.com" inputmode="url" spellcheck="false">
+                </div>
+                <div class="web-group" id="rb-pane">
+                  <div class="form-group">
+                    <span class="form-label"><span>Presets</span></span>
+                    <div class="web-tags rb-presets" role="group" aria-label="Presets"><button type="button" class="web-tag rb-preset" data-preset="allow">Allow everything</button><button type="button" class="web-tag rb-preset" data-preset="block">Block everything</button><button type="button" class="web-tag rb-preset" data-preset="ai">Block AI crawlers</button><button type="button" class="web-tag rb-preset" data-preset="wordpress">WordPress</button><button type="button" class="web-tag rb-preset" data-preset="staging">Staging site</button></div>
+                  </div>
+                  <div class="web-group" id="rb-groups"></div>
+                  <button type="button" class="btn-toolbar-sm" id="btn-add-group"><iconify-icon icon="lucide:plus" width="14" height="14"></iconify-icon><span>Add rule group</span></button>
+                  <datalist id="rb-ua-list"><option value="*"><option value="Googlebot"><option value="Googlebot-Image"><option value="Bingbot"><option value="DuckDuckBot"><option value="Applebot"><option value="YandexBot"><option value="Baiduspider"><option value="GPTBot"><option value="ChatGPT-User"><option value="OAI-SearchBot"><option value="Google-Extended"><option value="CCBot"><option value="anthropic-ai"><option value="ClaudeBot"><option value="PerplexityBot"><option value="Bytespider"><option value="Applebot-Extended"><option value="Amazonbot"><option value="FacebookBot"><option value="meta-externalagent"><option value="AhrefsBot"><option value="SemrushBot"><option value="MJ12bot"></datalist>
+                </div>
+                <div class="form-group form-group-grow" id="sm-pane" hidden>
+                  <label class="form-label" for="text-input"><span>URLs — one per line</span><span class="form-label-desc">optional: , lastmod, changefreq, priority</span></label>
+                  <textarea id="text-input" class="textarea-clean" rows="10" placeholder="/&#10;/about&#10;/blog/first-post, 2026-01-15, monthly, 0.8&#10;https://example.com/contact" spellcheck="false" autocapitalize="off" data-file-target></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Output</span>
+                <span class="pane-badge" id="output-badge">—</span>
+              </div>
+              <div class="pane-content web-output-pane">
+                <div class="pane-empty" id="output-empty">
+                  <iconify-icon icon="lucide:bot"></iconify-icon>
+                  <span>Your robots.txt or sitemap.xml will appear here</span>
+                </div>
+                <div class="web-output" id="output-content" hidden>
+                  <pre class="web-code" id="output-text"></pre>
+                  <div class="web-tags" id="output-issues"></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">lastmod today · no changefreq · no priority</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item">
+                <label for="opt-lastmod">Sitemap lastmod default</label>
+                <select id="opt-lastmod" class="select-clean"><option value="today" selected>Today</option><option value="none">Omit</option></select>
+              </div>
+              <div class="control-item">
+                <label for="opt-freq">Sitemap changefreq default</label>
+                <select id="opt-freq" class="select-clean"><option value="" selected>Omit</option><option value="always">always</option><option value="hourly">hourly</option><option value="daily">daily</option><option value="weekly">weekly</option><option value="monthly">monthly</option><option value="yearly">yearly</option><option value="never">never</option></select>
+              </div>
+              <div class="control-item">
+                <label for="opt-priority">Sitemap priority default</label>
+                <select id="opt-priority" class="select-clean"><option value="" selected>Omit</option><option value="1.0">1.0</option><option value="0.8">0.8</option><option value="0.5">0.5</option><option value="0.3">0.3</option></select>
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Use Robots.txt & Sitemap Generator in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Pick a preset or add groups</h3>
+              <p class="step-desc">Start from <strong>Allow everything</strong>, <strong>Block AI crawlers</strong> or <strong>WordPress</strong>, then adjust: each rule group has one or more user-agents (comma-separated), Disallow and Allow paths (one per line) and an optional crawl-delay. Enter your site URL to get the <code>Sitemap:</code> line.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Paste URLs for the sitemap</h3>
+              <p class="step-desc">Switch to <strong>sitemap.xml</strong> and paste one URL per line — relative paths like <code>/about</code> are resolved against your site URL. Add <code>, lastmod, changefreq, priority</code> after a URL to override the defaults for that page.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Download both files</h3>
+              <p class="step-desc">Problems (foreign hosts, bad dates, duplicates) are listed under the output. Download <code>robots.txt</code> and <code>sitemap.xml</code> and upload them to the root of your site, then submit the sitemap in Search Console.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Robots.txt & Sitemap Generator — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Does blocking AI crawlers in robots.txt actually work?</summary>
+              <p>Reputable crawlers (GPTBot, ClaudeBot, Google-Extended, CCBot, PerplexityBot, Bytespider and others in the preset) state that they honour robots.txt. It is a request, not a lock — content stays publicly reachable, and bots that ignore the standard are not stopped. The preset list is current as of October 2026; add or remove agents freely.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why is there an empty <code>Disallow:</code> line?</summary>
+              <p>A group with a user-agent and an empty Disallow is the standard way to say “this agent may crawl everything”. Omitting the line entirely is ambiguous to some crawlers, so the generator always writes it.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why not just crawl my site to build the sitemap?</summary>
+              <p>Toolity runs entirely in your browser and has no server, so it cannot crawl. Paste the URLs from your CMS, an export, or your existing sitemap. Up to 50,000 URLs per file (the sitemap protocol limit); split larger sites into several files and list them in a sitemap index.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What do lastmod, changefreq and priority do?</summary>
+              <p><code>lastmod</code> (YYYY-MM-DD) is the one search engines actually use — keep it honest. <code>changefreq</code> and <code>priority</code> are hints that Google ignores; they are omitted by default and only written when you set them.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Do the files need to be at a specific location?</summary>
+              <p>Yes: <code>https://your-site.com/robots.txt</code> — exactly at the root of the host. The sitemap can live anywhere on the same host, but the root is conventional and is what the <code>Sitemap:</code> line points to.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is my input sent anywhere?</summary>
+              <p>No. Everything is computed by JavaScript in your browser tab. Nothing is uploaded, logged or stored by Toolity.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="labs"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=4.4"></script>
+  <script src="/scripts/tool-common.js?v=1.1"></script>
+  <script src="/scripts/web-common.js?v=1.2"></script>
+  <script src="/labs/robots-sitemap-generator/robots-sitemap-generator.js?v=1.0"></script>
+</body>
+</html>

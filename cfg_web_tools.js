@@ -40,6 +40,168 @@ const RANGE = (id, label, min, max, val, unit = '') => `
                 </div>`;
 const SHARE_PLATFORMS = [['whatsapp', 'WhatsApp'], ['telegram', 'Telegram'], ['x', 'X (Twitter)'], ['facebook', 'Facebook'], ['linkedin', 'LinkedIn'], ['reddit', 'Reddit'], ['pinterest', 'Pinterest'], ['email', 'Email'], ['sms', 'SMS']];
 const BARCODE_FORMATS = [['CODE128', 'Code 128 (any text)'], ['EAN13', 'EAN-13 (retail, 12–13 digits)'], ['EAN8', 'EAN-8 (7–8 digits)'], ['UPC', 'UPC-A (11–12 digits)'], ['CODE39', 'Code 39 (A–Z, 0–9)'], ['ITF14', 'ITF-14 (cartons, 13–14 digits)'], ['codabar', 'Codabar (libraries, blood banks)']];
+/* SEO & Site Helpers batch (Oct 2026): `section` = heading on /labs/ (read by wire_seo_text.py). */
+const SEO_TOOLS = [
+  {
+    slug: 'robots-sitemap-generator', name: 'Robots.txt & Sitemap Generator', icon: 'lucide:bot', section: 'SEO & Site Helpers', split: '50/50', css: true,
+    desc: 'Free online robots.txt and sitemap.xml generator: build crawler rules with presets (allow all, block all, block AI bots, WordPress), add Allow / Disallow paths and crawl-delay, and turn a list of URLs into a valid XML sitemap. Runs in your browser — nothing crawled or uploaded.',
+    lead: 'Build a correct robots.txt with presets and rule groups, and turn a list of URLs into a valid sitemap.xml — both ready to download.',
+    cardDesc: 'Rule builder with AI-bot and WordPress presets; URL list → sitemap.xml.',
+    tags: ['robots.txt generator', 'sitemap generator', 'sitemap.xml', 'block ai crawlers', 'gptbot robots.txt', 'disallow', 'crawl-delay', 'xml sitemap', 'seo tools', 'robots txt'],
+    idle: 'Add a rule group or paste URLs', sourceLabel: 'Builder', outputLabel: 'Output', outputIcon: 'lucide:bot', outputEmpty: 'Your robots.txt or sitemap.xml will appear here',
+    downloads: [['robots', 'robots.txt', 'lucide:bot'], ['sitemap', 'sitemap.xml', 'lucide:map']],
+    sourceHtml: `
+                <div class="form-group">
+                  <span class="form-label"><span>File</span></span>
+                  <div class="segmented-group segmented-group-pill" id="seg-mode" role="group" aria-label="File">
+                    <button type="button" class="seg-pill active" data-value="robots">robots.txt</button>
+                    <button type="button" class="seg-pill" data-value="sitemap">sitemap.xml</button>
+                  </div>
+                </div>${FIELD('site-url', 'Site URL', 'type="url" placeholder="https://example.com" inputmode="url" spellcheck="false"', 'adds the Sitemap: line · resolves relative paths')}
+                <div class="web-group" id="rb-pane">
+                  <div class="form-group">
+                    <span class="form-label"><span>Presets</span></span>
+                    <div class="web-tags rb-presets" role="group" aria-label="Presets">${[['allow', 'Allow everything'], ['block', 'Block everything'], ['ai', 'Block AI crawlers'], ['wordpress', 'WordPress'], ['staging', 'Staging site']].map(([v, l]) => `<button type="button" class="web-tag rb-preset" data-preset="${v}">${l}</button>`).join('')}</div>
+                  </div>
+                  <div class="web-group" id="rb-groups"></div>
+                  <button type="button" class="btn-toolbar-sm" id="btn-add-group"><iconify-icon icon="lucide:plus" width="14" height="14"></iconify-icon><span>Add rule group</span></button>
+                  <datalist id="rb-ua-list">${['*', 'Googlebot', 'Googlebot-Image', 'Bingbot', 'DuckDuckBot', 'Applebot', 'YandexBot', 'Baiduspider', 'GPTBot', 'ChatGPT-User', 'OAI-SearchBot', 'Google-Extended', 'CCBot', 'anthropic-ai', 'ClaudeBot', 'PerplexityBot', 'Bytespider', 'Applebot-Extended', 'Amazonbot', 'FacebookBot', 'meta-externalagent', 'AhrefsBot', 'SemrushBot', 'MJ12bot'].map((u) => `<option value="${u}">`).join('')}</datalist>
+                </div>
+                <div class="form-group form-group-grow" id="sm-pane" hidden>
+                  <label class="form-label" for="text-input"><span>URLs — one per line</span><span class="form-label-desc">optional: , lastmod, changefreq, priority</span></label>
+                  <textarea id="text-input" class="textarea-clean" rows="10" placeholder="/&#10;/about&#10;/blog/first-post, 2026-01-15, monthly, 0.8&#10;https://example.com/contact" spellcheck="false" autocapitalize="off" data-file-target></textarea>
+                </div>`,
+    outputHtml: `
+                  <pre class="web-code" id="output-text"></pre>
+                  <div class="web-tags" id="output-issues"></div>`,
+    settingsSummary: 'lastmod today · no changefreq · no priority',
+    settings: `
+              <div class="control-item">
+                <label for="opt-lastmod">Sitemap lastmod default</label>
+                <select id="opt-lastmod" class="select-clean">${OPTS([['today', 'Today'], ['none', 'Omit']], 'today')}</select>
+              </div>
+              <div class="control-item">
+                <label for="opt-freq">Sitemap changefreq default</label>
+                <select id="opt-freq" class="select-clean">${OPTS([['', 'Omit'], ['always', 'always'], ['hourly', 'hourly'], ['daily', 'daily'], ['weekly', 'weekly'], ['monthly', 'monthly'], ['yearly', 'yearly'], ['never', 'never']], '')}</select>
+              </div>
+              <div class="control-item">
+                <label for="opt-priority">Sitemap priority default</label>
+                <select id="opt-priority" class="select-clean">${OPTS([['', 'Omit'], ['1.0', '1.0'], ['0.8', '0.8'], ['0.5', '0.5'], ['0.3', '0.3']], '')}</select>
+              </div>`,
+    guide: [['Pick a preset or add groups', 'Start from <strong>Allow everything</strong>, <strong>Block AI crawlers</strong> or <strong>WordPress</strong>, then adjust: each rule group has one or more user-agents (comma-separated), Disallow and Allow paths (one per line) and an optional crawl-delay. Enter your site URL to get the <code>Sitemap:</code> line.'], ['Paste URLs for the sitemap', 'Switch to <strong>sitemap.xml</strong> and paste one URL per line — relative paths like <code>/about</code> are resolved against your site URL. Add <code>, lastmod, changefreq, priority</code> after a URL to override the defaults for that page.'], ['Download both files', 'Problems (foreign hosts, bad dates, duplicates) are listed under the output. Download <code>robots.txt</code> and <code>sitemap.xml</code> and upload them to the root of your site, then submit the sitemap in Search Console.']],
+    faq: [['Does blocking AI crawlers in robots.txt actually work?', 'Reputable crawlers (GPTBot, ClaudeBot, Google-Extended, CCBot, PerplexityBot, Bytespider and others in the preset) state that they honour robots.txt. It is a request, not a lock — content stays publicly reachable, and bots that ignore the standard are not stopped. The preset list is current as of October 2026; add or remove agents freely.'], ['Why is there an empty <code>Disallow:</code> line?', 'A group with a user-agent and an empty Disallow is the standard way to say “this agent may crawl everything”. Omitting the line entirely is ambiguous to some crawlers, so the generator always writes it.'], ['Why not just crawl my site to build the sitemap?', 'Toolity runs entirely in your browser and has no server, so it cannot crawl. Paste the URLs from your CMS, an export, or your existing sitemap. Up to 50,000 URLs per file (the sitemap protocol limit); split larger sites into several files and list them in a sitemap index.'], ['What do lastmod, changefreq and priority do?', '<code>lastmod</code> (YYYY-MM-DD) is the one search engines actually use — keep it honest. <code>changefreq</code> and <code>priority</code> are hints that Google ignores; they are omitted by default and only written when you set them.'], ['Do the files need to be at a specific location?', 'Yes: <code>https://your-site.com/robots.txt</code> — exactly at the root of the host. The sitemap can live anywhere on the same host, but the root is conventional and is what the <code>Sitemap:</code> line points to.'], PRIVACY_FAQ]
+  },
+  {
+    slug: 'serp-snippet-preview', name: 'SERP Snippet Preview', icon: 'lucide:search', section: 'SEO & Site Helpers', split: '50/50', css: true,
+    desc: 'Free online SERP snippet preview: see how your title and meta description will look in Google results on desktop and mobile, with pixel-width meters that show exactly where Google truncates. Import from a live page or type your own. Runs in your browser.',
+    lead: 'See your title and description the way Google will show them — desktop and mobile — with pixel meters that tell you where the cut-off is.',
+    cardDesc: 'Google result preview with pixel-width truncation, desktop & mobile.',
+    tags: ['serp preview', 'google snippet preview', 'meta title length', 'meta description length', 'title tag pixel width', 'serp simulator', 'search result preview', 'seo title checker', 'snippet optimizer'],
+    idle: 'Type a title or import a page', sourceLabel: 'Snippet', outputLabel: 'Preview', outputIcon: 'lucide:search', outputEmpty: 'The Google result preview will appear here',
+    action: 'Import', actionIcon: 'lucide:download',
+    downloads: [['png', 'Preview as PNG', 'lucide:image'], ['txt', 'Title + description (.txt)', 'lucide:file-text']],
+    sourceHtml: `
+                <div class="form-group">
+                  <span class="form-label"><span>Device</span></span>
+                  <div class="segmented-group segmented-group-pill" id="seg-device" role="group" aria-label="Device">
+                    <button type="button" class="seg-pill active" data-value="desktop">Desktop</button>
+                    <button type="button" class="seg-pill" data-value="mobile">Mobile</button>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="f-title"><span>Title</span><span class="form-label-desc" id="f-title-count"></span></label>
+                  <input type="text" id="f-title" class="input-clean" placeholder="Free Online Image Compressor | Toolity" autocomplete="off">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="f-desc"><span>Meta description</span><span class="form-label-desc" id="f-desc-count"></span></label>
+                  <textarea id="f-desc" class="textarea-clean" rows="3" placeholder="Compress JPG, PNG and WebP images in your browser — no upload, no sign-up." spellcheck="true"></textarea>
+                </div>${FIELD('f-url', 'Page URL', 'type="url" placeholder="https://example.com/blog/my-post" inputmode="url" spellcheck="false"', 'shown as a breadcrumb')}${FIELD('f-date', 'Date (optional)', 'type="date"', 'prefixes the description, like Google does for articles')}
+                <div class="form-group">
+                  <label class="form-label" for="url-input"><span>Import from a live page</span><span class="form-label-desc">fills the fields above</span></label>
+                  <input type="url" id="url-input" class="input-clean" placeholder="https://example.com/page-to-check" spellcheck="false" autocomplete="off" autocapitalize="off" inputmode="url">
+                </div>`,
+    outputHtml: `
+                  <div class="serp" id="output-card" data-device="desktop">
+                    <div class="serp-site">
+                      <span class="serp-fav" id="serp-fav"><img id="serp-fav-img" alt="" width="18" height="18" hidden><iconify-icon icon="lucide:globe" width="16" height="16" id="serp-fav-fb"></iconify-icon></span>
+                      <div class="serp-site-text"><div class="serp-name" id="serp-name"></div><div class="serp-url" id="serp-url"></div></div>
+                    </div>
+                    <div class="serp-title" id="serp-title"></div>
+                    <div class="serp-desc"><span class="serp-date" id="serp-date"></span><span id="serp-desc-text"></span></div>
+                  </div>
+                  <div class="serp-meters">
+                    <div class="serp-meter"><span>Title</span><div class="serp-bar"><i id="m-title"></i></div><b id="m-title-val">—</b></div>
+                    <div class="serp-meter"><span>Description</span><div class="serp-bar"><i id="m-desc"></i></div><b id="m-desc-val">—</b></div>
+                  </div>
+                  <div class="web-tags" id="output-issues"></div>`,
+    settingsSummary: 'favicon from site · no pasted HTML',
+    settings: `${CHECK('opt-favicon', 'Show the site’s favicon (loaded from the page URL’s host by your browser)', true)}
+                <div class="form-group">
+                  <label class="form-label" for="html-input"><span>Or import from pasted HTML</span><span class="form-label-desc">Works offline · overrides the URL when you press Import</span></label>
+                  <textarea id="html-input" class="textarea-clean" rows="4" placeholder="&lt;head&gt;…&lt;/head&gt; — view-source, select all, paste" spellcheck="false"></textarea>
+                </div>`,
+    guide: [['Type or import', 'Enter a title, description and URL — or paste a live URL in <strong>Import from a live page</strong> and press <strong>Import</strong> to pull them from the page’s tags. Switch between <strong>Desktop</strong> and <strong>Mobile</strong>.'], ['Watch the meters', 'Google cuts titles at about 600 px on desktop and 920 px on mobile, and descriptions at roughly 920 / 1,300 px — not at a character count. The meters measure your text in Google’s actual font sizes and show the cut with an ellipsis, exactly where it would appear.'], ['Export', 'Download the preview as a PNG for a client deck or a ticket, or copy the final title and description. Then paste them into the <a href="/labs/meta-tag-generator/">Meta Tag Generator</a> to produce the tags.']],
+    faq: [['Why pixels and not characters?', 'Google truncates by available width, so “WWW” uses far more room than “iii”. A 55-character title full of wide capitals can be cut while a 65-character title of narrow letters fits. The meters measure the real rendered width in Arial at Google’s sizes (20 px title, 14 px description) — the same method Google’s own tooling uses.'], ['Will Google show exactly this?', 'Mostly. Google often rewrites titles (adding the site name, dropping boilerplate) and may pick a different snippet from the page when the description doesn’t match the query. The preview shows what your tags ask for; the limits are accurate as of 2026 but Google changes them from time to time.'], ['How does the date work?', 'For articles Google prefixes the description with the publish date (“18 Oct 2026 — ”), which eats into the description’s width. Set a date to see the effect; the meter includes it.'], ['Where does the favicon come from?', 'Your browser loads <code>/favicon.ico</code> from the host in the Page URL field — Toolity never fetches it. If the site has no favicon at that path, a globe icon is shown, which is also what Google does.'], RELAY_FAQ, PASTE_FAQ]
+  },
+  {
+    slug: 'meta-tag-generator', name: 'Meta Tag Generator', icon: 'lucide:code-xml', section: 'SEO & Site Helpers', split: '50/50',
+    desc: 'Free online meta tag generator: fill in title, description, canonical, robots, Open Graph and Twitter Card fields and get a clean, copy-paste <head> block — with pixel-width checks for the title and description. Runs in your browser.',
+    lead: 'Fill in the fields, get a complete, correct <head> block — title, description, canonical, robots, Open Graph and Twitter tags — ready to paste.',
+    cardDesc: 'Title, description, OG, Twitter, canonical → copy-paste <head> block.',
+    tags: ['meta tag generator', 'open graph generator', 'twitter card generator', 'meta tags', 'og tags', 'canonical tag', 'robots meta', 'head tags', 'seo meta tags', 'html meta generator'],
+    idle: 'Start with a title', sourceLabel: 'Fields', outputLabel: 'Head block', outputIcon: 'lucide:code-xml', outputEmpty: 'Your <head> tags will appear here',
+    downloads: [['html', 'head.html', 'lucide:code-xml']],
+    sourceHtml: `
+                <div class="form-group">
+                  <label class="form-label" for="f-title"><span>Title</span><span class="form-label-desc" id="f-title-count"></span></label>
+                  <input type="text" id="f-title" class="input-clean" placeholder="Free Online Image Compressor | Toolity" autocomplete="off">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="f-desc"><span>Description</span><span class="form-label-desc" id="f-desc-count"></span></label>
+                  <textarea id="f-desc" class="textarea-clean" rows="3" placeholder="Compress JPG, PNG and WebP images in your browser — no upload, no sign-up." spellcheck="true"></textarea>
+                </div>${FIELD('f-canonical', 'Canonical URL', 'type="url" placeholder="https://example.com/page" inputmode="url" spellcheck="false"')}
+                <div class="web-convert-row web-convert-row-2">${FIELD('f-site', 'Site name', 'type="text" placeholder="Toolity"')}${FIELD('f-author', 'Author', 'type="text" placeholder="Kapil Pidhwani"')}
+                </div>
+                <div class="web-convert-row web-convert-row-2">
+                  <div class="form-group">
+                    <label class="form-label" for="f-ogtype"><span>Open Graph type</span></label>
+                    <select id="f-ogtype" class="select-clean">${OPTS([['website', 'website'], ['article', 'article'], ['product', 'product'], ['profile', 'profile'], ['video.other', 'video']], 'website')}</select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="f-twcard"><span>Twitter card</span></label>
+                    <select id="f-twcard" class="select-clean">${OPTS([['summary_large_image', 'Large image'], ['summary', 'Summary'], ['', 'None']], 'summary_large_image')}</select>
+                  </div>
+                </div>${FIELD('f-image', 'Share image URL', 'type="url" placeholder="https://example.com/og-image.png" inputmode="url" spellcheck="false"', '1200×630 recommended')}${FIELD('f-imagealt', 'Image alt text', 'type="text" placeholder="What the image shows"')}
+                <div class="web-convert-row web-convert-row-2">${FIELD('f-twsite', 'X / Twitter @site', 'type="text" placeholder="@toolity_in" spellcheck="false"')}${FIELD('f-twcreator', '@creator', 'type="text" placeholder="@kapil" spellcheck="false"')}
+                </div>
+                <div class="form-group">
+                  <span class="form-label"><span>Robots</span></span>
+                  <div class="web-checks">${CHECK('f-index', 'index', true)}${CHECK('f-follow', 'follow', true)}${CHECK('f-maximage', 'max-image-preview:large', true)}${CHECK('f-noarchive', 'noarchive', false)}
+                  </div>
+                </div>`,
+    outputHtml: `
+                  <div class="serp-meters">
+                    <div class="serp-meter"><span>Title</span><div class="serp-bar"><i id="m-title"></i></div><b id="m-title-val">—</b></div>
+                    <div class="serp-meter"><span>Description</span><div class="serp-bar"><i id="m-desc"></i></div><b id="m-desc-val">—</b></div>
+                  </div>
+                  <pre class="web-code" id="output-text"></pre>
+                  <div class="web-tags" id="output-issues"></div>
+                  <p class="web-muted"><a id="serp-link" href="/labs/serp-snippet-preview/">Preview this snippet in Google results →</a></p>`,
+    settingsSummary: 'charset + viewport · og:url = canonical · en',
+    settings: `${CHECK('opt-boiler', 'Include charset and viewport', true)}${CHECK('opt-ogurl', 'Set og:url to the canonical URL', true)}${CHECK('opt-locale', 'Include og:locale', true)}${CHECK('opt-favicons', 'Include favicon link placeholders', false)}
+              <div class="control-item">
+                <label for="opt-lang">Language (og:locale)</label>
+                <select id="opt-lang" class="select-clean">${OPTS([['en_US', 'English (US)'], ['en_GB', 'English (UK)'], ['en_IN', 'English (India)'], ['hi_IN', 'Hindi'], ['de_DE', 'German'], ['fr_FR', 'French'], ['es_ES', 'Spanish'], ['pt_BR', 'Portuguese (BR)'], ['ja_JP', 'Japanese']], 'en_US')}</select>
+              </div>
+              <div class="control-item">
+                <label for="opt-theme">Theme colour (optional)</label>
+                <input type="text" id="opt-theme" class="input-clean" placeholder="#F4511E" spellcheck="false" autocomplete="off">
+              </div>`,
+    guide: [['Fill in what you have', 'Title and description drive everything — the Open Graph and Twitter tags reuse them unless you add a share image. Canonical, site name, author and robots are optional but recommended.'], ['Check the meters', 'The title and description meters use Google’s real pixel limits (about 600 px and 920 px on desktop). Warnings below the code flag a missing description, an image without alt text, or a canonical that isn’t absolute.'], ['Copy the block', 'Copy the <code>&lt;head&gt;</code> block or download it as <code>head.html</code> and paste it inside <code>&lt;head&gt;</code>, replacing any existing tags with the same names. Then check the live page with the <a href="/labs/meta-tag-extractor/">Meta Tag Extractor</a> and <a href="/labs/open-graph-preview/">Open Graph Preview</a>.']],
+    faq: [['Which tags does it generate?', '<code>&lt;title&gt;</code>, description, canonical, robots, author, theme-color, charset and viewport; Open Graph (<code>og:title</code>, <code>og:description</code>, <code>og:type</code>, <code>og:url</code>, <code>og:site_name</code>, <code>og:image</code>, <code>og:image:alt</code>, <code>og:locale</code>) and Twitter Card (<code>twitter:card</code>, <code>twitter:site</code>, <code>twitter:creator</code>, <code>twitter:title</code>, <code>twitter:description</code>, <code>twitter:image</code>). Empty fields are simply left out — no blank tags.'], ['Do I need the twitter:title and twitter:description tags?', 'X falls back to the Open Graph tags when they are missing, so strictly no. They are included because other platforms (Slack, Discord, iMessage) and some X previews behave more predictably with both sets present. Set the Twitter card to “None” to leave them out.'], ['What is the keywords meta tag — and why isn’t it here?', 'Google has ignored <code>&lt;meta name="keywords"&gt;</code> since 2009 and no major search engine ranks on it. Leaving it out keeps your head clean; nothing is lost.'], ['Why the pixel limits instead of character counts?', 'Google truncates by width, not length. The meters measure your text in Google’s font sizes; see the <a href="/labs/serp-snippet-preview/">SERP Snippet Preview</a> for the full rendered result on desktop and mobile.'], ['Should og:url be the canonical URL?', 'Yes, in almost every case — it tells Facebook and LinkedIn which URL to count shares against, so tracking parameters and duplicates roll up to one page. The default follows the canonical; untick the setting if you need them to differ.'], PRIVACY_FAQ]
+  }
+];
+
 const GEN_TOOLS = [
   {
     slug: 'share-link-generator', name: 'Share & Message Link Generator', icon: 'lucide:share-2', section: 'Generators & Links',
@@ -676,5 +838,6 @@ module.exports = [
     guide: [['Shape it', 'Pick a style, then drag Points, Randomness and Smoothness — or hit <strong>Randomise</strong> for a new seed. The preview stays in view while you scroll the controls. Presets give you a styled starting point.'], ['Colour and move it', 'Choose a solid, linear or radial fill, a background (or transparent) and a movement: morph, float, spin or pulse. Layers, blur, grain and shadow live in Settings.'], ['Export', 'Copy the SVG or CSS, or use Download for SVG, animated SVG, PNG up to 4×, WebP, JPG, a looping GIF or a WebM/MP4 video. Copy share link saves the design in a URL.']],
     faq: [['Which export should I use?', '<strong>SVG</strong> for websites and design tools (Figma, Illustrator) — tiny and sharp at any size. <strong>Animated SVG</strong> plays by itself in any browser via an &lt;img&gt; tag. <strong>CSS</strong> gives a clip-path you can put on any element. <strong>PNG/WebP</strong> for slides and social posts, <strong>GIF</strong> for chats and email, <strong>WebM/MP4</strong> for video editors and reels.'], ['Do the animations loop seamlessly?', 'Yes. Every movement is built on one loop of the length you set, so the last frame flows straight back into the first — in the animated SVG, the GIF and the video alike.'], ['Why does the video take as long as the loop?', 'Browsers record video in real time, so a 6-second loop takes about 6 seconds to export. Keep the tab visible while it records. GIFs are rendered frame by frame instead and are usually quicker.'], ['Will blur and grain look the same everywhere?', 'In browsers, yes. Design tools sometimes render SVG filters (blur, grain, shadow) differently or ignore them; export a PNG if you need an exact match there. Safari before version 18 shows the live preview without blur, but the SVG export keeps it.'], ['Can I come back to a design later?', 'Yes — every setting is saved in the page link. Use <strong>Copy share link</strong> and open it any time; nothing is stored on a server.'], PRIVACY_FAQ]
   },
-  ...GEN_TOOLS
+  ...GEN_TOOLS,
+  ...SEO_TOOLS
 ];
