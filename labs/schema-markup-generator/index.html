@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Schema Markup Generator | Toolity Labs</title>
+  <link rel="canonical" href="https://toolity.in/labs/schema-markup-generator/">
+  <meta name="description" content="Free online schema markup generator: build valid JSON-LD structured data for Organization, Local Business, Article, Product, FAQ, How-to, Event, Breadcrumbs, Recipe, Video, Job posting, Person and Website — with required-field checks — and copy the script tag. Runs in your browser.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Schema Markup Generator | Toolity Labs">
+  <meta property="og:description" content="Free online schema markup generator: build valid JSON-LD structured data for Organization, Local Business, Article, Product, FAQ, How-to, Event, Breadcrumbs, Recipe, Video, Job posting, Person and Website — with required-field checks — and copy the script tag. Runs in your browser.">
+  <meta property="og:url" content="https://toolity.in/labs/schema-markup-generator/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=6.1" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=6.1">
+  <link rel="stylesheet" href="/styles/tools/schema-markup-generator.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Schema Markup Generator",
+        "url": "https://toolity.in/labs/schema-markup-generator/",
+        "description": "Free online schema markup generator: build valid JSON-LD structured data for Organization, Local Business, Article, Product, FAQ, How-to, Event, Breadcrumbs, Recipe, Video, Job posting, Person and Website — with required-field checks — and copy the script tag. Runs in your browser.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Labs", "item": "https://toolity.in/labs/" },
+          { "@type": "ListItem", "position": 3, "name": "Schema Markup Generator", "item": "https://toolity.in/labs/schema-markup-generator/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Which types can show rich results in Google?", "acceptedAnswer": { "@type": "Answer", "text": "Article, Product, FAQ, How-to, Event, Local Business, Recipe, Video, Job posting and Breadcrumbs are all documented Google rich-result types (eligibility rules change — FAQ rich results, for example, are now limited to authoritative government and health sites). Organization, Person and Website feed the Knowledge Panel and sitelinks search box rather than a visible snippet." } },
+          { "@type": "Question", "name": "Do I need every field?", "acceptedAnswer": { "@type": "Answer", "text": "Only the ones marked required — those are what Google lists as required for the rich result. Recommended fields raise the chance of a richer display; leave the rest blank and they are simply omitted from the output." } },
+          { "@type": "Question", "name": "Where exactly does the code go?", "acceptedAnswer": { "@type": "Answer", "text": "Anywhere in the HTML, but &lt;head&gt; is conventional. JSON-LD does not need to wrap visible content, unlike Microdata, which is why Google recommends it. If your CMS has a “custom head code” field, paste it there." } },
+          { "@type": "Question", "name": "Can I combine several types in one script?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — put them in a JSON array or an @graph. This tool outputs one entity at a time to keep the form manageable; generate each, then combine. Reference one from another with the @id option (e.g. an Article’s publisher pointing at your Organization)." } },
+          { "@type": "Question", "name": "Why does my FAQ schema not show up?", "acceptedAnswer": { "@type": "Answer", "text": "Since 2023 Google shows FAQ rich results only for well-known authoritative sites, and How-to results only on desktop. Valid markup is still useful for other search engines and AI assistants, but do not expect the dropdown in Google for a typical site." } },
+          { "@type": "Question", "name": "Is my input sent anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. Everything is computed by JavaScript in your browser tab. Nothing is uploaded, logged or stored by Toolity." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/labs/" class="breadcrumb-link">Labs</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Schema Markup Generator</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Labs</span>
+            <h1 class="page-title">Schema Markup Generator</h1>
+            <p class="page-desc">Pick a type, fill in the fields, copy the JSON-LD — with required fields and formats checked before you paste it into your page.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" data-split="50/50" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge web-status-badge" id="status-badge">Pick a type and fill the required fields</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result" aria-label="Copy result" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <div class="dropdown-menu-wrapper" id="download-dropdown-wrap">
+                <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download result" aria-label="Download result" aria-haspopup="true" disabled>
+                  <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                  <span>Download</span>
+                  <iconify-icon icon="lucide:chevron-down" class="dropdown-arrow" width="13" height="13"></iconify-icon>
+                </button>
+                <div class="dropdown-popup" role="menu">
+                  <button type="button" class="dropdown-item" data-format="html" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:code-xml" width="14" height="14"></iconify-icon>
+                      <span>Script tag (.html)</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="json" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:braces" width="14" height="14"></iconify-icon>
+                      <span>JSON only (.json)</span>
+                    </div>
+                  </button>
+                </div>
+              </div>
+              <button type="button" class="btn-toolbar-sm" id="btn-open" title="Open result in a new tab" aria-label="Open result in a new tab" disabled>
+                <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
+                <span>Open</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Fields</span>
+                <span class="pane-badge" id="input-badge">—</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content web-form">
+                <div class="form-group">
+                  <label class="form-label" for="sc-type"><span>Schema type</span></label>
+                  <select id="sc-type" class="select-clean"><option value="Organization">Organization</option><option value="LocalBusiness">Local Business</option><option value="Person">Person</option><option value="WebSite">Website (+ search box)</option><option value="Article" selected>Article / Blog post</option><option value="Product">Product (+ offer, rating)</option><option value="FAQPage">FAQ page</option><option value="HowTo">How-to</option><option value="Event">Event</option><option value="BreadcrumbList">Breadcrumbs</option><option value="Recipe">Recipe</option><option value="VideoObject">Video</option><option value="JobPosting">Job posting</option></select>
+                </div>
+                <div class="web-group" id="sc-fields"></div>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>JSON-LD</span>
+                <span class="pane-badge" id="output-badge">—</span>
+              </div>
+              <div class="pane-content web-output-pane">
+                <div class="pane-empty" id="output-empty">
+                  <iconify-icon icon="lucide:braces"></iconify-icon>
+                  <span>Your structured data will appear here</span>
+                </div>
+                <div class="web-output" id="output-content" hidden>
+                  <div class="web-tags" id="output-issues"></div>
+                  <pre class="web-code" id="output-text"></pre>
+                  <p class="web-muted">Validate it with <a href="https://search.google.com/test/rich-results" target="_blank" rel="noopener">Google’s Rich Results Test</a> or the <a href="https://validator.schema.org/" target="_blank" rel="noopener">Schema.org validator</a> — paste the code there; nothing is sent from here.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">2-space indent · with @context</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item">
+                <label for="opt-indent">Indent</label>
+                <select id="opt-indent" class="select-clean"><option value="2" selected>2 spaces</option><option value="4">4 spaces</option><option value="0">Minified</option></select>
+              </div>
+              <div class="control-item"><input type="checkbox" id="opt-context" checked><label for="opt-context">Include "@context": "https://schema.org"</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-id"><label for="opt-id">Add an @id based on the URL field</label></div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Use Schema Markup Generator in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Choose the type</h3>
+              <p class="step-desc">Article for posts, Product for shop pages, FAQ and How-to for help content, Event, Local Business, Recipe, Video, Job posting, Breadcrumbs, Website (adds the sitelinks search box), Organization or Person. The form changes to the fields that type needs; required ones are marked.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Fill it in</h3>
+              <p class="step-desc">Repeatable sections (FAQ questions, How-to steps, breadcrumb items) have Add / remove buttons. Dates use the picker (ISO 8601 comes out), prices and ratings are checked for range, URLs must be absolute. Warnings appear above the code as you type.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Paste and test</h3>
+              <p class="step-desc">Copy the <code>&lt;script type="application/ld+json"&gt;</code> block into your page’s <code>&lt;head&gt;</code> (or before <code>&lt;/body&gt;</code>), publish, then test the live URL in Google’s Rich Results Test. One block per entity — repeat for other types on the same page.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Schema Markup Generator — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Which types can show rich results in Google?</summary>
+              <p>Article, Product, FAQ, How-to, Event, Local Business, Recipe, Video, Job posting and Breadcrumbs are all documented Google rich-result types (eligibility rules change — FAQ rich results, for example, are now limited to authoritative government and health sites). Organization, Person and Website feed the Knowledge Panel and sitelinks search box rather than a visible snippet.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Do I need every field?</summary>
+              <p>Only the ones marked required — those are what Google lists as required for the rich result. Recommended fields raise the chance of a richer display; leave the rest blank and they are simply omitted from the output.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Where exactly does the code go?</summary>
+              <p>Anywhere in the HTML, but <code>&lt;head&gt;</code> is conventional. JSON-LD does not need to wrap visible content, unlike Microdata, which is why Google recommends it. If your CMS has a “custom head code” field, paste it there.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can I combine several types in one script?</summary>
+              <p>Yes — put them in a JSON array or an <code>@graph</code>. This tool outputs one entity at a time to keep the form manageable; generate each, then combine. Reference one from another with the <code>@id</code> option (e.g. an Article’s publisher pointing at your Organization).</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why does my FAQ schema not show up?</summary>
+              <p>Since 2023 Google shows FAQ rich results only for well-known authoritative sites, and How-to results only on desktop. Valid markup is still useful for other search engines and AI assistants, but do not expect the dropdown in Google for a typical site.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is my input sent anywhere?</summary>
+              <p>No. Everything is computed by JavaScript in your browser tab. Nothing is uploaded, logged or stored by Toolity.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="labs"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=4.5"></script>
+  <script src="/scripts/tool-common.js?v=1.1"></script>
+  <script src="/scripts/web-common.js?v=1.2"></script>
+  <script src="/labs/schema-markup-generator/schema-markup-generator.js?v=1.0"></script>
+</body>
+</html>

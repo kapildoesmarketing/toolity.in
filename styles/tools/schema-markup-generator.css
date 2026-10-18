@@ -1,0 +1,11 @@
+/* Schema Markup Generator — repeatable rows and required markers. */
+.sc-req { color: var(--brand); font-weight: 700; }
+.sc-list { gap: 0.5rem; }
+.sc-rows { display: flex; flex-direction: column; gap: 0.5rem; }
+.sc-row { display: flex; flex-direction: column; gap: 0.5rem; padding: 0.7rem 0.8rem; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); min-width: 0; }
+.sc-row .form-group { margin: 0; }
+.sc-row-head { display: flex; align-items: center; justify-content: space-between; }
+.sc-del { width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); color: var(--text-muted); cursor: pointer; transition: all 0.15s ease; }
+.sc-del:hover { color: #dc2626; border-color: #dc2626; background: rgba(220, 38, 38, 0.08); }
+.sc-add { align-self: flex-start; }
+#output-text { max-height: 640px; }
