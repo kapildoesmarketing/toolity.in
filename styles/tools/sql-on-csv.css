@@ -1,0 +1,26 @@
+/* SQL on CSV — schema cards, insert chips, result table. */
+.sql-mono { font-family: var(--font-mono); font-size: 0.88rem; }
+.sql-tables { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 0.5rem; min-width: 0; }
+.sql-tables[hidden] { display: none; }
+.sql-table-card { border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); min-width: 0; }
+.sql-table-card summary { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; padding: 0.45rem 0.6rem; cursor: pointer; list-style: none; min-width: 0; }
+.sql-table-card summary::-webkit-details-marker { display: none; }
+.sql-table-card summary::after { content: '›'; color: var(--text-muted); transition: transform 0.15s ease; flex-shrink: 0; }
+.sql-table-card[open] summary::after { transform: rotate(90deg); }
+.sql-table-card summary .web-muted { white-space: nowrap; margin-left: auto; }
+.sql-ins { border: 0; background: none; padding: 0; font: inherit; font-family: var(--font-mono); font-weight: 600; font-size: 0.84rem; color: var(--text-primary); cursor: pointer; text-align: left; min-width: 0; overflow-wrap: anywhere; }
+.sql-ins:hover { color: var(--brand); }
+.sql-cols { display: flex; flex-wrap: wrap; gap: 0.3rem; padding: 0 0.6rem 0.6rem; border-top: 1px dashed var(--border); padding-top: 0.5rem; }
+.sql-col { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.2rem 0.5rem; border: 1px solid var(--border); border-radius: var(--radius-pill); background: var(--surface-elevated); font-weight: 500; font-size: 0.78rem; }
+.sql-col:hover { border-color: var(--brand); }
+.sql-col i { font-style: normal; font-size: 0.68rem; color: var(--text-muted); text-transform: lowercase; }
+.sql-wrap { max-height: 600px; }
+.sql-table { border-collapse: separate; border-spacing: 0; font-size: 0.82rem; min-width: 100%; }
+.sql-table th, .sql-table td { padding: 0.45rem 0.65rem; border-bottom: 1px solid var(--border); border-right: 1px solid var(--border-subtle); text-align: left; white-space: nowrap; max-width: 360px; overflow: hidden; text-overflow: ellipsis; }
+.sql-table thead th { position: sticky; top: 0; z-index: 1; background: var(--surface-elevated); font-weight: 600; color: var(--text-secondary); font-family: var(--font-mono); }
+.sql-table td { font-family: var(--font-mono); color: var(--text-primary); }
+.sql-table td.is-num { text-align: right; font-variant-numeric: tabular-nums; }
+.sql-table td.is-null { color: var(--text-muted); font-style: italic; }
+.sql-table .sql-num { position: sticky; left: 0; background: var(--surface-elevated); color: var(--text-muted); font-variant-numeric: tabular-nums; width: 1%; padding: 0.45rem 0.5rem; }
+.sql-table thead .sql-num { z-index: 2; }
+#sql-more[hidden] { display: none; }

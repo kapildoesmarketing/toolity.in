@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online SQL on CSV | Toolity Data</title>
+  <link rel="canonical" href="https://toolity.in/data/sql-on-csv/">
+  <meta name="description" content="Free online SQL on CSV: load CSV, TSV or JSON files as tables and query them with real SQL (SQLite) — joins, GROUP BY, window functions, CTEs — then export the result as CSV, JSON or a SQLite database. Runs in your browser — nothing uploaded.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online SQL on CSV | Toolity Data">
+  <meta property="og:description" content="Free online SQL on CSV: load CSV, TSV or JSON files as tables and query them with real SQL (SQLite) — joins, GROUP BY, window functions, CTEs — then export the result as CSV, JSON or a SQLite database. Runs in your browser — nothing uploaded.">
+  <meta property="og:url" content="https://toolity.in/data/sql-on-csv/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=5.6" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=5.6">
+  <link rel="stylesheet" href="/styles/tools/sql-on-csv.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "SQL on CSV",
+        "url": "https://toolity.in/data/sql-on-csv/",
+        "description": "Free online SQL on CSV: load CSV, TSV or JSON files as tables and query them with real SQL (SQLite) — joins, GROUP BY, window functions, CTEs — then export the result as CSV, JSON or a SQLite database. Runs in your browser — nothing uploaded.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Data", "item": "https://toolity.in/data/" },
+          { "@type": "ListItem", "position": 3, "name": "SQL on CSV", "item": "https://toolity.in/data/sql-on-csv/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Which SQL dialect is this?", "acceptedAnswer": { "@type": "Answer", "text": "SQLite, running as WebAssembly (sql.js) inside your browser — the same engine inside every phone and browser. Joins, subqueries, CTEs, window functions, GROUP_CONCAT, strftime and JSON functions are all available; LIMIT works, TOP does not. The engine (about 1 MB) downloads once, when you run your first query." } },
+          { "@type": "Question", "name": "How are column types decided?", "acceptedAnswer": { "@type": "Answer", "text": "Each CSV column that contains only numbers becomes INTEGER or REAL, so SUM, AVG and numeric sorting behave; everything else stays TEXT. Empty cells become NULL in numeric columns and empty strings in text columns. Untick “Detect numbers” to keep everything as text (useful for ZIP / PIN codes with leading zeros). JSON keeps its own numbers and strings." } },
+          { "@type": "Question", "name": "Can I join two files?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — load both, then SELECT … FROM orders o JOIN customers c ON c.id = o.customer_id. Table names come from the file names (lower-cased, non-letters replaced by underscores); a second file with the same name gets a _2 suffix. Column names with spaces need double quotes: \"Order Date\"." } },
+          { "@type": "Question", "name": "How big can the files be?", "acceptedAnswer": { "@type": "Answer", "text": "Up to 50 MB per file. Everything lives in your tab’s memory, so a few hundred thousand rows are fine; multi-million-row files will be slow to load. The result table shows up to the number of rows you choose in Settings, while downloads always include every row — add a LIMIT if a query returns more than you need." } },
+          { "@type": "Question", "name": "What JSON shapes are accepted?", "acceptedAnswer": { "@type": "Answer", "text": "An array of objects ([{\"id\":1,\"name\":\"Ada\"}, …]) — each key becomes a column, and keys missing from some objects are NULL there. An object with a data array is unwrapped. Nested objects and arrays are stored as JSON text, which you can query with SQLite’s json_extract()." } },
+          { "@type": "Question", "name": "Is my data uploaded anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. Parsing and converting happen in JavaScript inside your browser tab. Your text and files are never sent to Toolity or anyone else." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/data/" class="breadcrumb-link">Data</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">SQL on CSV</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Data</span>
+            <h1 class="page-title">SQL on CSV</h1>
+            <p class="page-desc">Drop CSV or JSON files, write SQL, get a result table — joins, aggregates and window functions included. Export CSV, JSON or SQLite.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="stacked" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge web-status-badge" id="status-badge">Add a CSV or JSON file to begin</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result" aria-label="Copy result" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <div class="dropdown-menu-wrapper" id="download-dropdown-wrap">
+                <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download result" aria-label="Download result" aria-haspopup="true" disabled>
+                  <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                  <span>Download</span>
+                  <iconify-icon icon="lucide:chevron-down" class="dropdown-arrow" width="13" height="13"></iconify-icon>
+                </button>
+                <div class="dropdown-popup" role="menu">
+                  <button type="button" class="dropdown-item" data-format="csv" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:file-text" width="14" height="14"></iconify-icon>
+                      <span>Result as CSV</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="json" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:braces" width="14" height="14"></iconify-icon>
+                      <span>Result as JSON</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="db" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:database" width="14" height="14"></iconify-icon>
+                      <span>All tables as SQLite (.db)</span>
+                    </div>
+                  </button>
+                </div>
+              </div>
+              <button type="button" class="btn-toolbar-sm" id="btn-open" title="Open result in a new tab" aria-label="Open result in a new tab" disabled>
+                <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
+                <span>Open</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Tables & query</span>
+                <span class="pane-badge" id="input-badge">—</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content web-form">
+                <div class="web-file-row">
+                  <button type="button" class="btn-toolbar-sm" id="btn-file" title="Open a file from your device" aria-label="Open a file from your device">
+                    <iconify-icon icon="lucide:folder-open" width="14" height="14"></iconify-icon>
+                    <span>Open file</span>
+                  </button>
+                  <input type="file" id="file-input" accept=".csv,.tsv,.txt,.json" multiple hidden>
+                  <span class="web-muted" id="file-name">or drop files here</span>
+                </div>
+                <div class="sql-tables" id="sql-tables" hidden></div>
+                <div class="form-group">
+                  <label class="form-label" for="text-input"><span>Or paste CSV / JSON</span><span class="form-label-desc">becomes a table named <code>pasted</code></span></label>
+                  <textarea id="text-input" class="textarea-clean" rows="3" placeholder="name,city,amount&#10;Ada,London,120&#10;Linus,Helsinki,80" spellcheck="false" autocapitalize="off"></textarea>
+                </div>
+                <div class="form-group form-group-grow">
+                  <label class="form-label" for="sql-input"><span>SQL</span><span class="form-label-desc">SQLite dialect · Ctrl/⌘ + Enter runs</span></label>
+                  <textarea id="sql-input" class="textarea-clean sql-mono" rows="5" placeholder="SELECT city, COUNT(*) AS orders, SUM(amount) AS total&#10;FROM pasted&#10;GROUP BY city&#10;ORDER BY total DESC" spellcheck="false" autocapitalize="off"></textarea>
+                </div>
+                <button type="button" id="btn-run" class="btn-toolbar-sm btn-brand-sm btn-primary-action">
+                  <iconify-icon icon="lucide:play" width="16" height="16"></iconify-icon>
+                  <span>Run query</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Result</span>
+                <span class="pane-badge" id="output-badge">—</span>
+              </div>
+              <div class="pane-content web-output-pane">
+                <div class="pane-empty" id="output-empty">
+                  <iconify-icon icon="lucide:database"></iconify-icon>
+                  <span>Query results will appear here</span>
+                </div>
+                <div class="web-output" id="output-content" hidden>
+                  <div class="web-table-wrap sql-wrap">
+                    <table class="sql-table" id="output-table"></table>
+                  </div>
+                  <p class="web-muted" id="sql-more" hidden></p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">Header row · auto delimiter · detect numbers · 500 rows shown</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item"><input type="checkbox" id="opt-header" checked><label for="opt-header">First row is a header (files loaded after changing this)</label></div>
+              <div class="control-item">
+                <label for="opt-delim">CSV delimiter</label>
+                <select id="opt-delim" class="select-clean"><option value="auto" selected>Auto-detect</option><option value=",">Comma</option><option value=";">Semicolon</option><option value="tab">Tab</option><option value="|">Pipe</option></select>
+              </div>
+              <div class="control-item"><input type="checkbox" id="opt-types" checked><label for="opt-types">Detect numbers (columns that are all numeric become INTEGER / REAL)</label></div>
+              <div class="control-item">
+                <label for="opt-limit">Rows shown in the result table</label>
+                <select id="opt-limit" class="select-clean"><option value="100">100</option><option value="500" selected>500</option><option value="2000">2,000</option><option value="10000">10,000</option></select>
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Use SQL on CSV in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Load your data</h3>
+              <p class="step-desc">Drop one or more CSV, TSV or JSON files — each becomes a table named after the file (<code>sales.csv</code> → <code>sales</code>), listed with its columns and detected types. Or paste data to get a table called <code>pasted</code>. Click a table or column name to insert it into the query.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Write SQL and run</h3>
+              <p class="step-desc">Any SQLite query works: <code>WHERE</code>, <code>GROUP BY</code>, <code>JOIN</code> across files, <code>WITH</code> CTEs, window functions like <code>ROW_NUMBER() OVER (…)</code>, date functions, even <code>CREATE TABLE … AS SELECT</code>. Press <strong>Run query</strong> or Ctrl/⌘ + Enter.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Export the result</h3>
+              <p class="step-desc">Download the result as CSV or JSON, or export every loaded table as one SQLite <code>.db</code> file to open later in DB Browser, DBeaver or Python. Copy puts the result on the clipboard as CSV.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">SQL on CSV — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Which SQL dialect is this?</summary>
+              <p>SQLite, running as WebAssembly (<a href="https://sql.js.org" target="_blank" rel="noopener">sql.js</a>) inside your browser — the same engine inside every phone and browser. Joins, subqueries, CTEs, window functions, <code>GROUP_CONCAT</code>, <code>strftime</code> and JSON functions are all available; <code>LIMIT</code> works, <code>TOP</code> does not. The engine (about 1 MB) downloads once, when you run your first query.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How are column types decided?</summary>
+              <p>Each CSV column that contains only numbers becomes <code>INTEGER</code> or <code>REAL</code>, so <code>SUM</code>, <code>AVG</code> and numeric sorting behave; everything else stays <code>TEXT</code>. Empty cells become <code>NULL</code> in numeric columns and empty strings in text columns. Untick “Detect numbers” to keep everything as text (useful for ZIP / PIN codes with leading zeros). JSON keeps its own numbers and strings.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can I join two files?</summary>
+              <p>Yes — load both, then <code>SELECT … FROM orders o JOIN customers c ON c.id = o.customer_id</code>. Table names come from the file names (lower-cased, non-letters replaced by underscores); a second file with the same name gets a <code>_2</code> suffix. Column names with spaces need double quotes: <code>"Order Date"</code>.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How big can the files be?</summary>
+              <p>Up to 50 MB per file. Everything lives in your tab’s memory, so a few hundred thousand rows are fine; multi-million-row files will be slow to load. The result table shows up to the number of rows you choose in Settings, while downloads always include every row — add a <code>LIMIT</code> if a query returns more than you need.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What JSON shapes are accepted?</summary>
+              <p>An array of objects (<code>[{"id":1,"name":"Ada"}, …]</code>) — each key becomes a column, and keys missing from some objects are <code>NULL</code> there. An object with a <code>data</code> array is unwrapped. Nested objects and arrays are stored as JSON text, which you can query with SQLite’s <code>json_extract()</code>.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is my data uploaded anywhere?</summary>
+              <p>No. Parsing and converting happen in JavaScript inside your browser tab. Your text and files are never sent to Toolity or anyone else.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="data"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=4.3"></script>
+  <script src="/scripts/tool-common.js?v=1.1"></script>
+  <script src="/scripts/web-common.js?v=1.2"></script>
+  <script src="/data/sql-on-csv/sql-on-csv.js?v=1.0"></script>
+</body>
+</html>

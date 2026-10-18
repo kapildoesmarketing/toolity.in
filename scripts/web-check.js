@@ -380,7 +380,69 @@ const CASES = [
     const SYS = '<11>May  1 10:00:00 host sshd[12]: Failed password' + NL + 'May  1 10:01:00 host cron[5]: job ok';
     set('text-input', SYS); await settle(); A(/syslog/.test($('input-count').textContent) && stat(1) === '1', 'syslog: ' + $('input-count').textContent + ' ' + stat(1));
     const csv = await T.T.download('csv', T); A(csv.text.split(NL)[0] === 'time,level,message' && csv.text.split(NL).length === 3, 'csv export');
-    $('btn-reset').click(); await settle(); A(!out() && $('text-input').value === '' && $('lvl-info').checked, 'reset');`]
+    $('btn-reset').click(); await settle(); A(!out() && $('text-input').value === '' && $('lvl-info').checked, 'reset');`],
+  ['dev/markdown-studio', `
+    set('text-input', '# Hello World\\n\\nSome **bold** and a [link](https://example.com).\\n\\n| a | b |\\n|---|---|\\n| 1 | 2 |\\n\\n- [x] done\\n- [ ] todo');
+    A(await waitFor(() => out() && /<h1/.test(out().text), 30000), 'no html output');
+    A(/<h1 id="hello-world">Hello World<\\/h1>/.test(out().text), 'h1 id: ' + out().text.slice(0, 80));
+    A(/<table>/.test(out().text) && /<strong>bold<\\/strong>/.test(out().text) && /type="checkbox"/.test(out().text), 'gfm: ' + out().text);
+    A($('output-preview').querySelector('h1') && !$('output-preview').hidden && $('output-text').hidden, 'preview rendered');
+    A(/1 heading/.test($('output-badge').textContent) && /min read/.test($('output-badge').textContent), 'badge: ' + $('output-badge').textContent);
+    pill('seg-view', 'code'); await tick(300); A(!$('output-text').hidden && $('output-preview').hidden && /<h1/.test($('output-text').textContent), 'code view');
+    set('text-input', 'Hi <script>alert(1)</script> <img src=x onerror=alert(1)>');
+    A(await waitFor(() => out() && /Hi/.test(out().text) && !/script/.test(out().text), 20000), 'sanitize wait');
+    A(!/onerror|<script/.test(out().text), 'sanitized: ' + out().text);
+    pill('seg-mode', 'html2md'); A($('input-label').textContent === 'HTML', 'label switch');
+    set('text-input', '<h2>Title</h2><p>Some <em>it</em> and <code>x</code></p><ul><li>one</li><li>two</li></ul>');
+    A(await waitFor(() => out() && /^## Title/.test(out().text), 30000), 'md output: ' + (out() && out().text));
+    A(/- +one\\n- +two/.test(out().text) && /_it_/.test(out().text) && /\`x\`/.test(out().text), 'md details: ' + out().text);
+    const dl = await T.T.download('html', T); A(/<!doctype html>/i.test(dl.text) && /<h2[^>]*>Title/.test(dl.text) && /\\.html$/.test(dl.name), 'full doc download');
+    const md = await T.T.download('md', T); A(/^## Title/.test(md.text) && /\\.md$/.test(md.name), 'md download');
+    $('btn-reset').click(); await settle(); A(!out() && $('text-input').value === '' && $('input-label').textContent === 'Markdown' && $('output-preview').innerHTML === '', 'reset');`],
+  ['dev/regex-tester', `
+    set('rx-pattern', '(?<user>\\\\w+)@(\\\\w+)\\\\.com'); set('text-input', 'ada@example.com, linus@kernel.com and bad@x.org');
+    A(await waitFor(() => out() && /2 matches/.test($('output-badge').textContent), 20000), 'badge: ' + $('output-badge').textContent);
+    A($('output-highlight').querySelectorAll('mark').length === 2, 'highlight count: ' + $('output-highlight').querySelectorAll('mark').length);
+    A(out().text === 'ada@example.com\\nlinus@kernel.com', 'text: ' + out().text);
+    A($('output-matches').textContent.includes('user') && $('output-matches').textContent.includes('example') && $('output-matches').querySelectorAll('.rx-match').length === 2, 'groups listed');
+    set('flag-g', false); A(await waitFor(() => /^1 match ·/.test($('output-badge').textContent), 10000), 'non-global: ' + $('output-badge').textContent);
+    set('flag-g', true); await tick(400);
+    set('rx-pattern', '(abc'); await tick(500); A(!$('input-error').hidden && /Invalid pattern/.test($('input-error').textContent), 'syntax error: ' + $('input-error').textContent);
+    set('rx-pattern', '(\\\\w+)@(\\\\w+)\\\\.com'); pill('seg-mode', 'replace'); set('rx-replace', '$2:$1');
+    A(await waitFor(() => out() && /example:ada, kernel:linus/.test(out().text), 20000), 'replace: ' + (out() && out().text));
+    A(!$('rx-replace-group').hidden && !$('output-text').hidden && $('output-highlight').hidden, 'replace ui');
+    pill('seg-mode', 'match'); set('rx-pattern', '(a+)+$'); set('text-input', 'a'.repeat(40) + 'b');
+    A(await waitFor(() => !$('input-error').hidden && /took more than/.test($('input-error').textContent), 8000), 'timeout: ' + $('input-error').textContent);
+    set('rx-pattern', '\\\\d+'); set('text-input', 'a1b22c333');
+    A(await waitFor(() => out() && /3 matches/.test($('output-badge').textContent), 10000), 'recovered after timeout: ' + $('output-badge').textContent);
+    const j = JSON.parse((await T.T.download('json', T)).text); A(j.total === 3 && j.matches[2].match === '333' && j.matches[2].index === 6, 'json download');
+    document.querySelector('.rx-chip[data-insert="(abc)"]').click(); await tick(200); A($('rx-pattern').value.endsWith('(abc)'), 'cheat insert: ' + $('rx-pattern').value);
+    document.querySelector('.rx-chip[data-pattern]').click(); await tick(200); A($('rx-pattern').value.includes('@'), 'preset: ' + $('rx-pattern').value);
+    $('btn-reset').click(); await settle(); A(!out() && $('rx-pattern').value === '' && $('flag-g').checked && !$('flag-i').checked && $('rx-replace-group').hidden, 'reset');`],
+  ['data/sql-on-csv', `
+    const addFile = (name, text) => { const dt = new DataTransfer(); dt.items.add(new File([text], name, { type: 'text/plain' })); const i = $('file-input'); i.files = dt.files; i.dispatchEvent(new Event('change', { bubbles: true })); };
+    addFile('Sales 2024.csv', 'id,city,amount\\n1,London,120\\n2,Helsinki,80\\n3,London,30');
+    A(await waitFor(() => !$('sql-tables').hidden && /sales_2024/.test($('sql-tables').textContent), 40000), 'table card: ' + $('sql-tables').textContent);
+    A(/3 rows · 3 cols/.test($('sql-tables').textContent) && /INTEGER/.test($('sql-tables').textContent) && /TEXT/.test($('sql-tables').textContent), 'schema: ' + $('sql-tables').textContent);
+    A(/sales_2024/.test($('sql-input').placeholder), 'placeholder: ' + $('sql-input').placeholder);
+    set('sql-input', 'SELECT city, SUM(amount) AS total FROM sales_2024 GROUP BY city ORDER BY total DESC'); await tick(300);
+    A(/Press Run query/.test($('status-badge').textContent), 'status: ' + $('status-badge').textContent);
+    await go(); A(out() && out().text === 'city,total\\nLondon,150\\nHelsinki,80', 'result: ' + (out() && out().text));
+    A($('output-table').querySelectorAll('tbody tr').length === 2 && $('output-table').querySelector('td.is-num'), 'table rows');
+    A(/2 rows · 2 cols/.test($('output-badge').textContent), 'badge: ' + $('output-badge').textContent);
+    set('sql-input', 'SELECT 1'); await tick(300); A(out() && /Query changed/.test($('status-badge').textContent) && $('output-table').querySelectorAll('tbody tr').length === 2, 'result kept while editing');
+    addFile('cities.json', '[{"city":"London","country":"UK"},{"city":"Helsinki","country":"FI"}]');
+    A(await waitFor(() => /cities/.test($('sql-tables').textContent), 20000), 'json table');
+    set('text-input', 'city,tax\\nLondon,20\\nHelsinki,24');
+    set('sql-input', 'SELECT c.country, SUM(s.amount * p.tax / 100.0) AS tax FROM sales_2024 s JOIN cities c ON c.city = s.city JOIN pasted p ON p.city = s.city GROUP BY c.country ORDER BY c.country');
+    await go(); A(out() && out().text === 'country,tax\\nFI,19.2\\nUK,30', 'join: ' + (out() && out().text));
+    A(/pasted/.test($('sql-tables').textContent), 'pasted table listed');
+    set('sql-input', 'SELECT * FROM nope'); await go(); A(!$('input-error').hidden && /no such table/.test($('input-error').textContent), 'sql error: ' + $('input-error').textContent);
+    set('sql-input', 'SELECT id, city FROM sales_2024 ORDER BY id LIMIT 2'); await go();
+    const js = JSON.parse((await T.T.download('json', T)).text); A(js.length === 2 && js[0].city === 'London' && js[0].id === 1, 'json download: ' + JSON.stringify(js));
+    const dbf = await T.T.download('db', T); A(dbf.blob && dbf.blob.size > 4096 && dbf.name === 'tables.db', 'db export');
+    $('sql-tables').querySelector('.sql-col').click(); await tick(100); A(/"?id"?$/.test($('sql-input').value), 'column insert: ' + $('sql-input').value);
+    $('btn-reset').click(); await settle(); A(!out() && $('sql-tables').hidden && $('sql-input').value === '' && $('text-input').value === '', 'reset');`]
 ];
 
 (async () => {

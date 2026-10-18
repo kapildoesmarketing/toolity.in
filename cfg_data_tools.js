@@ -220,5 +220,44 @@ module.exports = [
               <div class="control-item"><input type="checkbox" id="opt-case"><label for="opt-case">Case-sensitive search</label></div>`,
     guide: [['Open a log', 'Drop a .log, .txt or .jsonl file, or paste lines. JSON lines, Apache/Nginx access logs, syslog and “timestamp LEVEL message” logs are recognised automatically; stack traces stay attached to their line.'], ['Filter', 'Untick levels you do not need, search for text (or a regex), and narrow to a time window with From and To.'], ['Read and export', 'See counts per level, a timeline, the most repeated messages (and status codes, paths and IPs for access logs). Download the matching lines as a log, CSV or JSON.']],
     faq: [['Which log formats are supported?', 'JSON lines (level/msg/time fields, including pino and bunyan numeric levels), Apache and Nginx common/combined access logs, syslog (RFC 3164 and 5424) and any text log that starts lines with a timestamp and a level word. Lines that match nothing are kept as “Other”.'], ['How are access-log levels decided?', 'Access logs have no level, so status codes are mapped: 5xx = Error, 4xx = Warn, everything else = Info. Filter by level to jump straight to failures.'], ['How are “top messages” counted?', 'Messages are grouped after replacing numbers, hex ids and UUIDs with #, so “user 41 timed out” and “user 97 timed out” count as one repeated message.'], ['Why do some lines have no time?', 'If a line has no recognisable timestamp it is still shown and counted, but a From/To time filter hides it. Syslog lines without a year are assumed to be in the current year.'], ['How big a log can it handle?', 'Up to 50 MB. All lines are parsed and counted; the table shows the first 1,000 matching lines to stay fast, and downloads include every match.'], PRIVACY_FAQ]
+  },
+  {
+    slug: 'sql-on-csv', name: 'SQL on CSV', icon: 'lucide:database', section: 'Parsers', layout: 'stacked', css: true,
+    desc: 'Free online SQL on CSV: load CSV, TSV or JSON files as tables and query them with real SQL (SQLite) — joins, GROUP BY, window functions, CTEs — then export the result as CSV, JSON or a SQLite database. Runs in your browser — nothing uploaded.',
+    lead: 'Drop CSV or JSON files, write SQL, get a result table — joins, aggregates and window functions included. Export CSV, JSON or SQLite.',
+    cardDesc: 'Query CSV / JSON files with real SQL (SQLite) — joins, GROUP BY, export.',
+    tags: ['sql on csv', 'query csv with sql', 'csv sql', 'sqlite online', 'run sql on csv file', 'join csv files', 'csv group by', 'json sql query', 'csv to sqlite', 'sql playground'],
+    idle: 'Add a CSV or JSON file to begin', sourceLabel: 'Tables & query', outputLabel: 'Result', outputIcon: 'lucide:database', outputEmpty: 'Query results will appear here',
+    file: { accept: '.csv,.tsv,.txt,.json', multiple: true }, action: 'Run query', actionIcon: 'lucide:play',
+    downloads: [['csv', 'Result as CSV', 'lucide:file-text'], ['json', 'Result as JSON', 'lucide:braces'], ['db', 'All tables as SQLite (.db)', 'lucide:database']],
+    sourceHtml: `
+                <div class="sql-tables" id="sql-tables" hidden></div>
+                <div class="form-group">
+                  <label class="form-label" for="text-input"><span>Or paste CSV / JSON</span><span class="form-label-desc">becomes a table named <code>pasted</code></span></label>
+                  <textarea id="text-input" class="textarea-clean" rows="3" placeholder="name,city,amount&#10;Ada,London,120&#10;Linus,Helsinki,80" spellcheck="false" autocapitalize="off"></textarea>
+                </div>
+                <div class="form-group form-group-grow">
+                  <label class="form-label" for="sql-input"><span>SQL</span><span class="form-label-desc">SQLite dialect · Ctrl/⌘ + Enter runs</span></label>
+                  <textarea id="sql-input" class="textarea-clean sql-mono" rows="5" placeholder="SELECT city, COUNT(*) AS orders, SUM(amount) AS total&#10;FROM pasted&#10;GROUP BY city&#10;ORDER BY total DESC" spellcheck="false" autocapitalize="off"></textarea>
+                </div>`,
+    outputHtml: `
+                  <div class="web-table-wrap sql-wrap">
+                    <table class="sql-table" id="output-table"></table>
+                  </div>
+                  <p class="web-muted" id="sql-more" hidden></p>`,
+    settingsSummary: 'Header row · auto delimiter · detect numbers · 500 rows shown',
+    settings: `
+              <div class="control-item"><input type="checkbox" id="opt-header" checked><label for="opt-header">First row is a header (files loaded after changing this)</label></div>
+              <div class="control-item">
+                <label for="opt-delim">CSV delimiter</label>
+                <select id="opt-delim" class="select-clean">${opts([['auto', 'Auto-detect'], [',', 'Comma'], [';', 'Semicolon'], ['tab', 'Tab'], ['|', 'Pipe']], 'auto')}</select>
+              </div>
+              <div class="control-item"><input type="checkbox" id="opt-types" checked><label for="opt-types">Detect numbers (columns that are all numeric become INTEGER / REAL)</label></div>
+              <div class="control-item">
+                <label for="opt-limit">Rows shown in the result table</label>
+                <select id="opt-limit" class="select-clean">${opts([['100', '100'], ['500', '500'], ['2000', '2,000'], ['10000', '10,000']], '500')}</select>
+              </div>`,
+    guide: [['Load your data', 'Drop one or more CSV, TSV or JSON files — each becomes a table named after the file (<code>sales.csv</code> → <code>sales</code>), listed with its columns and detected types. Or paste data to get a table called <code>pasted</code>. Click a table or column name to insert it into the query.'], ['Write SQL and run', 'Any SQLite query works: <code>WHERE</code>, <code>GROUP BY</code>, <code>JOIN</code> across files, <code>WITH</code> CTEs, window functions like <code>ROW_NUMBER() OVER (…)</code>, date functions, even <code>CREATE TABLE … AS SELECT</code>. Press <strong>Run query</strong> or Ctrl/⌘ + Enter.'], ['Export the result', 'Download the result as CSV or JSON, or export every loaded table as one SQLite <code>.db</code> file to open later in DB Browser, DBeaver or Python. Copy puts the result on the clipboard as CSV.']],
+    faq: [['Which SQL dialect is this?', 'SQLite, running as WebAssembly (<a href="https://sql.js.org" target="_blank" rel="noopener">sql.js</a>) inside your browser — the same engine inside every phone and browser. Joins, subqueries, CTEs, window functions, <code>GROUP_CONCAT</code>, <code>strftime</code> and JSON functions are all available; <code>LIMIT</code> works, <code>TOP</code> does not. The engine (about 1 MB) downloads once, when you run your first query.'], ['How are column types decided?', 'Each CSV column that contains only numbers becomes <code>INTEGER</code> or <code>REAL</code>, so <code>SUM</code>, <code>AVG</code> and numeric sorting behave; everything else stays <code>TEXT</code>. Empty cells become <code>NULL</code> in numeric columns and empty strings in text columns. Untick “Detect numbers” to keep everything as text (useful for ZIP / PIN codes with leading zeros). JSON keeps its own numbers and strings.'], ['Can I join two files?', 'Yes — load both, then <code>SELECT … FROM orders o JOIN customers c ON c.id = o.customer_id</code>. Table names come from the file names (lower-cased, non-letters replaced by underscores); a second file with the same name gets a <code>_2</code> suffix. Column names with spaces need double quotes: <code>"Order Date"</code>.'], ['How big can the files be?', 'Up to 50 MB per file. Everything lives in your tab’s memory, so a few hundred thousand rows are fine; multi-million-row files will be slow to load. The result table shows up to the number of rows you choose in Settings, while downloads always include every row — add a <code>LIMIT</code> if a query returns more than you need.'], ['What JSON shapes are accepted?', 'An array of objects (<code>[{"id":1,"name":"Ada"}, …]</code>) — each key becomes a column, and keys missing from some objects are <code>NULL</code> there. An object with a <code>data</code> array is unwrapped. Nested objects and arrays are stored as JSON text, which you can query with SQLite’s <code>json_extract()</code>.'], PRIVACY_FAQ]
   }
 ];
