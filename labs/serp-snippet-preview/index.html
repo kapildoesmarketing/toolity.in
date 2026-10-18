@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online SERP Snippet Preview | Toolity Labs</title>
+  <link rel="canonical" href="https://toolity.in/labs/serp-snippet-preview/">
+  <meta name="description" content="Free online SERP snippet preview: see how your title and meta description will look in Google results on desktop and mobile, with pixel-width meters that show exactly where Google truncates. Import from a live page or type your own. Runs in your browser.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online SERP Snippet Preview | Toolity Labs">
+  <meta property="og:description" content="Free online SERP snippet preview: see how your title and meta description will look in Google results on desktop and mobile, with pixel-width meters that show exactly where Google truncates. Import from a live page or type your own. Runs in your browser.">
+  <meta property="og:url" content="https://toolity.in/labs/serp-snippet-preview/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=5.9" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=5.9">
+  <link rel="stylesheet" href="/styles/tools/serp-snippet-preview.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "SERP Snippet Preview",
+        "url": "https://toolity.in/labs/serp-snippet-preview/",
+        "description": "Free online SERP snippet preview: see how your title and meta description will look in Google results on desktop and mobile, with pixel-width meters that show exactly where Google truncates. Import from a live page or type your own. Runs in your browser.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Labs", "item": "https://toolity.in/labs/" },
+          { "@type": "ListItem", "position": 3, "name": "SERP Snippet Preview", "item": "https://toolity.in/labs/serp-snippet-preview/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Why pixels and not characters?", "acceptedAnswer": { "@type": "Answer", "text": "Google truncates by available width, so “WWW” uses far more room than “iii”. A 55-character title full of wide capitals can be cut while a 65-character title of narrow letters fits. The meters measure the real rendered width in Arial at Google’s sizes (20 px title, 14 px description) — the same method Google’s own tooling uses." } },
+          { "@type": "Question", "name": "Will Google show exactly this?", "acceptedAnswer": { "@type": "Answer", "text": "Mostly. Google often rewrites titles (adding the site name, dropping boilerplate) and may pick a different snippet from the page when the description doesn’t match the query. The preview shows what your tags ask for; the limits are accurate as of 2026 but Google changes them from time to time." } },
+          { "@type": "Question", "name": "How does the date work?", "acceptedAnswer": { "@type": "Answer", "text": "For articles Google prefixes the description with the publish date (“18 Oct 2026 — ”), which eats into the description’s width. Set a date to see the effect; the meter includes it." } },
+          { "@type": "Question", "name": "Where does the favicon come from?", "acceptedAnswer": { "@type": "Answer", "text": "Your browser loads /favicon.ico from the host in the Page URL field — Toolity never fetches it. If the site has no favicon at that path, a globe icon is shown, which is also what Google does." } },
+          { "@type": "Question", "name": "Why does fetching sometimes fail — and what is the relay?", "acceptedAnswer": { "@type": "Answer", "text": "Browsers block JavaScript from reading other websites directly (CORS). The tool first tries a direct request; when the site forbids it, the URL only is sent to a public read-only relay (allorigins.win, then codetabs.com) that fetches the page and returns its HTML. The relay sees the URL you typed, nothing else — Toolity has no server and keeps no record. If the relay is busy or the site blocks bots, paste the page source instead: that path is 100% local." } },
+          { "@type": "Question", "name": "How do I use paste mode?", "acceptedAnswer": { "@type": "Answer", "text": "Open the page in your browser, press Ctrl/⌘+U (view source), select all, copy, and paste into the HTML box. Only the &lt;head&gt; is needed. Paste mode never contacts any server." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/labs/" class="breadcrumb-link">Labs</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">SERP Snippet Preview</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Labs</span>
+            <h1 class="page-title">SERP Snippet Preview</h1>
+            <p class="page-desc">See your title and description the way Google will show them — desktop and mobile — with pixel meters that tell you where the cut-off is.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" data-split="50/50" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge web-status-badge" id="status-badge">Type a title or import a page</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result" aria-label="Copy result" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <div class="dropdown-menu-wrapper" id="download-dropdown-wrap">
+                <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download result" aria-label="Download result" aria-haspopup="true" disabled>
+                  <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                  <span>Download</span>
+                  <iconify-icon icon="lucide:chevron-down" class="dropdown-arrow" width="13" height="13"></iconify-icon>
+                </button>
+                <div class="dropdown-popup" role="menu">
+                  <button type="button" class="dropdown-item" data-format="png" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:image" width="14" height="14"></iconify-icon>
+                      <span>Preview as PNG</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="txt" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:file-text" width="14" height="14"></iconify-icon>
+                      <span>Title + description (.txt)</span>
+                    </div>
+                  </button>
+                </div>
+              </div>
+              <button type="button" class="btn-toolbar-sm" id="btn-open" title="Open result in a new tab" aria-label="Open result in a new tab" disabled>
+                <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
+                <span>Open</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Snippet</span>
+                <span class="pane-badge" id="input-badge">—</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content web-form">
+                <div class="form-group">
+                  <span class="form-label"><span>Device</span></span>
+                  <div class="segmented-group segmented-group-pill" id="seg-device" role="group" aria-label="Device">
+                    <button type="button" class="seg-pill active" data-value="desktop">Desktop</button>
+                    <button type="button" class="seg-pill" data-value="mobile">Mobile</button>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="f-title"><span>Title</span><span class="form-label-desc" id="f-title-count"></span></label>
+                  <input type="text" id="f-title" class="input-clean" placeholder="Free Online Image Compressor | Toolity" autocomplete="off">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="f-desc"><span>Meta description</span><span class="form-label-desc" id="f-desc-count"></span></label>
+                  <textarea id="f-desc" class="textarea-clean" rows="3" placeholder="Compress JPG, PNG and WebP images in your browser — no upload, no sign-up." spellcheck="true"></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="f-url"><span>Page URL</span><span class="form-label-desc">shown as a breadcrumb</span></label>
+                  <input id="f-url" class="input-clean" autocomplete="off" type="url" placeholder="https://example.com/blog/my-post" inputmode="url" spellcheck="false">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="f-date"><span>Date (optional)</span><span class="form-label-desc">prefixes the description, like Google does for articles</span></label>
+                  <input id="f-date" class="input-clean" autocomplete="off" type="date">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="url-input"><span>Import from a live page</span><span class="form-label-desc">fills the fields above</span></label>
+                  <input type="url" id="url-input" class="input-clean" placeholder="https://example.com/page-to-check" spellcheck="false" autocomplete="off" autocapitalize="off" inputmode="url">
+                </div>
+                <button type="button" id="btn-run" class="btn-toolbar-sm btn-brand-sm btn-primary-action">
+                  <iconify-icon icon="lucide:download" width="16" height="16"></iconify-icon>
+                  <span>Import</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Preview</span>
+                <span class="pane-badge" id="output-badge">—</span>
+              </div>
+              <div class="pane-content web-output-pane">
+                <div class="pane-empty" id="output-empty">
+                  <iconify-icon icon="lucide:search"></iconify-icon>
+                  <span>The Google result preview will appear here</span>
+                </div>
+                <div class="web-output" id="output-content" hidden>
+                  <div class="serp" id="output-card" data-device="desktop">
+                    <div class="serp-site">
+                      <span class="serp-fav" id="serp-fav"><img id="serp-fav-img" alt="" width="18" height="18" hidden><iconify-icon icon="lucide:globe" width="16" height="16" id="serp-fav-fb"></iconify-icon></span>
+                      <div class="serp-site-text"><div class="serp-name" id="serp-name"></div><div class="serp-url" id="serp-url"></div></div>
+                    </div>
+                    <div class="serp-title" id="serp-title"></div>
+                    <div class="serp-desc"><span class="serp-date" id="serp-date"></span><span id="serp-desc-text"></span></div>
+                  </div>
+                  <div class="serp-meters">
+                    <div class="serp-meter"><span>Title</span><div class="serp-bar"><i id="m-title"></i></div><b id="m-title-val">—</b></div>
+                    <div class="serp-meter"><span>Description</span><div class="serp-bar"><i id="m-desc"></i></div><b id="m-desc-val">—</b></div>
+                  </div>
+                  <div class="web-tags" id="output-issues"></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">favicon from site · no pasted HTML</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item"><input type="checkbox" id="opt-favicon" checked><label for="opt-favicon">Show the site’s favicon (loaded from the page URL’s host by your browser)</label></div>
+                <div class="form-group">
+                  <label class="form-label" for="html-input"><span>Or import from pasted HTML</span><span class="form-label-desc">Works offline · overrides the URL when you press Import</span></label>
+                  <textarea id="html-input" class="textarea-clean" rows="4" placeholder="&lt;head&gt;…&lt;/head&gt; — view-source, select all, paste" spellcheck="false"></textarea>
+                </div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Use SERP Snippet Preview in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Type or import</h3>
+              <p class="step-desc">Enter a title, description and URL — or paste a live URL in <strong>Import from a live page</strong> and press <strong>Import</strong> to pull them from the page’s tags. Switch between <strong>Desktop</strong> and <strong>Mobile</strong>.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Watch the meters</h3>
+              <p class="step-desc">Google cuts titles at about 600 px on desktop and 920 px on mobile, and descriptions at roughly 920 / 1,300 px — not at a character count. The meters measure your text in Google’s actual font sizes and show the cut with an ellipsis, exactly where it would appear.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Export</h3>
+              <p class="step-desc">Download the preview as a PNG for a client deck or a ticket, or copy the final title and description. Then paste them into the <a href="/labs/meta-tag-generator/">Meta Tag Generator</a> to produce the tags.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">SERP Snippet Preview — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Why pixels and not characters?</summary>
+              <p>Google truncates by available width, so “WWW” uses far more room than “iii”. A 55-character title full of wide capitals can be cut while a 65-character title of narrow letters fits. The meters measure the real rendered width in Arial at Google’s sizes (20 px title, 14 px description) — the same method Google’s own tooling uses.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Will Google show exactly this?</summary>
+              <p>Mostly. Google often rewrites titles (adding the site name, dropping boilerplate) and may pick a different snippet from the page when the description doesn’t match the query. The preview shows what your tags ask for; the limits are accurate as of 2026 but Google changes them from time to time.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How does the date work?</summary>
+              <p>For articles Google prefixes the description with the publish date (“18 Oct 2026 — ”), which eats into the description’s width. Set a date to see the effect; the meter includes it.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Where does the favicon come from?</summary>
+              <p>Your browser loads <code>/favicon.ico</code> from the host in the Page URL field — Toolity never fetches it. If the site has no favicon at that path, a globe icon is shown, which is also what Google does.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why does fetching sometimes fail — and what is the relay?</summary>
+              <p>Browsers block JavaScript from reading other websites directly (CORS). The tool first tries a direct request; when the site forbids it, the <em>URL only</em> is sent to a public read-only relay (allorigins.win, then codetabs.com) that fetches the page and returns its HTML. The relay sees the URL you typed, nothing else — Toolity has no server and keeps no record. If the relay is busy or the site blocks bots, paste the page source instead: that path is 100% local.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How do I use paste mode?</summary>
+              <p>Open the page in your browser, press <kbd>Ctrl</kbd>/<kbd>⌘</kbd>+<kbd>U</kbd> (view source), select all, copy, and paste into the HTML box. Only the <code>&lt;head&gt;</code> is needed. Paste mode never contacts any server.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="labs"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=4.4"></script>
+  <script src="/scripts/tool-common.js?v=1.1"></script>
+  <script src="/scripts/web-common.js?v=1.2"></script>
+  <script src="/labs/serp-snippet-preview/serp-snippet-preview.js?v=1.0"></script>
+</body>
+</html>

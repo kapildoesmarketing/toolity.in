@@ -4189,6 +4189,14 @@ body {
 .web-checks { display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; min-width: 0; }
 .web-checks .control-item { margin: 0; }
 .web-group-head { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); }
+/* Pixel-width meters shared by SERP Snippet Preview and Meta Tag Generator (JS sets width + is-near / is-over) */
+.serp-meters { display: flex; flex-direction: column; gap: 0.45rem; min-width: 0; }
+.serp-meter { display: grid; grid-template-columns: 88px minmax(0, 1fr) auto; align-items: center; gap: 0.6rem; font-size: 0.78rem; color: var(--text-secondary); }
+.serp-meter b { font-family: var(--font-mono); font-weight: 500; color: var(--text-primary); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.serp-bar { height: 6px; border-radius: var(--radius-pill); background: var(--surface-elevated); border: 1px solid var(--border); overflow: hidden; }
+.serp-bar i { display: block; height: 100%; width: 0; background: #16a34a; transition: width 0.15s ease, background 0.15s ease; }
+.serp-bar i.is-near { background: #ca8a04; }
+.serp-bar i.is-over { background: #dc2626; }
 
 /* ═══════════ Games family — shared stage, score bar, overlay & board primitives ═══════════ */
 .game-pane-wrap { gap: 0.75rem; align-items: center; }
