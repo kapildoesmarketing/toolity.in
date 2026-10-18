@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Password Generator | Toolity Labs</title>
+  <link rel="canonical" href="https://toolity.in/labs/password-generator/">
+  <meta name="description" content="Free strong password generator: random passwords, memorable passphrases (EFF word list) and PINs made with your browser’s cryptographic random generator, with a strength meter and bulk generation. Nothing is sent or stored.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Password Generator | Toolity Labs">
+  <meta property="og:description" content="Free strong password generator: random passwords, memorable passphrases (EFF word list) and PINs made with your browser’s cryptographic random generator, with a strength meter and bulk generation. Nothing is sent or stored.">
+  <meta property="og:url" content="https://toolity.in/labs/password-generator/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=5.5" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=5.5">
+  <link rel="stylesheet" href="/styles/tools/password-generator.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Password Generator",
+        "url": "https://toolity.in/labs/password-generator/",
+        "description": "Free strong password generator: random passwords, memorable passphrases (EFF word list) and PINs made with your browser’s cryptographic random generator, with a strength meter and bulk generation. Nothing is sent or stored.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Labs", "item": "https://toolity.in/labs/" },
+          { "@type": "ListItem", "position": 3, "name": "Password Generator", "item": "https://toolity.in/labs/password-generator/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "How random are these passwords?", "acceptedAnswer": { "@type": "Answer", "text": "They use crypto.getRandomValues, the browser’s cryptographically secure random generator — the same source password managers use — with rejection sampling so every character is equally likely." } },
+          { "@type": "Question", "name": "Are passwords saved or sent anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. They are created in this tab and never stored — not in cookies, not in local storage, not on a server. Closing the tab forgets them." } },
+          { "@type": "Question", "name": "Where do the passphrase words come from?", "acceptedAnswer": { "@type": "Answer", "text": "From the EFF long word list: 7,776 common, easy-to-spell words. Each word adds about 12.9 bits, so 5 words ≈ 64 bits and 6 words ≈ 77 bits before the extra number." } },
+          { "@type": "Question", "name": "How is the crack time estimated?", "acceptedAnswer": { "@type": "Answer", "text": "From the entropy: on average an attacker must try half of all possibilities. The estimate assumes a fast offline attack of 10 billion guesses per second — real websites that rate-limit logins are far slower." } },
+          { "@type": "Question", "name": "What length should I use?", "acceptedAnswer": { "@type": "Answer", "text": "For accounts in a password manager, 16–20 random characters is plenty. For a master password you have to type, a 6-word passphrase is strong and much easier to remember." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/labs/" class="breadcrumb-link">Labs</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Password Generator</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Labs</span>
+            <h1 class="page-title">Password Generator</h1>
+            <p class="page-desc">Strong random passwords, easy-to-type passphrases or PINs — generated on your device and never stored.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" data-split="40/60" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge web-status-badge" id="status-badge">Generating…</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result" aria-label="Copy result" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download result" aria-label="Download result" disabled>
+                <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                <span>Download</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-open" title="Open result in a new tab" aria-label="Open result in a new tab" disabled>
+                <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
+                <span>Open</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Options</span>
+                <span class="pane-badge" id="input-badge">—</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content web-form">
+                <div class="segmented-group segmented-group-pill" id="seg-mode" role="group" aria-label="Type">
+                  <button type="button" class="seg-pill active" data-value="password">Password</button>
+                  <button type="button" class="seg-pill" data-value="passphrase">Passphrase</button>
+                  <button type="button" class="seg-pill" data-value="pin">PIN</button>
+                </div>
+                <div class="web-group" id="grp-password">
+                <div class="form-group">
+                  <label class="form-label" for="opt-length"><span>Length</span><span class="form-label-desc"><span id="opt-length-val">20</span></span></label>
+                  <input type="range" id="opt-length" min="4" max="128" step="1" value="20">
+                </div>
+                  <div class="web-checks" role="group" aria-label="Characters">
+              <div class="control-item"><input type="checkbox" id="opt-upper" checked><label for="opt-upper">A–Z</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-lower" checked><label for="opt-lower">a–z</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-digits" checked><label for="opt-digits">0–9</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-symbols" checked><label for="opt-symbols">!@#…</label></div>
+                  </div>
+                </div>
+                <div class="web-group" id="grp-passphrase" hidden>
+                <div class="form-group">
+                  <label class="form-label" for="opt-words"><span>Words</span><span class="form-label-desc"><span id="opt-words-val">5</span></span></label>
+                  <input type="range" id="opt-words" min="3" max="12" step="1" value="5">
+                </div>
+                  <div class="form-group">
+                    <label class="form-label" for="opt-sep"><span>Separator</span></label>
+                    <select id="opt-sep" class="select-clean"><option value="-" selected>Hyphen  (word-word)</option><option value=" ">Space  (word word)</option><option value=".">Dot  (word.word)</option><option value="_">Underscore  (word_word)</option><option value="">None  (wordword)</option></select>
+                  </div>
+                  <div class="web-checks">
+              <div class="control-item"><input type="checkbox" id="opt-cap" checked><label for="opt-cap">Capitalise words</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-num" checked><label for="opt-num">Add a number</label></div>
+                  </div>
+                </div>
+                <div class="web-group" id="grp-pin" hidden>
+                <div class="form-group">
+                  <label class="form-label" for="opt-pin"><span>Digits</span><span class="form-label-desc"><span id="opt-pin-val">6</span></span></label>
+                  <input type="range" id="opt-pin" min="4" max="12" step="1" value="6">
+                </div>
+                </div>
+                <button type="button" id="btn-run" class="btn-toolbar-sm btn-brand-sm btn-primary-action">
+                  <iconify-icon icon="lucide:refresh-cw" width="16" height="16"></iconify-icon>
+                  <span>New password</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Password</span>
+                <span class="pane-badge" id="output-badge">—</span>
+              </div>
+              <div class="pane-content web-output-pane">
+                <div class="pane-empty" id="output-empty">
+                  <iconify-icon icon="lucide:key-round"></iconify-icon>
+                  <span>Your password will appear here</span>
+                </div>
+                <div class="web-output" id="output-content" hidden>
+                  <div class="pw-list" id="output-list" aria-live="polite"></div>
+                  <div class="pw-meter" id="output-meter">
+                    <div class="pw-bar"><span id="pw-bar-fill"></span></div>
+                    <div class="pw-meter-row"><strong id="pw-label"></strong><span class="web-muted" id="pw-detail"></span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">1 at a time · all characters</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item">
+                <label for="opt-count">How many</label>
+                <input type="number" id="opt-count" class="input-clean" min="1" max="100" value="1" inputmode="numeric">
+              </div>
+              <div class="control-item"><input type="checkbox" id="opt-similar"><label for="opt-similar">Avoid look-alike characters (I l 1 O 0 o)</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-each" checked><label for="opt-each">Use every ticked character type at least once</label></div>
+              <div class="control-item">
+                <label for="opt-symset">Symbols to use</label>
+                <input type="text" id="opt-symset" class="input-clean" value="!@#$%^&amp;*-_=+?" spellcheck="false" autocomplete="off">
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Use Password Generator in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Pick a type</h3>
+              <p class="step-desc"><strong>Password</strong> for maximum strength, <strong>Passphrase</strong> for something you can remember and type on a phone, <strong>PIN</strong> for number-only codes.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Tune it</h3>
+              <p class="step-desc">Set the length or number of words and which characters to use. The meter shows the strength in bits and how long a fast offline attack would take.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Copy and save</h3>
+              <p class="step-desc">Copy it straight into your password manager. Need several? Set “How many” in Settings and download them as a .txt. Press <strong>New password</strong> for another.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Password Generator — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>How random are these passwords?</summary>
+              <p>They use <code>crypto.getRandomValues</code>, the browser’s cryptographically secure random generator — the same source password managers use — with rejection sampling so every character is equally likely.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Are passwords saved or sent anywhere?</summary>
+              <p>No. They are created in this tab and never stored — not in cookies, not in local storage, not on a server. Closing the tab forgets them.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Where do the passphrase words come from?</summary>
+              <p>From the <a href="https://www.eff.org/dice" target="_blank" rel="noopener">EFF long word list</a>: 7,776 common, easy-to-spell words. Each word adds about 12.9 bits, so 5 words ≈ 64 bits and 6 words ≈ 77 bits before the extra number.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How is the crack time estimated?</summary>
+              <p>From the entropy: on average an attacker must try half of all possibilities. The estimate assumes a fast offline attack of 10 billion guesses per second — real websites that rate-limit logins are far slower.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What length should I use?</summary>
+              <p>For accounts in a password manager, 16–20 random characters is plenty. For a master password you have to type, a 6-word passphrase is strong and much easier to remember.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="labs"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=4.2"></script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="/scripts/web-common.js?v=1.1"></script>
+  <script src="/labs/password-generator/password-generator.js?v=1.0"></script>
+</body>
+</html>
