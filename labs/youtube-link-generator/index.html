@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online YouTube Link & Embed Generator | Toolity Labs</title>
+  <link rel="canonical" href="https://toolity.in/labs/youtube-link-generator/">
+  <meta name="description" content="Free YouTube link and embed code generator: make timestamp links that start at a set time, and iframe embed code with start/end, autoplay, mute, loop, captions and privacy-enhanced mode. Works with Shorts and youtu.be links.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online YouTube Link & Embed Generator | Toolity Labs">
+  <meta property="og:description" content="Free YouTube link and embed code generator: make timestamp links that start at a set time, and iframe embed code with start/end, autoplay, mute, loop, captions and privacy-enhanced mode. Works with Shorts and youtu.be links.">
+  <meta property="og:url" content="https://toolity.in/labs/youtube-link-generator/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=5.5" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=5.5">
+  <link rel="stylesheet" href="/styles/tools/youtube-link-generator.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "YouTube Link & Embed Generator",
+        "url": "https://toolity.in/labs/youtube-link-generator/",
+        "description": "Free YouTube link and embed code generator: make timestamp links that start at a set time, and iframe embed code with start/end, autoplay, mute, loop, captions and privacy-enhanced mode. Works with Shorts and youtu.be links.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Labs", "item": "https://toolity.in/labs/" },
+          { "@type": "ListItem", "position": 3, "name": "YouTube Link & Embed Generator", "item": "https://toolity.in/labs/youtube-link-generator/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Why does autoplay not start?", "acceptedAnswer": { "@type": "Answer", "text": "Browsers block videos that autoplay with sound. Tick Start muted together with Autoplay and it will start on every modern browser." } },
+          { "@type": "Question", "name": "Why does loop add a playlist parameter?", "acceptedAnswer": { "@type": "Answer", "text": "YouTube only loops an embedded video when it is also given a playlist — so the tool adds playlist= with the same video ID. That is the documented way to loop one video." } },
+          { "@type": "Question", "name": "What does privacy-enhanced mode do?", "acceptedAnswer": { "@type": "Answer", "text": "The embed loads from youtube-nocookie.com, so YouTube does not set tracking cookies until the visitor presses play. It is on by default." } },
+          { "@type": "Question", "name": "Does the end time work on share links?", "acceptedAnswer": { "@type": "Answer", "text": "No — YouTube supports an end time only in embeds. Share links accept a start time (?t=)." } },
+          { "@type": "Question", "name": "Does this page contact YouTube?", "acceptedAnswer": { "@type": "Answer", "text": "Only to show the video’s thumbnail image, and to play the preview if you click it. Building the links and embed code happens entirely in your browser." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/labs/" class="breadcrumb-link">Labs</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">YouTube Link & Embed Generator</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Labs</span>
+            <h1 class="page-title">YouTube Link & Embed Generator</h1>
+            <p class="page-desc">Paste any YouTube link — get a link that starts at the right second and embed code with exactly the options you want.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" data-split="40/60" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge web-status-badge" id="status-badge">Paste a YouTube link to begin</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result" aria-label="Copy result" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download result" aria-label="Download result" disabled>
+                <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                <span>Download</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-open" title="Open result in a new tab" aria-label="Open result in a new tab" disabled>
+                <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
+                <span>Open</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Video</span>
+                <span class="pane-badge" id="input-badge">—</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content web-form">
+                <div class="form-group">
+                  <label class="form-label" for="url-input"><span>YouTube link or video ID</span></label>
+                  <input id="url-input" class="input-clean" autocomplete="off" type="url" inputmode="url" spellcheck="false" autocapitalize="off" placeholder="https://youtu.be/dQw4w9WgXcQ or a Shorts link">
+                </div>
+                <div class="web-convert-row web-convert-row-2">
+                <div class="form-group">
+                  <label class="form-label" for="start-input"><span>Start at</span><span class="form-label-desc">Optional</span></label>
+                  <input id="start-input" class="input-clean" autocomplete="off" type="text" inputmode="numeric" spellcheck="false" placeholder="1:23">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="end-input"><span>End at</span><span class="form-label-desc">Embed only</span></label>
+                  <input id="end-input" class="input-clean" autocomplete="off" type="text" inputmode="numeric" spellcheck="false" placeholder="2:10">
+                </div>
+                </div>
+                <div class="yt-preview" id="yt-preview" hidden>
+                  <button type="button" class="yt-thumb" id="btn-preview" aria-label="Play preview with these settings">
+                    <img id="yt-thumb-img" alt="Video thumbnail" width="480" height="360" loading="lazy" referrerpolicy="no-referrer">
+                    <span class="yt-play"><iconify-icon icon="lucide:play" width="26" height="26"></iconify-icon></span>
+                  </button>
+                  <span class="web-muted">Click to play the embed with your settings</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Links & embed code</span>
+                <span class="pane-badge" id="output-badge">—</span>
+              </div>
+              <div class="pane-content web-output-pane">
+                <div class="pane-empty" id="output-empty">
+                  <iconify-icon icon="lucide:youtube"></iconify-icon>
+                  <span>Links and embed code will appear here</span>
+                </div>
+                <div class="web-output" id="output-content" hidden>
+                  <div class="web-rows" id="output-rows"></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">Privacy mode · responsive</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item"><input type="checkbox" id="opt-nocookie" checked><label for="opt-nocookie">Privacy-enhanced mode (youtube-nocookie.com)</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-responsive" checked><label for="opt-responsive">Responsive width (fills its container, 16:9)</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-autoplay"><label for="opt-autoplay">Autoplay</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-mute"><label for="opt-mute">Start muted</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-loop"><label for="opt-loop">Loop</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-nocontrols"><label for="opt-nocontrols">Hide player controls</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-cc"><label for="opt-cc">Show captions by default</label></div>
+              <div class="control-item">
+                <label for="opt-title">Video title (for accessibility)</label>
+                <input type="text" id="opt-title" class="input-clean" placeholder="YouTube video player" autocomplete="off">
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Use YouTube Link & Embed Generator in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Paste the video</h3>
+              <p class="step-desc">Any YouTube address works — watch pages, youtu.be, Shorts, live, embed links or just the 11-character ID. A thumbnail confirms it is the right video.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Set the times</h3>
+              <p class="step-desc">Type when it should start (and, for embeds, stop) as <code>1:23</code>, <code>83</code> or <code>1m23s</code>. Open Settings for autoplay, mute, loop, captions and privacy mode.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Copy what you need</h3>
+              <p class="step-desc">Copy the short link, the full link, the iframe code or a Markdown thumbnail link. Click the thumbnail to test the embed with your exact settings.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">YouTube Link & Embed Generator — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Why does autoplay not start?</summary>
+              <p>Browsers block videos that autoplay with sound. Tick <strong>Start muted</strong> together with Autoplay and it will start on every modern browser.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why does loop add a playlist parameter?</summary>
+              <p>YouTube only loops an embedded video when it is also given a playlist — so the tool adds <code>playlist=</code> with the same video ID. That is the documented way to loop one video.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What does privacy-enhanced mode do?</summary>
+              <p>The embed loads from youtube-nocookie.com, so YouTube does not set tracking cookies until the visitor presses play. It is on by default.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Does the end time work on share links?</summary>
+              <p>No — YouTube supports an end time only in embeds. Share links accept a start time (<code>?t=</code>).</p>
+            </details>
+            <details class="faq-item">
+              <summary>Does this page contact YouTube?</summary>
+              <p>Only to show the video’s thumbnail image, and to play the preview if you click it. Building the links and embed code happens entirely in your browser.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="labs"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=4.2"></script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="/scripts/web-common.js?v=1.1"></script>
+  <script src="/labs/youtube-link-generator/youtube-link-generator.js?v=1.0"></script>
+</body>
+</html>
