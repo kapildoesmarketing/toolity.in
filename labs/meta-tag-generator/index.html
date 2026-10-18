@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Meta Tag Generator | Toolity Labs</title>
+  <link rel="canonical" href="https://toolity.in/labs/meta-tag-generator/">
+  <meta name="description" content="Free online meta tag generator: fill in title, description, canonical, robots, Open Graph and Twitter Card fields and get a clean, copy-paste &lt;head&gt; block — with pixel-width checks for the title and description. Runs in your browser.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Meta Tag Generator | Toolity Labs">
+  <meta property="og:description" content="Free online meta tag generator: fill in title, description, canonical, robots, Open Graph and Twitter Card fields and get a clean, copy-paste &lt;head&gt; block — with pixel-width checks for the title and description. Runs in your browser.">
+  <meta property="og:url" content="https://toolity.in/labs/meta-tag-generator/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=5.9" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=5.9">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Meta Tag Generator",
+        "url": "https://toolity.in/labs/meta-tag-generator/",
+        "description": "Free online meta tag generator: fill in title, description, canonical, robots, Open Graph and Twitter Card fields and get a clean, copy-paste  block — with pixel-width checks for the title and description. Runs in your browser.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Labs", "item": "https://toolity.in/labs/" },
+          { "@type": "ListItem", "position": 3, "name": "Meta Tag Generator", "item": "https://toolity.in/labs/meta-tag-generator/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Which tags does it generate?", "acceptedAnswer": { "@type": "Answer", "text": "&lt;title&gt;, description, canonical, robots, author, theme-color, charset and viewport; Open Graph (og:title, og:description, og:type, og:url, og:site_name, og:image, og:image:alt, og:locale) and Twitter Card (twitter:card, twitter:site, twitter:creator, twitter:title, twitter:description, twitter:image). Empty fields are simply left out — no blank tags." } },
+          { "@type": "Question", "name": "Do I need the twitter:title and twitter:description tags?", "acceptedAnswer": { "@type": "Answer", "text": "X falls back to the Open Graph tags when they are missing, so strictly no. They are included because other platforms (Slack, Discord, iMessage) and some X previews behave more predictably with both sets present. Set the Twitter card to “None” to leave them out." } },
+          { "@type": "Question", "name": "What is the keywords meta tag — and why isn’t it here?", "acceptedAnswer": { "@type": "Answer", "text": "Google has ignored &lt;meta name=\"keywords\"&gt; since 2009 and no major search engine ranks on it. Leaving it out keeps your head clean; nothing is lost." } },
+          { "@type": "Question", "name": "Why the pixel limits instead of character counts?", "acceptedAnswer": { "@type": "Answer", "text": "Google truncates by width, not length. The meters measure your text in Google’s font sizes; see the SERP Snippet Preview for the full rendered result on desktop and mobile." } },
+          { "@type": "Question", "name": "Should og:url be the canonical URL?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, in almost every case — it tells Facebook and LinkedIn which URL to count shares against, so tracking parameters and duplicates roll up to one page. The default follows the canonical; untick the setting if you need them to differ." } },
+          { "@type": "Question", "name": "Is my input sent anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. Everything is computed by JavaScript in your browser tab. Nothing is uploaded, logged or stored by Toolity." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/labs/" class="breadcrumb-link">Labs</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Meta Tag Generator</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Labs</span>
+            <h1 class="page-title">Meta Tag Generator</h1>
+            <p class="page-desc">Fill in the fields, get a complete, correct &lt;head&gt; block — title, description, canonical, robots, Open Graph and Twitter tags — ready to paste.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" data-split="50/50" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge web-status-badge" id="status-badge">Start with a title</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result" aria-label="Copy result" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <div class="dropdown-menu-wrapper" id="download-dropdown-wrap">
+                <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download result" aria-label="Download result" aria-haspopup="true" disabled>
+                  <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                  <span>Download</span>
+                  <iconify-icon icon="lucide:chevron-down" class="dropdown-arrow" width="13" height="13"></iconify-icon>
+                </button>
+                <div class="dropdown-popup" role="menu">
+                  <button type="button" class="dropdown-item" data-format="html" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:code-xml" width="14" height="14"></iconify-icon>
+                      <span>head.html</span>
+                    </div>
+                  </button>
+                </div>
+              </div>
+              <button type="button" class="btn-toolbar-sm" id="btn-open" title="Open result in a new tab" aria-label="Open result in a new tab" disabled>
+                <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
+                <span>Open</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Fields</span>
+                <span class="pane-badge" id="input-badge">—</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content web-form">
+                <div class="form-group">
+                  <label class="form-label" for="f-title"><span>Title</span><span class="form-label-desc" id="f-title-count"></span></label>
+                  <input type="text" id="f-title" class="input-clean" placeholder="Free Online Image Compressor | Toolity" autocomplete="off">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="f-desc"><span>Description</span><span class="form-label-desc" id="f-desc-count"></span></label>
+                  <textarea id="f-desc" class="textarea-clean" rows="3" placeholder="Compress JPG, PNG and WebP images in your browser — no upload, no sign-up." spellcheck="true"></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="f-canonical"><span>Canonical URL</span></label>
+                  <input id="f-canonical" class="input-clean" autocomplete="off" type="url" placeholder="https://example.com/page" inputmode="url" spellcheck="false">
+                </div>
+                <div class="web-convert-row web-convert-row-2">
+                <div class="form-group">
+                  <label class="form-label" for="f-site"><span>Site name</span></label>
+                  <input id="f-site" class="input-clean" autocomplete="off" type="text" placeholder="Toolity">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="f-author"><span>Author</span></label>
+                  <input id="f-author" class="input-clean" autocomplete="off" type="text" placeholder="Kapil Pidhwani">
+                </div>
+                </div>
+                <div class="web-convert-row web-convert-row-2">
+                  <div class="form-group">
+                    <label class="form-label" for="f-ogtype"><span>Open Graph type</span></label>
+                    <select id="f-ogtype" class="select-clean"><option value="website" selected>website</option><option value="article">article</option><option value="product">product</option><option value="profile">profile</option><option value="video.other">video</option></select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="f-twcard"><span>Twitter card</span></label>
+                    <select id="f-twcard" class="select-clean"><option value="summary_large_image" selected>Large image</option><option value="summary">Summary</option><option value="">None</option></select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="f-image"><span>Share image URL</span><span class="form-label-desc">1200×630 recommended</span></label>
+                  <input id="f-image" class="input-clean" autocomplete="off" type="url" placeholder="https://example.com/og-image.png" inputmode="url" spellcheck="false">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="f-imagealt"><span>Image alt text</span></label>
+                  <input id="f-imagealt" class="input-clean" autocomplete="off" type="text" placeholder="What the image shows">
+                </div>
+                <div class="web-convert-row web-convert-row-2">
+                <div class="form-group">
+                  <label class="form-label" for="f-twsite"><span>X / Twitter @site</span></label>
+                  <input id="f-twsite" class="input-clean" autocomplete="off" type="text" placeholder="@toolity_in" spellcheck="false">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="f-twcreator"><span>@creator</span></label>
+                  <input id="f-twcreator" class="input-clean" autocomplete="off" type="text" placeholder="@kapil" spellcheck="false">
+                </div>
+                </div>
+                <div class="form-group">
+                  <span class="form-label"><span>Robots</span></span>
+                  <div class="web-checks">
+              <div class="control-item"><input type="checkbox" id="f-index" checked><label for="f-index">index</label></div>
+              <div class="control-item"><input type="checkbox" id="f-follow" checked><label for="f-follow">follow</label></div>
+              <div class="control-item"><input type="checkbox" id="f-maximage" checked><label for="f-maximage">max-image-preview:large</label></div>
+              <div class="control-item"><input type="checkbox" id="f-noarchive"><label for="f-noarchive">noarchive</label></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Head block</span>
+                <span class="pane-badge" id="output-badge">—</span>
+              </div>
+              <div class="pane-content web-output-pane">
+                <div class="pane-empty" id="output-empty">
+                  <iconify-icon icon="lucide:code-xml"></iconify-icon>
+                  <span>Your &lt;head&gt; tags will appear here</span>
+                </div>
+                <div class="web-output" id="output-content" hidden>
+                  <div class="serp-meters">
+                    <div class="serp-meter"><span>Title</span><div class="serp-bar"><i id="m-title"></i></div><b id="m-title-val">—</b></div>
+                    <div class="serp-meter"><span>Description</span><div class="serp-bar"><i id="m-desc"></i></div><b id="m-desc-val">—</b></div>
+                  </div>
+                  <pre class="web-code" id="output-text"></pre>
+                  <div class="web-tags" id="output-issues"></div>
+                  <p class="web-muted"><a id="serp-link" href="/labs/serp-snippet-preview/">Preview this snippet in Google results →</a></p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">charset + viewport · og:url = canonical · en</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item"><input type="checkbox" id="opt-boiler" checked><label for="opt-boiler">Include charset and viewport</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-ogurl" checked><label for="opt-ogurl">Set og:url to the canonical URL</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-locale" checked><label for="opt-locale">Include og:locale</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-favicons"><label for="opt-favicons">Include favicon link placeholders</label></div>
+              <div class="control-item">
+                <label for="opt-lang">Language (og:locale)</label>
+                <select id="opt-lang" class="select-clean"><option value="en_US" selected>English (US)</option><option value="en_GB">English (UK)</option><option value="en_IN">English (India)</option><option value="hi_IN">Hindi</option><option value="de_DE">German</option><option value="fr_FR">French</option><option value="es_ES">Spanish</option><option value="pt_BR">Portuguese (BR)</option><option value="ja_JP">Japanese</option></select>
+              </div>
+              <div class="control-item">
+                <label for="opt-theme">Theme colour (optional)</label>
+                <input type="text" id="opt-theme" class="input-clean" placeholder="#F4511E" spellcheck="false" autocomplete="off">
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Use Meta Tag Generator in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Fill in what you have</h3>
+              <p class="step-desc">Title and description drive everything — the Open Graph and Twitter tags reuse them unless you add a share image. Canonical, site name, author and robots are optional but recommended.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Check the meters</h3>
+              <p class="step-desc">The title and description meters use Google’s real pixel limits (about 600 px and 920 px on desktop). Warnings below the code flag a missing description, an image without alt text, or a canonical that isn’t absolute.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Copy the block</h3>
+              <p class="step-desc">Copy the <code>&lt;head&gt;</code> block or download it as <code>head.html</code> and paste it inside <code>&lt;head&gt;</code>, replacing any existing tags with the same names. Then check the live page with the <a href="/labs/meta-tag-extractor/">Meta Tag Extractor</a> and <a href="/labs/open-graph-preview/">Open Graph Preview</a>.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Meta Tag Generator — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Which tags does it generate?</summary>
+              <p><code>&lt;title&gt;</code>, description, canonical, robots, author, theme-color, charset and viewport; Open Graph (<code>og:title</code>, <code>og:description</code>, <code>og:type</code>, <code>og:url</code>, <code>og:site_name</code>, <code>og:image</code>, <code>og:image:alt</code>, <code>og:locale</code>) and Twitter Card (<code>twitter:card</code>, <code>twitter:site</code>, <code>twitter:creator</code>, <code>twitter:title</code>, <code>twitter:description</code>, <code>twitter:image</code>). Empty fields are simply left out — no blank tags.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Do I need the twitter:title and twitter:description tags?</summary>
+              <p>X falls back to the Open Graph tags when they are missing, so strictly no. They are included because other platforms (Slack, Discord, iMessage) and some X previews behave more predictably with both sets present. Set the Twitter card to “None” to leave them out.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What is the keywords meta tag — and why isn’t it here?</summary>
+              <p>Google has ignored <code>&lt;meta name="keywords"&gt;</code> since 2009 and no major search engine ranks on it. Leaving it out keeps your head clean; nothing is lost.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why the pixel limits instead of character counts?</summary>
+              <p>Google truncates by width, not length. The meters measure your text in Google’s font sizes; see the <a href="/labs/serp-snippet-preview/">SERP Snippet Preview</a> for the full rendered result on desktop and mobile.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Should og:url be the canonical URL?</summary>
+              <p>Yes, in almost every case — it tells Facebook and LinkedIn which URL to count shares against, so tracking parameters and duplicates roll up to one page. The default follows the canonical; untick the setting if you need them to differ.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is my input sent anywhere?</summary>
+              <p>No. Everything is computed by JavaScript in your browser tab. Nothing is uploaded, logged or stored by Toolity.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="labs"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=4.4"></script>
+  <script src="/scripts/tool-common.js?v=1.1"></script>
+  <script src="/scripts/web-common.js?v=1.2"></script>
+  <script src="/labs/meta-tag-generator/meta-tag-generator.js?v=1.0"></script>
+</body>
+</html>
