@@ -106,6 +106,7 @@
 ## Labs — links, QR codes and everyday utilities
 
 - [Add to Calendar Link Creator](https://toolity.in/labs/add-to-calendar-link-creator/): Free add-to-calendar link generator: create Google Calendar, Outlook, Office 365 and Yahoo event links and download an .ics file for Apple Calendar. Repeat rules, reminders and time zones — nothing uploaded.
+- [Barcode Generator](https://toolity.in/labs/barcode-generator/): Free barcode generator: create Code 128, EAN-13, EAN-8, UPC-A, Code 39, ITF-14 and Codabar barcodes with automatic check digits. Download SVG or PNG, or make a whole batch as a ZIP — in your browser.
 - [Blob Maker](https://toolity.in/labs/blob-maker/): Free online blob maker: design organic SVG blob shapes with full control over points, randomness, smoothness, gradients, background, layers, blur, grain and animation. Export SVG, animated SVG, CSS, PNG, GIF or video — all in your browser.
 - [Camera](https://toolity.in/labs/camera/): Free online camera: take photos and record videos with your webcam or phone camera in the browser — switch front/back, self-timer, grid, mirror and resolution, then download. Nothing is uploaded.
 - [Color Converter](https://toolity.in/labs/color-converter/): Free online colour converter: turn any CSS colour — hex, RGB, HSL, HWB, CMYK, OKLCH, named — into every other format at once, with alpha, uppercase hex and copy buttons. In your browser.
@@ -118,15 +119,20 @@
 - [Meta Tag Extractor](https://toolity.in/labs/meta-tag-extractor/): Free online meta tag extractor: list a page’s title, description, canonical, robots, viewport, Open Graph, Twitter Card, hreflang and icon tags with SEO warnings. Fetches the page or reads pasted HTML — in your browser.
 - [Online Photo Booth](https://toolity.in/labs/photo-booth/): Free online photo booth. Pick a strip layout, shoot with a countdown, add emoji sticker packs, your logo and a date caption, then download a print-ready PNG. 100% in your browser — photos never leave your device.
 - [Open Graph Preview](https://toolity.in/labs/open-graph-preview/): Free online Open Graph preview: see how any link will look when shared on Facebook, X (Twitter), LinkedIn and Slack. Fetches the page or reads pasted HTML — in your browser.
+- [Password Generator](https://toolity.in/labs/password-generator/): Free strong password generator: random passwords, memorable passphrases (EFF word list) and PINs made with your browser’s cryptographic random generator, with a strength meter and bulk generation. Nothing is sent or stored.
 - [Pomodoro Timer](https://toolity.in/labs/pomodoro-timer/): Free online Pomodoro timer with task list, custom focus and break lengths, auto-start, long breaks, sound and desktop notifications. Keeps running in a background tab; progress is saved in your browser.
 - [Redirect Checker](https://toolity.in/labs/redirect-checker/): Free online redirect checker and link unshortener: find where a short link or redirecting URL finally lands, the final HTTP status, and whether it changed host or upgraded to HTTPS. Browser-based.
+- [Share & Message Link Generator](https://toolity.in/labs/share-link-generator/): Free share link generator: turn a URL and message into ready-to-use share links for WhatsApp, Telegram, X, Facebook, LinkedIn, Reddit, Pinterest, email and SMS — plus a copy-paste share-buttons HTML snippet. In your browser.
+- [UPI Payment QR Generator](https://toolity.in/labs/upi-qr-generator/): Free UPI QR code generator: create a scan-to-pay QR for any UPI ID with your name, an optional fixed amount and a note — works with Google Pay, PhonePe, Paytm, BHIM and every UPI app. Download PNG, SVG or a printable stand card.
 - [URL Cleaner](https://toolity.in/labs/url-cleaner/): Free online URL cleaner: strip utm_*, fbclid, gclid and other tracking parameters from one or many links at once, optionally remove fragments and force HTTPS. Runs entirely in your browser.
 - [URL Encoder Decoder](https://toolity.in/labs/url-encoder-decoder/): Free online URL encoder and decoder: percent-encode text for query strings (encodeURIComponent), encode full URLs safely (encodeURI) or decode %20-style escapes back to text. In your browser, line by line.
 - [Website Favicon Extractor](https://toolity.in/labs/favicon-extractor/): Free Website Favicon Extractor: Grab, preview, and download high-resolution favicons (16px to 256px HD) from any website or domain using Google's Favicon Service. 100% free and client-side.
 - [WhatsApp Link Creator](https://toolity.in/labs/whatsapp-link-creator/): Free, instant WhatsApp Link Creator and Click-to-Chat Generator. Create custom wa.me links with pre-filled messages, HTML chat buttons, and Markdown snippets with 100% client-side privacy.
+- [YouTube Link & Embed Generator](https://toolity.in/labs/youtube-link-generator/): Free YouTube link and embed code generator: make timestamp links that start at a set time, and iframe embed code with start/end, autoplay, mute, loop, captions and privacy-enhanced mode. Works with Shorts and youtu.be links.
 
 ## Dev — format, inspect, validate
 
+- [Code Formatter & Minifier](https://toolity.in/dev/code-formatter/): Free online code formatter and minifier: beautify HTML, CSS, SCSS, JavaScript, TypeScript, JSON, SQL, XML, Markdown and YAML with Prettier, or minify HTML, CSS, JS, JSON, SQL and XML. Auto-detects the language — runs in your browser.
 - [JSON Visualizer](https://toolity.in/dev/json-visualizer/): Free online interactive JSON visualizer, tree explorer, table generator, and schema validator. Inspect, search, format, and copy nested JSON paths 100% privately in your browser.
 
 ## Data — parse and manipulate

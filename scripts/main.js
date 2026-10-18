@@ -1308,6 +1308,54 @@
         tags: ['log parser', 'log viewer', 'log analyzer', 'nginx log analyzer', 'apache access log', 'syslog viewer', 'json logs', 'filter logs by level', 'log file viewer']
       },
       {
+        id: 'share-link-generator',
+        title: 'Share & Message Link Generator',
+        category: 'Labs',
+        url: 'labs/share-link-generator/',
+        icon: 'lucide:share-2',
+        tags: ['share link generator', 'social share links', 'whatsapp share link', 'telegram share link', 'twitter share link', 'facebook share link', 'linkedin share link', 'sms link', 'share buttons html']
+      },
+      {
+        id: 'youtube-link-generator',
+        title: 'YouTube Link & Embed Generator',
+        category: 'Labs',
+        url: 'labs/youtube-link-generator/',
+        icon: 'lucide:youtube',
+        tags: ['youtube timestamp link', 'youtube start time link', 'youtube embed code generator', 'youtube iframe', 'youtube embed autoplay', 'youtube loop embed', 'youtube-nocookie', 'youtube shorts embed', 'youtu.be link']
+      },
+      {
+        id: 'password-generator',
+        title: 'Password Generator',
+        category: 'Labs',
+        url: 'labs/password-generator/',
+        icon: 'lucide:key-round',
+        tags: ['password generator', 'strong password generator', 'random password', 'passphrase generator', 'diceware', 'pin generator', 'secure password', 'password strength']
+      },
+      {
+        id: 'upi-qr-generator',
+        title: 'UPI Payment QR Generator',
+        category: 'Labs',
+        url: 'labs/upi-qr-generator/',
+        icon: 'lucide:indian-rupee',
+        tags: ['upi qr code generator', 'upi qr', 'upi payment qr', 'google pay qr', 'phonepe qr', 'paytm qr', 'bhim upi qr', 'upi link generator', 'upi://pay', 'payment qr code']
+      },
+      {
+        id: 'barcode-generator',
+        title: 'Barcode Generator',
+        category: 'Labs',
+        url: 'labs/barcode-generator/',
+        icon: 'lucide:barcode',
+        tags: ['barcode generator', 'ean 13 generator', 'upc barcode generator', 'code 128 generator', 'code 39', 'itf-14', 'codabar', 'bulk barcode generator', 'barcode svg', 'barcode png']
+      },
+      {
+        id: 'code-formatter',
+        title: 'Code Formatter & Minifier',
+        category: 'Dev',
+        url: 'dev/code-formatter/',
+        icon: 'lucide:wand-sparkles',
+        tags: ['code formatter', 'code beautifier', 'prettier online', 'html formatter', 'css minifier', 'javascript minifier', 'js beautifier', 'sql formatter', 'xml formatter', 'json formatter', 'typescript formatter', 'minify code']
+      },
+      {
         id: 'cat-widgets',
         title: 'Widgets',
         category: 'Category',
