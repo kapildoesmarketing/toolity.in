@@ -1420,6 +1420,54 @@
         tags: ['readability score', 'flesch reading ease', 'flesch kincaid grade', 'gunning fog', 'smog index', 'readability checker', 'reading level', 'passive voice checker', 'reading time calculator', 'text analysis']
       },
       {
+        id: 'text-to-handwriting',
+        title: 'Text to Handwriting',
+        category: 'Labs',
+        url: 'labs/text-to-handwriting/',
+        icon: 'lucide:pen-line',
+        tags: ['text to handwriting', 'handwriting converter', 'handwritten assignment', 'text to handwritten notes', 'handwriting generator', 'fake handwriting', 'handwriting font', 'ruled paper pdf', 'assignment writer', 'handwritten pdf']
+      },
+      {
+        id: 'countdown-page-maker',
+        title: 'Countdown Page Maker',
+        category: 'Labs',
+        url: 'labs/countdown-page-maker/',
+        icon: 'lucide:timer',
+        tags: ['countdown page', 'countdown timer link', 'event countdown', 'shareable countdown', 'launch countdown', 'exam countdown', 'wedding countdown', 'countdown qr code', 'countdown maker', 'days until']
+      },
+      {
+        id: 'schema-markup-generator',
+        title: 'Schema Markup Generator',
+        category: 'Labs',
+        url: 'labs/schema-markup-generator/',
+        icon: 'lucide:braces',
+        tags: ['schema markup generator', 'json-ld generator', 'structured data generator', 'faq schema', 'article schema', 'product schema', 'local business schema', 'breadcrumb schema', 'rich results', 'schema.org']
+      },
+      {
+        id: 'html-css-js-playground',
+        title: 'HTML / CSS / JS Playground',
+        category: 'Dev',
+        url: 'dev/html-css-js-playground/',
+        icon: 'lucide:code',
+        tags: ['html css js playground', 'online code editor', 'live html editor', 'javascript playground', 'codepen alternative', 'jsfiddle alternative', 'run html online', 'css sandbox', 'web playground', 'html preview']
+      },
+      {
+        id: 'config-converter',
+        title: 'Config Converter',
+        category: 'Dev',
+        url: 'dev/config-converter/',
+        icon: 'lucide:settings-2',
+        tags: ['env to json', 'json to env', 'yaml to env', 'env to yaml', 'dotenv converter', 'docker compose environment', 'kubernetes configmap generator', 'toml to json', 'ini to json', 'properties to yaml', 'config converter']
+      },
+      {
+        id: 'hash-id-generator',
+        title: 'Hash & ID Generator',
+        category: 'Dev',
+        url: 'dev/hash-id-generator/',
+        icon: 'lucide:fingerprint',
+        tags: ['hash generator', 'sha256 generator', 'md5 generator', 'sha512 hash', 'hmac generator', 'checksum verifier', 'uuid generator', 'uuid v7', 'ulid generator', 'nanoid', 'random id generator', 'file hash']
+      },
+      {
         id: 'cat-widgets',
         title: 'Widgets',
         category: 'Category',
