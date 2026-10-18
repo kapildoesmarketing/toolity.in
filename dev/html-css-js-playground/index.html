@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online HTML / CSS / JS Playground | Toolity Dev</title>
+  <link rel="canonical" href="https://toolity.in/dev/html-css-js-playground/">
+  <meta name="description" content="Free online HTML, CSS and JavaScript playground: write code in three editors, run it in a sandboxed preview with a console, and share the result as a link — no account, nothing stored. Download as a single HTML file or a ZIP.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online HTML / CSS / JS Playground | Toolity Dev">
+  <meta property="og:description" content="Free online HTML, CSS and JavaScript playground: write code in three editors, run it in a sandboxed preview with a console, and share the result as a link — no account, nothing stored. Download as a single HTML file or a ZIP.">
+  <meta property="og:url" content="https://toolity.in/dev/html-css-js-playground/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=6.1" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=6.1">
+  <link rel="stylesheet" href="/styles/tools/html-css-js-playground.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "HTML / CSS / JS Playground",
+        "url": "https://toolity.in/dev/html-css-js-playground/",
+        "description": "Free online HTML, CSS and JavaScript playground: write code in three editors, run it in a sandboxed preview with a console, and share the result as a link — no account, nothing stored. Download as a single HTML file or a ZIP.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Dev", "item": "https://toolity.in/dev/" },
+          { "@type": "ListItem", "position": 3, "name": "HTML / CSS / JS Playground", "item": "https://toolity.in/dev/html-css-js-playground/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Where is my code saved?", "acceptedAnswer": { "@type": "Answer", "text": "Nowhere — Toolity has no server and this page uses no storage. The share link is the save: the three editors are compressed (deflate, via the browser’s CompressionStream) and base64-encoded into the URL fragment, which is never sent to any server. A typical pen is 1–3 KB of URL; browsers handle links up to about 60 KB." } },
+          { "@type": "Question", "name": "How safe is the preview?", "acceptedAnswer": { "@type": "Answer", "text": "It runs in an iframe with sandbox=\"allow-scripts allow-modals allow-forms allow-popups\" and no allow-same-origin, so the code gets a unique opaque origin: it cannot read Toolity’s cookies or localStorage, cannot navigate this page, and network requests are subject to the usual CORS rules." } },
+          { "@type": "Question", "name": "Can I use libraries?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — add a &lt;script src=\"https://cdn.jsdelivr.net/npm/…\"&gt; or &lt;link&gt; tag in the HTML editor. Settings also offer one-click normalize.css and the Tailwind Play CDN. Modules work too: &lt;script type=\"module\"&gt; with import from a CDN URL." } },
+          { "@type": "Question", "name": "Why is there no syntax highlighting?", "acceptedAnswer": { "@type": "Answer", "text": "The editors are plain textareas so the page loads instantly and works offline with zero dependencies. Tab indenting, line counts and Ctrl/⌘ + Enter are there; a full editor would add ~300 KB. Paste from your IDE for anything long." } },
+          { "@type": "Question", "name": "Does the console show everything?", "acceptedAnswer": { "@type": "Answer", "text": "console.log / info / warn / error / table (as JSON), uncaught errors and unhandled promise rejections are forwarded from the sandbox. Objects are printed as JSON (circular structures are flattened); DOM nodes print as their outerHTML." } },
+          { "@type": "Question", "name": "Is my code uploaded anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. Formatting and minifying run in JavaScript inside your browser tab. The formatter libraries are downloaded once from a CDN; your code never leaves the page." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/dev/" class="breadcrumb-link">Dev</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">HTML / CSS / JS Playground</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Dev</span>
+            <h1 class="page-title">HTML / CSS / JS Playground</h1>
+            <p class="page-desc">Three editors, a live sandboxed preview and a console — share the whole thing as a link, no sign-up.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="stacked" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge web-status-badge" id="status-badge">Write some HTML, CSS or JavaScript</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result" aria-label="Copy result" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <div class="dropdown-menu-wrapper" id="download-dropdown-wrap">
+                <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download result" aria-label="Download result" aria-haspopup="true" disabled>
+                  <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                  <span>Download</span>
+                  <iconify-icon icon="lucide:chevron-down" class="dropdown-arrow" width="13" height="13"></iconify-icon>
+                </button>
+                <div class="dropdown-popup" role="menu">
+                  <button type="button" class="dropdown-item" data-format="html" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:file-code" width="14" height="14"></iconify-icon>
+                      <span>Single HTML file</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="zip" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:file-archive" width="14" height="14"></iconify-icon>
+                      <span>index.html + style.css + script.js (.zip)</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="link" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:link" width="14" height="14"></iconify-icon>
+                      <span>Share link (.txt)</span>
+                    </div>
+                  </button>
+                </div>
+              </div>
+              <button type="button" class="btn-toolbar-sm" id="btn-open" title="Open result in a new tab" aria-label="Open result in a new tab" disabled>
+                <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
+                <span>Open</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Editors</span>
+                <span class="pane-badge" id="input-badge">—</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content web-form">
+                <div class="pg-editors">
+                  <div class="form-group form-group-grow"><label class="form-label" for="pg-html"><span>HTML</span><span class="form-label-desc" id="pg-html-count"></span></label><textarea id="pg-html" class="textarea-clean pg-code" rows="12" placeholder="&lt;h1&gt;Hello&lt;/h1&gt;&#10;&lt;button id=&quot;go&quot;&gt;Click&lt;/button&gt;" spellcheck="false" autocapitalize="off" data-file-target></textarea></div>
+                  <div class="form-group form-group-grow"><label class="form-label" for="pg-css"><span>CSS</span><span class="form-label-desc" id="pg-css-count"></span></label><textarea id="pg-css" class="textarea-clean pg-code" rows="12" placeholder="body { font-family: system-ui; padding: 2rem; }" spellcheck="false" autocapitalize="off"></textarea></div>
+                  <div class="form-group form-group-grow"><label class="form-label" for="pg-js"><span>JavaScript</span><span class="form-label-desc" id="pg-js-count"></span></label><textarea id="pg-js" class="textarea-clean pg-code" rows="12" placeholder="document.getElementById('go').onclick = () => console.log('clicked');" spellcheck="false" autocapitalize="off"></textarea></div>
+                </div>
+                <button type="button" id="btn-run" class="btn-toolbar-sm btn-brand-sm btn-primary-action">
+                  <iconify-icon icon="lucide:play" width="16" height="16"></iconify-icon>
+                  <span>Run</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Preview</span>
+                <span class="pane-badge" id="output-badge">—</span>
+              </div>
+              <div class="pane-content web-output-pane">
+                <div class="pane-empty" id="output-empty">
+                  <iconify-icon icon="lucide:code"></iconify-icon>
+                  <span>Press Run (or turn on auto-run) to see the result</span>
+                </div>
+                <div class="web-output" id="output-content" hidden>
+                  <div class="pg-result">
+                    <iframe id="pg-frame" class="pg-frame" title="Preview" sandbox="allow-scripts allow-modals allow-forms allow-popups" referrerpolicy="no-referrer"></iframe>
+                    <div class="pg-console" id="pg-console" aria-live="polite" aria-label="Console"></div>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="pg-link"><span>Share link</span><span class="form-label-desc">the code lives in the URL — nothing is stored</span></label>
+                    <div class="web-inline"><input type="text" id="pg-link" class="input-clean pg-link" readonly placeholder="Appears after the first run"><button type="button" class="btn-toolbar-sm" id="btn-link"><iconify-icon icon="lucide:link" width="14" height="14"></iconify-icon><span>Copy link</span></button></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">Auto-run on · no CSS reset · no Tailwind</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item"><input type="checkbox" id="opt-auto" checked><label for="opt-auto">Auto-run while typing (600 ms after you stop)</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-normalize"><label for="opt-normalize">Add normalize.css</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-tailwind"><label for="opt-tailwind">Add Tailwind CSS (Play CDN)</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-console" checked><label for="opt-console">Show the console</label></div>
+              <div class="control-item">
+                <label for="opt-tab">Tab key inserts</label>
+                <select id="opt-tab" class="select-clean"><option value="2" selected>2 spaces</option><option value="4">4 spaces</option><option value="\t">Tab character</option></select>
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Use HTML / CSS / JS Playground in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Write</h3>
+              <p class="step-desc">Type HTML, CSS and JavaScript in the three editors — Tab indents, Ctrl/⌘ + Enter runs. Drop an .html file onto the HTML editor to start from it.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Run and debug</h3>
+              <p class="step-desc">The preview is a sandboxed iframe: your script cannot touch Toolity, cookies or storage. <code>console.log</code>, warnings, errors and uncaught exceptions appear in the console under the preview, with line numbers where the browser provides them.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Share or export</h3>
+              <p class="step-desc"><strong>Download ▾ Share link</strong> (or Copy) gives a URL with the whole pen compressed into it — open it anywhere, no account. Download a single self-contained HTML file, or a ZIP with the three files separated.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">HTML / CSS / JS Playground — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Where is my code saved?</summary>
+              <p>Nowhere — Toolity has no server and this page uses no storage. The share link <em>is</em> the save: the three editors are compressed (deflate, via the browser’s CompressionStream) and base64-encoded into the URL fragment, which is never sent to any server. A typical pen is 1–3 KB of URL; browsers handle links up to about 60 KB.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How safe is the preview?</summary>
+              <p>It runs in an iframe with <code>sandbox="allow-scripts allow-modals allow-forms allow-popups"</code> and no <code>allow-same-origin</code>, so the code gets a unique opaque origin: it cannot read Toolity’s cookies or localStorage, cannot navigate this page, and network requests are subject to the usual CORS rules.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can I use libraries?</summary>
+              <p>Yes — add a <code>&lt;script src="https://cdn.jsdelivr.net/npm/…"&gt;</code> or <code>&lt;link&gt;</code> tag in the HTML editor. Settings also offer one-click normalize.css and the Tailwind Play CDN. Modules work too: <code>&lt;script type="module"&gt;</code> with <code>import</code> from a CDN URL.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why is there no syntax highlighting?</summary>
+              <p>The editors are plain textareas so the page loads instantly and works offline with zero dependencies. Tab indenting, line counts and Ctrl/⌘ + Enter are there; a full editor would add ~300 KB. Paste from your IDE for anything long.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Does the console show everything?</summary>
+              <p><code>console.log / info / warn / error / table (as JSON)</code>, uncaught errors and unhandled promise rejections are forwarded from the sandbox. Objects are printed as JSON (circular structures are flattened); DOM nodes print as their outerHTML.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is my code uploaded anywhere?</summary>
+              <p>No. Formatting and minifying run in JavaScript inside your browser tab. The formatter libraries are downloaded once from a CDN; your code never leaves the page.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="dev"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=4.5"></script>
+  <script src="/scripts/tool-common.js?v=1.1"></script>
+  <script src="/scripts/web-common.js?v=1.2"></script>
+  <script src="/dev/html-css-js-playground/html-css-js-playground.js?v=1.0"></script>
+</body>
+</html>
