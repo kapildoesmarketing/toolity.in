@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online UPI Payment QR Generator | Toolity Labs</title>
+  <link rel="canonical" href="https://toolity.in/labs/upi-qr-generator/">
+  <meta name="description" content="Free UPI QR code generator: create a scan-to-pay QR for any UPI ID with your name, an optional fixed amount and a note — works with Google Pay, PhonePe, Paytm, BHIM and every UPI app. Download PNG, SVG or a printable stand card.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online UPI Payment QR Generator | Toolity Labs">
+  <meta property="og:description" content="Free UPI QR code generator: create a scan-to-pay QR for any UPI ID with your name, an optional fixed amount and a note — works with Google Pay, PhonePe, Paytm, BHIM and every UPI app. Download PNG, SVG or a printable stand card.">
+  <meta property="og:url" content="https://toolity.in/labs/upi-qr-generator/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=5.5" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=5.5">
+  <link rel="stylesheet" href="/styles/tools/upi-qr-generator.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "UPI Payment QR Generator",
+        "url": "https://toolity.in/labs/upi-qr-generator/",
+        "description": "Free UPI QR code generator: create a scan-to-pay QR for any UPI ID with your name, an optional fixed amount and a note — works with Google Pay, PhonePe, Paytm, BHIM and every UPI app. Download PNG, SVG or a printable stand card.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Labs", "item": "https://toolity.in/labs/" },
+          { "@type": "ListItem", "position": 3, "name": "UPI Payment QR Generator", "item": "https://toolity.in/labs/upi-qr-generator/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Does this work with Google Pay, PhonePe and Paytm?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The QR contains a standard upi://pay link defined by NPCI, which every UPI app can read — Google Pay, PhonePe, Paytm, BHIM, Amazon Pay, bank apps and more." } },
+          { "@type": "Question", "name": "Is my UPI ID checked or stored?", "acceptedAnswer": { "@type": "Answer", "text": "Neither. The QR is made in your browser and nothing is sent anywhere, so Toolity cannot confirm the ID is real. Scan it and pay ₹1 to yourself before printing it." } },
+          { "@type": "Question", "name": "Should I set an amount?", "acceptedAnswer": { "@type": "Answer", "text": "Set it for a fixed price (a product, a fee). Leave it blank for a shop counter, so each customer types their own amount. Some apps limit how much can be paid to a personal UPI ID through a QR." } },
+          { "@type": "Question", "name": "Why does Open do nothing on my computer?", "acceptedAnswer": { "@type": "Answer", "text": "UPI links only open on phones that have a UPI app installed. On a computer, scan the QR with your phone instead." } },
+          { "@type": "Question", "name": "Can I use this for my business?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — it is free with no watermark. For payment confirmations, settlement reports or GST invoices you still need a merchant account with your bank or a payment provider." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/labs/" class="breadcrumb-link">Labs</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">UPI Payment QR Generator</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Labs</span>
+            <h1 class="page-title">UPI Payment QR Generator</h1>
+            <p class="page-desc">Enter your UPI ID — get a scan-to-pay QR that works in every UPI app, plus a printable card for your counter.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" data-split="40/60" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge web-status-badge" id="status-badge">Enter a UPI ID to begin</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result" aria-label="Copy result" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <div class="dropdown-menu-wrapper" id="download-dropdown-wrap">
+                <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download result" aria-label="Download result" aria-haspopup="true" disabled>
+                  <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                  <span>Download</span>
+                  <iconify-icon icon="lucide:chevron-down" class="dropdown-arrow" width="13" height="13"></iconify-icon>
+                </button>
+                <div class="dropdown-popup" role="menu">
+                  <button type="button" class="dropdown-item" data-format="png" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:image" width="14" height="14"></iconify-icon>
+                      <span>QR code (.png)</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="svg" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:pen-tool" width="14" height="14"></iconify-icon>
+                      <span>QR code (.svg)</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="card" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:printer" width="14" height="14"></iconify-icon>
+                      <span>Printable card (.png)</span>
+                    </div>
+                  </button>
+                </div>
+              </div>
+              <button type="button" class="btn-toolbar-sm" id="btn-open" title="Open result in a new tab" aria-label="Open result in a new tab" disabled>
+                <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
+                <span>Open</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Payment details</span>
+                <span class="pane-badge" id="input-badge">—</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content web-form">
+                <div class="form-group">
+                  <label class="form-label" for="upi-input"><span>UPI ID</span></label>
+                  <input id="upi-input" class="input-clean" autocomplete="off" type="text" spellcheck="false" autocapitalize="off" inputmode="email" placeholder="yourname@okaxis">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="name-input"><span>Payee name</span></label>
+                  <input id="name-input" class="input-clean" autocomplete="off" type="text" placeholder="Name shown to the payer" maxlength="60">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="amount-input"><span>Amount (₹)</span><span class="form-label-desc">Optional</span></label>
+                  <input id="amount-input" class="input-clean" autocomplete="off" type="text" inputmode="decimal" placeholder="Leave blank to let the payer enter it">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="note-input"><span>Note</span><span class="form-label-desc">Optional</span></label>
+                  <input id="note-input" class="input-clean" autocomplete="off" type="text" placeholder="Order #1024" maxlength="50">
+                </div>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Scan to pay</span>
+                <span class="pane-badge" id="output-badge">—</span>
+              </div>
+              <div class="pane-content web-output-pane">
+                <div class="pane-empty" id="output-empty">
+                  <iconify-icon icon="lucide:qr-code"></iconify-icon>
+                  <span>Your payment QR will appear here</span>
+                </div>
+                <div class="web-output" id="output-content" hidden>
+                  <div class="upi-out">
+                    <img id="upi-qr" class="upi-qr" alt="UPI payment QR code" width="280" height="280">
+                    <div class="upi-meta"><strong id="upi-name"></strong><span id="upi-vpa"></span><span class="upi-amt" id="upi-amt"></span></div>
+                    <pre class="web-code" id="output-text"></pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">ECC M · 1024 px</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item">
+                <label for="opt-ecc">Error correction</label>
+                <select id="opt-ecc" class="select-clean"><option value="L">Low (7%) — smallest</option><option value="M" selected>Medium (15%)</option><option value="Q">Quartile (25%)</option><option value="H">High (30%) — best for print</option></select>
+              </div>
+              <div class="control-item">
+                <label for="opt-size">PNG size</label>
+                <select id="opt-size" class="select-clean"><option value="512">512 px</option><option value="1024" selected>1024 px</option><option value="2048">2048 px</option></select>
+              </div>
+              <div class="control-item">
+                <label for="opt-card">Card headline</label>
+                <input type="text" id="opt-card" class="input-clean" value="Scan &amp; pay with any UPI app" maxlength="40" autocomplete="off">
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Use UPI Payment QR Generator in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Enter your UPI ID</h3>
+              <p class="step-desc">Type the UPI ID you receive money on (for example <code>name@okaxis</code>) and the name the payer should see. Add an amount for a fixed price, or leave it blank.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Check the QR</h3>
+              <p class="step-desc">The QR updates as you type. On a phone, press Open to launch your UPI app with the same details — the safest way to test before printing.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Download and display</h3>
+              <p class="step-desc">Download the QR as PNG or SVG, or the printable card with your name and UPI ID for a shop counter or invoice.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">UPI Payment QR Generator — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Does this work with Google Pay, PhonePe and Paytm?</summary>
+              <p>Yes. The QR contains a standard <code>upi://pay</code> link defined by NPCI, which every UPI app can read — Google Pay, PhonePe, Paytm, BHIM, Amazon Pay, bank apps and more.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is my UPI ID checked or stored?</summary>
+              <p>Neither. The QR is made in your browser and nothing is sent anywhere, so Toolity cannot confirm the ID is real. Scan it and pay ₹1 to yourself before printing it.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Should I set an amount?</summary>
+              <p>Set it for a fixed price (a product, a fee). Leave it blank for a shop counter, so each customer types their own amount. Some apps limit how much can be paid to a personal UPI ID through a QR.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why does Open do nothing on my computer?</summary>
+              <p>UPI links only open on phones that have a UPI app installed. On a computer, scan the QR with your phone instead.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can I use this for my business?</summary>
+              <p>Yes — it is free with no watermark. For payment confirmations, settlement reports or GST invoices you still need a merchant account with your bank or a payment provider.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="labs"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=4.2"></script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="/scripts/qr-engine.js?v=1.0"></script>
+  <script src="/scripts/web-common.js?v=1.1"></script>
+  <script src="/labs/upi-qr-generator/upi-qr-generator.js?v=1.0"></script>
+</body>
+</html>
