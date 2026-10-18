@@ -969,18 +969,25 @@ body {
 .hero-btn:active { transform: translateY(0) scale(.985); }
 .hero-btn:focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; }
 
+/* Designed by Kapil Pidhwani: tonal brand, same palette as .btn-primary-signal (soft fill, deep brand text,
+   tinted hairline) — orange stays an accent, not a block. No glow; depth comes from the lift + a neutral shadow. */
 .hero-btn-primary,
 .hero-btn-primary:visited {
-  background: var(--brand);
-  color: #FFFFFF;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, .12), 0 10px 28px -10px color-mix(in srgb, var(--brand) 70%, transparent);
+  background: var(--brand-soft);
+  color: var(--brand-hover);
+  border-color: rgba(244, 81, 30, 0.28);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .04);
 }
 .hero-btn-primary:hover {
-  background: var(--brand-hover);
-  color: #FFFFFF;
+  background: rgba(244, 81, 30, 0.14);
+  border-color: rgba(244, 81, 30, 0.45);
+  color: var(--brand-hover);
   transform: translateY(-2px);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 16px 36px -12px color-mix(in srgb, var(--brand) 85%, transparent);
+  box-shadow: 0 8px 20px -10px rgba(0, 0, 0, .18);
 }
+[data-theme="dark"] .hero-btn-primary,
+[data-theme="dark"] .hero-btn-primary:visited { border-color: rgba(255, 106, 42, 0.32); }
+[data-theme="dark"] .hero-btn-primary:hover { background: rgba(255, 106, 42, 0.2); border-color: rgba(255, 106, 42, 0.5); }
 .hero-btn-primary:hover iconify-icon { transform: translateY(3px); }
 
 .hero-btn-ghost,
