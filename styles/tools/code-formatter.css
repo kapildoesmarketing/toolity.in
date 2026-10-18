@@ -1,0 +1,3 @@
+/* Code Formatter & Minifier — Language + Mode row: top-align the labels, stack when the card is narrow (tokens from main.css) */
+.tool-workspace-card .web-convert-row-2 { align-items: start; }
+@container (max-width: 560px) { .tool-workspace-card .web-convert-row-2 { grid-template-columns: minmax(0, 1fr); } }

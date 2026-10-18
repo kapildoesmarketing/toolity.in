@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Code Formatter & Minifier | Toolity Dev</title>
+  <link rel="canonical" href="https://toolity.in/dev/code-formatter/">
+  <meta name="description" content="Free online code formatter and minifier: beautify HTML, CSS, SCSS, JavaScript, TypeScript, JSON, SQL, XML, Markdown and YAML with Prettier, or minify HTML, CSS, JS, JSON, SQL and XML. Auto-detects the language — runs in your browser.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Code Formatter & Minifier | Toolity Dev">
+  <meta property="og:description" content="Free online code formatter and minifier: beautify HTML, CSS, SCSS, JavaScript, TypeScript, JSON, SQL, XML, Markdown and YAML with Prettier, or minify HTML, CSS, JS, JSON, SQL and XML. Auto-detects the language — runs in your browser.">
+  <meta property="og:url" content="https://toolity.in/dev/code-formatter/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=5.5" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=5.5">
+  <link rel="stylesheet" href="/styles/tools/code-formatter.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Code Formatter & Minifier",
+        "url": "https://toolity.in/dev/code-formatter/",
+        "description": "Free online code formatter and minifier: beautify HTML, CSS, SCSS, JavaScript, TypeScript, JSON, SQL, XML, Markdown and YAML with Prettier, or minify HTML, CSS, JS, JSON, SQL and XML. Auto-detects the language — runs in your browser.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Dev", "item": "https://toolity.in/dev/" },
+          { "@type": "ListItem", "position": 3, "name": "Code Formatter & Minifier", "item": "https://toolity.in/dev/code-formatter/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Which tools does it use?", "acceptedAnswer": { "@type": "Answer", "text": "Beautify uses Prettier for HTML, CSS, SCSS, JS, TS, Markdown and YAML, and sql-formatter for SQL. Minify uses Terser for JavaScript and CSSO for CSS. JSON uses the browser’s own JSON engine; XML and HTML minify are built in." } },
+          { "@type": "Question", "name": "Is minified JavaScript safe to use?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — Terser only applies transformations that keep behaviour identical. Turn off “Shorten variable names” if other scripts call your functions by name, and leave console calls in while debugging." } },
+          { "@type": "Question", "name": "What does HTML minify remove?", "acceptedAnswer": { "@type": "Answer", "text": "Comments and the whitespace between block-level tags (div, p, li, table…). Spaces between inline elements are kept so text doesn’t run together, and the contents of &lt;pre&gt;, &lt;textarea&gt;, &lt;script&gt; and &lt;style&gt; are left exactly as they are." } },
+          { "@type": "Question", "name": "Why can’t I minify TypeScript, SCSS or Markdown?", "acceptedAnswer": { "@type": "Answer", "text": "They are source formats that get compiled first — minify the compiled JavaScript or CSS instead. Beautify works for all of them." } },
+          { "@type": "Question", "name": "Why do I see “Loading formatter…”?", "acceptedAnswer": { "@type": "Answer", "text": "Each formatter downloads once, the first time you use that language (Prettier’s TypeScript support is the biggest at about 1 MB). After that it is cached by your browser and formatting is instant." } },
+          { "@type": "Question", "name": "Is my code uploaded anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. Formatting and minifying run in JavaScript inside your browser tab. The formatter libraries are downloaded once from a CDN; your code never leaves the page." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/dev/" class="breadcrumb-link">Dev</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Code Formatter & Minifier</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Dev</span>
+            <h1 class="page-title">Code Formatter & Minifier</h1>
+            <p class="page-desc">Paste messy or minified code — get it cleanly formatted with Prettier, or squeezed down to the smallest size.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" data-split="50/50" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge web-status-badge" id="status-badge">Paste code to begin</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result" aria-label="Copy result" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download result" aria-label="Download result" disabled>
+                <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                <span>Download</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-open" title="Open result in a new tab" aria-label="Open result in a new tab" disabled>
+                <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
+                <span>Open</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Input</span>
+                <span class="pane-badge" id="input-badge">—</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content web-form">
+                <div class="web-file-row">
+                  <button type="button" class="btn-toolbar-sm" id="btn-file" title="Open a file from your device" aria-label="Open a file from your device">
+                    <iconify-icon icon="lucide:folder-open" width="14" height="14"></iconify-icon>
+                    <span>Open file</span>
+                  </button>
+                  <input type="file" id="file-input" accept=".html,.htm,.css,.scss,.js,.mjs,.cjs,.jsx,.ts,.tsx,.json,.sql,.xml,.svg,.md,.yaml,.yml,.txt" hidden>
+                  <span class="web-muted" id="file-name">or drop a file here</span>
+                </div>
+                <div class="web-convert-row web-convert-row-2">
+                  <div class="form-group">
+                    <label class="form-label" for="opt-lang"><span>Language</span></label>
+                    <select id="opt-lang" class="select-clean"><option value="auto" selected>Auto-detect</option><option value="html">HTML</option><option value="css">CSS</option><option value="scss">SCSS</option><option value="javascript">JavaScript</option><option value="typescript">TypeScript</option><option value="json">JSON</option><option value="sql">SQL</option><option value="xml">XML</option><option value="markdown">Markdown</option><option value="yaml">YAML</option></select>
+                  </div>
+                  <div class="form-group">
+                    <span class="form-label"><span>Mode</span></span>
+                    <div class="segmented-group segmented-group-pill" id="seg-mode" role="group" aria-label="Mode">
+                      <button type="button" class="seg-pill active" data-value="beautify">Beautify</button>
+                      <button type="button" class="seg-pill" data-value="minify">Minify</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group form-group-grow">
+                  <label class="form-label" for="text-input"><span>Code</span><span class="form-label-desc" id="input-count"></span></label>
+                  <textarea id="text-input" class="textarea-clean" rows="16" placeholder="Paste HTML, CSS, JavaScript, TypeScript, JSON, SQL, XML, Markdown or YAML…" spellcheck="false" autocapitalize="off" data-file-target></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Output</span>
+                <span class="pane-badge" id="output-badge">—</span>
+              </div>
+              <div class="pane-content web-output-pane">
+                <div class="pane-empty" id="output-empty">
+                  <iconify-icon icon="lucide:wand-sparkles"></iconify-icon>
+                  <span>Formatted code will appear here</span>
+                </div>
+                <div class="web-output" id="output-content" hidden>
+                  <pre class="web-code" id="output-text" aria-live="polite"></pre>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">2 spaces · 80 cols · double quotes</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item">
+                <label for="opt-indent">Indent</label>
+                <select id="opt-indent" class="select-clean"><option value="2" selected>2 spaces</option><option value="4">4 spaces</option><option value="tab">Tabs</option></select>
+              </div>
+              <div class="control-item">
+                <label for="opt-width">Line width</label>
+                <select id="opt-width" class="select-clean"><option value="80" selected>80 characters</option><option value="100">100 characters</option><option value="120">120 characters</option></select>
+              </div>
+              <div class="control-item"><input type="checkbox" id="opt-single"><label for="opt-single">Single quotes (JS / TS / CSS)</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-semi" checked><label for="opt-semi">Semicolons (JS / TS)</label></div>
+              <div class="control-item">
+                <label for="opt-dialect">SQL dialect</label>
+                <select id="opt-dialect" class="select-clean"><option value="sql" selected>Standard SQL</option><option value="mysql">MySQL / MariaDB</option><option value="postgresql">PostgreSQL</option><option value="sqlite">SQLite</option><option value="bigquery">BigQuery</option><option value="tsql">SQL Server (T-SQL)</option><option value="plsql">Oracle PL/SQL</option><option value="snowflake">Snowflake</option></select>
+              </div>
+              <div class="control-item"><input type="checkbox" id="opt-upper" checked><label for="opt-upper">Uppercase SQL keywords</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-mangle" checked><label for="opt-mangle">Shorten variable names when minifying JS</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-console"><label for="opt-console">Remove console.* calls when minifying JS</label></div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Use Code Formatter & Minifier in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Paste or open code</h3>
+              <p class="step-desc">Paste a snippet or drop a file. The language is detected automatically — pick it yourself for SCSS, Markdown or YAML, or if the guess is wrong.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Beautify or minify</h3>
+              <p class="step-desc"><strong>Beautify</strong> re-indents with Prettier (the formatter most teams use). <strong>Minify</strong> strips whitespace and comments — and for JavaScript, shortens names with Terser.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Copy or download</h3>
+              <p class="step-desc">The output updates as you type. Copy it, or download it with the right file extension. The badge shows how many bytes you saved.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Code Formatter & Minifier — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Which tools does it use?</summary>
+              <p>Beautify uses <a href="https://prettier.io" target="_blank" rel="noopener">Prettier</a> for HTML, CSS, SCSS, JS, TS, Markdown and YAML, and <a href="https://github.com/sql-formatter-org/sql-formatter" target="_blank" rel="noopener">sql-formatter</a> for SQL. Minify uses <a href="https://terser.org" target="_blank" rel="noopener">Terser</a> for JavaScript and <a href="https://github.com/css/csso" target="_blank" rel="noopener">CSSO</a> for CSS. JSON uses the browser’s own JSON engine; XML and HTML minify are built in.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is minified JavaScript safe to use?</summary>
+              <p>Yes — Terser only applies transformations that keep behaviour identical. Turn off “Shorten variable names” if other scripts call your functions by name, and leave console calls in while debugging.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What does HTML minify remove?</summary>
+              <p>Comments and the whitespace between block-level tags (div, p, li, table…). Spaces between inline elements are kept so text doesn’t run together, and the contents of &lt;pre&gt;, &lt;textarea&gt;, &lt;script&gt; and &lt;style&gt; are left exactly as they are.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why can’t I minify TypeScript, SCSS or Markdown?</summary>
+              <p>They are source formats that get compiled first — minify the compiled JavaScript or CSS instead. Beautify works for all of them.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why do I see “Loading formatter…”?</summary>
+              <p>Each formatter downloads once, the first time you use that language (Prettier’s TypeScript support is the biggest at about 1 MB). After that it is cached by your browser and formatting is instant.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is my code uploaded anywhere?</summary>
+              <p>No. Formatting and minifying run in JavaScript inside your browser tab. The formatter libraries are downloaded once from a CDN; your code never leaves the page.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="dev"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=4.2"></script>
+  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="/scripts/web-common.js?v=1.1"></script>
+  <script src="/dev/code-formatter/code-formatter.js?v=1.0"></script>
+</body>
+</html>
