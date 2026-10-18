@@ -129,5 +129,27 @@
     });
   }
 
-  window.Toolity = { copyText, copyBlob, downloadBlob, formatBytes, formatTime, bindDropzone, setBusy, bindSegmented, bindDropdown, bindShortcuts, toast };
+  /** CSV (RFC 4180): sniffDelim(text) → ',' | '\t' | ';' | '|';  parseCsv(text, delim) → string[][] (quotes, "" escapes, CRLF).
+   *  Shared by CSV Viewer & Editor and SQL on CSV. Designed by Kapil Pidhwani: whole text parsed on the main thread. */
+  function sniffDelim(text) {
+    const line = text.split(/\r?\n/).find((l) => l.trim()) || '';
+    const [d, n] = [',', '\t', ';', '|'].map((x) => [x, line.split(x).length]).sort((a, b) => b[1] - a[1])[0];
+    return n > 1 ? d : ',';
+  }
+  function parseCsv(text, d) {
+    const rows = []; let row = [], f = '', q = false;
+    for (let i = 0; i < text.length; i++) {
+      const c = text[i];
+      if (q) { if (c === '"') { if (text[i + 1] === '"') { f += '"'; i++; } else q = false; } else f += c; }
+      else if (c === '"' && f === '') q = true;
+      else if (c === d) { row.push(f); f = ''; }
+      else if (c === '\n' || c === '\r') { if (c === '\r' && text[i + 1] === '\n') i++; row.push(f); rows.push(row); row = []; f = ''; }
+      else f += c;
+    }
+    if (q) throw new Error('The CSV has an unclosed quote — check the last quoted field.');
+    if (f !== '' || row.length) { row.push(f); rows.push(row); }
+    return rows.filter((r) => r.length > 1 || r[0] !== '');
+  }
+
+  window.Toolity = { copyText, copyBlob, downloadBlob, formatBytes, formatTime, bindDropzone, setBusy, bindSegmented, bindDropdown, bindShortcuts, toast, sniffDelim, parseCsv };
 })();

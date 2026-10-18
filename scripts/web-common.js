@@ -163,9 +163,13 @@
     const fileIn = $('file-input'), fileName = $('file-name');
     if (fileIn) {
       const target = card.querySelector('[data-file-target]'), pane = fileIn.closest('.tool-pane'), idleName = fileName.textContent;
-      const load = (f) => {
-        if (!f) return;
-        if (f.size > 50e6) return showError('That file is larger than 50 MB — split it first.');
+      const load = (files) => {
+        files = [...(files || [])];
+        if (!files.length) return;
+        const big = files.find((f) => f.size > 50e6);
+        if (big) return showError(`${big.name} is larger than 50 MB — split it first.`);
+        if (T.onFiles) { fileName.textContent = files.length === 1 ? `${files[0].name} · ${window.Toolity.formatBytes(files[0].size)}` : `${files.length} files`; return T.onFiles(files, api); }
+        const f = files[0];
         f.text().then((txt) => {
           target.value = txt; fileName.textContent = `${f.name} · ${window.Toolity.formatBytes(f.size)}`;
           if (T.onFile) T.onFile(f, api);
@@ -173,11 +177,11 @@
         }).catch(() => showError('Could not read that file.'));
       };
       $('btn-file').addEventListener('click', () => fileIn.click());
-      fileIn.addEventListener('change', () => { load(fileIn.files[0]); fileIn.value = ''; });
+      fileIn.addEventListener('change', () => { load(fileIn.files); fileIn.value = ''; });
       const isFile = (e) => e.dataTransfer && [...e.dataTransfer.types].includes('Files');
       ['dragenter', 'dragover'].forEach((ev) => pane.addEventListener(ev, (e) => { if (isFile(e)) { e.preventDefault(); pane.classList.add('dragover'); } }));
       pane.addEventListener('dragleave', (e) => { if (!pane.contains(e.relatedTarget)) pane.classList.remove('dragover'); });
-      pane.addEventListener('drop', (e) => { if (!isFile(e)) return; e.preventDefault(); pane.classList.remove('dragover'); load(e.dataTransfer.files[0]); });
+      pane.addEventListener('drop', (e) => { if (!isFile(e)) return; e.preventDefault(); pane.classList.remove('dragover'); load(fileIn.multiple ? e.dataTransfer.files : [e.dataTransfer.files[0]]); });
       $('btn-reset').addEventListener('click', () => { fileName.textContent = idleName; });
     }
     run();

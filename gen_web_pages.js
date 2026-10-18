@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 /* Designed by Kapil Pidhwani: cfg_web_tools.js → /labs/<slug>/index.html, mirroring templates/tool-page.html (rule 47).
  * Form-input variant of gen_pdf_pages.js: no dropzone, optional primary button (#btn-run), optional Download dropdown.
- * Per-tool options: layout ('split' default | 'stacked'), file { accept } (Open-file button + drop-on-pane, read by web-common).
+ * Per-tool options: layout ('split' default | 'stacked'), file { accept, multiple? } (Open-file button + drop-on-pane, read by
+ * web-common), reference { title, html } (optional block 4 between the guide and the FAQ, per templates/tool-page.html).
  * Usage: node gen_web_pages.js [slug] [--cfg=cfg_data_tools.js --cat=data]   — idempotent; defaults = Labs batch. */
 const fs = require('fs');
 const path = require('path');
@@ -11,7 +12,7 @@ const only = process.argv.slice(2).find((a) => !a.startsWith('--'));
 const CAT = arg('cat', 'labs'), CAT_LABEL = CAT[0].toUpperCase() + CAT.slice(1);
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const jsonStr = (s) => JSON.stringify(String(s).replace(/<[^>]+>/g, ''));
-const MAIN_V = '4.2', CSS_V = '5.5';
+const MAIN_V = '4.3', CSS_V = '5.6';
 const LIBS = { color: '  <script src="/scripts/color-common.js?v=1.0"></script>\n', qr: '  <script src="/scripts/qr-engine.js?v=1.0"></script>\n' };
 
 function downloadBtn(t) {
@@ -47,8 +48,8 @@ function fileRow(t) {
                     <iconify-icon icon="lucide:folder-open" width="14" height="14"></iconify-icon>
                     <span>Open file</span>
                   </button>
-                  <input type="file" id="file-input" accept="${t.file.accept}" hidden>
-                  <span class="web-muted" id="file-name">or drop a file here</span>
+                  <input type="file" id="file-input" accept="${t.file.accept}"${t.file.multiple ? ' multiple' : ''} hidden>
+                  <span class="web-muted" id="file-name">${t.file.multiple ? 'or drop files here' : 'or drop a file here'}</span>
                 </div>`;
 }
 
@@ -274,7 +275,16 @@ ${guide}
           </div>
         </section>
 
-        <!-- ═══════════ 5. FAQ ═══════════ -->
+${t.reference ? `        <!-- ═══════════ 4. REFERENCE ═══════════ -->
+        <section class="reference-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">Reference</span>
+            <h2 class="section-heading-sm">${t.reference.title}</h2>
+          </div>
+${t.reference.html}
+        </section>
+
+` : ''}        <!-- ═══════════ 5. FAQ ═══════════ -->
         <section class="faq-section">
           <div class="section-header-compact">
             <span class="section-eyebrow">FAQ</span>
@@ -295,8 +305,8 @@ ${faqHtml}
   <div data-include="/components/footer.html"></div>
 
   <script src="/scripts/main.js?v=${MAIN_V}"></script>
-  <script src="/scripts/tool-common.js?v=1.0"></script>
-${libs}  <script src="/scripts/web-common.js?v=1.1"></script>
+  <script src="/scripts/tool-common.js?v=1.1"></script>
+${libs}  <script src="/scripts/web-common.js?v=1.2"></script>
   <script src="/${CAT}/${t.slug}/${t.slug}.js?v=1.0"></script>
 </body>
 </html>

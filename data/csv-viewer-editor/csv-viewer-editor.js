@@ -9,25 +9,7 @@
   const M = { head: [], rows: [], delim: ',', sort: null, page: 0, view: [] };
   const DNAME = { ',': 'comma', ';': 'semicolon', '\t': 'tab', '|': 'pipe' };
 
-  function sniff(text) {
-    const line = text.split(/\r?\n/).find((l) => l.trim()) || '';
-    const [d, n] = [',', '\t', ';', '|'].map((x) => [x, line.split(x).length]).sort((a, b) => b[1] - a[1])[0];
-    return n > 1 ? d : ',';
-  }
-  function parse(text, d) {
-    const rows = []; let row = [], f = '', q = false;
-    for (let i = 0; i < text.length; i++) {
-      const c = text[i];
-      if (q) { if (c === '"') { if (text[i + 1] === '"') { f += '"'; i++; } else q = false; } else f += c; }
-      else if (c === '"' && f === '') q = true;
-      else if (c === d) { row.push(f); f = ''; }
-      else if (c === '\n' || c === '\r') { if (c === '\r' && text[i + 1] === '\n') i++; row.push(f); rows.push(row); row = []; f = ''; }
-      else f += c;
-    }
-    if (q) throw new Error('The CSV has an unclosed quote — check the last quoted field.');
-    if (f !== '' || row.length) { row.push(f); rows.push(row); }
-    return rows.filter((r) => r.length > 1 || r[0] !== '');
-  }
+  const { sniffDelim: sniff, parseCsv: parse } = window.Toolity; // shared with SQL on CSV (tool-common.js)
   const quote = (s, d) => (s.includes(d) || /["\r\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s);
   const toCsv = (head, rows, d) => [...(head ? [head] : []), ...rows].map((r) => r.map((c) => quote(c ?? '', d)).join(d)).join('\n');
   const num = (s) => (s !== '' && /^-?\d+(\.\d+)?$/.test(s.replace(/,/g, '')) ? +s.replace(/,/g, '') : null);
