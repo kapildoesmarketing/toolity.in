@@ -7,7 +7,7 @@
 const fs = require('fs');
 const path = require('path');
 const only = process.argv[2];
-const MAIN_V = '4.2', CSS_V = '5.5', WC_V = '1.2', EMBED_CSS_V = '1.2';
+const MAIN_V = '4.3', CSS_V = '5.6', WC_V = '1.2', EMBED_CSS_V = '1.2';
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const jsonStr = (s) => JSON.stringify(String(s).replace(/<[^>]+>/g, ''));
 
@@ -406,7 +406,7 @@ ${w.faq.map(([q, a]) => `            <details class="faq-item">
   <div data-include="/components/footer.html"></div>
 
   <script src="/scripts/main.js?v=${MAIN_V}"></script>
-  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="/scripts/tool-common.js?v=1.1"></script>
   <script src="/scripts/widget-common.js?v=${WC_V}"></script>
   <script src="/scripts/widgets/${w.slug}.js?v=1.0"></script>
 </body>

@@ -1356,6 +1356,30 @@
         tags: ['code formatter', 'code beautifier', 'prettier online', 'html formatter', 'css minifier', 'javascript minifier', 'js beautifier', 'sql formatter', 'xml formatter', 'json formatter', 'typescript formatter', 'minify code']
       },
       {
+        id: 'markdown-studio',
+        title: 'Markdown Studio',
+        category: 'Dev',
+        url: 'dev/markdown-studio/',
+        icon: 'lucide:notebook-text',
+        tags: ['markdown editor', 'markdown preview', 'markdown to html', 'html to markdown', 'markdown to pdf', 'md to html', 'readme preview', 'gfm', 'markdown converter', 'online markdown']
+      },
+      {
+        id: 'regex-tester',
+        title: 'Regex Tester',
+        category: 'Dev',
+        url: 'dev/regex-tester/',
+        icon: 'lucide:regex',
+        tags: ['regex tester', 'regular expression tester', 'regex online', 'javascript regex', 'regex match', 'regex replace', 'regex groups', 'named groups', 'regex cheat sheet', 'regexp']
+      },
+      {
+        id: 'sql-on-csv',
+        title: 'SQL on CSV',
+        category: 'Data',
+        url: 'data/sql-on-csv/',
+        icon: 'lucide:database',
+        tags: ['sql on csv', 'query csv with sql', 'csv sql', 'sqlite online', 'run sql on csv file', 'join csv files', 'csv group by', 'json sql query', 'csv to sqlite', 'sql playground']
+      },
+      {
         id: 'cat-widgets',
         title: 'Widgets',
         category: 'Category',

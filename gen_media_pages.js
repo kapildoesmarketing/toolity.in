@@ -10,7 +10,7 @@ const only = process.argv[2];
 const CAT_LABEL = { media: 'Media', labs: 'Labs' };
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const jsonStr = (s) => JSON.stringify(String(s).replace(/<[^>]+>/g, ''));
-const MAIN_V = '4.2', CSS_V = '5.5';
+const MAIN_V = '4.3', CSS_V = '5.6';
 const RUNTIME = {
   audio: '  <script src="/scripts/audio-common.js?v=1.1"></script>\n  <script src="https://cdn.jsdelivr.net/npm/lamejs@1.2.1/lame.all.js" defer></script>\n',
   gif: '  <script src="/scripts/gif-common.js?v=1.0"></script>\n',
@@ -284,7 +284,7 @@ ${faqHtml}
   <div data-include="/components/footer.html"></div>
 
   <script src="/scripts/main.js?v=${MAIN_V}"></script>
-  <script src="/scripts/tool-common.js?v=1.0"></script>
+  <script src="/scripts/tool-common.js?v=1.1"></script>
 ${t.runtime ? RUNTIME[t.runtime] : ''}${libs}  <script src="/${CAT}/${t.slug}/${t.slug}.js?v=1.0"></script>
 </body>
 </html>
