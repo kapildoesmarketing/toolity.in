@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Regex Tester | Toolity Dev</title>
+  <link rel="canonical" href="https://toolity.in/dev/regex-tester/">
+  <meta name="description" content="Free online regex tester: write a JavaScript regular expression, see matches highlighted live with capture groups and named groups, test replacements with $1 and $&lt;name&gt;, and use the built-in cheat sheet. Runs in your browser — nothing uploaded.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Regex Tester | Toolity Dev">
+  <meta property="og:description" content="Free online regex tester: write a JavaScript regular expression, see matches highlighted live with capture groups and named groups, test replacements with $1 and $&lt;name&gt;, and use the built-in cheat sheet. Runs in your browser — nothing uploaded.">
+  <meta property="og:url" content="https://toolity.in/dev/regex-tester/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=5.6" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=5.6">
+  <link rel="stylesheet" href="/styles/tools/regex-tester.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Regex Tester",
+        "url": "https://toolity.in/dev/regex-tester/",
+        "description": "Free online regex tester: write a JavaScript regular expression, see matches highlighted live with capture groups and named groups, test replacements with $1 and $, and use the built-in cheat sheet. Runs in your browser — nothing uploaded.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Dev", "item": "https://toolity.in/dev/" },
+          { "@type": "ListItem", "position": 3, "name": "Regex Tester", "item": "https://toolity.in/dev/regex-tester/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Which regex flavour is this?", "acceptedAnswer": { "@type": "Answer", "text": "JavaScript (ECMAScript), exactly as your browser runs it — the same engine Node.js, React and every web page use. Named groups, lookbehind, Unicode property escapes (with the u flag) and the s flag are all supported. PCRE-only syntax such as possessive quantifiers or \\A is not." } },
+          { "@type": "Question", "name": "Why does it say “pattern took more than 1.5 s”?", "acceptedAnswer": { "@type": "Answer", "text": "Patterns with nested quantifiers like (a+)+$ can backtrack exponentially on the wrong input. Matching runs in a background thread with a time limit, so the page stays responsive and tells you instead of freezing. Make the inner quantifier possessive-style by using a character class, or anchor the pattern." } },
+          { "@type": "Question", "name": "How do capture groups show up?", "acceptedAnswer": { "@type": "Answer", "text": "Each match lists its numbered groups (1, 2, …) and named groups ((?&lt;year&gt;\\d{4}) appears as year). In Replace mode use $1 or $&lt;year&gt; to reuse them." } },
+          { "@type": "Question", "name": "Is there a limit on text size or matches?", "acceptedAnswer": { "@type": "Answer", "text": "The test string can be up to 50 MB if you open a file, but highlighting is drawn for the first 200,000 characters and the first 2,000 matches so the page stays fast. The badge tells you when either limit kicks in; the match count and Replace output are still complete." } },
+          { "@type": "Question", "name": "Why does my pattern match nothing with the y flag?", "acceptedAnswer": { "@type": "Answer", "text": "Sticky (y) only tries to match at the current position (0 to begin with), so it behaves like an anchored search. Untick it unless you specifically need that behaviour." } },
+          { "@type": "Question", "name": "Is my code uploaded anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. Formatting and minifying run in JavaScript inside your browser tab. The formatter libraries are downloaded once from a CDN; your code never leaves the page." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/dev/" class="breadcrumb-link">Dev</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Regex Tester</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Dev</span>
+            <h1 class="page-title">Regex Tester</h1>
+            <p class="page-desc">Type a pattern and a test string — matches, groups and replacements update as you type. Cheat sheet included.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" data-split="50/50" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge web-status-badge" id="status-badge">Enter a pattern and a test string</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result" aria-label="Copy result" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <div class="dropdown-menu-wrapper" id="download-dropdown-wrap">
+                <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download result" aria-label="Download result" aria-haspopup="true" disabled>
+                  <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                  <span>Download</span>
+                  <iconify-icon icon="lucide:chevron-down" class="dropdown-arrow" width="13" height="13"></iconify-icon>
+                </button>
+                <div class="dropdown-popup" role="menu">
+                  <button type="button" class="dropdown-item" data-format="txt" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:file-text" width="14" height="14"></iconify-icon>
+                      <span>Matches (.txt)</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="json" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:braces" width="14" height="14"></iconify-icon>
+                      <span>Matches (.json)</span>
+                    </div>
+                  </button>
+                </div>
+              </div>
+              <button type="button" class="btn-toolbar-sm" id="btn-open" title="Open result in a new tab" aria-label="Open result in a new tab" disabled>
+                <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
+                <span>Open</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Pattern & test string</span>
+                <span class="pane-badge" id="input-badge">—</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content web-form">
+                <div class="web-file-row">
+                  <button type="button" class="btn-toolbar-sm" id="btn-file" title="Open a file from your device" aria-label="Open a file from your device">
+                    <iconify-icon icon="lucide:folder-open" width="14" height="14"></iconify-icon>
+                    <span>Open file</span>
+                  </button>
+                  <input type="file" id="file-input" accept=".txt,.log,.csv,.json,.md,.html,.xml,.js,.css" hidden>
+                  <span class="web-muted" id="file-name">or drop a file here</span>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="rx-pattern"><span>Pattern</span><span class="form-label-desc">JavaScript flavour</span></label>
+                  <div class="rx-pattern-row">
+                    <span class="rx-slash" aria-hidden="true">/</span>
+                    <input type="text" id="rx-pattern" class="input-clean rx-mono" placeholder="(\w+)@(\w+)\.com" spellcheck="false" autocomplete="off" autocapitalize="off">
+                    <span class="rx-slash" aria-hidden="true">/</span>
+                    <div class="rx-flags" role="group" aria-label="Flags">
+                      <input type="checkbox" id="flag-g" checked><label for="flag-g" title="Global — find every match">g</label>
+                      <input type="checkbox" id="flag-i"><label for="flag-i" title="Ignore case">i</label>
+                      <input type="checkbox" id="flag-m"><label for="flag-m" title="Multiline — ^ and $ match at line breaks">m</label>
+                      <input type="checkbox" id="flag-s"><label for="flag-s" title="Dot matches newlines">s</label>
+                      <input type="checkbox" id="flag-u"><label for="flag-u" title="Unicode">u</label>
+                      <input type="checkbox" id="flag-y"><label for="flag-y" title="Sticky — match only from lastIndex">y</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <span class="form-label"><span>Mode</span></span>
+                  <div class="segmented-group segmented-group-pill" id="seg-mode" role="group" aria-label="Mode">
+                    <button type="button" class="seg-pill active" data-value="match">Match</button>
+                    <button type="button" class="seg-pill" data-value="replace">Replace</button>
+                  </div>
+                </div>
+                <div class="form-group" id="rx-replace-group" hidden>
+                  <label class="form-label" for="rx-replace"><span>Replacement</span><span class="form-label-desc">$1 · $&lt;name&gt; · $&amp;</span></label>
+                  <input type="text" id="rx-replace" class="input-clean rx-mono" placeholder="$2 ($1)" spellcheck="false" autocomplete="off" autocapitalize="off">
+                </div>
+                <div class="form-group form-group-grow">
+                  <label class="form-label" for="text-input"><span>Test string</span><span class="form-label-desc" id="input-count"></span></label>
+                  <textarea id="text-input" class="textarea-clean" rows="10" placeholder="Paste the text to search…" spellcheck="false" autocapitalize="off" data-file-target></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Matches</span>
+                <span class="pane-badge" id="output-badge">—</span>
+              </div>
+              <div class="pane-content web-output-pane">
+                <div class="pane-empty" id="output-empty">
+                  <iconify-icon icon="lucide:regex"></iconify-icon>
+                  <span>Matches will be highlighted here</span>
+                </div>
+                <div class="web-output" id="output-content" hidden>
+                  <div class="web-code rx-highlight" id="output-highlight" aria-label="Test string with matches highlighted"></div>
+                  <div class="rx-matches" id="output-matches"></div>
+                  <pre class="web-code" id="output-text" hidden></pre>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Use Regex Tester in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Write the pattern</h3>
+              <p class="step-desc">Type a JavaScript regular expression between the slashes and tick the flags you need (<strong>g</strong> finds every match, <strong>i</strong> ignores case, <strong>m</strong> makes ^ and $ work per line). Click any token in the cheat sheet below to insert it.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Paste a test string</h3>
+              <p class="step-desc">Matches light up in the text as you type, and each one is listed with its position, numbered groups and named groups. An invalid pattern shows the exact syntax error under the input.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Replace or export</h3>
+              <p class="step-desc">Switch to <strong>Replace</strong> to preview a substitution — <code>$1</code>, <code>$&lt;name&gt;</code> and <code>$&amp;</code> work as in JavaScript. Copy the result, or download the match list as text or JSON.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 4. REFERENCE ═══════════ -->
+        <section class="reference-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">Reference</span>
+            <h2 class="section-heading-sm">Regex Cheat Sheet — click to insert</h2>
+          </div>
+          <div class="rx-sheet">
+            <section class="rx-sheet-group">
+              <h3>Characters</h3>
+              <div class="rx-chips"><button type="button" class="rx-chip" data-insert="."><code>.</code><span>any char but newline</span></button><button type="button" class="rx-chip" data-insert="\d"><code>\d</code><span>digit 0-9</span></button><button type="button" class="rx-chip" data-insert="\D"><code>\D</code><span>not a digit</span></button><button type="button" class="rx-chip" data-insert="\w"><code>\w</code><span>word char [A-Za-z0-9_]</span></button><button type="button" class="rx-chip" data-insert="\W"><code>\W</code><span>not a word char</span></button><button type="button" class="rx-chip" data-insert="\s"><code>\s</code><span>whitespace</span></button><button type="button" class="rx-chip" data-insert="\S"><code>\S</code><span>not whitespace</span></button><button type="button" class="rx-chip" data-insert="[abc]"><code>[abc]</code><span>one of a, b, c</span></button><button type="button" class="rx-chip" data-insert="[^abc]"><code>[^abc]</code><span>not a, b or c</span></button><button type="button" class="rx-chip" data-insert="[a-z]"><code>[a-z]</code><span>range</span></button><button type="button" class="rx-chip" data-insert="\."><code>\.</code><span>literal dot</span></button><button type="button" class="rx-chip" data-insert="\n"><code>\n</code><span>newline</span></button><button type="button" class="rx-chip" data-insert="\t"><code>\t</code><span>tab</span></button></div>
+            </section>
+            <section class="rx-sheet-group">
+              <h3>Quantifiers</h3>
+              <div class="rx-chips"><button type="button" class="rx-chip" data-insert="*"><code>*</code><span>0 or more</span></button><button type="button" class="rx-chip" data-insert="+"><code>+</code><span>1 or more</span></button><button type="button" class="rx-chip" data-insert="?"><code>?</code><span>0 or 1</span></button><button type="button" class="rx-chip" data-insert="{3}"><code>{3}</code><span>exactly 3</span></button><button type="button" class="rx-chip" data-insert="{2,5}"><code>{2,5}</code><span>2 to 5</span></button><button type="button" class="rx-chip" data-insert="{2,}"><code>{2,}</code><span>2 or more</span></button><button type="button" class="rx-chip" data-insert="*?"><code>*?</code><span>lazy (fewest)</span></button><button type="button" class="rx-chip" data-insert="+?"><code>+?</code><span>lazy 1 or more</span></button></div>
+            </section>
+            <section class="rx-sheet-group">
+              <h3>Anchors</h3>
+              <div class="rx-chips"><button type="button" class="rx-chip" data-insert="^"><code>^</code><span>start of string / line (m)</span></button><button type="button" class="rx-chip" data-insert="$"><code>$</code><span>end of string / line (m)</span></button><button type="button" class="rx-chip" data-insert="\b"><code>\b</code><span>word boundary</span></button><button type="button" class="rx-chip" data-insert="\B"><code>\B</code><span>not a word boundary</span></button></div>
+            </section>
+            <section class="rx-sheet-group">
+              <h3>Groups</h3>
+              <div class="rx-chips"><button type="button" class="rx-chip" data-insert="(abc)"><code>(abc)</code><span>capture group</span></button><button type="button" class="rx-chip" data-insert="(?:abc)"><code>(?:abc)</code><span>non-capturing</span></button><button type="button" class="rx-chip" data-insert="(?&lt;name&gt;abc)"><code>(?&lt;name&gt;abc)</code><span>named group</span></button><button type="button" class="rx-chip" data-insert="a|b"><code>a|b</code><span>a or b</span></button><button type="button" class="rx-chip" data-insert="\1"><code>\1</code><span>back-reference to group 1</span></button><button type="button" class="rx-chip" data-insert="\k&lt;name&gt;"><code>\k&lt;name&gt;</code><span>back-reference by name</span></button></div>
+            </section>
+            <section class="rx-sheet-group">
+              <h3>Lookaround</h3>
+              <div class="rx-chips"><button type="button" class="rx-chip" data-insert="(?=x)"><code>(?=x)</code><span>followed by x</span></button><button type="button" class="rx-chip" data-insert="(?!x)"><code>(?!x)</code><span>not followed by x</span></button><button type="button" class="rx-chip" data-insert="(?&lt;=x)"><code>(?&lt;=x)</code><span>preceded by x</span></button><button type="button" class="rx-chip" data-insert="(?&lt;!x)"><code>(?&lt;!x)</code><span>not preceded by x</span></button></div>
+            </section>
+            <section class="rx-sheet-group">
+              <h3>Common patterns</h3>
+              <div class="rx-chips"><button type="button" class="rx-chip" data-pattern="[\w.+-]+@[\w-]+\.[\w.-]+"><code>Email</code><span>[\w.+-]+@[\w-]+\.[\w.-]+</span></button><button type="button" class="rx-chip" data-pattern="https?:\/\/[^\s/$.?#][^\s]*"><code>URL</code><span>https?:\/\/[^\s/$.?#][^\s]*</span></button><button type="button" class="rx-chip" data-pattern="\b(?:\d{1,3}\.){3}\d{1,3}\b"><code>IPv4</code><span>\b(?:\d{1,3}\.){3}\d{1,3}\b</span></button><button type="button" class="rx-chip" data-pattern="\b\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])\b"><code>Date YYYY-MM-DD</code><span>\b\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])\b</span></button><button type="button" class="rx-chip" data-pattern="#(?:[0-9a-fA-F]{3}){1,2}\b"><code>Hex colour</code><span>#(?:[0-9a-fA-F]{3}){1,2}\b</span></button><button type="button" class="rx-chip" data-pattern="\b[6-9]\d{9}\b"><code>Indian mobile</code><span>\b[6-9]\d{9}\b</span></button><button type="button" class="rx-chip" data-pattern="\b[1-9]\d{5}\b"><code>Indian PIN code</code><span>\b[1-9]\d{5}\b</span></button><button type="button" class="rx-chip" data-pattern="\b([01]\d|2[0-3]):[0-5]\d\b"><code>Time HH:MM</code><span>\b([01]\d|2[0-3]):[0-5]\d\b</span></button></div>
+            </section>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Regex Tester — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Which regex flavour is this?</summary>
+              <p>JavaScript (ECMAScript), exactly as your browser runs it — the same engine Node.js, React and every web page use. Named groups, lookbehind, Unicode property escapes (with the <strong>u</strong> flag) and the <strong>s</strong> flag are all supported. PCRE-only syntax such as possessive quantifiers or <code>\A</code> is not.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why does it say “pattern took more than 1.5 s”?</summary>
+              <p>Patterns with nested quantifiers like <code>(a+)+$</code> can backtrack exponentially on the wrong input. Matching runs in a background thread with a time limit, so the page stays responsive and tells you instead of freezing. Make the inner quantifier possessive-style by using a character class, or anchor the pattern.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How do capture groups show up?</summary>
+              <p>Each match lists its numbered groups (1, 2, …) and named groups (<code>(?&lt;year&gt;\d{4})</code> appears as <em>year</em>). In Replace mode use <code>$1</code> or <code>$&lt;year&gt;</code> to reuse them.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is there a limit on text size or matches?</summary>
+              <p>The test string can be up to 50 MB if you open a file, but highlighting is drawn for the first 200,000 characters and the first 2,000 matches so the page stays fast. The badge tells you when either limit kicks in; the match count and Replace output are still complete.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why does my pattern match nothing with the y flag?</summary>
+              <p>Sticky (<strong>y</strong>) only tries to match at the current position (0 to begin with), so it behaves like an anchored search. Untick it unless you specifically need that behaviour.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is my code uploaded anywhere?</summary>
+              <p>No. Formatting and minifying run in JavaScript inside your browser tab. The formatter libraries are downloaded once from a CDN; your code never leaves the page.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="dev"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=4.3"></script>
+  <script src="/scripts/tool-common.js?v=1.1"></script>
+  <script src="/scripts/web-common.js?v=1.2"></script>
+  <script src="/dev/regex-tester/regex-tester.js?v=1.0"></script>
+</body>
+</html>

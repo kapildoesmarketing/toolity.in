@@ -1,0 +1,39 @@
+/* Regex Tester — pattern row, flag chips, highlighted matches, match list, cheat sheet. */
+.rx-mono { font-family: var(--font-mono); }
+.rx-pattern-row { display: flex; align-items: center; gap: 0.35rem; min-width: 0; max-width: 100%; flex-wrap: wrap; }
+.rx-pattern-row .input-clean { flex: 1 1 200px; min-width: 0; }
+.rx-slash { font-family: var(--font-mono); font-size: 1.2rem; color: var(--text-muted); user-select: none; }
+.rx-flags { display: flex; gap: 0.25rem; flex-wrap: wrap; }
+.rx-flags input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.rx-flags label { display: inline-flex; align-items: center; justify-content: center; min-width: 32px; height: 32px; padding: 0 0.5rem; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); font-family: var(--font-mono); font-size: 0.84rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all 0.15s ease; }
+.rx-flags label:hover { border-color: var(--text-muted); color: var(--text-primary); }
+.rx-flags input:checked + label { background: var(--brand-soft); border-color: rgba(244, 81, 30, 0.35); color: var(--brand-hover); }
+.rx-flags input:focus-visible + label { outline: 2px solid var(--brand); outline-offset: 2px; }
+@container (max-width: 480px) { .rx-flags label { min-width: 40px; height: 40px; } }
+#rx-replace-group[hidden] { display: none; }
+.rx-highlight { max-height: 320px; }
+.rx-highlight[hidden], .rx-matches[hidden] { display: none; }
+.rx-m { background: rgba(244, 81, 30, 0.22); color: inherit; border-radius: 3px; box-shadow: 0 0 0 1px rgba(244, 81, 30, 0.35); }
+.rx-m-alt { background: rgba(249, 183, 43, 0.3); box-shadow: 0 0 0 1px rgba(249, 183, 43, 0.5); }
+.rx-m-empty { display: inline-block; width: 2px; height: 1em; vertical-align: text-bottom; background: var(--brand); box-shadow: none; }
+[data-theme="dark"] .rx-m { background: rgba(255, 106, 42, 0.3); }
+[data-theme="dark"] .rx-m-alt { background: rgba(249, 183, 43, 0.28); }
+.rx-cut { display: block; margin-top: 0.5rem; color: var(--text-muted); font-family: var(--font-family); font-size: 0.78rem; }
+.rx-matches { display: flex; flex-direction: column; gap: 0.45rem; max-height: 360px; overflow: auto; min-width: 0; }
+.rx-match { padding: 0.5rem 0.7rem; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); font-size: 0.82rem; min-width: 0; }
+.rx-match-head { display: flex; align-items: baseline; gap: 0.6rem; flex-wrap: wrap; min-width: 0; }
+.rx-match-head b { color: var(--text-muted); font-weight: 600; font-variant-numeric: tabular-nums; }
+.rx-match-head code, .rx-group { font-family: var(--font-mono); overflow-wrap: anywhere; color: var(--text-primary); }
+.rx-match-head code { font-weight: 600; }
+.rx-match i, .rx-group em { font-style: normal; color: var(--text-muted); }
+.rx-groups { display: flex; flex-wrap: wrap; gap: 0.3rem 0.8rem; margin-top: 0.35rem; padding-top: 0.35rem; border-top: 1px dashed var(--border); }
+.rx-group i { font-style: normal; font-size: 0.72rem; font-weight: 600; margin-right: 0.35rem; padding: 0.05rem 0.35rem; border-radius: 3px; background: var(--surface-elevated); border: 1px solid var(--border); color: var(--text-secondary); }
+.rx-group-named i { color: var(--brand-hover); }
+.rx-sheet { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+.rx-sheet-group { padding: 1rem 1.1rem; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--surface); min-width: 0; }
+.rx-sheet-group h3 { margin: 0 0 0.6rem; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-muted); }
+.rx-chips { display: flex; flex-direction: column; gap: 0.25rem; }
+.rx-chip { display: grid; grid-template-columns: minmax(0, 46%) minmax(0, 1fr); align-items: center; gap: 0.6rem; width: 100%; min-height: 34px; padding: 0.3rem 0.55rem; border: 1px solid transparent; border-radius: var(--radius-sm); background: none; font: inherit; color: var(--text-secondary); text-align: left; cursor: pointer; transition: all 0.15s ease; }
+.rx-chip:hover { background: var(--surface-elevated); border-color: var(--border); color: var(--text-primary); }
+.rx-chip code { font-family: var(--font-mono); font-size: 0.8rem; font-weight: 600; color: var(--text-primary); overflow-wrap: anywhere; }
+.rx-chip span { font-size: 0.78rem; overflow-wrap: anywhere; }
