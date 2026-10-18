@@ -247,6 +247,112 @@ const CASES = [
     const inp = $('input-url'); inp.value = 'https://toolity.in/'; inp.dispatchEvent(new Event('input', { bubbles: true }));
     A(await waitFor(() => $('qr-render-target').querySelector('canvas, svg, img'), 5000), 'QR not rendered');
     const q = new QRCodeGenerator(0, QRErrorCorrectLevel.M); q.addData('https://toolity.in/'); q.make(); A(q.getModuleCount() === 25, 'module count ' + q.getModuleCount());`, true],
+  ['share-link-generator', `
+    const NL = String.fromCharCode(10);
+    set('url-input', 'example.com/a b?x=1'); set('text-input', 'Hi & bye'); set('title-input', 'T'); set('tags-input', '#one, two'); set('phone-input', '+91 98765-43210'); await settle();
+    A(out(), 'no output ' + $('status-badge').textContent);
+    const L = () => Object.fromEntries(out().text.split(NL).map((l) => [l.slice(0, l.indexOf(': ')), l.slice(l.indexOf(': ') + 2)]));
+    const url = 'https://example.com/a%20b?x=1', U = encodeURIComponent(url), M = encodeURIComponent('Hi & bye');
+    A(L()['WhatsApp'] === 'https://wa.me/?text=' + encodeURIComponent('Hi & bye ' + url), 'wa: ' + L()['WhatsApp']);
+    A(L()['X (Twitter)'] === 'https://twitter.com/intent/tweet?text=' + M + '&url=' + U + '&hashtags=one%2Ctwo', 'x: ' + L()['X (Twitter)']);
+    A(L()['Facebook'] === 'https://www.facebook.com/sharer/sharer.php?u=' + U, 'fb');
+    A(L()['Reddit'] === 'https://www.reddit.com/submit?url=' + U + '&title=T', 'reddit: ' + L()['Reddit']);
+    A(L()['Email'] === 'mailto:?subject=T&body=' + encodeURIComponent('Hi & bye' + NL + NL + url), 'email: ' + L()['Email']);
+    A(L()['SMS'] === 'sms:+919876543210?&body=' + encodeURIComponent('Hi & bye ' + url), 'sms: ' + L()['SMS']);
+    A($('output-rows').children.length === 9 && $('output-badge').textContent === '9 links', 'rows ' + $('output-rows').children.length);
+    set('opt-smsstyle', 'android'); await settle(); A(L()['SMS'].startsWith('sms:+919876543210?body='), 'android sms');
+    const h = await T.T.download('html', T); A(/Share on WhatsApp/.test(h.text) && /&amp;url=/.test(h.text) && !/<script/i.test(h.text), 'html snippet');
+    set('url-input', ''); await settle(); A($('output-badge').textContent === '4 links' && /need a link/.test($('status-badge').textContent), 'no-url: ' + $('output-badge').textContent);
+    set('url-input', 'not a url'); await settle(); A(!out() && /look like/.test($('status-badge').textContent), 'bad url');
+    $('btn-reset').click(); await settle(); A(!out() && $('text-input').value === '' && $('opt-smsstyle').value === 'universal', 'reset');`],
+  ['youtube-link-generator', `
+    const P = window.ToolityYouTube, ID = 'dQw4w9WgXcQ';
+    ['https://www.youtube.com/watch?v=' + ID + '&t=42', 'https://youtu.be/' + ID + '?si=x', 'youtube.com/shorts/' + ID + '?feature=share', 'https://m.youtube.com/live/' + ID, 'https://www.youtube-nocookie.com/embed/' + ID + '?start=5', ID].forEach((u) => A((P.parseVideo(u) || {}).id === ID, 'parse ' + u));
+    A(P.parseVideo('https://vimeo.com/123') === null, 'vimeo rejected');
+    A(P.toSeconds('1:23') === 83 && P.toSeconds('1:02:03') === 3723 && P.toSeconds('1m23s') === 83 && P.toSeconds('83') === 83 && Number.isNaN(P.toSeconds('1:75')), 'time parse');
+    set('url-input', 'https://youtu.be/' + ID); set('start-input', '1:23'); await settle();
+    A(out() && out().text === 'https://youtu.be/' + ID + '?t=83', 'short: ' + (out() && out().text));
+    A(out().url === 'https://www.youtube.com/watch?v=' + ID + '&t=83s', 'watch');
+    const row = (i) => $('output-rows').children[i].querySelector('pre').textContent;
+    A(row(2).includes('youtube-nocookie.com/embed/' + ID + '?start=83') && row(2).includes('aspect-ratio:16/9'), 'iframe: ' + row(2));
+    A(!$('yt-preview').hidden && $('yt-thumb-img').src.includes('i.ytimg.com/vi/' + ID), 'thumbnail preview');
+    set('opt-loop', true); await settle(); A(row(3).includes('loop=1&playlist=' + ID), 'loop playlist: ' + row(3));
+    set('end-input', '1:00'); await settle(); A(!out() && /after the start/.test($('input-error').textContent), 'end before start');
+    set('end-input', '2:00'); await settle(); A(out() && row(3).includes('end=120'), 'end param');
+    set('opt-autoplay', true); await settle(); A(/Start muted/.test($('status-badge').textContent), 'autoplay tip');
+    set('opt-nocookie', false); set('opt-responsive', false); await settle(); A(row(2).includes('www.youtube.com/embed/') && row(2).includes('width="560"'), 'fixed + standard');
+    $('btn-preview').click(); await tick(200); A($('yt-preview').querySelector('iframe.yt-frame'), 'click loads iframe');
+    set('url-input', 'https://vimeo.com/1'); await settle(); A(!out() && /isn.t a YouTube/.test($('input-error').textContent) && $('yt-preview').hidden, 'bad link');
+    $('btn-reset').click(); await settle(); A(!out() && $('yt-preview').hidden && $('opt-nocookie').checked, 'reset');`],
+  ['password-generator', `
+    const NL = String.fromCharCode(10), W = window.ToolityPassword;
+    await settle(); A(out() && out().text.length === 20, 'default length: ' + (out() && out().text.length));
+    const t0 = out().text; A(/[A-Z]/.test(t0) && /[a-z]/.test(t0) && /[0-9]/.test(t0) && /[^A-Za-z0-9]/.test(t0), 'every type present: ' + t0);
+    set('opt-length', 64); await settle(); A(out().text.length === 64, 'length 64');
+    set('opt-symbols', false); set('opt-similar', true); await settle(); A(/^[A-Za-z0-9]+$/.test(out().text) && !/[Il1O0o]/.test(out().text), 'no symbols / look-alikes: ' + out().text);
+    const c = new Array(7).fill(0); for (let i = 0; i < 14000; i++) c[W.randInt(7)]++; A(c.every((n) => n > 1600 && n < 2400), 'uniform randInt: ' + c);
+    set('opt-count', 10); await settle(); const many = out().text.split(NL); A(many.length === 10 && new Set(many).size === 10 && $('output-list').children.length === 10, 'bulk 10');
+    set('opt-count', 1); set('opt-upper', false); set('opt-lower', false); set('opt-digits', false); await settle(); A(!out() && /Tick at least one/.test($('input-error').textContent), 'no types error');
+    set('opt-lower', true);
+    pill('seg-mode', 'passphrase'); set('opt-sep', ' '); await settle(); A(await waitFor(() => out() && out().text.split(' ').length === 5, 15000), 'passphrase 5 words: ' + (out() && out().text) + $('input-error').textContent);
+    A(out().text.split(' ').every((w) => /^[A-Z]/.test(w)) && /\\d/.test(out().text), 'capitalised + number: ' + out().text);
+    A($('output-badge').textContent === '74 bits' && !$('grp-passphrase').hidden && $('grp-password').hidden, 'passphrase bits: ' + $('output-badge').textContent);
+    pill('seg-mode', 'pin'); await settle(); A(/^\\d{6}$/.test(out().text) && $('output-badge').textContent === '20 bits', 'pin: ' + out().text);
+    A(W.crackTime(30) === 'instantly' && /years|universe/.test(W.crackTime(80)), 'crack time: ' + W.crackTime(80));
+    $('btn-run').click(); await settle(); A(/^\\d{6}$/.test(out().text), 'new password button');
+    $('btn-reset').click(); await settle(); A(out() && out().text.length === 20 && !$('grp-password').hidden && $('opt-length').value === '20', 'reset');`],
+  ['upi-qr-generator', `
+    set('upi-input', 'ada.l@okaxis'); set('name-input', 'Ada Lovelace'); set('amount-input', '1,250.5'); set('note-input', 'Order #12'); await settle();
+    A(out() && out().text === 'upi://pay?pa=ada.l@okaxis&pn=Ada%20Lovelace&am=1250.50&cu=INR&tn=Order%20%2312', 'link: ' + (out() && out().text) + $('input-error').textContent);
+    A(out().url === out().text && $('output-badge').textContent === '₹1,250.50', 'badge: ' + $('output-badge').textContent);
+    A($('upi-qr').src.startsWith('data:image/png') && $('upi-amt').textContent === '₹1,250.50', 'preview');
+    const q = new QRCodeGenerator(0, QRErrorCorrectLevel.M); q.addData(out().text); q.make(); A(T.S.qr.getModuleCount() === q.getModuleCount(), 'shared engine matrix');
+    if ('BarcodeDetector' in window) { try { const r = await new BarcodeDetector({ formats: ['qr_code'] }).detect($('upi-qr')); if (r.length) A(r[0].rawValue === out().text, 'QR decodes to the link'); } catch (e) {} }
+    const png = await T.T.download('png', T); A(png.blob.type === 'image/png' && (await createImageBitmap(png.blob)).width === 1024, 'png 1024');
+    const svg = await T.T.download('svg', T); A(svg.text.startsWith('<svg') && /path d="M/.test(svg.text), 'svg');
+    const card = await T.T.download('card', T); const bm = await createImageBitmap(card.blob); A(bm.width === 1200 && bm.height === 1800 && card.name === 'upi-card-ada.l.png', 'card ' + card.name);
+    set('amount-input', ''); await settle(); A(!/am=/.test(out().text) && $('output-badge').textContent === 'Any amount', 'open amount');
+    set('amount-input', '12.345'); await settle(); A(!out() && /Amount/.test($('input-error').textContent), 'bad amount');
+    set('amount-input', ''); set('upi-input', 'ada'); await settle(); A(!out() && /name@bank/.test($('input-error').textContent), 'bad vpa');
+    set('upi-input', 'ada@ybl'); set('name-input', ''); await settle(); A(out() && /payee name/.test($('status-badge').textContent), 'name warning');
+    $('btn-reset').click(); await settle(); A(!out() && $('upi-input').value === '' && !$('upi-qr').getAttribute('src'), 'reset');`],
+  ['barcode-generator', `
+    const NL = String.fromCharCode(10), B = window.ToolityBarcode;
+    A(B.gs1('590123412345') === 7 && B.gs1('03600029145') === 2, 'gs1 maths');
+    set('opt-format', 'EAN13'); set('text-input', '590123412345'); await settle();
+    A(out() && out().badge === '5901234123457' && /Check digit 7 added/.test($('status-badge').textContent), 'ean13: ' + (out() && out().badge) + $('input-error').textContent);
+    A($('output-list').querySelector('svg rect, svg g'), 'svg drawn');
+    set('text-input', '5901234123458'); await settle(); A(!out() && /should be 7/.test($('input-error').textContent), 'wrong check digit');
+    set('text-input', '12345'); await settle(); A(!out() && /needs 12 digits/.test($('input-error').textContent), 'length error');
+    set('opt-format', 'UPC'); set('text-input', '03600029145'); await settle(); A(out() && out().badge === '036000291452', 'upc');
+    set('opt-format', 'CODE39'); set('text-input', 'abc-1'); await settle(); A(out() && out().badge === 'ABC-1', 'code39 upper');
+    set('opt-format', 'CODE128'); set('text-input', 'A-1' + NL + NL + 'B-2' + NL + 'C-3'); await settle();
+    A(out() && out().badge === '3 barcodes' && $('output-list').querySelectorAll('.bc-tile').length === 3, 'batch');
+    const z = await T.T.download('zip', T); const zip = await JSZip.loadAsync(z.blob); A(Object.keys(zip.files).length === 3 && z.name === 'barcodes-code128-3.zip', 'zip ' + z.name);
+    const p = await T.T.download('png', T); A(p.blob.type === 'image/png' && p.name === 'barcode-A-1.png', 'png');
+    set('text-input', 'Line two' + NL + 'naïve'); await settle(); A(!out() && /Line 2/.test($('input-error').textContent), 'batch error line');
+    $('btn-reset').click(); await settle(); A(!out() && $('opt-format').value === 'CODE128' && $('text-input').value === '', 'reset');`],
+  ['dev/code-formatter', `
+    const NL = String.fromCharCode(10), F = window.ToolityFormatter;
+    const fin = async () => { await tick(500); A(await waitFor(() => !/Formatting|Loading/.test($('status-badge').textContent) && (out() || !$('input-error').hidden), 60000), 'timed out'); };
+    set('text-input', 'function  f( a,b ){return a+b}'); await fin();
+    A(out() && out().text === 'function f(a, b) {' + NL + '  return a + b;' + NL + '}' + NL, 'prettier js: ' + JSON.stringify(out() && out().text) + $('input-error').textContent);
+    A(/Detected JavaScript/.test($('status-badge').textContent) && out().ext === 'js', 'detect js');
+    pill('seg-mode', 'minify'); await fin(); A(out() && out().text.length < 30 && new Function(out().text + ';return f(2,3)')() === 5, 'terser: ' + (out() && out().text));
+    set('text-input', 'a{color:red;margin:0 0 0 0}'); await fin(); A(out() && out().text === 'a{color:red;margin:0}', 'csso: ' + (out() && out().text));
+    pill('seg-mode', 'beautify'); await fin(); A(out() && out().text === 'a {' + NL + '  color: red;' + NL + '  margin: 0 0 0 0;' + NL + '}' + NL, 'prettier css: ' + JSON.stringify(out() && out().text));
+    set('text-input', 'select a,b from t where x=1'); await fin(); A(out() && out().text.startsWith('SELECT' + NL + '  a,' + NL + '  b' + NL + 'FROM'), 'sql: ' + JSON.stringify(out() && out().text));
+    set('text-input', '<?xml version="1.0"?><r><a x="1">t</a><b/></r>'); await fin();
+    A(out() && out().text === '<?xml version="1.0"?>' + NL + '<r>' + NL + '  <a x="1">t</a>' + NL + '  <b/>' + NL + '</r>' + NL, 'xml beautify: ' + JSON.stringify(out() && out().text));
+    pill('seg-mode', 'minify'); set('text-input', out().text); await fin(); A(out() && out().text === '<?xml version="1.0"?><r><a x="1">t</a><b/></r>', 'xml minify: ' + (out() && out().text));
+    A(F.minifyHtml('<div>' + NL + '  <b>a</b> <i>b</i>' + NL + '  <!-- x -->' + NL + '  <pre>  keep  </pre>' + NL + '</div>') === '<div><b>a</b> <i>b</i><pre>  keep  </pre></div>', 'html minify');
+    A(F.minifySql("SELECT  a , 'x  y' -- c" + NL + "FROM t /* z */ WHERE b = 1") === "SELECT a,'x  y' FROM t WHERE b=1", 'sql minify: ' + F.minifySql("SELECT  a , 'x  y' -- c" + NL + "FROM t /* z */ WHERE b = 1"));
+    A(F.detect('<div>x</div>') === 'html' && F.detect('{"a":1}') === 'json' && F.detect('interface A { b: string }') === 'typescript' && F.detect('.a { color: red; }') === 'css', 'detect');
+    set('opt-lang', 'typescript'); await fin(); A(!out() && /minify TypeScript/.test($('input-error').textContent), 'ts minify refused');
+    pill('seg-mode', 'beautify'); set('text-input', 'const a: number = 1'); await fin(); A(out() && out().text === 'const a: number = 1;' + NL && out().ext === 'ts', 'prettier ts: ' + JSON.stringify(out() && out().text));
+    set('opt-lang', 'json'); set('text-input', '{"a":1,}'); await fin(); A(!out() && /JSON error/.test($('input-error').textContent), 'json error');
+    set('opt-lang', 'javascript'); set('text-input', 'function ('); await fin(); A(!out() && /JavaScript error at line 1/.test($('input-error').textContent), 'js error: ' + $('input-error').textContent);
+    $('btn-reset').click(); await tick(500); A(!out() && $('text-input').value === '' && $('opt-lang').value === 'auto', 'reset');`],
   ['data/log-parser', `
     const NL = String.fromCharCode(10);
     const GEN = ['2024-05-01T10:00:01Z INFO server started', '2024-05-01T10:05:00Z WARN slow query 812ms', '2024-05-01T11:00:00Z ERROR db: connection refused id=41', 'java.lang.Exception: boom', '    at Foo.bar(Foo.java:10)', '2024-05-01T11:30:00Z ERROR db: connection refused id=97', '2024-05-01T12:00:00Z DEBUG cache hit', 'garbage line'].join(NL);

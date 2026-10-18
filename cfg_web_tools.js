@@ -24,6 +24,206 @@ const HTML_PASTE = `
                   <textarea id="html-input" class="textarea-clean" rows="6" placeholder="&lt;head&gt;…&lt;/head&gt; — view-source, select all, paste" spellcheck="false"></textarea>
                 </div>`;
 
+/* Generators batch (Oct 2026): `section` = heading on /labs/ (read by wire_labs_dev.py; the generator ignores it). */
+const OPTS = (list, sel) => list.map(([v, l]) => `<option value="${v}"${v === sel ? ' selected' : ''}>${l}</option>`).join('');
+const CHECK = (id, label, on) => `
+              <div class="control-item"><input type="checkbox" id="${id}"${on ? ' checked' : ''}><label for="${id}">${label}</label></div>`;
+const FIELD = (id, label, attrs, desc = '') => `
+                <div class="form-group">
+                  <label class="form-label" for="${id}"><span>${label}</span>${desc ? `<span class="form-label-desc">${desc}</span>` : ''}</label>
+                  <input id="${id}" class="input-clean" autocomplete="off" ${attrs}>
+                </div>`;
+const RANGE = (id, label, min, max, val, unit = '') => `
+                <div class="form-group">
+                  <label class="form-label" for="${id}"><span>${label}</span><span class="form-label-desc"><span id="${id}-val">${val}${unit}</span></span></label>
+                  <input type="range" id="${id}" min="${min}" max="${max}" step="1" value="${val}"${unit ? ` data-unit="${unit}"` : ''}>
+                </div>`;
+const SHARE_PLATFORMS = [['whatsapp', 'WhatsApp'], ['telegram', 'Telegram'], ['x', 'X (Twitter)'], ['facebook', 'Facebook'], ['linkedin', 'LinkedIn'], ['reddit', 'Reddit'], ['pinterest', 'Pinterest'], ['email', 'Email'], ['sms', 'SMS']];
+const BARCODE_FORMATS = [['CODE128', 'Code 128 (any text)'], ['EAN13', 'EAN-13 (retail, 12–13 digits)'], ['EAN8', 'EAN-8 (7–8 digits)'], ['UPC', 'UPC-A (11–12 digits)'], ['CODE39', 'Code 39 (A–Z, 0–9)'], ['ITF14', 'ITF-14 (cartons, 13–14 digits)'], ['codabar', 'Codabar (libraries, blood banks)']];
+const GEN_TOOLS = [
+  {
+    slug: 'share-link-generator', name: 'Share & Message Link Generator', icon: 'lucide:share-2', section: 'Generators & Links',
+    desc: 'Free share link generator: turn a URL and message into ready-to-use share links for WhatsApp, Telegram, X, Facebook, LinkedIn, Reddit, Pinterest, email and SMS — plus a copy-paste share-buttons HTML snippet. In your browser.',
+    lead: 'Type a link and a message once — get a working share link for every app, plus share buttons for your site.',
+    cardDesc: 'One link and message → share links for WhatsApp, X, Telegram, SMS and more.',
+    tags: ['share link generator', 'social share links', 'whatsapp share link', 'telegram share link', 'twitter share link', 'facebook share link', 'linkedin share link', 'sms link', 'share buttons html'],
+    idle: 'Add a link or a message to begin', sourceLabel: 'What to share', outputLabel: 'Share links', outputIcon: 'lucide:share-2', outputEmpty: 'Share links for each app will appear here',
+    downloads: [['txt', 'All links (.txt)', 'lucide:file-text'], ['html', 'Share buttons (.html)', 'lucide:code']],
+    sourceHtml: `${FIELD('url-input', 'Link to share', 'type="url" inputmode="url" spellcheck="false" autocapitalize="off" placeholder="https://example.com/article"')}
+                <div class="form-group">
+                  <label class="form-label" for="text-input"><span>Message</span><span class="form-label-desc" id="input-count"></span></label>
+                  <textarea id="text-input" class="textarea-clean" rows="3" placeholder="Check this out — it saved me an hour today."></textarea>
+                </div>${FIELD('title-input', 'Title', 'type="text" placeholder="Used by Reddit, Pinterest and as the email subject"', 'Optional')}${FIELD('tags-input', 'Hashtags', 'type="text" spellcheck="false" autocapitalize="off" placeholder="launch, privacy"', 'X only · optional')}${FIELD('phone-input', 'SMS number', 'type="tel" inputmode="tel" placeholder="+91 98765 43210"', 'Optional')}`,
+    outputHtml: `
+                  <div class="web-rows" id="output-rows"></div>`,
+    settingsSummary: 'All 9 apps · universal SMS',
+    settings: `
+              <div class="web-checks" role="group" aria-label="Apps to include">${SHARE_PLATFORMS.map(([v, l]) => CHECK('opt-' + v, l, true)).join('')}
+              </div>
+              <div class="control-item">
+                <label for="opt-smsstyle">SMS link style</label>
+                <select id="opt-smsstyle" class="select-clean">${OPTS([['universal', 'Universal (?&body=)'], ['ios', 'iPhone only (&body=)'], ['android', 'Android only (?body=)']], 'universal')}</select>
+              </div>`,
+    guide: [['Add your link and message', 'Paste the page you want to share and write the message people will see. A title, hashtags and an SMS number are optional extras.'], ['Get a link for every app', 'Each app gets its own correctly encoded link with Copy and Open buttons. Apps that only accept a link (Facebook, LinkedIn) ignore the message — that is their rule, not ours.'], ['Use them anywhere', 'Paste links into emails, bios, QR codes or buttons. Download the share-buttons HTML for your website: plain links, no scripts and no trackers.']],
+    faq: [['Why doesn’t Facebook or LinkedIn show my message?', 'Both only accept a URL in share links and read the title, description and image from the page’s Open Graph tags. Check how your page will look with the <a href="/labs/open-graph-preview/">Open Graph Preview</a>.'], ['What is the difference from the WhatsApp Link Creator?', 'This tool makes a WhatsApp <em>share</em> link — the sender picks who to send it to. The <a href="/labs/whatsapp-link-creator/">WhatsApp Link Creator</a> opens a chat with one specific phone number.'], ['Which SMS style should I use?', 'iPhones expect <code>sms:number&amp;body=</code> and Android expects <code>sms:number?body=</code>. The universal form <code>?&amp;body=</code> works on both in current versions, so it is the default; pick a specific style only if you know the device.'], ['Do the share buttons track clicks?', 'No. The HTML snippet is plain <code>&lt;a&gt;</code> links with <code>rel="noopener noreferrer"</code> — no JavaScript, no third-party scripts, no tracking pixels. Style them with your own CSS.'], PRIVACY_FAQ]
+  },
+  {
+    slug: 'youtube-link-generator', name: 'YouTube Link & Embed Generator', icon: 'lucide:youtube', section: 'Generators & Links', css: true,
+    desc: 'Free YouTube link and embed code generator: make timestamp links that start at a set time, and iframe embed code with start/end, autoplay, mute, loop, captions and privacy-enhanced mode. Works with Shorts and youtu.be links.',
+    lead: 'Paste any YouTube link — get a link that starts at the right second and embed code with exactly the options you want.',
+    cardDesc: 'Start-at-time links and embed code with autoplay, loop and privacy mode.',
+    tags: ['youtube timestamp link', 'youtube start time link', 'youtube embed code generator', 'youtube iframe', 'youtube embed autoplay', 'youtube loop embed', 'youtube-nocookie', 'youtube shorts embed', 'youtu.be link'],
+    idle: 'Paste a YouTube link to begin', sourceLabel: 'Video', outputLabel: 'Links & embed code', outputIcon: 'lucide:youtube', outputEmpty: 'Links and embed code will appear here',
+    sourceHtml: `${FIELD('url-input', 'YouTube link or video ID', 'type="url" inputmode="url" spellcheck="false" autocapitalize="off" placeholder="https://youtu.be/dQw4w9WgXcQ or a Shorts link"')}
+                <div class="web-convert-row web-convert-row-2">${FIELD('start-input', 'Start at', 'type="text" inputmode="numeric" spellcheck="false" placeholder="1:23"', 'Optional')}${FIELD('end-input', 'End at', 'type="text" inputmode="numeric" spellcheck="false" placeholder="2:10"', 'Embed only')}
+                </div>
+                <div class="yt-preview" id="yt-preview" hidden>
+                  <button type="button" class="yt-thumb" id="btn-preview" aria-label="Play preview with these settings">
+                    <img id="yt-thumb-img" alt="Video thumbnail" width="480" height="360" loading="lazy" referrerpolicy="no-referrer">
+                    <span class="yt-play"><iconify-icon icon="lucide:play" width="26" height="26"></iconify-icon></span>
+                  </button>
+                  <span class="web-muted">Click to play the embed with your settings</span>
+                </div>`,
+    outputHtml: `
+                  <div class="web-rows" id="output-rows"></div>`,
+    settingsSummary: 'Privacy mode · responsive',
+    settings: `${CHECK('opt-nocookie', 'Privacy-enhanced mode (youtube-nocookie.com)', true)}${CHECK('opt-responsive', 'Responsive width (fills its container, 16:9)', true)}${CHECK('opt-autoplay', 'Autoplay', false)}${CHECK('opt-mute', 'Start muted', false)}${CHECK('opt-loop', 'Loop', false)}${CHECK('opt-nocontrols', 'Hide player controls', false)}${CHECK('opt-cc', 'Show captions by default', false)}
+              <div class="control-item">
+                <label for="opt-title">Video title (for accessibility)</label>
+                <input type="text" id="opt-title" class="input-clean" placeholder="YouTube video player" autocomplete="off">
+              </div>`,
+    guide: [['Paste the video', 'Any YouTube address works — watch pages, youtu.be, Shorts, live, embed links or just the 11-character ID. A thumbnail confirms it is the right video.'], ['Set the times', 'Type when it should start (and, for embeds, stop) as <code>1:23</code>, <code>83</code> or <code>1m23s</code>. Open Settings for autoplay, mute, loop, captions and privacy mode.'], ['Copy what you need', 'Copy the short link, the full link, the iframe code or a Markdown thumbnail link. Click the thumbnail to test the embed with your exact settings.']],
+    faq: [['Why does autoplay not start?', 'Browsers block videos that autoplay with sound. Tick <strong>Start muted</strong> together with Autoplay and it will start on every modern browser.'], ['Why does loop add a playlist parameter?', 'YouTube only loops an embedded video when it is also given a playlist — so the tool adds <code>playlist=</code> with the same video ID. That is the documented way to loop one video.'], ['What does privacy-enhanced mode do?', 'The embed loads from youtube-nocookie.com, so YouTube does not set tracking cookies until the visitor presses play. It is on by default.'], ['Does the end time work on share links?', 'No — YouTube supports an end time only in embeds. Share links accept a start time (<code>?t=</code>).'], ['Does this page contact YouTube?', 'Only to show the video’s thumbnail image, and to play the preview if you click it. Building the links and embed code happens entirely in your browser.']]
+  },
+  {
+    slug: 'password-generator', name: 'Password Generator', icon: 'lucide:key-round', section: 'Generators & Links', css: true,
+    desc: 'Free strong password generator: random passwords, memorable passphrases (EFF word list) and PINs made with your browser’s cryptographic random generator, with a strength meter and bulk generation. Nothing is sent or stored.',
+    lead: 'Strong random passwords, easy-to-type passphrases or PINs — generated on your device and never stored.',
+    cardDesc: 'Strong passwords, passphrases and PINs with a strength meter.',
+    tags: ['password generator', 'strong password generator', 'random password', 'passphrase generator', 'diceware', 'pin generator', 'secure password', 'password strength'],
+    idle: 'Generating…', sourceLabel: 'Options', outputLabel: 'Password', outputIcon: 'lucide:key-round', outputEmpty: 'Your password will appear here',
+    action: 'New password', actionIcon: 'lucide:refresh-cw',
+    sourceHtml: `
+                <div class="segmented-group segmented-group-pill" id="seg-mode" role="group" aria-label="Type">
+                  <button type="button" class="seg-pill active" data-value="password">Password</button>
+                  <button type="button" class="seg-pill" data-value="passphrase">Passphrase</button>
+                  <button type="button" class="seg-pill" data-value="pin">PIN</button>
+                </div>
+                <div class="web-group" id="grp-password">${RANGE('opt-length', 'Length', 4, 128, 20)}
+                  <div class="web-checks" role="group" aria-label="Characters">${CHECK('opt-upper', 'A–Z', true)}${CHECK('opt-lower', 'a–z', true)}${CHECK('opt-digits', '0–9', true)}${CHECK('opt-symbols', '!@#…', true)}
+                  </div>
+                </div>
+                <div class="web-group" id="grp-passphrase" hidden>${RANGE('opt-words', 'Words', 3, 12, 5)}
+                  <div class="form-group">
+                    <label class="form-label" for="opt-sep"><span>Separator</span></label>
+                    <select id="opt-sep" class="select-clean">${OPTS([['-', 'Hyphen  (word-word)'], [' ', 'Space  (word word)'], ['.', 'Dot  (word.word)'], ['_', 'Underscore  (word_word)'], ['', 'None  (wordword)']], '-')}</select>
+                  </div>
+                  <div class="web-checks">${CHECK('opt-cap', 'Capitalise words', true)}${CHECK('opt-num', 'Add a number', true)}
+                  </div>
+                </div>
+                <div class="web-group" id="grp-pin" hidden>${RANGE('opt-pin', 'Digits', 4, 12, 6)}
+                </div>`,
+    outputHtml: `
+                  <div class="pw-list" id="output-list" aria-live="polite"></div>
+                  <div class="pw-meter" id="output-meter">
+                    <div class="pw-bar"><span id="pw-bar-fill"></span></div>
+                    <div class="pw-meter-row"><strong id="pw-label"></strong><span class="web-muted" id="pw-detail"></span></div>
+                  </div>`,
+    settingsSummary: '1 at a time · all characters',
+    settings: `
+              <div class="control-item">
+                <label for="opt-count">How many</label>
+                <input type="number" id="opt-count" class="input-clean" min="1" max="100" value="1" inputmode="numeric">
+              </div>${CHECK('opt-similar', 'Avoid look-alike characters (I l 1 O 0 o)', false)}${CHECK('opt-each', 'Use every ticked character type at least once', true)}
+              <div class="control-item">
+                <label for="opt-symset">Symbols to use</label>
+                <input type="text" id="opt-symset" class="input-clean" value="!@#$%^&amp;*-_=+?" spellcheck="false" autocomplete="off">
+              </div>`,
+    guide: [['Pick a type', '<strong>Password</strong> for maximum strength, <strong>Passphrase</strong> for something you can remember and type on a phone, <strong>PIN</strong> for number-only codes.'], ['Tune it', 'Set the length or number of words and which characters to use. The meter shows the strength in bits and how long a fast offline attack would take.'], ['Copy and save', 'Copy it straight into your password manager. Need several? Set “How many” in Settings and download them as a .txt. Press <strong>New password</strong> for another.']],
+    faq: [['How random are these passwords?', 'They use <code>crypto.getRandomValues</code>, the browser’s cryptographically secure random generator — the same source password managers use — with rejection sampling so every character is equally likely.'], ['Are passwords saved or sent anywhere?', 'No. They are created in this tab and never stored — not in cookies, not in local storage, not on a server. Closing the tab forgets them.'], ['Where do the passphrase words come from?', 'From the <a href="https://www.eff.org/dice" target="_blank" rel="noopener">EFF long word list</a>: 7,776 common, easy-to-spell words. Each word adds about 12.9 bits, so 5 words ≈ 64 bits and 6 words ≈ 77 bits before the extra number.'], ['How is the crack time estimated?', 'From the entropy: on average an attacker must try half of all possibilities. The estimate assumes a fast offline attack of 10 billion guesses per second — real websites that rate-limit logins are far slower.'], ['What length should I use?', 'For accounts in a password manager, 16–20 random characters is plenty. For a master password you have to type, a 6-word passphrase is strong and much easier to remember.']]
+  },
+  {
+    slug: 'upi-qr-generator', name: 'UPI Payment QR Generator', icon: 'lucide:indian-rupee', section: 'Generators & Links', libs: ['qr'], css: true,
+    desc: 'Free UPI QR code generator: create a scan-to-pay QR for any UPI ID with your name, an optional fixed amount and a note — works with Google Pay, PhonePe, Paytm, BHIM and every UPI app. Download PNG, SVG or a printable stand card.',
+    lead: 'Enter your UPI ID — get a scan-to-pay QR that works in every UPI app, plus a printable card for your counter.',
+    cardDesc: 'Scan-to-pay QR for any UPI ID, with amount, note and a printable card.',
+    tags: ['upi qr code generator', 'upi qr', 'upi payment qr', 'google pay qr', 'phonepe qr', 'paytm qr', 'bhim upi qr', 'upi link generator', 'upi://pay', 'payment qr code'],
+    idle: 'Enter a UPI ID to begin', sourceLabel: 'Payment details', outputLabel: 'Scan to pay', outputIcon: 'lucide:qr-code', outputEmpty: 'Your payment QR will appear here',
+    downloads: [['png', 'QR code (.png)', 'lucide:image'], ['svg', 'QR code (.svg)', 'lucide:pen-tool'], ['card', 'Printable card (.png)', 'lucide:printer']],
+    sourceHtml: `${FIELD('upi-input', 'UPI ID', 'type="text" spellcheck="false" autocapitalize="off" inputmode="email" placeholder="yourname@okaxis"')}${FIELD('name-input', 'Payee name', 'type="text" placeholder="Name shown to the payer" maxlength="60"')}${FIELD('amount-input', 'Amount (₹)', 'type="text" inputmode="decimal" placeholder="Leave blank to let the payer enter it"', 'Optional')}${FIELD('note-input', 'Note', 'type="text" placeholder="Order #1024" maxlength="50"', 'Optional')}`,
+    outputHtml: `
+                  <div class="upi-out">
+                    <img id="upi-qr" class="upi-qr" alt="UPI payment QR code" width="280" height="280">
+                    <div class="upi-meta"><strong id="upi-name"></strong><span id="upi-vpa"></span><span class="upi-amt" id="upi-amt"></span></div>
+                    <pre class="web-code" id="output-text"></pre>
+                  </div>`,
+    settingsSummary: 'ECC M · 1024 px',
+    settings: `
+              <div class="control-item">
+                <label for="opt-ecc">Error correction</label>
+                <select id="opt-ecc" class="select-clean">${OPTS([['L', 'Low (7%) — smallest'], ['M', 'Medium (15%)'], ['Q', 'Quartile (25%)'], ['H', 'High (30%) — best for print']], 'M')}</select>
+              </div>
+              <div class="control-item">
+                <label for="opt-size">PNG size</label>
+                <select id="opt-size" class="select-clean">${OPTS([['512', '512 px'], ['1024', '1024 px'], ['2048', '2048 px']], '1024')}</select>
+              </div>
+              <div class="control-item">
+                <label for="opt-card">Card headline</label>
+                <input type="text" id="opt-card" class="input-clean" value="Scan &amp; pay with any UPI app" maxlength="40" autocomplete="off">
+              </div>`,
+    guide: [['Enter your UPI ID', 'Type the UPI ID you receive money on (for example <code>name@okaxis</code>) and the name the payer should see. Add an amount for a fixed price, or leave it blank.'], ['Check the QR', 'The QR updates as you type. On a phone, press Open to launch your UPI app with the same details — the safest way to test before printing.'], ['Download and display', 'Download the QR as PNG or SVG, or the printable card with your name and UPI ID for a shop counter or invoice.']],
+    faq: [['Does this work with Google Pay, PhonePe and Paytm?', 'Yes. The QR contains a standard <code>upi://pay</code> link defined by NPCI, which every UPI app can read — Google Pay, PhonePe, Paytm, BHIM, Amazon Pay, bank apps and more.'], ['Is my UPI ID checked or stored?', 'Neither. The QR is made in your browser and nothing is sent anywhere, so Toolity cannot confirm the ID is real. Scan it and pay ₹1 to yourself before printing it.'], ['Should I set an amount?', 'Set it for a fixed price (a product, a fee). Leave it blank for a shop counter, so each customer types their own amount. Some apps limit how much can be paid to a personal UPI ID through a QR.'], ['Why does Open do nothing on my computer?', 'UPI links only open on phones that have a UPI app installed. On a computer, scan the QR with your phone instead.'], ['Can I use this for my business?', 'Yes — it is free with no watermark. For payment confirmations, settlement reports or GST invoices you still need a merchant account with your bank or a payment provider.']]
+  },
+  {
+    slug: 'barcode-generator', name: 'Barcode Generator', icon: 'lucide:barcode', section: 'Generators & Links', css: true,
+    desc: 'Free barcode generator: create Code 128, EAN-13, EAN-8, UPC-A, Code 39, ITF-14 and Codabar barcodes with automatic check digits. Download SVG or PNG, or make a whole batch as a ZIP — in your browser.',
+    lead: 'Type a value — get a scannable barcode in the format you need, or paste a list for a whole batch.',
+    cardDesc: 'Code 128, EAN-13, UPC-A and more — SVG, PNG or a batch ZIP.',
+    tags: ['barcode generator', 'ean 13 generator', 'upc barcode generator', 'code 128 generator', 'code 39', 'itf-14', 'codabar', 'bulk barcode generator', 'barcode svg', 'barcode png'],
+    idle: 'Enter a value to begin', sourceLabel: 'Barcode', outputLabel: 'Preview', outputIcon: 'lucide:barcode', outputEmpty: 'Your barcode will appear here',
+    downloads: [['svg', 'SVG (vector)', 'lucide:pen-tool'], ['png', 'PNG (high-res)', 'lucide:image'], ['zip', 'Batch ZIP (one PNG per line)', 'lucide:archive']],
+    sourceHtml: `
+                <div class="form-group">
+                  <label class="form-label" for="opt-format"><span>Format</span></label>
+                  <select id="opt-format" class="select-clean">${OPTS(BARCODE_FORMATS, 'CODE128')}</select>
+                </div>
+                <div class="form-group form-group-grow">
+                  <label class="form-label" for="text-input"><span>Value</span><span class="form-label-desc" id="input-count">One per line for a batch</span></label>
+                  <textarea id="text-input" class="textarea-clean" rows="5" placeholder="590123412345" spellcheck="false" autocapitalize="off"></textarea>
+                </div>`,
+    outputHtml: `
+                  <div class="bc-list" id="output-list"></div>`,
+    settingsSummary: 'Width 2 · 100 px · text on',
+    settings: `
+              <div class="control-item">
+                <label for="opt-width">Bar width (<span id="opt-width-val">2</span>)</label>
+                <input type="range" id="opt-width" min="1" max="4" step="1" value="2">
+              </div>
+              <div class="control-item">
+                <label for="opt-height">Height (<span id="opt-height-val">100px</span>)</label>
+                <input type="range" id="opt-height" min="30" max="200" step="5" value="100" data-unit="px">
+              </div>${CHECK('opt-text', 'Show the value under the bars', true)}
+              <div class="control-item">
+                <label for="opt-font">Text size (<span id="opt-font-val">18px</span>)</label>
+                <input type="range" id="opt-font" min="10" max="32" step="1" value="18" data-unit="px">
+              </div>
+              <div class="control-item">
+                <label for="opt-margin">Quiet zone (<span id="opt-margin-val">10px</span>)</label>
+                <input type="range" id="opt-margin" min="0" max="40" step="1" value="10" data-unit="px">
+              </div>
+              <div class="control-item">
+                <label for="opt-fg">Bar colour</label>
+                <input type="color" id="opt-fg" class="web-color-input" value="#000000">
+              </div>
+              <div class="control-item">
+                <label for="opt-bg">Background</label>
+                <input type="color" id="opt-bg" class="web-color-input" value="#ffffff">
+              </div>`,
+    guide: [['Pick a format', 'Use <strong>EAN-13</strong> or <strong>UPC-A</strong> for retail products, <strong>Code 128</strong> for anything else (inventory, shipping, IDs), <strong>ITF-14</strong> for cartons.'], ['Type the value', 'Leave the check digit off and it is calculated for you; type it and it is verified. Paste several lines to make a batch.'], ['Download', 'SVG stays sharp at any size for print and design tools. PNG is 4× resolution. A batch downloads as a ZIP with one PNG per line.']],
+    faq: [['Do I need to calculate the check digit?', 'No. For EAN-13, EAN-8, UPC-A and ITF-14, type the number without its last digit and the check digit is added. If you type the full number, the check digit is verified and a wrong one is reported.'], ['Can I sell products with these EAN codes?', 'The barcodes are technically correct, but retail EAN/UPC numbers must be licensed from GS1 (GS1 India for Indian products) so they are unique worldwide. Use any number for internal stock.'], ['Which format should I use for inventory?', '<strong>Code 128</strong>: it holds letters, digits and symbols, is compact and every scanner reads it. Code 39 is older and wider but still common in industry.'], ['How are batches made?', 'Each non-empty line becomes one barcode. The preview shows the first 12; the ZIP contains all of them as PNGs named by line number and value.'], ['Which library draws the barcodes?', '<a href="https://github.com/lindell/JsBarcode" target="_blank" rel="noopener">JsBarcode</a> (MIT), loaded from a pinned CDN link and run in your browser. Nothing you type is uploaded.']]
+  }
+];
+
 module.exports = [
   {
     slug: 'url-cleaner', name: 'URL Cleaner', icon: 'lucide:eraser',
@@ -475,5 +675,6 @@ module.exports = [
               </div>`,
     guide: [['Shape it', 'Pick a style, then drag Points, Randomness and Smoothness — or hit <strong>Randomise</strong> for a new seed. The preview stays in view while you scroll the controls. Presets give you a styled starting point.'], ['Colour and move it', 'Choose a solid, linear or radial fill, a background (or transparent) and a movement: morph, float, spin or pulse. Layers, blur, grain and shadow live in Settings.'], ['Export', 'Copy the SVG or CSS, or use Download for SVG, animated SVG, PNG up to 4×, WebP, JPG, a looping GIF or a WebM/MP4 video. Copy share link saves the design in a URL.']],
     faq: [['Which export should I use?', '<strong>SVG</strong> for websites and design tools (Figma, Illustrator) — tiny and sharp at any size. <strong>Animated SVG</strong> plays by itself in any browser via an &lt;img&gt; tag. <strong>CSS</strong> gives a clip-path you can put on any element. <strong>PNG/WebP</strong> for slides and social posts, <strong>GIF</strong> for chats and email, <strong>WebM/MP4</strong> for video editors and reels.'], ['Do the animations loop seamlessly?', 'Yes. Every movement is built on one loop of the length you set, so the last frame flows straight back into the first — in the animated SVG, the GIF and the video alike.'], ['Why does the video take as long as the loop?', 'Browsers record video in real time, so a 6-second loop takes about 6 seconds to export. Keep the tab visible while it records. GIFs are rendered frame by frame instead and are usually quicker.'], ['Will blur and grain look the same everywhere?', 'In browsers, yes. Design tools sometimes render SVG filters (blur, grain, shadow) differently or ignore them; export a PNG if you need an exact match there. Safari before version 18 shows the live preview without blur, but the SVG export keeps it.'], ['Can I come back to a design later?', 'Yes — every setting is saved in the page link. Use <strong>Copy share link</strong> and open it any time; nothing is stored on a server.'], PRIVACY_FAQ]
-  }
+  },
+  ...GEN_TOOLS
 ];
