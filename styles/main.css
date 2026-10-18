@@ -1634,13 +1634,8 @@ body {
   color: var(--text-secondary);
 }
 
-/* Designed by Kapil Pidhwani: SumoDir badge (markup must stay verbatim, so all sizing lives here). The PNG has ~20.6% transparent
-   padding on the left; the negative margin lines the visible pill up with the mission text. Ceiling: tied to this exact image — if
-   SumoDir changes badge.png, re-measure or drop the margin. */
-.footer-badge { margin-top: 1rem; line-height: 0; }
-.footer-badge a { display: inline-block; opacity: 0.9; transition: opacity .15s; }
-.footer-badge a:hover, .footer-badge a:focus-visible { opacity: 1; }
-.footer-badge img { width: 220px; height: auto; margin-left: -45px; }
+/* Social links sit under the mission text in the brand column (they used to live in the bottom bar) */
+.footer-col-brand .footer-social { margin-top: 1rem; }
 
 .footer-heading {
   font-size: 0.82rem;
@@ -4248,7 +4243,6 @@ html::-webkit-scrollbar-corner, body *::-webkit-scrollbar-corner { background: t
 .footer-social a { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid var(--border); border-radius: var(--radius-pill); color: var(--text-secondary); transition: color .15s, border-color .15s; }
 .footer-social a:hover { color: var(--brand); border-color: var(--brand); }
 .mobile-nav-social { padding-top: 0.75rem; }
-@media (min-width: 769px) { .footer-bottom .footer-social { margin-left: auto; } } /* stays on the right edge even when the bar wraps */
 @media (pointer: coarse) { .footer-social a { width: var(--touch); height: var(--touch); } }
 
 /* Contact: email row + topic cards */
