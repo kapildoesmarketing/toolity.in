@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Config Converter | Toolity Dev</title>
+  <link rel="canonical" href="https://toolity.in/dev/config-converter/">
+  <meta name="description" content="Free online config converter: convert between .env, JSON, YAML, TOML, INI, Java .properties, shell exports, docker-compose environment blocks and Kubernetes ConfigMaps / Secrets — with duplicate-key and quoting checks. Runs in your browser; nothing uploaded.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Config Converter | Toolity Dev">
+  <meta property="og:description" content="Free online config converter: convert between .env, JSON, YAML, TOML, INI, Java .properties, shell exports, docker-compose environment blocks and Kubernetes ConfigMaps / Secrets — with duplicate-key and quoting checks. Runs in your browser; nothing uploaded.">
+  <meta property="og:url" content="https://toolity.in/dev/config-converter/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=6.1" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=6.1">
+  <link rel="stylesheet" href="/styles/tools/config-converter.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Config Converter",
+        "url": "https://toolity.in/dev/config-converter/",
+        "description": "Free online config converter: convert between .env, JSON, YAML, TOML, INI, Java .properties, shell exports, docker-compose environment blocks and Kubernetes ConfigMaps / Secrets — with duplicate-key and quoting checks. Runs in your browser; nothing uploaded.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Dev", "item": "https://toolity.in/dev/" },
+          { "@type": "ListItem", "position": 3, "name": "Config Converter", "item": "https://toolity.in/dev/config-converter/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Does it handle multi-line values and comments?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Quoted multi-line .env values (double quotes spanning lines, or \\\\n escapes) are read correctly; comments (#, ; in INI, ! in properties) are dropped from the output because most target formats have no place for them. Quoted values are unquoted on read and re-quoted only when the target needs it." } },
+          { "@type": "Question", "name": "What is the __ rule?", "acceptedAnswer": { "@type": "Answer", "text": "Flat formats cannot nest, so a convention is needed: DATABASE__HOST=db ↔ database: { host: db } is the double-underscore rule used by docker-compose overrides, ASP.NET and many config libraries. Choose dots if your keys look like spring.datasource.url, or “Never nest” to keep everything flat (nested input is then flattened with the same separator)." } },
+          { "@type": "Question", "name": "How are types decided?", "acceptedAnswer": { "@type": "Answer", "text": "When converting to JSON / YAML / TOML, values that are exactly true/false, integers, decimals or null become those types; everything else stays a string. Untick “Type values” to keep every value a string — safer for ZIP codes, version numbers and IDs with leading zeros." } },
+          { "@type": "Question", "name": "Kubernetes Secret or ConfigMap?", "acceptedAnswer": { "@type": "Answer", "text": "ConfigMap output writes values as plain text under data:. Tick “Base64-encode values” to emit a kind: Secret with base64 values under data: — which is encoding, not encryption; keep real secrets out of pasted text and use a secrets manager." } },
+          { "@type": "Question", "name": "Are my secrets safe here?", "acceptedAnswer": { "@type": "Answer", "text": "The conversion runs entirely in your browser; nothing is sent anywhere. The “looks like a secret” warning exists because people paste real credentials into online tools — this one never transmits them, but your clipboard, screen and browser history still exist." } },
+          { "@type": "Question", "name": "Is my code uploaded anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. Formatting and minifying run in JavaScript inside your browser tab. The formatter libraries are downloaded once from a CDN; your code never leaves the page." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/dev/" class="breadcrumb-link">Dev</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Config Converter</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Dev</span>
+            <h1 class="page-title">Config Converter</h1>
+            <p class="page-desc">Paste any config — .env, JSON, YAML, TOML, INI, properties, compose or ConfigMap — and get it back in any other format, with the quoting handled.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" data-split="50/50" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge web-status-badge" id="status-badge">Paste a config to begin</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result" aria-label="Copy result" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download result" aria-label="Download result" disabled>
+                <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                <span>Download</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-open" title="Open result in a new tab" aria-label="Open result in a new tab" disabled>
+                <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
+                <span>Open</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Input</span>
+                <span class="pane-badge" id="input-badge">—</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content web-form">
+                <div class="web-file-row">
+                  <button type="button" class="btn-toolbar-sm" id="btn-file" title="Open a file from your device" aria-label="Open a file from your device">
+                    <iconify-icon icon="lucide:folder-open" width="14" height="14"></iconify-icon>
+                    <span>Open file</span>
+                  </button>
+                  <input type="file" id="file-input" accept=".env,.json,.yaml,.yml,.toml,.ini,.properties,.cfg,.conf,.sh,.txt" hidden>
+                  <span class="web-muted" id="file-name">or drop a file here</span>
+                </div>
+                <div class="web-convert-row">
+                  <div class="form-group">
+                    <label class="form-label" for="opt-from"><span>From</span></label>
+                    <select id="opt-from" class="select-clean"><option value="auto" selected>Auto-detect</option><option value="env">.env (dotenv)</option><option value="json">JSON</option><option value="yaml">YAML</option><option value="toml">TOML</option><option value="ini">INI</option><option value="properties">Java .properties</option><option value="export">Shell export</option><option value="compose">docker-compose environment:</option><option value="configmap">Kubernetes ConfigMap / Secret</option></select>
+                  </div>
+                  <button type="button" class="web-row-btn" id="btn-swap" title="Swap From and To" aria-label="Swap From and To"><iconify-icon icon="lucide:arrow-left-right" width="16" height="16"></iconify-icon></button>
+                  <div class="form-group">
+                    <label class="form-label" for="opt-to"><span>To</span></label>
+                    <select id="opt-to" class="select-clean"><option value="env">.env (dotenv)</option><option value="json" selected>JSON</option><option value="yaml">YAML</option><option value="toml">TOML</option><option value="ini">INI</option><option value="properties">Java .properties</option><option value="export">Shell export</option><option value="compose">docker-compose environment:</option><option value="configmap">Kubernetes ConfigMap / Secret</option></select>
+                  </div>
+                </div>
+                <div class="form-group form-group-grow">
+                  <label class="form-label" for="text-input"><span>Config</span><span class="form-label-desc" id="input-count"></span></label>
+                  <textarea id="text-input" class="textarea-clean" rows="14" placeholder="DATABASE_URL=postgres://user:pass@localhost:5432/app&#10;PORT=3000&#10;DEBUG=true&#10;# comments are kept out of the output" spellcheck="false" autocapitalize="off" data-file-target></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Output</span>
+                <span class="pane-badge" id="output-badge">—</span>
+              </div>
+              <div class="pane-content web-output-pane">
+                <div class="pane-empty" id="output-empty">
+                  <iconify-icon icon="lucide:settings-2"></iconify-icon>
+                  <span>The converted config will appear here</span>
+                </div>
+                <div class="web-output" id="output-content" hidden>
+                  <pre class="web-code" id="output-text"></pre>
+                  <div class="web-tags" id="output-issues"></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">Nest on __ · typed values · quote when needed</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item">
+                <label for="opt-nest">Flat ⇄ nested key rule</label>
+                <select id="opt-nest" class="select-clean"><option value="__" selected>A__B ⇄ A.B (double underscore — compose / .NET style)</option><option value=".">A.B ⇄ A.B (dots)</option><option value="none">Never nest / flatten</option></select>
+              </div>
+              <div class="control-item">
+                <label for="opt-case">Key case for flat formats</label>
+                <select id="opt-case" class="select-clean"><option value="upper" selected>UPPER_SNAKE</option><option value="keep">Keep as-is</option></select>
+              </div>
+              <div class="control-item"><input type="checkbox" id="opt-types" checked><label for="opt-types">Type values when going to JSON / YAML / TOML (true, 42, null)</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-quote" checked><label for="opt-quote">Quote .env values only when needed (spaces, #, $, quotes)</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-secret"><label for="opt-secret">Base64-encode values for Kubernetes Secret output</label></div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Use Config Converter in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Paste the source</h3>
+              <p class="step-desc">Drop a file or paste text. The format is detected from the shape — JSON braces, YAML keys, TOML tables, <code>KEY=value</code> lines, <code>export KEY=</code>, <code>[sections]</code>, compose <code>environment:</code> or a ConfigMap <code>data:</code> block. Override it with the From menu if the guess is wrong.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Pick the target</h3>
+              <p class="step-desc">Flat formats (.env, export, properties, compose, ConfigMap) and nested formats (JSON, YAML, TOML, INI) interconvert using the key rule in Settings — <code>DB__HOST</code> becomes <code>{ "DB": { "HOST": … } }</code> and back. Values are typed on the way to JSON / YAML / TOML and quoted on the way to .env only when they contain spaces, <code>#</code>, <code>$</code> or quotes.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Check and download</h3>
+              <p class="step-desc">Duplicate keys, keys that are invalid for the target (a dash in an env name), values that needed quoting and anything that looks like a secret are listed under the output. Download with the right extension and file name (<code>.env</code>, <code>configmap.yaml</code>, …).</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Config Converter — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Does it handle multi-line values and comments?</summary>
+              <p>Yes. Quoted multi-line .env values (double quotes spanning lines, or <code>\\n</code> escapes) are read correctly; comments (<code>#</code>, <code>;</code> in INI, <code>!</code> in properties) are dropped from the output because most target formats have no place for them. Quoted values are unquoted on read and re-quoted only when the target needs it.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What is the __ rule?</summary>
+              <p>Flat formats cannot nest, so a convention is needed: <code>DATABASE__HOST=db</code> ↔ <code>database: { host: db }</code> is the double-underscore rule used by docker-compose overrides, ASP.NET and many config libraries. Choose dots if your keys look like <code>spring.datasource.url</code>, or “Never nest” to keep everything flat (nested input is then flattened with the same separator).</p>
+            </details>
+            <details class="faq-item">
+              <summary>How are types decided?</summary>
+              <p>When converting to JSON / YAML / TOML, values that are exactly <code>true</code>/<code>false</code>, integers, decimals or <code>null</code> become those types; everything else stays a string. Untick “Type values” to keep every value a string — safer for ZIP codes, version numbers and IDs with leading zeros.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Kubernetes Secret or ConfigMap?</summary>
+              <p>ConfigMap output writes values as plain text under <code>data:</code>. Tick “Base64-encode values” to emit a <code>kind: Secret</code> with base64 values under <code>data:</code> — which is encoding, not encryption; keep real secrets out of pasted text and use a secrets manager.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Are my secrets safe here?</summary>
+              <p>The conversion runs entirely in your browser; nothing is sent anywhere. The “looks like a secret” warning exists because people paste real credentials into online tools — this one never transmits them, but your clipboard, screen and browser history still exist.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is my code uploaded anywhere?</summary>
+              <p>No. Formatting and minifying run in JavaScript inside your browser tab. The formatter libraries are downloaded once from a CDN; your code never leaves the page.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="dev"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=4.5"></script>
+  <script src="/scripts/tool-common.js?v=1.1"></script>
+  <script src="/scripts/web-common.js?v=1.2"></script>
+  <script src="/dev/config-converter/config-converter.js?v=1.0"></script>
+</body>
+</html>

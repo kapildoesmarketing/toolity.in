@@ -1,0 +1,3 @@
+/* Config Converter — mono editors. */
+#text-input, #output-text { font-family: var(--font-mono); font-size: 0.84rem; }
+#output-text { max-height: 600px; }
