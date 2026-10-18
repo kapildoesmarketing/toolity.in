@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Countdown Page Maker | Toolity Labs</title>
+  <link rel="canonical" href="https://toolity.in/labs/countdown-page-maker/">
+  <meta name="description" content="Free online countdown page maker: create a full-screen countdown to any event — launch, exam, wedding, sale — with your title, colours and time zone, and share it as a link or QR code. No account, nothing stored; the page lives in the link. Add the event to your calendar in one click.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Countdown Page Maker | Toolity Labs">
+  <meta property="og:description" content="Free online countdown page maker: create a full-screen countdown to any event — launch, exam, wedding, sale — with your title, colours and time zone, and share it as a link or QR code. No account, nothing stored; the page lives in the link. Add the event to your calendar in one click.">
+  <meta property="og:url" content="https://toolity.in/labs/countdown-page-maker/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=6.1" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=6.1">
+  <link rel="stylesheet" href="/styles/tools/countdown-page-maker.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Countdown Page Maker",
+        "url": "https://toolity.in/labs/countdown-page-maker/",
+        "description": "Free online countdown page maker: create a full-screen countdown to any event — launch, exam, wedding, sale — with your title, colours and time zone, and share it as a link or QR code. No account, nothing stored; the page lives in the link. Add the event to your calendar in one click.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Labs", "item": "https://toolity.in/labs/" },
+          { "@type": "ListItem", "position": 3, "name": "Countdown Page Maker", "item": "https://toolity.in/labs/countdown-page-maker/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Where is the countdown stored?", "acceptedAnswer": { "@type": "Answer", "text": "Nowhere. Every setting is encoded in the link itself, so it works forever, needs no account and cannot expire. The page is served by Toolity’s static site, which has no database — if you lose the link, make a new one in seconds." } },
+          { "@type": "Question", "name": "How do time zones work?", "acceptedAnswer": { "@type": "Answer", "text": "“Viewer’s local time” means the date you entered is interpreted in each viewer’s own zone (good for “midnight on New Year’s Eve wherever you are”). Pick a specific zone for a single global moment such as a product launch at 9:00 IST — every visitor then sees the same remaining time." } },
+          { "@type": "Question", "name": "Can I embed it in my website or Notion?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — the same page is the Countdown widget. Paste the link into an iframe, or open the Countdown Widget builder for ready-made embed code with the same settings." } },
+          { "@type": "Question", "name": "What happens when it reaches zero?", "acceptedAnswer": { "@type": "Answer", "text": "The clock is replaced by your end message (or “Time’s up” if you left it blank). The page keeps working after the date, so a “days since” style page is just a countdown to a past date." } },
+          { "@type": "Question", "name": "Does the QR code expire?", "acceptedAnswer": { "@type": "Answer", "text": "No — it encodes the link, nothing else. Print it on a poster or invite; it keeps working as long as toolity.in does." } },
+          { "@type": "Question", "name": "Is my input sent anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. Everything is computed by JavaScript in your browser tab. Nothing is uploaded, logged or stored by Toolity." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/labs/" class="breadcrumb-link">Labs</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Countdown Page Maker</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Labs</span>
+            <h1 class="page-title">Countdown Page Maker</h1>
+            <p class="page-desc">Name the event, set the date and colours — get a full-screen countdown page you can share as a link or QR, plus a calendar file.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" data-split="40/60" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge web-status-badge" id="status-badge">Name the event and pick a date</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result" aria-label="Copy result" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <div class="dropdown-menu-wrapper" id="download-dropdown-wrap">
+                <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download result" aria-label="Download result" aria-haspopup="true" disabled>
+                  <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                  <span>Download</span>
+                  <iconify-icon icon="lucide:chevron-down" class="dropdown-arrow" width="13" height="13"></iconify-icon>
+                </button>
+                <div class="dropdown-popup" role="menu">
+                  <button type="button" class="dropdown-item" data-format="qr" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:qr-code" width="14" height="14"></iconify-icon>
+                      <span>QR code (PNG)</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="ics" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:calendar-plus" width="14" height="14"></iconify-icon>
+                      <span>Calendar event (.ics)</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="txt" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:link" width="14" height="14"></iconify-icon>
+                      <span>Link (.txt)</span>
+                    </div>
+                  </button>
+                </div>
+              </div>
+              <button type="button" class="btn-toolbar-sm" id="btn-open" title="Open result in a new tab" aria-label="Open result in a new tab" disabled>
+                <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
+                <span>Open</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Event</span>
+                <span class="pane-badge" id="input-badge">—</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content web-form">
+                <div class="form-group">
+                  <label class="form-label" for="cd-title"><span>Event title</span></label>
+                  <input id="cd-title" class="input-clean" autocomplete="off" type="text" placeholder="Product launch" maxlength="80" autocomplete="off">
+                </div>
+                <div class="web-convert-row web-convert-row-2">
+                <div class="form-group">
+                  <label class="form-label" for="cd-to"><span>Date & time</span></label>
+                  <input id="cd-to" class="input-clean" autocomplete="off" type="datetime-local">
+                </div>
+                  <div class="form-group">
+                    <label class="form-label" for="cd-tz"><span>Time zone</span></label>
+                    <select id="cd-tz" class="select-clean"><option value="local" selected>Viewer’s local time</option></select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="cd-done"><span>Message when it ends</span></label>
+                  <input id="cd-done" class="input-clean" autocomplete="off" type="text" placeholder="We’re live!" maxlength="80" autocomplete="off">
+                </div>
+                <div class="form-group">
+                  <span class="form-label"><span>Style</span></span>
+                  <div class="segmented-group segmented-group-pill" id="seg-variant" role="group" aria-label="Style">
+                    <button type="button" class="seg-pill active" data-value="flip">Flip clock</button>
+                    <button type="button" class="seg-pill" data-value="minimal">Minimal</button>
+                    <button type="button" class="seg-pill" data-value="compact">Compact</button>
+                  </div>
+                </div>
+                <div class="web-convert-row web-convert-row-2">
+                  <div class="form-group">
+                    <label class="form-label" for="cd-theme"><span>Theme</span></label>
+                    <select id="cd-theme" class="select-clean"><option value="dark" selected>Dark</option><option value="light">Light</option><option value="auto">Match viewer</option></select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="cd-font"><span>Font</span></label>
+                    <select id="cd-font" class="select-clean"><option value="inter" selected>Inter</option><option value="space-grotesk">Space Grotesk</option><option value="dm-sans">DM Sans</option><option value="playfair">Playfair Display</option><option value="jetbrains-mono">JetBrains Mono</option><option value="serif">System serif</option><option value="mono">System mono</option></select>
+                  </div>
+                </div>
+                <div class="web-convert-row web-convert-row-2">
+                <div class="form-group">
+                  <label class="form-label" for="cd-accent-input"><span>Accent colour</span></label>
+                  <div class="web-inline">
+                    <input type="text" id="cd-accent-input" class="input-clean" placeholder="#F4511E" spellcheck="false" autocomplete="off" autocapitalize="off">
+                    <input type="color" id="cd-accent-pick" class="web-color-input" aria-label="Accent colour picker" value="#000000">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="cd-bg-input"><span>Background (optional)</span></label>
+                  <div class="web-inline">
+                    <input type="text" id="cd-bg-input" class="input-clean" placeholder="theme default" spellcheck="false" autocomplete="off" autocapitalize="off">
+                    <input type="color" id="cd-bg-pick" class="web-color-input" aria-label="Background (optional) picker" value="#000000">
+                  </div>
+                </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Your page</span>
+                <span class="pane-badge" id="output-badge">—</span>
+              </div>
+              <div class="pane-content web-output-pane">
+                <div class="pane-empty" id="output-empty">
+                  <iconify-icon icon="lucide:timer"></iconify-icon>
+                  <span>The live countdown page will appear here</span>
+                </div>
+                <div class="web-output" id="output-content" hidden>
+                  <div class="cd-frame-wrap"><iframe id="cd-frame" class="cd-frame" title="Countdown page preview" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe></div>
+                  <div class="form-group">
+                    <label class="form-label" for="cd-link"><span>Shareable link</span><span class="form-label-desc">everything lives in the URL</span></label>
+                    <div class="web-inline"><input type="text" id="cd-link" class="input-clean" readonly><a id="cd-open" class="web-row-btn" href="#" target="_blank" rel="noopener" title="Open full screen" aria-label="Open full screen"><iconify-icon icon="lucide:maximize-2" width="16" height="16"></iconify-icon></a></div>
+                  </div>
+                  <div class="cd-share">
+                    <canvas id="cd-qr" class="cd-qr" width="160" height="160" aria-label="QR code for the countdown link"></canvas>
+                    <div class="web-tags" id="cd-share-links"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">days · hours · minutes · seconds · Toolity badge</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item"><input type="checkbox" id="opt-days" checked><label for="opt-days">Show days</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-hours" checked><label for="opt-hours">Show hours</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-minutes" checked><label for="opt-minutes">Show minutes</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-seconds" checked><label for="opt-seconds">Show seconds</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-badge" checked><label for="opt-badge">Show the small “Toolity” badge on the page</label></div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Use Countdown Page Maker in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Describe the event</h3>
+              <p class="step-desc">Give it a title, a date and time, and — if the audience is spread out — a time zone so everyone counts down to the same instant. Add the message that replaces the clock when it hits zero.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Style the page</h3>
+              <p class="step-desc">Pick flip-clock, minimal or compact, dark or light, a font and an accent colour. The preview on the right is the real page, so what you see is what people get.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Share it</h3>
+              <p class="step-desc">Copy the link, open it full screen for a projector or lobby display, download the QR code for posters, or send it with the share chips. The .ics file adds the event to Google / Apple / Outlook calendars. Nothing is stored anywhere — the link <em>is</em> the page.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Countdown Page Maker — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Where is the countdown stored?</summary>
+              <p>Nowhere. Every setting is encoded in the link itself, so it works forever, needs no account and cannot expire. The page is served by Toolity’s static site, which has no database — if you lose the link, make a new one in seconds.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How do time zones work?</summary>
+              <p>“Viewer’s local time” means the date you entered is interpreted in each viewer’s own zone (good for “midnight on New Year’s Eve wherever you are”). Pick a specific zone for a single global moment such as a product launch at 9:00 IST — every visitor then sees the same remaining time.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can I embed it in my website or Notion?</summary>
+              <p>Yes — the same page is the Countdown widget. Paste the link into an iframe, or open the <a href="/widgets/countdown/">Countdown Widget</a> builder for ready-made embed code with the same settings.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What happens when it reaches zero?</summary>
+              <p>The clock is replaced by your end message (or “Time’s up” if you left it blank). The page keeps working after the date, so a “days since” style page is just a countdown to a past date.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Does the QR code expire?</summary>
+              <p>No — it encodes the link, nothing else. Print it on a poster or invite; it keeps working as long as toolity.in does.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is my input sent anywhere?</summary>
+              <p>No. Everything is computed by JavaScript in your browser tab. Nothing is uploaded, logged or stored by Toolity.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="labs"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=4.5"></script>
+  <script src="/scripts/tool-common.js?v=1.1"></script>
+  <script src="/scripts/qr-engine.js?v=1.0"></script>
+  <script src="/scripts/web-common.js?v=1.2"></script>
+  <script src="/labs/countdown-page-maker/countdown-page-maker.js?v=1.0"></script>
+</body>
+</html>
