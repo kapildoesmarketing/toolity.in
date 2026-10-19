@@ -1,0 +1,15 @@
+/* Sprite Sheet Studio — grid row under the sheet, pixel-crisp canvases, settings pairs, extras row. */
+.gif-stage#stage, .ss-preview { image-rendering: pixelated; cursor: crosshair; }
+.ss-preview { background: repeating-conic-gradient(var(--border) 0 25%, transparent 0 50%) 0 0 / 16px 16px; cursor: default; }
+.ss-grid-row { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 0.5rem; margin-top: 0.6rem; min-width: 0; }
+.ss-grid-row[hidden], .ss-tip[hidden], .ss-extras[hidden], .ss-mode[hidden] { display: none; }
+.ss-num { display: flex; flex-direction: column; gap: 0.2rem; font-size: 0.74rem; font-weight: 600; color: var(--text-secondary); }
+.ss-num .input-clean { width: 84px; }
+.ss-x { align-self: flex-end; padding-bottom: 0.6rem; color: var(--text-muted); }
+.ss-grid-row .btn-toolbar-sm { align-self: flex-end; }
+.ss-grid-row .web-muted { align-self: flex-end; padding-bottom: 0.6rem; }
+.ss-tip { margin: 0.35rem 0 0; }
+.ss-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; }
+.ss-extras { margin-top: 0.5rem; }
+.ss-extras .web-tag { cursor: pointer; }
+.ss-extras .web-tag:hover { border-color: var(--brand); color: var(--text-primary); }

@@ -164,6 +164,66 @@ module.exports = [
     guide: [['Drop a GIF', 'Drag an animated GIF onto the left pane. It plays as a preview.'], ['Choose the turn', 'Open Settings to pick 90°, 180° or 270° and an optional mirror or flip.'], ['Rotate and download', 'Click <strong>Rotate GIF</strong>. Every frame is turned and re-encoded with its original delay.']],
     faq: [['Is my GIF uploaded anywhere?', 'No. Frames are decoded, rotated on a canvas and re-encoded in your browser. Nothing is sent to a server.'], ['Is the animation speed kept?', 'Yes — each frame keeps its own delay, so the timing is identical to the original.'], ['Does rotating lose quality?', 'Rotations by 90° steps are pixel-exact. The GIF is re-encoded with a fresh colour palette, which can shift colours very slightly on gradients.'], ['What is the difference between mirror and flip?', '<em>Mirror</em> swaps left and right (like a selfie camera). <em>Flip</em> swaps top and bottom. 180° rotation equals both together.']]
   },
+  {
+    slug: 'sprite-sheet-studio', name: 'Sprite Sheet Studio', icon: 'lucide:grid-3x3', section: 'GIF Tools', runtime: 'gif', libs: ['jszip'], css: true, split: '50/50',
+    desc: 'Free online sprite sheet studio: turn a sprite sheet into an animated GIF or APNG (auto grid detection, frame order, FPS, pixel-perfect scaling, ping-pong), or pack a GIF / APNG / WebP animation into a sprite sheet with JSON metadata and CSS keyframes. Runs in your browser — no upload.',
+    lead: 'Sprite sheet → GIF / APNG with auto grid detection and crisp pixel scaling, or animation → sprite sheet with JSON metadata and a CSS steps() snippet — all on your device.',
+    cardDesc: 'Sprite sheet ⇄ GIF / APNG — auto grid, pixel scaling, JSON + CSS export.',
+    tags: ['sprite sheet', 'spritesheet', 'sprite to gif', 'gif to sprite sheet', 'apng', 'pixel art', 'game dev', 'texture atlas', 'frames', 'animation', 'css sprite animation', 'steps()', 'phaser', 'godot', 'unity'],
+    action: 'Build', actionIcon: 'lucide:grid-3x3', idle: 'Drop a sprite sheet or an animation',
+    source: { label: 'Source', drop: { accept: 'image/*', title: 'Drop a sprite sheet (PNG/JPG/WebP) or an animation (GIF/APNG/WebP)', sub: 'Up to 50 MB — static image = sheet, animated file = frames' }, html: `
+                  <canvas id="stage" class="media-preview-canvas gif-stage" width="360" height="240" aria-label="Sprite sheet with grid overlay"></canvas>
+                  <canvas id="scrub-canvas" class="media-preview-canvas gif-stage" width="360" height="240" aria-label="Animation frame"></canvas>`, after: `
+                <div class="ss-grid-row" id="ss-grid-row" hidden>
+                  <label class="ss-num" for="grid-cols">Columns<input type="number" id="grid-cols" class="input-clean" min="1" max="64" value="1" inputmode="numeric"></label>
+                  <span class="ss-x" aria-hidden="true">×</span>
+                  <label class="ss-num" for="grid-rows">Rows<input type="number" id="grid-rows" class="input-clean" min="1" max="64" value="1" inputmode="numeric"></label>
+                  <button type="button" class="btn-toolbar-sm" id="btn-auto-grid" title="Detect the grid from transparent or solid gutters"><iconify-icon icon="lucide:scan-search" width="14" height="14"></iconify-icon><span>Auto</span></button>
+                  <span class="web-muted" id="ss-cell-info"></span>
+                </div>
+                <p class="web-muted ss-tip" id="ss-tip" hidden>Click a cell to skip it.</p>
+                <div class="vdt-range" id="rng-wrap" hidden>
+                  <div class="vdt-range-row"><label for="rng-start">First</label><input type="range" id="rng-start" class="range-slider-clean" min="0" max="0" step="1" value="0" aria-label="First frame"><span class="range-val-badge" id="rng-start-val">#1</span><span></span></div>
+                  <div class="vdt-range-row"><label for="rng-end">Last</label><input type="range" id="rng-end" class="range-slider-clean" min="0" max="0" step="1" value="0" aria-label="Last frame"><span class="range-val-badge" id="rng-end-val">#1</span><span id="rng-len" class="web-muted"></span></div>
+                </div>` },
+    output: { label: 'Result', icon: 'lucide:grid-3x3', empty: 'The animation or sprite sheet appears here', html: `
+                  <canvas id="preview" class="media-preview-canvas ss-preview" width="360" height="240" aria-label="Live animation preview"></canvas>
+                  <img id="output-img" alt="Result" class="media-preview-img" width="360" height="240">`, after: `
+                  <div class="web-tags ss-extras" id="ss-extras" hidden>
+                    <button type="button" class="web-tag" data-x="json" title="Download frame metadata as JSON"><iconify-icon icon="lucide:braces" width="12" height="12"></iconify-icon> metadata.json</button>
+                    <button type="button" class="web-tag" data-x="css" title="Download a CSS steps() animation"><iconify-icon icon="lucide:code" width="12" height="12"></iconify-icon> sprite.css</button>
+                  </div>` },
+    settingsSummary: 'Auto · 12 fps · GIF',
+    settings: `
+              <div class="control-item ss-mode" data-mode="anim">
+                <label for="opt-out">Output</label>
+                <select id="opt-out" class="select-clean"><option value="gif" selected>Animated GIF</option><option value="apng">APNG (lossless, keeps alpha)</option><option value="zip">Frames as PNG (ZIP)</option></select>
+              </div>` + range('opt-fps', 'Speed', 1, 60, 1, 12, '12 fps').replace('class="control-item"', 'class="control-item ss-mode" data-mode="anim"')
+      + select('opt-order', 'Frame order', [['row', 'Row by row (left → right, top → bottom)', 1], ['col', 'Column by column'], ['row-rev', 'Row by row, reversed']]).replace('class="control-item"', 'class="control-item ss-mode" data-mode="anim"')
+      + select('opt-loop', 'Loop', [['0', 'Forever', 1], ['1', 'Play once'], ['3', '3 times']]).replace('class="control-item"', 'class="control-item ss-mode" data-mode="anim"')
+      + check('opt-pingpong', 'Ping-pong (play forwards then backwards)', false).replace('class="control-item"', 'class="control-item ss-mode" data-mode="anim"')
+      + check('opt-skip-empty', 'Skip empty cells automatically', true).replace('class="control-item"', 'class="control-item ss-mode" data-mode="anim"')
+      + `
+              <div class="control-item ss-mode" data-mode="anim">
+                <label for="opt-margin">Sheet margin / spacing (px)</label>
+                <div class="ss-pair"><input type="number" id="opt-margin" class="input-clean" min="0" max="512" value="0" inputmode="numeric" aria-label="Margin"><input type="number" id="opt-spacing" class="input-clean" min="0" max="512" value="0" inputmode="numeric" aria-label="Spacing"></div>
+              </div>`
+      + select('opt-layout', 'Sheet layout', [['square', 'Auto (near-square)', 1], ['cols', 'Fixed columns'], ['row', 'Single row (strip)'], ['col', 'Single column']]).replace('class="control-item"', 'class="control-item ss-mode" data-mode="sheet"')
+      + `
+              <div class="control-item ss-mode" data-mode="sheet">
+                <label for="opt-cols">Columns (fixed layout)</label>
+                <input type="number" id="opt-cols" class="input-clean" min="1" max="64" value="8" inputmode="numeric">
+              </div>
+              <div class="control-item ss-mode" data-mode="sheet">
+                <label for="opt-pad">Sheet padding / spacing (px)</label>
+                <div class="ss-pair"><input type="number" id="opt-pad" class="input-clean" min="0" max="512" value="0" inputmode="numeric" aria-label="Padding"><input type="number" id="opt-sp" class="input-clean" min="0" max="512" value="0" inputmode="numeric" aria-label="Spacing"></div>
+              </div>`
+      + select('opt-every', 'Keep every', [['1', 'frame', 1], ['2', '2nd frame'], ['3', '3rd frame'], ['4', '4th frame']]).replace('class="control-item"', 'class="control-item ss-mode" data-mode="sheet"')
+      + select('opt-bg', 'Sheet background', [['transparent', 'Transparent', 1], ['#ffffff', 'White'], ['#000000', 'Black'], ['#ff00ff', 'Magenta key']]).replace('class="control-item"', 'class="control-item ss-mode" data-mode="sheet"')
+      + select('opt-scale', 'Scale (nearest-neighbour)', [['1', '1×', 1], ['2', '2×'], ['3', '3×'], ['4', '4×'], ['0.5', '½×']]),
+    guide: [['Drop a sheet or an animation', 'A static PNG / JPG / WebP is treated as a sprite sheet; an animated GIF, APNG or WebP is split into frames. For a sheet, press <strong>Auto</strong> to detect the grid from the gutters, or type columns × rows — the overlay shows exactly which cells will be used. Click a cell to skip it.'], ['Tune the animation or layout', 'Sheet → animation: set the speed, frame order, loop, ping-pong and scale (nearest-neighbour keeps pixel art crisp) and watch the live preview. Animation → sheet: choose a near-square grid, a fixed column count or a single strip, padding, spacing and background.'], ['Build and export', 'Press <strong>Build</strong>. Animations download as GIF, APNG (lossless with alpha) or a ZIP of PNG frames. Sheets download as PNG, with one-click <code>metadata.json</code> (frame rectangles and delays for Phaser, Godot, Unity, PixiJS) and <code>sprite.css</code> (a <code>steps()</code> keyframe animation).']],
+    faq: [['How does Auto grid detection work?', 'It looks for fully transparent (or solid background-coloured) columns and rows that separate the sprites and counts the content runs between them. Uniform sheets with gutters are detected exactly; tightly packed sheets fall back to a square-cell guess, which you can correct by typing columns × rows. Irregular texture atlases with mixed sizes are not supported — use their JSON instead.'], ['GIF or APNG?', 'GIF is universal but limited to 256 colours and 1-bit transparency, so soft edges get jagged. APNG keeps full 24-bit colour and 8-bit alpha, loses nothing, and plays in every modern browser, Discord, Slack and iMessage — the better choice for pixel art and UI stickers. Choose GIF only where APNG is not accepted (some chat apps, older email clients).'], ['Why do my pixels look blurry / crisp?', 'Scaling uses nearest-neighbour sampling, so 2× / 3× / 4× keeps pixel art razor sharp. ½× halves the size and will soften detail — it is meant for photo-style frames, not pixel art.'], ['What is in metadata.json and sprite.css?', 'The JSON lists the sheet size, frame size, columns, rows, padding and every frame’s x, y, width, height and delay in milliseconds — enough to import into Phaser, PixiJS, Godot or Unity, or to write your own loader. The CSS animates a <code>div</code> with <code>background-position</code> in <code>steps()</code>, with keyframe percentages that follow the original per-frame delays.'], ['Is there a size limit?', 'Files up to 50 MB. Sheets wider or taller than 8,192 px are flagged — many GPUs and engines refuse textures above that; switch to more rows, a smaller scale or “keep every 2nd frame”.'], ['Is anything uploaded?', 'No. Decoding, slicing, scaling and encoding all run in your browser; the ZIP library and GIF encoder are static scripts. Your sprites never leave your device.']]
+  },
   /* ═══════════ AUDIO ═══════════ */
   {
     slug: 'audio-normalizer', name: 'Audio Normalizer (LUFS)', icon: 'lucide:gauge', section: 'Audio Tools', runtime: 'audio',

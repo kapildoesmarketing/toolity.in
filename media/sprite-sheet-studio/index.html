@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Sprite Sheet Studio | Toolity Media</title>
+  <link rel="canonical" href="https://toolity.in/media/sprite-sheet-studio/">
+  <meta name="description" content="Free online sprite sheet studio: turn a sprite sheet into an animated GIF or APNG (auto grid detection, frame order, FPS, pixel-perfect scaling, ping-pong), or pack a GIF / APNG / WebP animation into a sprite sheet with JSON metadata and CSS keyframes. Runs in your browser — no upload.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Sprite Sheet Studio | Toolity Media">
+  <meta property="og:description" content="Free online sprite sheet studio: turn a sprite sheet into an animated GIF or APNG (auto grid detection, frame order, FPS, pixel-perfect scaling, ping-pong), or pack a GIF / APNG / WebP animation into a sprite sheet with JSON metadata and CSS keyframes. Runs in your browser — no upload.">
+  <meta property="og:url" content="https://toolity.in/media/sprite-sheet-studio/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=6.1" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=6.1">
+  <link rel="stylesheet" href="/styles/tools/sprite-sheet-studio.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Sprite Sheet Studio",
+        "url": "https://toolity.in/media/sprite-sheet-studio/",
+        "description": "Free online sprite sheet studio: turn a sprite sheet into an animated GIF or APNG (auto grid detection, frame order, FPS, pixel-perfect scaling, ping-pong), or pack a GIF / APNG / WebP animation into a sprite sheet with JSON metadata and CSS keyframes. Runs in your browser — no upload.",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Media", "item": "https://toolity.in/media/" },
+          { "@type": "ListItem", "position": 3, "name": "Sprite Sheet Studio", "item": "https://toolity.in/media/sprite-sheet-studio/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "How does Auto grid detection work?", "acceptedAnswer": { "@type": "Answer", "text": "It looks for fully transparent (or solid background-coloured) columns and rows that separate the sprites and counts the content runs between them. Uniform sheets with gutters are detected exactly; tightly packed sheets fall back to a square-cell guess, which you can correct by typing columns × rows. Irregular texture atlases with mixed sizes are not supported — use their JSON instead." } },
+          { "@type": "Question", "name": "GIF or APNG?", "acceptedAnswer": { "@type": "Answer", "text": "GIF is universal but limited to 256 colours and 1-bit transparency, so soft edges get jagged. APNG keeps full 24-bit colour and 8-bit alpha, loses nothing, and plays in every modern browser, Discord, Slack and iMessage — the better choice for pixel art and UI stickers. Choose GIF only where APNG is not accepted (some chat apps, older email clients)." } },
+          { "@type": "Question", "name": "Why do my pixels look blurry / crisp?", "acceptedAnswer": { "@type": "Answer", "text": "Scaling uses nearest-neighbour sampling, so 2× / 3× / 4× keeps pixel art razor sharp. ½× halves the size and will soften detail — it is meant for photo-style frames, not pixel art." } },
+          { "@type": "Question", "name": "What is in metadata.json and sprite.css?", "acceptedAnswer": { "@type": "Answer", "text": "The JSON lists the sheet size, frame size, columns, rows, padding and every frame’s x, y, width, height and delay in milliseconds — enough to import into Phaser, PixiJS, Godot or Unity, or to write your own loader. The CSS animates a div with background-position in steps(), with keyframe percentages that follow the original per-frame delays." } },
+          { "@type": "Question", "name": "Is there a size limit?", "acceptedAnswer": { "@type": "Answer", "text": "Files up to 50 MB. Sheets wider or taller than 8,192 px are flagged — many GPUs and engines refuse textures above that; switch to more rows, a smaller scale or “keep every 2nd frame”." } },
+          { "@type": "Question", "name": "Is anything uploaded?", "acceptedAnswer": { "@type": "Answer", "text": "No. Decoding, slicing, scaling and encoding all run in your browser; the ZIP library and GIF encoder are static scripts. Your sprites never leave your device." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/media/" class="breadcrumb-link">Media</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Sprite Sheet Studio</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Media</span>
+            <h1 class="page-title">Sprite Sheet Studio</h1>
+            <p class="page-desc">Sprite sheet → GIF / APNG with auto grid detection and crisp pixel scaling, or animation → sprite sheet with JSON metadata and a CSS steps() snippet — all on your device.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" data-split="50/50" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge" id="result-badge">Drop a sprite sheet or an animation</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result" aria-label="Copy result" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download result" aria-label="Download result" disabled>
+                <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                <span>Download</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Source</span>
+                <span class="pane-badge" id="source-badge">No file loaded</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content pane-content-between">
+                <div class="media-canvas-viewport">
+                  <div id="dropzone" class="video-dropzone" tabindex="0" role="button" aria-label="Drop a sprite sheet (PNG/JPG/WebP) or an animation (GIF/APNG/WebP)">
+                    <input type="file" id="file-input" accept="image/*">
+                    <div class="video-drop-icon">
+                      <iconify-icon icon="lucide:upload-cloud" width="22" height="22"></iconify-icon>
+                    </div>
+                    <div class="video-drop-title">Drop a sprite sheet (PNG/JPG/WebP) or an animation (GIF/APNG/WebP)</div>
+                    <div class="video-drop-subtitle">Up to 50 MB — static image = sheet, animated file = frames</div>
+                  </div>
+                  <canvas id="stage" class="media-preview-canvas gif-stage" width="360" height="240" aria-label="Sprite sheet with grid overlay"></canvas>
+                  <canvas id="scrub-canvas" class="media-preview-canvas gif-stage" width="360" height="240" aria-label="Animation frame"></canvas>
+                </div>
+                <div class="ss-grid-row" id="ss-grid-row" hidden>
+                  <label class="ss-num" for="grid-cols">Columns<input type="number" id="grid-cols" class="input-clean" min="1" max="64" value="1" inputmode="numeric"></label>
+                  <span class="ss-x" aria-hidden="true">×</span>
+                  <label class="ss-num" for="grid-rows">Rows<input type="number" id="grid-rows" class="input-clean" min="1" max="64" value="1" inputmode="numeric"></label>
+                  <button type="button" class="btn-toolbar-sm" id="btn-auto-grid" title="Detect the grid from transparent or solid gutters"><iconify-icon icon="lucide:scan-search" width="14" height="14"></iconify-icon><span>Auto</span></button>
+                  <span class="web-muted" id="ss-cell-info"></span>
+                </div>
+                <p class="web-muted ss-tip" id="ss-tip" hidden>Click a cell to skip it.</p>
+                <div class="vdt-range" id="rng-wrap" hidden>
+                  <div class="vdt-range-row"><label for="rng-start">First</label><input type="range" id="rng-start" class="range-slider-clean" min="0" max="0" step="1" value="0" aria-label="First frame"><span class="range-val-badge" id="rng-start-val">#1</span><span></span></div>
+                  <div class="vdt-range-row"><label for="rng-end">Last</label><input type="range" id="rng-end" class="range-slider-clean" min="0" max="0" step="1" value="0" aria-label="Last frame"><span class="range-val-badge" id="rng-end-val">#1</span><span id="rng-len" class="web-muted"></span></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Result</span>
+                <span class="pane-badge" id="output-badge">Awaiting file</span>
+              </div>
+              <div class="pane-content pane-content-between">
+                <div class="media-canvas-viewport">
+                  <div id="output-empty" class="media-empty-placeholder">
+                    <iconify-icon icon="lucide:grid-3x3" width="32" height="32"></iconify-icon>
+                    <p>The animation or sprite sheet appears here</p>
+                  </div>
+                  <canvas id="preview" class="media-preview-canvas ss-preview" width="360" height="240" aria-label="Live animation preview"></canvas>
+                  <img id="output-img" alt="Result" class="media-preview-img" width="360" height="240">
+                </div>
+                <div>
+                  <div class="web-tags ss-extras" id="ss-extras" hidden>
+                    <button type="button" class="web-tag" data-x="json" title="Download frame metadata as JSON"><iconify-icon icon="lucide:braces" width="12" height="12"></iconify-icon> metadata.json</button>
+                    <button type="button" class="web-tag" data-x="css" title="Download a CSS steps() animation"><iconify-icon icon="lucide:code" width="12" height="12"></iconify-icon> sprite.css</button>
+                  </div>
+                  <button type="button" id="btn-compress" class="btn-toolbar-sm btn-brand-sm btn-primary-action" disabled>
+                    <iconify-icon icon="lucide:grid-3x3" width="16" height="16"></iconify-icon>
+                    <span id="btn-compress-label">Build</span>
+                  </button>
+                  <div class="slim-progress-bar" id="progress-bar">
+                    <div class="slim-progress-fill" id="progress-fill"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">Auto · 12 fps · GIF</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item ss-mode" data-mode="anim">
+                <label for="opt-out">Output</label>
+                <select id="opt-out" class="select-clean"><option value="gif" selected>Animated GIF</option><option value="apng">APNG (lossless, keeps alpha)</option><option value="zip">Frames as PNG (ZIP)</option></select>
+              </div>
+              <div class="control-item ss-mode" data-mode="anim">
+                <label for="opt-fps">Speed</label>
+                <input type="range" id="opt-fps" class="range-slider-clean" min="1" max="60" step="1" value="12">
+                <span class="range-val-badge" id="opt-fps-val">12 fps</span>
+              </div>
+              <div class="control-item ss-mode" data-mode="anim">
+                <label for="opt-order">Frame order</label>
+                <select id="opt-order" class="select-clean">
+                  <option value="row" selected>Row by row (left → right, top → bottom)</option>
+                  <option value="col">Column by column</option>
+                  <option value="row-rev">Row by row, reversed</option>
+                </select>
+              </div>
+              <div class="control-item ss-mode" data-mode="anim">
+                <label for="opt-loop">Loop</label>
+                <select id="opt-loop" class="select-clean">
+                  <option value="0" selected>Forever</option>
+                  <option value="1">Play once</option>
+                  <option value="3">3 times</option>
+                </select>
+              </div>
+              <div class="control-item ss-mode" data-mode="anim">
+                <input type="checkbox" id="opt-pingpong">
+                <label for="opt-pingpong">Ping-pong (play forwards then backwards)</label>
+              </div>
+              <div class="control-item ss-mode" data-mode="anim">
+                <input type="checkbox" id="opt-skip-empty" checked>
+                <label for="opt-skip-empty">Skip empty cells automatically</label>
+              </div>
+              <div class="control-item ss-mode" data-mode="anim">
+                <label for="opt-margin">Sheet margin / spacing (px)</label>
+                <div class="ss-pair"><input type="number" id="opt-margin" class="input-clean" min="0" max="512" value="0" inputmode="numeric" aria-label="Margin"><input type="number" id="opt-spacing" class="input-clean" min="0" max="512" value="0" inputmode="numeric" aria-label="Spacing"></div>
+              </div>
+              <div class="control-item ss-mode" data-mode="sheet">
+                <label for="opt-layout">Sheet layout</label>
+                <select id="opt-layout" class="select-clean">
+                  <option value="square" selected>Auto (near-square)</option>
+                  <option value="cols">Fixed columns</option>
+                  <option value="row">Single row (strip)</option>
+                  <option value="col">Single column</option>
+                </select>
+              </div>
+              <div class="control-item ss-mode" data-mode="sheet">
+                <label for="opt-cols">Columns (fixed layout)</label>
+                <input type="number" id="opt-cols" class="input-clean" min="1" max="64" value="8" inputmode="numeric">
+              </div>
+              <div class="control-item ss-mode" data-mode="sheet">
+                <label for="opt-pad">Sheet padding / spacing (px)</label>
+                <div class="ss-pair"><input type="number" id="opt-pad" class="input-clean" min="0" max="512" value="0" inputmode="numeric" aria-label="Padding"><input type="number" id="opt-sp" class="input-clean" min="0" max="512" value="0" inputmode="numeric" aria-label="Spacing"></div>
+              </div>
+              <div class="control-item ss-mode" data-mode="sheet">
+                <label for="opt-every">Keep every</label>
+                <select id="opt-every" class="select-clean">
+                  <option value="1" selected>frame</option>
+                  <option value="2">2nd frame</option>
+                  <option value="3">3rd frame</option>
+                  <option value="4">4th frame</option>
+                </select>
+              </div>
+              <div class="control-item ss-mode" data-mode="sheet">
+                <label for="opt-bg">Sheet background</label>
+                <select id="opt-bg" class="select-clean">
+                  <option value="transparent" selected>Transparent</option>
+                  <option value="#ffffff">White</option>
+                  <option value="#000000">Black</option>
+                  <option value="#ff00ff">Magenta key</option>
+                </select>
+              </div>
+              <div class="control-item">
+                <label for="opt-scale">Scale (nearest-neighbour)</label>
+                <select id="opt-scale" class="select-clean">
+                  <option value="1" selected>1×</option>
+                  <option value="2">2×</option>
+                  <option value="3">3×</option>
+                  <option value="4">4×</option>
+                  <option value="0.5">½×</option>
+                </select>
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Use Sprite Sheet Studio in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Drop a sheet or an animation</h3>
+              <p class="step-desc">A static PNG / JPG / WebP is treated as a sprite sheet; an animated GIF, APNG or WebP is split into frames. For a sheet, press <strong>Auto</strong> to detect the grid from the gutters, or type columns × rows — the overlay shows exactly which cells will be used. Click a cell to skip it.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Tune the animation or layout</h3>
+              <p class="step-desc">Sheet → animation: set the speed, frame order, loop, ping-pong and scale (nearest-neighbour keeps pixel art crisp) and watch the live preview. Animation → sheet: choose a near-square grid, a fixed column count or a single strip, padding, spacing and background.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Build and export</h3>
+              <p class="step-desc">Press <strong>Build</strong>. Animations download as GIF, APNG (lossless with alpha) or a ZIP of PNG frames. Sheets download as PNG, with one-click <code>metadata.json</code> (frame rectangles and delays for Phaser, Godot, Unity, PixiJS) and <code>sprite.css</code> (a <code>steps()</code> keyframe animation).</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Sprite Sheet Studio — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>How does Auto grid detection work?</summary>
+              <p>It looks for fully transparent (or solid background-coloured) columns and rows that separate the sprites and counts the content runs between them. Uniform sheets with gutters are detected exactly; tightly packed sheets fall back to a square-cell guess, which you can correct by typing columns × rows. Irregular texture atlases with mixed sizes are not supported — use their JSON instead.</p>
+            </details>
+            <details class="faq-item">
+              <summary>GIF or APNG?</summary>
+              <p>GIF is universal but limited to 256 colours and 1-bit transparency, so soft edges get jagged. APNG keeps full 24-bit colour and 8-bit alpha, loses nothing, and plays in every modern browser, Discord, Slack and iMessage — the better choice for pixel art and UI stickers. Choose GIF only where APNG is not accepted (some chat apps, older email clients).</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why do my pixels look blurry / crisp?</summary>
+              <p>Scaling uses nearest-neighbour sampling, so 2× / 3× / 4× keeps pixel art razor sharp. ½× halves the size and will soften detail — it is meant for photo-style frames, not pixel art.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What is in metadata.json and sprite.css?</summary>
+              <p>The JSON lists the sheet size, frame size, columns, rows, padding and every frame’s x, y, width, height and delay in milliseconds — enough to import into Phaser, PixiJS, Godot or Unity, or to write your own loader. The CSS animates a <code>div</code> with <code>background-position</code> in <code>steps()</code>, with keyframe percentages that follow the original per-frame delays.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is there a size limit?</summary>
+              <p>Files up to 50 MB. Sheets wider or taller than 8,192 px are flagged — many GPUs and engines refuse textures above that; switch to more rows, a smaller scale or “keep every 2nd frame”.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is anything uploaded?</summary>
+              <p>No. Decoding, slicing, scaling and encoding all run in your browser; the ZIP library and GIF encoder are static scripts. Your sprites never leave your device.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="media"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=4.5"></script>
+  <script src="/scripts/tool-common.js?v=1.1"></script>
+  <script src="/scripts/gif-common.js?v=1.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js" defer></script>
+  <script src="/media/sprite-sheet-studio/sprite-sheet-studio.js?v=1.0"></script>
+</body>
+</html>

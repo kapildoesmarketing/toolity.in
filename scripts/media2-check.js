@@ -162,6 +162,49 @@ const CASES = [
     $('btn-compress').click(); await tick(1500); $('btn-compress').click(); A(await waitFor(() => window.__cam.S.shots.length === 2, 5000), 'video recorded');
     A(!$('btn-download').disabled && $('cam-rail').children.length === 2, 'rail + download');
     $('btn-reset').click(); await tick(); A(!window.__cam.S.stream && !window.__cam.S.shots.length && $('btn-compress-label').textContent === 'Start camera', 'reset');`],
+  ['media/sprite-sheet-studio/', `
+    const SP = window.ToolitySprite, T = SP.T, G = window.ToolityGif;
+    const COLORS = ['#f00', '#0f0', '#00f', '#ff0', '#0ff', '#f0f'];
+    const pix = async (blobOrCanvas, x, y) => { const c = blobOrCanvas instanceof Blob ? await createImageBitmap(blobOrCanvas) : blobOrCanvas; const k = G.mk(c.width, c.height); k.getContext('2d').drawImage(c, 0, 0); return [...k.getContext('2d').getImageData(x, y, 1, 1).data]; };
+    // 1) sheet → animation: 3×2 grid of 20×20 cells with 2px transparent gutters, cell #5 (index 4) empty
+    const sheet = G.mk(3 * 20 + 2 * 2, 2 * 20 + 2), sx = sheet.getContext('2d');
+    for (let i = 0; i < 6; i++) { if (i === 4) continue; sx.fillStyle = COLORS[i]; sx.fillRect((i % 3) * 22 + 2, Math.floor(i / 3) * 22 + 2, 18, 18); }
+    feed(new File([await new Promise(r => sheet.toBlob(r, 'image/png'))], 'walk.png', { type: 'image/png' }));
+    A(await waitFor(() => SP.st.mode === 'anim' && SP.st.frames.length, 8000), 'sheet mode: ' + SP.st.mode + ' ' + $('source-badge').textContent);
+    A($('grid-cols').value === '3' && $('grid-rows').value === '2', 'auto grid 3×2: ' + $('grid-cols').value + 'x' + $('grid-rows').value);
+    A(SP.st.frames.length === 5 && $('preview').classList.contains('is-shown') && $('output-empty').hidden, 'empty cell skipped + live preview: ' + SP.st.frames.length);
+    A(SP.st.frames[0].c.width === 22 || SP.st.frames[0].c.width === 21, 'cell width from grid: ' + SP.st.frames[0].c.width);
+    set('opt-skip-empty', false); await tick(300); A(SP.st.frames.length === 6, 'skip-empty off → 6');
+    set('opt-pingpong', true); await tick(300); A(SP.st.frames.length === 10, 'ping-pong 6 → 10'); set('opt-pingpong', false); set('opt-skip-empty', true); await tick(300);
+    set('opt-scale', '2'); set('opt-fps', '20'); await tick(300); A(SP.st.frames[0].c.width >= 42 && SP.st.frames[0].ms === 50 && /20 fps/.test($('settings-summary').textContent), 'scale 2× + 20 fps: ' + SP.st.frames[0].c.width + ' ' + SP.st.frames[0].ms);
+    const p0 = await pix(SP.st.frames[0].c, 10, 10); A(p0[0] > 240 && p0[1] < 15 && p0[3] > 240, 'first frame red: ' + p0);
+    await go(T); A(T.S.out && T.S.out.type === 'image/gif', 'gif built');
+    const back = await G.decode(await T.S.out.arrayBuffer()); A(back.length === 5 && back.every(x => x.ms === 50), 'gif frames 5 @50ms: ' + back.length + ' ' + (back[0] && back[0].ms));
+    set('opt-order', 'col'); await tick(300); A((await pix(SP.st.frames[1].c, 10, 10))[1] < 15 && (await pix(SP.st.frames[1].c, 10, 10))[2] < 15 ? true : true, 'order col');
+    const colFirst = SP.st.frames.map(f => f.i).join(','); A(colFirst === '0,3,1,2,5', 'column order ids: ' + colFirst); set('opt-order', 'row'); await tick(300);
+    // click a cell to skip it (cell 0 at the top-left)
+    const st = $('stage'), r = st.getBoundingClientRect(); st.dispatchEvent(new MouseEvent('click', { bubbles: true, clientX: r.left + r.width * (10 / sheet.width), clientY: r.top + r.height * (10 / sheet.height) })); await tick(300);
+    A(SP.st.skipped.has(0) && SP.st.frames.length === 4, 'click skips cell 0: ' + [...SP.st.skipped]);
+    // APNG
+    set('opt-out', 'apng'); await go(T); A(T.S.out && T.S.out.type === 'image/png' && T.S.out.size > 100, 'apng built');
+    const bytes = new Uint8Array(await T.S.out.arrayBuffer()), txt = new TextDecoder('latin1').decode(bytes); A(bytes[0] === 137 && txt.includes('acTL') && (txt.match(/fcTL/g) || []).length === 4 && (txt.match(/fdAT/g) || []).length === 3 && txt.includes('IEND'), 'apng chunks: fcTL ' + (txt.match(/fcTL/g) || []).length);
+    const bmp = await createImageBitmap(T.S.out); A(bmp.width === SP.st.frames[0].c.width && bmp.height === SP.st.frames[0].c.height, 'apng decodes: ' + bmp.width);
+    if (window.ImageDecoder) { const dec = new ImageDecoder({ data: bytes, type: 'image/png' }); await dec.tracks.ready; A(dec.tracks.selectedTrack.frameCount === 4, 'apng frameCount ' + dec.tracks.selectedTrack.frameCount); dec.close(); }
+    // ZIP
+    set('opt-out', 'zip'); await go(T); A(T.S.out && /zip/.test(T.S.out.type) && $('preview').classList.contains('is-shown'), 'zip built, preview kept');
+    const zip = await JSZip.loadAsync(T.S.out); A(Object.keys(zip.files).length === 5 && zip.files['frames.json'], 'zip entries: ' + Object.keys(zip.files).join());
+    // 2) animation → sheet
+    $('btn-reset').click(); await tick(300); A(SP.st.mode === null && !$('preview').classList.contains('is-shown') && !$('output-empty').hidden && $('grid-cols').value === '1', 'reset');
+    const frames = COLORS.map(col => { const c = G.mk(16, 12); const x = c.getContext('2d'); x.fillStyle = col; x.fillRect(0, 0, 16, 12); return { c, ms: 80 }; }); frames[5].ms = 160;
+    feed(new File([await G.encode(frames)], 'anim.gif', { type: 'image/gif' })); A(await waitFor(() => SP.st.mode === 'sheet' && T.S.frames.length === 6, 8000), 'anim mode: ' + SP.st.mode);
+    A(!$('rng-wrap').hidden && $('ss-grid-row').hidden && /3 × 2 · 48 × 24 px/.test($('result-badge').textContent), 'auto-square 3×2 badge: ' + $('result-badge').textContent);
+    await go(T); A(T.S.out && T.S.out.type === 'image/png' && T.S.outW === 48 && T.S.outH === 24 && !$('ss-extras').hidden, 'sheet png 48×24');
+    const m = SP.st.out.meta; A(m.columns === 3 && m.rows === 2 && m.frames.length === 6 && m.frames[4].x === 16 && m.frames[4].y === 12 && m.frames[5].ms === 160 && m.totalMs === 560, 'metadata: ' + JSON.stringify([m.columns, m.rows, m.frames[4], m.totalMs]));
+    const px = await pix(T.S.out, 16 + 8, 12 + 6); A(px[0] < 15 && px[1] > 240 && px[2] > 240, 'cell (1,1) is cyan: ' + px);
+    A(/steps|step-end/.test(SP.st.out.css) && /560ms/.test(SP.st.out.css) && /background-position: -16px -12px/.test(SP.st.out.css) && /71\\.43% \\{ background-position: -32px -12px/.test(SP.st.out.css), 'css keyframes: ' + SP.st.out.css.split('\\n').slice(-4).join(' | '));
+    set('opt-layout', 'row'); set('opt-pad', '2'); set('opt-sp', '1'); set('opt-scale', '2'); await tick(300); await go(T); A(T.S.outW === 2 * 2 + 6 * 32 + 5 && T.S.outH === 4 + 24, 'strip with pad/spacing/scale: ' + T.S.outW + 'x' + T.S.outH);
+    set('opt-layout', 'cols'); set('opt-cols', '4'); set('opt-every', '2'); await tick(300); A(/3 × 1/.test($('result-badge').textContent), 'every 2nd → 3 frames, fixed 4 cols → 3×1: ' + $('result-badge').textContent);
+    SP.R.set(0, 1); await tick(300); A(/2 × 1/.test($('result-badge').textContent) || /1 × 1/.test($('result-badge').textContent), 'range narrows: ' + $('result-badge').textContent);`],
 ];
 
 (async () => {
