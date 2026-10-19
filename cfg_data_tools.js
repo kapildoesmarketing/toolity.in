@@ -259,5 +259,70 @@ module.exports = [
               </div>`,
     guide: [['Load your data', 'Drop one or more CSV, TSV or JSON files — each becomes a table named after the file (<code>sales.csv</code> → <code>sales</code>), listed with its columns and detected types. Or paste data to get a table called <code>pasted</code>. Click a table or column name to insert it into the query.'], ['Write SQL and run', 'Any SQLite query works: <code>WHERE</code>, <code>GROUP BY</code>, <code>JOIN</code> across files, <code>WITH</code> CTEs, window functions like <code>ROW_NUMBER() OVER (…)</code>, date functions, even <code>CREATE TABLE … AS SELECT</code>. Press <strong>Run query</strong> or Ctrl/⌘ + Enter.'], ['Export the result', 'Download the result as CSV or JSON, or export every loaded table as one SQLite <code>.db</code> file to open later in DB Browser, DBeaver or Python. Copy puts the result on the clipboard as CSV.']],
     faq: [['Which SQL dialect is this?', 'SQLite, running as WebAssembly (<a href="https://sql.js.org" target="_blank" rel="noopener">sql.js</a>) inside your browser — the same engine inside every phone and browser. Joins, subqueries, CTEs, window functions, <code>GROUP_CONCAT</code>, <code>strftime</code> and JSON functions are all available; <code>LIMIT</code> works, <code>TOP</code> does not. The engine (about 1 MB) downloads once, when you run your first query.'], ['How are column types decided?', 'Each CSV column that contains only numbers becomes <code>INTEGER</code> or <code>REAL</code>, so <code>SUM</code>, <code>AVG</code> and numeric sorting behave; everything else stays <code>TEXT</code>. Empty cells become <code>NULL</code> in numeric columns and empty strings in text columns. Untick “Detect numbers” to keep everything as text (useful for ZIP / PIN codes with leading zeros). JSON keeps its own numbers and strings.'], ['Can I join two files?', 'Yes — load both, then <code>SELECT … FROM orders o JOIN customers c ON c.id = o.customer_id</code>. Table names come from the file names (lower-cased, non-letters replaced by underscores); a second file with the same name gets a <code>_2</code> suffix. Column names with spaces need double quotes: <code>"Order Date"</code>.'], ['How big can the files be?', 'Up to 50 MB per file. Everything lives in your tab’s memory, so a few hundred thousand rows are fine; multi-million-row files will be slow to load. The result table shows up to the number of rows you choose in Settings, while downloads always include every row — add a <code>LIMIT</code> if a query returns more than you need.'], ['What JSON shapes are accepted?', 'An array of objects (<code>[{"id":1,"name":"Ada"}, …]</code>) — each key becomes a column, and keys missing from some objects are <code>NULL</code> there. An object with a <code>data</code> array is unwrapped. Nested objects and arrays are stored as JSON text, which you can query with SQLite’s <code>json_extract()</code>.'], PRIVACY_FAQ]
+  },
+  {
+    slug: 'date-calculator', name: 'Date Calculator', icon: 'lucide:calendar-days', section: 'Converters', split: '40/60', css: true,
+    desc: 'Free online date calculator: days between two dates, add or subtract days, weeks, months and years, count working days with your own holiday list, and work out an exact age on any date. Runs in your browser — nothing is sent anywhere.',
+    lead: 'Days between dates, add or subtract time, working days with custom holidays, and exact age — all in one place.',
+    cardDesc: 'Difference between dates, add/subtract, working days with holidays, age.',
+    tags: ['date', 'calculator', 'days between', 'date difference', 'add days', 'subtract days', 'working days', 'business days', 'holidays', 'age calculator', 'duration', 'weeks', 'countdown', 'iso week'],
+    sourceLabel: 'Dates', outputLabel: 'Result', outputIcon: 'lucide:calendar-days', outputEmpty: 'Pick dates to see the result', idle: 'Pick a date',
+    downloads: [['txt', 'Text (.txt)', 'lucide:file-text'], ['json', 'JSON (.json)', 'lucide:braces']],
+    sourceHtml: `
+                <div class="form-group">
+                  <span class="form-label"><span>Calculate</span></span>
+                  <div class="segmented-group segmented-group-pill" id="seg-mode" role="group" aria-label="Calculation">
+                    <button type="button" class="seg-pill active" data-value="diff">Difference</button>
+                    <button type="button" class="seg-pill" data-value="add">Add / Subtract</button>
+                    <button type="button" class="seg-pill" data-value="work">Working days</button>
+                    <button type="button" class="seg-pill" data-value="age">Age</button>
+                  </div>
+                </div>
+                <div class="web-group" id="pane-diff">
+                  <div class="web-convert-row web-convert-row-2">
+                    <div class="form-group"><label class="form-label" for="diff-a"><span>From</span></label><input type="datetime-local" id="diff-a" class="input-clean"></div>
+                    <div class="form-group"><label class="form-label" for="diff-b"><span>To</span></label><input type="datetime-local" id="diff-b" class="input-clean"></div>
+                  </div>
+                </div>
+                <div class="web-group" id="pane-add" hidden>
+                  <div class="form-group"><label class="form-label" for="add-start"><span>Start</span><span class="form-label-desc">leave empty for now</span></label><input type="datetime-local" id="add-start" class="input-clean"></div>
+                  <div class="form-group">
+                    <span class="form-label"><span>Direction</span></span>
+                    <div class="segmented-group segmented-group-pill" id="seg-dir" role="group" aria-label="Direction">
+                      <button type="button" class="seg-pill active" data-value="add">Add</button>
+                      <button type="button" class="seg-pill" data-value="sub">Subtract</button>
+                    </div>
+                  </div>
+                  <div class="dc-units">${[['years', 'Years'], ['months', 'Months'], ['weeks', 'Weeks'], ['days', 'Days'], ['hours', 'Hours'], ['minutes', 'Minutes']].map(([k, l]) => `
+                    <div class="form-group"><label class="form-label" for="add-${k}"><span>${l}</span></label><input type="number" id="add-${k}" class="input-clean" min="0" step="1" placeholder="0" inputmode="numeric"></div>`).join('')}
+                  </div>
+                </div>
+                <div class="web-group" id="pane-work" hidden>
+                  <div class="form-group"><label class="form-label" for="work-start"><span>Start date</span></label><input type="date" id="work-start" class="input-clean"></div>
+                  <div class="web-convert-row web-convert-row-2">
+                    <div class="form-group"><label class="form-label" for="work-end"><span>End date</span></label><input type="date" id="work-end" class="input-clean"></div>
+                    <div class="form-group"><label class="form-label" for="work-n"><span>…or working days to add</span></label><input type="number" id="work-n" class="input-clean" min="-10000" max="10000" step="1" placeholder="e.g. 10" inputmode="numeric"></div>
+                  </div>
+                  <div class="form-group"><label class="form-label" for="work-holidays"><span>Holidays</span><span class="form-label-desc">one date per line, any common format</span></label><textarea id="work-holidays" class="textarea-clean" rows="4" placeholder="2026-10-20&#10;25 Dec 2026&#10;01/26/2027" spellcheck="false"></textarea></div>
+                </div>
+                <div class="web-group" id="pane-age" hidden>
+                  <div class="web-convert-row web-convert-row-2">
+                    <div class="form-group"><label class="form-label" for="age-dob"><span>Date of birth</span></label><input type="date" id="age-dob" class="input-clean"></div>
+                    <div class="form-group"><label class="form-label" for="age-on"><span>Age on</span><span class="form-label-desc">empty = today</span></label><input type="date" id="age-on" class="input-clean"></div>
+                  </div>
+                </div>`,
+    outputHtml: `
+                  <div class="dc-headline" id="output-headline"></div>
+                  <div class="web-grid-2" id="output-stats"></div>
+                  <div class="web-table-wrap"><table class="web-table" id="output-table"><tbody></tbody></table></div>`,
+    settingsSummary: 'Sat–Sun weekend · end day excluded',
+    settings: `
+              <div class="control-item">
+                <label for="opt-weekend">Weekend</label>
+                <select id="opt-weekend" class="select-clean">${opts([['60', 'Saturday & Sunday'], ['56', 'Friday & Saturday'], ['5', 'Friday only'], ['0', 'Sunday only'], ['', 'No weekend (every day counts)']], '60')}</select>
+              </div>
+              <div class="control-item"><input type="checkbox" id="opt-inclusive"><label for="opt-inclusive">Include the end day (difference & working days)</label></div>`,
+    guide: [['Pick what to calculate', '<strong>Difference</strong> for the gap between two moments, <strong>Add / Subtract</strong> to move a date by years, months, weeks, days, hours or minutes, <strong>Working days</strong> to count or add business days around your own holiday list, and <strong>Age</strong> for an exact age on any date.'], ['Enter the dates', 'Type or pick dates; results update as you type. Leave <em>Start</em> or <em>Age on</em> empty to use right now. Holidays accept one date per line in almost any format (ISO, 25 Dec 2026, 12/25/2026).'], ['Copy or download', 'The result card shows the headline number plus breakdowns — total days, weeks, hours, ISO week, day of year and more. Copy everything as text or download as text or JSON.']],
+    faq: [['How is “1 month” counted when adding?', 'Calendar-wise, the way people expect: 31 Jan + 1 month = 28 Feb (or 29 in a leap year), not 3 March. The day is clamped to the last day of the target month, and years follow the same rule for 29 Feb.'], ['Why do years/months/days and total days differ?', 'The breakdown walks the calendar (whole years, then whole months, then the leftover days), so month lengths matter. <em>Total days</em> is the exact number of 24-hour days between the two moments. Both are correct — they answer different questions.'], ['Which days count as working days?', 'Every day except the weekend pattern you choose in Settings and the dates in your holiday list. Weekends and holidays that overlap are counted once. “Working days to add” skips non-working days and lands on a working day; negative numbers go backwards.'], ['Are daylight-saving changes handled?', 'Yes. Dates are interpreted in your device’s local time zone, so a 23- or 25-hour day on a DST switch shows up correctly in the hours total while the day count stays whole.'], ['What does the ISO week mean?', 'ISO 8601 weeks start on Monday and week 1 is the week containing the year’s first Thursday — the numbering used across Europe and in most project tools. The tool also shows the day of the year (1–366).'], PRIVACY_FAQ]
   }
 ];

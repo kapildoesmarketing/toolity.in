@@ -1,0 +1,8 @@
+/* Date Calculator — headline result and the six-field amount grid. */
+.dc-headline { display: flex; flex-direction: column; gap: 0.25rem; padding: 0.9rem 1rem; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); min-width: 0; }
+.dc-headline strong { font-size: 1.35rem; font-weight: 700; letter-spacing: -0.01em; color: var(--text-primary); overflow-wrap: anywhere; }
+.dc-headline span { color: var(--text-muted); font-size: 0.8rem; }
+.dc-headline:empty { display: none; }
+.dc-units { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.5rem; min-width: 0; }
+@container (max-width: 360px) { .dc-units { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+#pane-diff[hidden], #pane-add[hidden], #pane-work[hidden], #pane-age[hidden], .web-table-wrap[hidden] { display: none; }
