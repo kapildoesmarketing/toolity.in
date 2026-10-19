@@ -344,6 +344,116 @@ const HANDY_TOOLS = [
               </div>${CHECK('opt-context', 'Include "@context": "https://schema.org"', true)}${CHECK('opt-id', 'Add an @id based on the URL field', false)}`,
     guide: [['Choose the type', 'Article for posts, Product for shop pages, FAQ and How-to for help content, Event, Local Business, Recipe, Video, Job posting, Breadcrumbs, Website (adds the sitelinks search box), Organization or Person. The form changes to the fields that type needs; required ones are marked.'], ['Fill it in', 'Repeatable sections (FAQ questions, How-to steps, breadcrumb items) have Add / remove buttons. Dates use the picker (ISO 8601 comes out), prices and ratings are checked for range, URLs must be absolute. Warnings appear above the code as you type.'], ['Paste and test', 'Copy the <code>&lt;script type="application/ld+json"&gt;</code> block into your page’s <code>&lt;head&gt;</code> (or before <code>&lt;/body&gt;</code>), publish, then test the live URL in Google’s Rich Results Test. One block per entity — repeat for other types on the same page.']],
     faq: [['Which types can show rich results in Google?', 'Article, Product, FAQ, How-to, Event, Local Business, Recipe, Video, Job posting and Breadcrumbs are all documented Google rich-result types (eligibility rules change — FAQ rich results, for example, are now limited to authoritative government and health sites). Organization, Person and Website feed the Knowledge Panel and sitelinks search box rather than a visible snippet.'], ['Do I need every field?', 'Only the ones marked required — those are what Google lists as required for the rich result. Recommended fields raise the chance of a richer display; leave the rest blank and they are simply omitted from the output.'], ['Where exactly does the code go?', 'Anywhere in the HTML, but <code>&lt;head&gt;</code> is conventional. JSON-LD does not need to wrap visible content, unlike Microdata, which is why Google recommends it. If your CMS has a “custom head code” field, paste it there.'], ['Can I combine several types in one script?', 'Yes — put them in a JSON array or an <code>@graph</code>. This tool outputs one entity at a time to keep the form manageable; generate each, then combine. Reference one from another with the <code>@id</code> option (e.g. an Article’s publisher pointing at your Organization).'], ['Why does my FAQ schema not show up?', 'Since 2023 Google shows FAQ rich results only for well-known authoritative sites, and How-to results only on desktop. Valid markup is still useful for other search engines and AI assistants, but do not expect the dropdown in Google for a typical site.'], PRIVACY_FAQ]
+  },
+  {
+    slug: 'utm-link-builder', name: 'UTM Link Builder', icon: 'lucide:link-2', section: 'Generators & Links', split: '50/50', css: true, libs: ['qr'],
+    desc: 'Free online UTM link builder: add utm_source, utm_medium, utm_campaign, utm_term, utm_content and custom parameters to any URL, with platform presets, lowercase and space normalisation, saved presets, bulk tagging and a ready QR code. Runs in your browser — nothing is stored on a server.',
+    lead: 'Tag campaign links the consistent way: presets for Google Ads, Meta, LinkedIn and email, saved sources, bulk mode and a QR code for print.',
+    cardDesc: 'Campaign URLs with presets, normalisation, saved sources, bulk and QR.',
+    tags: ['utm', 'utm builder', 'utm link', 'campaign url builder', 'utm_source', 'utm_medium', 'utm_campaign', 'google analytics', 'ga4', 'tracking link', 'bulk utm', 'qr code', 'marketing'],
+    sourceLabel: 'Campaign', outputLabel: 'Tagged link', outputIcon: 'lucide:link-2', outputEmpty: 'Enter a URL and campaign details', idle: 'Enter a URL',
+    downloads: [['txt', 'Link (.txt)', 'lucide:file-text'], ['csv', 'Table (.csv)', 'lucide:table'], ['png', 'QR code (.png)', 'lucide:qr-code']],
+    sourceHtml: `
+                <div class="form-group">
+                  <span class="form-label"><span>Mode</span></span>
+                  <div class="segmented-group segmented-group-pill" id="seg-mode" role="group" aria-label="Mode">
+                    <button type="button" class="seg-pill active" data-value="single">One link</button>
+                    <button type="button" class="seg-pill" data-value="bulk">Bulk</button>
+                  </div>
+                </div>
+                <div class="form-group" id="utm-url-group">
+                  <label class="form-label" for="utm-url"><span>Website URL</span><span class="form-label-desc">existing utm_* are replaced</span></label>
+                  <input type="url" id="utm-url" class="input-clean" placeholder="https://example.com/landing-page" spellcheck="false" autocomplete="off" autocapitalize="off" inputmode="url">
+                </div>
+                <div class="form-group" id="utm-urls-group" hidden>
+                  <label class="form-label" for="utm-urls"><span>URLs — one per line</span><span class="form-label-desc">optionally “url, content” to vary utm_content per line</span></label>
+                  <textarea id="utm-urls" class="textarea-clean" rows="6" placeholder="https://example.com/&#10;https://example.com/pricing, pricing-cta&#10;https://example.com/blog/post, blog-banner" spellcheck="false" autocapitalize="off"></textarea>
+                </div>
+                <div class="form-group">
+                  <span class="form-label"><span>Platform preset</span><span class="form-label-desc">fills source + medium</span></span>
+                  <div class="web-tags utm-presets" role="group" aria-label="Platform presets">${[['google', 'cpc', 'Google Ads'], ['facebook', 'paid_social', 'Meta Ads'], ['instagram', 'social', 'Instagram'], ['linkedin', 'social', 'LinkedIn'], ['x', 'social', 'X'], ['youtube', 'video', 'YouTube'], ['newsletter', 'email', 'Newsletter'], ['whatsapp', 'messaging', 'WhatsApp'], ['partner', 'referral', 'Partner'], ['qr', 'offline', 'Print / QR']].map(([s, m, l]) => `<button type="button" class="web-tag utm-preset" data-source="${s}" data-medium="${m}">${l}</button>`).join('')}</div>
+                </div>
+                <div class="web-convert-row web-convert-row-2">
+                  ${FIELD('utm-source', 'Source *', 'type="text" list="utm-source-list" placeholder="google, newsletter, linkedin" spellcheck="false" autocapitalize="off"', 'where the traffic comes from')}
+                  ${FIELD('utm-medium', 'Medium *', 'type="text" list="utm-medium-list" placeholder="cpc, email, social" spellcheck="false" autocapitalize="off"', 'the channel')}
+                </div>
+                <datalist id="utm-source-list"><option value="google"><option value="bing"><option value="facebook"><option value="instagram"><option value="linkedin"><option value="x"><option value="youtube"><option value="newsletter"><option value="whatsapp"><option value="telegram"><option value="reddit"><option value="partner"><option value="qr"></datalist>
+                <datalist id="utm-medium-list"><option value="cpc"><option value="paid_social"><option value="social"><option value="email"><option value="referral"><option value="display"><option value="video"><option value="affiliate"><option value="messaging"><option value="offline"><option value="organic"></datalist>
+                ${FIELD('utm-campaign', 'Campaign *', 'type="text" placeholder="spring_sale_2026" spellcheck="false" autocapitalize="off"', 'promotion or product name')}
+                <div class="web-convert-row web-convert-row-2">
+                  ${FIELD('utm-term', 'Term', 'type="text" placeholder="running+shoes" spellcheck="false" autocapitalize="off"', 'paid keywords')}
+                  ${FIELD('utm-content', 'Content', 'type="text" placeholder="hero_button" spellcheck="false" autocapitalize="off"', 'A/B variant or placement')}
+                </div>
+                <details class="utm-more">
+                  <summary>More parameters</summary>
+                  <div class="web-convert-row web-convert-row-2">
+                    ${FIELD('utm-id', 'Campaign ID (utm_id)', 'type="text" placeholder="abc.123" spellcheck="false" autocapitalize="off"')}
+                    ${FIELD('utm-source-platform', 'Source platform', 'type="text" placeholder="Search Ads 360" spellcheck="false"')}
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="utm-custom"><span>Custom parameters</span><span class="form-label-desc">key=value, one per line (ref=, fbclid=, gclid=…)</span></label>
+                    <textarea id="utm-custom" class="textarea-clean" rows="2" placeholder="ref=partner42&#10;promo=SPRING" spellcheck="false" autocapitalize="off"></textarea>
+                  </div>
+                </details>
+                <div class="form-group">
+                  <span class="form-label"><span>Saved presets</span><span class="form-label-desc">kept on this device only</span></span>
+                  <div class="web-inline">
+                    <select id="utm-saved" class="select-clean" aria-label="Load a saved preset"><option value="">Load a saved preset…</option></select>
+                    <button type="button" class="btn-toolbar-sm" id="btn-save-preset" title="Save source, medium, campaign, term and content under a name"><iconify-icon icon="lucide:bookmark-plus" width="14" height="14"></iconify-icon><span>Save</span></button>
+                    <button type="button" class="btn-toolbar-sm" id="btn-del-preset" title="Delete the selected preset" disabled><iconify-icon icon="lucide:trash-2" width="14" height="14"></iconify-icon></button>
+                  </div>
+                </div>`,
+    outputHtml: `
+                  <button type="button" class="utm-final" id="output-final" title="Click to copy"></button>
+                  <div class="web-tags" id="output-flags"></div>
+                  <div class="utm-result-grid">
+                    <div class="web-table-wrap"><table class="web-table" id="output-params"><tbody></tbody></table></div>
+                    <canvas id="output-qr" class="utm-qr" width="160" height="160" aria-label="QR code of the tagged link"></canvas>
+                  </div>
+                  <div class="web-table-wrap" id="output-bulk-wrap" hidden><table class="web-table utm-bulk" id="output-bulk"><thead><tr><th>#</th><th>Tagged link</th></tr></thead><tbody></tbody></table></div>`,
+    settingsSummary: 'lowercase · spaces → _ · keep #fragment',
+    settings: `${CHECK('opt-lower', 'Lowercase all values (GA4 treats “Google” and “google” as different sources)', true)}
+              <div class="control-item">
+                <label for="opt-space">Replace spaces with</label>
+                <select id="opt-space" class="select-clean">${OPTS([['_', 'underscore _'], ['-', 'hyphen -'], ['%20', 'keep (encoded %20)'], ['+', 'plus +']], '_')}</select>
+              </div>${CHECK('opt-strip', 'Remove existing utm_* and click IDs (gclid, fbclid…) from the pasted URL', true)}${CHECK('opt-fragment', 'Keep the #fragment at the end', true)}${CHECK('opt-qr', 'Show a QR code for the link', true)}`,
+    guide: [['Paste the destination', 'Enter the landing-page URL. Existing utm_* tags and click IDs are stripped (toggle in Settings) so you never double-tag. Pick a platform preset to fill source and medium with the conventional values, or type your own — the suggestions follow GA4’s default channel grouping.'], ['Name the campaign', 'Source, medium and campaign are required; term and content are optional. Values are lower-cased and spaces are replaced so “Spring Sale” and “spring_sale” don’t split your reports. Save a frequently used combination as a preset — it stays in this browser only.'], ['Copy, QR or bulk', 'Click the big link to copy it. The QR code is ready for posters and packaging (download as PNG). Switch to <strong>Bulk</strong> to tag many URLs at once — one per line, optionally with a different utm_content — and download the table as CSV.']],
+    faq: [['Which parameters does Google Analytics read?', '<code>utm_source</code>, <code>utm_medium</code> and <code>utm_campaign</code> are the core three (GA4 needs source and medium to attribute a session). <code>utm_term</code> and <code>utm_content</code> add keyword and creative detail; <code>utm_id</code> and <code>utm_source_platform</code> are newer GA4 fields used with cost-data imports. Custom parameters are passed through for your own tooling but GA ignores them unless you register them.'], ['What should I put in medium?', 'Use the values GA4 maps to channels automatically: <code>cpc</code> or <code>paid_search</code> for paid search, <code>paid_social</code> for paid social, <code>social</code> for organic social posts, <code>email</code>, <code>referral</code>, <code>display</code>, <code>video</code>, <code>affiliate</code>. The presets follow that list; inventing new words lands traffic in “Unassigned”.'], ['Why lowercase everything?', 'Analytics tools are case-sensitive: <code>Newsletter</code> and <code>newsletter</code> become two rows. Lower-casing and replacing spaces with underscores keeps every report tidy. Turn it off in Settings if your team has a different convention.'], ['Where are saved presets stored?', 'In your browser’s localStorage — never on a server. They survive reloads on this device and browser only; clearing site data removes them. A preset stores source, medium, campaign, term and content, not the URL, so one “Newsletter” preset works for every link you send.'], ['Can I tag many links at once?', 'Yes — Bulk mode accepts one URL per line and applies the same source, medium and campaign to each. Add a comma and a value after a URL to set a per-line <code>utm_content</code> (e.g. <code>https://example.com/pricing, pricing-cta</code>). The CSV download lists the original URL, every parameter and the final link.'], PRIVACY_FAQ]
+  },
+  {
+    slug: 'qr-barcode-scanner', name: 'QR & Barcode Scanner', icon: 'lucide:scan-line', section: 'Generators & Links', split: '50/50', css: true,
+    desc: 'Free online QR code and barcode scanner: read QR, EAN, UPC, Code 128, Code 39, Data Matrix, PDF417 and more from your camera, an image file, a screenshot or the clipboard. Wi-Fi, vCard, UPI, links and events are decoded into one-tap actions. Runs in your browser — images never leave your device.',
+    lead: 'Point your camera or drop a screenshot — QR codes and barcodes are decoded on your device, with one-tap actions for links, Wi-Fi, contacts and UPI.',
+    cardDesc: 'Scan QR and barcodes from camera, image or clipboard — links, Wi-Fi, vCard, UPI.',
+    tags: ['qr scanner', 'qr code reader', 'barcode scanner', 'barcode reader', 'scan qr from image', 'scan screenshot', 'ean', 'upc', 'code 128', 'data matrix', 'pdf417', 'wifi qr', 'vcard', 'upi qr', 'camera'],
+    sourceLabel: 'Scan', outputLabel: 'Results', outputIcon: 'lucide:scan-line', outputEmpty: 'Decoded codes appear here', idle: 'Open an image or start the camera',
+    file: { accept: 'image/*', multiple: true },
+    downloads: [['txt', 'Latest result (.txt)', 'lucide:file-text'], ['csv', 'All results (.csv)', 'lucide:table'], ['json', 'All results (.json)', 'lucide:braces']],
+    sourceHtml: `
+                <p class="web-muted qs-hint">or paste a screenshot with <kbd>Ctrl</kbd>/<kbd>⌘</kbd>+<kbd>V</kbd></p>
+                <div class="qs-stage" id="qs-stage">
+                  <video id="cam-video" class="qs-video" autoplay playsinline muted hidden></video>
+                  <canvas id="img-canvas" class="qs-image" hidden aria-label="Scanned image"></canvas>
+                  <canvas id="qs-overlay" class="qs-overlay" hidden aria-hidden="true"></canvas>
+                  <div class="qs-stage-empty" id="qs-stage-empty"><iconify-icon icon="lucide:camera" width="28" height="28"></iconify-icon><span>Camera preview or image</span></div>
+                </div>
+                <div class="qs-camrow">
+                  <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-cam"><iconify-icon icon="lucide:camera" width="14" height="14"></iconify-icon><span>Start camera</span></button>
+                  <select id="cam-select" class="select-clean" aria-label="Camera" hidden></select>
+                  <button type="button" class="btn-toolbar-sm" id="btn-torch" title="Torch" aria-label="Toggle torch" hidden><iconify-icon icon="lucide:flashlight" width="14" height="14"></iconify-icon></button>
+                  <button type="button" class="btn-toolbar-sm" id="btn-rescan" hidden><iconify-icon icon="lucide:refresh-cw" width="14" height="14"></iconify-icon><span>Scan again</span></button>
+                </div>
+                <p class="web-muted" id="qs-status"></p>`,
+    outputHtml: `
+                  <div class="qs-results" id="output-results"></div>`,
+    settingsSummary: 'All formats · beep on · auto-pause',
+    settings: `
+              <div class="control-item">
+                <label for="opt-formats">Formats to look for</label>
+                <select id="opt-formats" class="select-clean">${OPTS([['all', 'All (QR, 1D barcodes, Data Matrix, PDF417, Aztec)'], ['qr', 'QR codes only (faster)'], ['1d', '1D retail / logistics barcodes only'], ['2d', '2D codes only (QR, Data Matrix, Aztec, PDF417)']], 'all')}</select>
+              </div>${CHECK('opt-beep', 'Beep when a code is found', true)}${CHECK('opt-pause', 'Pause the camera after a successful scan', true)}${CHECK('opt-dedupe', 'Ignore repeats of a code already in the list', true)}`,
+    guide: [['Choose a source', 'Click <strong>Start camera</strong> (the back camera is preferred on phones — switch cameras or turn on the torch from the row below the preview), or <strong>Open file</strong>, drop an image, or paste a screenshot straight from the clipboard. Several images can be dropped at once.'], ['Read the result', 'Every code found is listed with its format and content. Links open in a new tab, Wi-Fi codes show the network and password, vCard / MeCard become a downloadable contact, UPI codes show payee and amount, calendar events save as .ics, and phone / SMS / email codes get the right button.'], ['Copy or export', 'Copy any single result, or download the latest as text and the whole session as CSV / JSON. Nothing is stored — reload the page and the list is gone.']],
+    faq: [['Which codes can it read?', 'QR Code, Micro QR, Data Matrix, Aztec, PDF417, and the 1D families EAN-13 / EAN-8, UPC-A / UPC-E, Code 128, Code 39, Code 93, Codabar, ITF and DataBar. The browser’s own <code>BarcodeDetector</code> is used when available (Chrome on Android / macOS, Safari); elsewhere the ZXing library is loaded as WebAssembly (about 1 MB, once) and decodes on your device.'], ['Why does the camera not start?', 'Camera access needs a secure page (https) and your permission — look for the camera icon in the address bar. On iPhone, Safari and Chrome both work; inside some in-app browsers (Instagram, Facebook) the camera API is blocked, so open the page in the real browser. If you have no camera, use a file or paste a screenshot.'], ['The code is in a photo but nothing is found — what helps?', 'Crop so the code fills more of the frame, make sure it is in focus and not glaring, and keep some light margin around it. Tiny codes in a full-page screenshot can be below the decoder’s minimum size — zoom in and take the screenshot again. Inverted (white-on-black) 1D barcodes are not read.'], ['Is the scanned content safe to open?', 'The decoder only reads text; nothing runs. Links are shown in full before you open them, and they open in a new tab with <code>noopener</code>. Treat QR codes on posters like any unknown link — check the domain first.'], ['Does anything get uploaded or saved?', 'No. Frames and images are decoded in your browser and never sent anywhere; results live in the page only until you reload or press Reset. The ZXing fallback is a static file fetched from a CDN, it receives no image data.'], ['Can it read a Wi-Fi or UPI code and connect or pay?', 'It shows the network name, security type and password (with a copy button) — browsers cannot join Wi-Fi for you. UPI codes show the payee and amount with an <em>Open</em> button that hands the <code>upi://</code> link to an installed payment app on Android.']]
   }
 ];
 
