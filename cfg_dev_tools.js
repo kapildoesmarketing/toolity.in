@@ -303,5 +303,123 @@ module.exports = [
               </div>`,
     guide: [['Hash text or a file', 'Type text or drop any file (up to 50 MB) — MD5, SHA-1, SHA-256, SHA-384 and SHA-512 are computed at once with the browser’s Web Crypto. Add an HMAC key to get keyed hashes; paste an expected checksum into <strong>Verify against</strong> and the matching algorithm lights up green (or red).'], ['Generate IDs', 'Switch to <strong>IDs</strong>: UUID v4 for random identifiers, UUID v7 or ULID when you want them to sort by creation time, nanoid for short URL-safe tokens, or a numeric code. Set how many (up to 1,000) and the format; paste a v7 / ULID into the decode box to read its timestamp.'], ['Copy or export', 'Click any row to copy that value, or use Copy for all of them. Download as text, JSON or CSV.']],
     faq: [['Is MD5 safe to use?', 'For checksums (did my download arrive intact?) and non-security fingerprints, yes. For passwords, signatures or anything an attacker could tamper with, no — MD5 and SHA-1 are broken for collision resistance; use SHA-256 or better, and for passwords use a dedicated slow hash (bcrypt, scrypt, Argon2) on the server.'], ['How are the hashes computed?', 'SHA-1/256/384/512 and HMAC use the browser’s native <code>crypto.subtle</code>; MD5 is a small built-in implementation (Web Crypto deliberately omits it), checked against the RFC 1321 test vectors. Files are read into memory and hashed in one call — fine up to the 50 MB limit.'], ['UUID v4 or v7?', 'v4 is 122 random bits — use it when ordering doesn’t matter. v7 puts a millisecond timestamp in the first 48 bits, so ids generated later sort later: much friendlier for database indexes and logs. ULID is the same idea in a shorter, case-insensitive base32 form. All three are generated with <code>crypto.getRandomValues</code>.'], ['How random are nanoids and short ids?', 'They use <code>crypto.getRandomValues</code> with rejection sampling, so every character is uniformly random — no modulo bias. A 21-character nanoid (the default) has the same collision resistance as a UUID v4; the length box lets you trade length for safety.'], ['Why can’t I see the file’s hash while typing?', 'Dropping a file replaces the text — the hash is of the file’s bytes, not its name. To hash text again, clear the box or press Reset.'], PRIVACY_FAQ]
+  },
+  {
+    slug: 'cron-builder', name: 'Cron Builder', icon: 'lucide:alarm-clock', section: 'Encoders & Inspectors', split: '50/50', css: true,
+    desc: 'Free online cron expression builder and explainer: build a schedule visually or paste an expression, read it in plain English, and see the next 10 run times in any time zone. Supports 5- and 6-field cron, @aliases, L, W and # — all in your browser.',
+    lead: 'Build a cron schedule visually or paste one, read it in plain English, and see exactly when it will run next in your time zone.',
+    cardDesc: 'Visual schedule ⇄ cron expression, plain English, next runs in any time zone.',
+    tags: ['cron', 'crontab', 'cron expression', 'cron builder', 'cron generator', 'schedule', 'cron explainer', 'next run', 'quartz', 'kubernetes cronjob', 'github actions schedule', 'time zone', 'every 5 minutes'],
+    sourceLabel: 'Schedule', outputLabel: 'Explanation & next runs', outputIcon: 'lucide:alarm-clock', outputEmpty: 'Build or paste a cron expression', idle: 'Enter an expression',
+    downloads: [['txt', 'Text (.txt)', 'lucide:file-text'], ['json', 'JSON (.json)', 'lucide:braces']],
+    sourceHtml: `
+                <div class="form-group">
+                  <label class="form-label" for="cron-input"><span>Cron expression</span><span class="form-label-desc" id="cron-fields-hint">minute · hour · day · month · weekday</span></label>
+                  <div class="web-inline">
+                    <input type="text" id="cron-input" class="input-clean cb-expr" placeholder="*/15 9-17 * * 1-5" spellcheck="false" autocomplete="off" autocapitalize="off">
+                    <select id="cron-preset" class="select-clean cb-preset" aria-label="Presets">${opts([['', 'Presets…'], ['* * * * *', 'Every minute'], ['*/5 * * * *', 'Every 5 minutes'], ['*/15 * * * *', 'Every 15 minutes'], ['0 * * * *', 'Every hour'], ['0 */6 * * *', 'Every 6 hours'], ['0 0 * * *', 'Daily at midnight'], ['0 9 * * *', 'Daily at 09:00'], ['30 9 * * 1-5', 'Weekdays at 09:30'], ['0 0 * * 0', 'Weekly on Sunday'], ['0 0 1 * *', 'Monthly on the 1st'], ['0 0 L * *', 'Last day of the month'], ['0 9 * * 1#1', 'First Monday at 09:00'], ['0 0 1 1 *', 'Yearly on 1 Jan']], '')}</select>
+                  </div>
+                </div>
+                <div class="cb-builder" id="cron-builder" aria-label="Visual builder"></div>`,
+    outputHtml: `
+                  <div class="cb-headline" id="output-human"></div>
+                  <div class="web-tags" id="output-flags"></div>
+                  <ol class="cb-runs" id="output-runs"></ol>`,
+    settingsSummary: 'Device time zone · 10 runs · 5 fields',
+    settings: `
+              <div class="control-item">
+                <label for="opt-tz">Time zone for next runs</label>
+                <select id="opt-tz" class="select-clean"><option value="" selected>Device time zone</option></select>
+              </div>
+              <div class="control-item">
+                <label for="opt-count">Runs to show</label>
+                <select id="opt-count" class="select-clean">${opts([['5', '5'], ['10', '10'], ['20', '20'], ['50', '50']], '10')}</select>
+              </div>${CHECKBOX('opt-seconds', 'Six fields — leading seconds (Quartz, Spring, some schedulers)', false)}${CHECKBOX('opt-24h', 'Show run times as 24-hour', true)}`,
+    reference: { title: 'Cron fields & special characters', html: `
+          <div class="web-table-wrap"><table class="web-table cb-ref"><thead><tr><th>Field</th><th>Allowed values</th><th>Special characters</th></tr></thead><tbody>
+            <tr><th>Seconds (6-field only)</th><td>0–59</td><td><code>, - * /</code></td></tr>
+            <tr><th>Minute</th><td>0–59</td><td><code>, - * /</code></td></tr>
+            <tr><th>Hour</th><td>0–23</td><td><code>, - * /</code></td></tr>
+            <tr><th>Day of month</th><td>1–31</td><td><code>, - * / ? L W</code> — <code>L</code> last day, <code>15W</code> nearest weekday to the 15th</td></tr>
+            <tr><th>Month</th><td>1–12 or JAN–DEC</td><td><code>, - * /</code></td></tr>
+            <tr><th>Day of week</th><td>0–7 or SUN–SAT (0 and 7 are Sunday)</td><td><code>, - * / ? L #</code> — <code>5L</code> last Friday, <code>1#2</code> second Monday</td></tr>
+            <tr><th>Aliases</th><td colspan="2"><code>@yearly @annually @monthly @weekly @daily @midnight @hourly</code> expand to a standard expression; <code>@reboot</code> runs at start-up and has no next-run list.</td></tr>
+          </tbody></table></div>` },
+    guide: [['Build or paste', 'Pick a preset, type an expression, or use the visual builder: each field can be <em>every</em>, <em>every N</em>, <em>between</em> or <em>specific values</em> (click the chips). The builder and the expression stay in sync in both directions.'], ['Read it back', 'The right pane explains the schedule in plain English and lists the next runs in your device time zone — or any zone from Settings, so a server in UTC and a team in Mumbai see the same thing. Warnings flag expressions that never run or mix day-of-month with day-of-week.'], ['Copy into your scheduler', 'Copy the expression for crontab, Kubernetes CronJob, GitHub Actions or a cloud scheduler. Turn on <em>Six fields</em> for Quartz / Spring style schedules with a seconds column. Download the explanation and run list as text or JSON.']],
+    faq: [['Which cron syntax does this follow?', 'Standard Vixie / POSIX cron (what crontab, Kubernetes, GitHub Actions and most cloud schedulers use): five fields, <code>,</code> lists, <code>-</code> ranges, <code>/</code> steps, names for months and weekdays, and the <code>@hourly</code>-style aliases. The Quartz extensions <code>L</code>, <code>W</code>, <code>#</code> and <code>?</code> are also understood, as is a leading seconds field when you turn it on. Year fields and non-standard words are not.'], ['Why does “1 and Monday” run more often than I expected?', 'When both day-of-month and day-of-week are restricted (neither is <code>*</code>), classic cron runs on days that match <em>either</em> one — <code>0 9 1 * 1</code> fires on the 1st <em>and</em> every Monday. The tool warns about this; use <code>#</code>, <code>L</code> or two separate jobs if you meant “and”.'], ['How are time zones handled?', 'Cron expressions have no time zone of their own — the scheduler’s zone applies. Pick the zone your server or platform uses in Settings and the next-run list is computed there, including daylight-saving changes: a time that does not exist on a spring-forward night is skipped, as real cron does.'], ['Why is the next-run list empty?', 'Either the expression can never match (for example <code>0 0 31 2 *</code> — there is no 31 February), or it is <code>@reboot</code>, which runs at start-up only. The tool searches up to five years ahead.'], ['Does this check how my specific scheduler reads it?', 'No — it validates the expression and simulates standard cron. Some platforms add limits (GitHub Actions runs at most every 5 minutes, AWS EventBridge uses a 6-field form with a year and requires <code>?</code>); check their docs for those rules.'], ['Is anything sent to a server?', 'No. Parsing and the next-run calculation happen in JavaScript in your browser; nothing you type leaves the page.']]
+  },
+  {
+    slug: 'jwt-builder-verifier', name: 'JWT Builder & Verifier', icon: 'lucide:shield-check', section: 'Encoders & Inspectors', split: '50/50', css: true,
+    desc: 'Free online JWT builder and verifier: sign tokens with HS256/384/512, RS256, PS256 or ES256 using Web Crypto, verify signatures with a secret, PEM public key or JWKS, check exp / nbf / iat, and decode any token — entirely in your browser, nothing is uploaded.',
+    lead: 'Sign, decode and verify JSON Web Tokens with HS, RS, PS and ES algorithms — secrets and keys never leave your browser.',
+    cardDesc: 'Sign HS/RS/PS/ES tokens, verify with secret, PEM or JWKS, check exp/nbf.',
+    tags: ['jwt', 'json web token', 'jwt builder', 'jwt verifier', 'jwt decoder', 'hs256', 'rs256', 'es256', 'jwks', 'sign jwt', 'verify signature', 'exp', 'bearer token', 'oauth', 'oidc', 'web crypto'],
+    sourceLabel: 'Token', outputLabel: 'Result', outputIcon: 'lucide:shield-check', outputEmpty: 'The signed or decoded token appears here', idle: 'Enter a payload or paste a token',
+    downloads: [['txt', 'Token / result (.txt)', 'lucide:file-text'], ['json', 'Decoded (.json)', 'lucide:braces'], ['pem-private', 'Private key (.pem)', 'lucide:key-round'], ['pem-public', 'Public key (.pem)', 'lucide:key']],
+    sourceHtml: `
+                <div class="form-group">
+                  <span class="form-label"><span>Mode</span></span>
+                  <div class="segmented-group segmented-group-pill" id="seg-mode" role="group" aria-label="Mode">
+                    <button type="button" class="seg-pill active" data-value="build">Build & sign</button>
+                    <button type="button" class="seg-pill" data-value="verify">Verify & decode</button>
+                  </div>
+                </div>
+                <div class="web-group" id="pane-build">
+                  <div class="web-convert-row web-convert-row-2">
+                    <div class="form-group">
+                      <label class="form-label" for="jwt-alg"><span>Algorithm</span></label>
+                      <select id="jwt-alg" class="select-clean">${opts([['HS256', 'HS256 · HMAC SHA-256'], ['HS384', 'HS384 · HMAC SHA-384'], ['HS512', 'HS512 · HMAC SHA-512'], ['RS256', 'RS256 · RSA PKCS#1 SHA-256'], ['RS384', 'RS384'], ['RS512', 'RS512'], ['PS256', 'PS256 · RSA-PSS SHA-256'], ['PS384', 'PS384'], ['PS512', 'PS512'], ['ES256', 'ES256 · ECDSA P-256'], ['ES384', 'ES384 · ECDSA P-384'], ['ES512', 'ES512 · ECDSA P-521']], 'HS256')}</select>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label" for="jwt-kid"><span>Key ID (kid)</span><span class="form-label-desc">optional</span></label>
+                      <input type="text" id="jwt-kid" class="input-clean" placeholder="e.g. 2026-10-key-1" spellcheck="false" autocomplete="off">
+                    </div>
+                  </div>
+                  <div class="form-group form-group-grow">
+                    <label class="form-label" for="jwt-payload"><span>Payload (JSON)</span><span class="form-label-desc">click a claim to insert it</span></label>
+                    <div class="web-tags jwt-claims" role="group" aria-label="Insert a claim">${[['iat', 'iat · now'], ['exp', 'exp · +1 h'], ['nbf', 'nbf · now'], ['jti', 'jti · uuid'], ['iss', 'iss'], ['sub', 'sub'], ['aud', 'aud']].map(([k, l]) => `<button type="button" class="web-tag jwt-claim" data-claim="${k}">${l}</button>`).join('')}</div>
+                    <textarea id="jwt-payload" class="textarea-clean" rows="7" placeholder='{ "sub": "1234567890", "name": "Ada" }' spellcheck="false" autocapitalize="off"></textarea>
+                  </div>
+                  <div class="form-group" id="jwt-secret-group">
+                    <label class="form-label" for="jwt-secret"><span>Secret</span><span class="form-label-desc" id="jwt-secret-hint">shared HMAC secret</span></label>
+                    <div class="web-inline">
+                      <input type="password" id="jwt-secret" class="input-clean" placeholder="your-256-bit-secret" spellcheck="false" autocomplete="off">
+                      <button type="button" class="btn-toolbar-sm" id="btn-gen-secret" title="Generate a random 256-bit secret"><iconify-icon icon="lucide:dices" width="14" height="14"></iconify-icon><span>Random</span></button>
+                    </div>
+                  </div>
+                  <div class="form-group" id="jwt-privkey-group" hidden>
+                    <label class="form-label" for="jwt-privkey"><span>Private key (PEM, PKCS#8)</span><span class="form-label-desc">-----BEGIN PRIVATE KEY-----</span></label>
+                    <textarea id="jwt-privkey" class="textarea-clean jwt-pem" rows="5" placeholder="Paste a PKCS#8 private key, or generate a pair" spellcheck="false" autocapitalize="off"></textarea>
+                    <button type="button" class="btn-toolbar-sm" id="btn-gen-keys"><iconify-icon icon="lucide:key-round" width="14" height="14"></iconify-icon><span>Generate key pair</span></button>
+                  </div>
+                </div>
+                <div class="web-group" id="pane-verify" hidden>
+                  <div class="form-group form-group-grow">
+                    <label class="form-label" for="jwt-token"><span>Token</span><span class="form-label-desc" id="jwt-token-hint"></span></label>
+                    <textarea id="jwt-token" class="textarea-clean jwt-pem" rows="6" placeholder="eyJhbGciOi…" spellcheck="false" autocapitalize="off"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="jwt-verify-key"><span>Secret, public key (PEM) or JWK / JWKS</span><span class="form-label-desc">optional — leave empty to decode only</span></label>
+                    <textarea id="jwt-verify-key" class="textarea-clean jwt-pem" rows="4" placeholder="HMAC secret · -----BEGIN PUBLIC KEY----- · { &quot;keys&quot;: [ … ] }" spellcheck="false" autocapitalize="off"></textarea>
+                  </div>
+                </div>`,
+    outputHtml: `
+                  <div class="jwt-token" id="output-token"></div>
+                  <div class="web-tags" id="output-flags"></div>
+                  <div class="jwt-section"><div class="web-group-head"><span>Header</span></div><div class="web-table-wrap"><table class="web-table" id="output-header"><tbody></tbody></table></div></div>
+                  <div class="jwt-section"><div class="web-group-head"><span>Payload</span></div><div class="web-table-wrap"><table class="web-table" id="output-payload"><tbody></tbody></table></div></div>
+                  <div class="jwt-section" id="output-keys" hidden><div class="web-group-head"><span>Public key (PEM) — share this with verifiers</span></div><pre class="web-code" id="output-pubkey"></pre></div>`,
+    settingsSummary: 'No clock skew · UTF-8 secret',
+    settings: `
+              <div class="control-item">
+                <label for="opt-skew">Clock skew tolerance (seconds)</label>
+                <input type="number" id="opt-skew" class="input-clean" min="0" max="3600" step="1" value="0" inputmode="numeric">
+              </div>
+              <div class="control-item">
+                <label for="opt-secret-enc">HMAC secret is</label>
+                <select id="opt-secret-enc" class="select-clean">${opts([['utf8', 'Plain text (UTF-8 bytes)'], ['base64', 'Base64 / base64url encoded bytes']], 'utf8')}</select>
+              </div>${CHECKBOX('opt-pretty', 'Pretty-print JSON in the payload box after inserting a claim', true)}`,
+    guide: [['Build a token', 'Pick an algorithm, write the payload as JSON (click <em>iat</em>, <em>exp</em>, <em>jti</em>… to insert standard claims), and provide a secret for HS* or a PKCS#8 private key for RS*, PS* and ES*. No key yet? <strong>Generate key pair</strong> creates one in the browser and shows the matching public key. The token is signed live with Web Crypto.'], ['Verify a token', 'Switch to <strong>Verify & decode</strong> and paste a token. Header and payload are decoded immediately, with exp / nbf / iat shown as readable dates and status badges. Add the HMAC secret, a PEM public key or a JWK / JWKS document to check the signature — the right key in a JWKS is picked by <code>kid</code>.'], ['Copy or download', 'Copy puts the token (or decoded JSON) on the clipboard. Download the token, the decoded JSON, or the generated private / public key as PEM files.']],
+    faq: [['Are my secrets and keys safe here?', 'They never leave the tab: signing and verification use the browser’s built-in <code>crypto.subtle</code>, nothing is stored in localStorage, and nothing is sent to Toolity. Still, treat anything you paste into any web page as sensitive — rotate test secrets before production.'], ['Which key formats are accepted?', 'Private keys as PKCS#8 PEM (<code>BEGIN PRIVATE KEY</code>), public keys as SPKI PEM (<code>BEGIN PUBLIC KEY</code>), and JWK or JWKS JSON. Legacy <code>BEGIN RSA PRIVATE KEY</code> / <code>BEGIN EC PRIVATE KEY</code> files are not understood by Web Crypto — convert with <code>openssl pkcs8 -topk8 -nocrypt -in key.pem</code>. X.509 certificates are not parsed.'], ['What do “expired” and “not yet valid” mean?', '<code>exp</code> is the moment after which a token must be rejected, <code>nbf</code> the moment before which it must not be accepted, and <code>iat</code> when it was issued — all Unix seconds. The badges compare them with your device clock plus the skew tolerance from Settings. A valid signature on an expired token is still shown as valid signature + expired, because those are separate checks.'], ['Why is <code>alg: none</code> flagged?', 'A token with <code>alg: none</code> is unsigned; libraries that accept it have been the source of real breaches. The tool decodes it but marks it as unsafe, and it will never report a “valid signature” for it.'], ['How do ES256 signatures compare with openssl output?', 'JWS uses the raw <code>r || s</code> form (64 bytes for P-256), which is also what Web Crypto produces, so tokens made here verify in jose, PyJWT, jsonwebtoken and friends. openssl prints DER-encoded signatures, which is a different wrapper around the same values.'], ['Can I decode a token without the key?', 'Yes — header and payload are only base64url-encoded, not encrypted, so anyone can read them. Verification needs the key; without it the signature badge says “unverified”. Encrypted tokens (JWE, five segments) show their header only.']]
   }
 ];

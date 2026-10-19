@@ -1,0 +1,16 @@
+/* JWT Builder & Verifier — coloured token, claim chips, PEM textareas, sections. */
+.jwt-token { padding: 0.8rem 0.9rem; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.5; overflow-wrap: anywhere; word-break: break-all; }
+.jwt-token:empty { display: none; }
+.jwt-h { color: #d946ef; } .jwt-p { color: #2563eb; } .jwt-s { color: #16a34a; }
+[data-theme="dark"] .jwt-h { color: #f0abfc; } [data-theme="dark"] .jwt-p { color: #93c5fd; } [data-theme="dark"] .jwt-s { color: #86efac; }
+.jwt-claims { margin-bottom: 0.4rem; }
+.jwt-claim { cursor: pointer; font-family: var(--font-mono); font-weight: 500; }
+.jwt-claim:hover { border-color: var(--brand); color: var(--text-primary); }
+.jwt-pem { font-family: var(--font-mono); font-size: 0.78rem; }
+.jwt-section { display: flex; flex-direction: column; gap: 0.4rem; min-width: 0; }
+.jwt-section[hidden], #pane-build[hidden], #pane-verify[hidden], #jwt-secret-group[hidden], #jwt-privkey-group[hidden] { display: none; }
+#jwt-privkey-group .btn-toolbar-sm { align-self: flex-start; margin-top: 0.4rem; }
+#output-pubkey { cursor: copy; font-size: 0.74rem; max-height: 180px; overflow: auto; }
+#output-header th, #output-payload th { width: 28%; }
+#output-header td, #output-payload td { font-family: var(--font-family); }
+#output-header td code, #output-payload td code { font-family: var(--font-mono); }

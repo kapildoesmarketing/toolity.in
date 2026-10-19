@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online JWT Builder & Verifier | Toolity Dev</title>
+  <link rel="canonical" href="https://toolity.in/dev/jwt-builder-verifier/">
+  <meta name="description" content="Free online JWT builder and verifier: sign tokens with HS256/384/512, RS256, PS256 or ES256 using Web Crypto, verify signatures with a secret, PEM public key or JWKS, check exp / nbf / iat, and decode any token — entirely in your browser, nothing is uploaded.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online JWT Builder & Verifier | Toolity Dev">
+  <meta property="og:description" content="Free online JWT builder and verifier: sign tokens with HS256/384/512, RS256, PS256 or ES256 using Web Crypto, verify signatures with a secret, PEM public key or JWKS, check exp / nbf / iat, and decode any token — entirely in your browser, nothing is uploaded.">
+  <meta property="og:url" content="https://toolity.in/dev/jwt-builder-verifier/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=6.1" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=6.1">
+  <link rel="stylesheet" href="/styles/tools/jwt-builder-verifier.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "JWT Builder & Verifier",
+        "url": "https://toolity.in/dev/jwt-builder-verifier/",
+        "description": "Free online JWT builder and verifier: sign tokens with HS256/384/512, RS256, PS256 or ES256 using Web Crypto, verify signatures with a secret, PEM public key or JWKS, check exp / nbf / iat, and decode any token — entirely in your browser, nothing is uploaded.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Dev", "item": "https://toolity.in/dev/" },
+          { "@type": "ListItem", "position": 3, "name": "JWT Builder & Verifier", "item": "https://toolity.in/dev/jwt-builder-verifier/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Are my secrets and keys safe here?", "acceptedAnswer": { "@type": "Answer", "text": "They never leave the tab: signing and verification use the browser’s built-in crypto.subtle, nothing is stored in localStorage, and nothing is sent to Toolity. Still, treat anything you paste into any web page as sensitive — rotate test secrets before production." } },
+          { "@type": "Question", "name": "Which key formats are accepted?", "acceptedAnswer": { "@type": "Answer", "text": "Private keys as PKCS#8 PEM (BEGIN PRIVATE KEY), public keys as SPKI PEM (BEGIN PUBLIC KEY), and JWK or JWKS JSON. Legacy BEGIN RSA PRIVATE KEY / BEGIN EC PRIVATE KEY files are not understood by Web Crypto — convert with openssl pkcs8 -topk8 -nocrypt -in key.pem. X.509 certificates are not parsed." } },
+          { "@type": "Question", "name": "What do “expired” and “not yet valid” mean?", "acceptedAnswer": { "@type": "Answer", "text": "exp is the moment after which a token must be rejected, nbf the moment before which it must not be accepted, and iat when it was issued — all Unix seconds. The badges compare them with your device clock plus the skew tolerance from Settings. A valid signature on an expired token is still shown as valid signature + expired, because those are separate checks." } },
+          { "@type": "Question", "name": "Why is alg: none flagged?", "acceptedAnswer": { "@type": "Answer", "text": "A token with alg: none is unsigned; libraries that accept it have been the source of real breaches. The tool decodes it but marks it as unsafe, and it will never report a “valid signature” for it." } },
+          { "@type": "Question", "name": "How do ES256 signatures compare with openssl output?", "acceptedAnswer": { "@type": "Answer", "text": "JWS uses the raw r || s form (64 bytes for P-256), which is also what Web Crypto produces, so tokens made here verify in jose, PyJWT, jsonwebtoken and friends. openssl prints DER-encoded signatures, which is a different wrapper around the same values." } },
+          { "@type": "Question", "name": "Can I decode a token without the key?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — header and payload are only base64url-encoded, not encrypted, so anyone can read them. Verification needs the key; without it the signature badge says “unverified”. Encrypted tokens (JWE, five segments) show their header only." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/dev/" class="breadcrumb-link">Dev</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">JWT Builder & Verifier</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Dev</span>
+            <h1 class="page-title">JWT Builder & Verifier</h1>
+            <p class="page-desc">Sign, decode and verify JSON Web Tokens with HS, RS, PS and ES algorithms — secrets and keys never leave your browser.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" data-split="50/50" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge web-status-badge" id="status-badge">Enter a payload or paste a token</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result" aria-label="Copy result" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <div class="dropdown-menu-wrapper" id="download-dropdown-wrap">
+                <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download result" aria-label="Download result" aria-haspopup="true" disabled>
+                  <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                  <span>Download</span>
+                  <iconify-icon icon="lucide:chevron-down" class="dropdown-arrow" width="13" height="13"></iconify-icon>
+                </button>
+                <div class="dropdown-popup" role="menu">
+                  <button type="button" class="dropdown-item" data-format="txt" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:file-text" width="14" height="14"></iconify-icon>
+                      <span>Token / result (.txt)</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="json" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:braces" width="14" height="14"></iconify-icon>
+                      <span>Decoded (.json)</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="pem-private" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:key-round" width="14" height="14"></iconify-icon>
+                      <span>Private key (.pem)</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="pem-public" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:key" width="14" height="14"></iconify-icon>
+                      <span>Public key (.pem)</span>
+                    </div>
+                  </button>
+                </div>
+              </div>
+              <button type="button" class="btn-toolbar-sm" id="btn-open" title="Open result in a new tab" aria-label="Open result in a new tab" disabled>
+                <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
+                <span>Open</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Token</span>
+                <span class="pane-badge" id="input-badge">—</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content web-form">
+                <div class="form-group">
+                  <span class="form-label"><span>Mode</span></span>
+                  <div class="segmented-group segmented-group-pill" id="seg-mode" role="group" aria-label="Mode">
+                    <button type="button" class="seg-pill active" data-value="build">Build & sign</button>
+                    <button type="button" class="seg-pill" data-value="verify">Verify & decode</button>
+                  </div>
+                </div>
+                <div class="web-group" id="pane-build">
+                  <div class="web-convert-row web-convert-row-2">
+                    <div class="form-group">
+                      <label class="form-label" for="jwt-alg"><span>Algorithm</span></label>
+                      <select id="jwt-alg" class="select-clean"><option value="HS256" selected>HS256 · HMAC SHA-256</option><option value="HS384">HS384 · HMAC SHA-384</option><option value="HS512">HS512 · HMAC SHA-512</option><option value="RS256">RS256 · RSA PKCS#1 SHA-256</option><option value="RS384">RS384</option><option value="RS512">RS512</option><option value="PS256">PS256 · RSA-PSS SHA-256</option><option value="PS384">PS384</option><option value="PS512">PS512</option><option value="ES256">ES256 · ECDSA P-256</option><option value="ES384">ES384 · ECDSA P-384</option><option value="ES512">ES512 · ECDSA P-521</option></select>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label" for="jwt-kid"><span>Key ID (kid)</span><span class="form-label-desc">optional</span></label>
+                      <input type="text" id="jwt-kid" class="input-clean" placeholder="e.g. 2026-10-key-1" spellcheck="false" autocomplete="off">
+                    </div>
+                  </div>
+                  <div class="form-group form-group-grow">
+                    <label class="form-label" for="jwt-payload"><span>Payload (JSON)</span><span class="form-label-desc">click a claim to insert it</span></label>
+                    <div class="web-tags jwt-claims" role="group" aria-label="Insert a claim"><button type="button" class="web-tag jwt-claim" data-claim="iat">iat · now</button><button type="button" class="web-tag jwt-claim" data-claim="exp">exp · +1 h</button><button type="button" class="web-tag jwt-claim" data-claim="nbf">nbf · now</button><button type="button" class="web-tag jwt-claim" data-claim="jti">jti · uuid</button><button type="button" class="web-tag jwt-claim" data-claim="iss">iss</button><button type="button" class="web-tag jwt-claim" data-claim="sub">sub</button><button type="button" class="web-tag jwt-claim" data-claim="aud">aud</button></div>
+                    <textarea id="jwt-payload" class="textarea-clean" rows="7" placeholder='{ "sub": "1234567890", "name": "Ada" }' spellcheck="false" autocapitalize="off"></textarea>
+                  </div>
+                  <div class="form-group" id="jwt-secret-group">
+                    <label class="form-label" for="jwt-secret"><span>Secret</span><span class="form-label-desc" id="jwt-secret-hint">shared HMAC secret</span></label>
+                    <div class="web-inline">
+                      <input type="password" id="jwt-secret" class="input-clean" placeholder="your-256-bit-secret" spellcheck="false" autocomplete="off">
+                      <button type="button" class="btn-toolbar-sm" id="btn-gen-secret" title="Generate a random 256-bit secret"><iconify-icon icon="lucide:dices" width="14" height="14"></iconify-icon><span>Random</span></button>
+                    </div>
+                  </div>
+                  <div class="form-group" id="jwt-privkey-group" hidden>
+                    <label class="form-label" for="jwt-privkey"><span>Private key (PEM, PKCS#8)</span><span class="form-label-desc">-----BEGIN PRIVATE KEY-----</span></label>
+                    <textarea id="jwt-privkey" class="textarea-clean jwt-pem" rows="5" placeholder="Paste a PKCS#8 private key, or generate a pair" spellcheck="false" autocapitalize="off"></textarea>
+                    <button type="button" class="btn-toolbar-sm" id="btn-gen-keys"><iconify-icon icon="lucide:key-round" width="14" height="14"></iconify-icon><span>Generate key pair</span></button>
+                  </div>
+                </div>
+                <div class="web-group" id="pane-verify" hidden>
+                  <div class="form-group form-group-grow">
+                    <label class="form-label" for="jwt-token"><span>Token</span><span class="form-label-desc" id="jwt-token-hint"></span></label>
+                    <textarea id="jwt-token" class="textarea-clean jwt-pem" rows="6" placeholder="eyJhbGciOi…" spellcheck="false" autocapitalize="off"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="jwt-verify-key"><span>Secret, public key (PEM) or JWK / JWKS</span><span class="form-label-desc">optional — leave empty to decode only</span></label>
+                    <textarea id="jwt-verify-key" class="textarea-clean jwt-pem" rows="4" placeholder="HMAC secret · -----BEGIN PUBLIC KEY----- · { &quot;keys&quot;: [ … ] }" spellcheck="false" autocapitalize="off"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Result</span>
+                <span class="pane-badge" id="output-badge">—</span>
+              </div>
+              <div class="pane-content web-output-pane">
+                <div class="pane-empty" id="output-empty">
+                  <iconify-icon icon="lucide:shield-check"></iconify-icon>
+                  <span>The signed or decoded token appears here</span>
+                </div>
+                <div class="web-output" id="output-content" hidden>
+                  <div class="jwt-token" id="output-token"></div>
+                  <div class="web-tags" id="output-flags"></div>
+                  <div class="jwt-section"><div class="web-group-head"><span>Header</span></div><div class="web-table-wrap"><table class="web-table" id="output-header"><tbody></tbody></table></div></div>
+                  <div class="jwt-section"><div class="web-group-head"><span>Payload</span></div><div class="web-table-wrap"><table class="web-table" id="output-payload"><tbody></tbody></table></div></div>
+                  <div class="jwt-section" id="output-keys" hidden><div class="web-group-head"><span>Public key (PEM) — share this with verifiers</span></div><pre class="web-code" id="output-pubkey"></pre></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">No clock skew · UTF-8 secret</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item">
+                <label for="opt-skew">Clock skew tolerance (seconds)</label>
+                <input type="number" id="opt-skew" class="input-clean" min="0" max="3600" step="1" value="0" inputmode="numeric">
+              </div>
+              <div class="control-item">
+                <label for="opt-secret-enc">HMAC secret is</label>
+                <select id="opt-secret-enc" class="select-clean"><option value="utf8" selected>Plain text (UTF-8 bytes)</option><option value="base64">Base64 / base64url encoded bytes</option></select>
+              </div>
+              <div class="control-item"><input type="checkbox" id="opt-pretty" checked><label for="opt-pretty">Pretty-print JSON in the payload box after inserting a claim</label></div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Use JWT Builder & Verifier in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Build a token</h3>
+              <p class="step-desc">Pick an algorithm, write the payload as JSON (click <em>iat</em>, <em>exp</em>, <em>jti</em>… to insert standard claims), and provide a secret for HS* or a PKCS#8 private key for RS*, PS* and ES*. No key yet? <strong>Generate key pair</strong> creates one in the browser and shows the matching public key. The token is signed live with Web Crypto.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Verify a token</h3>
+              <p class="step-desc">Switch to <strong>Verify & decode</strong> and paste a token. Header and payload are decoded immediately, with exp / nbf / iat shown as readable dates and status badges. Add the HMAC secret, a PEM public key or a JWK / JWKS document to check the signature — the right key in a JWKS is picked by <code>kid</code>.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Copy or download</h3>
+              <p class="step-desc">Copy puts the token (or decoded JSON) on the clipboard. Download the token, the decoded JSON, or the generated private / public key as PEM files.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">JWT Builder & Verifier — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Are my secrets and keys safe here?</summary>
+              <p>They never leave the tab: signing and verification use the browser’s built-in <code>crypto.subtle</code>, nothing is stored in localStorage, and nothing is sent to Toolity. Still, treat anything you paste into any web page as sensitive — rotate test secrets before production.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Which key formats are accepted?</summary>
+              <p>Private keys as PKCS#8 PEM (<code>BEGIN PRIVATE KEY</code>), public keys as SPKI PEM (<code>BEGIN PUBLIC KEY</code>), and JWK or JWKS JSON. Legacy <code>BEGIN RSA PRIVATE KEY</code> / <code>BEGIN EC PRIVATE KEY</code> files are not understood by Web Crypto — convert with <code>openssl pkcs8 -topk8 -nocrypt -in key.pem</code>. X.509 certificates are not parsed.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What do “expired” and “not yet valid” mean?</summary>
+              <p><code>exp</code> is the moment after which a token must be rejected, <code>nbf</code> the moment before which it must not be accepted, and <code>iat</code> when it was issued — all Unix seconds. The badges compare them with your device clock plus the skew tolerance from Settings. A valid signature on an expired token is still shown as valid signature + expired, because those are separate checks.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why is <code>alg: none</code> flagged?</summary>
+              <p>A token with <code>alg: none</code> is unsigned; libraries that accept it have been the source of real breaches. The tool decodes it but marks it as unsafe, and it will never report a “valid signature” for it.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How do ES256 signatures compare with openssl output?</summary>
+              <p>JWS uses the raw <code>r || s</code> form (64 bytes for P-256), which is also what Web Crypto produces, so tokens made here verify in jose, PyJWT, jsonwebtoken and friends. openssl prints DER-encoded signatures, which is a different wrapper around the same values.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can I decode a token without the key?</summary>
+              <p>Yes — header and payload are only base64url-encoded, not encrypted, so anyone can read them. Verification needs the key; without it the signature badge says “unverified”. Encrypted tokens (JWE, five segments) show their header only.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="dev"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=4.5"></script>
+  <script src="/scripts/tool-common.js?v=1.1"></script>
+  <script src="/scripts/web-common.js?v=1.2"></script>
+  <script src="/dev/jwt-builder-verifier/jwt-builder-verifier.js?v=1.0"></script>
+</body>
+</html>
