@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Cron Builder | Toolity Dev</title>
+  <link rel="canonical" href="https://toolity.in/dev/cron-builder/">
+  <meta name="description" content="Free online cron expression builder and explainer: build a schedule visually or paste an expression, read it in plain English, and see the next 10 run times in any time zone. Supports 5- and 6-field cron, @aliases, L, W and # — all in your browser.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Cron Builder | Toolity Dev">
+  <meta property="og:description" content="Free online cron expression builder and explainer: build a schedule visually or paste an expression, read it in plain English, and see the next 10 run times in any time zone. Supports 5- and 6-field cron, @aliases, L, W and # — all in your browser.">
+  <meta property="og:url" content="https://toolity.in/dev/cron-builder/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=6.1" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=6.1">
+  <link rel="stylesheet" href="/styles/tools/cron-builder.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Cron Builder",
+        "url": "https://toolity.in/dev/cron-builder/",
+        "description": "Free online cron expression builder and explainer: build a schedule visually or paste an expression, read it in plain English, and see the next 10 run times in any time zone. Supports 5- and 6-field cron, @aliases, L, W and # — all in your browser.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Dev", "item": "https://toolity.in/dev/" },
+          { "@type": "ListItem", "position": 3, "name": "Cron Builder", "item": "https://toolity.in/dev/cron-builder/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Which cron syntax does this follow?", "acceptedAnswer": { "@type": "Answer", "text": "Standard Vixie / POSIX cron (what crontab, Kubernetes, GitHub Actions and most cloud schedulers use): five fields, , lists, - ranges, / steps, names for months and weekdays, and the @hourly-style aliases. The Quartz extensions L, W, # and ? are also understood, as is a leading seconds field when you turn it on. Year fields and non-standard words are not." } },
+          { "@type": "Question", "name": "Why does “1 and Monday” run more often than I expected?", "acceptedAnswer": { "@type": "Answer", "text": "When both day-of-month and day-of-week are restricted (neither is *), classic cron runs on days that match either one — 0 9 1 * 1 fires on the 1st and every Monday. The tool warns about this; use #, L or two separate jobs if you meant “and”." } },
+          { "@type": "Question", "name": "How are time zones handled?", "acceptedAnswer": { "@type": "Answer", "text": "Cron expressions have no time zone of their own — the scheduler’s zone applies. Pick the zone your server or platform uses in Settings and the next-run list is computed there, including daylight-saving changes: a time that does not exist on a spring-forward night is skipped, as real cron does." } },
+          { "@type": "Question", "name": "Why is the next-run list empty?", "acceptedAnswer": { "@type": "Answer", "text": "Either the expression can never match (for example 0 0 31 2 * — there is no 31 February), or it is @reboot, which runs at start-up only. The tool searches up to five years ahead." } },
+          { "@type": "Question", "name": "Does this check how my specific scheduler reads it?", "acceptedAnswer": { "@type": "Answer", "text": "No — it validates the expression and simulates standard cron. Some platforms add limits (GitHub Actions runs at most every 5 minutes, AWS EventBridge uses a 6-field form with a year and requires ?); check their docs for those rules." } },
+          { "@type": "Question", "name": "Is anything sent to a server?", "acceptedAnswer": { "@type": "Answer", "text": "No. Parsing and the next-run calculation happen in JavaScript in your browser; nothing you type leaves the page." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/dev/" class="breadcrumb-link">Dev</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Cron Builder</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Dev</span>
+            <h1 class="page-title">Cron Builder</h1>
+            <p class="page-desc">Build a cron schedule visually or paste one, read it in plain English, and see exactly when it will run next in your time zone.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" data-split="50/50" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge web-status-badge" id="status-badge">Enter an expression</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result" aria-label="Copy result" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <div class="dropdown-menu-wrapper" id="download-dropdown-wrap">
+                <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download result" aria-label="Download result" aria-haspopup="true" disabled>
+                  <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                  <span>Download</span>
+                  <iconify-icon icon="lucide:chevron-down" class="dropdown-arrow" width="13" height="13"></iconify-icon>
+                </button>
+                <div class="dropdown-popup" role="menu">
+                  <button type="button" class="dropdown-item" data-format="txt" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:file-text" width="14" height="14"></iconify-icon>
+                      <span>Text (.txt)</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="json" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:braces" width="14" height="14"></iconify-icon>
+                      <span>JSON (.json)</span>
+                    </div>
+                  </button>
+                </div>
+              </div>
+              <button type="button" class="btn-toolbar-sm" id="btn-open" title="Open result in a new tab" aria-label="Open result in a new tab" disabled>
+                <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
+                <span>Open</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Schedule</span>
+                <span class="pane-badge" id="input-badge">—</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content web-form">
+                <div class="form-group">
+                  <label class="form-label" for="cron-input"><span>Cron expression</span><span class="form-label-desc" id="cron-fields-hint">minute · hour · day · month · weekday</span></label>
+                  <div class="web-inline">
+                    <input type="text" id="cron-input" class="input-clean cb-expr" placeholder="*/15 9-17 * * 1-5" spellcheck="false" autocomplete="off" autocapitalize="off">
+                    <select id="cron-preset" class="select-clean cb-preset" aria-label="Presets"><option value="" selected>Presets…</option><option value="* * * * *">Every minute</option><option value="*/5 * * * *">Every 5 minutes</option><option value="*/15 * * * *">Every 15 minutes</option><option value="0 * * * *">Every hour</option><option value="0 */6 * * *">Every 6 hours</option><option value="0 0 * * *">Daily at midnight</option><option value="0 9 * * *">Daily at 09:00</option><option value="30 9 * * 1-5">Weekdays at 09:30</option><option value="0 0 * * 0">Weekly on Sunday</option><option value="0 0 1 * *">Monthly on the 1st</option><option value="0 0 L * *">Last day of the month</option><option value="0 9 * * 1#1">First Monday at 09:00</option><option value="0 0 1 1 *">Yearly on 1 Jan</option></select>
+                  </div>
+                </div>
+                <div class="cb-builder" id="cron-builder" aria-label="Visual builder"></div>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Explanation & next runs</span>
+                <span class="pane-badge" id="output-badge">—</span>
+              </div>
+              <div class="pane-content web-output-pane">
+                <div class="pane-empty" id="output-empty">
+                  <iconify-icon icon="lucide:alarm-clock"></iconify-icon>
+                  <span>Build or paste a cron expression</span>
+                </div>
+                <div class="web-output" id="output-content" hidden>
+                  <div class="cb-headline" id="output-human"></div>
+                  <div class="web-tags" id="output-flags"></div>
+                  <ol class="cb-runs" id="output-runs"></ol>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">Device time zone · 10 runs · 5 fields</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item">
+                <label for="opt-tz">Time zone for next runs</label>
+                <select id="opt-tz" class="select-clean"><option value="" selected>Device time zone</option></select>
+              </div>
+              <div class="control-item">
+                <label for="opt-count">Runs to show</label>
+                <select id="opt-count" class="select-clean"><option value="5">5</option><option value="10" selected>10</option><option value="20">20</option><option value="50">50</option></select>
+              </div>
+              <div class="control-item"><input type="checkbox" id="opt-seconds"><label for="opt-seconds">Six fields — leading seconds (Quartz, Spring, some schedulers)</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-24h" checked><label for="opt-24h">Show run times as 24-hour</label></div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Use Cron Builder in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Build or paste</h3>
+              <p class="step-desc">Pick a preset, type an expression, or use the visual builder: each field can be <em>every</em>, <em>every N</em>, <em>between</em> or <em>specific values</em> (click the chips). The builder and the expression stay in sync in both directions.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Read it back</h3>
+              <p class="step-desc">The right pane explains the schedule in plain English and lists the next runs in your device time zone — or any zone from Settings, so a server in UTC and a team in Mumbai see the same thing. Warnings flag expressions that never run or mix day-of-month with day-of-week.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Copy into your scheduler</h3>
+              <p class="step-desc">Copy the expression for crontab, Kubernetes CronJob, GitHub Actions or a cloud scheduler. Turn on <em>Six fields</em> for Quartz / Spring style schedules with a seconds column. Download the explanation and run list as text or JSON.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 4. REFERENCE ═══════════ -->
+        <section class="reference-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">Reference</span>
+            <h2 class="section-heading-sm">Cron fields & special characters</h2>
+          </div>
+
+          <div class="web-table-wrap"><table class="web-table cb-ref"><thead><tr><th>Field</th><th>Allowed values</th><th>Special characters</th></tr></thead><tbody>
+            <tr><th>Seconds (6-field only)</th><td>0–59</td><td><code>, - * /</code></td></tr>
+            <tr><th>Minute</th><td>0–59</td><td><code>, - * /</code></td></tr>
+            <tr><th>Hour</th><td>0–23</td><td><code>, - * /</code></td></tr>
+            <tr><th>Day of month</th><td>1–31</td><td><code>, - * / ? L W</code> — <code>L</code> last day, <code>15W</code> nearest weekday to the 15th</td></tr>
+            <tr><th>Month</th><td>1–12 or JAN–DEC</td><td><code>, - * /</code></td></tr>
+            <tr><th>Day of week</th><td>0–7 or SUN–SAT (0 and 7 are Sunday)</td><td><code>, - * / ? L #</code> — <code>5L</code> last Friday, <code>1#2</code> second Monday</td></tr>
+            <tr><th>Aliases</th><td colspan="2"><code>@yearly @annually @monthly @weekly @daily @midnight @hourly</code> expand to a standard expression; <code>@reboot</code> runs at start-up and has no next-run list.</td></tr>
+          </tbody></table></div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Cron Builder — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Which cron syntax does this follow?</summary>
+              <p>Standard Vixie / POSIX cron (what crontab, Kubernetes, GitHub Actions and most cloud schedulers use): five fields, <code>,</code> lists, <code>-</code> ranges, <code>/</code> steps, names for months and weekdays, and the <code>@hourly</code>-style aliases. The Quartz extensions <code>L</code>, <code>W</code>, <code>#</code> and <code>?</code> are also understood, as is a leading seconds field when you turn it on. Year fields and non-standard words are not.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why does “1 and Monday” run more often than I expected?</summary>
+              <p>When both day-of-month and day-of-week are restricted (neither is <code>*</code>), classic cron runs on days that match <em>either</em> one — <code>0 9 1 * 1</code> fires on the 1st <em>and</em> every Monday. The tool warns about this; use <code>#</code>, <code>L</code> or two separate jobs if you meant “and”.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How are time zones handled?</summary>
+              <p>Cron expressions have no time zone of their own — the scheduler’s zone applies. Pick the zone your server or platform uses in Settings and the next-run list is computed there, including daylight-saving changes: a time that does not exist on a spring-forward night is skipped, as real cron does.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why is the next-run list empty?</summary>
+              <p>Either the expression can never match (for example <code>0 0 31 2 *</code> — there is no 31 February), or it is <code>@reboot</code>, which runs at start-up only. The tool searches up to five years ahead.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Does this check how my specific scheduler reads it?</summary>
+              <p>No — it validates the expression and simulates standard cron. Some platforms add limits (GitHub Actions runs at most every 5 minutes, AWS EventBridge uses a 6-field form with a year and requires <code>?</code>); check their docs for those rules.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is anything sent to a server?</summary>
+              <p>No. Parsing and the next-run calculation happen in JavaScript in your browser; nothing you type leaves the page.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="dev"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=4.5"></script>
+  <script src="/scripts/tool-common.js?v=1.1"></script>
+  <script src="/scripts/web-common.js?v=1.2"></script>
+  <script src="/dev/cron-builder/cron-builder.js?v=1.0"></script>
+</body>
+</html>
