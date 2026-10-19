@@ -1468,6 +1468,62 @@
         tags: ['hash generator', 'sha256 generator', 'md5 generator', 'sha512 hash', 'hmac generator', 'checksum verifier', 'uuid generator', 'uuid v7', 'ulid generator', 'nanoid', 'random id generator', 'file hash']
       },
       {
+        id: 'sprite-sheet-studio',
+        title: 'Sprite Sheet Studio',
+        category: 'Media',
+        url: 'media/sprite-sheet-studio/',
+        icon: 'lucide:grid-3x3',
+        tags: ['sprite sheet', 'spritesheet', 'sprite to gif', 'gif to sprite sheet', 'apng', 'pixel art', 'game dev', 'texture atlas', 'frames', 'animation', 'css sprite animation', 'steps()', 'phaser', 'godot', 'unity']
+      },
+      {
+        id: 'dummy-text-data-generator',
+        title: 'Dummy Text & Data Generator',
+        category: 'Docs',
+        url: 'docs/dummy-text-data-generator/',
+        icon: 'lucide:text-cursor-input',
+        tags: ['lorem ipsum', 'dummy text', 'placeholder text', 'fake data', 'mock data', 'test data', 'fake names', 'fake email', 'fake address', 'random data generator', 'csv generator', 'json generator', 'sql insert', 'seed', 'indian names']
+      },
+      {
+        id: 'utm-link-builder',
+        title: 'UTM Link Builder',
+        category: 'Labs',
+        url: 'labs/utm-link-builder/',
+        icon: 'lucide:link-2',
+        tags: ['utm', 'utm builder', 'utm link', 'campaign url builder', 'utm_source', 'utm_medium', 'utm_campaign', 'google analytics', 'ga4', 'tracking link', 'bulk utm', 'qr code', 'marketing']
+      },
+      {
+        id: 'qr-barcode-scanner',
+        title: 'QR & Barcode Scanner',
+        category: 'Labs',
+        url: 'labs/qr-barcode-scanner/',
+        icon: 'lucide:scan-line',
+        tags: ['qr scanner', 'qr code reader', 'barcode scanner', 'barcode reader', 'scan qr from image', 'scan screenshot', 'ean', 'upc', 'code 128', 'data matrix', 'pdf417', 'wifi qr', 'vcard', 'upi qr', 'camera']
+      },
+      {
+        id: 'cron-builder',
+        title: 'Cron Builder',
+        category: 'Dev',
+        url: 'dev/cron-builder/',
+        icon: 'lucide:alarm-clock',
+        tags: ['cron', 'crontab', 'cron expression', 'cron builder', 'cron generator', 'schedule', 'cron explainer', 'next run', 'quartz', 'kubernetes cronjob', 'github actions schedule', 'time zone', 'every 5 minutes']
+      },
+      {
+        id: 'jwt-builder-verifier',
+        title: 'JWT Builder & Verifier',
+        category: 'Dev',
+        url: 'dev/jwt-builder-verifier/',
+        icon: 'lucide:shield-check',
+        tags: ['jwt', 'json web token', 'jwt builder', 'jwt verifier', 'jwt decoder', 'hs256', 'rs256', 'es256', 'jwks', 'sign jwt', 'verify signature', 'exp', 'bearer token', 'oauth', 'oidc', 'web crypto']
+      },
+      {
+        id: 'date-calculator',
+        title: 'Date Calculator',
+        category: 'Data',
+        url: 'data/date-calculator/',
+        icon: 'lucide:calendar-days',
+        tags: ['date', 'calculator', 'days between', 'date difference', 'add days', 'subtract days', 'working days', 'business days', 'holidays', 'age calculator', 'duration', 'weeks', 'countdown', 'iso week']
+      },
+      {
         id: 'cat-widgets',
         title: 'Widgets',
         category: 'Category',
