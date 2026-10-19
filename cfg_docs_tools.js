@@ -91,5 +91,71 @@ module.exports = [
               </div>`,
     guide: [['Paste the text', 'Drop in anything from a tweet to a report — plain text, Markdown or HTML (tags are stripped). Scores update as you type.'], ['Read the scores', '<strong>Flesch Reading Ease</strong> runs 0–100 (higher is easier; 60–70 is plain English, newspapers sit around 50–60). The grade-level scores (Flesch-Kincaid, Gunning Fog, SMOG, Coleman-Liau, ARI) estimate the US school grade needed; the consensus is their median. Aim for grade 8 or below for a general audience.'], ['Fix what is highlighted', 'Long sentences, possible passive voice and -ly adverbs are marked in the text. Split long sentences, turn “was approved by the board” into “the board approved”, and cut adverbs that add nothing. Re-check the numbers as you edit.']],
     faq: [['How are the scores calculated?', 'Standard formulas on word, sentence and syllable counts: Flesch Reading Ease = 206.835 − 1.015 × (words ÷ sentences) − 84.6 × (syllables ÷ words); Flesch-Kincaid = 0.39 × (words ÷ sentences) + 11.8 × (syllables ÷ words) − 15.59; Gunning Fog = 0.4 × ((words ÷ sentences) + 100 × (complex words ÷ words)); SMOG = 1.043 × √(polysyllables × 30 ÷ sentences) + 3.1291; Coleman-Liau and ARI use letters per word and words per sentence. Syllables come from an English vowel-group heuristic, so expect ±1 on unusual words.'], ['Which languages does it work for?', 'The formulas and the syllable counter are calibrated for English. Other Latin-script languages produce numbers, but they are not meaningful — German compounds and French silent endings break the assumptions.'], ['What counts as a “complex” word?', 'Three or more syllables, as in the Gunning Fog and SMOG definitions. Proper nouns and compound words are not excluded, so technical text scores slightly harder than a human rater would say.'], ['How accurate is the passive-voice detection?', 'It is a heuristic: a form of “to be” followed by a past participle (“was approved”, “is being reviewed”). It catches most cases and also flags some adjectives (“was tired”) — treat each highlight as a prompt to look, not a verdict. Turn it off in Settings if it gets in the way.'], ['How is reading time estimated?', 'Words divided by your chosen speed (200 words per minute is a typical adult silent-reading rate); speaking time uses 130 wpm. Short texts round up to one minute.'], PRIVACY_FAQ]
+  },
+  {
+    slug: 'dummy-text-data-generator', name: 'Dummy Text & Data Generator', icon: 'lucide:text-cursor-input', section: 'Text & Notes', split: '40/60', css: true,
+    desc: 'Free online dummy text and data generator: lorem ipsum (plus hipster, corporate, tech and pangram flavours) by words, sentences or paragraphs; fake people with names, emails, phones and addresses (international or Indian); and a schema-based mock dataset with a seed for repeatable results. Export CSV, JSON or SQL — all in your browser.',
+    lead: 'Placeholder text in five flavours, realistic fake people, and seedable mock datasets you can export as CSV, JSON or SQL — nothing leaves your browser.',
+    cardDesc: 'Lorem ipsum, fake people and seedable mock datasets → CSV / JSON / SQL.',
+    tags: ['lorem ipsum', 'dummy text', 'placeholder text', 'fake data', 'mock data', 'test data', 'fake names', 'fake email', 'fake address', 'random data generator', 'csv generator', 'json generator', 'sql insert', 'seed', 'indian names'],
+    sourceLabel: 'What to generate', outputLabel: 'Generated', outputIcon: 'lucide:text-cursor-input', outputEmpty: 'Generated text or rows appear here', idle: 'Choose what to generate',
+    downloads: [['txt', 'Text (.txt)', 'lucide:file-text'], ['csv', 'CSV (.csv)', 'lucide:table'], ['json', 'JSON (.json)', 'lucide:braces'], ['sql', 'SQL inserts (.sql)', 'lucide:database']],
+    sourceHtml: `
+                <div class="form-group">
+                  <span class="form-label"><span>Generate</span></span>
+                  <div class="segmented-group segmented-group-pill" id="seg-mode" role="group" aria-label="Generator">
+                    <button type="button" class="seg-pill active" data-value="text">Text</button>
+                    <button type="button" class="seg-pill" data-value="people">People</button>
+                    <button type="button" class="seg-pill" data-value="dataset">Dataset</button>
+                  </div>
+                </div>
+                <div class="web-group" id="pane-text">
+                  <div class="web-convert-row web-convert-row-2">
+                    <div class="form-group"><label class="form-label" for="txt-flavour"><span>Flavour</span></label><select id="txt-flavour" class="select-clean">${opts([['lorem', 'Lorem ipsum (classic)'], ['hipster', 'Hipster'], ['corporate', 'Corporate buzzwords'], ['tech', 'Tech jargon'], ['pangram', 'Pangrams (real English)']], 'lorem')}</select></div>
+                    <div class="form-group"><label class="form-label" for="txt-format"><span>Format</span></label><select id="txt-format" class="select-clean">${opts([['plain', 'Plain text'], ['html', 'HTML <p>'], ['md', 'Markdown']], 'plain')}</select></div>
+                  </div>
+                  <div class="web-convert-row web-convert-row-2">
+                    <div class="form-group"><label class="form-label" for="txt-count"><span>How many</span></label><input type="number" id="txt-count" class="input-clean" min="1" max="500" value="3" inputmode="numeric"></div>
+                    <div class="form-group"><label class="form-label" for="txt-unit"><span>Unit</span></label><select id="txt-unit" class="select-clean">${opts([['paragraphs', 'Paragraphs'], ['sentences', 'Sentences'], ['words', 'Words']], 'paragraphs')}</select></div>
+                  </div>
+                </div>
+                <div class="web-group" id="pane-people" hidden>
+                  <div class="web-convert-row web-convert-row-2">
+                    <div class="form-group"><label class="form-label" for="ppl-count"><span>How many people</span></label><input type="number" id="ppl-count" class="input-clean" min="1" max="5000" value="10" inputmode="numeric"></div>
+                    <div class="form-group"><label class="form-label" for="ppl-locale"><span>Locale</span></label><select id="ppl-locale" class="select-clean">${opts([['intl', 'International (US-style)'], ['in', 'India']], 'intl')}</select></div>
+                  </div>
+                  <div class="web-checks" role="group" aria-label="Fields">${[['name', 'Name', 1], ['email', 'Email', 1], ['phone', 'Phone', 1], ['city', 'City', 1], ['address', 'Street address', 0], ['dob', 'Date of birth', 0], ['company', 'Company', 1], ['job', 'Job title', 0], ['username', 'Username', 0]].map(([k, l, on]) => `<div class="control-item"><input type="checkbox" id="ppl-${k}"${on ? ' checked' : ''}><label for="ppl-${k}">${l}</label></div>`).join('')}</div>
+                </div>
+                <div class="web-group" id="pane-dataset" hidden>
+                  <div class="web-convert-row web-convert-row-2">
+                    <div class="form-group"><label class="form-label" for="ds-count"><span>Rows</span></label><input type="number" id="ds-count" class="input-clean" min="1" max="10000" value="25" inputmode="numeric"></div>
+                    <div class="form-group"><label class="form-label" for="ds-locale"><span>Locale</span></label><select id="ds-locale" class="select-clean">${opts([['intl', 'International'], ['in', 'India']], 'intl')}</select></div>
+                  </div>
+                  <div class="form-group">
+                    <span class="form-label"><span>Columns</span><span class="form-label-desc">name · type · options (min-max or a|b|c)</span></span>
+                    <div class="dd-rows" id="ds-rows"></div>
+                    <button type="button" class="btn-toolbar-sm" id="btn-add-col"><iconify-icon icon="lucide:plus" width="14" height="14"></iconify-icon><span>Add column</span></button>
+                  </div>
+                </div>`,
+    outputHtml: `
+                  <pre class="web-code dd-text" id="output-text" hidden></pre>
+                  <div class="web-table-wrap dd-table-wrap" id="output-table-wrap" hidden><table class="web-table dd-table" id="output-table"><thead></thead><tbody></tbody></table></div>
+                  <p class="web-muted" id="output-note" hidden></p>`,
+    settingsSummary: 'Random seed · example.com',
+    settings: `
+              <div class="control-item">
+                <label for="opt-seed">Seed (same seed → same data)</label>
+                <input type="text" id="opt-seed" class="input-clean" placeholder="leave empty for a fresh random seed" spellcheck="false" autocomplete="off">
+              </div>
+              <div class="control-item">
+                <label for="opt-domain">Email domain</label>
+                <select id="opt-domain" class="select-clean">${opts([['example.com', 'example.com'], ['example.org', 'example.org'], ['example.net', 'example.net'], ['test', 'name.test (reserved TLD)'], ['invalid', 'name.invalid (never resolves)']], 'example.com')}</select>
+              </div>
+              <div class="control-item">
+                <label for="opt-table">SQL table name</label>
+                <input type="text" id="opt-table" class="input-clean" placeholder="people / data" spellcheck="false" autocomplete="off">
+              </div>${CHECK('opt-lorem-start', 'Classic lorem starts with “Lorem ipsum dolor sit amet…”', true)}${CHECK('opt-header', 'Include a header row in CSV', true)}`,
+    guide: [['Pick a generator', '<strong>Text</strong> gives placeholder copy by paragraphs, sentences or words in five flavours — classic lorem, hipster, corporate, tech or real-English pangrams — as plain text, HTML or Markdown. <strong>People</strong> makes fake contacts (international or Indian names, phones, PIN codes). <strong>Dataset</strong> lets you define columns and types for any mock table.'], ['Shape it', 'Tick the people fields you need, or add dataset columns: names, emails, cities, dates, integers and floats with a range, booleans, UUIDs, prices, colours, IPs, or a pick-list (<code>a|b|c</code>). Set a <em>seed</em> in Settings and the same inputs produce the same rows every time — ideal for tests and fixtures.'], ['Export', 'Copy the result, or download as text, CSV, JSON or SQL <code>INSERT</code> statements. Emails always use reserved domains (example.com, .test, .invalid) so nothing you generate can reach a real inbox.']],
+    faq: [['Is the data really random?', 'It comes from a small seeded pseudo-random generator (mulberry32). With an empty seed a fresh one is drawn each time you reset; with a seed of your own the output is fully reproducible — same seed, same counts, same rows, on any device. Nothing is pulled from the internet.'], ['Can generated emails or phone numbers belong to real people?', 'Names are combined from short lists, so coincidences with real names are possible, but emails use only the reserved domains example.com / .org / .net, .test and .invalid, which can never deliver mail. Phone numbers follow the right shape (+91 9xxxx xxxxx, +1 (xxx) xxx-xxxx) but are not checked against any directory.'], ['What are the lorem flavours for?', 'Classic lorem is unreadable on purpose, so designers see layout not content. Hipster, corporate and tech read like real sentences in a recognisable register when a mock-up needs believable copy, and pangrams contain every letter of the alphabet — useful for testing fonts.'], ['How big can a dataset be?', 'Up to 10,000 rows and any number of columns; the preview shows the first 50 rows and the downloads contain everything. Larger sets are better produced in a script — the browser tab would hold it all in memory.'], ['What does the SQL export look like?', 'One multi-row <code>INSERT INTO table (columns) VALUES (…), (…);</code> per 500 rows, with strings single-quoted and escaped, numbers and booleans bare, and empty values as <code>NULL</code>. Set the table name in Settings; it defaults to <code>people</code> or <code>data</code>.'], PRIVACY_FAQ]
   }
 ];

@@ -651,7 +651,190 @@ const CASES = [
     set('id-type', 'nanoid'); set('id-len', '12'); set('opt-alpha', 'nolook'); set('id-count', '200'); await settle(); A(out().list.every(x => x.length === 12 && !/[0OIl1]/.test(x)) && new Set(out().list).size === 200, 'nanoid nolook unique');
     set('id-type', 'otp'); set('id-len', '6'); await settle(); A(out().list.every(x => /^\\d{6}$/.test(x)), 'otp');
     const csv = await T.T.download('csv', T); A(csv.text.startsWith('id\\n') && csv.text.split('\\n').length === 201, 'csv');
-    $('btn-reset').click(); await settle(); A(!out() && !$('hash-pane').hidden && $('id-count').value === '10' && $('text-input').value === '', 'reset');`]
+    $('btn-reset').click(); await settle(); A(!out() && !$('hash-pane').hidden && $('id-count').value === '10' && $('text-input').value === '', 'reset');`],
+  ['data/date-calculator', `
+    set('diff-a', '2024-02-28T00:00'); set('diff-b', '2024-03-01T00:00'); await settle();
+    A(out() && /^2 days$/.test(out().json.Result), 'leap diff: ' + (out() && out().json.Result));
+    A(out().json['Total days'] === '2' && out().json['ISO 8601 duration'] === 'P2D', 'totals: ' + JSON.stringify(out().json));
+    set('opt-inclusive', true); await settle(); A(out().json['Total days'] === '3', 'inclusive: ' + out().json['Total days']); set('opt-inclusive', false);
+    set('diff-a', '2020-01-31T10:00'); set('diff-b', '2021-03-01T09:30'); await settle();
+    A(out().json.Result === '1 year, 1 month, 23 hours, 30 minutes', 'calendar walk: ' + out().json.Result);
+    const D = window.ToolityDate; A(D.addMonths(new Date(2025, 0, 31), 1).getDate() === 28 && D.addMonths(new Date(2024, 0, 31), 1).getDate() === 29, 'month clamp');
+    A(D.isoWeek(new Date(2021, 0, 1)).week === 53 && D.isoWeek(new Date(2026, 0, 1)).week === 1, 'iso week');
+    A(D.parseLoose('26/01/2027').getMonth() === 0 && D.parseLoose('01/26/2027').getDate() === 26 && D.parseLoose('25 Dec 2026').getDate() === 25 && D.parseLoose('nope') === null, 'loose parse');
+    pill('seg-mode', 'add'); await settle(); A(!$('pane-add').hidden && $('pane-diff').hidden, 'add pane');
+    set('add-start', '2025-01-31T00:00'); set('add-months', '1'); await settle(); A(out().json['ISO 8601'] === '2025-02-28', 'add month clamp: ' + out().json['ISO 8601']);
+    pill('seg-dir', 'sub'); set('add-months', ''); set('add-days', '31'); await settle(); A(out().json['ISO 8601'] === '2024-12-31', 'subtract days: ' + out().json['ISO 8601']);
+    pill('seg-mode', 'work'); set('work-start', '2026-10-19'); set('work-end', '2026-10-31'); await settle();
+    A(/^10 working days$/.test(out().json.Result), 'working days: ' + out().json.Result);
+    set('work-holidays', '2026-10-20\\n25 Dec 2026\\nbad line'); await settle(); A(/^9 working days$/.test(out().json.Result) && out().json['Holidays counted'] === '2026-10-20' && /bad line/.test(out().json['Unparsed holiday lines']), 'holiday: ' + JSON.stringify(out().json));
+    set('work-end', ''); set('work-n', '10'); await settle(); A(out().json['ISO 8601'] === '2026-11-03', '+10 working days: ' + out().json['ISO 8601']);
+    set('work-n', '-1'); await settle(); A(out().json['ISO 8601'] === '2026-10-16', '-1 working day: ' + out().json['ISO 8601']);
+    pill('seg-mode', 'age'); set('age-dob', '2000-02-29'); set('age-on', '2026-02-28'); await settle();
+    A(out().json.Result === '26 years, 0 months, 0 days' && /2027/.test(out().json['Next birthday']), 'age: ' + out().json.Result + ' / ' + out().json['Next birthday']);
+    set('age-on', '1999-01-01'); await settle(); A(!out() && /before/.test($('status-badge').textContent), 'age before dob');
+    $('btn-reset').click(); await settle(); A(!out() && !$('pane-diff').hidden && $('pane-age').hidden && $('age-dob').value === '', 'reset');`],
+  ['dev/cron-builder', `
+    const C = window.ToolityCron;
+    set('cron-input', '*/15 9-17 * * 1-5'); await settle(); A(out(), 'no output');
+    A(out().full.description === 'Every 15th minute past hour 9 through 17 on day-of-week Monday through Friday', 'describe: ' + out().full.description);
+    A(out().full.nextRuns.length === 10 && out().full.nextRuns.every((iso, i, a) => { const d = new Date(iso); return [1,2,3,4,5].includes(d.getDay()) && d.getHours() >= 9 && d.getHours() <= 17 && d.getMinutes() % 15 === 0 && (!i || d > new Date(a[i-1])); }), 'runs: ' + out().full.nextRuns.slice(0, 3));
+    A($('cb-minute-mode').value === 'step' && $('cb-minute-step').value === '15' && $('cb-hour-mode').value === 'range' && $('cb-hour-from').value === '9' && $('cb-hour-to').value === '17' && $('cb-dow-mode').value === 'range', 'builder reflects expression');
+    A(C.describe(C.parse('30 9 * * 1-5')) === 'At 09:30 on day-of-week Monday through Friday', 'd1: ' + C.describe(C.parse('30 9 * * 1-5')));
+    A(C.describe(C.parse('0 0 L * *')) === 'At 00:00 on the last day of the month', 'd2: ' + C.describe(C.parse('0 0 L * *')));
+    A(C.describe(C.parse('0 9 * * MON#1')) === 'At 09:00 on the 1st Monday of the month', 'd3: ' + C.describe(C.parse('0 9 * * MON#1')));
+    A(C.describe(C.parse('@hourly')) === 'At minute 0 past every hour', 'alias: ' + C.describe(C.parse('@hourly')));
+    A(C.describe(C.parse('0 12 1,15 JAN,JUL *')) === 'At 12:00 on day-of-month 1 and 15 in month January and July', 'd4: ' + C.describe(C.parse('0 12 1,15 JAN,JUL *')));
+    A(C.describe(C.parse('*/10 * * * * *', true), true) === 'Every 10th second, every minute', 'seconds: ' + C.describe(C.parse('*/10 * * * * *', true), true));
+    let threw = ''; try { C.parse('61 * * * *'); } catch (e) { threw = e.message; } A(/0–59/.test(threw), 'range error: ' + threw);
+    threw = ''; try { C.parse('* * * *'); } catch (e) { threw = e.message; } A(/Expected 5/.test(threw), 'count error: ' + threw);
+    const first = C.nextRuns(C.parse('0 0 L * *'), 'UTC', 2, false).map(t => new Date(t)); A(first.every(d => d.getUTCHours() === 0 && new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + 1, 0)).getUTCDate() === d.getUTCDate()), 'L in UTC: ' + first);
+    const ist = C.nextRuns(C.parse('0 9 * * *'), 'Asia/Kolkata', 1, false)[0]; A(new Date(ist).getUTCHours() === 3 && new Date(ist).getUTCMinutes() === 30, 'IST 09:00 = 03:30Z: ' + new Date(ist).toISOString());
+    A(C.zonedToUtc(2026, 3, 8, 2, 30, 0, 'America/New_York') === null && C.zonedToUtc(2026, 3, 8, 3, 30, 0, 'America/New_York') === Date.UTC(2026, 2, 8, 7, 30), 'DST gap skipped');
+    A(C.nextRuns(C.parse('0 0 31 2 *'), 'UTC', 1, false).length === 0, 'never runs');
+    set('cron-input', '0 0 31 2 *'); await settle(); A(out() && out().ok === false && /Never runs/.test($('output-flags').textContent), 'never flag: ' + $('output-flags').textContent);
+    set('cron-input', '0 9 1 * 1'); await settle(); A(/OR/.test($('output-flags').textContent), 'dom/dow warning');
+    set('cron-preset', '0 0 * * 0'); await settle(); A($('cron-input').value === '0 0 * * 0' && $('cron-preset').value === '' && $('cb-dow-mode').value === 'list' && document.querySelector('[data-k=dow] .cb-chip[data-v="0"]').getAttribute('aria-pressed') === 'true', 'preset → builder');
+    document.querySelector('[data-k=dow] .cb-chip[data-v="3"]').click(); await settle(); A($('cron-input').value === '0 0 * * 0,3', 'chip → expression: ' + $('cron-input').value);
+    set('cb-hour-mode', 'step'); set('cb-hour-step', '4'); await settle(); A($('cron-input').value === '0 */4 * * 0,3', 'builder select → expression: ' + $('cron-input').value);
+    set('opt-seconds', true); await settle(); A($('cron-input').value === '0 0 */4 * * 0,3' && !document.querySelector('[data-k=second]').hidden && out().full.fields === 6, 'seconds toggle: ' + $('cron-input').value);
+    set('opt-seconds', false); await settle(); A($('cron-input').value === '0 */4 * * 0,3' && document.querySelector('[data-k=second]').hidden, 'seconds off: ' + $('cron-input').value);
+    set('opt-tz', 'Asia/Tokyo'); set('opt-count', '5'); await settle(); A(out().full.timeZone === 'Asia/Tokyo' && out().full.nextRuns.length === 5 && /Tokyo/.test($('settings-summary').textContent), 'tz + count');
+    const txt = await T.T.download('txt', T); A(/Next runs:/.test(txt.text) && txt.text.split('\\n').length > 6, 'txt download');
+    $('btn-reset').click(); await settle(); A(!out() && $('cron-input').value === '' && $('cb-hour-mode').value === 'any' && $('opt-tz').value === '' && document.querySelector('[data-k=dow] .cb-chip[aria-pressed="true"]') === null, 'reset');`],
+  ['dev/jwt-builder-verifier', `
+    const J = window.ToolityJwt;
+    // jwt.io reference token: HS256, secret "your-256-bit-secret"
+    const REF = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
+    set('jwt-payload', '{"sub":"1234567890","name":"John Doe","iat":1516239022}'); set('jwt-secret', 'your-256-bit-secret'); await settle();
+    A(out() && out().text === REF, 'HS256 vector: ' + (out() && out().text));
+    A(/Secret is 19 bytes/.test($('output-flags').textContent) && /never expires/.test($('output-flags').textContent), 'flags: ' + $('output-flags').textContent);
+    $('jwt-secret').value = ''; set('jwt-payload', '{"a":1'); await settle(); A(!out() || !$('input-error').hidden, 'bad json → no token');
+    set('jwt-payload', '{}'); set('jwt-secret', 's'); await settle(); document.querySelector('.jwt-claim[data-claim=exp]').click(); await settle();
+    const pl = JSON.parse($('jwt-payload').value); A(Math.abs(pl.exp - Date.now() / 1000 - 3600) < 5 && /Expires in 1 hour|Expires in 60 minutes/.test($('output-flags').textContent), 'exp chip: ' + $('output-flags').textContent);
+    set('jwt-alg', 'ES256'); await settle(); A($('jwt-secret-group').hidden && !$('jwt-privkey-group').hidden, 'alg switches key field');
+    $('btn-gen-keys').click(); A(await waitFor(() => /BEGIN PRIVATE KEY/.test($('jwt-privkey').value) && out() && out().text.split('.').length === 3 && !$('output-keys').hidden, 15000), 'ES256 generated + signed');
+    const es = out().text, pub = J.keys().publicPem; A(J.unb64u(es.split('.')[2]).length === 64, 'ES256 raw r||s = 64 bytes');
+    A(await J.verify(es, pub) === true, 'ES256 verifies with public PEM');
+    A(await J.verify(es.slice(0, -2) + (es.endsWith('A') ? 'BB' : 'AA'), pub) === false, 'tampered ES256 fails');
+    set('jwt-alg', 'RS256'); $('btn-gen-keys').click(); A(await waitFor(() => J.keys().privatePem !== '' && out() && out().text !== es && /RS256/.test($('output-badge').textContent), 20000), 'RS256 generated + signed');
+    const rs = out().text, rsPub = J.keys().publicPem; A(await J.verify(rs, rsPub) === true, 'RS256 verifies');
+    set('jwt-alg', 'PS256'); await settle(); A(await waitFor(() => out() && /PS256/.test($('output-badge').textContent), 10000) && await J.verify(out().text, rsPub) === true, 'PS256 with same RSA key verifies');
+    pill('seg-mode', 'verify'); await settle(); A($('pane-build').hidden && !$('pane-verify').hidden, 'verify pane');
+    set('jwt-token', 'Bearer ' + REF); await settle(); A(out() && out().decoded.payload.name === 'John Doe' && /unverified/.test($('output-flags').textContent), 'decode only: ' + $('output-flags').textContent);
+    set('jwt-verify-key', 'your-256-bit-secret'); await settle(); A(out().decoded.signatureValid === true && /Signature valid/.test($('output-flags').textContent), 'HS256 verified');
+    set('jwt-verify-key', 'wrong'); await settle(); A(out().decoded.signatureValid === false && out().ok === false, 'wrong secret → invalid');
+    set('jwt-verify-key', rsPub); await settle(); A(/Cannot verify/.test($('output-flags').textContent), 'PEM for HS → clear error: ' + $('output-flags').textContent);
+    set('jwt-token', rs); await settle(); A(out().decoded.signatureValid === true, 'RS256 verified via PEM');
+    // JWKS by kid: kid in header, key picked from a JWKS, wrong JWKS → false
+    pill('seg-mode', 'build'); set('jwt-alg', 'ES256'); set('jwt-kid', 'mine'); $('btn-gen-keys').click();
+    A(await waitFor(() => out() && /ES256/.test($('output-badge').textContent) && J.keys().publicPem !== rsPub, 15000), 'ES256 regenerated');
+    const esKid = out().text; A(JSON.parse(atob(esKid.split('.')[0].replace(/-/g, '+').replace(/_/g, '/'))).kid === 'mine', 'kid in header');
+    const minePub = await crypto.subtle.exportKey('jwk', await crypto.subtle.importKey('spki', J.unb64u(J.keys().publicPem.replace(/-----[^-]+-----/g, '').replace(/\\s+/g, '')), { name: 'ECDSA', namedCurve: 'P-256' }, true, ['verify']));
+    const other = await crypto.subtle.exportKey('jwk', (await crypto.subtle.generateKey({ name: 'ECDSA', namedCurve: 'P-256' }, true, ['sign', 'verify'])).publicKey);
+    A(await J.verify(esKid, JSON.stringify({ keys: [Object.assign({ kid: 'other' }, other), Object.assign({ kid: 'mine' }, minePub)] })) === true, 'JWKS picks kid=mine');
+    A(await J.verify(esKid, JSON.stringify({ keys: [Object.assign({ kid: 'other' }, other)] })) === false, 'JWKS wrong key → false');
+    A(await J.verify(esKid, JSON.stringify(minePub)) === true, 'single JWK verifies');
+    // expired + nbf + none
+    pill('seg-mode', 'verify'); const hdr = (o) => J.b64u(new TextEncoder().encode(JSON.stringify(o)));
+    set('jwt-verify-key', ''); set('jwt-token', hdr({ alg: 'HS256', typ: 'JWT' }) + '.' + hdr({ exp: 1000000000, nbf: 4102444800 }) + '.sig'); await settle();
+    A(/Expired/.test($('output-flags').textContent) && /Not valid until/.test($('output-flags').textContent) && out().ok === false, 'exp/nbf flags: ' + $('output-flags').textContent);
+    set('opt-skew', '3600'); await settle(); A(/3600 s clock skew|3600 s/.test($('settings-summary').textContent), 'skew summary');
+    set('jwt-token', hdr({ alg: 'none' }) + '.' + hdr({ sub: 'x' }) + '.'); await settle(); A(/alg: none/.test($('output-flags').textContent) && out().ok === false, 'alg none flagged');
+    set('jwt-token', 'a.b.c.d.e'); await settle(); A(out() && /JWE/.test($('output-badge').textContent), 'JWE detected');
+    set('jwt-token', 'not a token'); await settle(); A(!$('input-error').hidden && /3 dot-separated/.test($('input-error').textContent), 'bad token error');
+    const dl = await T.T.download('pem-public', T); A(dl && /BEGIN PUBLIC KEY/.test(dl.text) && dl.name === 'public.pem', 'pem download');
+    $('btn-reset').click(); await settle(); A(!out() && !$('pane-build').hidden && $('jwt-payload').value === '' && $('jwt-privkey').value === '' && J.keys().publicPem === '' && $('opt-skew').value === '0', 'reset clears keys');`],
+  ['utm-link-builder', `
+    const U = window.ToolityUtm; localStorage.removeItem('toolity_utm_presets');
+    set('utm-url', 'https://www.Example.com/p?a=1&utm_source=old&fbclid=zzz#top'); set('utm-source', 'Google'); set('utm-medium', 'CPC'); set('utm-campaign', 'Spring Sale 2026'); await settle();
+    A(out() && out().text === 'https://www.example.com/p?a=1&utm_source=google&utm_medium=cpc&utm_campaign=spring_sale_2026#top', 'final: ' + (out() && out().text));
+    A(/Removed utm_source, fbclid/.test($('output-flags').textContent) && out().ok === true, 'strip flag: ' + $('output-flags').textContent);
+    A(!$('output-qr').hidden && $('output-qr').getContext('2d').getImageData(0, 0, 160, 160).data.some((v, i) => i % 4 === 0 && v === 0), 'qr drawn');
+    set('opt-lower', false); set('opt-space', '-'); set('opt-fragment', false); await settle(); A(out().text === 'https://www.example.com/p?a=1&utm_source=Google&utm_medium=CPC&utm_campaign=Spring-Sale-2026' && /Mixed case/.test($('output-flags').textContent), 'settings: ' + out().text);
+    set('opt-lower', true); set('opt-space', '_'); set('opt-fragment', true); set('opt-strip', false); await settle(); A(/utm_source=google/.test(out().text) && /fbclid=zzz/.test(out().text) && !/utm_source=old/.test(out().text), 'no strip keeps fbclid, utm overwritten: ' + out().text); set('opt-strip', true);
+    set('utm-medium', ''); await settle(); A(out().ok === false && /utm_medium is required/.test($('status-badge').textContent), 'required flag');
+    document.querySelector('.utm-preset[data-source="newsletter"]').click(); await settle(); A($('utm-source').value === 'newsletter' && $('utm-medium').value === 'email' && /utm_medium=email/.test(out().text), 'platform preset');
+    set('utm-term', 'running shoes'); set('utm-custom', 'ref=partner 42\\nbad'); await settle(); A(/utm_term=running_shoes/.test(out().text) && /ref=partner\\+42|ref=partner%2042/.test(out().text) && /&bad=/.test(out().text), 'term + custom: ' + out().text);
+    set('utm-custom', ''); set('utm-term', '');
+    window.prompt = () => 'News Oct'; $('btn-save-preset').click(); await tick(100); A(U.loadPresets()['News Oct'].source === 'newsletter' && $('utm-saved').value === 'News Oct' && !$('btn-del-preset').disabled, 'preset saved');
+    set('utm-source', 'x'); set('utm-campaign', 'y'); set('utm-saved', 'News Oct'); await settle(); A($('utm-source').value === 'newsletter' && $('utm-campaign').value === 'spring sale 2026'.replace(/ /g, ' ') || $('utm-campaign').value === 'Spring Sale 2026', 'preset loads: ' + $('utm-campaign').value);
+    $('btn-del-preset').click(); await tick(100); A(!U.loadPresets()['News Oct'] && $('utm-saved').options.length === 1, 'preset deleted');
+    pill('seg-mode', 'bulk'); await settle(); A($('utm-url-group').hidden && !$('utm-urls-group').hidden, 'bulk pane');
+    set('utm-urls', 'https://example.com/\\nhttps://example.com/pricing, pricing CTA\\nnot a url'); await settle();
+    const rows = out().text.split('\\n'); A(rows.length === 2 && /utm_content=pricing_cta/.test(rows[1]) && !/utm_content/.test(rows[0]), 'bulk rows: ' + rows);
+    A(/1 line not a URL/.test($('output-flags').textContent) && $('output-bulk').querySelectorAll('tbody tr').length === 3, 'bulk flags');
+    const csv = await T.T.download('csv', T); A(csv.text.split('\\n').length === 3 && csv.text.startsWith('url,utm_source') && /pricing_cta/.test(csv.text), 'bulk csv');
+    $('btn-reset').click(); await settle(); A(!out() && !$('utm-url-group').hidden && $('utm-source').value === '' && $('opt-lower').checked, 'reset');`],
+  ['docs/dummy-text-data-generator', `
+    const G = window.ToolityDummy;
+    await settle(); A(out() && /^Lorem ipsum dolor sit amet/.test(out().text) && out().text.split('\\n\\n').length === 3, 'default 3 lorem paragraphs: ' + (out() && out().text.slice(0, 40)));
+    set('opt-lorem-start', false); set('txt-unit', 'words'); set('txt-count', '12'); await settle(); A(out().text.replace(/\\.$/, '').split(' ').length === 12 && !/^Lorem ipsum dolor/.test(out().text), '12 words: ' + out().text);
+    set('txt-unit', 'sentences'); set('txt-count', '5'); set('txt-flavour', 'pangram'); await settle(); A(out().text.split(/[.!?]\\s/).length === 5 && /quick|Sphinx|zebras|wizards|Jackdaws|Frederick|buckles|discotheques|nymph|jocks|vixens/.test(out().text), 'pangram sentences: ' + out().text);
+    set('txt-flavour', 'corporate'); set('txt-unit', 'paragraphs'); set('txt-count', '2'); set('txt-format', 'html'); await settle(); A((out().text.match(/<p>/g) || []).length === 2 && /synergy|leverage|roadmap|stakeholders|pivot|bandwidth|deliverables|alignment|paradigm|scalable/i.test(out().text), 'corporate html: ' + out().text.slice(0, 80));
+    set('opt-seed', '42'); await settle(); const a = out().text; $('btn-reset').click(); await settle(); set('opt-seed', '42'); set('txt-flavour', 'corporate'); set('txt-unit', 'paragraphs'); set('txt-count', '2'); set('txt-format', 'html'); set('opt-lorem-start', false); await settle(); A(out().text === a, 'seed reproducible');
+    pill('seg-mode', 'people'); await settle(); A(!$('pane-people').hidden && !$('output-table-wrap').hidden && $('output-text').hidden, 'people pane');
+    set('ppl-count', '100'); await settle(); A(out().data.length === 100 && out().cols.join() === 'id,name,email,phone,city,company', 'people cols: ' + out().cols);
+    A(out().data.every(p => /^[a-z0-9.]+@example\\.com$/.test(p.email)) && out().data.every(p => /^\\+1 \\(\\d{3}\\) \\d{3}-\\d{4}$/.test(p.phone)), 'intl email/phone: ' + out().data[0].email + ' ' + out().data[0].phone);
+    set('ppl-locale', 'in'); set('opt-domain', 'test'); set('ppl-address', true); set('ppl-dob', true); await settle();
+    A(out().data.every(p => /^\\+91 [6-9]\\d{4} \\d{5}$/.test(p.phone) && /\\.test$/.test(p.email) && /\\d{6}$/.test(p.address) && /^\\d{4}-\\d{2}-\\d{2}$/.test(p.dob)), 'india: ' + JSON.stringify(out().data[0]));
+    const seedA = out().data.map(p => p.email).join(); set('opt-seed', '43'); await settle(); A(out().data.map(p => p.email).join() !== seedA, 'different seed → different people'); set('opt-seed', '42'); await settle(); A(out().data.map(p => p.email).join() === seedA, 'same seed → same people');
+    A($('output-table').querySelectorAll('tbody tr').length === 50 && /Showing 50 of 100/.test($('output-note').textContent), 'preview capped at 50');
+    const sql = await T.T.download('sql', T); A(/^INSERT INTO people \\(id, name, email, phone, city, address, dob, company\\) VALUES/.test(sql.text) && (sql.text.match(/\\n  \\(/g) || []).length === 100, 'sql: ' + sql.text.slice(0, 120));
+    const json = await T.T.download('json', T); A(JSON.parse(json.text).length === 100 && JSON.parse(json.text)[0].id === 1, 'json');
+    set('opt-header', false); await settle(); A(!/^id,name/.test(out().csv) && out().csv.split('\\n').length === 100, 'csv without header'); set('opt-header', true);
+    pill('seg-mode', 'dataset'); await settle(); A($('ds-rows').querySelectorAll('.dd-row').length === 5 && out().cols.join() === 'increment,full_name,email,city,int' && out().data.length === 25, 'default schema: ' + out().cols);
+    A(out().data.every((r, i) => r.increment === i + 1 && r.int >= 1 && r.int <= 100 && Number.isInteger(r.int)), 'increment + int range');
+    $('btn-add-col').click(); await settle(); const last = $('ds-rows').lastElementChild; last.querySelector('.dd-name').value = 'plan'; last.querySelector('.dd-type').value = 'pick'; last.querySelector('.dd-opt').value = 'free|pro|team'; last.querySelector('.dd-opt').dispatchEvent(new Event('input', { bubbles: true })); await settle();
+    A(out().cols.includes('plan') && out().data.every(r => ['free', 'pro', 'team'].includes(r.plan)), 'pick column: ' + out().data[0].plan);
+    $('btn-add-col').click(); await settle(); const l2 = $('ds-rows').lastElementChild; l2.querySelector('.dd-type').value = 'price'; l2.querySelector('.dd-opt').value = '5-10'; l2.querySelector('.dd-opt').dispatchEvent(new Event('input', { bubbles: true })); await settle();
+    A(out().data.every(r => r.price >= 5 && r.price <= 10), 'price range: ' + out().data[0].price);
+    $('ds-rows').querySelector('.dd-del').click(); await settle(); A(!out().cols.includes('increment') && out().cols.length === 6, 'remove column');
+    const sql2 = await T.T.download('sql', T); A(/^INSERT INTO data \\(/.test(sql2.text) && /'free'|'pro'|'team'/.test(sql2.text), 'dataset sql');
+    set('ds-count', '0'); await settle(); A(out().data.length === 1, 'min 1 row');
+    [...$('ds-rows').querySelectorAll('.dd-del')].forEach(b => b.click()); await settle(); A(!out() && /at least one column/.test($('output-note').textContent), 'no columns note');
+    $('btn-reset').click(); await settle(); A(out() && !$('pane-text').hidden && $('ds-rows').querySelectorAll('.dd-row').length === 5 && $('opt-seed').value === '' && $('ppl-locale').value === 'intl', 'reset');`],
+  ['qr-barcode-scanner', `
+    const Sc = window.ToolityScan;
+    const load = (src) => new Promise((res, rej) => { const el = document.createElement('script'); el.src = src; el.onload = res; el.onerror = rej; document.head.appendChild(el); });
+    await load('/scripts/qr-engine.js'); await load('https://cdn.jsdelivr.net/npm/jsbarcode@3.12.3/dist/JsBarcode.all.min.js');
+    const qrCanvas = (text, size = 360) => { const q = new QRCodeGenerator(0, QRErrorCorrectLevel.M); q.addData(text); q.make(); const n = q.getModuleCount(), Q = 4, s = size / (n + Q * 2), c = document.createElement('canvas'); c.width = c.height = size; const x = c.getContext('2d'); x.fillStyle = '#fff'; x.fillRect(0, 0, size, size); x.fillStyle = '#000'; for (let r = 0; r < n; r++) for (let col = 0; col < n; col++) if (q.isDark(r, col)) x.fillRect(Math.round((col + Q) * s), Math.round((r + Q) * s), Math.ceil(s), Math.ceil(s)); return c; };
+    const toFile = (c, name) => new Promise(r => c.toBlob(b => r(new File([b], name, { type: 'image/png' })), 'image/png'));
+    const feed = async (files) => { const dt = new DataTransfer(); files.forEach(f => dt.items.add(f)); $('file-input').files = dt.files; $('file-input').dispatchEvent(new Event('change', { bubbles: true })); };
+    // classify (pure)
+    const C = Sc.classify; A(C('https://toolity.in/x').type === 'URL' && C('www.example.com').actions[0][2] === 'https://www.example.com/', 'classify url');
+    const w = C('WIFI:T:WPA;S:Home Net;P:pa\\\\;ss;H:true;;'); A(w.type === 'Wi-Fi' && w.fields[0][1] === 'Home Net' && w.fields[2][1] === 'pa;ss', 'classify wifi: ' + JSON.stringify(w.fields));
+    const u = C('upi://pay?pa=shop@upi&pn=Tea%20Stall&am=40.00&cu=INR'); A(u.type === 'UPI payment' && u.fields[0][1] === 'Tea Stall' && u.fields[2][1] === '₹40.00', 'classify upi: ' + JSON.stringify(u.fields));
+    const v = C('BEGIN:VCARD\\nVERSION:3.0\\nN:Doe;Jane\\nFN:Jane Doe\\nTEL;TYPE=cell:+1 555 0100\\nEMAIL:jane@example.com\\nEND:VCARD'); A(v.type === 'Contact (vCard)' && v.fields[0][1] === 'Jane Doe' && v.actions[0][3] === 'contact.vcf', 'classify vcard');
+    const mc = C('MECARD:N:Doe,John;TEL:5550100;EMAIL:j@example.com;;'); A(mc.fields[0][1] === 'John Doe' && /BEGIN:VCARD/.test(mc.actions[0][2]), 'classify mecard');
+    A(C('tel:+919999999999').type === 'Phone' && C('geo:12.97,77.59').actions[0][2].includes('12.97,77.59') && C('5901234123457').type === 'Product code' && C('hello world').type === 'Text' && C('javascript://x').type === 'Text', 'classify misc');
+    A(C('otpauth://totp/Acme:bob?secret=ABCDEFGH&issuer=Acme').fields[2][1] === 'ABCD••••', 'otp secret masked');
+    // image scan via the real file input (zxing fallback in headless Linux)
+    await feed([await toFile(qrCanvas('https://toolity.in/labs/'), 'qr.png')]);
+    A(await waitFor(() => out() && Sc.results.length === 1, 40000), 'qr decoded from file: ' + $('qs-status').textContent + ' ' + ($('input-error').hidden ? '' : $('input-error').textContent));
+    A(Sc.results[0].text === 'https://toolity.in/labs/' && Sc.results[0].format === 'QR Code' && out().url === 'https://toolity.in/labs/' && /QR Code · URL/.test($('status-badge').textContent), 'result 1: ' + JSON.stringify(Sc.results[0] && [Sc.results[0].text, Sc.results[0].format]));
+    A(!$('img-canvas').hidden && !$('qs-overlay').hidden && $('output-results').querySelectorAll('.qs-card').length === 1 && /Open link/.test($('output-results').textContent), 'image shown + card');
+    // same code again → dedupe (×2), then with dedupe off → second card
+    await feed([await toFile(qrCanvas('https://toolity.in/labs/'), 'qr2.png')]); await tick(1500); A(Sc.results.length === 1 && Sc.results[0].seen === 2 && /×2/.test($('output-results').textContent), 'dedupe: ' + Sc.results.length + ' seen ' + Sc.results[0].seen);
+    set('opt-dedupe', false); await feed([await toFile(qrCanvas('WIFI:T:WPA;S:Cafe;P:latte123;;'), 'wifi.png')]); A(await waitFor(() => Sc.results.length === 2, 20000), 'second code'); A(Sc.results[0].info.type === 'Wi-Fi' && /latte123/.test($('output-results').textContent) && /Copy password/.test($('output-results').textContent), 'wifi card');
+    // EAN-13 barcode via JsBarcode
+    const bc = document.createElement('canvas'); JsBarcode(bc, '5901234123457', { format: 'EAN13', width: 3, height: 120, margin: 20 }); await feed([await toFile(bc, 'ean.png')]);
+    A(await waitFor(() => Sc.results.length === 3, 20000), 'ean decoded: ' + $('qs-status').textContent); A(Sc.results[0].format === 'EAN-13' && Sc.results[0].text === '5901234123457' && Sc.results[0].info.type === 'Product code', 'ean: ' + Sc.results[0].format + ' ' + Sc.results[0].text);
+    // formats filter: QR-only must not read the barcode
+    set('opt-formats', 'qr'); await feed([await toFile(bc, 'ean2.png')]); await tick(2500); A(Sc.results.length === 3 && /No code found/.test($('qs-status').textContent), 'qr-only ignores EAN: ' + $('qs-status').textContent); set('opt-formats', 'all');
+    // blank image → friendly status, no error
+    const blank = document.createElement('canvas'); blank.width = blank.height = 200; blank.getContext('2d').fillStyle = '#fff'; blank.getContext('2d').fillRect(0, 0, 200, 200); await feed([await toFile(blank, 'blank.png')]); await tick(2500); A(/No code found in blank\\.png/.test($('qs-status').textContent) && $('input-error').hidden, 'blank status: ' + $('qs-status').textContent);
+    // paste
+    const pf = await toFile(qrCanvas('tel:+15550100'), 'paste.png'); const pdt = new DataTransfer(); pdt.items.add(pf); const pe = new ClipboardEvent('paste', { bubbles: true, cancelable: true, clipboardData: pdt }); document.dispatchEvent(pe); A(await waitFor(() => Sc.results.length === 4, 20000), 'paste decoded'); A(Sc.results[0].info.type === 'Phone', 'paste → phone card');
+    // camera stub: captureStream of a QR canvas
+    set('opt-dedupe', true); const camC = qrCanvas('https://example.com/cam', 480); const stream = camC.captureStream(10); navigator.mediaDevices.getUserMedia = async () => stream; navigator.mediaDevices.enumerateDevices = async () => [{ kind: 'videoinput', deviceId: 'stub', label: 'Stub cam' }];
+    $('btn-cam').click(); A(await waitFor(() => Sc.results.length === 5, 30000), 'camera decoded: ' + $('qs-status').textContent + ' ' + ($('input-error').hidden ? '' : $('input-error').textContent));
+    A(Sc.results[0].text === 'https://example.com/cam' && Sc.results[0].source === 'camera' && !$('btn-rescan').hidden && /Paused/.test($('qs-status').textContent) && /Stop camera/.test($('btn-cam').textContent), 'camera result + paused: ' + $('qs-status').textContent);
+    $('btn-rescan').click(); await tick(300); A($('btn-rescan').hidden, 'rescan resumes'); await tick(1500);
+    $('btn-cam').click(); await tick(200); A(/Start camera/.test($('btn-cam').textContent) && $('cam-video').hidden && stream.getVideoTracks()[0].readyState === 'ended', 'camera stopped');
+    const csv = await T.T.download('csv', T); A(csv.text.split('\\n').length === Sc.results.length + 1 && /^text,format,type,source,at/.test(csv.text), 'csv'); const js = await T.T.download('json', T); A(JSON.parse(js.text).length === Sc.results.length, 'json');
+    const card = $('output-results').querySelector('.qs-card'); window.open = (u) => { window.__opened = u; return null; }; card.querySelector('.btn-brand-sm').click(); A(window.__opened === 'https://example.com/cam', 'open action: ' + window.__opened);
+    $('btn-reset').click(); await settle(); A(!out() && Sc.results.length === 0 && $('output-results').children.length === 0 && !$('qs-stage-empty').hidden && $('opt-formats').value === 'all' && $('opt-dedupe').checked, 'reset');`],
 ];
 
 (async () => {
