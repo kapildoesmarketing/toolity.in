@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online UTM Link Builder | Toolity Labs</title>
+  <link rel="canonical" href="https://toolity.in/labs/utm-link-builder/">
+  <meta name="description" content="Free online UTM link builder: add utm_source, utm_medium, utm_campaign, utm_term, utm_content and custom parameters to any URL, with platform presets, lowercase and space normalisation, saved presets, bulk tagging and a ready QR code. Runs in your browser — nothing is stored on a server.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online UTM Link Builder | Toolity Labs">
+  <meta property="og:description" content="Free online UTM link builder: add utm_source, utm_medium, utm_campaign, utm_term, utm_content and custom parameters to any URL, with platform presets, lowercase and space normalisation, saved presets, bulk tagging and a ready QR code. Runs in your browser — nothing is stored on a server.">
+  <meta property="og:url" content="https://toolity.in/labs/utm-link-builder/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=6.1" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=6.1">
+  <link rel="stylesheet" href="/styles/tools/utm-link-builder.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "UTM Link Builder",
+        "url": "https://toolity.in/labs/utm-link-builder/",
+        "description": "Free online UTM link builder: add utm_source, utm_medium, utm_campaign, utm_term, utm_content and custom parameters to any URL, with platform presets, lowercase and space normalisation, saved presets, bulk tagging and a ready QR code. Runs in your browser — nothing is stored on a server.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Labs", "item": "https://toolity.in/labs/" },
+          { "@type": "ListItem", "position": 3, "name": "UTM Link Builder", "item": "https://toolity.in/labs/utm-link-builder/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Which parameters does Google Analytics read?", "acceptedAnswer": { "@type": "Answer", "text": "utm_source, utm_medium and utm_campaign are the core three (GA4 needs source and medium to attribute a session). utm_term and utm_content add keyword and creative detail; utm_id and utm_source_platform are newer GA4 fields used with cost-data imports. Custom parameters are passed through for your own tooling but GA ignores them unless you register them." } },
+          { "@type": "Question", "name": "What should I put in medium?", "acceptedAnswer": { "@type": "Answer", "text": "Use the values GA4 maps to channels automatically: cpc or paid_search for paid search, paid_social for paid social, social for organic social posts, email, referral, display, video, affiliate. The presets follow that list; inventing new words lands traffic in “Unassigned”." } },
+          { "@type": "Question", "name": "Why lowercase everything?", "acceptedAnswer": { "@type": "Answer", "text": "Analytics tools are case-sensitive: Newsletter and newsletter become two rows. Lower-casing and replacing spaces with underscores keeps every report tidy. Turn it off in Settings if your team has a different convention." } },
+          { "@type": "Question", "name": "Where are saved presets stored?", "acceptedAnswer": { "@type": "Answer", "text": "In your browser’s localStorage — never on a server. They survive reloads on this device and browser only; clearing site data removes them. A preset stores source, medium, campaign, term and content, not the URL, so one “Newsletter” preset works for every link you send." } },
+          { "@type": "Question", "name": "Can I tag many links at once?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — Bulk mode accepts one URL per line and applies the same source, medium and campaign to each. Add a comma and a value after a URL to set a per-line utm_content (e.g. https://example.com/pricing, pricing-cta). The CSV download lists the original URL, every parameter and the final link." } },
+          { "@type": "Question", "name": "Is my input sent anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. Everything is computed by JavaScript in your browser tab. Nothing is uploaded, logged or stored by Toolity." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main>
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/labs/" class="breadcrumb-link">Labs</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">UTM Link Builder</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Labs</span>
+            <h1 class="page-title">UTM Link Builder</h1>
+            <p class="page-desc">Tag campaign links the consistent way: presets for Google Ads, Meta, LinkedIn and email, saved sources, bulk mode and a QR code for print.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" data-split="50/50" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge web-status-badge" id="status-badge">Enter a URL</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result" aria-label="Copy result" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <div class="dropdown-menu-wrapper" id="download-dropdown-wrap">
+                <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download result" aria-label="Download result" aria-haspopup="true" disabled>
+                  <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                  <span>Download</span>
+                  <iconify-icon icon="lucide:chevron-down" class="dropdown-arrow" width="13" height="13"></iconify-icon>
+                </button>
+                <div class="dropdown-popup" role="menu">
+                  <button type="button" class="dropdown-item" data-format="txt" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:file-text" width="14" height="14"></iconify-icon>
+                      <span>Link (.txt)</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="csv" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:table" width="14" height="14"></iconify-icon>
+                      <span>Table (.csv)</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="png" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:qr-code" width="14" height="14"></iconify-icon>
+                      <span>QR code (.png)</span>
+                    </div>
+                  </button>
+                </div>
+              </div>
+              <button type="button" class="btn-toolbar-sm" id="btn-open" title="Open result in a new tab" aria-label="Open result in a new tab" disabled>
+                <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
+                <span>Open</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Campaign</span>
+                <span class="pane-badge" id="input-badge">—</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content web-form">
+                <div class="form-group">
+                  <span class="form-label"><span>Mode</span></span>
+                  <div class="segmented-group segmented-group-pill" id="seg-mode" role="group" aria-label="Mode">
+                    <button type="button" class="seg-pill active" data-value="single">One link</button>
+                    <button type="button" class="seg-pill" data-value="bulk">Bulk</button>
+                  </div>
+                </div>
+                <div class="form-group" id="utm-url-group">
+                  <label class="form-label" for="utm-url"><span>Website URL</span><span class="form-label-desc">existing utm_* are replaced</span></label>
+                  <input type="url" id="utm-url" class="input-clean" placeholder="https://example.com/landing-page" spellcheck="false" autocomplete="off" autocapitalize="off" inputmode="url">
+                </div>
+                <div class="form-group" id="utm-urls-group" hidden>
+                  <label class="form-label" for="utm-urls"><span>URLs — one per line</span><span class="form-label-desc">optionally “url, content” to vary utm_content per line</span></label>
+                  <textarea id="utm-urls" class="textarea-clean" rows="6" placeholder="https://example.com/&#10;https://example.com/pricing, pricing-cta&#10;https://example.com/blog/post, blog-banner" spellcheck="false" autocapitalize="off"></textarea>
+                </div>
+                <div class="form-group">
+                  <span class="form-label"><span>Platform preset</span><span class="form-label-desc">fills source + medium</span></span>
+                  <div class="web-tags utm-presets" role="group" aria-label="Platform presets"><button type="button" class="web-tag utm-preset" data-source="google" data-medium="cpc">Google Ads</button><button type="button" class="web-tag utm-preset" data-source="facebook" data-medium="paid_social">Meta Ads</button><button type="button" class="web-tag utm-preset" data-source="instagram" data-medium="social">Instagram</button><button type="button" class="web-tag utm-preset" data-source="linkedin" data-medium="social">LinkedIn</button><button type="button" class="web-tag utm-preset" data-source="x" data-medium="social">X</button><button type="button" class="web-tag utm-preset" data-source="youtube" data-medium="video">YouTube</button><button type="button" class="web-tag utm-preset" data-source="newsletter" data-medium="email">Newsletter</button><button type="button" class="web-tag utm-preset" data-source="whatsapp" data-medium="messaging">WhatsApp</button><button type="button" class="web-tag utm-preset" data-source="partner" data-medium="referral">Partner</button><button type="button" class="web-tag utm-preset" data-source="qr" data-medium="offline">Print / QR</button></div>
+                </div>
+                <div class="web-convert-row web-convert-row-2">
+                  
+                <div class="form-group">
+                  <label class="form-label" for="utm-source"><span>Source *</span><span class="form-label-desc">where the traffic comes from</span></label>
+                  <input id="utm-source" class="input-clean" autocomplete="off" type="text" list="utm-source-list" placeholder="google, newsletter, linkedin" spellcheck="false" autocapitalize="off">
+                </div>
+                  
+                <div class="form-group">
+                  <label class="form-label" for="utm-medium"><span>Medium *</span><span class="form-label-desc">the channel</span></label>
+                  <input id="utm-medium" class="input-clean" autocomplete="off" type="text" list="utm-medium-list" placeholder="cpc, email, social" spellcheck="false" autocapitalize="off">
+                </div>
+                </div>
+                <datalist id="utm-source-list"><option value="google"><option value="bing"><option value="facebook"><option value="instagram"><option value="linkedin"><option value="x"><option value="youtube"><option value="newsletter"><option value="whatsapp"><option value="telegram"><option value="reddit"><option value="partner"><option value="qr"></datalist>
+                <datalist id="utm-medium-list"><option value="cpc"><option value="paid_social"><option value="social"><option value="email"><option value="referral"><option value="display"><option value="video"><option value="affiliate"><option value="messaging"><option value="offline"><option value="organic"></datalist>
+                
+                <div class="form-group">
+                  <label class="form-label" for="utm-campaign"><span>Campaign *</span><span class="form-label-desc">promotion or product name</span></label>
+                  <input id="utm-campaign" class="input-clean" autocomplete="off" type="text" placeholder="spring_sale_2026" spellcheck="false" autocapitalize="off">
+                </div>
+                <div class="web-convert-row web-convert-row-2">
+                  
+                <div class="form-group">
+                  <label class="form-label" for="utm-term"><span>Term</span><span class="form-label-desc">paid keywords</span></label>
+                  <input id="utm-term" class="input-clean" autocomplete="off" type="text" placeholder="running+shoes" spellcheck="false" autocapitalize="off">
+                </div>
+                  
+                <div class="form-group">
+                  <label class="form-label" for="utm-content"><span>Content</span><span class="form-label-desc">A/B variant or placement</span></label>
+                  <input id="utm-content" class="input-clean" autocomplete="off" type="text" placeholder="hero_button" spellcheck="false" autocapitalize="off">
+                </div>
+                </div>
+                <details class="utm-more">
+                  <summary>More parameters</summary>
+                  <div class="web-convert-row web-convert-row-2">
+                    
+                <div class="form-group">
+                  <label class="form-label" for="utm-id"><span>Campaign ID (utm_id)</span></label>
+                  <input id="utm-id" class="input-clean" autocomplete="off" type="text" placeholder="abc.123" spellcheck="false" autocapitalize="off">
+                </div>
+                    
+                <div class="form-group">
+                  <label class="form-label" for="utm-source-platform"><span>Source platform</span></label>
+                  <input id="utm-source-platform" class="input-clean" autocomplete="off" type="text" placeholder="Search Ads 360" spellcheck="false">
+                </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="utm-custom"><span>Custom parameters</span><span class="form-label-desc">key=value, one per line (ref=, fbclid=, gclid=…)</span></label>
+                    <textarea id="utm-custom" class="textarea-clean" rows="2" placeholder="ref=partner42&#10;promo=SPRING" spellcheck="false" autocapitalize="off"></textarea>
+                  </div>
+                </details>
+                <div class="form-group">
+                  <span class="form-label"><span>Saved presets</span><span class="form-label-desc">kept on this device only</span></span>
+                  <div class="web-inline">
+                    <select id="utm-saved" class="select-clean" aria-label="Load a saved preset"><option value="">Load a saved preset…</option></select>
+                    <button type="button" class="btn-toolbar-sm" id="btn-save-preset" title="Save source, medium, campaign, term and content under a name"><iconify-icon icon="lucide:bookmark-plus" width="14" height="14"></iconify-icon><span>Save</span></button>
+                    <button type="button" class="btn-toolbar-sm" id="btn-del-preset" title="Delete the selected preset" disabled><iconify-icon icon="lucide:trash-2" width="14" height="14"></iconify-icon></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Tagged link</span>
+                <span class="pane-badge" id="output-badge">—</span>
+              </div>
+              <div class="pane-content web-output-pane">
+                <div class="pane-empty" id="output-empty">
+                  <iconify-icon icon="lucide:link-2"></iconify-icon>
+                  <span>Enter a URL and campaign details</span>
+                </div>
+                <div class="web-output" id="output-content" hidden>
+                  <button type="button" class="utm-final" id="output-final" title="Click to copy"></button>
+                  <div class="web-tags" id="output-flags"></div>
+                  <div class="utm-result-grid">
+                    <div class="web-table-wrap"><table class="web-table" id="output-params"><tbody></tbody></table></div>
+                    <canvas id="output-qr" class="utm-qr" width="160" height="160" aria-label="QR code of the tagged link"></canvas>
+                  </div>
+                  <div class="web-table-wrap" id="output-bulk-wrap" hidden><table class="web-table utm-bulk" id="output-bulk"><thead><tr><th>#</th><th>Tagged link</th></tr></thead><tbody></tbody></table></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">lowercase · spaces → _ · keep #fragment</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item"><input type="checkbox" id="opt-lower" checked><label for="opt-lower">Lowercase all values (GA4 treats “Google” and “google” as different sources)</label></div>
+              <div class="control-item">
+                <label for="opt-space">Replace spaces with</label>
+                <select id="opt-space" class="select-clean"><option value="_" selected>underscore _</option><option value="-">hyphen -</option><option value="%20">keep (encoded %20)</option><option value="+">plus +</option></select>
+              </div>
+              <div class="control-item"><input type="checkbox" id="opt-strip" checked><label for="opt-strip">Remove existing utm_* and click IDs (gclid, fbclid…) from the pasted URL</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-fragment" checked><label for="opt-fragment">Keep the #fragment at the end</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-qr" checked><label for="opt-qr">Show a QR code for the link</label></div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Use UTM Link Builder in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Paste the destination</h3>
+              <p class="step-desc">Enter the landing-page URL. Existing utm_* tags and click IDs are stripped (toggle in Settings) so you never double-tag. Pick a platform preset to fill source and medium with the conventional values, or type your own — the suggestions follow GA4’s default channel grouping.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Name the campaign</h3>
+              <p class="step-desc">Source, medium and campaign are required; term and content are optional. Values are lower-cased and spaces are replaced so “Spring Sale” and “spring_sale” don’t split your reports. Save a frequently used combination as a preset — it stays in this browser only.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Copy, QR or bulk</h3>
+              <p class="step-desc">Click the big link to copy it. The QR code is ready for posters and packaging (download as PNG). Switch to <strong>Bulk</strong> to tag many URLs at once — one per line, optionally with a different utm_content — and download the table as CSV.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">UTM Link Builder — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Which parameters does Google Analytics read?</summary>
+              <p><code>utm_source</code>, <code>utm_medium</code> and <code>utm_campaign</code> are the core three (GA4 needs source and medium to attribute a session). <code>utm_term</code> and <code>utm_content</code> add keyword and creative detail; <code>utm_id</code> and <code>utm_source_platform</code> are newer GA4 fields used with cost-data imports. Custom parameters are passed through for your own tooling but GA ignores them unless you register them.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What should I put in medium?</summary>
+              <p>Use the values GA4 maps to channels automatically: <code>cpc</code> or <code>paid_search</code> for paid search, <code>paid_social</code> for paid social, <code>social</code> for organic social posts, <code>email</code>, <code>referral</code>, <code>display</code>, <code>video</code>, <code>affiliate</code>. The presets follow that list; inventing new words lands traffic in “Unassigned”.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why lowercase everything?</summary>
+              <p>Analytics tools are case-sensitive: <code>Newsletter</code> and <code>newsletter</code> become two rows. Lower-casing and replacing spaces with underscores keeps every report tidy. Turn it off in Settings if your team has a different convention.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Where are saved presets stored?</summary>
+              <p>In your browser’s localStorage — never on a server. They survive reloads on this device and browser only; clearing site data removes them. A preset stores source, medium, campaign, term and content, not the URL, so one “Newsletter” preset works for every link you send.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can I tag many links at once?</summary>
+              <p>Yes — Bulk mode accepts one URL per line and applies the same source, medium and campaign to each. Add a comma and a value after a URL to set a per-line <code>utm_content</code> (e.g. <code>https://example.com/pricing, pricing-cta</code>). The CSV download lists the original URL, every parameter and the final link.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is my input sent anywhere?</summary>
+              <p>No. Everything is computed by JavaScript in your browser tab. Nothing is uploaded, logged or stored by Toolity.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="labs"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=4.5"></script>
+  <script src="/scripts/tool-common.js?v=1.1"></script>
+  <script src="/scripts/qr-engine.js?v=1.0"></script>
+  <script src="/scripts/web-common.js?v=1.2"></script>
+  <script src="/labs/utm-link-builder/utm-link-builder.js?v=1.0"></script>
+</body>
+</html>
