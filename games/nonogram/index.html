@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+  <title>Free Online Nonogram | Toolity Games</title>
+  <link rel="canonical" href="https://toolity.in/games/nonogram/">
+  <meta name="description" content="Free online Nonogram (Picross / griddler): freshly generated 5×5 to 20×15 picture-logic puzzles that are always solvable without guessing, plus a mode that turns any image into a puzzle. Fill, cross, undo, timer, best times, printable. Runs in your browser.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Nonogram | Toolity Games">
+  <meta property="og:description" content="Free online Nonogram (Picross / griddler): freshly generated 5×5 to 20×15 picture-logic puzzles that are always solvable without guessing, plus a mode that turns any image into a puzzle. Fill, cross, undo, timer, best times, printable. Runs in your browser.">
+  <meta property="og:url" content="https://toolity.in/games/nonogram/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=6.5" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=6.5">
+  <link rel="stylesheet" href="/styles/tools/nonogram.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Nonogram",
+        "url": "https://toolity.in/games/nonogram/",
+        "description": "Free online Nonogram (Picross / griddler): freshly generated 5×5 to 20×15 picture-logic puzzles that are always solvable without guessing, plus a mode that turns any image into a puzzle. Fill, cross, undo, timer, best times, printable. Runs in your browser.",
+        "applicationCategory": "GameApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Games", "item": "https://toolity.in/games/" },
+          { "@type": "ListItem", "position": 3, "name": "Nonogram", "item": "https://toolity.in/games/nonogram/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Are the puzzles solvable without guessing?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Every generated puzzle is run through a line-by-line logic solver before you see it; if the solver needs to guess, the puzzle is discarded and a new one is drawn. Image-based puzzles are checked the same way and the picture is nudged until it is logic-solvable." } },
+          { "@type": "Question", "name": "What do the numbers mean?", "acceptedAnswer": { "@type": "Answer", "text": "Each number is a run of consecutive filled cells in that row or column, in order from left to right or top to bottom, separated by at least one empty cell. A clue of 0 means the whole line is empty." } },
+          { "@type": "Question", "name": "How does “From image” work?", "acceptedAnswer": { "@type": "Answer", "text": "The picture is scaled to the grid size and converted to black and white at an automatic threshold, then adjusted so the result is a valid, logic-solvable nonogram. Simple logos, icons and high-contrast photos work best." } },
+          { "@type": "Question", "name": "Does it work on a phone?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Tap to fill, use the Cross button to mark empties, and drag to paint a run. Cells are sized to fit the screen; 20×15 is comfortable in landscape." } },
+          { "@type": "Question", "name": "Can I print puzzles?", "acceptedAnswer": { "@type": "Answer", "text": "Press Print to open a clean page with the clues and an empty grid — handy for classrooms or the train." } },
+          { "@type": "Question", "name": "Is anything uploaded or tracked while I play?", "acceptedAnswer": { "@type": "Answer", "text": "No. The game runs entirely in your browser tab. Your best times are saved only in your browser’s localStorage and cleared when you press Reset." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main id="main">
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/games/" class="breadcrumb-link">Games</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Nonogram</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Games</span>
+            <h1 class="page-title">Nonogram</h1>
+            <p class="page-desc">Picture-logic puzzles generated on the spot and verified solvable by pure logic — fill, cross out, beat your time, or turn a photo into a puzzle.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="stacked" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <div class="segmented-group segmented-group-pill" id="seg-mode" role="group" aria-label="Size">
+                <button type="button" class="seg-pill" data-value="5">5×5</button>
+                <button type="button" class="seg-pill active" data-value="10">10×10</button>
+                <button type="button" class="seg-pill" data-value="15">15×15</button>
+                <button type="button" class="seg-pill" data-value="20">20×15</button>
+              </div>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-undo" title="Undo last move" aria-label="Undo last move" disabled>
+                <iconify-icon icon="lucide:undo-2" width="14" height="14"></iconify-icon>
+                <span>Undo</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy puzzle as text" aria-label="Copy puzzle as text" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-play" aria-label="New puzzle">
+                <iconify-icon icon="lucide:play" width="14" height="14" id="play-icon"></iconify-icon>
+                <span id="play-label">New puzzle</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Game pane -->
+          <div class="split-pane-grid">
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Progress</span>
+                <span class="game-score" id="score" aria-live="polite"><span>left <b id="left-val">0</b></span><i>·</i><span>time <b id="time-val">0:00</b></span><i>·</i><span>best <b id="best-val">—</b></span></span>
+                <span id="status-badge" class="pane-badge">Fill cells to match the clues</span>
+              </div>
+              <div class="pane-content game-pane-wrap">
+                <div class="game-stage game-stage-wide" id="stage">
+                  <div class="ng-wrap" id="ng-wrap">
+                    <div class="ng-corner" id="ng-corner"></div>
+                    <div class="ng-cols" id="ng-cols" aria-hidden="true"></div>
+                    <div class="ng-rows" id="ng-rows" aria-hidden="true"></div>
+                    <div class="ng-board" id="board" role="grid" aria-label="Nonogram board"></div>
+                  </div>
+                  <div class="game-bar" id="ng-bar" role="group" aria-label="Tools">
+                    <button type="button" class="game-key is-on" id="btn-fill" aria-pressed="true" title="Fill mode (F)">■ Fill</button>
+                    <button type="button" class="game-key" id="btn-cross" aria-pressed="false" title="Cross mode (X)">✕ Cross</button>
+                    <button type="button" class="game-key" id="btn-check" title="Check for mistakes (C)">Check</button>
+                    <button type="button" class="game-key" id="btn-image" title="Make a puzzle from an image">From image</button>
+                    <button type="button" class="game-key" id="btn-print" title="Print the empty puzzle">Print</button>
+                    <input type="file" id="ng-file" accept="image/*" hidden>
+                  </div>
+                  <div class="game-overlay" id="overlay" hidden>
+                    <strong id="overlay-title">Game over</strong>
+                    <span id="overlay-text">Press Space or New game to play again</span>
+                    <button type="button" class="btn-toolbar-sm" id="overlay-btn" hidden></button>
+                  </div>
+                </div>
+                <p class="form-helper game-hint" id="hint">Click / tap to fill · right-click or X mode to cross · drag to paint a line · arrows + Space / X on keyboard · Z to undo</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Game options</span>
+                <span class="pane-badge" id="settings-summary">Medium density · auto-cross finished lines</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item">
+                <label for="opt-density">Picture density</label>
+                <select id="opt-density" class="select-clean"><option value="0.35">Sparse (easier)</option><option value="0.45" selected>Medium</option><option value="0.55">Dense (harder)</option></select>
+              </div>
+              <div class="control-item"><input type="checkbox" id="opt-autocross" checked><label for="opt-autocross">Cross out the rest of a line when its clues are complete</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-mistakes"><label for="opt-mistakes">Show mistakes immediately</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-sound" checked><label for="opt-sound">Sound effects</label></div>
+            </div>
+          </details>
+
+        </div>
+
+        <!-- ═══════════ 3. GUIDE ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Play Nonogram in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Read the clues</h3>
+              <p class="step-desc">Numbers beside a row or above a column list the runs of filled cells in order, with at least one empty cell between runs. <code>3 1</code> means three filled, a gap, then one filled.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Fill and cross</h3>
+              <p class="step-desc">Click to fill, right-click (or switch to <strong>Cross</strong>) to mark cells you know are empty. Drag to paint a whole run. Satisfied clues grey out automatically.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Finish the picture</h3>
+              <p class="step-desc">When every row and column matches its clues the picture is revealed and your time is saved. Try <strong>From image</strong> to turn any photo or logo into a puzzle for friends.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 4. REFERENCE ═══════════ -->
+        <section class="reference-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">Reference</span>
+            <h2 class="section-heading-sm">Controls &amp; rules</h2>
+          </div>
+          <div class="formats-table-card">
+            <table class="formats-table">
+              <thead><tr><th>Action</th><th>Keyboard</th><th>Mouse / Touch</th></tr></thead>
+              <tbody>
+                <tr><td>Fill a cell</td><td><code>Space</code> / <code>Enter</code></td><td>Tap or click</td></tr>
+                <tr><td>Cross a cell</td><td><code>X</code></td><td>Right-click, or Cross mode + tap</td></tr>
+                <tr><td>Move</td><td><code>←</code> <code>→</code> <code>↑</code> <code>↓</code></td><td>Tap any cell</td></tr>
+                <tr><td>Paint a run</td><td>Hold <code>Shift</code> + arrows</td><td>Press and drag</td></tr>
+                <tr><td>Switch mode</td><td><code>F</code> / <code>X</code></td><td>Tap Fill / Cross</td></tr>
+                <tr><td>Check</td><td><code>C</code></td><td>Tap Check</td></tr>
+                <tr><td>Undo</td><td><code>Z</code></td><td>Tap Undo</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Nonogram — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Are the puzzles solvable without guessing?</summary>
+              <p>Yes. Every generated puzzle is run through a line-by-line logic solver before you see it; if the solver needs to guess, the puzzle is discarded and a new one is drawn. Image-based puzzles are checked the same way and the picture is nudged until it is logic-solvable.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What do the numbers mean?</summary>
+              <p>Each number is a run of consecutive filled cells in that row or column, in order from left to right or top to bottom, separated by at least one empty cell. A clue of 0 means the whole line is empty.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How does “From image” work?</summary>
+              <p>The picture is scaled to the grid size and converted to black and white at an automatic threshold, then adjusted so the result is a valid, logic-solvable nonogram. Simple logos, icons and high-contrast photos work best.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Does it work on a phone?</summary>
+              <p>Yes. Tap to fill, use the Cross button to mark empties, and drag to paint a run. Cells are sized to fit the screen; 20×15 is comfortable in landscape.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can I print puzzles?</summary>
+              <p>Press <strong>Print</strong> to open a clean page with the clues and an empty grid — handy for classrooms or the train.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is anything uploaded or tracked while I play?</summary>
+              <p>No. The game runs entirely in your browser tab. Your best times are saved only in your browser’s <code>localStorage</code> and cleared when you press Reset.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="games"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=5.1"></script>
+  <script src="/scripts/tool-common.js?v=1.2"></script>
+  <script src="/scripts/game-common.js?v=1.0"></script>
+  <script src="/games/nonogram/nonogram.js?v=1.0"></script>
+</body>
+</html>
