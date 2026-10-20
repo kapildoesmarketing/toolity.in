@@ -102,6 +102,37 @@ const CASES = [
     set('opt-ai', false); await tick(400); A($('rt-ai').closest('.rt-ai').hidden, 'AI summary toggle');
     set('text-input', 'User-agent: *\\nDisallow: /'); await tick(500); A(/whole site is blocked/.test($('rt-issues').textContent) && T.S.out, 'paste overrides URL');
     $('btn-reset').click(); await tick(200); A(!$('output-empty').hidden && $('rt-table').querySelector('tbody').innerHTML === '' && $('opt-ai').checked, 'reset');
+  `],
+  ['labs/sitemap-health-checker/', `
+    for (let i = 0; i < 80 && !(window.__sm && window.ToolityWellKnown && window.ToolityWebTool); i++) await tick(100);
+    const T = window.ToolityWebTool, M = window.__sm, O = location.origin;
+    const NS = 'http://www.sitemaps.org/schemas/sitemap/0.9', future = new Date(Date.now() + 10 * 864e5).toISOString().slice(0, 10);
+    const FIX = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="' + NS + '" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"><url><loc>https://x.test/</loc><lastmod>2026-01-15</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url><url><loc>https://x.test/blog/a</loc><lastmod>' + future + '</lastmod><image:image><image:loc>https://x.test/a.png</image:loc></image:image></url><url><loc>https://x.test/blog/a</loc></url><url><loc>http://x.test/http-page</loc><lastmod>15/01/2026</lastmod><changefreq>sometimes</changefreq><priority>1.5</priority></url><url><loc>https://other.test/p#frag</loc></url><url><loc>/relative</loc></url><url><lastmod>2026-01-01</lastmod></url></urlset>';
+    const f = M.parseOne(FIX, 'https://x.test/sitemap.xml'); A(f.kind === 'urlset' && f.urls.length === 7 && f.urls[1].images === 1 && f.issues.length === 0, 'parseOne: ' + JSON.stringify(f.issues));
+    const iss = M.lint(f.urls, [f], 'https://x.test/sitemap.xml'), msgs = iss.map(i => i.lvl + ':' + i.msg).join('|');
+    A(/fail:1 URL not absolute/.test(msgs) && /fail:1 URL on another host/.test(msgs) && /fail:1 URL use a different scheme/.test(msgs) && /warn:1 duplicate URL/.test(msgs) && /warn:1 URL with a #fragment/.test(msgs) && /warn:1 invalid lastmod/.test(msgs) && /warn:1 lastmod date in the future/.test(msgs) && /warn:1 invalid changefreq/.test(msgs) && /warn:1 invalid priority/.test(msgs), 'lint: ' + msgs);
+    A(f.urls[6].flags[0] === 'no loc' && f.urls[2].flags.includes('duplicate') && f.urls[0].section === '/' && f.urls[1].section === '/blog/', 'flags/sections: ' + JSON.stringify(f.urls.map(u => u.flags)));
+    const bad = M.parseOne('<?xml version="1.0"?><urlset xmlns="' + NS + '"><url><loc>https://x.test/?a=1&b=2</loc></url></urlset>', ''); A(bad.issues[0] && /Malformed XML/.test(bad.issues[0].msg), 'malformed: ' + JSON.stringify(bad.issues));
+    const ns = M.parseOne('<urlset><url><loc>https://x.test/</loc></url></urlset>', ''); A(ns.issues.some(i => /namespace/.test(i.msg)) && ns.urls.length === 1, 'namespace check');
+    const txt = M.parseOne('https://x.test/a\\nhttps://x.test/b\\n', ''); A(txt.kind === 'text' && txt.urls.length === 2, 'text sitemap');
+    const idx = M.parseOne('<sitemapindex xmlns="' + NS + '"><sitemap><loc>https://x.test/s1.xml</loc><lastmod>2026-01-01</lastmod></sitemap><sitemap><loc>https://x.test/s2.xml</loc></sitemap></sitemapindex>', ''); A(idx.kind === 'index' && idx.children.length === 2, 'index parse');
+    // live: a pasted index pointing at this site's own sitemap (same-origin child fetch)
+    set('url-input', O + '/sitemap.xml'); set('text-input', '<sitemapindex xmlns="' + NS + '"><sitemap><loc>' + O + '/sitemap.xml</loc></sitemap><sitemap><loc>' + O + '/nope-sitemap.xml</loc></sitemap></sitemapindex>'); await tick(500);
+    A(await waitFor(() => T.S.out || !$('input-error').hidden, 20000) && T.S.out, 'index run: ' + $('input-error').textContent);
+    A(M.last.root.kind === 'index' && M.last.files.length === 3 && M.last.all.length > 100, 'children read: ' + M.last.files.map(x => x.kind + ':' + x.urls.length).join(','));
+    A(/HTTP 404/.test($('sm-issues').textContent) && /other host/.test($('sm-issues').textContent), 'child 404 + host mismatch (localhost vs toolity.in): ' + $('sm-issues').textContent.slice(0, 200));
+    A($('sm-tree').querySelectorAll('.sm-bar').length > 3 && $('sm-table').querySelectorAll('tbody tr').length > 50, 'tree + table');
+    const bar = [...$('sm-tree').querySelectorAll('.sm-bar')].find(b => b.dataset.section === '/labs/'); bar.click(); await tick(100);
+    A(bar.getAttribute('aria-pressed') === 'true' && M.rows().length > 10 && M.rows().every(u => /\\/labs\\//.test(u.loc)), 'section click filters: ' + M.rows().length);
+    $('sm-filter').value = 'qr-code'; $('sm-filter').dispatchEvent(new Event('input', { bubbles: true })); await tick(100); A(M.rows().length >= 1 && M.rows().every(u => /qr-code/.test(u.loc)) && bar.getAttribute('aria-pressed') === 'false', 'text filter');
+    A(/- \`\\/labs\\/\` — \\d+/.test(T.S.out.text) && /other host/.test(T.S.out.text), 'markdown: ' + T.S.out.text.slice(0, 300));
+    // sampling on same-origin URLs: one 200, one 404
+    set('text-input', '<urlset xmlns="' + NS + '"><url><loc>' + O + '/labs/</loc></url><url><loc>' + O + '/definitely-missing-page/</loc></url></urlset>'); await tick(600);
+    A(T.S.out && M.last.all.length === 2, 'small urlset');
+    $('btn-sample').click(); A(await waitFor(() => Object.keys(M.sampled).length === 2 && !$('btn-sample').disabled, 20000), 'sampling finished: ' + JSON.stringify(M.sampled));
+    const s = M.sampled; A(s[O + '/labs/'] && /^200 · canonical https:\\/\\/toolity\\.in\\/labs\\/$/.test(s[O + '/labs/'].text) && s[O + '/definitely-missing-page/'] && s[O + '/definitely-missing-page/'].cls === 'fail' && /404/.test(s[O + '/definitely-missing-page/'].text), 'sample results: ' + JSON.stringify(s));
+    A(!$('sm-table').querySelector('.sm-col-status').hidden && $('sm-table').querySelectorAll('td.is-fail').length === 1, 'status column shown');
+    $('btn-reset').click(); await tick(200); A(!$('output-empty').hidden && $('sm-table').querySelector('tbody').innerHTML === '' && Object.keys(M.sampled).length === 0 && $('sm-filter').value === '', 'reset');
   `]
 ];
 

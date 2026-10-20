@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Sitemap Health Checker | Toolity Labs</title>
+  <link rel="canonical" href="https://toolity.in/labs/sitemap-health-checker/">
+  <meta name="description" content="Free online XML sitemap checker: fetch any sitemap.xml or sitemap index (or paste it) and validate it against the sitemaps.org protocol — XML well-formedness, namespace, 50,000-URL and 50 MB limits, duplicate and cross-host URLs, lastmod dates, changefreq and priority values — with an interactive breakdown of URLs by site section, a filter, and an optional live status check of sample URLs. Runs in your browser.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Sitemap Health Checker | Toolity Labs">
+  <meta property="og:description" content="Free online XML sitemap checker: fetch any sitemap.xml or sitemap index (or paste it) and validate it against the sitemaps.org protocol — XML well-formedness, namespace, 50,000-URL and 50 MB limits, duplicate and cross-host URLs, lastmod dates, changefreq and priority values — with an interactive breakdown of URLs by site section, a filter, and an optional live status check of sample URLs. Runs in your browser.">
+  <meta property="og:url" content="https://toolity.in/labs/sitemap-health-checker/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=6.5" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=6.5">
+  <link rel="stylesheet" href="/styles/tools/sitemap-health-checker.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Sitemap Health Checker",
+        "url": "https://toolity.in/labs/sitemap-health-checker/",
+        "description": "Free online XML sitemap checker: fetch any sitemap.xml or sitemap index (or paste it) and validate it against the sitemaps.org protocol — XML well-formedness, namespace, 50,000-URL and 50 MB limits, duplicate and cross-host URLs, lastmod dates, changefreq and priority values — with an interactive breakdown of URLs by site section, a filter, and an optional live status check of sample URLs. Runs in your browser.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Labs", "item": "https://toolity.in/labs/" },
+          { "@type": "ListItem", "position": 3, "name": "Sitemap Health Checker", "item": "https://toolity.in/labs/sitemap-health-checker/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "What makes a sitemap invalid for Google?", "acceptedAnswer": { "@type": "Answer", "text": "Malformed XML (an unescaped &amp; is the classic), a missing or wrong xmlns, more than 50,000 URLs or 50 MB uncompressed per file, URLs that are not absolute, URLs on a different host or scheme than the sitemap itself, and a sitemap index that points to another index (Google supports one level). This tool reports all of those as errors." } },
+          { "@type": "Question", "name": "Does lastmod matter? What about changefreq and priority?", "acceptedAnswer": { "@type": "Answer", "text": "lastmod matters — Google uses it to decide what to recrawl, as long as it is consistently accurate. Dates must be W3C format (2026-01-15 or full ISO 8601 with a timezone); future dates and “every URL has the same timestamp” are flagged because they teach Google to ignore the field. changefreq and priority are ignored by Google and Bing; invalid values are reported, but removing them entirely is fine." } },
+          { "@type": "Question", "name": "How does the status check work and why is it limited?", "acceptedAnswer": { "@type": "Answer", "text": "Toolity has no server, so each sampled URL is fetched by your browser — directly where the site allows it, otherwise through a public read-only relay that sees only the URL. That costs a request per URL, so the sample is capped at 25 evenly spread across the list and never runs unless you press the button. For a full crawl use a desktop crawler." } },
+          { "@type": "Question", "name": "Why is a URL marked “another host”?", "acceptedAnswer": { "@type": "Answer", "text": "The sitemap protocol says a sitemap at https://www.example.com/sitemap.xml may only list URLs on https://www.example.com. http:// URLs in an https sitemap, or a bare-domain sitemap listing www URLs, are ignored by Google unless the host is verified in Search Console — a common cause of “sitemap could not be read”." } },
+          { "@type": "Question", "name": "Can it read compressed (.xml.gz) sitemaps?", "acceptedAnswer": { "@type": "Answer", "text": "Not yet — the browser receives the gzip bytes as text. Paste the decompressed XML, or point the tool at the uncompressed version. Everything else (sitemap index, image, video and hreflang extensions, plain-text sitemaps) is supported." } },
+          { "@type": "Question", "name": "Why does fetching sometimes fail — and what is the relay?", "acceptedAnswer": { "@type": "Answer", "text": "Browsers block JavaScript from reading other websites directly (CORS). The tool first tries a direct request; when the site forbids it, the URL only is sent to a public read-only relay (allorigins.win, then codetabs.com) that fetches the page and returns its HTML. The relay sees the URL you typed, nothing else — Toolity has no server and keeps no record. If the relay is busy or the site blocks bots, paste the page source instead: that path is 100% local." } },
+          { "@type": "Question", "name": "Is my input sent anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. Everything is computed by JavaScript in your browser tab. Nothing is uploaded, logged or stored by Toolity." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main id="main">
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/labs/" class="breadcrumb-link">Labs</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Sitemap Health Checker</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Labs</span>
+            <h1 class="page-title">Sitemap Health Checker</h1>
+            <p class="page-desc">Validate a sitemap the way Google reads it — limits, namespace, dates, duplicates, wrong hosts — then explore it by section and spot-check that the URLs actually return 200.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="stacked" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge web-status-badge" id="status-badge">Enter a site URL or paste sitemap.xml</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result" aria-label="Copy result" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <div class="dropdown-menu-wrapper" id="download-dropdown-wrap">
+                <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download result" aria-label="Download result" aria-haspopup="true" disabled>
+                  <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                  <span>Download</span>
+                  <iconify-icon icon="lucide:chevron-down" class="dropdown-arrow" width="13" height="13"></iconify-icon>
+                </button>
+                <div class="dropdown-popup" role="menu">
+                  <button type="button" class="dropdown-item" data-format="md" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:file-text" width="14" height="14"></iconify-icon>
+                      <span>Report (Markdown)</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="csv" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:file-spreadsheet" width="14" height="14"></iconify-icon>
+                      <span>URLs (CSV)</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="txt" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:list" width="14" height="14"></iconify-icon>
+                      <span>URLs (one per line)</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="json" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:braces" width="14" height="14"></iconify-icon>
+                      <span>Report (JSON)</span>
+                    </div>
+                  </button>
+                </div>
+              </div>
+              <button type="button" class="btn-toolbar-sm" id="btn-open" title="Open result in a new tab" aria-label="Open result in a new tab" disabled>
+                <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
+                <span>Open</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Sitemap</span>
+                <span class="pane-badge" id="input-badge">—</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content web-form">
+                <div class="web-file-row">
+                  <button type="button" class="btn-toolbar-sm" id="btn-file" title="Open a file from your device" aria-label="Open a file from your device">
+                    <iconify-icon icon="lucide:folder-open" width="14" height="14"></iconify-icon>
+                    <span>Open file</span>
+                  </button>
+                  <input type="file" id="file-input" accept=".xml,.txt" hidden>
+                  <span class="web-muted" id="file-name">or drop a file here</span>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="url-input"><span>Site or file URL</span><span class="form-label-desc">fetches /sitemap.xml · follows sitemap indexes</span></label>
+                  <input type="url" id="url-input" class="input-clean" placeholder="https://example.com  or  https://example.com/sitemap_index.xml" spellcheck="false" autocomplete="off" autocapitalize="off" inputmode="url">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="text-input"><span>Or paste sitemap.xml</span><span class="form-label-desc">Works offline · overrides the URL</span></label>
+                  <textarea id="text-input" class="textarea-clean" rows="6" placeholder="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#10;&lt;urlset xmlns=&quot;http://www.sitemaps.org/schemas/sitemap/0.9&quot;&gt;&#10;  &lt;url&gt;&lt;loc&gt;https://example.com/&lt;/loc&gt;&lt;lastmod&gt;2026-01-15&lt;/lastmod&gt;&lt;/url&gt;&#10;&lt;/urlset&gt;" spellcheck="false" autocapitalize="off" data-file-target></textarea>
+                </div>
+                <button type="button" id="btn-run" class="btn-toolbar-sm btn-brand-sm btn-primary-action">
+                  <iconify-icon icon="lucide:map" width="16" height="16"></iconify-icon>
+                  <span>Check</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Health report</span>
+                <span class="pane-badge" id="output-badge">—</span>
+              </div>
+              <div class="pane-content web-output-pane">
+                <div class="pane-empty" id="output-empty">
+                  <iconify-icon icon="lucide:map"></iconify-icon>
+                  <span>Validation results, URL counts by section and the URL list appear here</span>
+                </div>
+                <div class="web-output" id="output-content" hidden>
+                  <div class="web-grid-2" id="sm-stats"></div>
+                  <div class="web-tags" id="sm-issues"></div>
+                  <div class="sm-children" id="sm-children"></div>
+                  <div class="sm-tree-wrap"><div class="web-group-head"><span>URLs by section</span><span class="web-muted" id="sm-tree-sum"></span></div><div class="sm-tree" id="sm-tree"></div></div>
+                  <div class="sm-toolbar">
+                    <label class="visually-hidden" for="sm-filter">Filter URLs</label>
+                    <input type="search" id="sm-filter" class="input-clean" placeholder="Filter URLs… (text or /regex/)" autocomplete="off" spellcheck="false">
+                    <button type="button" class="btn-toolbar-sm" id="btn-sample"><iconify-icon icon="lucide:activity" width="14" height="14"></iconify-icon><span>Check status of 25 URLs</span></button>
+                  </div>
+                  <div class="web-table-wrap"><table class="web-table sm-table" id="sm-table"><thead><tr><th>URL</th><th>lastmod</th><th>freq · prio</th><th>extras</th><th class="sm-col-status" hidden>status</th></tr></thead><tbody></tbody></table></div>
+                  <p class="web-muted" id="sm-more"></p>
+                  <details class="td-more"><summary>Sitemap as fetched</summary><pre class="web-code" id="sm-raw"></pre></details>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">Follow index · up to 10 child sitemaps</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item"><input type="checkbox" id="opt-children" checked><label for="opt-children">Follow a sitemap index and read its child sitemaps</label></div>
+              <div class="control-item">
+                <label for="opt-max-children">Child sitemaps to read</label>
+                <select id="opt-max-children" class="select-clean"><option value="5">5</option><option value="10" selected>10</option><option value="25">25</option></select>
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Use Sitemap Health Checker in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Fetch or paste</h3>
+              <p class="step-desc">Enter the site (the tool fetches <code>/sitemap.xml</code>), the sitemap’s own URL, or paste the XML. A sitemap index is followed automatically — up to the number of child sitemaps set in Settings. Plain-text sitemaps (one URL per line) work too. Press <strong>Check</strong>.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Read the report</h3>
+              <p class="step-desc">Errors are what Search Console would reject: malformed XML, wrong namespace, over 50,000 URLs or 50 MB, URLs on another host or scheme, missing <code>&lt;loc&gt;</code>. Warnings cover duplicates, invalid or future <code>lastmod</code> dates, identical timestamps on every URL, and <code>changefreq</code> / <code>priority</code> noise. The section bars show where your URLs live; click one to filter the list.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Spot-check live URLs</h3>
+              <p class="step-desc">Press <strong>Check status of 25 URLs</strong> to fetch a spread sample through the relay and see the HTTP status, redirects, <code>noindex</code> and canonical mismatches — the three things that silently waste a sitemap entry. Export the URL list as CSV or TXT, or the whole report as Markdown.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Sitemap Health Checker — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>What makes a sitemap invalid for Google?</summary>
+              <p>Malformed XML (an unescaped <code>&amp;</code> is the classic), a missing or wrong <code>xmlns</code>, more than 50,000 URLs or 50 MB uncompressed per file, URLs that are not absolute, URLs on a different host or scheme than the sitemap itself, and a sitemap index that points to another index (Google supports one level). This tool reports all of those as errors.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Does lastmod matter? What about changefreq and priority?</summary>
+              <p><code>lastmod</code> matters — Google uses it to decide what to recrawl, as long as it is consistently accurate. Dates must be W3C format (<code>2026-01-15</code> or full ISO 8601 with a timezone); future dates and “every URL has the same timestamp” are flagged because they teach Google to ignore the field. <code>changefreq</code> and <code>priority</code> are ignored by Google and Bing; invalid values are reported, but removing them entirely is fine.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How does the status check work and why is it limited?</summary>
+              <p>Toolity has no server, so each sampled URL is fetched by your browser — directly where the site allows it, otherwise through a public read-only relay that sees only the URL. That costs a request per URL, so the sample is capped at 25 evenly spread across the list and never runs unless you press the button. For a full crawl use a desktop crawler.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why is a URL marked “another host”?</summary>
+              <p>The sitemap protocol says a sitemap at <code>https://www.example.com/sitemap.xml</code> may only list URLs on <code>https://www.example.com</code>. <code>http://</code> URLs in an <code>https</code> sitemap, or a bare-domain sitemap listing <code>www</code> URLs, are ignored by Google unless the host is verified in Search Console — a common cause of “sitemap could not be read”.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can it read compressed (.xml.gz) sitemaps?</summary>
+              <p>Not yet — the browser receives the gzip bytes as text. Paste the decompressed XML, or point the tool at the uncompressed version. Everything else (sitemap index, image, video and hreflang extensions, plain-text sitemaps) is supported.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why does fetching sometimes fail — and what is the relay?</summary>
+              <p>Browsers block JavaScript from reading other websites directly (CORS). The tool first tries a direct request; when the site forbids it, the <em>URL only</em> is sent to a public read-only relay (allorigins.win, then codetabs.com) that fetches the page and returns its HTML. The relay sees the URL you typed, nothing else — Toolity has no server and keeps no record. If the relay is busy or the site blocks bots, paste the page source instead: that path is 100% local.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is my input sent anywhere?</summary>
+              <p>No. Everything is computed by JavaScript in your browser tab. Nothing is uploaded, logged or stored by Toolity.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="labs"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=5.2"></script>
+  <script src="/scripts/tool-common.js?v=1.2"></script>
+  <script src="/scripts/wellknown-common.js?v=1.0"></script>
+  <script src="/scripts/web-common.js?v=1.2"></script>
+  <script src="/labs/sitemap-health-checker/sitemap-health-checker.js?v=1.0"></script>
+</body>
+</html>
