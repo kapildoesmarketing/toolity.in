@@ -68,6 +68,40 @@ const CASES = [
     set('opt-context', 'cross'); await tick(400); A(/not sent in cross-site/.test($('ck-list').textContent), 'cross-site re-render');
     set('text-input', 'HTTP/2 200\\ncontent-type: text/html'); await tick(400); A(!$('input-error').hidden && /No cookies/.test($('input-error').textContent), 'no-cookie error');
     $('btn-reset').click(); await tick(200); A(!$('output-empty').hidden && $('ck-list').innerHTML === '' && $('opt-context').value === 'same', 'reset');
+  `],
+  ['labs/robots-txt-tester/', `
+    for (let i = 0; i < 80 && !(window.__rt && window.ToolityWellKnown && window.ToolityWebTool); i++) await tick(100);
+    const T = window.ToolityWebTool, R = window.__rt;
+    const FIX = 'Disallow: /orphan\\nUser-agent: *\\nDisallow: /admin/\\nAllow: /admin/public/\\nDisallow: /*.pdf$\\nDisallow: /*?utm_\\nCrawl-delay: 5\\n\\nUser-agent: Googlebot\\nUser-agent: Bingbot\\nDisallow: /private\\nAllow: /private\\n\\nUser-agent: GPTBot\\nDisallow: /\\n\\nUser-agent: Googlebot-News\\nAllow: /\\n\\nSitemap: /sitemap.xml\\nSitemap: https://x.test/sitemap.xml\\nNoindex: /x\\nDissallow: /typo\\n';
+    const p = R.parse(FIX), msgs = p.issues.map(i => i.lvl + ':' + i.msg).join('|');
+    A(p.groups.length === 5 && p.groups.map(g => g.ua).join() === '*,googlebot,bingbot,gptbot,googlebot-news', 'groups: ' + p.groups.map(g => g.ua).join());
+    A(/fail:Line 1: Disallow before any User-agent/.test(msgs) && /fail:Line 20: Sitemap must be an absolute/.test(msgs) && /warn:Line 7: Crawl-delay/.test(msgs) && /Noindex in robots.txt is not supported/.test(msgs) && /misspelling of Disallow/.test(msgs), 'lint: ' + msgs);
+    const d = (ua, path, fb = true) => R.decide(p, ua, path, fb);
+    A(d('*', '/admin/x').allowed === false && d('*', '/admin/public/x').allowed === true, 'longest match');
+    A(d('*', '/doc.pdf').allowed === false && d('*', '/doc.pdfx').allowed === true && d('*', '/a/b.pdf').allowed === false, '$ anchor');
+    A(d('*', '/page?utm_source=x').allowed === false && d('*', '/page').allowed === true, '* wildcard with query');
+    A(d('Googlebot', '/private/x').allowed === true && d('Bingbot', '/private').allowed === true, 'Allow wins tie: ' + d('Googlebot', '/private/x').why);
+    A(d('Googlebot', '/admin/x').allowed === true, 'specific group does not inherit * rules');
+    A(d('Googlebot-Image', '/private/x').allowed === true && d('Googlebot-Image', '/private/x').group.ua === 'googlebot', 'fallback to parent token');
+    A(d('Googlebot-Image', '/private/x', false).group.ua === '*' && d('Googlebot-Image', '/private/x', false).allowed === true, 'no fallback → *');
+    A(d('AdsBot-Google', '/admin/x').allowed === true && d('AdsBot-Google', '/admin/x').group === null, 'AdsBot ignores *');
+    A(d('gptbot', '/anything').allowed === false && d('GPTBot', '/').why === 'Disallow: / (line 15)', 'case-insensitive UA + why: ' + d('GPTBot', '/').why);
+    const an = R.analyse(FIX, { urls: ['/admin/public/a', 'https://other.test/x'], uas: [], origin: 'https://x.test', fallback: true });
+    A(an.agents.length === 6 && an.matrix.length === 3 && an.matrix[0].input === '/' && an.ai.find(a => a.ua === 'GPTBot').status === 'blocked' && an.ai.find(a => a.ua === 'ClaudeBot').status === 'partial', 'analyse: ' + JSON.stringify(an.ai.slice(0, 5)));
+    A(an.parsed.issues.some(i => /other\\.test\\/x is on another host/.test(i.msg)), 'foreign host info');
+    // live: the site's own robots.txt through the page (same-origin direct fetch)
+    set('url-input', location.origin); set('rt-urls', '/templates/x\\n/labs/'); set('rt-agents', 'Googlebot, GPTBot'); await tick(300);
+    A(/Press Test/.test($('status-badge').textContent), 'waits for button: ' + $('status-badge').textContent);
+    $('btn-run').click(); A(await waitFor(() => T.S.out || !$('input-error').hidden, 15000), 'fetch did not finish: ' + $('input-error').textContent);
+    A(T.S.out && $('rt-table').querySelectorAll('tbody tr').length === 3 && $('rt-table').querySelectorAll('thead th').length === 3, 'matrix rendered: ' + $('input-error').textContent);
+    const cells = [...$('rt-table').querySelectorAll('tbody tr')].map(tr => tr.querySelector('th').textContent.trim().split('/')[1] + ':' + [...tr.querySelectorAll('td b')].map(b => b.textContent).join('/'));
+    A(cells.some(c => /^templates:Blocked\\/Blocked/.test(c)) && cells.some(c => /^labs:Allowed/.test(c)), 'live cells: ' + cells.join(' '));
+    A(/blocked combination/.test($('status-badge').textContent), 'status: ' + $('status-badge').textContent);
+    A(/^Source/.test([...$('rt-stats').children].pop().textContent) && /direct/.test($('rt-stats').textContent), 'source stat: ' + $('rt-stats').textContent);
+    A(/\\| \`\\/templates\\/x\` \\| ⛔ Blocked/.test(T.S.out.text), 'markdown row');
+    set('opt-ai', false); await tick(400); A($('rt-ai').closest('.rt-ai').hidden, 'AI summary toggle');
+    set('text-input', 'User-agent: *\\nDisallow: /'); await tick(500); A(/whole site is blocked/.test($('rt-issues').textContent) && T.S.out, 'paste overrides URL');
+    $('btn-reset').click(); await tick(200); A(!$('output-empty').hidden && $('rt-table').querySelector('tbody').innerHTML === '' && $('opt-ai').checked, 'reset');
   `]
 ];
 

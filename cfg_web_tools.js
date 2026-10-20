@@ -23,6 +23,17 @@ const HTML_PASTE = `
                   <label class="form-label" for="html-input"><span>Or paste the page's HTML</span><span class="form-label-desc">Works offline · overrides the URL</span></label>
                   <textarea id="html-input" class="textarea-clean" rows="6" placeholder="&lt;head&gt;…&lt;/head&gt; — view-source, select all, paste" spellcheck="false"></textarea>
                 </div>`;
+/* Site-file checkers (robots / sitemap / ads.txt / security.txt): URL of the site or of the file itself + paste fallback. */
+const SITE_INPUT = (placeholder, desc) => `
+                <div class="form-group">
+                  <label class="form-label" for="url-input"><span>Site or file URL</span>${desc ? `<span class="form-label-desc">${desc}</span>` : ''}</label>
+                  <input type="url" id="url-input" class="input-clean" placeholder="${placeholder}" spellcheck="false" autocomplete="off" autocapitalize="off" inputmode="url">
+                </div>`;
+const FILE_PASTE = (name, placeholder, rows = 6) => `
+                <div class="form-group">
+                  <label class="form-label" for="text-input"><span>Or paste ${name}</span><span class="form-label-desc">Works offline · overrides the URL</span></label>
+                  <textarea id="text-input" class="textarea-clean" rows="${rows}" placeholder="${placeholder}" spellcheck="false" autocapitalize="off" data-file-target></textarea>
+                </div>`;
 
 /* Generators batch (Oct 2026): `section` = heading on /labs/ (read by wire_labs_dev.py; the generator ignores it). */
 const OPTS = (list, sel) => list.map(([v, l]) => `<option value="${v}"${v === sel ? ' selected' : ''}>${l}</option>`).join('');
@@ -206,6 +217,72 @@ const SEO_TOOLS = [
 const HW_FONTS = [['caveat', 'Caveat', 30], ['homemade-apple', 'Homemade Apple', 22], ['indie-flower', 'Indie Flower', 26], ['shadows-into-light', 'Shadows Into Light', 28], ['reenie-beanie', 'Reenie Beanie', 30], ['kalam', 'Kalam', 26], ['patrick-hand', 'Patrick Hand', 27], ['dancing-script', 'Dancing Script', 28], ['gloria-hallelujah', 'Gloria Hallelujah', 24], ['nothing-you-could-do', 'Nothing You Could Do', 24], ['zeyada', 'Zeyada', 30], ['liu-jian-mao-cao', 'Liu Jian Mao Cao', 30]];
 const SCHEMA_TYPES = [['Organization', 'Organization'], ['LocalBusiness', 'Local Business'], ['Person', 'Person'], ['WebSite', 'Website (+ search box)'], ['Article', 'Article / Blog post'], ['Product', 'Product (+ offer, rating)'], ['FAQPage', 'FAQ page'], ['HowTo', 'How-to'], ['Event', 'Event'], ['BreadcrumbList', 'Breadcrumbs'], ['Recipe', 'Recipe'], ['VideoObject', 'Video'], ['JobPosting', 'Job posting']];
 const HANDY_TOOLS = [
+  {
+    slug: 'sitemap-health-checker', name: 'Sitemap Health Checker', icon: 'lucide:map', section: 'SEO & Site Helpers', layout: 'stacked', css: true, libs: ['wellknown'],
+    action: 'Check', actionIcon: 'lucide:map',
+    desc: 'Free online XML sitemap checker: fetch any sitemap.xml or sitemap index (or paste it) and validate it against the sitemaps.org protocol — XML well-formedness, namespace, 50,000-URL and 50 MB limits, duplicate and cross-host URLs, lastmod dates, changefreq and priority values — with an interactive breakdown of URLs by site section, a filter, and an optional live status check of sample URLs. Runs in your browser.',
+    lead: 'Validate a sitemap the way Google reads it — limits, namespace, dates, duplicates, wrong hosts — then explore it by section and spot-check that the URLs actually return 200.',
+    cardDesc: 'Protocol validation, nested index support, duplicates and lastmod checks, section breakdown with filter, optional 200/404 sampling.',
+    tags: ['sitemap checker', 'sitemap validator', 'xml sitemap validator', 'sitemap.xml checker', 'validate sitemap', 'sitemap index checker', 'sitemap lastmod', 'sitemap 50000 urls', 'sitemap errors google search console', 'sitemap tester', 'sitemap url count'],
+    idle: 'Enter a site URL or paste sitemap.xml', sourceLabel: 'Sitemap', outputLabel: 'Health report', outputIcon: 'lucide:map', outputEmpty: 'Validation results, URL counts by section and the URL list appear here',
+    downloads: [['md', 'Report (Markdown)', 'lucide:file-text'], ['csv', 'URLs (CSV)', 'lucide:file-spreadsheet'], ['txt', 'URLs (one per line)', 'lucide:list'], ['json', 'Report (JSON)', 'lucide:braces']],
+    file: { accept: '.xml,.txt' },
+    sourceHtml: SITE_INPUT('https://example.com  or  https://example.com/sitemap_index.xml', 'fetches /sitemap.xml · follows sitemap indexes') + FILE_PASTE('sitemap.xml', '&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#10;&lt;urlset xmlns=&quot;http://www.sitemaps.org/schemas/sitemap/0.9&quot;&gt;&#10;  &lt;url&gt;&lt;loc&gt;https://example.com/&lt;/loc&gt;&lt;lastmod&gt;2026-01-15&lt;/lastmod&gt;&lt;/url&gt;&#10;&lt;/urlset&gt;'),
+    outputHtml: `
+                  <div class="web-grid-2" id="sm-stats"></div>
+                  <div class="web-tags" id="sm-issues"></div>
+                  <div class="sm-children" id="sm-children"></div>
+                  <div class="sm-tree-wrap"><div class="web-group-head"><span>URLs by section</span><span class="web-muted" id="sm-tree-sum"></span></div><div class="sm-tree" id="sm-tree"></div></div>
+                  <div class="sm-toolbar">
+                    <label class="visually-hidden" for="sm-filter">Filter URLs</label>
+                    <input type="search" id="sm-filter" class="input-clean" placeholder="Filter URLs… (text or /regex/)" autocomplete="off" spellcheck="false">
+                    <button type="button" class="btn-toolbar-sm" id="btn-sample"><iconify-icon icon="lucide:activity" width="14" height="14"></iconify-icon><span>Check status of 25 URLs</span></button>
+                  </div>
+                  <div class="web-table-wrap"><table class="web-table sm-table" id="sm-table"><thead><tr><th>URL</th><th>lastmod</th><th>freq · prio</th><th>extras</th><th class="sm-col-status" hidden>status</th></tr></thead><tbody></tbody></table></div>
+                  <p class="web-muted" id="sm-more"></p>
+                  <details class="td-more"><summary>Sitemap as fetched</summary><pre class="web-code" id="sm-raw"></pre></details>`,
+    settingsSummary: 'Follow index · up to 10 child sitemaps',
+    settings: `${CHECK('opt-children', 'Follow a sitemap index and read its child sitemaps', true)}
+              <div class="control-item">
+                <label for="opt-max-children">Child sitemaps to read</label>
+                <select id="opt-max-children" class="select-clean">${OPTS([['5', '5'], ['10', '10'], ['25', '25']], '10')}</select>
+              </div>`,
+    guide: [['Fetch or paste', 'Enter the site (the tool fetches <code>/sitemap.xml</code>), the sitemap’s own URL, or paste the XML. A sitemap index is followed automatically — up to the number of child sitemaps set in Settings. Plain-text sitemaps (one URL per line) work too. Press <strong>Check</strong>.'], ['Read the report', 'Errors are what Search Console would reject: malformed XML, wrong namespace, over 50,000 URLs or 50 MB, URLs on another host or scheme, missing <code>&lt;loc&gt;</code>. Warnings cover duplicates, invalid or future <code>lastmod</code> dates, identical timestamps on every URL, and <code>changefreq</code> / <code>priority</code> noise. The section bars show where your URLs live; click one to filter the list.'], ['Spot-check live URLs', 'Press <strong>Check status of 25 URLs</strong> to fetch a spread sample through the relay and see the HTTP status, redirects, <code>noindex</code> and canonical mismatches — the three things that silently waste a sitemap entry. Export the URL list as CSV or TXT, or the whole report as Markdown.']],
+    faq: [['What makes a sitemap invalid for Google?', 'Malformed XML (an unescaped <code>&amp;</code> is the classic), a missing or wrong <code>xmlns</code>, more than 50,000 URLs or 50 MB uncompressed per file, URLs that are not absolute, URLs on a different host or scheme than the sitemap itself, and a sitemap index that points to another index (Google supports one level). This tool reports all of those as errors.'], ['Does lastmod matter? What about changefreq and priority?', '<code>lastmod</code> matters — Google uses it to decide what to recrawl, as long as it is consistently accurate. Dates must be W3C format (<code>2026-01-15</code> or full ISO 8601 with a timezone); future dates and “every URL has the same timestamp” are flagged because they teach Google to ignore the field. <code>changefreq</code> and <code>priority</code> are ignored by Google and Bing; invalid values are reported, but removing them entirely is fine.'], ['How does the status check work and why is it limited?', 'Toolity has no server, so each sampled URL is fetched by your browser — directly where the site allows it, otherwise through a public read-only relay that sees only the URL. That costs a request per URL, so the sample is capped at 25 evenly spread across the list and never runs unless you press the button. For a full crawl use a desktop crawler.'], ['Why is a URL marked “another host”?', 'The sitemap protocol says a sitemap at <code>https://www.example.com/sitemap.xml</code> may only list URLs on <code>https://www.example.com</code>. <code>http://</code> URLs in an <code>https</code> sitemap, or a bare-domain sitemap listing <code>www</code> URLs, are ignored by Google unless the host is verified in Search Console — a common cause of “sitemap could not be read”.'], ['Can it read compressed (.xml.gz) sitemaps?', 'Not yet — the browser receives the gzip bytes as text. Paste the decompressed XML, or point the tool at the uncompressed version. Everything else (sitemap index, image, video and hreflang extensions, plain-text sitemaps) is supported.'], RELAY_FAQ, PRIVACY_FAQ]
+  },
+  {
+    slug: 'robots-txt-tester', name: 'Robots.txt Tester', icon: 'lucide:bot', section: 'SEO & Site Helpers', layout: 'stacked', css: true, libs: ['wellknown'],
+    action: 'Test', actionIcon: 'lucide:bot',
+    desc: 'Free online robots.txt tester: fetch any site’s robots.txt (or paste it) and test URLs against Googlebot, Bingbot, GPTBot, ClaudeBot and any user-agent — allowed or blocked, with the exact matching line, using RFC 9309 longest-match rules with wildcards and $. Flags syntax problems (rules outside a group, unknown directives, Crawl-delay, relative Sitemap URLs, 500 KB limit) and summarises which AI crawlers you block. Runs in your browser.',
+    lead: 'Test any URL against any crawler the way Google does — longest match, wildcards, $ — see the exact line that decides, catch syntax mistakes, and learn which AI bots your robots.txt really blocks.',
+    cardDesc: 'URL × user-agent matrix with the deciding line, RFC 9309 matching, syntax lint and an AI-crawler summary.',
+    tags: ['robots.txt tester', 'robots.txt checker', 'robots.txt validator', 'test robots.txt', 'is url blocked by robots.txt', 'googlebot robots.txt test', 'robots txt syntax check', 'block gptbot', 'ai crawlers robots.txt', 'disallow allow precedence', 'robots.txt wildcard'],
+    idle: 'Enter a site URL or paste robots.txt', sourceLabel: 'robots.txt', outputLabel: 'Results', outputIcon: 'lucide:bot', outputEmpty: 'Allowed / blocked per URL and crawler, with the deciding line, appear here',
+    downloads: [['md', 'Report (Markdown)', 'lucide:file-text'], ['json', 'Report (JSON)', 'lucide:braces'], ['csv', 'Matrix (CSV)', 'lucide:file-spreadsheet']],
+    file: { accept: '.txt' },
+    sourceHtml: SITE_INPUT('https://example.com  or  https://example.com/robots.txt', 'fetches /robots.txt') + FILE_PASTE('robots.txt', 'User-agent: *&#10;Disallow: /admin/&#10;Allow: /admin/public/&#10;Sitemap: https://example.com/sitemap.xml') + `
+                <div class="web-convert-row web-convert-row-2">
+                  <div class="form-group">
+                    <label class="form-label" for="rt-urls"><span>URLs to test</span><span class="form-label-desc">one per line · / is always tested</span></label>
+                    <textarea id="rt-urls" class="textarea-clean" rows="4" placeholder="/admin/settings&#10;/blog/post?utm_source=x&#10;https://example.com/wp-content/uploads/a.pdf" spellcheck="false" autocapitalize="off"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="rt-agents"><span>User-agents</span><span class="form-label-desc">comma-separated · product tokens</span></label>
+                    <textarea id="rt-agents" class="textarea-clean" rows="4" placeholder="Googlebot, Googlebot-Image, Bingbot, GPTBot, ClaudeBot, *" spellcheck="false" autocapitalize="off"></textarea>
+                  </div>
+                </div>`,
+    outputHtml: `
+                  <div class="web-grid-2" id="rt-stats"></div>
+                  <div class="web-tags" id="rt-issues"></div>
+                  <div class="web-table-wrap"><table class="web-table rt-table" id="rt-table"><thead></thead><tbody></tbody></table></div>
+                  <div class="rt-ai"><div class="web-group-head"><span>AI &amp; LLM crawlers</span><span class="web-muted" id="rt-ai-sum"></span></div><div class="web-tags" id="rt-ai"></div></div>
+                  <details class="td-more"><summary>Parsed groups</summary><pre class="web-code" id="rt-groups"></pre></details>
+                  <details class="td-more"><summary>robots.txt as fetched</summary><pre class="web-code" id="rt-raw"></pre></details>`,
+    settingsSummary: 'Google fallback rules · AI summary on',
+    settings: `${CHECK('opt-fallback', 'Fall back like Google: Googlebot-Image → Googlebot → *, AdsBot ignores *', true)}${CHECK('opt-ai', 'Show the AI-crawler summary', true)}`,
+    guide: [['Fetch or paste', 'Enter the site (the tool fetches <code>/robots.txt</code>) or the file’s own URL, or paste the contents. Add the URLs you care about — relative paths are fine — and the crawler names to test; the root <code>/</code> and a sensible default set of crawlers are included when you leave them blank. Press <strong>Test</strong>.'], ['Read the matrix', 'Each cell says <strong>Allowed</strong> or <strong>Blocked</strong> and names the line that decided it. Matching follows RFC 9309 and Google’s implementation: the most specific user-agent group wins, then the longest matching path pattern, with <code>Allow</code> winning ties; <code>*</code> and <code>$</code> work as wildcards.'], ['Fix what the lint found', 'Issues above the table flag rules outside a group (ignored by crawlers), unknown or misspelled directives, <code>Crawl-delay</code> (ignored by Google), relative Sitemap URLs, the 500 KB limit and a root block for everyone. The AI section lists which LLM crawlers are blocked, allowed or partially blocked.']],
+    faq: [['How exactly does matching work?', 'Google picks the group whose <code>User-agent</code> is the most specific match for the crawler (an exact product token first, then its parent — Googlebot-Image falls back to Googlebot — then <code>*</code>). Within that group every <code>Allow</code> and <code>Disallow</code> is compared to the URL path + query; <code>*</code> matches any run of characters and <code>$</code> anchors the end. The longest matching pattern wins; if an Allow and a Disallow tie, Allow wins. An empty <code>Disallow:</code> means everything is allowed. This tool implements those rules; other crawlers (Bing, Yandex) agree on the essentials.'], ['Why is a rule marked “outside a group”?', 'Allow / Disallow lines only count after a <code>User-agent</code> line. Rules at the top of the file before any user-agent — a common copy-paste mistake — are silently ignored by every major crawler, so the tool flags them as errors.'], ['Does blocking GPTBot, ClaudeBot and others actually work?', 'Those crawlers publish that they honour robots.txt, and the summary tells you whether your file blocks them for the whole site, for parts of it, or not at all. It is a request, not a lock: content stays publicly reachable and bots that ignore the standard are not stopped. Blocking training crawlers (GPTBot, Google-Extended, CCBot) does not remove you from search; blocking search crawlers does.'], ['What about noindex, Crawl-delay and Host?', '<code>noindex</code> in robots.txt has been ignored by Google since 2019 — use a meta robots tag or X-Robots-Tag. <code>Crawl-delay</code> is honoured by Bing and Yandex but ignored by Google (set crawl rate in Search Console). <code>Host</code> is Yandex-only. All three are reported as warnings, not errors.'], ['Can it check a staging robots.txt or one that isn’t live yet?', 'Yes — paste it. Paste mode never contacts any server, and you can test the exact file you are about to deploy. Use the <a href="/labs/robots-sitemap-generator/">Robots.txt &amp; Sitemap Generator</a> to build one from scratch.'], RELAY_FAQ, PRIVACY_FAQ]
+  },
   {
     slug: 'tag-detector', name: 'Tag Detector', icon: 'lucide:radar', section: 'SEO & Site Helpers', layout: 'stacked', css: true, libs: ['tagscan'],
     action: 'Scan', actionIcon: 'lucide:radar',

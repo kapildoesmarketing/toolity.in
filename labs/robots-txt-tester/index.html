@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Robots.txt Tester | Toolity Labs</title>
+  <link rel="canonical" href="https://toolity.in/labs/robots-txt-tester/">
+  <meta name="description" content="Free online robots.txt tester: fetch any site’s robots.txt (or paste it) and test URLs against Googlebot, Bingbot, GPTBot, ClaudeBot and any user-agent — allowed or blocked, with the exact matching line, using RFC 9309 longest-match rules with wildcards and $. Flags syntax problems (rules outside a group, unknown directives, Crawl-delay, relative Sitemap URLs, 500 KB limit) and summarises which AI crawlers you block. Runs in your browser.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Robots.txt Tester | Toolity Labs">
+  <meta property="og:description" content="Free online robots.txt tester: fetch any site’s robots.txt (or paste it) and test URLs against Googlebot, Bingbot, GPTBot, ClaudeBot and any user-agent — allowed or blocked, with the exact matching line, using RFC 9309 longest-match rules with wildcards and $. Flags syntax problems (rules outside a group, unknown directives, Crawl-delay, relative Sitemap URLs, 500 KB limit) and summarises which AI crawlers you block. Runs in your browser.">
+  <meta property="og:url" content="https://toolity.in/labs/robots-txt-tester/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=6.5" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=6.5">
+  <link rel="stylesheet" href="/styles/tools/robots-txt-tester.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Robots.txt Tester",
+        "url": "https://toolity.in/labs/robots-txt-tester/",
+        "description": "Free online robots.txt tester: fetch any site’s robots.txt (or paste it) and test URLs against Googlebot, Bingbot, GPTBot, ClaudeBot and any user-agent — allowed or blocked, with the exact matching line, using RFC 9309 longest-match rules with wildcards and $. Flags syntax problems (rules outside a group, unknown directives, Crawl-delay, relative Sitemap URLs, 500 KB limit) and summarises which AI crawlers you block. Runs in your browser.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Labs", "item": "https://toolity.in/labs/" },
+          { "@type": "ListItem", "position": 3, "name": "Robots.txt Tester", "item": "https://toolity.in/labs/robots-txt-tester/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "How exactly does matching work?", "acceptedAnswer": { "@type": "Answer", "text": "Google picks the group whose User-agent is the most specific match for the crawler (an exact product token first, then its parent — Googlebot-Image falls back to Googlebot — then *). Within that group every Allow and Disallow is compared to the URL path + query; * matches any run of characters and $ anchors the end. The longest matching pattern wins; if an Allow and a Disallow tie, Allow wins. An empty Disallow: means everything is allowed. This tool implements those rules; other crawlers (Bing, Yandex) agree on the essentials." } },
+          { "@type": "Question", "name": "Why is a rule marked “outside a group”?", "acceptedAnswer": { "@type": "Answer", "text": "Allow / Disallow lines only count after a User-agent line. Rules at the top of the file before any user-agent — a common copy-paste mistake — are silently ignored by every major crawler, so the tool flags them as errors." } },
+          { "@type": "Question", "name": "Does blocking GPTBot, ClaudeBot and others actually work?", "acceptedAnswer": { "@type": "Answer", "text": "Those crawlers publish that they honour robots.txt, and the summary tells you whether your file blocks them for the whole site, for parts of it, or not at all. It is a request, not a lock: content stays publicly reachable and bots that ignore the standard are not stopped. Blocking training crawlers (GPTBot, Google-Extended, CCBot) does not remove you from search; blocking search crawlers does." } },
+          { "@type": "Question", "name": "What about noindex, Crawl-delay and Host?", "acceptedAnswer": { "@type": "Answer", "text": "noindex in robots.txt has been ignored by Google since 2019 — use a meta robots tag or X-Robots-Tag. Crawl-delay is honoured by Bing and Yandex but ignored by Google (set crawl rate in Search Console). Host is Yandex-only. All three are reported as warnings, not errors." } },
+          { "@type": "Question", "name": "Can it check a staging robots.txt or one that isn’t live yet?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — paste it. Paste mode never contacts any server, and you can test the exact file you are about to deploy. Use the Robots.txt &amp; Sitemap Generator to build one from scratch." } },
+          { "@type": "Question", "name": "Why does fetching sometimes fail — and what is the relay?", "acceptedAnswer": { "@type": "Answer", "text": "Browsers block JavaScript from reading other websites directly (CORS). The tool first tries a direct request; when the site forbids it, the URL only is sent to a public read-only relay (allorigins.win, then codetabs.com) that fetches the page and returns its HTML. The relay sees the URL you typed, nothing else — Toolity has no server and keeps no record. If the relay is busy or the site blocks bots, paste the page source instead: that path is 100% local." } },
+          { "@type": "Question", "name": "Is my input sent anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. Everything is computed by JavaScript in your browser tab. Nothing is uploaded, logged or stored by Toolity." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main id="main">
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/labs/" class="breadcrumb-link">Labs</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Robots.txt Tester</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Labs</span>
+            <h1 class="page-title">Robots.txt Tester</h1>
+            <p class="page-desc">Test any URL against any crawler the way Google does — longest match, wildcards, $ — see the exact line that decides, catch syntax mistakes, and learn which AI bots your robots.txt really blocks.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="stacked" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge web-status-badge" id="status-badge">Enter a site URL or paste robots.txt</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result" aria-label="Copy result" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <div class="dropdown-menu-wrapper" id="download-dropdown-wrap">
+                <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download result" aria-label="Download result" aria-haspopup="true" disabled>
+                  <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                  <span>Download</span>
+                  <iconify-icon icon="lucide:chevron-down" class="dropdown-arrow" width="13" height="13"></iconify-icon>
+                </button>
+                <div class="dropdown-popup" role="menu">
+                  <button type="button" class="dropdown-item" data-format="md" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:file-text" width="14" height="14"></iconify-icon>
+                      <span>Report (Markdown)</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="json" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:braces" width="14" height="14"></iconify-icon>
+                      <span>Report (JSON)</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="csv" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:file-spreadsheet" width="14" height="14"></iconify-icon>
+                      <span>Matrix (CSV)</span>
+                    </div>
+                  </button>
+                </div>
+              </div>
+              <button type="button" class="btn-toolbar-sm" id="btn-open" title="Open result in a new tab" aria-label="Open result in a new tab" disabled>
+                <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
+                <span>Open</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>robots.txt</span>
+                <span class="pane-badge" id="input-badge">—</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content web-form">
+                <div class="web-file-row">
+                  <button type="button" class="btn-toolbar-sm" id="btn-file" title="Open a file from your device" aria-label="Open a file from your device">
+                    <iconify-icon icon="lucide:folder-open" width="14" height="14"></iconify-icon>
+                    <span>Open file</span>
+                  </button>
+                  <input type="file" id="file-input" accept=".txt" hidden>
+                  <span class="web-muted" id="file-name">or drop a file here</span>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="url-input"><span>Site or file URL</span><span class="form-label-desc">fetches /robots.txt</span></label>
+                  <input type="url" id="url-input" class="input-clean" placeholder="https://example.com  or  https://example.com/robots.txt" spellcheck="false" autocomplete="off" autocapitalize="off" inputmode="url">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="text-input"><span>Or paste robots.txt</span><span class="form-label-desc">Works offline · overrides the URL</span></label>
+                  <textarea id="text-input" class="textarea-clean" rows="6" placeholder="User-agent: *&#10;Disallow: /admin/&#10;Allow: /admin/public/&#10;Sitemap: https://example.com/sitemap.xml" spellcheck="false" autocapitalize="off" data-file-target></textarea>
+                </div>
+                <div class="web-convert-row web-convert-row-2">
+                  <div class="form-group">
+                    <label class="form-label" for="rt-urls"><span>URLs to test</span><span class="form-label-desc">one per line · / is always tested</span></label>
+                    <textarea id="rt-urls" class="textarea-clean" rows="4" placeholder="/admin/settings&#10;/blog/post?utm_source=x&#10;https://example.com/wp-content/uploads/a.pdf" spellcheck="false" autocapitalize="off"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="rt-agents"><span>User-agents</span><span class="form-label-desc">comma-separated · product tokens</span></label>
+                    <textarea id="rt-agents" class="textarea-clean" rows="4" placeholder="Googlebot, Googlebot-Image, Bingbot, GPTBot, ClaudeBot, *" spellcheck="false" autocapitalize="off"></textarea>
+                  </div>
+                </div>
+                <button type="button" id="btn-run" class="btn-toolbar-sm btn-brand-sm btn-primary-action">
+                  <iconify-icon icon="lucide:bot" width="16" height="16"></iconify-icon>
+                  <span>Test</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Results</span>
+                <span class="pane-badge" id="output-badge">—</span>
+              </div>
+              <div class="pane-content web-output-pane">
+                <div class="pane-empty" id="output-empty">
+                  <iconify-icon icon="lucide:bot"></iconify-icon>
+                  <span>Allowed / blocked per URL and crawler, with the deciding line, appear here</span>
+                </div>
+                <div class="web-output" id="output-content" hidden>
+                  <div class="web-grid-2" id="rt-stats"></div>
+                  <div class="web-tags" id="rt-issues"></div>
+                  <div class="web-table-wrap"><table class="web-table rt-table" id="rt-table"><thead></thead><tbody></tbody></table></div>
+                  <div class="rt-ai"><div class="web-group-head"><span>AI &amp; LLM crawlers</span><span class="web-muted" id="rt-ai-sum"></span></div><div class="web-tags" id="rt-ai"></div></div>
+                  <details class="td-more"><summary>Parsed groups</summary><pre class="web-code" id="rt-groups"></pre></details>
+                  <details class="td-more"><summary>robots.txt as fetched</summary><pre class="web-code" id="rt-raw"></pre></details>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">Google fallback rules · AI summary on</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item"><input type="checkbox" id="opt-fallback" checked><label for="opt-fallback">Fall back like Google: Googlebot-Image → Googlebot → *, AdsBot ignores *</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-ai" checked><label for="opt-ai">Show the AI-crawler summary</label></div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Use Robots.txt Tester in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Fetch or paste</h3>
+              <p class="step-desc">Enter the site (the tool fetches <code>/robots.txt</code>) or the file’s own URL, or paste the contents. Add the URLs you care about — relative paths are fine — and the crawler names to test; the root <code>/</code> and a sensible default set of crawlers are included when you leave them blank. Press <strong>Test</strong>.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Read the matrix</h3>
+              <p class="step-desc">Each cell says <strong>Allowed</strong> or <strong>Blocked</strong> and names the line that decided it. Matching follows RFC 9309 and Google’s implementation: the most specific user-agent group wins, then the longest matching path pattern, with <code>Allow</code> winning ties; <code>*</code> and <code>$</code> work as wildcards.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Fix what the lint found</h3>
+              <p class="step-desc">Issues above the table flag rules outside a group (ignored by crawlers), unknown or misspelled directives, <code>Crawl-delay</code> (ignored by Google), relative Sitemap URLs, the 500 KB limit and a root block for everyone. The AI section lists which LLM crawlers are blocked, allowed or partially blocked.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Robots.txt Tester — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>How exactly does matching work?</summary>
+              <p>Google picks the group whose <code>User-agent</code> is the most specific match for the crawler (an exact product token first, then its parent — Googlebot-Image falls back to Googlebot — then <code>*</code>). Within that group every <code>Allow</code> and <code>Disallow</code> is compared to the URL path + query; <code>*</code> matches any run of characters and <code>$</code> anchors the end. The longest matching pattern wins; if an Allow and a Disallow tie, Allow wins. An empty <code>Disallow:</code> means everything is allowed. This tool implements those rules; other crawlers (Bing, Yandex) agree on the essentials.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why is a rule marked “outside a group”?</summary>
+              <p>Allow / Disallow lines only count after a <code>User-agent</code> line. Rules at the top of the file before any user-agent — a common copy-paste mistake — are silently ignored by every major crawler, so the tool flags them as errors.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Does blocking GPTBot, ClaudeBot and others actually work?</summary>
+              <p>Those crawlers publish that they honour robots.txt, and the summary tells you whether your file blocks them for the whole site, for parts of it, or not at all. It is a request, not a lock: content stays publicly reachable and bots that ignore the standard are not stopped. Blocking training crawlers (GPTBot, Google-Extended, CCBot) does not remove you from search; blocking search crawlers does.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What about noindex, Crawl-delay and Host?</summary>
+              <p><code>noindex</code> in robots.txt has been ignored by Google since 2019 — use a meta robots tag or X-Robots-Tag. <code>Crawl-delay</code> is honoured by Bing and Yandex but ignored by Google (set crawl rate in Search Console). <code>Host</code> is Yandex-only. All three are reported as warnings, not errors.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can it check a staging robots.txt or one that isn’t live yet?</summary>
+              <p>Yes — paste it. Paste mode never contacts any server, and you can test the exact file you are about to deploy. Use the <a href="/labs/robots-sitemap-generator/">Robots.txt &amp; Sitemap Generator</a> to build one from scratch.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why does fetching sometimes fail — and what is the relay?</summary>
+              <p>Browsers block JavaScript from reading other websites directly (CORS). The tool first tries a direct request; when the site forbids it, the <em>URL only</em> is sent to a public read-only relay (allorigins.win, then codetabs.com) that fetches the page and returns its HTML. The relay sees the URL you typed, nothing else — Toolity has no server and keeps no record. If the relay is busy or the site blocks bots, paste the page source instead: that path is 100% local.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is my input sent anywhere?</summary>
+              <p>No. Everything is computed by JavaScript in your browser tab. Nothing is uploaded, logged or stored by Toolity.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="labs"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=5.2"></script>
+  <script src="/scripts/tool-common.js?v=1.2"></script>
+  <script src="/scripts/wellknown-common.js?v=1.0"></script>
+  <script src="/scripts/web-common.js?v=1.2"></script>
+  <script src="/labs/robots-txt-tester/robots-txt-tester.js?v=1.0"></script>
+</body>
+</html>

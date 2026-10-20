@@ -1,0 +1,22 @@
+/* Robots.txt Tester — result matrix + AI crawler chips. Shared table/chip primitives come from main.css. */
+.rt-table { table-layout: auto; min-width: 100%; }
+.rt-table th { width: auto; white-space: nowrap; }
+.rt-table thead th:first-child { min-width: 14ch; }
+.rt-table tbody th { font-family: var(--font-mono); font-weight: 600; color: var(--text-primary); white-space: normal; }
+.rt-table tbody th code { font-family: inherit; font-size: 0.8rem; }
+.rt-table tbody th .web-muted { display: block; font-size: 0.72rem; margin-top: 0.15rem; }
+.rt-table td { font-family: var(--font-family); min-width: 11ch; }
+.rt-table td b { display: block; font-weight: 700; }
+.rt-table td span { display: block; font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted); margin-top: 0.15rem; }
+.rt-table td.is-pass b { color: #15803d; }
+.rt-table td.is-fail b { color: #b91c1c; }
+.rt-table td.is-fail { background: rgba(220, 38, 38, 0.05); }
+[data-theme="dark"] .rt-table td.is-pass b { color: #4ade80; }
+[data-theme="dark"] .rt-table td.is-fail b { color: #f87171; }
+.rt-ai .web-group-head { display: flex; justify-content: space-between; align-items: baseline; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 0.5rem; }
+.rt-ai .web-tag i { font-style: normal; font-weight: 500; opacity: 0.8; }
+.rt-ai[hidden] { display: none; }
+.td-more { border-top: 1px solid var(--border); padding-top: 0.6rem; }
+.td-more summary { cursor: pointer; font-size: 0.86rem; font-weight: 600; color: var(--text-secondary); min-height: 32px; display: flex; align-items: center; }
+.td-more > :not(summary) { margin-top: 0.6rem; }
+.td-more .web-code { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 0.78rem; max-height: 360px; overflow: auto; }
