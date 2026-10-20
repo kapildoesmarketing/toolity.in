@@ -45,7 +45,8 @@
     const paintBadges = () => card.querySelectorAll('input[type="range"]').forEach((el) => { const b = $(`${el.id}-val`); if (b) b.textContent = T.fmtRange ? T.fmtRange(el) : el.value; });
     let css = '', ic = {};
     // first paint doesn't wait on the network: CSS text is only needed at export, icons re-render when they arrive
-    const cssReady = fetch('/styles/tools/mockup.css').then((r) => r.text()).then((t) => { css = t; }).catch(() => {});
+    const sheets = [...document.querySelectorAll('link[rel="stylesheet"][href*="/styles/tools/"]')].map((l) => l.getAttribute('href'));
+    const cssReady = Promise.all(sheets.map((h) => fetch(h).then((r) => r.text()).catch(() => ''))).then((t) => { css = t.join('\n'); });
     icons(T.icons || []).then((r) => { ic = r; if (Object.keys(r).some((k) => r[k])) render(); });
 
     let timer = 0, state = null;
@@ -54,11 +55,21 @@
       stage.innerHTML = T.render(state, ic);
       stage.style.width = `${T.width(state)}px`;
       stage.classList.add('is-shown'); outEmpty.hidden = true;
+      fit();
       paintBadges(); if (T.summary && $('settings-summary')) $('settings-summary').textContent = T.summary(state);
-      $('output-badge').textContent = `${T.width(state)} × ${Math.round(stage.getBoundingClientRect().height)} css px · live`;
+      $('output-badge').textContent = `${T.width(state)} × ${stage.offsetHeight} css px · live`;
       $('btn-compress').disabled = false;
       S.out = null; $('btn-download').disabled = true; $('btn-copy').disabled = true; // export is per snapshot
     }
+    // Designed by Kapil Pidhwani: the preview is laid out at the real export width and only *visually* scaled down to fit the pane,
+    // so line breaks in the PNG are exactly what you saw. Ceiling: very narrow panes (< 300 px) show small text — pinch/zoom.
+    function fit() {
+      const w = T.width(state), avail = stage.parentElement.clientWidth - 2, k = Math.min(1, avail / w);
+      stage.style.transformOrigin = 'top left'; stage.style.transform = k < 1 ? `scale(${k})` : '';
+      stage.style.marginBottom = k < 1 ? `${-Math.round(stage.offsetHeight * (1 - k))}px` : '';
+      stage.dataset.k = k;
+    }
+    new ResizeObserver(() => { if (state) fit(); }).observe(stage.parentElement);
     const queue = () => { clearTimeout(timer); timer = setTimeout(render, 120); };
     card.addEventListener('input', (e) => { if (e.target.type !== 'file') queue(); });
     card.addEventListener('change', (e) => { if (e.target.type !== 'file') queue(); });
@@ -78,7 +89,7 @@
       try {
         await cssReady;
         const scale = Number(($('opt-scale') && $('opt-scale').value) || 2), node = stage.firstElementChild;
-        const w = T.width(state), h = Math.ceil(node.getBoundingClientRect().height);
+        const w = T.width(state), h = Math.ceil(node.offsetHeight); // offsetHeight = unscaled layout height (preview may be visually scaled)
         const xhtml = new XMLSerializer().serializeToString(node); // XML serialisation: void elements come out self-closed, xmlns added
         const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${w * scale}" height="${h * scale}" viewBox="0 0 ${w} ${h}"><foreignObject width="${w}" height="${h}"><div xmlns="http://www.w3.org/1999/xhtml" class="mk-root"><style>${css}</style>${xhtml}</div></foreignObject></svg>`;
         const img = await new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = () => rej(new Error('The browser could not rasterise the mockup. Try a smaller image attachment.')); i.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg); });

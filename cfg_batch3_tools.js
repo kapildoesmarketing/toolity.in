@@ -76,7 +76,7 @@ module.exports = [
 
   /* ═══════════ 3. CHAT MOCKUP ═══════════ */
   {
-    slug: 'chat-mockup', name: 'Chat Mockup', icon: 'lucide:message-square-text', section: 'Image Tools', runtime: 'mockup', css: true, cssFile: 'mockup', actionEnabled: true, split: '45/55', idle: 'Live preview',
+    slug: 'chat-mockup', name: 'Chat Mockup', icon: 'lucide:message-square-text', section: 'Image Tools', runtime: 'mockup', css: true, cssFile: ['mockup', 'mockup-chat'], actionEnabled: true, split: '45/55', idle: 'Live preview',
     desc: 'Free online chat mockup generator: create realistic fake WhatsApp, iMessage, Instagram DM, Telegram, Messenger, Discord, Slack and Google Messages conversations with avatars, read receipts, reactions, images and voice notes — exported as a sharp PNG, made in your browser.',
     lead: 'Build a realistic WhatsApp, iMessage, Instagram, Telegram, Messenger, Discord, Slack or Android chat — bubbles, ticks, reactions, voice notes and images — and export it as a crisp PNG.',
     cardDesc: 'Fake WhatsApp, iMessage, Instagram, Telegram, Discord or Slack chats as PNG.',
@@ -124,6 +124,58 @@ module.exports = [
       ['Can I add photos and voice notes?', 'Yes — change a message’s type to <em>Image</em> and upload a picture, or to <em>Voice note</em> and set a duration; it draws a waveform bubble like the real apps.'],
       ['Which platforms show read receipts?', 'WhatsApp and Telegram show grey/blue double ticks, Google Messages shows “Delivered / Read”, iMessage shows “Delivered” or “Read” under your last bubble, Messenger and Instagram show the seen avatar. Discord and Slack have no receipts, so the option is hidden there.'],
       ['Why is the export sharp but the text size looks different from my phone?', 'The mockup is laid out at 390 CSS px (an iPhone-class width) and exported at 2× or 3× so it is crisp. Your phone may use a larger system text size; the proportions match the default setting.'],
+      ['Can I remove the Toolity credit?', 'Yes — untick <em>Show “Made with Toolity.in” credit</em> under Settings before exporting.']]
+  },
+
+  /* ═══════════ 4. SOCIAL POST MOCKUPS ═══════════ */
+  {
+    slug: 'social-post-mockup', name: 'Social Post Mockups', icon: 'lucide:layout-template', section: 'Image Tools', runtime: 'mockup', css: true, cssFile: ['mockup', 'mockup-post'], actionEnabled: true, split: '45/55', idle: 'Live preview',
+    desc: 'Free online social post mockup generator: create realistic X (Twitter) posts, Instagram posts and stories, LinkedIn, Facebook and Threads posts with your name, avatar, verified badge, text, image and like/reply counts — exported as a sharp PNG, made in your browser.',
+    lead: 'Mock up an X post, Instagram post or story, LinkedIn, Facebook or Threads post — avatar, verified badge, text, image, metrics — and export a crisp PNG.',
+    cardDesc: 'X, Instagram, LinkedIn, Facebook and Threads post mockups as PNG.',
+    tags: ['tweet generator', 'fake tweet', 'x post mockup', 'instagram post generator', 'instagram story mockup', 'linkedin post generator', 'facebook post mockup', 'threads post', 'social media mockup', 'tweet to image', 'post to image', 'mockup', 'screenshot'],
+    action: 'Export PNG', actionIcon: 'lucide:image-down', copyTitle: 'Copy PNG to clipboard', downloadTitle: 'Download PNG',
+    source: { label: 'Post', badge: 'Edit on the left', html: `
+                  <div class="mk-form" id="mk-form">
+                    <div class="mk-row">
+                      <label class="mk-field mk-grow"><span>Platform</span><select id="opt-platform" class="select-clean">
+                        <option value="x" selected>X (Twitter) post</option><option value="instagram">Instagram post</option><option value="story">Instagram story</option><option value="linkedin">LinkedIn post</option><option value="facebook">Facebook post</option><option value="threads">Threads post</option></select></label>
+                      <label class="mk-field"><span>Theme</span><select id="opt-theme" class="select-clean"><option value="light" selected>Light</option><option value="dark">Dark</option></select></label>
+                    </div>
+                    <div class="mk-row">
+                      <label class="mk-field mk-grow"><span>Name</span><input type="text" id="au-name" class="input-clean" placeholder="e.g. Kapil Pidhwani" maxlength="50"></label>
+                      <label class="mk-field mk-grow"><span>Handle / headline</span><input type="text" id="au-handle" class="input-clean" placeholder="@handle · or a LinkedIn headline" maxlength="80"></label>
+                    </div>
+                    <div class="mk-row">
+                      <label class="mk-field mk-file"><span>Avatar</span><input type="file" id="au-avatar" accept="image/*" data-image="avatar" aria-label="Avatar"></label>
+                      <label class="mk-field mk-check"><input type="checkbox" id="au-verified"> <span>Verified badge</span></label>
+                      <label class="mk-field mk-grow"><span>Time / date</span><input type="text" id="po-time" class="input-clean" placeholder="2h · or 9:41 AM · Oct 20, 2026" maxlength="40"></label>
+                    </div>
+                    <label class="mk-field"><span>Text</span><textarea id="po-text" class="textarea-clean mk-text" rows="4" placeholder="What’s happening? @mentions, #hashtags and links are highlighted." maxlength="3000"></textarea></label>
+                    <div class="mk-row">
+                      <label class="mk-field mk-file"><span>Image</span><input type="file" id="po-image" accept="image/*" data-image="post" aria-label="Post image"></label>
+                      <label class="mk-field"><span>Likes</span><input type="number" id="m-likes" class="input-clean mk-num" min="0" placeholder="0"></label>
+                      <label class="mk-field"><span>Comments</span><input type="number" id="m-comments" class="input-clean mk-num" min="0" placeholder="0"></label>
+                      <label class="mk-field"><span>Reposts / shares</span><input type="number" id="m-reposts" class="input-clean mk-num" min="0" placeholder="0"></label>
+                      <label class="mk-field"><span>Views</span><input type="number" id="m-views" class="input-clean mk-num" min="0" placeholder="0"></label>
+                    </div>
+                    <label class="mk-field"><span>Caption source / location <small>(Instagram)</small></span><input type="text" id="po-sub" class="input-clean" placeholder="e.g. Bengaluru, India" maxlength="60"></label>
+                  </div>` },
+    output: { label: 'Preview', badge: 'Live', icon: 'lucide:layout-template', empty: 'The post preview appears here', html: `
+                  <div id="mockup-stage" class="mk-stage"></div>` },
+    settingsSummary: 'Card · 2×',
+    settings: select('opt-width', 'Card width', [['390', 'Phone (390 px)'], ['520', 'Standard (520 px)', 1], ['600', 'Wide (600 px)']])
+      + check('opt-frame', 'Rounded card with border', true)
+      + check('opt-actions', 'Show action row (like / reply / share)', true)
+      + check('opt-liked', 'Show the post as liked', false)
+      + select('opt-scale', 'Export resolution', [['1', '1×'], ['2', '2× (sharp on phones)', 1], ['3', '3× (print / 4K)']])
+      + check('opt-credit', 'Show “Made with Toolity.in” credit', true),
+    guide: [['Pick the platform and the author', 'Choose X, Instagram post or story, LinkedIn, Facebook or Threads. Enter a name and handle (or LinkedIn headline), upload an avatar and tick the verified badge if you want it.'], ['Write the post', 'Type the text — @mentions, #hashtags and links are highlighted like the real thing — attach an image and set the like, comment, repost and view counts.'], ['Export the PNG', 'The card updates live. Click <strong>Export PNG</strong> for a 2× or 3× image, then download it or copy it into a deck, article or chat.']],
+    faq: [['Is my post or avatar uploaded anywhere?', 'No. The card is rendered in your browser tab and turned into a PNG on a canvas in the page. Nothing is sent to a server.'],
+      ['Are the platform logos real?', 'Yes — the X, Instagram, LinkedIn, Facebook and Threads marks are the official vector logos, fetched from the same icon library the site uses and embedded in the export. The layouts follow each platform’s current post design. Brands own their marks; this is a mockup tool for presentations, previews and tutorials — please label fabricated posts clearly.'],
+      ['Why is there no X or Threads image size limit?', 'The attached image is scaled to the card width and kept at its own aspect ratio (Instagram posts crop to the feed ratio, stories to 9:16). Upload up to a few thousand pixels — it is downscaled to keep the PNG small.'],
+      ['What do the number fields do on each platform?', 'They fill the metric row in the platform’s own format: X shows replies, reposts, likes and views; Instagram shows likes and the caption; LinkedIn shows reactions and comments; Facebook shows reactions, comments and shares; Threads shows replies and likes. Large numbers are abbreviated (12.4K, 1.2M).'],
+      ['Can I make it look like dark mode?', 'Yes — switch <em>Theme</em> to Dark. Every platform has its real dark palette.'],
       ['Can I remove the Toolity credit?', 'Yes — untick <em>Show “Made with Toolity.in” credit</em> under Settings before exporting.']]
   }
 ];

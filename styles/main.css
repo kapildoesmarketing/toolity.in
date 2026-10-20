@@ -4415,7 +4415,7 @@ main[id="main"] { scroll-margin-top: var(--header-height); }
 .mk-msg-ops { margin-left: auto; display: flex; gap: 0.2rem; }
 .mk-msg-ops .btn-toolbar-sm { padding: 0.15rem 0.45rem; }
 .mk-text { width: 100%; font-size: 0.86rem; resize: vertical; min-height: 2.4em; }
-.mk-stage { display: none; width: 390px; max-width: 100%; margin: 0 auto; }
+.mk-stage { display: none; width: 390px; flex: none; margin: 0; }
 .mk-stage.is-shown { display: block; }
 .media-canvas-viewport:has(.mk-stage.is-shown) { align-items: flex-start; overflow: auto; }
 
@@ -4423,4 +4423,4 @@ main[id="main"] { scroll-margin-top: var(--header-height); }
 .mk-field[hidden], .mk-img[hidden], .mk-voice[hidden] { display: none; }
 .media-canvas-viewport .mk-form input[type="file"] { display: block; }
 .media-canvas-viewport:has(.mk-form), .media-canvas-viewport:has(.mk-stage.is-shown) { height: auto; min-height: 280px; align-items: flex-start; justify-content: flex-start; overflow: visible; padding: 0.75rem; }
-.media-canvas-viewport:has(.mk-stage.is-shown) { justify-content: center; background: var(--surface); }
+.media-canvas-viewport:has(.mk-stage.is-shown) { justify-content: flex-start; background: var(--surface); }

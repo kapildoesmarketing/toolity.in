@@ -107,10 +107,36 @@ const CASES = [
     A(api.S.out && api.S.out.type === 'image/png' && api.S.outW === 780, 'png 2x: ' + (api.S.out && api.S.out.type) + ' ' + api.S.outW);
     const img = await imgOf(api.S.out); A(img.naturalHeight > 600, 'export height ' + img.naturalHeight);
     const c = document.createElement('canvas'); c.width = img.naturalWidth; c.height = img.naturalHeight; const g = c.getContext('2d'); g.drawImage(img, 0, 0);
-    const me = st.querySelector('.mk-m.me .mk-b').getBoundingClientRect(), root = st.firstElementChild.getBoundingClientRect(); const px = g.getImageData(Math.round((me.left - root.left + 10) * 2), Math.round((me.top - root.top + 10) * 2), 1, 1).data;
+    const all = g.getImageData(0, 0, c.width, c.height).data, me = st.querySelector('.mk-m.me .mk-b').getBoundingClientRect(), root = st.firstElementChild.getBoundingClientRect(), k = Number(st.dataset.k || 1); const ii = (Math.round((me.top - root.top) / k * 2 + 20) * c.width + Math.round((me.left - root.left) / k * 2 + 20)) * 4, px = [all[ii], all[ii + 1], all[ii + 2]];
     A(px[1] > 230 && px[0] > 200 && px[2] < 230, 'me bubble is WhatsApp green in the PNG: ' + [...px]);
     set('opt-scale', '3'); await tick(300); await go(api, 30000); A(api.S.outW === 1170, '3x width ' + api.S.outW);
     $('btn-reset').click(); await tick(300); A(list.children.length === 2 && $('ct-name').value === '' && $('opt-platform').value === 'whatsapp' && st.classList.contains('is-shown'), 'reset reseeds + still previews');`],
+  ['media/social-post-mockup/', `
+    A(await waitFor(() => window.__sp, 8000), 'mount'); const api = window.__sp.api, st = $('mockup-stage');
+    A(st.classList.contains('is-shown') && st.querySelector('.mk-post.sp-x'), 'x preview');
+    set('au-name', 'Kapil'); set('au-handle', 'kapil'); set('au-verified', true); set('po-text', 'Hello @world #tag https://toolity.in'); set('m-likes', 12400); set('m-views', 1200000); set('m-comments', 5); await tick(300);
+    A(st.querySelector('.sp-names b').textContent.trim() === 'Kapil' && st.querySelector('.sp-names span').textContent === '@kapil', 'name + auto-@ handle: ' + st.querySelector('.sp-names span').textContent);
+    A(st.querySelector('.mk-verified'), 'verified badge'); A(st.querySelectorAll('.mk-link').length === 3, 'linkify 3: ' + st.querySelectorAll('.mk-link').length);
+    A(/12\.4K/.test(st.querySelector('.sp-x').textContent) && /1\.2M/.test(st.querySelector('.sp-time').textContent), 'metrics formatted');
+    A(await waitFor(() => st.querySelector('.sp-logo svg'), 8000), 'x logo inlined (iconify)');
+    set('opt-liked', true); await tick(300); A(st.querySelector('.sp-actions .is-liked path[fill="#f91880"]'), 'liked heart');
+    set('opt-platform', 'instagram'); await tick(300); A(st.querySelector('.sp-ig-img.sp-ig-empty') && /12\.4K likes/.test(st.querySelector('.sp-ig-likes').textContent) && !$('po-sub').closest('.mk-field').hidden, 'instagram layout + sub field shown');
+    set('opt-platform', 'story'); await tick(300); A(st.querySelector('.sp-story') && api.S && st.style.width === '360px', 'story 360 wide: ' + st.style.width);
+    set('opt-platform', 'linkedin'); set('opt-theme', 'dark'); await tick(300); A(st.querySelector('.mk-post.sp-linkedin.dark .sp-li-stats') && /5 comments/.test(st.textContent), 'linkedin dark stats');
+    set('opt-platform', 'facebook'); await tick(300); A(st.querySelector('.sp-fb-stats') && st.querySelectorAll('.sp-fb span').length === 3, 'facebook actions');
+    set('opt-platform', 'threads'); await tick(300); A(st.querySelector('.sp-th-line') && /5 replies/.test(st.querySelector('.sp-th-stats').textContent), 'threads'); A(st.querySelector('.sp-logo svg') && /#fff/i.test(st.querySelector('.sp-logo').innerHTML) && !/#000/.test(st.querySelector('.sp-logo').innerHTML), 'threads logo recoloured white on dark');
+    set('opt-platform', 'x'); set('opt-theme', 'light'); set('opt-width', '600'); await tick(300); A(st.style.width === '600px', 'width option');
+    // export 2x: 1200 wide, has non-white pixels, avatar initials region coloured
+    await go(api, 30000); A(api.S.out && api.S.outW === 1200, 'png 2x width ' + api.S.outW);
+    const img = await imgOf(api.S.out), c = document.createElement('canvas'); c.width = img.naturalWidth; c.height = img.naturalHeight; const g = c.getContext('2d'); g.drawImage(img, 0, 0);
+    const all = g.getImageData(0, 0, c.width, c.height).data, at = (x, y) => { const i = (y * c.width + x) * 4; return [all[i], all[i + 1], all[i + 2], all[i + 3]]; }; // Designed by Kapil Pidhwani: 1×1 getImageData right after drawImage can read stale white in headless Chrome; read the full buffer once.
+    const root = st.firstElementChild.getBoundingClientRect(), k = Number(st.dataset.k || 1), box = (el) => { const r = el.getBoundingClientRect(); return { x: Math.round((r.left - root.left) / k * 2), y: Math.round((r.top - root.top) / k * 2), w: Math.round(r.width / k * 2), h: Math.round(r.height / k * 2) }; };
+    const ab = box(st.querySelector('.mk-avatar')), px = at(ab.x + Math.round(ab.w * 0.3), ab.y + Math.round(ab.h * 0.3)); // off-centre: the centre is the white initial
+    A(!(px[0] > 240 && px[1] > 240 && px[2] > 240), 'avatar area is coloured in the PNG: ' + px);
+    const lb = box(st.querySelector('.sp-logo')); let dark = 0; for (let y = lb.y; y < lb.y + lb.h; y++) for (let x = lb.x; x < lb.x + lb.w; x++) { const q = at(x, y); if (q[0] < 80 && q[3] > 200) dark++; }
+    A(dark > 20, 'X logo rasterised (dark pixels in its box): ' + dark);
+    set('opt-credit', false); await tick(300); A(!st.querySelector('.mk-credit'), 'credit removable');
+    $('btn-reset').click(); await tick(300); A($('au-name').value === '' && $('opt-platform').value === 'x' && st.classList.contains('is-shown') && st.querySelector('.mk-credit'), 'reset');`],
 ];
 
 (async () => {

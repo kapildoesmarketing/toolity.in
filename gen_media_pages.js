@@ -124,7 +124,7 @@ function page(t) {
   <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 
   <link rel="stylesheet" href="/styles/main.css?v=${CSS_V}">
-${t.css ? `  <link rel="stylesheet" href="/styles/tools/${t.cssFile || t.slug}.css?v=1.0">\n` : ''}
+${t.css ? [].concat(t.cssFile || t.slug).map((f) => `  <link rel="stylesheet" href="/styles/tools/${f}.css?v=1.0">\n`).join('') : ''}
   <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
   <script type="application/ld+json">
   {
