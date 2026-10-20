@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Shape Crop | Toolity Media</title>
+  <link rel="canonical" href="https://toolity.in/media/shape-crop/">
+  <meta name="description" content="Free online shape crop: cut any photo into a circle, rounded square, squircle, heart, star, hexagon or your own SVG path, with soft edges and a border — transparent PNG, made in your browser, no upload.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Shape Crop | Toolity Media">
+  <meta property="og:description" content="Free online shape crop: cut any photo into a circle, rounded square, squircle, heart, star, hexagon or your own SVG path, with soft edges and a border — transparent PNG, made in your browser, no upload.">
+  <meta property="og:url" content="https://toolity.in/media/shape-crop/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=6.3" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=6.3">
+  <link rel="stylesheet" href="/styles/tools/shape-crop.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Shape Crop",
+        "url": "https://toolity.in/media/shape-crop/",
+        "description": "Free online shape crop: cut any photo into a circle, rounded square, squircle, heart, star, hexagon or your own SVG path, with soft edges and a border — transparent PNG, made in your browser, no upload.",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Media", "item": "https://toolity.in/media/" },
+          { "@type": "ListItem", "position": 3, "name": "Shape Crop", "item": "https://toolity.in/media/shape-crop/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Is my image uploaded anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. The image is decoded and processed on a canvas in your browser tab. Nothing is sent to a server, and nothing is kept after you close the page." } },
+          { "@type": "Question", "name": "Is the background really transparent?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, when you save as PNG or WebP. JPG cannot hold transparency, so the outside of the shape is filled with white instead." } },
+          { "@type": "Question", "name": "How do I use my own shape?", "acceptedAnswer": { "@type": "Answer", "text": "Choose Custom SVG path… and paste the d attribute of any SVG &lt;path&gt; (from Figma, Illustrator or an icon set). It is scaled to fit the crop box automatically." } },
+          { "@type": "Question", "name": "Can I make a round profile picture at an exact size?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — keep Circle, drag the box over your face, then set Output size to 512 px or 1024 px. The crop is taken from the full-resolution original, not the preview." } },
+          { "@type": "Question", "name": "What does “Soft edge” do?", "acceptedAnswer": { "@type": "Answer", "text": "It feathers the outline by the chosen number of pixels so the shape fades into transparency instead of ending in a hard line — useful over busy backgrounds." } },
+          { "@type": "Question", "name": "Does the border sit inside or outside the shape?", "acceptedAnswer": { "@type": "Answer", "text": "Inside, so the output stays the size you chose. For a border that does not cover the photo, make the box slightly larger than the subject." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main id="main">
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/media/" class="breadcrumb-link">Media</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Shape Crop</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Media</span>
+            <h1 class="page-title">Shape Crop</h1>
+            <p class="page-desc">Crop a photo into a circle, heart, star or any SVG shape — with a soft edge and an optional border — as a transparent PNG, privately in your browser.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" data-split="40/60" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge" id="result-badge">Drop a file to begin</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result" aria-label="Copy result" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download result" aria-label="Download result" disabled>
+                <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                <span>Download</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Source</span>
+                <span class="pane-badge" id="source-badge">No file loaded</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content pane-content-between">
+                <div class="media-canvas-viewport">
+                  <div id="dropzone" class="video-dropzone" tabindex="0" role="button" aria-label="Drop an image here or click to browse">
+                    <input type="file" id="file-input" accept="image/*">
+                    <div class="video-drop-icon">
+                      <iconify-icon icon="lucide:upload-cloud" width="22" height="22"></iconify-icon>
+                    </div>
+                    <div class="video-drop-title">Drop an image here or click to browse</div>
+                    <div class="video-drop-subtitle">JPG, PNG, WebP, GIF, AVIF, BMP — up to 50 MB</div>
+                  </div>
+                  <canvas id="stage" class="media-preview-canvas gif-stage" width="360" height="240" aria-label="Image with shape outline"></canvas>
+                  <div id="crop-box" class="vcr-box" hidden aria-hidden="true"><span class="vcr-handle"></span></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Cropped</span>
+                <span class="pane-badge" id="output-badge">Awaiting file</span>
+              </div>
+              <div class="pane-content pane-content-between">
+                <div class="media-canvas-viewport">
+                  <div id="output-empty" class="media-empty-placeholder">
+                    <iconify-icon icon="lucide:circle-dashed" width="32" height="32"></iconify-icon>
+                    <p>The shaped image appears here</p>
+                  </div>
+                  <img id="output-img" alt="Shape-cropped image" class="media-preview-img" width="360" height="240">
+                </div>
+                <div>
+                  <button type="button" id="btn-compress" class="btn-toolbar-sm btn-brand-sm btn-primary-action" disabled>
+                    <iconify-icon icon="lucide:circle-dashed" width="16" height="16"></iconify-icon>
+                    <span id="btn-compress-label">Crop to shape</span>
+                  </button>
+                  <div class="slim-progress-bar" id="progress-bar">
+                    <div class="slim-progress-fill" id="progress-fill"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">Circle</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item">
+                <label for="opt-shape">Shape</label>
+                <select id="opt-shape" class="select-clean">
+                  <option value="circle" selected>Circle</option>
+                  <option value="rounded">Rounded rectangle</option>
+                  <option value="squircle">Squircle</option>
+                  <option value="heart">Heart</option>
+                  <option value="star">Star</option>
+                  <option value="hexagon">Hexagon</option>
+                  <option value="triangle">Triangle</option>
+                  <option value="custom">Custom SVG path…</option>
+                </select>
+              </div>
+              <div class="control-item">
+                <label for="opt-path">SVG path (d attribute)</label>
+                <textarea id="opt-path" class="textarea-clean sc-path" rows="2" spellcheck="false" placeholder="M 50 0 L 100 100 L 0 100 Z"></textarea>
+              </div>
+              <div class="control-item">
+                <label for="opt-radius">Corner radius</label>
+                <input type="range" id="opt-radius" class="range-slider-clean" min="0" max="50" step="1" value="20">
+                <span class="range-val-badge" id="opt-radius-val">20%</span>
+              </div>
+              <div class="control-item">
+                <label for="opt-feather">Soft edge</label>
+                <input type="range" id="opt-feather" class="range-slider-clean" min="0" max="40" step="1" value="0">
+                <span class="range-val-badge" id="opt-feather-val">Off</span>
+              </div>
+              <div class="control-item">
+                <label for="opt-border">Border width</label>
+                <input type="range" id="opt-border" class="range-slider-clean" min="0" max="40" step="1" value="0">
+                <span class="range-val-badge" id="opt-border-val">Off</span>
+              </div>
+              <div class="control-item">
+                <label for="opt-border-color">Border colour</label>
+                <input type="color" id="opt-border-color" value="#ffffff">
+              </div>
+              <div class="control-item">
+                <label for="opt-size">Output size</label>
+                <select id="opt-size" class="select-clean">
+                  <option value="0" selected>Same as crop</option>
+                  <option value="256">256 px</option>
+                  <option value="512">512 px</option>
+                  <option value="1024">1024 px</option>
+                  <option value="2048">2048 px</option>
+                </select>
+              </div>
+              <div class="control-item">
+                <label for="opt-format">Output format</label>
+                <select id="opt-format" class="select-clean">
+                  <option value="auto" selected>Same as original</option>
+                  <option value="image/png">PNG</option>
+                  <option value="image/jpeg">JPG</option>
+                  <option value="image/webp">WebP</option>
+                </select>
+              </div>
+              <div class="control-item">
+                <label for="opt-quality">Quality (JPG / WebP)</label>
+                <input type="range" id="opt-quality" class="range-slider-clean" min="40" max="100" step="1" value="92">
+                <span class="range-val-badge" id="opt-quality-val">92</span>
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Use Shape Crop in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Drop an image</h3>
+              <p class="step-desc">Drag a photo onto the left pane. A square crop box with the shape outline appears over it.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Pick a shape and position</h3>
+              <p class="step-desc">Move or resize the box; choose a shape under Settings — or paste your own SVG path. Add a soft edge or a border if you like.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Download the PNG</h3>
+              <p class="step-desc">The result on the right updates live. Download it as a transparent PNG, or copy it straight to the clipboard.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Shape Crop — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Is my image uploaded anywhere?</summary>
+              <p>No. The image is decoded and processed on a canvas in your browser tab. Nothing is sent to a server, and nothing is kept after you close the page.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is the background really transparent?</summary>
+              <p>Yes, when you save as PNG or WebP. JPG cannot hold transparency, so the outside of the shape is filled with white instead.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How do I use my own shape?</summary>
+              <p>Choose <em>Custom SVG path…</em> and paste the <code>d</code> attribute of any SVG <code>&lt;path&gt;</code> (from Figma, Illustrator or an icon set). It is scaled to fit the crop box automatically.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can I make a round profile picture at an exact size?</summary>
+              <p>Yes — keep <em>Circle</em>, drag the box over your face, then set <em>Output size</em> to 512 px or 1024 px. The crop is taken from the full-resolution original, not the preview.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What does “Soft edge” do?</summary>
+              <p>It feathers the outline by the chosen number of pixels so the shape fades into transparency instead of ending in a hard line — useful over busy backgrounds.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Does the border sit inside or outside the shape?</summary>
+              <p>Inside, so the output stays the size you chose. For a border that does not cover the photo, make the box slightly larger than the subject.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="media"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=4.8"></script>
+  <script src="/scripts/tool-common.js?v=1.2"></script>
+  <script src="/scripts/image-common.js?v=1.0"></script>
+  <script src="/media/shape-crop/shape-crop.js?v=1.0"></script>
+</body>
+</html>

@@ -443,3 +443,6 @@ module.exports = [
     faq: [['Are my photos uploaded?', 'No. The camera feed is shown and captured inside your browser tab. Shots exist only in this page\'s memory until you download them — closing the tab discards them.'], ['Why does it ask for permission?', 'Browsers never let a page use the camera or microphone without your consent. You can revoke it at any time from the padlock icon in the address bar.'], ['Why are my selfies mirrored?', 'Mirroring makes the preview behave like a mirror, which feels natural. Turn it off in Settings if you want text and logos to read correctly in photos.'], ['What format are videos saved in?', 'Your browser\'s recorder decides: WebM (VP8/VP9 + Opus) in Chrome, Edge and Firefox; MP4 in Safari. Use the Video Converter for other formats.'], ['How is this different from the Photo Booth?', 'The Photo Booth makes decorated photo strips. Camera is a plain, full-resolution camera for single photos and videos.']]
   },
 ];
+
+// Shared builders for sibling configs (cfg_batch3_tools.js) — rule 23.
+module.exports.h = { AUDIO_ACCEPT, AUDIO_DROP, IMAGE_DROP, AUDIO_SRC, AUDIO_OUT, IMG_SRC, IMG_OUT, ctl, select, range, check, color, OUT_FMT, IMG_FMT, PRIV_AUDIO, PRIV_IMAGE, FMT_FAQ };

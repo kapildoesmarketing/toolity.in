@@ -5,19 +5,19 @@
  * Usage: node gen_media_pages.js [slug]   — idempotent; re-run after editing the config. */
 const fs = require('fs');
 const path = require('path');
-const TOOLS = require('./cfg_media_tools.js');
+const TOOLS = require(process.env.CFG ? `./${process.env.CFG}` : './cfg_media_tools.js'); // CFG=cfg_batch3_tools.js node gen_media_pages.js [slug]
 const only = process.argv[2];
 const CAT_LABEL = { media: 'Media', labs: 'Labs' };
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const jsonStr = (s) => JSON.stringify(String(s).replace(/<[^>]+>/g, ''));
-const MAIN_V = '4.6', CSS_V = '6.1';
+const MAIN_V = '4.8', CSS_V = '6.3';
 const RUNTIME = {
   audio: '  <script src="/scripts/audio-common.js?v=1.1"></script>\n  <script src="https://cdn.jsdelivr.net/npm/lamejs@1.2.1/lame.all.js" defer></script>\n',
   gif: '  <script src="/scripts/gif-common.js?v=1.0"></script>\n',
-  video: '  <script src="/scripts/video-common.js?v=1.0"></script>\n',
+  video: '  <script src="/scripts/video-common.js?v=1.1"></script>\n',
   image: '  <script src="/scripts/image-common.js?v=1.0"></script>\n',
 };
-const LIBS = { jszip: '  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js" defer></script>\n' };
+const LIBS = { jszip: '  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js" defer></script>\n', 'webp-anim': '  <script src="/scripts/webp-anim.js?v=1.0"></script>\n' };
 
 const dropzone = (d) => `
                   <div id="dropzone" class="video-dropzone" tabindex="0" role="button" aria-label="${esc(d.title)}">

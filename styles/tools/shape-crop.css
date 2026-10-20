@@ -1,0 +1,2 @@
+/* Shape Crop — one-offs. Crop box + stage come from main.css (.vcr-box / .gif-stage). */
+.sc-path { width: 100%; min-height: 2.6em; font-family: var(--font-mono); font-size: 0.8rem; resize: vertical; }
