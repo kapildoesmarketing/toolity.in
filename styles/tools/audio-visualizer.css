@@ -1,0 +1,6 @@
+/* Audio Visualizer — one-offs. Form field styles come from main.css (.mk-field). */
+.av-uploads { display: flex; flex-wrap: wrap; gap: 0.5rem 0.75rem; margin-top: 0.6rem; align-items: flex-end; }
+.av-uploads .mk-file input { max-width: 170px; }
+.av-canvas { width: 100%; height: 100%; object-fit: contain; display: none; }
+.av-canvas.is-shown { display: block; }
+.media-canvas-viewport:has(.av-canvas.is-shown) { height: auto; aspect-ratio: 1 / 1; max-height: 520px; }

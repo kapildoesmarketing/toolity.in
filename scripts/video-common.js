@@ -163,6 +163,34 @@
     return { blob, mime: R.mime, w, h };
   }
 
+  /* renderLive({ w, h, audioBuffer, fps = 30, vbps, draw(ctx, analyser, t, dur), onProgress(p, left), stop() }) → { blob, mime, w, h }
+   * Plays an AudioBuffer through an AnalyserNode into the recorder while draw() paints each frame — real time, like render(). */
+  async function renderLive(o) {
+    const w = even(o.w), h = even(o.h), [canvas, ctx] = makeCanvas(w, h), ac = audioCtx();
+    if (ac.state === 'suspended') await Promise.race([ac.resume(), sleep(1500)]);
+    const R = recorder(canvas, { audio: true, vbps: o.vbps, fps: o.fps || 30, mime: o.mime });
+    const an = ac.createAnalyser(); an.fftSize = o.fftSize || 2048; an.smoothingTimeConstant = o.smoothing ?? 0.8;
+    const src = ac.createBufferSource(); src.buffer = o.audioBuffer; src.connect(an); an.connect(R.dest);
+    const dur = o.audioBuffer.duration; o.draw(ctx, an, 0, dur);
+    R.rec.start(250); const t0 = ac.currentTime; src.start();
+    try {
+      await new Promise((resolve, reject) => {
+        let last = -1, moved = performance.now(), done = false, raf = 0, iv = 0;
+        const end = (fn, arg) => { if (done) return; done = true; clearInterval(iv); cancelAnimationFrame(raf); fn(arg); };
+        src.onended = () => end(resolve);
+        const tick = () => {
+          if (o.stop && o.stop()) { try { src.stop(); } catch (e) { /* stopped */ } return end(reject, new Error('Cancelled')); }
+          const t = ac.currentTime - t0; if (t !== last) { last = t; moved = performance.now(); } else if (performance.now() - moved > 8000) return end(reject, new Error('Recording stalled — keep this tab visible and try again.'));
+          if (o.onProgress) o.onProgress(Math.min(0.99, t / dur), Math.max(0, dur - t));
+        };
+        iv = setInterval(tick, 250); const paint = () => { o.draw(ctx, an, Math.min(dur, ac.currentTime - t0), dur); if (!done) raf = requestAnimationFrame(paint); }; paint();
+      });
+      await sleep(150); // let the last frame land in the recorder
+    } finally { try { src.disconnect(); an.disconnect(); } catch (e) { /* already gone */ } }
+    const blob = await R.stop();
+    return { blob, mime: R.mime, w, h };
+  }
+
   /* recordAudio(video, from, to, onProgress, stop) → Blob (audio-only real-time capture; fallback when decodeAudioData can't parse the container) */
   async function recordAudio(video, from, to, onProgress, stop) {
     const mime = ['audio/webm;codecs=opus', 'audio/webm', 'audio/mp4'].find((m) => MediaRecorder.isTypeSupported(m));
@@ -273,5 +301,5 @@
     return { S, run, reset, loadFile, sync, setOutput, showError, progress, src, outV };
   }
 
-  window.ToolityVideo = { MAX_FILE, mimeFor, ext, even, stem, bpsFor, fitBox, load, seek, audioCtx, routeTo, decodeAudio, sliceBuffer, render, extractFrames, renderFrames, recordAudio, bindRange, mount };
+  window.ToolityVideo = { MAX_FILE, mimeFor, ext, even, stem, bpsFor, fitBox, load, seek, audioCtx, routeTo, decodeAudio, sliceBuffer, render, renderLive, extractFrames, renderFrames, recordAudio, bindRange, mount };
 })();

@@ -137,6 +137,17 @@ const CASES = [
     A(dark > 20, 'X logo rasterised (dark pixels in its box): ' + dark);
     set('opt-credit', false); await tick(300); A(!st.querySelector('.mk-credit'), 'credit removable');
     $('btn-reset').click(); await tick(300); A($('au-name').value === '' && $('opt-platform').value === 'x' && st.classList.contains('is-shown') && st.querySelector('.mk-credit'), 'reset');`],
+  ['media/audio-visualizer/', `
+    const T = window.__av.T; await loadAudio(T, buffer(2, t => 0.4 * Math.sin(2 * Math.PI * 220 * t) * (0.6 + 0.4 * Math.sin(2 * Math.PI * 2 * t))));
+    A($('viz').classList.contains('is-shown') && $('viz').width === 1080 && $('viz').height === 1080, 'still preview 1080²');
+    set('av-title', 'My Track'); set('opt-size', '1080x1920'); await tick(200); A($('viz').height === 1920, 'vertical size applied');
+    const g = $('viz').getContext('2d'); const bottom = g.getImageData(540, 1900, 1, 1).data; A(bottom[0] < 40 && bottom[1] < 40, 'dark background: ' + [...bottom]);
+    set('opt-bgmode', 'light'); await tick(200); const lb = g.getImageData(540, 1900, 1, 1).data; A(lb[0] > 230, 'light background: ' + [...lb]); set('opt-bgmode', 'dark');
+    set('opt-size', '1280x720'); set('opt-fps', '24'); set('opt-style', 'bars'); await tick(200);
+    await go(T, 30000); A(T.S.out && T.S.out.size > 20000 && /webm|mp4/.test(T.S.out.type), 'video rendered: ' + (T.S.out && (T.S.out.type + ' ' + T.S.out.size)));
+    const m = await videoMeta(T.S.out); A(m && m.w === 1280 && m.h === 720, 'video 1280×720: ' + JSON.stringify(m)); A(m && m.dur > 1.6 && m.dur < 3.5, 'duration ≈ 2 s: ' + (m && m.dur));
+    A($('output-video').classList.contains('is-shown') && !$('viz').classList.contains('is-shown'), 'video shown');
+    $('btn-reset').click(); await tick(); A(!T.S.out && !$('viz').classList.contains('is-shown') && $('av-title').value === '', 'reset');`],
 ];
 
 (async () => {

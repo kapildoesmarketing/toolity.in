@@ -1,7 +1,7 @@
 /* Designed by Kapil Pidhwani: batch 3 (20 Oct 2026) — Shape Crop · Video to Sticker · Chat Mockup · Social Post Mockups ·
  * Audio Visualizer · Audio to Text. Same contract as cfg_media_tools.js (see its header); builders are shared via its `h` export.
  * Generate: CFG=cfg_batch3_tools.js node gen_media_pages.js [slug]   Wire: python3 wire_batch3.py */
-const { IMAGE_DROP, IMG_SRC, IMG_OUT, ctl, select, range, check, color, IMG_FMT, PRIV_IMAGE } = require('./cfg_media_tools.js').h;
+const { IMAGE_DROP, IMG_SRC, IMG_OUT, AUDIO_DROP, AUDIO_SRC, ctl, select, range, check, color, IMG_FMT, PRIV_IMAGE, PRIV_AUDIO } = require('./cfg_media_tools.js').h;
 
 module.exports = [
   /* ═══════════ 1. SHAPE CROP ═══════════ */
@@ -177,5 +177,41 @@ module.exports = [
       ['What do the number fields do on each platform?', 'They fill the metric row in the platform’s own format: X shows replies, reposts, likes and views; Instagram shows likes and the caption; LinkedIn shows reactions and comments; Facebook shows reactions, comments and shares; Threads shows replies and likes. Large numbers are abbreviated (12.4K, 1.2M).'],
       ['Can I make it look like dark mode?', 'Yes — switch <em>Theme</em> to Dark. Every platform has its real dark palette.'],
       ['Can I remove the Toolity credit?', 'Yes — untick <em>Show “Made with Toolity.in” credit</em> under Settings before exporting.']]
+  },
+
+  /* ═══════════ 5. AUDIO VISUALIZER ═══════════ */
+  {
+    slug: 'audio-visualizer', name: 'Audio Visualizer', icon: 'lucide:audio-waveform', section: 'Audio Tools', runtime: 'audio', libs: ['video-common'], css: true, idle: 'Drop audio to begin',
+    desc: 'Free online audio visualizer: turn a song, podcast or voice note into a music video with reactive bars, a circular spectrum or a waveform, cover art, title and a background image — MP4/WebM for Instagram, YouTube or TikTok, rendered in your browser, no upload.',
+    lead: 'Turn any audio into a shareable video — bars, circle or waveform reacting to the sound, with cover art, a title and your background — rendered on your device.',
+    cardDesc: 'Song or podcast → reactive music video with cover art and title (MP4/WebM).',
+    tags: ['audio visualizer', 'music visualizer', 'audio to video', 'mp3 to mp4', 'podcast video', 'audiogram', 'waveform video', 'spectrum video', 'youtube music video', 'instagram reel audio', 'tiktok audio video', 'cover art video'],
+    action: 'Render video', actionIcon: 'lucide:clapperboard',
+    source: { drop: AUDIO_DROP, html: AUDIO_SRC, after: `
+                <div class="av-uploads">
+                  <label class="mk-field mk-file"><span>Cover art</span><input type="file" id="av-cover" accept="image/*" aria-label="Cover art image"></label>
+                  <label class="mk-field mk-file"><span>Background image</span><input type="file" id="av-bg" accept="image/*" aria-label="Background image"></label>
+                  <label class="mk-field mk-grow"><span>Title</span><input type="text" id="av-title" class="input-clean" placeholder="Song or episode title" maxlength="80"></label>
+                  <label class="mk-field mk-grow"><span>Subtitle</span><input type="text" id="av-sub" class="input-clean" placeholder="Artist · Podcast · @handle" maxlength="80"></label>
+                </div>` },
+    output: { label: 'Video', icon: 'lucide:clapperboard', empty: 'The video preview appears here', html: `
+                  <canvas id="viz" class="media-preview-canvas av-canvas" width="1080" height="1080" aria-label="Visualizer preview"></canvas>
+                  <video id="output-video" class="video-converted-preview" controls playsinline></video>` },
+    settingsSummary: 'Circle · 1080 × 1080',
+    settings: select('opt-style', 'Style', [['circle', 'Circular spectrum around the cover', 1], ['bars', 'Bars along the bottom'], ['mirror', 'Mirrored bars in the centre'], ['wave', 'Waveform line'], ['dots', 'Pulsing dots']])
+      + select('opt-size', 'Video size', [['1080x1080', 'Square 1080 × 1080 (Instagram)', 1], ['1080x1920', 'Vertical 1080 × 1920 (Reels / TikTok / Shorts)'], ['1920x1080', 'Landscape 1920 × 1080 (YouTube)'], ['1280x720', 'HD 1280 × 720 (smaller file)']])
+      + color('opt-accent', 'Accent colour', '#f4511e') + color('opt-accent2', 'Second colour (gradient)', '#ffb347')
+      + select('opt-bgmode', 'Background', [['dark', 'Dark', 1], ['light', 'Light'], ['gradient', 'Accent gradient'], ['image', 'Uploaded image (blurred)'], ['cover', 'Cover art (blurred)']])
+      + range('opt-sens', 'Sensitivity', 50, 200, 5, 100, '100%')
+      + check('opt-progress', 'Progress bar', true)
+      + check('opt-time', 'Time counter', false)
+      + select('opt-fps', 'Frame rate', [['30', '30 fps', 1], ['60', '60 fps (smoother, bigger)'], ['24', '24 fps']]),
+    guide: [['Drop the audio', 'MP3, WAV, M4A, OGG or FLAC — a song, podcast clip or voice note up to 10 minutes. A still preview of the layout appears on the right.'], ['Design the frame', 'Add cover art, a title and subtitle, pick a style (circle, bars, mirror, wave, dots), the video size for your platform, colours and a background.'], ['Render and download', 'Click <strong>Render video</strong>. It records in real time with the audio, so keep the tab open; then download the MP4/WebM or copy a frame as PNG.']],
+    faq: [PRIV_AUDIO,
+      ['Why does rendering take as long as the track?', 'The browser plays the audio through an analyser and records the canvas with MediaRecorder in real time — a 3-minute song takes 3 minutes. Keep the tab visible; background tabs throttle the frame timer.'],
+      ['Which format do I get?', 'MP4 (H.264 + AAC) in Chrome and Edge on most systems; WebM (VP9/Opus) in Firefox or where MP4 recording is unavailable. Both upload fine to YouTube, Instagram and TikTok.'],
+      ['How do I make a Reel or Short?', 'Pick <em>Vertical 1080 × 1920</em>. The cover sits in the upper third and the title underneath, which is the layout Reels and Shorts crop for.'],
+      ['Is there a length limit?', 'Ten minutes. Longer audio would mean a very large file and a very long real-time render — split it with the Audio Splitter first.'],
+      ['Can I use my own font or logo?', 'Text uses the system UI font so it renders identically everywhere. For a logo, bake it into the background image or the cover art.']]
   }
 ];

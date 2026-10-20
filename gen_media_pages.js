@@ -18,7 +18,7 @@ const RUNTIME = {
   image: '  <script src="/scripts/image-common.js?v=1.0"></script>\n',
   mockup: '  <script src="/scripts/mockup-common.js?v=1.0"></script>\n',
 };
-const LIBS = { jszip: '  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js" defer></script>\n', 'webp-anim': '  <script src="/scripts/webp-anim.js?v=1.0"></script>\n' };
+const LIBS = { jszip: '  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js" defer></script>\n', 'webp-anim': '  <script src="/scripts/webp-anim.js?v=1.0"></script>\n', 'video-common': '  <script src="/scripts/video-common.js?v=1.1"></script>\n' };
 
 const dropzone = (d) => `
                   <div id="dropzone" class="video-dropzone" tabindex="0" role="button" aria-label="${esc(d.title)}">
