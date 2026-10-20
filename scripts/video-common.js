@@ -59,8 +59,8 @@
   }
 
   /* ── Recorder ── */
-  function recorder(canvas, { audio, vbps, fps = 30 }) {
-    const mime = mimeFor();
+  function recorder(canvas, { audio, vbps, fps = 30, mime: want }) {
+    const mime = (want && window.MediaRecorder && MediaRecorder.isTypeSupported(want)) ? want : mimeFor(); // `mime` lets a tool force e.g. VP9 WebM (stickers)
     if (!mime) throw new Error('This browser cannot record video (no MediaRecorder codec). Try Chrome, Edge or Firefox.');
     const stream = canvas.captureStream(fps);
     let dest = null;
@@ -76,7 +76,7 @@
 
   // Designed by Kapil Pidhwani: MediaRecorder encodes in real time (1 min of output = 1 min of waiting) and needs the tab visible for rAF.
   // Upgrade path: WebCodecs VideoEncoder + mp4-muxer runs 5-10× faster but needs its own demux/mux code.
-  /* render({ w, h, segments: [{ video, from, to, rate }], draw(ctx, video, w, h, t), audio, vbps, onProgress(p, secondsLeft), stop() }) → { blob, mime, w, h } */
+  /* render({ w, h, segments: [{ video, from, to, rate }], draw(ctx, video, w, h, t), audio, vbps, fps, mime, onProgress(p, secondsLeft), stop() }) → { blob, mime, w, h } */
   async function render(o) {
     const w = even(o.w), h = even(o.h), [canvas, ctx] = makeCanvas(w, h);
     const draw = o.draw || ((c, v) => c.drawImage(v, 0, 0, w, h));
@@ -197,6 +197,7 @@
     b.addEventListener('input', () => { set(R.from, Math.max(+b.value, R.from + 0.1)); video.currentTime = R.to; });
     $('btn-start-now').addEventListener('click', () => set(video.currentTime, R.to));
     $('btn-end-now').addEventListener('click', () => set(R.from, video.currentTime));
+    R.set = set; // programmatic range (e.g. preselect the first 3 s)
     R.reset = (dur) => { R.dur = dur; a.max = b.max = dur; a.step = b.step = 0.1; set(0, dur); $('rng-wrap').hidden = !dur; };
     R.reset(0);
     return R;

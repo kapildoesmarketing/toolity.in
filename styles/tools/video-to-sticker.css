@@ -1,0 +1,10 @@
+/* Video to Sticker — one-offs. Crop box + range come from main.css (.vcr-box / .vdt-range). */
+.vts-box { border-radius: 4px; }
+.vts-len { margin: 0.4rem 0 0; font-size: 0.8rem; }
+.vts-checker:not(:has(.is-shown)) { display: none; }
+.vts-checker { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-sm); background-color: #e9e9e9; background-image: linear-gradient(45deg, #cfcfcf 25%, transparent 25%, transparent 75%, #cfcfcf 75%), linear-gradient(45deg, #cfcfcf 25%, transparent 25%, transparent 75%, #cfcfcf 75%); background-size: 16px 16px; background-position: 0 0, 8px 8px; }
+.vts-out { max-width: min(100%, 256px); max-height: 256px; width: auto; height: auto; object-fit: contain; display: none; }
+.vts-out.is-shown { display: block; }
+.vts-verdict { margin: 0.5rem 0 0; font-size: 0.82rem; font-weight: 500; }
+.vts-verdict.is-ok { color: var(--success-ink); }
+.vts-verdict.is-bad { color: var(--danger-ink); }
