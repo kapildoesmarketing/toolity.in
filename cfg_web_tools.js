@@ -207,6 +207,75 @@ const HW_FONTS = [['caveat', 'Caveat', 30], ['homemade-apple', 'Homemade Apple',
 const SCHEMA_TYPES = [['Organization', 'Organization'], ['LocalBusiness', 'Local Business'], ['Person', 'Person'], ['WebSite', 'Website (+ search box)'], ['Article', 'Article / Blog post'], ['Product', 'Product (+ offer, rating)'], ['FAQPage', 'FAQ page'], ['HowTo', 'How-to'], ['Event', 'Event'], ['BreadcrumbList', 'Breadcrumbs'], ['Recipe', 'Recipe'], ['VideoObject', 'Video'], ['JobPosting', 'Job posting']];
 const HANDY_TOOLS = [
   {
+    slug: 'keyboard-shortcut-cheat-sheet-maker', name: 'Keyboard Shortcut Cheat-Sheet Maker', icon: 'lucide:keyboard', section: 'Web Utilities', split: '40/60', css: true,
+    desc: 'Free online keyboard shortcut cheat sheet maker: type shortcuts one per line, group them with headings, switch between Mac and Windows symbols, pick a theme and columns, then export a printable PDF, PNG, Markdown table or HTML. Presets for VS Code, Gmail, Figma and Chrome. Runs in your browser.',
+    lead: 'Type shortcuts one per line, get a clean printable cheat sheet — Mac or Windows symbols, themes, columns — as PDF, PNG or Markdown.',
+    cardDesc: 'Shortcuts → printable cheat sheet with keycaps; Mac/Windows symbols, PDF, PNG, Markdown.',
+    tags: ['keyboard shortcut cheat sheet', 'cheat sheet maker', 'shortcut cheat sheet generator', 'printable shortcuts', 'keycap generator', 'hotkey list', 'vs code shortcuts pdf', 'mac keyboard symbols', 'shortcut poster', 'notion shortcut table'],
+    idle: 'Type a shortcut to begin', sourceLabel: 'Shortcuts', outputLabel: 'Cheat sheet', outputIcon: 'lucide:keyboard', outputEmpty: 'Your cheat sheet renders here as you type',
+    downloads: [['png', 'PNG image', 'lucide:image'], ['print', 'Print / save as PDF', 'lucide:printer'], ['md', 'Markdown table (Notion)', 'lucide:file-text'], ['html', 'Standalone HTML', 'lucide:code']],
+    sourceHtml: `
+                <div class="web-convert-row web-convert-row-2">
+                  <div class="form-group">
+                    <label class="form-label" for="opt-title"><span>Title</span></label>
+                    <input type="text" id="opt-title" class="input-clean" value="VS Code essentials" maxlength="60" autocomplete="off">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="opt-subtitle"><span>Subtitle</span><span class="form-label-desc">Optional</span></label>
+                    <input type="text" id="opt-subtitle" class="input-clean" placeholder="The 30 I actually use" maxlength="80" autocomplete="off">
+                  </div>
+                </div>
+                <div class="web-convert-row web-convert-row-2">
+                  <div class="form-group">
+                    <span class="form-label"><span>Show keys for</span></span>
+                    <div class="segmented-group segmented-group-pill" id="seg-os" role="group" aria-label="Platform">
+                      <button type="button" class="seg-pill active" data-value="mac">Mac</button>
+                      <button type="button" class="seg-pill" data-value="win">Windows</button>
+                      <button type="button" class="seg-pill" data-value="both">Both</button>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="opt-preset"><span>Start from a preset</span></label>
+                    <select id="opt-preset" class="select-clean"><option value="">— keep my list —</option><option value="vscode">VS Code</option><option value="chrome">Chrome</option><option value="gmail">Gmail</option><option value="figma">Figma</option><option value="slack">Slack</option><option value="excel">Excel / Sheets</option><option value="toolity">Toolity</option></select>
+                  </div>
+                </div>
+                <div class="form-group form-group-grow">
+                  <label class="form-label" for="text-input"><span>Shortcuts</span><span class="form-label-desc" id="input-count">## Heading · Ctrl+K — what it does</span></label>
+                  <textarea id="text-input" class="textarea-clean" rows="14" placeholder="## Editing&#10;Ctrl+D — Select next match&#10;Alt+Up — Move line up&#10;Ctrl+K Ctrl+C — Comment (chord)&#10;&#10;## Navigation&#10;Ctrl+P — Quick open" spellcheck="false" autocapitalize="off" data-file-target></textarea>
+                </div>`,
+    outputHtml: `
+                  <div class="ks-stage-wrap"><div class="ks-sheet" id="ks-sheet"></div></div>`,
+    settingsSummary: '2 columns · Light · A4',
+    settings: `
+              <div class="control-item">
+                <label for="opt-cols">Columns</label>
+                <select id="opt-cols" class="select-clean"><option value="1">1</option><option value="2" selected>2</option><option value="3">3</option></select>
+              </div>
+              <div class="control-item">
+                <label for="opt-theme">Theme</label>
+                <select id="opt-theme" class="select-clean"><option value="light" selected>Light</option><option value="dark">Dark</option><option value="paper">Paper</option><option value="brand">Brand colour</option></select>
+              </div>
+              <div class="control-item">
+                <label for="opt-accent">Accent</label>
+                <input type="color" id="opt-accent" value="#f4511e">
+              </div>
+              <div class="control-item">
+                <label for="opt-paper">Print size</label>
+                <select id="opt-paper" class="select-clean"><option value="a4" selected>A4</option><option value="letter">US Letter</option></select>
+              </div>
+              <div class="control-item"><input type="checkbox" id="opt-numbers"><label for="opt-numbers">Number the shortcuts</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-credit" checked><label for="opt-credit">“Made with Toolity” footer</label></div>`,
+    guide: [['List your shortcuts', 'One per line: <code>Ctrl+Shift+P — Command palette</code>. Start a line with <code>##</code> to open a group. Chords like <code>Ctrl+K Ctrl+C</code> and alternatives like <code>Ctrl+Y / Ctrl+Shift+Z</code> are understood. Or load a preset and edit it.'],
+      ['Pick the look', 'Write keys Windows-style; the <strong>Mac</strong> view turns Ctrl/Alt/Shift into ⌘ ⌥ ⇧ automatically (use <code>Control</code> to force ⌃). Choose columns, theme, accent and whether to number rows.'],
+      ['Export', '<strong>Print / PDF</strong> opens a clean A4 or Letter page, <strong>PNG</strong> is pixel-perfect for Slack or a wallpaper, <strong>Markdown</strong> pastes straight into Notion, GitHub or Obsidian, and <strong>HTML</strong> is a self-contained file for your wiki.']],
+    faq: [['How are Mac symbols decided?', 'Ctrl becomes ⌘, Alt becomes ⌥, Shift becomes ⇧ and Win/Super becomes ⌘ — that is how almost every cross-platform app maps its shortcuts. Write <code>Control</code> or <code>Cmd</code> explicitly when you need ⌃ or ⌘ regardless of platform. Arrows, Enter, Backspace, Tab, Esc and Space get their standard glyphs.'],
+      ['Can I show both Mac and Windows keys?', 'Yes — choose <strong>Both</strong> and each row shows the Mac combination with the Windows one beside it. Handy for team docs where people use different machines.'],
+      ['What does the Markdown export look like?', 'A GitHub-flavoured table per group with the keys in backticks, so it renders correctly in Notion, GitHub, Obsidian and most wikis. The Copy button copies the same Markdown.'],
+      ['How do I get a PDF?', 'Choose <strong>Print / save as PDF</strong> from the Download menu: a print-ready page opens with your sheet laid out for A4 or Letter; pick “Save as PDF” in the print dialog. Multi-page sheets flow naturally.'],
+      ['Can I save my list?', 'Your text stays in the box while the tab is open; copy it into a note to keep it. There is no account — nothing is stored on a server.'],
+      PRIVACY_FAQ]
+  },
+  {
     slug: 'text-to-handwriting', name: 'Text to Handwriting', icon: 'lucide:pen-line', section: 'Generators & Links', split: '40/60', css: true,
     desc: 'Free online text to handwriting converter: turn typed text into realistic handwritten pages — 12 handwriting fonts or your own, ruled / grid / blank paper, ink colours, pen-pressure jitter and a scanner effect. Download as PNG or multi-page PDF. Runs in your browser.',
     lead: 'Type or paste text and get realistic handwritten pages — pick a hand, paper and ink, add natural jitter, then download PNG or a multi-page PDF.',

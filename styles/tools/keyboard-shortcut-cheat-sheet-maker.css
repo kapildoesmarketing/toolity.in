@@ -1,0 +1,31 @@
+/* Keyboard Shortcut Cheat-Sheet Maker — the sheet itself (also inlined into PNG/HTML exports, so keep it self-contained). */
+.ks-stage-wrap { position: relative; overflow: hidden; min-width: 0; }
+#ks-sheet { transform-origin: top left; }
+.ks-paper { --ks-bg: #fff; --ks-fg: #17191c; --ks-muted: #6b7076; --ks-line: #e6e7ea; --ks-key-bg: #f6f7f9; --ks-key-edge: #cfd3d8; --ks-key-fg: #17191c; --ks-accent: #f4511e; box-sizing: border-box; padding: 28px 32px 22px; background: var(--ks-bg); color: var(--ks-fg); border: 1px solid var(--ks-line); border-radius: 12px; font-size: 13px; line-height: 1.4; font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+.ks-paper.theme-dark { --ks-bg: #141518; --ks-fg: #f2f3f5; --ks-muted: #9a9fa6; --ks-line: #2a2d33; --ks-key-bg: #23262c; --ks-key-edge: #3a3e46; --ks-key-fg: #f2f3f5; }
+.ks-paper.theme-paper { --ks-bg: #fbf7ef; --ks-fg: #2b2520; --ks-muted: #7a6f63; --ks-line: #e7dfd0; --ks-key-bg: #fffdf8; --ks-key-edge: #d8ccb6; --ks-key-fg: #2b2520; font-family: Georgia, "Iowan Old Style", "Times New Roman", serif; }
+.ks-paper.theme-brand { --ks-bg: var(--ks-accent); --ks-fg: #fff; --ks-muted: rgba(255, 255, 255, 0.75); --ks-line: rgba(255, 255, 255, 0.3); --ks-key-bg: rgba(255, 255, 255, 0.95); --ks-key-edge: rgba(0, 0, 0, 0.18); --ks-key-fg: #17191c; }
+.ks-head { display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: 4px 16px; padding-bottom: 14px; margin-bottom: 16px; border-bottom: 2px solid var(--ks-accent); }
+.theme-brand .ks-head { border-bottom-color: rgba(255, 255, 255, 0.6); }
+.ks-title { margin: 0; font-size: 24px; font-weight: 700; letter-spacing: -0.02em; grid-column: 1; }
+.ks-sub { margin: 0; color: var(--ks-muted); font-size: 13px; grid-column: 1; }
+.ks-os { grid-column: 2; grid-row: 1 / span 2; align-self: start; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ks-muted); border: 1px solid var(--ks-line); border-radius: 999px; padding: 3px 9px; }
+.ks-cols { column-count: var(--ks-cols, 2); column-gap: 28px; column-rule: 1px solid var(--ks-line); }
+.ks-group { break-inside: avoid; margin: 0 0 16px; }
+.ks-group-title { margin: 0 0 6px; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ks-accent); }
+.theme-brand .ks-group-title { color: #fff; }
+.ks-rows { list-style: none; margin: 0; padding: 0; }
+.ks-row { display: grid; grid-template-columns: minmax(0, auto) minmax(0, 1fr); align-items: center; gap: 4px 12px; padding: 5px 0; border-bottom: 1px solid var(--ks-line); min-width: 0; }
+.ks-row:last-child { border-bottom: 0; }
+.ks-row:has(.ks-num) { grid-template-columns: 1.6em minmax(0, auto) minmax(0, 1fr); }
+.ks-row:has(.ks-keys-alt) { grid-template-columns: minmax(0, auto) minmax(0, auto) minmax(0, 1fr); }
+.ks-row:has(.ks-num):has(.ks-keys-alt) { grid-template-columns: 1.6em minmax(0, auto) minmax(0, auto) minmax(0, 1fr); }
+.ks-num { color: var(--ks-muted); font-size: 11px; font-variant-numeric: tabular-nums; }
+.ks-keys { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 2px; white-space: nowrap; }
+.ks-keys-alt { opacity: 0.8; }
+.ks-key { display: inline-block; min-width: 1.7em; padding: 2px 6px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11px; font-weight: 600; line-height: 1.3; text-align: center; color: var(--ks-key-fg); background: var(--ks-key-bg); border: 1px solid var(--ks-key-edge); border-bottom-width: 2px; border-radius: 5px; }
+.ks-key.is-sym { font-family: -apple-system, "SF Pro", "Segoe UI Symbol", sans-serif; font-size: 12px; }
+.ks-plus, .ks-then, .ks-or { color: var(--ks-muted); font-size: 10px; padding: 0 2px; }
+.ks-then, .ks-or { padding: 0 5px; font-style: italic; }
+.ks-desc { color: var(--ks-fg); min-width: 0; overflow-wrap: anywhere; }
+.ks-credit { margin-top: 14px; padding-top: 8px; border-top: 1px solid var(--ks-line); font-size: 10px; color: var(--ks-muted); text-align: right; }
