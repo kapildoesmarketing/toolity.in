@@ -12,6 +12,47 @@ const opts = (list, sel) => list.map(([v, l]) => `<option value="${v}"${v === se
 
 module.exports = [
   {
+    slug: 'number-formats-converter', name: 'Number Formats Converter', icon: 'lucide:hash', section: 'Converters', split: '50/50', css: true,
+    desc: 'Free online number converter: numbers to words in English (international and Indian lakh/crore), Hindi, Spanish, French, German and Portuguese; words back to numbers; Indian ↔ international ↔ European grouping; amounts in words for cheques (rupees/paise, dollars/cents, euros); Roman numerals; ordinals; scientific, engineering and compact notation. Batch, in your browser.',
+    lead: 'Turn numbers into words (English, Indian, Hindi, Spanish, French, German, Portuguese), swap lakh/crore and international grouping, write cheque amounts, Roman numerals, ordinals and scientific notation — all at once.',
+    cardDesc: 'Number ↔ words in 7 languages, lakh/crore ↔ million grouping, cheque amounts, Roman, ordinal, scientific.',
+    tags: ['number to words', 'number to words indian rupees', 'amount in words', 'lakh crore converter', 'indian number system converter', 'words to number', 'roman numerals converter', 'number to hindi words', 'scientific notation converter', 'ordinal number converter', 'cheque amount in words'],
+    idle: 'Type a number to begin', sourceLabel: 'Number', outputLabel: 'Formats', outputIcon: 'lucide:hash', outputEmpty: 'Every format of your number will appear here',
+    downloads: [['txt', 'All formats (.txt)', 'lucide:file-text'], ['csv', 'Batch results (.csv)', 'lucide:file-spreadsheet']],
+    sourceHtml: `
+                <div class="form-group form-group-grow">
+                  <label class="form-label" for="text-input"><span>Number or words</span><span class="form-label-desc" id="input-count">digits (12,34,567.89 · 1.5e6 · MMXXVI) or words (“two lakh fifty thousand”) · one per line for batch</span></label>
+                  <textarea id="text-input" class="textarea-clean" rows="5" placeholder="1234567.89&#10;two crore fifteen lakh&#10;MMXXVI&#10;3.5e8" spellcheck="false" autocapitalize="off" data-file-target></textarea>
+                </div>
+                <div class="web-convert-row web-convert-row-2">
+                  <div class="form-group">
+                    <label class="form-label" for="opt-lang"><span>Words language</span></label>
+                    <select id="opt-lang" class="select-clean">${opts([['en', 'English (international)'], ['en-IN', 'English (Indian: lakh / crore)'], ['hi', 'हिन्दी (Hindi)'], ['es', 'Español'], ['fr', 'Français'], ['de', 'Deutsch'], ['pt', 'Português']], 'en-IN')}</select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="opt-currency"><span>Currency for amount in words</span></label>
+                    <select id="opt-currency" class="select-clean">${opts([['INR', 'Rupees & paise (₹)'], ['USD', 'Dollars & cents ($)'], ['EUR', 'Euros & cents (€)'], ['GBP', 'Pounds & pence (£)'], ['AED', 'Dirhams & fils'], ['none', 'No currency']], 'INR')}</select>
+                  </div>
+                </div>`,
+    outputHtml: `
+                  <div class="web-table-wrap"><table class="web-table nf-table" id="nf-table"><tbody></tbody></table></div>
+                  <p class="web-muted nf-note" id="nf-note"></p>`,
+    settingsSummary: 'Title case · “only” suffix · 2 decimals',
+    settings: `
+              <div class="control-item">
+                <label for="opt-case">Words case</label>
+                <select id="opt-case" class="select-clean">${opts([['title', 'Title Case'], ['lower', 'lower case'], ['upper', 'UPPER CASE'], ['sentence', 'Sentence case']], 'title')}</select>
+              </div>
+              <div class="control-item"><input type="checkbox" id="opt-only" checked><label for="opt-only">Add “only” after cheque amounts</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-and" checked><label for="opt-and">British “and” (one hundred and five)</label></div>
+              <div class="control-item">
+                <label for="opt-dec">Decimals in grouped formats</label>
+                <select id="opt-dec" class="select-clean">${opts([['auto', 'As typed'], ['0', '0'], ['2', '2'], ['3', '3']], 'auto')}</select>
+              </div>`,
+    guide: [['Type anything numeric', 'Digits with any grouping (<code>12,34,567</code> or <code>1,234,567</code> or <code>1 234 567,89</code>), scientific notation, a Roman numeral, or words in English — “two lakh fifty thousand” is understood. Paste several lines for a batch.'], ['Read every format', 'Words in the language you chose, the amount in words for a cheque, Indian and international grouping, European style, compact (1.2 Cr / 1.2M), scientific and engineering notation, Roman numerals and the ordinal.'], ['Copy the one you need', 'Each row has its own copy button; Copy in the toolbar copies the words, Download gives all formats or a CSV of the batch.']],
+    faq: [['How does the Indian number system differ?', 'After the first thousand, digits are grouped in twos: 1,00,000 is one lakh (100 thousand) and 1,00,00,000 is one crore (10 million). Then arab (10⁹), kharab (10¹¹), neel (10¹³) and padma (10¹⁵). The international system groups in threes: thousand, million, billion, trillion.'], ['How large a number can it handle?', 'Integers up to 10³⁰ (nonillion / 10 quadrillion crore) exactly, using arbitrary-precision arithmetic; decimals are kept to the digits you type. Beyond that, scientific notation is still produced.'], ['Which languages are supported for words?', 'English (international and Indian styles), Hindi, Spanish, French (with the Swiss/Belgian septante–nonante variant off by default), German and Portuguese. Amounts in words follow each language’s currency phrasing — for Hindi, “रुपये … पैसे”.'], ['Is the cheque format correct for banks?', 'It follows the common conventions: the amount in words, paise/cents as a number of hundredths, and the word “only” at the end (switchable). Always check your bank’s guidance — some ask for “Rupees” first, which the output includes.'], ['Can it convert words back to numbers?', 'Yes, for English in both systems: “three crore twelve lakh”, “two million five hundred thousand” and mixed forms such as “1.5 lakh” are parsed. Other languages are output-only for now.'], PRIVACY_FAQ]
+  },
+  {
     slug: 'spreadsheet-formula-converter', name: 'Spreadsheet Formula Converter', icon: 'lucide:sigma', section: 'Converters', split: '50/50', css: true,
     desc: 'Free online spreadsheet formula converter between Excel, Google Sheets and LibreOffice Calc: renames functions (JOIN ↔ TEXTJOIN, SPLIT ↔ TEXTSPLIT, REGEXMATCH ↔ REGEXTEST, FLATTEN ↔ TOCOL…), swaps comma/semicolon separators and decimal marks, fixes sheet references and array constants, converts A1 ↔ R1C1, and reports every function that has no equivalent. Runs in your browser.',
     lead: 'Paste a formula from Excel, Google Sheets or LibreOffice and get it rewritten for another — functions renamed, separators and references fixed, and an honest report of what has no equivalent.',

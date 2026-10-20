@@ -1,0 +1,8 @@
+/* Number Formats Converter — results table. */
+.nf-table th { width: 32%; font-weight: 500; color: var(--text-secondary); vertical-align: middle; }
+.nf-table td { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; font-family: var(--font-mono); overflow-wrap: anywhere; }
+.nf-table td span { min-width: 0; }
+.nf-table tr:first-child td { font-family: var(--font-family); font-size: 0.95rem; color: var(--text-primary); }
+.nf-table .web-row-btn { width: 40px; height: 40px; flex-shrink: 0; }
+.nf-note:empty { display: none; }
+.nf-note { margin-top: 0.6rem; }

@@ -43,6 +43,31 @@ const PDF_HELPERS = `
 `;
 
 const CASES = [
+  ['data/number-formats-converter/', `
+    for (let i = 0; i < 80 && !(window.__nf && window.ToolityWebTool); i++) await tick(100);
+    const F = window.__nf, T = window.ToolityWebTool;
+    A(F.enIntl(1234567n, true) === 'one million two hundred and thirty-four thousand five hundred and sixty-seven', 'en intl: ' + F.enIntl(1234567n, true));
+    A(F.enIntl(1005n, true) === 'one thousand and five' && F.enIntl(1005n, false) === 'one thousand five' && F.enIntl(0n) === 'zero' && F.enIntl(10n ** 24n, false) === 'one septillion', 'en edge cases: ' + F.enIntl(1005n, true));
+    A(F.enIndian(12345678n, false) === 'one crore twenty-three lakh forty-five thousand six hundred seventy-eight', 'en Indian: ' + F.enIndian(12345678n, false));
+    A(F.hindi(12345678n) === 'एक करोड़ तेईस लाख पैंतालीस हज़ार छह सौ अठहत्तर' && F.hindi(0n) === 'शून्य' && F.hindi(99n) === 'निन्यानवे', 'hindi: ' + F.hindi(12345678n));
+    A(F.spanish(1234567n) === 'un millón doscientos treinta y cuatro mil quinientos sesenta y siete' && F.spanish(100n) === 'cien' && F.spanish(21n) === 'veintiuno' && F.spanish(2000000n) === 'dos millones', 'spanish: ' + F.spanish(1234567n));
+    A(F.french(1234567n) === 'un million deux cent trente-quatre mille cinq cent soixante-sept' && F.french(80n) === 'quatre-vingts' && F.french(91n) === 'quatre-vingt-onze' && F.french(71n) === 'soixante et onze' && F.french(200n) === 'deux cents' && F.french(1000n) === 'mille', 'french: ' + F.french(1234567n) + ' / ' + F.french(71n));
+    A(F.german(1234567n) === 'eine Million zweihundertvierunddreißigtausendfünfhundertsiebenundsechzig' && F.german(1n) === 'eins' && F.german(21n) === 'einundzwanzig' && F.german(1001n) === 'eintausendeins', 'german: ' + F.german(1234567n));
+    A(F.portuguese(1234567n) === 'um milhão duzentos e trinta e quatro mil quinhentos e sessenta e sete' && F.portuguese(100n) === 'cem' && F.portuguese(101n) === 'cento e um' && F.portuguese(1005n) === 'mil e cinco', 'portuguese: ' + F.portuguese(1234567n) + ' / ' + F.portuguese(1005n));
+    A(F.toRoman(2026n) === 'MMXXVI' && F.fromRoman('MCMXCIV') === 1994 && F.fromRoman('IIII') === null && F.toRoman(4000n) === '', 'roman');
+    const p1 = F.parse('12,34,567.89'); A(p1.int === 1234567n && p1.dec === '89', 'parse indian grouping');
+    A(F.parse('1.234.567,89').int === 1234567n && F.parse('3.5e8').int === 350000000n && F.parse('1.5e-3').dec === '0015' && F.parse('-42').neg && F.parse('MMXXVI').int === 2026n, 'parse european / scientific / negative / roman: ' + F.parse('1.5e-3').dec);
+    A(F.fromWords('two crore fifteen lakh thirty thousand and five').int === 21530005n && F.fromWords('two million five hundred thousand').int === 2500000n && F.fromWords('1.5 lakh').int === 150000n && F.fromWords('twelve point five').dec === '5' && F.fromWords('banana') === null, 'words → number: ' + (F.fromWords('two crore fifteen lakh thirty thousand and five') || {}).int);
+    A(F.groupIndian('1234567') === '12,34,567' && F.groupIndian('123') === '123' && F.ordinal(22n) === '22nd' && F.ordinal(113n) === '113th', 'grouping + ordinal');
+    set('text-input', '1234567.89'); set('opt-lang', 'en-IN'); A(await waitFor(() => T.S.out && /Twelve Lakh/.test(T.S.out.text), 10000), 'live words: ' + (T.S.out && T.S.out.text));
+    const rows = [...$('nf-table').querySelectorAll('tr')].map(r => [r.querySelector('th').textContent, r.querySelector('td span').textContent]); const get = (k) => (rows.find(r => r[0] === k) || [])[1];
+    A(get('Amount in words') === 'Rupees Twelve Lakh Thirty-Four Thousand Five Hundred And Sixty-Seven And Eighty-Nine Paise Only', 'cheque amount: ' + get('Amount in words'));
+    A(get('Indian grouping') === '12,34,567.89' && get('International grouping') === '1,234,567.89' && get('European (1.234,56)') === '1.234.567,89' && get('Scientific') === '1.23456789e+6' && get('Engineering') === '1.235 × 10^6' && /^1\\.23 M$/.test(get('Compact · International').replace('M', ' M')), 'grouped formats: ' + [get('Indian grouping'), get('Scientific'), get('Engineering'), get('Compact · International')]);
+    A(/12\\.35 Cr|1\\.23 Cr|12\\.35 L/.test(get('Compact · Indian')), 'compact indian: ' + get('Compact · Indian'));
+    set('opt-lang', 'hi'); set('opt-currency', 'INR'); await tick(300); A(/बारह लाख/.test(T.S.out.text) && /दशमलव/.test(T.S.out.text), 'hindi words: ' + T.S.out.text); const hiAmt = [...$('nf-table').querySelectorAll('tr')].find(r => r.querySelector('th').textContent === 'Amount in words').querySelector('td span').textContent; A(/रुपये और .* पैसे मात्र$/.test(hiAmt), 'hindi amount: ' + hiAmt);
+    set('opt-lang', 'en'); set('text-input', '2026'); await tick(300); const r2 = [...$('nf-table').querySelectorAll('tr')].map(r => [r.querySelector('th').textContent, r.querySelector('td span').textContent]); A((r2.find(r => r[0] === 'Roman numeral') || [])[1] === 'MMXXVI' && /2,026th · Two Thousand And Twenty-Sixth/.test((r2.find(r => r[0] === 'Ordinal') || [])[1]), 'roman + ordinal rows: ' + (r2.find(r => r[0] === 'Ordinal') || [])[1]);
+    set('text-input', 'hello'); await tick(300); A(/Could not read/.test($('input-error').textContent), 'error for junk');
+    set('text-input', '1\\n2\\n3'); await tick(300); const csv = await T.T.download('csv'); A(csv.text.split('\\n').length === 5 && /^input,words-en/.test(csv.text), 'batch csv: ' + csv.text.split('\\n')[0].slice(0, 40));`],
   ['games/nonogram/', `
     for (let i = 0; i < 80 && !(window.__ng && window.__game); i++) await tick(100);
     const N = window.__ng, api = window.__game;
