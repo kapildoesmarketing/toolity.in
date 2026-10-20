@@ -43,6 +43,24 @@ const PDF_HELPERS = `
 `;
 
 const CASES = [
+  ['widgets/chat-bubble/embed/?msgs=Hi%20there%0A%3E%20Yo%0A%3E%20Second&name=Kapil%20P&platform=whatsapp&typing=1&time=9%3A41', `
+    for (let i = 0; i < 80 && !(window.__chat && window.ToolityWidget); i++) await tick(100);
+    const P = window.__chat.parseLines; A(JSON.stringify(P('a\\n> b\\n\\n>c')) === '[{"me":false,"text":"a"},{"me":true,"text":"b"},{"me":true,"text":"c"},]'.replace(',]', ']'), 'parseLines: ' + JSON.stringify(P('a\\n> b\\n\\n>c')));
+    const st = window.ToolityWidget.getState(); A(st.msgs.includes('\\n') && st.platform === 'whatsapp' && st.typing, 'multiline state parsed: ' + JSON.stringify(st.msgs));
+    const rows = [...document.querySelectorAll('.w-chat-row')]; A(rows.length === 4, '3 bubbles + typing = 4 rows: ' + rows.length);
+    A(rows[0].classList.contains('them') && rows[1].classList.contains('me') && rows[2].classList.contains('me') && rows[2].classList.contains('last') && !rows[1].classList.contains('last'), 'sides + grouping');
+    A(document.querySelector('.w-chat-name').textContent === 'Kapil P' && document.querySelector('.w-chat-avatar').textContent === 'KP', 'name + initials avatar');
+    A(document.querySelector('.w-chat-typing i') && document.querySelector('.w-chat-time').textContent === '9:41', 'typing dots + time');
+    A(document.querySelector('.w-chat').classList.contains('p-whatsapp') && document.querySelector('.w-credit'), 'palette class + credit');
+    window.ToolityWidget.update({ msgs: 'solo', platform: 'slack', badge: '0', name: 'Dev' }); await tick(50);
+    A(document.querySelectorAll('.w-chat-row').length === 1 && document.querySelector('.p-slack') && !document.querySelector('.w-credit'), 'update → slack, no credit');
+    const emb = window.ToolityWidgets.buildEmbedUrl('chat-bubble', window.ToolityWidget.schema, window.ToolityWidgets.parse(window.ToolityWidget.schema, { msgs: 'a\\n> b', platform: 'telegram' }), 'https://toolity.in');
+    A(/msgs=a%0A%3E\\+b|msgs=a%0A%3E%20b/.test(emb) && /platform=telegram/.test(emb), 'embed url keeps newline: ' + emb);`],
+  ['widgets/chat-bubble/', `
+    for (let i = 0; i < 80 && !($('opt-msgs') && $('embed-url-output')); i++) await tick(100);
+    set('opt-msgs', 'Hello from the builder\\n> hi'); set('opt-platform', 'messenger'); await tick(400);
+    const u = $('embed-url-output').value || $('embed-url-output').textContent; A(/msgs=Hello/.test(u) && /platform=messenger/.test(u), 'builder url: ' + u);
+    set('opt-msgs', '   '); await tick(400); A(/at least one message/i.test(document.body.textContent), 'guardrail for empty messages');`],
   ['labs/chronometer-lap-timer/', `
     for (let i = 0; i < 80 && !window.__chrono; i++) await tick(100);
     const C = window.__chrono; A(C, 'mounted'); A(C.fmt(3723456, 3) === '01:02:03.456' && C.fmt(5000, 2) === '00:05.00', 'fmt: ' + C.fmt(3723456, 3));

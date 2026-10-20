@@ -135,7 +135,7 @@
       } else {
         // Plain text: strip control chars, cap length (default 120 chars)
         const max = f.maxLength || 120;
-        out[f.key] = String(raw).replace(/[\u0000-\u001F\u007F]/g, '').trim().slice(0, max);
+        out[f.key] = String(raw).replace(f.multiline ? /[\u0000-\u0009\u000B-\u001F\u007F]/g : /[\u0000-\u001F\u007F]/g, '').trim().slice(0, max);
       }
     }
     return out;

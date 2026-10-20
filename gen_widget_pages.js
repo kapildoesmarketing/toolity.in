@@ -7,7 +7,7 @@
 const fs = require('fs');
 const path = require('path');
 const only = process.argv[2];
-const MAIN_V = '4.6', CSS_V = '6.1', WC_V = '1.2', EMBED_CSS_V = '5.9';
+const MAIN_V = '4.9', CSS_V = '6.4', WC_V = '1.3', EMBED_CSS_V = '6.0';
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const jsonStr = (s) => JSON.stringify(String(s).replace(/<[^>]+>/g, ''));
 
@@ -71,6 +71,33 @@ const WIDGETS = [
       + checks([['opt-daylen', 'Day length', 1], ['opt-next', 'Next sunrise / sunset', 1], ['opt-golden', 'Golden hour', 0], ['opt-twilight', 'Twilight', 0], ['opt-badge', 'Toolity link', 1], ['opt-transparent', 'Transparent', 0]]) + THEME_PRESET,
     guide: [['Choose the place', 'Pick one of 130 cities, tap <strong>Use my location</strong>, or type coordinates. Set the time zone the times should show in.'], ['Style it', 'Pick Arc, Minimal or Compact, switch golden hour and twilight on if you want them, and match your page with a preset or theme.'], ['Copy and embed', 'Click Copy, type <code>/embed</code> in Notion and paste. The widget updates by itself every day.']],
     faq: [EMBED_FAQ[0], ['How accurate are the times?', 'They are calculated with the standard NOAA solar model and are usually within a minute for most places. Close to the poles, or when the sun only just skims the horizon, they can be a few minutes off.'], ['Does it ask visitors for their location?', 'No. You choose the location once in the builder; it is saved in the link, rounded to about 1 km. "Use my location" runs only on your device and nothing is sent to a server.'], ['What happens near the poles?', 'When the sun never sets or never rises that day, the widget says "Sun up all day" or "No sunrise today" instead of showing times.'], EMBED_FAQ[1], EMBED_FAQ[2]]
+  },
+  {
+    slug: 'chat-bubble', name: 'Chat Bubble Widget', short: 'Chat Bubble', pane: 'Message', icon: 'lucide:message-circle',
+    desc: 'Free embeddable chat bubble widget for Notion and websites: show a message, quote or testimonial as an iMessage, WhatsApp, Telegram, Messenger, Instagram or Slack-style bubble, with name, avatar, time and a typing indicator. All settings live in the URL.',
+    lead: 'Turn a quote, note or testimonial into a chat bubble — iMessage, WhatsApp, Telegram, Messenger, Instagram or Slack style — and embed it anywhere.',
+    cardDesc: 'Message, quote or testimonial as an iMessage / WhatsApp / Telegram-style bubble — embeddable in Notion.',
+    tags: ['chat bubble', 'speech bubble', 'message widget', 'testimonial widget', 'quote widget', 'imessage bubble', 'whatsapp bubble', 'notion widget', 'embed', 'chat ui', 'fake text message', 'notion chat'],
+    left: group('Messages', `
+                  <textarea id="opt-msgs" class="textarea-clean" rows="5" maxlength="600" placeholder="Hey! Welcome to my page 👋&#10;> Thanks — love the setup!&#10;Start a line with > for your own (right-side) bubbles" spellcheck="true"></textarea>`, 'One per line · &gt; = right side', 'opt-msgs')
+      + row2(text('opt-name', 'Sender name', 'Kapil', 40), text('opt-avatar', 'Avatar', '👋 or initials', 4, 'Emoji or 1–2 letters'))
+      + row2(group('Style', `
+                  <select id="opt-platform" class="select-clean">
+                    <option value="imessage" selected>iMessage</option>
+                    <option value="whatsapp">WhatsApp</option>
+                    <option value="telegram">Telegram</option>
+                    <option value="messenger">Messenger</option>
+                    <option value="instagram">Instagram</option>
+                    <option value="slack">Slack</option>
+                    <option value="plain">Plain (uses your accent)</option>
+                  </select>`, '', 'opt-platform'), text('opt-time', 'Time label', 'Today 9:41', 24))
+      + checks([['opt-typing', 'Typing indicator', 0], ['opt-tails', 'Bubble tails', 1], ['opt-badge', 'Toolity link', 1], ['opt-transparent', 'Transparent', 0]]) + THEME_PRESET,
+    guide: [['Write the messages', 'One bubble per line. Start a line with <code>&gt;</code> to put it on the right as “you”; plain lines come from the named sender. Add a name, an emoji or initials avatar and an optional time label.'],
+      ['Pick a style', 'iMessage, WhatsApp, Telegram, Messenger, Instagram or Slack colours — or <strong>Plain</strong>, which uses your accent colour and theme. Turn on the typing indicator for a live, animated feel.'],
+      ['Embed it', 'Copy the embed URL and paste it into Notion with <code>/embed</code>, or use the iframe snippet on any website. Every setting lives in the link, so it works on any device with no account.']],
+    faq: [EMBED_FAQ[0], ['What is this widget for?', 'Testimonials, pull-quotes, a welcome note on a Notion dashboard, mock conversations in docs and tutorials, or a “message from the founder” block on a landing page — anywhere a chat bubble reads better than a paragraph.'],
+      ['Can I make a whole conversation?', 'Yes — up to about 600 characters across as many lines as you like. Lines starting with &gt; sit on the right (you), others on the left (the named sender). For a full phone-frame screenshot use the Chat Mockup tool in Media instead.'],
+      ['Are the platform looks official?', 'They are colour schemes inspired by each app, not their logos or trademarks — fine for illustration, not for pretending to be a real screenshot of someone else’s message.'], EMBED_FAQ[1], EMBED_FAQ[2]]
   },
   {
     slug: 'timer', name: 'Timer Widget', short: 'Timer', pane: 'Timer', icon: 'lucide:timer',
