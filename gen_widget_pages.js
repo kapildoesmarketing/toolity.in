@@ -73,6 +73,67 @@ const WIDGETS = [
     faq: [EMBED_FAQ[0], ['How accurate are the times?', 'They are calculated with the standard NOAA solar model and are usually within a minute for most places. Close to the poles, or when the sun only just skims the horizon, they can be a few minutes off.'], ['Does it ask visitors for their location?', 'No. You choose the location once in the builder; it is saved in the link, rounded to about 1 km. "Use my location" runs only on your device and nothing is sent to a server.'], ['What happens near the poles?', 'When the sun never sets or never rises that day, the widget says "Sun up all day" or "No sunrise today" instead of showing times.'], EMBED_FAQ[1], EMBED_FAQ[2]]
   },
   {
+    slug: 'button-grid', name: 'Button Grid Widget', short: 'Button Grid', pane: 'Buttons', icon: 'lucide:layout-grid',
+    desc: 'Free embeddable button grid widget for Notion dashboards and websites: 2–8 big icon buttons linking anywhere, 1–4 columns, filled / outline / soft styles, any Iconify icon, your colours. Settings live in the URL — no account.',
+    lead: 'Big tappable link buttons for a Notion dashboard or a start page — pick icons, columns and colours, embed one URL.',
+    cardDesc: '2–8 big icon link buttons for dashboards — columns, styles, any icon, embeddable in Notion.',
+    tags: ['button widget', 'notion buttons', 'link buttons', 'dashboard buttons', 'notion dashboard widget', 'quick links widget', 'start page', 'icon buttons', 'embed', 'notion'],
+    left: group('Buttons', `
+                  <textarea id="opt-items" class="textarea-clean" rows="6" maxlength="900" placeholder="Inbox | https://mail.google.com | lucide:mail&#10;Calendar | https://calendar.google.com | lucide:calendar&#10;Tasks | https://todoist.com | lucide:check-square" spellcheck="false"></textarea>`, 'One per line: Label | URL | icon (lucide:name, any Iconify icon)', 'opt-items')
+      + row2(seg('seg-cols', 'Columns', [['2', '2'], ['3', '3'], ['4', '4'], ['1', '1']]), seg('seg-style', 'Style', [['soft', 'Soft'], ['filled', 'Filled'], ['outline', 'Outline']]))
+      + checks([['opt-newtab', 'Open links in a new tab', 1], ['opt-labels', 'Show labels', 1], ['opt-badge', 'Toolity link', 1], ['opt-transparent', 'Transparent', 0]]) + THEME_PRESET,
+    guide: [['List the links', 'One button per line: a label, the URL and an icon name such as <code>lucide:mail</code> — any of the 200k Iconify icons works (<code>simple-icons:github</code>, <code>mdi:home</code>). Up to eight buttons.'], ['Shape the grid', 'Choose 1–4 columns and Soft, Filled or Outline style. Accent, font, corner radius and theme come from the colours panel.'], ['Embed', 'Copy the embed URL and paste it in Notion with <code>/embed</code>, or drop the iframe snippet on any page. Every setting is in the link.']],
+    faq: [EMBED_FAQ[0], ['Can I use my own icons or logos?', 'Use any Iconify icon name — brand logos live in the <code>simple-icons</code> set (e.g. <code>simple-icons:notion</code>). Emoji work too: put an emoji instead of an icon name.'], ['Do the buttons open inside Notion?', 'Links open in a new tab by default so they are not trapped inside the embed frame. Untick “Open links in a new tab” if you embed on your own site and want same-tab navigation.'], EMBED_FAQ[1], EMBED_FAQ[2]]
+  },
+  {
+    slug: 'calculator', name: 'Mini Calculator Widget', short: 'Calculator', pane: 'Calculator', icon: 'lucide:calculator',
+    desc: 'Free embeddable calculator widget for Notion and websites: a clean mini calculator with memory, percent and full keyboard support, or a tip & bill splitter — your currency symbol and colours, settings in the URL, no account.',
+    lead: 'A tidy calculator — or a tip and bill splitter — that lives inside a Notion page or any site. Keyboard friendly, your colours.',
+    cardDesc: 'Mini calculator with memory and keyboard, or a tip & bill splitter — embeddable in Notion.',
+    tags: ['calculator widget', 'notion calculator', 'embed calculator', 'tip calculator widget', 'bill splitter', 'mini calculator', 'dashboard calculator', 'notion widget', 'embed'],
+    left: text('opt-title', 'Header label', 'Quick maths') + seg('seg-mode', 'Mode', [['calc', 'Calculator'], ['tip', 'Tip & split']])
+      + row2(text('opt-currency', 'Currency symbol', '₹, $, €…', 4, 'Shown in results'), group('Decimals', `
+                  <select id="opt-decimals" class="select-clean"><option value="2" selected>2</option><option value="0">0</option><option value="1">1</option><option value="3">3</option><option value="4">4</option></select>`, '', 'opt-decimals'))
+      + checks([['opt-history', 'Show last calculation', 1], ['opt-badge', 'Toolity link', 1], ['opt-transparent', 'Transparent', 0]]) + THEME_PRESET,
+    guide: [['Pick a mode', '<strong>Calculator</strong> for everyday arithmetic with memory keys, percent and a history line; <strong>Tip &amp; split</strong> for bill, tip percentage and number of people.'], ['Set the look', 'Currency symbol, decimals, accent colour, font and theme. The widget scales to its frame — a narrow Notion column works too.'], ['Embed', 'Copy the URL into Notion with <code>/embed</code> or use the iframe snippet.']],
+    faq: [EMBED_FAQ[0], ['Does the keyboard work inside Notion?', 'Yes — click the widget once to focus it, then type digits, operators, Enter for equals, Backspace to delete and Escape to clear. Percent and memory keys are on the pad.'], ['How precise is it?', 'Arithmetic is done in decimal-safe steps (no 0.1 + 0.2 surprises) and rounded to the decimals you choose for display.'], EMBED_FAQ[1], EMBED_FAQ[2]]
+  },
+  {
+    slug: 'world-clocks', name: 'World Clocks Widget', short: 'World Clocks', pane: 'Clocks', icon: 'lucide:globe', css: true,
+    desc: 'Free embeddable world clock widget for Notion and websites: 2–6 cities in a row with live times, day/night tint, dates and a working-hours overlap bar for remote teams. 12/24-hour, your colours, settings in the URL.',
+    lead: 'A row of live city clocks with day/night tint and a working-hours overlap bar — perfect for remote teams’ Notion pages.',
+    cardDesc: '2–6 live city clocks with day/night tint and a team-overlap bar — embeddable in Notion.',
+    tags: ['world clock widget', 'notion world clock', 'time zone widget', 'team time zones', 'remote team clock', 'multiple clocks', 'working hours overlap', 'embed clock', 'notion widget', 'time zones'],
+    left: text('opt-title', 'Header label', 'Team time') + group('Cities', `
+                  <textarea id="opt-cities" class="textarea-clean" rows="5" maxlength="400" placeholder="Asia/Kolkata | Mumbai&#10;Europe/London | London&#10;America/New_York | New York" spellcheck="false"></textarea>
+                  <div class="widget-loc-row"><select id="tz-pick" class="select-clean" aria-label="Add a time zone"><option value="">Add a time zone…</option></select></div>`, 'One per line: IANA zone | label (2–6)', 'opt-cities')
+      + row2(seg('seg-format', 'Time format', [['24', '24-hour'], ['12', '12-hour']]), seg('seg-variant', 'Display', [['cards', 'Cards'], ['row', 'Compact row']]))
+      + row2(num('opt-start', 'Work day starts', 0, 23, 1, '9'), num('opt-end', 'Work day ends', 1, 24, 1, '18'))
+      + checks([['opt-date', 'Show date', 1], ['opt-seconds', 'Seconds', 0], ['opt-overlap', 'Working-hours overlap bar', 1], ['opt-badge', 'Toolity link', 1], ['opt-transparent', 'Transparent', 0]]) + THEME_PRESET,
+    guide: [['Add cities', 'Pick zones from the list (it adds a line) or type <code>Region/City | Label</code>. Two to six clocks; the first one is treated as “home”.'], ['Tune it', '12 or 24-hour, dates, seconds, cards or a compact single row. Set your working day and the overlap bar shows the hours when every city is at work.'], ['Embed', 'Copy the URL into Notion with <code>/embed</code>; the clocks tick live in the visitor’s browser.']],
+    faq: [EMBED_FAQ[0], ['Does it handle daylight saving?', 'Yes — times come from the browser’s IANA time-zone database via <code>Intl.DateTimeFormat</code>, so DST changes apply automatically.'], ['What does the overlap bar show?', 'Each city’s working day (the hours you set, in its local time) drawn on a 24-hour strip in the home city’s time; the highlighted band is where all of them overlap — the window for a meeting everyone can attend.'], ['Why is a city tinted dark?', 'Clocks between 18:00 and 06:00 local get a night tint so you can see at a glance who is asleep.'], EMBED_FAQ[1], EMBED_FAQ[2]]
+  },
+  {
+    slug: 'weather', name: 'Weather Widget', short: 'Weather', pane: 'Weather', icon: 'lucide:cloud-sun', css: true,
+    desc: 'Free embeddable weather widget for Notion and websites: current conditions and a 1–5 day forecast for any city, °C or °F, wind and humidity, your colours — powered by Open-Meteo, no API key, no account. Settings live in the URL.',
+    lead: 'Today’s weather and a short forecast for any city, styled to match your page — one URL for Notion or any site, no API key.',
+    cardDesc: 'Current weather + 1–5 day forecast for any city (Open-Meteo, no key) — embeddable in Notion.',
+    tags: ['weather widget', 'notion weather widget', 'embed weather', 'weather forecast widget', 'free weather widget', 'open-meteo', 'weather for website', 'dashboard weather', 'notion widget', 'no api key'],
+    left: text('opt-title', 'Header label', 'Weather at home') + group('Place', `
+                  <div class="widget-loc-row">
+                    <input type="search" id="city-search" class="input-clean" placeholder="Search a city…" autocomplete="off" aria-label="Search a city">
+                    <button type="button" class="btn-toolbar-sm" id="btn-geo"><iconify-icon icon="lucide:locate-fixed" width="14" height="14"></iconify-icon><span>Use my location</span></button>
+                  </div>
+                  <div class="widget-city-results" id="city-results" role="listbox" aria-label="Matching places" hidden></div>
+                  <p class="form-helper" id="geo-note" aria-live="polite"></p>`, 'Search uses Open-Meteo geocoding · saved in the link')
+      + row2(num('opt-lat', 'Latitude', -90, 90, 0.01, '19.08'), num('opt-lon', 'Longitude', -180, 180, 0.01, '72.88'))
+      + text('opt-place', 'Place name', 'Mumbai', 40, 'Shown as the header if no label')
+      + row2(seg('seg-units', 'Units', [['c', '°C · km/h'], ['f', '°F · mph']]), seg('seg-days', 'Forecast days', [['3', '3'], ['5', '5'], ['1', 'Today only']]))
+      + checks([['opt-wind', 'Wind', 1], ['opt-humidity', 'Humidity', 1], ['opt-hilo', 'High / low', 1], ['opt-badge', 'Toolity link', 1], ['opt-transparent', 'Transparent', 0]]) + THEME_PRESET,
+    guide: [['Find the place', 'Type a city and pick it from the list, press <strong>Use my location</strong>, or enter coordinates. The name you see is editable.'], ['Choose what to show', 'Units, number of forecast days, wind and humidity. Colours, font and theme come from the colours panel.'], ['Embed', 'Copy the URL into Notion with <code>/embed</code>. The visitor’s browser fetches the forecast from Open-Meteo and refreshes it every 15 minutes.']],
+    faq: [EMBED_FAQ[0], ['Where does the weather data come from?', 'From <a href="https://open-meteo.com" target="_blank" rel="noopener">Open-Meteo</a>, an open-source weather API that is free for non-commercial use and needs no key. The request is made by the viewer’s browser directly to api.open-meteo.com and contains only the coordinates — no cookies, no account, nothing passes through Toolity.'], ['How often does it update?', 'Every 15 minutes while the widget is visible; the last forecast is cached in the viewer’s browser so the embed paints instantly on the next visit.'], ['Why does it say “weather unavailable”?', 'The viewer is offline, a browser extension blocked the request, or Open-Meteo is briefly down. The widget shows the last cached forecast when it has one.'], EMBED_FAQ[2]]
+  },
+  {
     slug: 'chat-bubble', name: 'Chat Bubble Widget', short: 'Chat Bubble', pane: 'Message', icon: 'lucide:message-circle',
     desc: 'Free embeddable chat bubble widget for Notion and websites: show a message, quote or testimonial as an iMessage, WhatsApp, Telegram, Messenger, Instagram or Slack-style bubble, with name, avatar, time and a typing indicator. All settings live in the URL.',
     lead: 'Turn a quote, note or testimonial into a chat bubble — iMessage, WhatsApp, Telegram, Messenger, Instagram or Slack style — and embed it anywhere.',

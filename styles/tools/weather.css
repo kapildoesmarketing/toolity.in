@@ -1,0 +1,7 @@
+/* Weather widget builder — city search results. */
+.widget-loc-row { display: flex; gap: 0.5rem; flex-wrap: wrap; min-width: 0; }
+.widget-loc-row .input-clean { flex: 1 1 12rem; min-width: 0; }
+.widget-city-results { display: flex; flex-direction: column; gap: 0.25rem; margin-top: 0.4rem; }
+.widget-city-results[hidden] { display: none; }
+.widget-city-opt { min-height: 44px; padding: 0.4rem 0.75rem; text-align: left; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); color: var(--text-primary); font: inherit; font-size: 0.88rem; cursor: pointer; }
+.widget-city-opt:hover { border-color: var(--brand); }
