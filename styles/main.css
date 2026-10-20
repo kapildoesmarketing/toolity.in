@@ -4261,6 +4261,11 @@ body {
 .web-group { display: flex; flex-direction: column; gap: 0.5rem; min-width: 0; }
 .web-convert-row { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: end; gap: 0.5rem; min-width: 0; }
 .web-convert-row-2 { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+/* Collapsible "more" sections under a tool output (robots / sitemap / ads.txt / security.txt checkers; tag tools override the box). */
+.td-more { border-top: 1px solid var(--border); padding-top: 0.6rem; }
+.td-more summary { cursor: pointer; font-size: 0.86rem; font-weight: 600; color: var(--text-secondary); min-height: 32px; display: flex; align-items: center; }
+.td-more > :not(summary) { margin-top: 0.6rem; }
+.td-more .web-code { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 0.78rem; max-height: 360px; overflow: auto; }
 .web-checks { display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; min-width: 0; }
 .web-checks .control-item { margin: 0; }
 .web-group-head { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); }

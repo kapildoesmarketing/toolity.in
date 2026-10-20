@@ -12,7 +12,7 @@ const only = process.argv.slice(2).find((a) => !a.startsWith('--'));
 const CAT = arg('cat', 'labs'), CAT_LABEL = CAT[0].toUpperCase() + CAT.slice(1);
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const jsonStr = (s) => JSON.stringify(String(s).replace(/<[^>]+>/g, ''));
-const MAIN_V = '5.2', CSS_V = '6.5';
+const MAIN_V = '5.3', CSS_V = '6.6';
 const LIBS = { color: '  <script src="/scripts/color-common.js?v=1.0"></script>\n', qr: '  <script src="/scripts/qr-engine.js?v=1.0"></script>\n', jszip: '  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>\n', tagscan: '  <script src="/scripts/tagscan-common.js?v=1.0"></script>\n', wellknown: '  <script src="/scripts/wellknown-common.js?v=1.0"></script>\n' };
 
 function downloadBtn(t) {

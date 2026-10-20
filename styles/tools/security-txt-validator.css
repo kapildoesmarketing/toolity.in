@@ -11,7 +11,3 @@
 #st-fields .web-group-head { margin-bottom: 0.5rem; }
 #st-fields .web-tag b { font-weight: 500; color: var(--text-primary); margin-left: 0.3rem; font-family: var(--font-mono); overflow-wrap: anywhere; }
 #st-fields .web-tag { max-width: 100%; white-space: normal; }
-.td-more { border-top: 1px solid var(--border); padding-top: 0.6rem; }
-.td-more summary { cursor: pointer; font-size: 0.86rem; font-weight: 600; color: var(--text-secondary); min-height: 32px; display: flex; align-items: center; }
-.td-more > :not(summary) { margin-top: 0.6rem; }
-.td-more .web-code { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 0.78rem; max-height: 360px; overflow: auto; }

@@ -16,7 +16,3 @@
 .rt-ai .web-group-head { display: flex; justify-content: space-between; align-items: baseline; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 0.5rem; }
 .rt-ai .web-tag i { font-style: normal; font-weight: 500; opacity: 0.8; }
 .rt-ai[hidden] { display: none; }
-.td-more { border-top: 1px solid var(--border); padding-top: 0.6rem; }
-.td-more summary { cursor: pointer; font-size: 0.86rem; font-weight: 600; color: var(--text-secondary); min-height: 32px; display: flex; align-items: center; }
-.td-more > :not(summary) { margin-top: 0.6rem; }
-.td-more .web-code { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 0.78rem; max-height: 360px; overflow: auto; }

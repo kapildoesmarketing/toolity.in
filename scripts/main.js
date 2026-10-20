@@ -1720,6 +1720,46 @@
         tags: ['focus room', 'study with me', 'ambient sounds for focus', 'rain sounds', 'brown noise', 'pomodoro with sounds', 'deep work timer', 'virtual study room', 'white noise generator', 'focus music alternative', 'fullscreen timer']
       },
       {
+        id: 'cookie-header-decoder',
+        title: 'Cookie Header Decoder',
+        category: 'Dev',
+        url: 'dev/cookie-header-decoder/',
+        icon: 'lucide:cookie',
+        tags: ['cookie header decoder', 'set-cookie parser', 'set-cookie header checker', 'cookie attributes explained', 'samesite none secure', '__host- cookie prefix', 'cookie max-age expires', 'httponly cookie checker', 'decode cookie value', 'document.cookie parser', 'partitioned cookie chips']
+      },
+      {
+        id: 'security-txt-validator',
+        title: 'security.txt Validator',
+        category: 'Labs',
+        url: 'labs/security-txt-validator/',
+        icon: 'lucide:shield-check',
+        tags: ['security.txt validator', 'security.txt checker', 'rfc 9116', 'well-known security.txt', 'security.txt expires', 'security.txt generator', 'vulnerability disclosure file', 'security txt format', 'securitytxt', 'responsible disclosure contact']
+      },
+      {
+        id: 'ads-txt-validator',
+        title: 'ads.txt Validator',
+        category: 'Labs',
+        url: 'labs/ads-txt-validator/',
+        icon: 'lucide:badge-dollar-sign',
+        tags: ['ads.txt validator', 'ads.txt checker', 'app-ads.txt validator', 'ads.txt not found adsense', 'earnings at risk ads.txt', 'ads.txt syntax', 'sellers.json checker', 'ownerdomain managerdomain', 'ads.txt direct reseller', 'iab ads.txt', 'google ads.txt line']
+      },
+      {
+        id: 'sitemap-health-checker',
+        title: 'Sitemap Health Checker',
+        category: 'Labs',
+        url: 'labs/sitemap-health-checker/',
+        icon: 'lucide:map',
+        tags: ['sitemap checker', 'sitemap validator', 'xml sitemap validator', 'sitemap.xml checker', 'validate sitemap', 'sitemap index checker', 'sitemap lastmod', 'sitemap 50000 urls', 'sitemap errors google search console', 'sitemap tester', 'sitemap url count']
+      },
+      {
+        id: 'robots-txt-tester',
+        title: 'Robots.txt Tester',
+        category: 'Labs',
+        url: 'labs/robots-txt-tester/',
+        icon: 'lucide:bot',
+        tags: ['robots.txt tester', 'robots.txt checker', 'robots.txt validator', 'test robots.txt', 'is url blocked by robots.txt', 'googlebot robots.txt test', 'robots txt syntax check', 'block gptbot', 'ai crawlers robots.txt', 'disallow allow precedence', 'robots.txt wildcard']
+      },
+      {
         id: 'cat-widgets',
         title: 'Widgets',
         category: 'Category',

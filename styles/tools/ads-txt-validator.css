@@ -17,7 +17,3 @@
 .ad-table th[hidden], .ad-table td[hidden] { display: none; }
 #ad-pub:empty, #ad-vars:empty, #ad-app:empty { display: none; }
 #ad-vars .web-group-head, #ad-app .web-group-head { display: flex; justify-content: space-between; align-items: baseline; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 0.5rem; }
-.td-more { border-top: 1px solid var(--border); padding-top: 0.6rem; }
-.td-more summary { cursor: pointer; font-size: 0.86rem; font-weight: 600; color: var(--text-secondary); min-height: 32px; display: flex; align-items: center; }
-.td-more > :not(summary) { margin-top: 0.6rem; }
-.td-more .web-code { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 0.78rem; max-height: 360px; overflow: auto; }

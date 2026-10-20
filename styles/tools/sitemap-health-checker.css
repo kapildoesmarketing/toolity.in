@@ -30,7 +30,3 @@
 [data-theme="dark"] .sm-table td.is-fail { color: #f87171; }
 .sm-table th[hidden], .sm-table td[hidden] { display: none; }
 #sm-more:empty { display: none; }
-.td-more { border-top: 1px solid var(--border); padding-top: 0.6rem; }
-.td-more summary { cursor: pointer; font-size: 0.86rem; font-weight: 600; color: var(--text-secondary); min-height: 32px; display: flex; align-items: center; }
-.td-more > :not(summary) { margin-top: 0.6rem; }
-.td-more .web-code { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 0.78rem; max-height: 360px; overflow: auto; }
