@@ -1575,6 +1575,46 @@
         tags: ['audio to text', 'speech to text', 'transcribe audio', 'mp3 to text', 'voice to text', 'whisper', 'transcription', 'subtitles', 'srt generator', 'vtt', 'video to text', 'podcast transcript', 'voice note to text', 'dictation']
       },
       {
+        id: 'pdf-repair',
+        title: 'PDF Repair',
+        category: 'Docs',
+        url: 'docs/pdf-repair/',
+        icon: 'lucide:wrench',
+        tags: ['pdf repair', 'fix pdf', 'repair pdf', 'corrupt pdf', 'damaged pdf', "pdf won't open", 'xref error', 'recover pdf', 'broken pdf', 'file is damaged', 'rebuild pdf']
+      },
+      {
+        id: 'pdf-booklet-nup',
+        title: 'Booklet & N-up Imposition',
+        category: 'Docs',
+        url: 'docs/pdf-booklet-nup/',
+        icon: 'lucide:book-open',
+        tags: ['booklet maker', 'pdf booklet', 'imposition', 'n-up', '2 pages per sheet', '4 pages per sheet', 'saddle stitch', 'print booklet', 'split pdf pages in half', 'halve pages', 'two page spread', 'handout', 'zine']
+      },
+      {
+        id: 'zip-maker-extractor',
+        title: 'ZIP Maker & Extractor',
+        category: 'Docs',
+        url: 'docs/zip-maker-extractor/',
+        icon: 'lucide:folder-archive',
+        tags: ['zip maker', 'create zip online', 'zip files online', 'unzip online', 'zip extractor', 'open zip file', 'extract zip', 'compress folder', 'zip folder', 'unzip without software']
+      },
+      {
+        id: 'chronometer-lap-timer',
+        title: 'Chronometer & Lap Timer',
+        category: 'Labs',
+        url: 'labs/chronometer-lap-timer/',
+        icon: 'lucide:timer',
+        tags: ['stopwatch online', 'lap timer', 'chronometer', 'online timer', 'split timer', 'countdown timer', 'stopwatch with laps', 'precise stopwatch', 'timer fullscreen', 'interval timer']
+      },
+      {
+        id: 'chat-bubble',
+        title: 'Chat Bubble Widget',
+        category: 'Widgets',
+        url: 'widgets/chat-bubble/',
+        icon: 'lucide:message-circle',
+        tags: ['chat bubble', 'speech bubble', 'message widget', 'testimonial widget', 'quote widget', 'imessage bubble', 'whatsapp bubble', 'notion widget', 'embed', 'chat ui', 'fake text message', 'notion chat']
+      },
+      {
         id: 'cat-widgets',
         title: 'Widgets',
         category: 'Category',

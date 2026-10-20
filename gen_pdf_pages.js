@@ -7,7 +7,7 @@ const TOOLS = require('./cfg_pdf_tools.js');
 const only = process.argv[2];
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const jsonStr = (s) => JSON.stringify(String(s).replace(/<[^>]+>/g, ''));
-const MAIN_V = '4.9', CSS_V = '6.4';
+const MAIN_V = '5.0', CSS_V = '6.4';
 
 function sourcePane(t) {
   const drop = `
@@ -305,7 +305,7 @@ ${faqHtml}
   <script src="/scripts/main.js?v=${MAIN_V}"></script>
   <script src="/scripts/tool-common.js?v=1.2"></script>
   <script src="https://cdn.jsdelivr.net/npm/@cantoo/pdf-lib@2.11.1/dist/pdf-lib.min.js" defer></script>
-${libs}  <script src="/scripts/pdf-common.js?v=1.1"></script>
+${libs}  <script src="/scripts/pdf-common.js?v=1.2"></script>
   <script src="/docs/${t.slug}/${t.slug}.js?v=1.0"></script>
 </body>
 </html>
