@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online ZIP Maker & Extractor | Toolity Docs</title>
+  <link rel="canonical" href="https://toolity.in/docs/zip-maker-extractor/">
+  <meta name="description" content="Free online ZIP maker and extractor: zip files and whole folders with adjustable compression, or open a ZIP to browse its contents, preview text and images, and download single files or everything — all in your browser, nothing uploaded.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online ZIP Maker & Extractor | Toolity Docs">
+  <meta property="og:description" content="Free online ZIP maker and extractor: zip files and whole folders with adjustable compression, or open a ZIP to browse its contents, preview text and images, and download single files or everything — all in your browser, nothing uploaded.">
+  <meta property="og:url" content="https://toolity.in/docs/zip-maker-extractor/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=6.4" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=6.4">
+  <link rel="stylesheet" href="/styles/tools/zip-maker-extractor.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "ZIP Maker & Extractor",
+        "url": "https://toolity.in/docs/zip-maker-extractor/",
+        "description": "Free online ZIP maker and extractor: zip files and whole folders with adjustable compression, or open a ZIP to browse its contents, preview text and images, and download single files or everything — all in your browser, nothing uploaded.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Docs", "item": "https://toolity.in/docs/" },
+          { "@type": "ListItem", "position": 3, "name": "ZIP Maker & Extractor", "item": "https://toolity.in/docs/zip-maker-extractor/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Is there a size limit?", "acceptedAnswer": { "@type": "Answer", "text": "Everything is held in your browser’s memory, so a few hundred megabytes is comfortable on most devices; gigabyte archives can exhaust the tab. The tool warns at 500 MB." } },
+          { "@type": "Question", "name": "Can it open password-protected ZIPs?", "acceptedAnswer": { "@type": "Answer", "text": "Not yet — encrypted entries are detected and reported, but decrypting ZipCrypto/AES archives in the browser is on the roadmap. 7z and RAR are different formats and are not supported." } },
+          { "@type": "Question", "name": "Which compression level should I use?", "acceptedAnswer": { "@type": "Answer", "text": "Normal is the sweet spot. Store is instant and right for files that are already compressed (JPEG, MP4, other ZIPs). Best squeezes text and documents a little further at the cost of time." } },
+          { "@type": "Question", "name": "Does it keep folder structure?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Adding a folder (or dropping one) preserves its sub-folders inside the ZIP, and extracting to a folder in Chrome/Edge recreates them." } },
+          { "@type": "Question", "name": "Why does my browser ask about multiple downloads?", "acceptedAnswer": { "@type": "Answer", "text": "Outside Chrome/Edge, “Extract all” saves each file separately, so the browser asks once whether this page may download several files. Allow it and the files arrive one after another." } },
+          { "@type": "Question", "name": "Is my text uploaded anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. Everything runs in JavaScript inside your browser tab. Your text and files are never sent to Toolity or anyone else." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main id="main">
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/docs/" class="breadcrumb-link">Docs</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">ZIP Maker & Extractor</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Docs</span>
+            <h1 class="page-title">ZIP Maker & Extractor</h1>
+            <p class="page-desc">Zip files and folders, or open any ZIP to browse, preview and extract its contents — without installing anything.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" data-split="50/50" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge web-status-badge" id="status-badge">Add files or open a ZIP</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result" aria-label="Copy result" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download result" aria-label="Download result" disabled>
+                <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                <span>Download</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-open" title="Open result in a new tab" aria-label="Open result in a new tab" disabled>
+                <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
+                <span>Open</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Files</span>
+                <span class="pane-badge" id="input-badge">—</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content web-form">
+                <div class="form-group">
+                  <span class="form-label"><span>Mode</span></span>
+                  <div class="segmented-group segmented-group-pill" id="seg-mode" role="group" aria-label="Mode">
+                    <button type="button" class="seg-pill active" data-value="make">Make a ZIP</button>
+                    <button type="button" class="seg-pill" data-value="extract">Open / extract a ZIP</button>
+                  </div>
+                </div>
+                <div id="panel-make" class="web-group">
+                  <div class="web-file-row">
+                    <button type="button" class="btn-toolbar-sm" id="btn-add-files"><iconify-icon icon="lucide:file-plus" width="14" height="14"></iconify-icon><span>Add files</span></button>
+                    <button type="button" class="btn-toolbar-sm" id="btn-add-folder"><iconify-icon icon="lucide:folder-plus" width="14" height="14"></iconify-icon><span>Add folder</span></button>
+                    <input type="file" id="in-files" multiple hidden>
+                    <input type="file" id="in-folder" webkitdirectory multiple hidden>
+                    <span class="web-muted" id="make-hint">or drop files &amp; folders anywhere on this pane</span>
+                  </div>
+                  <div class="zip-list" id="make-list" role="list" aria-label="Files to zip"></div>
+                  <div class="web-convert-row web-convert-row-2">
+                    <div class="form-group">
+                      <label class="form-label" for="opt-name"><span>Archive name</span></label>
+                      <input type="text" id="opt-name" class="input-clean" value="archive" maxlength="80" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label" for="opt-level"><span>Compression</span></label>
+                      <select id="opt-level" class="select-clean"><option value="0">Store (no compression, fastest)</option><option value="3">Fast</option><option value="6" selected>Normal (recommended)</option><option value="9">Best (slowest)</option></select>
+                    </div>
+                  </div>
+                </div>
+                <div id="panel-extract" class="web-group" hidden>
+                  <div class="web-file-row">
+                    <button type="button" class="btn-toolbar-sm" id="btn-open-zip"><iconify-icon icon="lucide:folder-open" width="14" height="14"></iconify-icon><span>Open ZIP</span></button>
+                    <input type="file" id="in-zip" accept=".zip,application/zip,application/x-zip-compressed" hidden>
+                    <span class="web-muted" id="zip-name">or drop a .zip on this pane</span>
+                  </div>
+                  <div class="web-file-row" id="extract-actions" hidden>
+                    <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-extract-all"><iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon><span>Extract all</span></button>
+                    <label class="web-muted zip-filter-label" for="zip-filter">Filter</label>
+                    <input type="search" id="zip-filter" class="input-clean zip-filter" placeholder="name or .ext" autocomplete="off">
+                    <span class="web-muted" id="zip-count"></span>
+                  </div>
+                  <div class="zip-list" id="zip-tree" role="list" aria-label="Archive contents"></div>
+                </div>
+                <input type="hidden" id="opt-sel" value="">
+                <button type="button" id="btn-run" class="btn-toolbar-sm btn-brand-sm btn-primary-action">
+                  <iconify-icon icon="lucide:package" width="16" height="16"></iconify-icon>
+                  <span>Build ZIP</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Result</span>
+                <span class="pane-badge" id="output-badge">—</span>
+              </div>
+              <div class="pane-content web-output-pane">
+                <div class="pane-empty" id="output-empty">
+                  <iconify-icon icon="lucide:folder-archive"></iconify-icon>
+                  <span>Your archive or the extracted file preview appears here</span>
+                </div>
+                <div class="web-output" id="output-content" hidden>
+                  <div class="web-grid-2" id="zip-stats"></div>
+                  <div id="zip-preview" class="zip-preview" hidden></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Use ZIP Maker & Extractor in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Make a ZIP</h3>
+              <p class="step-desc">Add files, whole folders (their structure is kept) or just drag things onto the pane. Name the archive, pick a compression level and press <strong>Build ZIP</strong> — the finished .zip downloads with the Download button.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Open a ZIP</h3>
+              <p class="step-desc">Switch to <strong>Open / extract</strong> and choose a .zip. Every entry is listed with its size and date; click one to preview it — text, code, JSON, images, audio, video and PDFs show right in the page.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Extract</h3>
+              <p class="step-desc">Download a single entry with its row button, or press <strong>Extract all</strong>. In Chrome and Edge you can pick a destination folder and the files are written straight into it with sub-folders intact; elsewhere each file downloads in turn.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">ZIP Maker & Extractor — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Is there a size limit?</summary>
+              <p>Everything is held in your browser’s memory, so a few hundred megabytes is comfortable on most devices; gigabyte archives can exhaust the tab. The tool warns at 500 MB.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can it open password-protected ZIPs?</summary>
+              <p>Not yet — encrypted entries are detected and reported, but decrypting ZipCrypto/AES archives in the browser is on the roadmap. 7z and RAR are different formats and are not supported.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Which compression level should I use?</summary>
+              <p><strong>Normal</strong> is the sweet spot. <strong>Store</strong> is instant and right for files that are already compressed (JPEG, MP4, other ZIPs). <strong>Best</strong> squeezes text and documents a little further at the cost of time.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Does it keep folder structure?</summary>
+              <p>Yes. Adding a folder (or dropping one) preserves its sub-folders inside the ZIP, and extracting to a folder in Chrome/Edge recreates them.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why does my browser ask about multiple downloads?</summary>
+              <p>Outside Chrome/Edge, “Extract all” saves each file separately, so the browser asks once whether this page may download several files. Allow it and the files arrive one after another.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is my text uploaded anywhere?</summary>
+              <p>No. Everything runs in JavaScript inside your browser tab. Your text and files are never sent to Toolity or anyone else.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="docs"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=4.9"></script>
+  <script src="/scripts/tool-common.js?v=1.2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+  <script src="/scripts/web-common.js?v=1.2"></script>
+  <script src="/docs/zip-maker-extractor/zip-maker-extractor.js?v=1.0"></script>
+</body>
+</html>

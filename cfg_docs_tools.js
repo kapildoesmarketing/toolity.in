@@ -7,6 +7,70 @@ const CHECK = (id, label, on) => `
 
 module.exports = [
   {
+    slug: 'zip-maker-extractor', name: 'ZIP Maker & Extractor', icon: 'lucide:folder-archive', section: 'Files & Archives', split: '50/50', css: true, libs: ['jszip'],
+    action: 'Build ZIP', actionIcon: 'lucide:package',
+    desc: 'Free online ZIP maker and extractor: zip files and whole folders with adjustable compression, or open a ZIP to browse its contents, preview text and images, and download single files or everything — all in your browser, nothing uploaded.',
+    lead: 'Zip files and folders, or open any ZIP to browse, preview and extract its contents — without installing anything.',
+    cardDesc: 'Zip files & folders or open a ZIP to browse, preview and extract — in-browser.',
+    tags: ['zip maker', 'create zip online', 'zip files online', 'unzip online', 'zip extractor', 'open zip file', 'extract zip', 'compress folder', 'zip folder', 'unzip without software'],
+    idle: 'Add files or open a ZIP', sourceLabel: 'Files', outputLabel: 'Result', outputIcon: 'lucide:folder-archive', outputEmpty: 'Your archive or the extracted file preview appears here',
+    sourceHtml: `
+                <div class="form-group">
+                  <span class="form-label"><span>Mode</span></span>
+                  <div class="segmented-group segmented-group-pill" id="seg-mode" role="group" aria-label="Mode">
+                    <button type="button" class="seg-pill active" data-value="make">Make a ZIP</button>
+                    <button type="button" class="seg-pill" data-value="extract">Open / extract a ZIP</button>
+                  </div>
+                </div>
+                <div id="panel-make" class="web-group">
+                  <div class="web-file-row">
+                    <button type="button" class="btn-toolbar-sm" id="btn-add-files"><iconify-icon icon="lucide:file-plus" width="14" height="14"></iconify-icon><span>Add files</span></button>
+                    <button type="button" class="btn-toolbar-sm" id="btn-add-folder"><iconify-icon icon="lucide:folder-plus" width="14" height="14"></iconify-icon><span>Add folder</span></button>
+                    <input type="file" id="in-files" multiple hidden>
+                    <input type="file" id="in-folder" webkitdirectory multiple hidden>
+                    <span class="web-muted" id="make-hint">or drop files &amp; folders anywhere on this pane</span>
+                  </div>
+                  <div class="zip-list" id="make-list" role="list" aria-label="Files to zip"></div>
+                  <div class="web-convert-row web-convert-row-2">
+                    <div class="form-group">
+                      <label class="form-label" for="opt-name"><span>Archive name</span></label>
+                      <input type="text" id="opt-name" class="input-clean" value="archive" maxlength="80" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label" for="opt-level"><span>Compression</span></label>
+                      <select id="opt-level" class="select-clean">${opts([['0', 'Store (no compression, fastest)'], ['3', 'Fast'], ['6', 'Normal (recommended)'], ['9', 'Best (slowest)']], '6')}</select>
+                    </div>
+                  </div>
+                </div>
+                <div id="panel-extract" class="web-group" hidden>
+                  <div class="web-file-row">
+                    <button type="button" class="btn-toolbar-sm" id="btn-open-zip"><iconify-icon icon="lucide:folder-open" width="14" height="14"></iconify-icon><span>Open ZIP</span></button>
+                    <input type="file" id="in-zip" accept=".zip,application/zip,application/x-zip-compressed" hidden>
+                    <span class="web-muted" id="zip-name">or drop a .zip on this pane</span>
+                  </div>
+                  <div class="web-file-row" id="extract-actions" hidden>
+                    <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-extract-all"><iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon><span>Extract all</span></button>
+                    <label class="web-muted zip-filter-label" for="zip-filter">Filter</label>
+                    <input type="search" id="zip-filter" class="input-clean zip-filter" placeholder="name or .ext" autocomplete="off">
+                    <span class="web-muted" id="zip-count"></span>
+                  </div>
+                  <div class="zip-list" id="zip-tree" role="list" aria-label="Archive contents"></div>
+                </div>
+                <input type="hidden" id="opt-sel" value="">`,
+    outputHtml: `
+                  <div class="web-grid-2" id="zip-stats"></div>
+                  <div id="zip-preview" class="zip-preview" hidden></div>`,
+    guide: [['Make a ZIP', 'Add files, whole folders (their structure is kept) or just drag things onto the pane. Name the archive, pick a compression level and press <strong>Build ZIP</strong> — the finished .zip downloads with the Download button.'],
+      ['Open a ZIP', 'Switch to <strong>Open / extract</strong> and choose a .zip. Every entry is listed with its size and date; click one to preview it — text, code, JSON, images, audio, video and PDFs show right in the page.'],
+      ['Extract', 'Download a single entry with its row button, or press <strong>Extract all</strong>. In Chrome and Edge you can pick a destination folder and the files are written straight into it with sub-folders intact; elsewhere each file downloads in turn.']],
+    faq: [['Is there a size limit?', 'Everything is held in your browser’s memory, so a few hundred megabytes is comfortable on most devices; gigabyte archives can exhaust the tab. The tool warns at 500 MB.'],
+      ['Can it open password-protected ZIPs?', 'Not yet — encrypted entries are detected and reported, but decrypting ZipCrypto/AES archives in the browser is on the roadmap. 7z and RAR are different formats and are not supported.'],
+      ['Which compression level should I use?', '<strong>Normal</strong> is the sweet spot. <strong>Store</strong> is instant and right for files that are already compressed (JPEG, MP4, other ZIPs). <strong>Best</strong> squeezes text and documents a little further at the cost of time.'],
+      ['Does it keep folder structure?', 'Yes. Adding a folder (or dropping one) preserves its sub-folders inside the ZIP, and extracting to a folder in Chrome/Edge recreates them.'],
+      ['Why does my browser ask about multiple downloads?', 'Outside Chrome/Edge, “Extract all” saves each file separately, so the browser asks once whether this page may download several files. Allow it and the files arrive one after another.'],
+      PRIVACY_FAQ]
+  },
+  {
     slug: 'diff-checker', name: 'Diff Checker', icon: 'lucide:git-compare', section: 'Text & Notes', layout: 'stacked', css: true,
     desc: 'Free online diff checker: compare two texts or JSON documents side by side or inline, with line and word-level highlighting, ignore-whitespace and ignore-case options, and a downloadable unified patch. Runs in your browser — nothing uploaded.',
     lead: 'Paste or drop two versions — see every added, removed and changed line side by side or inline, down to the word. JSON is compared by meaning, not formatting.',

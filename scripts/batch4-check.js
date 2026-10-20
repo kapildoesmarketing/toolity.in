@@ -43,6 +43,25 @@ const PDF_HELPERS = `
 `;
 
 const CASES = [
+  ['docs/zip-maker-extractor/', `
+    for (let i = 0; i < 80 && !(window.JSZip && window.__zip && window.ToolityWebTool); i++) await tick(100);
+    const Z = window.__zip, T = window.ToolityWebTool, txt = 'hello world '.repeat(200);
+    Z.addFiles([{ path: 'docs/hello.txt', file: new File([txt], 'hello.txt', { type: 'text/plain' }) }, { path: 'pic.png', file: await png(8, 8) }]);
+    await tick(300); A($('make-list').children.length === 2, 'two rows listed'); A(/Press Build ZIP/.test($('status-badge').textContent), 'waits for button: ' + $('status-badge').textContent);
+    $('btn-run').click(); A(await waitFor(() => T.S.out && T.S.out.blob && T.S.out.ext === 'zip', 20000), 'zip built');
+    const zblob = T.S.out.blob; A(zblob.size < txt.length, 'deflate shrank text: ' + zblob.size + ' < ' + txt.length);
+    const back = await JSZip.loadAsync(zblob); const names = Object.keys(back.files).filter(n => !back.files[n].dir).sort(); A(JSON.stringify(names) === '["docs/hello.txt","pic.png"]', 'entries kept with folder: ' + names); A(await back.file('docs/hello.txt').async('string') === txt, 'content round-trips');
+    set('opt-level', '0'); A(await waitFor(() => T.S.out && T.S.out.blob && T.S.out.blob !== zblob, 20000), 'store rebuild'); A(T.S.out.blob.size > txt.length, 'store is uncompressed: ' + T.S.out.blob.size);
+    $('make-list').querySelector('[data-rm="1"]').click(); await tick(300); A($('make-list').children.length === 1 && /Press Build ZIP/.test($('status-badge').textContent), 'remove row invalidates build');
+    // extract
+    document.querySelector('#seg-mode [data-value=extract]').click(); await tick(200); A($('panel-make').hidden && !$('panel-extract').hidden && $('btn-run').hidden, 'extract panel shown');
+    await Z.openZip(new File([zblob], 'test.zip', { type: 'application/zip' })); A(await waitFor(() => Z.M.entries.length === 2 && $('zip-tree').children.length === 2, 10000), 'entries listed: ' + Z.M.entries.length);
+    A(/2 files/.test($('output-badge').textContent) && /Folders/.test($('zip-stats').textContent), 'stats: ' + $('output-badge').textContent);
+    $('zip-tree').querySelector('[data-pick="0"]').click(); A(await waitFor(() => T.S.out && T.S.out.text === txt, 10000), 'text preview selected'); A(/hello world/.test($('zip-preview').textContent) && !$('zip-preview').hidden, 'inline preview rendered'); A(T.S.out.name === 'hello.txt', 'download name is basename: ' + T.S.out.name);
+    $('zip-tree').querySelector('[data-pick="1"]').click(); A(await waitFor(() => T.S.out && T.S.out.name === 'pic.png', 10000), 'png selected'); A($('zip-preview').querySelector('img.zip-media'), 'image preview'); A(T.S.out.blob.type === 'image/png', 'png mime');
+    set('zip-filter', 'png'); await tick(100); A($('zip-tree').children.length === 1 && /1 of 2/.test($('zip-count').textContent), 'filter: ' + $('zip-count').textContent);
+    await Z.openZip(new File([new Uint8Array([1, 2, 3, 4, 5, 6, 7, 8])], 'nope.zip')); await tick(300); A(/doesn’t look like a ZIP/.test($('input-error').textContent), 'bad zip message: ' + $('input-error').textContent);
+    $('btn-reset').click(); await tick(300); A(!$('panel-make').hidden && Z.M.files.length === 0 && !T.S.out, 'reset');`],
   ['dev/code-formatter/', `
     const out = () => $('output-text').textContent;
     set('opt-lang', 'sql'); set('opt-dialect', 'postgresql'); set('text-input', "select a.id, count(*) as n from users a join orders o on o.uid=a.id where a.created_at > now() - interval '7 days' group by a.id having count(*) > 2 order by n desc");
