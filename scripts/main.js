@@ -196,8 +196,8 @@
   });
 
   /**
-   * Designed by Kapil Pidhwani: one search block markup, injected into the header popover
-   * (#site-search-panel, desktop) and the top of the mobile drawer.
+   * Designed by Kapil Pidhwani: one search block markup, injected into the header
+   * (#nav-search, inline on desktop) and the top of the mobile drawer.
    */
   const SEARCH_HTML = `
     <div class="site-search" role="search">
@@ -219,11 +219,14 @@
   /**
    * Deisgned by Kapil Pidhwani: Site-wide Minimalist Fast Search & Tool Launcher
    * Top 3 results launcher with keyboard navigation; binds every .site-search block.
-   * Header panel uses the native Popover API (open/close, Esc, click-outside for free).
+   * Header block is a real inline input; results drop down under it (Esc / click-outside handled in bindSearch).
    */
   function initSiteSearch() {
-    const panel = document.getElementById('site-search-panel');
-    if (panel && !panel.firstElementChild) panel.innerHTML = SEARCH_HTML;
+    const navSearch = document.getElementById('nav-search');
+    if (navSearch && !navSearch.firstElementChild) {
+      navSearch.innerHTML = SEARCH_HTML;
+      navSearch.querySelector('.minimal-search-input').placeholder = 'Search tools…'; // 200px pill; drawer keeps the long one
+    }
     const roots = document.querySelectorAll('.site-search'); // may be empty; registry is still exposed for WebMCP
 
     const REGISTRY = [
@@ -1859,14 +1862,7 @@
 
     roots.forEach(bindSearch);
 
-    // Focus the header input whenever the popover opens (button click or shortcut)
-    if (panel) {
-      panel.addEventListener('toggle', (e) => {
-        if (e.newState === 'open') panel.querySelector('.minimal-search-input').focus();
-      });
-    }
-
-    // Global shortcut: ⌘K, Ctrl+K, or "/" → header panel on desktop, drawer search on mobile
+    // Global shortcut: ⌘K, Ctrl+K, or "/" → inline header input on desktop, drawer search on mobile
     window.addEventListener('keydown', (e) => {
       const active = document.activeElement;
       const isCmdK = (e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k';
@@ -1874,10 +1870,10 @@
       if (!isCmdK && !isSlash) return;
       e.preventDefault();
 
-      const toggle = document.getElementById('search-toggle');
-      if (panel && toggle && toggle.offsetParent !== null) {
-        if (!panel.matches(':popover-open')) panel.showPopover();
-        else panel.querySelector('.minimal-search-input').focus();
+      const navInput = navSearch && navSearch.querySelector('.minimal-search-input');
+      if (navInput && navInput.offsetParent !== null) {
+        navInput.focus();
+        navInput.select();
         return;
       }
       const drawer = document.getElementById('mobile-nav-drawer');
@@ -2331,6 +2327,7 @@
       const groups = {};
       list.forEach((t) => { const k = /[a-z]/i.test(t.title[0]) ? t.title[0].toUpperCase() : '#'; (groups[k] = groups[k] || []).push(t); });
       count.textContent = `${list.length} of ${tools.length} tools`;
+      root.classList.toggle('is-filtered-by-cat', !!cat); // category pill is redundant when one chip is active
       root.innerHTML = list.length ? Object.keys(groups).map((k) => `
         <section class="tools-index-group" aria-labelledby="letter-${k}">
           <h2 class="tools-index-letter" id="letter-${k}">${k}</h2>

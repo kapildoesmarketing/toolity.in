@@ -1012,22 +1012,90 @@ body {
 #categories { scroll-margin-top: var(--header-height); }
 
 /* ==========================================================================
-   Site Search (header popover on desktop, top of mobile drawer) & Top-3 Launcher
+   Site Search (inline in header on desktop, top of mobile drawer) & Top-3 Launcher
    ========================================================================== */
-.search-popover {
-  /* Designed by Kapil Pidhwani: native [popover] — top layer, Esc + click-outside built in.
-     pointer-events re-enabled because .site-header.scrolled passes clicks through. */
-  position: fixed;
-  inset: calc(var(--header-height) - 0.25rem) clamp(1rem, 2.5vw, 2.5rem) auto auto;
+/* Designed by Kapil Pidhwani: inline header search — same frosted-glass recipe as .btn-icon-pill so the
+   nav reads as one family (pill + pill). Hidden <1024px; the drawer search takes over there. */
+.nav-search { position: relative; pointer-events: auto; }
+
+.nav-search .minimal-search-bar {
+  height: 40px;
+  width: 200px;
+  padding: 0 0.6rem 0 0.85rem;
+  gap: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  box-shadow:
+    0 4px 16px -2px rgba(0, 0, 0, 0.05),
+    0 1px 2px rgba(0, 0, 0, 0.03),
+    inset 0 1px 1px rgba(255, 255, 255, 1);
+  transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+[data-theme="dark"] .nav-search .minimal-search-bar {
+  background: rgba(22, 22, 22, 0.78);
+  border-color: rgba(255, 255, 255, 0.14);
+  box-shadow:
+    0 8px 24px -4px rgba(0, 0, 0, 0.5),
+    inset 0 1px 1px rgba(255, 255, 255, 0.12);
+}
+
+.nav-search .minimal-search-bar:hover { border-color: rgba(244, 81, 30, 0.25); }
+
+.nav-search .minimal-search-bar:focus-within {
+  width: 280px;
+  border-color: var(--brand) !important;
+  box-shadow: 0 6px 20px -2px rgba(244, 81, 30, 0.15), 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+/* Leading search glyph (lucide:search) — masked so it follows the text colour */
+.nav-search .minimal-search-bar::before {
+  content: '';
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  background: var(--text-muted);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.3-4.3'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.3-4.3'/%3E%3C/svg%3E") center / contain no-repeat;
+  transition: background 0.15s ease;
+}
+.nav-search .minimal-search-bar:focus-within::before { background: var(--brand); }
+
+.nav-search .minimal-search-input { font-size: 0.88rem; padding: 0; }
+.nav-search .minimal-search-input::placeholder { font-size: 0.88rem; font-weight: 400; }
+
+/* Enter already submits; the trailing icon button is noise in a 40px pill */
+.nav-search .minimal-submit-btn { display: none; }
+
+/* ⌘K hint — fades out as soon as the user is in the field */
+.nav-search .minimal-search-actions::after {
+  content: '⌘K';
+  font-size: 0.68rem;
+  font-weight: 500;
+  line-height: 1;
+  padding: 0.2rem 0.4rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
+  color: var(--text-muted);
+  transition: opacity 0.15s ease;
+}
+.nav-search .minimal-search-bar:focus-within .minimal-search-actions::after { opacity: 0; width: 0; padding: 0; border: 0; overflow: hidden; }
+
+/* Results float under the pill instead of pushing the header */
+.nav-search .minimal-search-results {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  width: min(380px, calc(100vw - 2rem));
   margin: 0;
-  width: min(420px, calc(100vw - 2rem));
-  padding: 1rem 1.1rem;
+  padding: 0.6rem;
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   background: var(--surface);
-  color: var(--text-primary);
   box-shadow: var(--shadow-md);
-  pointer-events: auto;
 }
 
 .site-search {
@@ -2811,7 +2879,7 @@ body {
   }
 
   .nav-center,
-  #search-toggle {
+  .nav-search {
     display: none;
   }
 
@@ -4291,8 +4359,13 @@ html::-webkit-scrollbar-corner, body *::-webkit-scrollbar-corner { background: t
 .tools-index-count { font-size: 0.82rem; color: var(--text-muted); margin: 0; }
 .tools-index-group + .tools-index-group { margin-top: 1.75rem; }
 .tools-index-letter { font-size: 1rem; font-weight: 600; color: var(--brand); border-bottom: 1px solid var(--border); padding-bottom: 0.4rem; margin: 0 0 0.6rem; }
-.tools-index-list { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 0.15rem 1.25rem; }
-.prose-card .tools-index-list a { display: flex; align-items: center; gap: 0.5rem; padding: 0.4rem 0; color: var(--text-primary); font-weight: 400; font-size: 0.92rem; }
-.tools-index-list a iconify-icon { color: var(--brand); flex-shrink: 0; }
-.tools-index-cat { margin-left: auto; font-size: 0.72rem; color: var(--text-muted); }
+.tools-index-list { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 0.5rem; }
+/* Designed by Kapil Pidhwani: Option A pill rows — border + icon box make each entry read as one clickable unit;
+   category sits next to the title (not margin-left:auto) so it can't be mistaken for a separate column. */
+.prose-card .tools-index-list a { display: flex; align-items: center; gap: 0.6rem; min-width: 0; padding: 0.45rem 0.75rem 0.45rem 0.5rem; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--surface); color: var(--text-primary); font-weight: 500; font-size: 0.9rem; line-height: 1.3; transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease; }
+.prose-card .tools-index-list a:hover,
+.prose-card .tools-index-list a:focus-visible { border-color: var(--brand); color: var(--brand); transform: translateY(-1px); text-decoration: none; }
+.tools-index-list a iconify-icon { flex-shrink: 0; width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; border-radius: var(--radius-sm); color: var(--brand); background: color-mix(in srgb, var(--brand) 12%, transparent); }
+.tools-index-cat { flex-shrink: 0; margin-left: 0.1rem; padding: 0.1rem 0.5rem; border-radius: var(--radius-pill); background: var(--surface-elevated); font-size: 0.68rem; font-weight: 500; color: var(--text-muted); }
+.is-filtered-by-cat .tools-index-cat { display: none; }
 .prose-card.prose-card-wide { max-width: none; }
