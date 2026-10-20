@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online ads.txt Validator | Toolity Labs</title>
+  <link rel="canonical" href="https://toolity.in/labs/ads-txt-validator/">
+  <meta name="description" content="Free online ads.txt and app-ads.txt validator: fetch a site’s /ads.txt and /app-ads.txt (or paste them) and check every line against the IAB Tech Lab 1.1 spec — field count, DIRECT / RESELLER, certification authority IDs, OWNERDOMAIN / MANAGERDOMAIN / INVENTORYPARTNERDOMAIN variables, duplicates, BOM and whitespace — confirm your AdSense or GAM publisher ID is present, and cross-check seller IDs against each ad system’s sellers.json. Runs in your browser.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online ads.txt Validator | Toolity Labs">
+  <meta property="og:description" content="Free online ads.txt and app-ads.txt validator: fetch a site’s /ads.txt and /app-ads.txt (or paste them) and check every line against the IAB Tech Lab 1.1 spec — field count, DIRECT / RESELLER, certification authority IDs, OWNERDOMAIN / MANAGERDOMAIN / INVENTORYPARTNERDOMAIN variables, duplicates, BOM and whitespace — confirm your AdSense or GAM publisher ID is present, and cross-check seller IDs against each ad system’s sellers.json. Runs in your browser.">
+  <meta property="og:url" content="https://toolity.in/labs/ads-txt-validator/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=6.5" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=6.5">
+  <link rel="stylesheet" href="/styles/tools/ads-txt-validator.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "ads.txt Validator",
+        "url": "https://toolity.in/labs/ads-txt-validator/",
+        "description": "Free online ads.txt and app-ads.txt validator: fetch a site’s /ads.txt and /app-ads.txt (or paste them) and check every line against the IAB Tech Lab 1.1 spec — field count, DIRECT / RESELLER, certification authority IDs, OWNERDOMAIN / MANAGERDOMAIN / INVENTORYPARTNERDOMAIN variables, duplicates, BOM and whitespace — confirm your AdSense or GAM publisher ID is present, and cross-check seller IDs against each ad system’s sellers.json. Runs in your browser.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Labs", "item": "https://toolity.in/labs/" },
+          { "@type": "ListItem", "position": 3, "name": "ads.txt Validator", "item": "https://toolity.in/labs/ads-txt-validator/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Where must ads.txt live, and why “not found”?", "acceptedAnswer": { "@type": "Answer", "text": "At https://yourdomain.com/ads.txt — the root of the registrable domain, served as text/plain with a 200 status, no redirect to another domain. Common causes of “not found” in AdSense: the file is on www only (or the bare domain only) and the other host does not redirect; a CMS returns an HTML 404 page with status 200; a CDN or firewall blocks Google’s crawler; or the file is cached empty. This tool shows the exact status and content type it received." } },
+          { "@type": "Question", "name": "DIRECT or RESELLER?", "acceptedAnswer": { "@type": "Answer", "text": "DIRECT means you control the account in that ad system (your own AdSense publisher ID). RESELLER means a partner sells your inventory through their account. Each partner tells you which lines to add — paste them verbatim. The same seller ID appearing as both is flagged as a conflict." } },
+          { "@type": "Question", "name": "What is sellers.json and why cross-check it?", "acceptedAnswer": { "@type": "Answer", "text": "Every ad system publishes sellers.json, the mirror image of ads.txt: a list of the seller IDs it pays. Buyers match the two. If your ads.txt names a seller ID that the ad system’s sellers.json does not list, that line is dead — bids are rejected. The cross-check downloads each system’s file in your browser (Google’s alone is tens of megabytes, which is why it is a button) and reports found / not found / confidential." } },
+          { "@type": "Question", "name": "Do I need app-ads.txt?", "acceptedAnswer": { "@type": "Answer", "text": "Only if you monetise a mobile or CTV app: stores link the app to your developer website, and buyers look for app-ads.txt there. For a plain website a missing app-ads.txt is normal and reported as informational." } },
+          { "@type": "Question", "name": "What are OWNERDOMAIN and MANAGERDOMAIN?", "acceptedAnswer": { "@type": "Answer", "text": "Spec 1.1 additions. OWNERDOMAIN names the business that owns the site (one per file); MANAGERDOMAIN names a company that manages monetisation on your behalf, optionally per country (MANAGERDOMAIN=agency.com, FR). They let buyers verify the chain of custody and are required by some programmatic platforms — invalid or repeated values are flagged." } },
+          { "@type": "Question", "name": "Why does fetching sometimes fail — and what is the relay?", "acceptedAnswer": { "@type": "Answer", "text": "Browsers block JavaScript from reading other websites directly (CORS). The tool first tries a direct request; when the site forbids it, the URL only is sent to a public read-only relay (allorigins.win, then codetabs.com) that fetches the page and returns its HTML. The relay sees the URL you typed, nothing else — Toolity has no server and keeps no record. If the relay is busy or the site blocks bots, paste the page source instead: that path is 100% local." } },
+          { "@type": "Question", "name": "Is my input sent anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. Everything is computed by JavaScript in your browser tab. Nothing is uploaded, logged or stored by Toolity." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main id="main">
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/labs/" class="breadcrumb-link">Labs</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">ads.txt Validator</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Labs</span>
+            <h1 class="page-title">ads.txt Validator</h1>
+            <p class="page-desc">Fix “ads.txt not found” and “earnings at risk” for good: validate every line against the IAB spec, confirm your publisher ID is there, and check that each seller ID really exists in the ad system’s sellers.json.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="stacked" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge web-status-badge" id="status-badge">Enter a site URL or paste ads.txt</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result" aria-label="Copy result" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <div class="dropdown-menu-wrapper" id="download-dropdown-wrap">
+                <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download result" aria-label="Download result" aria-haspopup="true" disabled>
+                  <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                  <span>Download</span>
+                  <iconify-icon icon="lucide:chevron-down" class="dropdown-arrow" width="13" height="13"></iconify-icon>
+                </button>
+                <div class="dropdown-popup" role="menu">
+                  <button type="button" class="dropdown-item" data-format="md" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:file-text" width="14" height="14"></iconify-icon>
+                      <span>Report (Markdown)</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="csv" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:file-spreadsheet" width="14" height="14"></iconify-icon>
+                      <span>Records (CSV)</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="json" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:braces" width="14" height="14"></iconify-icon>
+                      <span>Report (JSON)</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="clean" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:file-check" width="14" height="14"></iconify-icon>
+                      <span>Cleaned ads.txt</span>
+                    </div>
+                  </button>
+                </div>
+              </div>
+              <button type="button" class="btn-toolbar-sm" id="btn-open" title="Open result in a new tab" aria-label="Open result in a new tab" disabled>
+                <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
+                <span>Open</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>ads.txt</span>
+                <span class="pane-badge" id="input-badge">—</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content web-form">
+                <div class="web-file-row">
+                  <button type="button" class="btn-toolbar-sm" id="btn-file" title="Open a file from your device" aria-label="Open a file from your device">
+                    <iconify-icon icon="lucide:folder-open" width="14" height="14"></iconify-icon>
+                    <span>Open file</span>
+                  </button>
+                  <input type="file" id="file-input" accept=".txt" hidden>
+                  <span class="web-muted" id="file-name">or drop a file here</span>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="url-input"><span>Site or file URL</span><span class="form-label-desc">fetches /ads.txt and /app-ads.txt</span></label>
+                  <input type="url" id="url-input" class="input-clean" placeholder="https://example.com" spellcheck="false" autocomplete="off" autocapitalize="off" inputmode="url">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="text-input"><span>Or paste ads.txt</span><span class="form-label-desc">Works offline · overrides the URL</span></label>
+                  <textarea id="text-input" class="textarea-clean" rows="6" placeholder="google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0&#10;appnexus.com, 1234, RESELLER&#10;OWNERDOMAIN=example.com&#10;CONTACT=ads@example.com" spellcheck="false" autocapitalize="off" data-file-target></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="ad-pubid"><span>Expect this publisher / seller ID</span><span class="form-label-desc">optional · e.g. pub-1234567890123456 — confirms your own line is present</span></label>
+                  <input type="text" id="ad-pubid" class="input-clean" placeholder="pub-1234567890123456" spellcheck="false" autocomplete="off" autocapitalize="off">
+                </div>
+                <button type="button" id="btn-run" class="btn-toolbar-sm btn-brand-sm btn-primary-action">
+                  <iconify-icon icon="lucide:badge-check" width="16" height="16"></iconify-icon>
+                  <span>Validate</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Validation</span>
+                <span class="pane-badge" id="output-badge">—</span>
+              </div>
+              <div class="pane-content web-output-pane">
+                <div class="pane-empty" id="output-empty">
+                  <iconify-icon icon="lucide:badge-check"></iconify-icon>
+                  <span>Line-by-line results, variables and the sellers.json cross-check appear here</span>
+                </div>
+                <div class="web-output" id="output-content" hidden>
+                  <div class="web-grid-2" id="ad-stats"></div>
+                  <div class="web-tags" id="ad-issues"></div>
+                  <div class="web-tags" id="ad-pub"></div>
+                  <div class="ad-toolbar"><button type="button" class="btn-toolbar-sm" id="btn-sellers"><iconify-icon icon="lucide:search-check" width="14" height="14"></iconify-icon><span>Cross-check with sellers.json</span></button><span class="web-muted" id="ad-sellers-note">Fetches each ad system’s sellers.json (Google’s is tens of MB) — only when you ask.</span></div>
+                  <div class="web-table-wrap"><table class="web-table ad-table" id="ad-table"><thead><tr><th>#</th><th>Ad system</th><th>Seller ID</th><th>Rel.</th><th>Cert. ID</th><th>Issues</th><th class="ad-col-sj" hidden>sellers.json</th></tr></thead><tbody></tbody></table></div>
+                  <div id="ad-vars"></div>
+                  <div id="ad-app"></div>
+                  <details class="td-more"><summary>ads.txt as fetched</summary><pre class="web-code" id="ad-raw"></pre></details>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">Also checks app-ads.txt</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item"><input type="checkbox" id="opt-app" checked><label for="opt-app">Also fetch and validate /app-ads.txt</label></div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Use ads.txt Validator in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Fetch or paste</h3>
+              <p class="step-desc">Enter the site — the tool fetches <code>/ads.txt</code> (and <code>/app-ads.txt</code>) from the root, exactly where buyers look — or paste the file. Optionally type your AdSense / Ad Manager publisher ID so the report confirms the line exists. Press <strong>Validate</strong>.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Fix the flagged lines</h3>
+              <p class="step-desc">Each record is checked against the IAB Tech Lab ads.txt 1.1 spec: three or four comma-separated fields, a bare domain for the ad system, <code>DIRECT</code> or <code>RESELLER</code> in capitals, a plausible certification authority ID (Google’s is always <code>f08c47fec0942fa0</code>), no duplicates or conflicting relationships, no stray BOM, quotes or tabs. Variables (<code>OWNERDOMAIN</code>, <code>MANAGERDOMAIN</code>, <code>CONTACT</code>, <code>SUBDOMAIN</code>, <code>INVENTORYPARTNERDOMAIN</code>) are validated too.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Cross-check sellers</h3>
+              <p class="step-desc">Press <strong>Cross-check with sellers.json</strong> to fetch each ad system’s <code>sellers.json</code> and confirm every seller ID is listed there with the expected type — a line that points to an unknown seller earns nothing. Download the cleaned file (deduplicated, normalised) or the report.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">ads.txt Validator — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Where must ads.txt live, and why “not found”?</summary>
+              <p>At <code>https://yourdomain.com/ads.txt</code> — the root of the registrable domain, served as <code>text/plain</code> with a 200 status, no redirect to another domain. Common causes of “not found” in AdSense: the file is on <code>www</code> only (or the bare domain only) and the other host does not redirect; a CMS returns an HTML 404 page with status 200; a CDN or firewall blocks Google’s crawler; or the file is cached empty. This tool shows the exact status and content type it received.</p>
+            </details>
+            <details class="faq-item">
+              <summary>DIRECT or RESELLER?</summary>
+              <p><code>DIRECT</code> means you control the account in that ad system (your own AdSense publisher ID). <code>RESELLER</code> means a partner sells your inventory through their account. Each partner tells you which lines to add — paste them verbatim. The same seller ID appearing as both is flagged as a conflict.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What is sellers.json and why cross-check it?</summary>
+              <p>Every ad system publishes <code>sellers.json</code>, the mirror image of ads.txt: a list of the seller IDs it pays. Buyers match the two. If your ads.txt names a seller ID that the ad system’s sellers.json does not list, that line is dead — bids are rejected. The cross-check downloads each system’s file in your browser (Google’s alone is tens of megabytes, which is why it is a button) and reports found / not found / confidential.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Do I need app-ads.txt?</summary>
+              <p>Only if you monetise a mobile or CTV app: stores link the app to your developer website, and buyers look for <code>app-ads.txt</code> there. For a plain website a missing app-ads.txt is normal and reported as informational.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What are OWNERDOMAIN and MANAGERDOMAIN?</summary>
+              <p>Spec 1.1 additions. <code>OWNERDOMAIN</code> names the business that owns the site (one per file); <code>MANAGERDOMAIN</code> names a company that manages monetisation on your behalf, optionally per country (<code>MANAGERDOMAIN=agency.com, FR</code>). They let buyers verify the chain of custody and are required by some programmatic platforms — invalid or repeated values are flagged.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why does fetching sometimes fail — and what is the relay?</summary>
+              <p>Browsers block JavaScript from reading other websites directly (CORS). The tool first tries a direct request; when the site forbids it, the <em>URL only</em> is sent to a public read-only relay (allorigins.win, then codetabs.com) that fetches the page and returns its HTML. The relay sees the URL you typed, nothing else — Toolity has no server and keeps no record. If the relay is busy or the site blocks bots, paste the page source instead: that path is 100% local.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is my input sent anywhere?</summary>
+              <p>No. Everything is computed by JavaScript in your browser tab. Nothing is uploaded, logged or stored by Toolity.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="labs"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=5.2"></script>
+  <script src="/scripts/tool-common.js?v=1.2"></script>
+  <script src="/scripts/wellknown-common.js?v=1.0"></script>
+  <script src="/scripts/web-common.js?v=1.2"></script>
+  <script src="/labs/ads-txt-validator/ads-txt-validator.js?v=1.0"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+/* ads.txt Validator — records table, flags, sellers.json column. */
+.ad-toolbar { display: flex; gap: 0.6rem; align-items: center; flex-wrap: wrap; min-width: 0; }
+.ad-table { table-layout: auto; min-width: 100%; }
+.ad-table th { width: auto; white-space: nowrap; }
+.ad-table td { font-size: 0.78rem; white-space: nowrap; }
+.ad-table td.ad-flags { white-space: normal; font-family: var(--font-family); min-width: 14ch; }
+.ad-table td.ad-flags .web-tag { font-style: normal; font-size: 0.68rem; padding: 0.05rem 0.45rem; margin: 0 0.2rem 0.2rem 0; }
+.ad-table tr.is-fail td { background: rgba(220, 38, 38, 0.05); }
+.ad-table tr.is-warn td { background: rgba(202, 138, 4, 0.05); }
+.ad-table td.ad-col-sj { white-space: normal; max-width: 36ch; font-family: var(--font-family); }
+.ad-table td.is-pass { color: #15803d; }
+.ad-table td.is-warn { color: #a16207; }
+.ad-table td.is-fail { color: #b91c1c; font-weight: 600; }
+[data-theme="dark"] .ad-table td.is-pass { color: #4ade80; }
+[data-theme="dark"] .ad-table td.is-warn { color: #facc15; }
+[data-theme="dark"] .ad-table td.is-fail { color: #f87171; }
+.ad-table th[hidden], .ad-table td[hidden] { display: none; }
+#ad-pub:empty, #ad-vars:empty, #ad-app:empty { display: none; }
+#ad-vars .web-group-head, #ad-app .web-group-head { display: flex; justify-content: space-between; align-items: baseline; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 0.5rem; }
+.td-more { border-top: 1px solid var(--border); padding-top: 0.6rem; }
+.td-more summary { cursor: pointer; font-size: 0.86rem; font-weight: 600; color: var(--text-secondary); min-height: 32px; display: flex; align-items: center; }
+.td-more > :not(summary) { margin-top: 0.6rem; }
+.td-more .web-code { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 0.78rem; max-height: 360px; overflow: auto; }

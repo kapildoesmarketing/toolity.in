@@ -133,6 +133,31 @@ const CASES = [
     const s = M.sampled; A(s[O + '/labs/'] && /^200 · canonical https:\\/\\/toolity\\.in\\/labs\\/$/.test(s[O + '/labs/'].text) && s[O + '/definitely-missing-page/'] && s[O + '/definitely-missing-page/'].cls === 'fail' && /404/.test(s[O + '/definitely-missing-page/'].text), 'sample results: ' + JSON.stringify(s));
     A(!$('sm-table').querySelector('.sm-col-status').hidden && $('sm-table').querySelectorAll('td.is-fail').length === 1, 'status column shown');
     $('btn-reset').click(); await tick(200); A(!$('output-empty').hidden && $('sm-table').querySelector('tbody').innerHTML === '' && Object.keys(M.sampled).length === 0 && $('sm-filter').value === '', 'reset');
+  `],
+  ['labs/ads-txt-validator/', `
+    for (let i = 0; i < 80 && !(window.__ad && window.ToolityWellKnown && window.ToolityWebTool); i++) await tick(100);
+    const T = window.ToolityWebTool, V = window.__ad, O = location.origin;
+    const FIX = '\\ufeff# comment\\nOWNERDOMAIN=example.com\\nOWNERDOMAIN=other.com\\nMANAGERDOMAIN=agency.com, fr\\nCONTACT=ads@example.com\\nFOO=bar\\ngoogle.com, pub-1234567890123456, DIRECT, f08c47fec0942fa0\\nGoogle.com, pub-1234567890123456, direct, f08c47fec0942fa0\\ngoogle.com, pub-1234567890123456, RESELLER, deadbeefdeadbeef\\nwww.appnexus.com, 1234, RESELLER\\nhttps://openx.com, 5678, RESELLER\\nrubiconproject.com, 9999\\n"pubmatic.com", 1, DIRECT\\nindexexchange.com, 42, RESELLER, 50b1c356f2c5c8fc, extra, more\\n';
+    const v = V.validate(FIX), msgs = v.issues.map(i => i.lvl + ':' + i.msg).join('|'), by = {}; v.records.forEach(r => { by[r.line] = r; });
+    A(v.records.length === 8 && v.vars.length === 5 && v.comments === 1, 'counts: ' + v.records.length + '/' + v.vars.length + '/' + v.comments);
+    A(/warn:File starts with a UTF-8 BOM/.test(msgs) && /fail:OWNERDOMAIN appears 2 times/.test(msgs) && /warn:Line 4: MANAGERDOMAIN country "fr"/.test(msgs) && /warn:Line 6: unknown variable FOO/.test(msgs), 'vars: ' + msgs);
+    A(by[7].flags.length === 0 && !by[7].bad, 'clean google line: ' + JSON.stringify(by[7].flags));
+    A(by[8].flags.includes('uppercase domain') && by[8].flags.includes('lowercase relationship') && by[8].flags.includes('duplicate') && by[8].domain === 'google.com' && by[8].rel === 'DIRECT' && !by[8].bad, 'normalised + dup: ' + JSON.stringify(by[8].flags));
+    A(by[9].bad && by[9].flags.includes('wrong cert ID') && by[9].flags.includes('DIRECT + RESELLER'), 'wrong cert + conflict: ' + JSON.stringify(by[9].flags));
+    A(by[10].flags.includes('www prefix') && by[11].bad && by[11].flags.includes('domain is a URL') && by[12].bad && by[12].flags.includes('too few fields') && by[13].bad && by[13].flags.includes('quotes') && by[14].flags.includes('extra fields') && !by[14].bad, 'line flags: ' + [10,11,12,13,14].map(n => n + ':' + by[n].flags.join('/')).join(' '));
+    A(v.stats.records === 8 && v.stats.direct === 3 && v.stats.systems === 6, 'stats: ' + JSON.stringify(v.stats));
+    const clean = V.cleaned(v); A(/^OWNERDOMAIN=example.com\\n/.test(clean) && clean.split('\\n').filter(l => /^google.com, pub-1234567890123456, DIRECT, f08c47fec0942fa0$/.test(l)).length === 1 && !/openx/.test(clean) && /FOO/.test(clean) === false, 'cleaned: ' + clean);
+    const html = V.validate('<!doctype html><html><body>404</body></html>'); A(html.issues[0].lvl === 'fail' && /HTML page/.test(html.issues[0].msg) && html.records.length === 0, 'soft-404');
+    // live: this site's own ads.txt (same-origin), publisher ID present, app-ads.txt absent
+    set('url-input', O); set('ad-pubid', 'pub-6148655095183291'); await tick(300); A(/Press Validate/.test($('status-badge').textContent), 'waits: ' + $('status-badge').textContent);
+    $('btn-run').click(); A(await waitFor(() => T.S.out || !$('input-error').hidden, 15000) && T.S.out, 'live run: ' + $('input-error').textContent);
+    A(V.last.ads.records.length >= 1 && V.last.pubHits.length === 1 && /found on line/.test($('ad-pub').textContent) && $('ad-pub').querySelector('.web-tag.pass'), 'pub id found: ' + $('ad-pub').textContent);
+    A(V.last.app && V.last.app.missing && /not present/.test($('ad-app').textContent), 'app-ads.txt missing info: ' + JSON.stringify(V.last.app));
+    A($('ad-table').querySelectorAll('tbody tr').length === V.last.ads.records.length && !$('btn-sellers').disabled && /✓ ads.txt is valid/.test($('status-badge').textContent), 'table + status: ' + $('status-badge').textContent);
+    A(/Publisher ID pub-6148655095183291: \\*\\*present\\*\\*/.test(T.S.out.text), 'markdown');
+    set('ad-pubid', 'pub-0000000000000000'); await tick(500); A(/NOT in this ads.txt/.test($('ad-pub').textContent) && /missing/.test($('status-badge').textContent), 'pub id missing: ' + $('status-badge').textContent);
+    set('text-input', FIX); await tick(500); A($('ad-table').querySelectorAll('tbody tr').length === 8 && /invalid line/.test($('status-badge').textContent) === false || /missing/.test($('status-badge').textContent), 'paste overrides: ' + $('status-badge').textContent);
+    $('btn-reset').click(); await tick(200); A(!$('output-empty').hidden && $('ad-table').querySelector('tbody').innerHTML === '' && $('ad-pubid').value === '', 'reset');
   `]
 ];
 
