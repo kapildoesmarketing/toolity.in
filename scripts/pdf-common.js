@@ -152,7 +152,7 @@
       const rb = $('result-badge'); if (rb) rb.classList.remove('is-win');
       const loaded = S.bytes || S.files.length;
       const r = loaded ? (T.ready ? T.ready(S) : true) : false;
-      if (rb) rb.textContent = !loaded ? (T.multiple ? 'Drop files to begin' : 'Drop a PDF to begin') : r === true ? `${S.pages ? S.pages + ' page' + (S.pages === 1 ? '' : 's') : S.files.length + ' files'} · press ${T.actionLabel}` : String(r);
+      if (rb) rb.textContent = !loaded ? (T.multiple ? 'Drop files to begin' : 'Drop a PDF to begin') : r === true ? `${S.pages ? S.pages + ' page' + (S.pages === 1 ? '' : 's') : S.files.length ? S.files.length + ' files' : 'Damaged file'} · press ${T.actionLabel}` : String(r);
       $('btn-compress').disabled = r !== true;
       if (T.summary && $('settings-summary')) $('settings-summary').textContent = T.summary(S);
     }
@@ -173,7 +173,16 @@
         if (T.onLoad) await T.onLoad(S, api);
         invalidate();
         if (T.source === 'thumbs' && $('page-grid')) await thumbs(r.doc, $('page-grid'), T.thumbOpts ? T.thumbOpts(S, api) : {});
-      } catch (e) { console.warn(e); showError(friendly(e)); $('source-badge').textContent = 'No file loaded'; }
+      } catch (e) {
+        // T.lenient (PDF Repair): a file PDF.js cannot open is still accepted — the tool's job is to fix it.
+        if (T.lenient && !/limit/.test(e.message || '') && !e.needsPassword) {
+          if (S.doc) S.doc.destroy();
+          Object.assign(S, { file, bytes: new Uint8Array(await file.arrayBuffer()), doc: null, pages: 0, damaged: String(e.message || e) });
+          $('dropzone').hidden = true; $('source-badge').textContent = `Damaged · ${formatBytes(file.size)}`;
+          if (T.onLoad) await T.onLoad(S, api); invalidate(); return;
+        }
+        console.warn(e); showError(friendly(e)); $('source-badge').textContent = 'No file loaded';
+      }
     }
     async function loadFiles(files) {
       showError(''); const list = [...files]; if (!list.length) return;
@@ -214,7 +223,7 @@
 
     function reset() {
       if (S.doc) S.doc.destroy(); if (S.outUrl) URL.revokeObjectURL(S.outUrl);
-      Object.assign(S, { file: null, files: [], bytes: null, doc: null, pages: 0, out: null, outText: '', outUrl: '' });
+      Object.assign(S, { file: null, files: [], bytes: null, doc: null, pages: 0, damaged: '', out: null, outText: '', outUrl: '' });
       ['source-canvas', 'output-canvas'].forEach((id) => { const c = $(id); if (c) { c.hidden = true; c.width = c.width; } });
       ['page-grid', 'file-list', 'form-fields'].forEach((id) => { const el = $(id); if (el) { el.replaceChildren(); el.hidden = true; } });
       if ($('dropzone')) $('dropzone').hidden = false;

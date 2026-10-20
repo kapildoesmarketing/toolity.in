@@ -369,5 +369,118 @@ module.exports = [
     faq: [['Is the text still selectable afterwards?', 'No. Pages are re-rendered as grayscale images, so text becomes part of the picture. If you need selectable text in grayscale, your PDF editor\'s print-to-PDF with a grayscale printer profile is the right tool.'], ['Will the file get smaller?', 'Usually, for colour-heavy pages — a grayscale JPEG at 150 dpi is far smaller than embedded colour photos. Text-only PDFs can grow, because vector text is tiny and images are not.'], ['How is the conversion done?', 'Each page is drawn by PDF.js onto a canvas, desaturated with a luminance filter (the same maths printers use) and saved as a JPEG page with pdf-lib.'], ['Can I convert only some pages?', 'Yes — enter a range in Settings; other pages are copied unchanged (and stay in colour).'], PRIVACY_FAQ],
     cardDesc: 'Turn a colour PDF black-and-white for cheaper printing or smaller files.',
     tags: ['grayscale pdf', 'greyscale pdf', 'black and white pdf', 'convert pdf to grayscale', 'desaturate', 'monochrome', 'print friendly']
+  },
+  /* ═══════════ batch 4 ═══════════ */
+  {
+    slug: 'pdf-repair', name: 'PDF Repair', icon: 'lucide:wrench',
+    desc: 'Free online PDF repair: fix PDFs that will not open or print — broken cross-reference tables, truncated downloads, damaged objects — by rebuilding the file structure in your browser, with a rasterise fallback for badly corrupted files. Nothing uploaded.',
+    lead: 'Fix a PDF that won’t open, prints blank or says “file is damaged” — the structure is rebuilt on your device, nothing uploaded.',
+    action: 'Repair', actionIcon: 'lucide:wrench', suffix: 'repaired', ext: 'pdf', lenient: true,
+    source: 'canvas', sourceLabel: 'Damaged PDF', dropTitle: 'Drop the PDF here or click to browse', dropSub: 'Any PDF, even ones that fail to open — up to 100 MB',
+    outputLabel: 'Repaired PDF', outputIcon: 'lucide:file-check', outputEmpty: 'The repaired first page appears here',
+    settingsSummary: 'Auto · keep metadata',
+    settings: `
+              <div class="control-item">
+                <label for="opt-method">Method</label>
+                <select id="opt-method" class="select-clean">
+                  <option value="auto" selected>Auto — rebuild structure, rasterise only if that fails</option>
+                  <option value="rebuild">Rebuild structure (vector, keeps text)</option>
+                  <option value="raster">Rasterise pages (last resort, 150 dpi images)</option>
+                </select>
+              </div>
+              <div class="control-item">
+                <input type="checkbox" id="opt-meta" checked>
+                <label for="opt-meta">Keep title, author and other metadata</label>
+              </div>
+              <div class="control-item">
+                <input type="checkbox" id="opt-strip">
+                <label for="opt-strip">Drop annotations, forms and links (fixes most “broken object” errors)</label>
+              </div>`,
+    guide: [['Drop the broken PDF', 'It is accepted even if the viewer cannot open it. If it does open, the first page shows on the left.'], ['Pick a method', '<strong>Auto</strong> re-parses every object, rebuilds the cross-reference table and rewrites a clean file; if the content streams themselves are damaged it falls back to re-drawing each page as an image. You can force either.'], ['Repair and check', 'Click <strong>Repair</strong>. The badge reports pages recovered, what was dropped and whether the result opens cleanly. Download it and try printing again.']],
+    faq: [PRIVACY_FAQ,
+      ['What kinds of damage can it fix?', 'The common ones: a broken or missing cross-reference table (the “xref” error), a truncated download, wrong object offsets, duplicate or dangling objects, a bad trailer, junk before the header or after %%EOF, and malformed annotations or forms. It rebuilds the index by scanning for objects, like Acrobat’s repair does.'],
+      ['What can it not fix?', 'Encrypted files (unlock them first), and files whose page content streams are themselves destroyed. For those the rasterise fallback re-draws whatever the renderer can still show — text becomes an image, so it is a last resort.'],
+      ['Will the text still be selectable?', 'Yes with <em>Rebuild structure</em> — pages are copied as vector content. Only the rasterise method turns pages into pictures, and the badge tells you when that happened.'],
+      ['Why is the repaired file a different size?', 'The file is rewritten with a fresh object table and compressed object streams; dead objects left behind by earlier edits are not copied, so it is often smaller. Dropping annotations also removes their data.'],
+      ENCRYPTED_FAQ],
+    cardDesc: 'Fix PDFs that won’t open — rebuild the structure, rasterise as a last resort.',
+    tags: ['pdf repair', 'fix pdf', 'repair pdf', 'corrupt pdf', 'damaged pdf', 'pdf won\'t open', 'xref error', 'recover pdf', 'broken pdf', 'file is damaged', 'rebuild pdf']
+  },
+  {
+    slug: 'pdf-booklet-nup', name: 'Booklet & N-up Imposition', icon: 'lucide:book-open',
+    desc: 'Free online PDF booklet maker and N-up imposition: arrange pages for saddle-stitch booklet printing, put 2, 4, 6 or 9 pages per sheet, or split scanned two-page spreads in half — with gutter, margins and crop marks, in your browser, nothing uploaded.',
+    lead: 'Print a booklet, fit several pages on one sheet, or split scanned spreads — imposition done on your device, vector-exact.',
+    action: 'Impose', actionIcon: 'lucide:book-open', suffix: 'imposed', ext: 'pdf',
+    source: 'canvas', sourceLabel: 'PDF', dropTitle: 'Drop PDF here or click to browse', dropSub: 'Any PDF — up to 100 MB',
+    outputLabel: 'Imposed PDF', outputIcon: 'lucide:file-check', outputEmpty: 'The first imposed sheet appears here',
+    settingsSummary: 'Booklet · A4 landscape',
+    settings: `
+              <div class="control-item">
+                <span>Mode</span>
+                <div class="segmented-group segmented-group-pill" id="seg-mode" role="group" aria-label="Mode">
+                  <button type="button" class="seg-pill active" data-value="booklet">Booklet</button>
+                  <button type="button" class="seg-pill" data-value="nup" title="Several pages per sheet">N-up</button>
+                  <button type="button" class="seg-pill" data-value="halve" title="Split each spread into two pages">Halve</button>
+                </div>
+              </div>
+              <div class="control-item" id="row-nup">
+                <label for="opt-nup">Pages per sheet</label>
+                <select id="opt-nup" class="select-clean"><option value="2" selected>2-up</option><option value="4">4-up</option><option value="6">6-up</option><option value="9">9-up</option><option value="16">16-up</option></select>
+              </div>
+              ${PAPER('opt-paper', '<option value="auto" selected>Auto — doubled source page</option>')}
+              <div class="control-item" id="row-order">
+                <span>Fill order</span>
+                <div class="segmented-group segmented-group-pill" id="seg-order" role="group" aria-label="Fill order">
+                  <button type="button" class="seg-pill active" data-value="row" title="Left to right, then down">Rows</button>
+                  <button type="button" class="seg-pill" data-value="col" title="Top to bottom, then across">Columns</button>
+                </div>
+              </div>
+              <div class="control-item" id="row-binding">
+                <span>Binding edge</span>
+                <div class="segmented-group segmented-group-pill" id="seg-bind" role="group" aria-label="Binding edge">
+                  <button type="button" class="seg-pill active" data-value="left" title="Left-to-right languages">Left</button>
+                  <button type="button" class="seg-pill" data-value="right" title="Right-to-left languages and manga">Right (RTL)</button>
+                </div>
+              </div>
+              <div class="control-item" id="row-duplex">
+                <span>Duplex flip</span>
+                <div class="segmented-group segmented-group-pill" id="seg-duplex" role="group" aria-label="Duplex flip">
+                  <button type="button" class="seg-pill active" data-value="short" title="Flip on short edge — most printers">Short edge</button>
+                  <button type="button" class="seg-pill" data-value="long">Long edge</button>
+                </div>
+              </div>
+              <div class="control-item" id="row-halve">
+                <span>Spread order</span>
+                <div class="segmented-group segmented-group-pill" id="seg-halve" role="group" aria-label="Spread order">
+                  <button type="button" class="seg-pill active" data-value="lr" title="Left half becomes the first page">Left first</button>
+                  <button type="button" class="seg-pill" data-value="rl" title="Right half becomes the first page">Right first</button>
+                </div>
+              </div>
+              <div class="control-item">
+                <label for="opt-margin">Sheet margin (mm)</label>
+                <input type="range" id="opt-margin" class="range-slider-clean" min="0" max="30" step="1" value="8" data-unit=" mm"><span class="range-val-badge" id="opt-margin-val">8 mm</span>
+              </div>
+              <div class="control-item">
+                <label for="opt-gutter">Gap between pages (mm)</label>
+                <input type="range" id="opt-gutter" class="range-slider-clean" min="0" max="30" step="1" value="4" data-unit=" mm"><span class="range-val-badge" id="opt-gutter-val">4 mm</span>
+              </div>
+              <div class="control-item">
+                <input type="checkbox" id="opt-marks">
+                <label for="opt-marks">Crop marks</label>
+              </div>
+              <div class="control-item">
+                <input type="checkbox" id="opt-border">
+                <label for="opt-border">Thin border around each page</label>
+              </div>`,
+    guide: [['Drop a PDF', 'The first page previews on the left. Pick <strong>Booklet</strong>, <strong>Pages per sheet</strong> or <strong>Split spreads</strong>.'], ['Set the sheet', 'Choose the sheet size (Auto doubles the source page: A5 pages → A4 sheets), the margin and gap, binding edge and how your printer flips for duplex. Crop marks and page borders are optional.'], ['Impose and print', 'Click <strong>Impose</strong>. Booklets come out in print order — print double-sided, fold in the middle, staple. Page count is padded to a multiple of four with blank pages.']],
+    faq: [PRIVACY_FAQ,
+      ['How does booklet order work?', 'For an 8-page document the sheets are [8,1] [2,7] on sheet one, [6,3] [4,5] on sheet two — fold the stack and the pages read in order. Documents are padded with blank pages to a multiple of four; the blanks land at the end (before the back cover).'],
+      ['Short edge or long edge?', 'Set this to match your printer’s duplex setting. Landscape booklet sheets normally need <em>short edge</em>; if your back sides come out upside down, switch to <em>long edge</em> — the tool rotates the back of every sheet 180°.'],
+      ['Does it change the quality?', 'No. Each page is embedded as vector content and scaled mathematically, so text stays sharp and selectable. Split spreads are exact crops of the original page.'],
+      ['What is “Split spreads in half” for?', 'Scanned books and magazines often come as one landscape page per two-page spread. This cuts every page down the middle into two portrait pages, in reading order — pick right page first for right-to-left books.'],
+      ['Can I do 2-up handouts with page numbers and notes?', 'Use <em>Pages per sheet</em> with 2-up or 4-up and a border; add page numbers afterwards with PDF Page Numberer if you need them on the sheet.'],
+      ENCRYPTED_FAQ],
+    cardDesc: 'Booklet print order, 2/4/6/9-up sheets, or split scanned spreads — with gutter and crop marks.',
+    tags: ['booklet maker', 'pdf booklet', 'imposition', 'n-up', '2 pages per sheet', '4 pages per sheet', 'saddle stitch', 'print booklet', 'split pdf pages in half', 'halve pages', 'two page spread', 'handout', 'zine']
   }
 ];
