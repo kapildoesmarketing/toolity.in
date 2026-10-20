@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Audio to Text | Toolity Media</title>
+  <link rel="canonical" href="https://toolity.in/media/audio-to-text/">
+  <meta name="description" content="Free online audio to text converter: transcribe MP3, WAV, M4A, voice notes, podcasts and video files with OpenAI Whisper running entirely in your browser — 99 languages, timestamps, TXT / SRT / VTT export, nothing uploaded.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Audio to Text | Toolity Media">
+  <meta property="og:description" content="Free online audio to text converter: transcribe MP3, WAV, M4A, voice notes, podcasts and video files with OpenAI Whisper running entirely in your browser — 99 languages, timestamps, TXT / SRT / VTT export, nothing uploaded.">
+  <meta property="og:url" content="https://toolity.in/media/audio-to-text/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=6.3" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=6.3">
+  <link rel="stylesheet" href="/styles/tools/audio-to-text.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Audio to Text",
+        "url": "https://toolity.in/media/audio-to-text/",
+        "description": "Free online audio to text converter: transcribe MP3, WAV, M4A, voice notes, podcasts and video files with OpenAI Whisper running entirely in your browser — 99 languages, timestamps, TXT / SRT / VTT export, nothing uploaded.",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Media", "item": "https://toolity.in/media/" },
+          { "@type": "ListItem", "position": 3, "name": "Audio to Text", "item": "https://toolity.in/media/audio-to-text/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Is my recording uploaded anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. OpenAI’s Whisper model runs inside your browser with Transformers.js (WebGPU or WebAssembly). The audio never leaves your device; only the model file is downloaded — from Hugging Face, once — and cached by the browser." } },
+          { "@type": "Question", "name": "How accurate is it?", "acceptedAnswer": { "@type": "Answer", "text": "Tiny is roughly what a phone’s offline dictation gives you; Base is noticeably better with accents and background noise; Small approaches cloud services on clear recordings. Names, jargon and heavy crosstalk are where all three slip — proof-read before publishing." } },
+          { "@type": "Question", "name": "How long does it take?", "acceptedAnswer": { "@type": "Answer", "text": "Roughly real time to 3× faster than real time with Tiny on a laptop, slower with Small or on phones. A 30-minute podcast with Base takes about 10–20 minutes on a modern laptop with WebGPU. Keep the tab open." } },
+          { "@type": "Question", "name": "Which languages work?", "acceptedAnswer": { "@type": "Answer", "text": "All 99 Whisper languages, including Hindi, Tamil, Telugu, Bengali, Marathi, Gujarati and Urdu. Translate to English gives an English transcript of speech in any of them." } },
+          { "@type": "Question", "name": "Can I get subtitles for a video?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — drop the video file itself, then download as SRT or VTT. Burn them in with the Video Subtitle Burner, or upload the SRT next to the video on YouTube." } },
+          { "@type": "Question", "name": "Why is the first run slow to start?", "acceptedAnswer": { "@type": "Answer", "text": "The model (41–249 MB) is downloaded and compiled the first time. After that it loads from the browser cache in a few seconds. If the download stalls, check an ad-blocker is not blocking huggingface.co." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main id="main">
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/media/" class="breadcrumb-link">Media</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Audio to Text</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Media</span>
+            <h1 class="page-title">Audio to Text</h1>
+            <p class="page-desc">Transcribe speech from any audio or video file with Whisper running on your device — timestamps included, export as TXT, SRT or VTT, nothing leaves your browser.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" data-split="40/60" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge" id="result-badge">Drop audio or video to begin</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result" aria-label="Copy result" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download result" aria-label="Download result" disabled>
+                <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                <span>Download</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Source</span>
+                <span class="pane-badge" id="source-badge">No file loaded</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content pane-content-between">
+                <div class="media-canvas-viewport">
+                  <div id="dropzone" class="video-dropzone" tabindex="0" role="button" aria-label="Drop audio or video here or click to browse">
+                    <input type="file" id="file-input" accept="audio/*, video/*, .mp3, .wav, .m4a, .aac, .ogg, .opus, .flac, .mp4, .webm, .mov">
+                    <div class="video-drop-icon">
+                      <iconify-icon icon="lucide:upload-cloud" width="22" height="22"></iconify-icon>
+                    </div>
+                    <div class="video-drop-title">Drop audio or video here or click to browse</div>
+                    <div class="video-drop-subtitle">MP3, WAV, M4A, OGG, FLAC, MP4, WebM — up to 200 MB</div>
+                  </div>
+                  <div id="source-wrap" class="aud-player" hidden>
+                    <canvas id="source-wave" class="aud-wave" aria-label="Source waveform"></canvas>
+                    <audio id="source-audio" controls preload="metadata"></audio>
+                  </div>
+                </div>
+                <div class="att-model">
+                  <label class="mk-field mk-grow"><span>Model <small>(downloaded once, then cached)</small></span><select id="opt-model" class="select-clean">
+                    <option value="onnx-community/whisper-tiny" data-mb="41" selected>Tiny · 41 MB · fastest, good for clear speech</option>
+                    <option value="onnx-community/whisper-base" data-mb="77">Base · 77 MB · better accuracy, 99 languages</option>
+                    <option value="onnx-community/whisper-small" data-mb="249">Small · 249 MB · best accuracy (desktop)</option></select></label>
+                  <label class="mk-field"><span>Language</span><select id="opt-lang" class="select-clean">
+                    <option value="" selected>Auto-detect</option><option value="english">English</option><option value="hindi">Hindi</option><option value="spanish">Spanish</option><option value="french">French</option><option value="german">German</option><option value="portuguese">Portuguese</option><option value="italian">Italian</option><option value="japanese">Japanese</option><option value="korean">Korean</option><option value="chinese">Chinese</option><option value="arabic">Arabic</option><option value="russian">Russian</option><option value="turkish">Turkish</option><option value="indonesian">Indonesian</option><option value="dutch">Dutch</option><option value="polish">Polish</option><option value="tamil">Tamil</option><option value="telugu">Telugu</option><option value="bengali">Bengali</option><option value="marathi">Marathi</option><option value="gujarati">Gujarati</option><option value="urdu">Urdu</option><option value="vietnamese">Vietnamese</option><option value="thai">Thai</option></select></label>
+                </div>
+                <p class="web-muted att-note" id="att-note"></p>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Transcript</span>
+                <span class="pane-badge" id="output-badge">Awaiting file</span>
+              </div>
+              <div class="pane-content pane-content-between">
+                <div class="media-canvas-viewport">
+                  <div id="output-empty" class="media-empty-placeholder">
+                    <iconify-icon icon="lucide:captions" width="32" height="32"></iconify-icon>
+                    <p>The transcript appears here as it is recognised</p>
+                  </div>
+                  <textarea id="output-text" class="textarea-clean att-out" readonly spellcheck="false" aria-label="Transcript" placeholder=""></textarea>
+                </div>
+                <div>
+                  <button type="button" id="btn-compress" class="btn-toolbar-sm btn-brand-sm btn-primary-action" disabled>
+                    <iconify-icon icon="lucide:captions" width="16" height="16"></iconify-icon>
+                    <span id="btn-compress-label">Transcribe</span>
+                  </button>
+                  <div class="slim-progress-bar" id="progress-bar">
+                    <div class="slim-progress-fill" id="progress-fill"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">Timestamps · TXT</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item">
+                <input type="checkbox" id="opt-ts" checked>
+                <label for="opt-ts">Show timestamps in the transcript</label>
+              </div>
+              <div class="control-item">
+                <label for="opt-fmt">Download as</label>
+                <select id="opt-fmt" class="select-clean">
+                  <option value="txt" selected>Plain text (.txt)</option>
+                  <option value="srt">Subtitles (.srt)</option>
+                  <option value="vtt">Web subtitles (.vtt)</option>
+                  <option value="json">Segments with times (.json)</option>
+                </select>
+              </div>
+              <div class="control-item">
+                <label for="opt-task">Output language</label>
+                <select id="opt-task" class="select-clean">
+                  <option value="transcribe" selected>Same as the speech</option>
+                  <option value="translate">Translate to English</option>
+                </select>
+              </div>
+              <div class="control-item">
+                <input type="checkbox" id="opt-gpu" checked>
+                <label for="opt-gpu">Use the GPU when available (WebGPU)</label>
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Use Audio to Text in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Drop the recording</h3>
+              <p class="step-desc">Any audio or video your browser can play — voice notes, meetings, podcasts, lectures. The speech track is decoded on your device.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Pick a model and language</h3>
+              <p class="step-desc">Tiny is quick and fine for clear speech; Base and Small are more accurate and handle accents and 99 languages. Leave the language on auto-detect unless you know it.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Transcribe and export</h3>
+              <p class="step-desc">Click <strong>Transcribe</strong>. The first run downloads the model once; text streams in as it is recognised. Copy it, or download TXT, SRT, VTT or JSON.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Audio to Text — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Is my recording uploaded anywhere?</summary>
+              <p>No. OpenAI’s Whisper model runs inside your browser with Transformers.js (WebGPU or WebAssembly). The audio never leaves your device; only the model file is downloaded — from Hugging Face, once — and cached by the browser.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How accurate is it?</summary>
+              <p>Tiny is roughly what a phone’s offline dictation gives you; Base is noticeably better with accents and background noise; Small approaches cloud services on clear recordings. Names, jargon and heavy crosstalk are where all three slip — proof-read before publishing.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How long does it take?</summary>
+              <p>Roughly real time to 3× faster than real time with Tiny on a laptop, slower with Small or on phones. A 30-minute podcast with Base takes about 10–20 minutes on a modern laptop with WebGPU. Keep the tab open.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Which languages work?</summary>
+              <p>All 99 Whisper languages, including Hindi, Tamil, Telugu, Bengali, Marathi, Gujarati and Urdu. <em>Translate to English</em> gives an English transcript of speech in any of them.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can I get subtitles for a video?</summary>
+              <p>Yes — drop the video file itself, then download as SRT or VTT. Burn them in with the Video Subtitle Burner, or upload the SRT next to the video on YouTube.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why is the first run slow to start?</summary>
+              <p>The model (41–249 MB) is downloaded and compiled the first time. After that it loads from the browser cache in a few seconds. If the download stalls, check an ad-blocker is not blocking huggingface.co.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="media"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=4.8"></script>
+  <script src="/scripts/tool-common.js?v=1.2"></script>
+  <script src="/scripts/audio-common.js?v=1.1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lamejs@1.2.1/lame.all.js" defer></script>
+  <script src="/media/audio-to-text/audio-to-text.js?v=1.0"></script>
+</body>
+</html>

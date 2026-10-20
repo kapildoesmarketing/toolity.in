@@ -213,5 +213,39 @@ module.exports = [
       ['How do I make a Reel or Short?', 'Pick <em>Vertical 1080 × 1920</em>. The cover sits in the upper third and the title underneath, which is the layout Reels and Shorts crop for.'],
       ['Is there a length limit?', 'Ten minutes. Longer audio would mean a very large file and a very long real-time render — split it with the Audio Splitter first.'],
       ['Can I use my own font or logo?', 'Text uses the system UI font so it renders identically everywhere. For a logo, bake it into the background image or the cover art.']]
+  },
+
+  /* ═══════════ 6. AUDIO TO TEXT ═══════════ */
+  {
+    slug: 'audio-to-text', name: 'Audio to Text', icon: 'lucide:captions', section: 'Audio Tools', runtime: 'audio', css: true, idle: 'Drop audio or video to begin',
+    desc: 'Free online audio to text converter: transcribe MP3, WAV, M4A, voice notes, podcasts and video files with OpenAI Whisper running entirely in your browser — 99 languages, timestamps, TXT / SRT / VTT export, nothing uploaded.',
+    lead: 'Transcribe speech from any audio or video file with Whisper running on your device — timestamps included, export as TXT, SRT or VTT, nothing leaves your browser.',
+    cardDesc: 'Whisper speech-to-text on your device — 99 languages, SRT/VTT export.',
+    tags: ['audio to text', 'speech to text', 'transcribe audio', 'mp3 to text', 'voice to text', 'whisper', 'transcription', 'subtitles', 'srt generator', 'vtt', 'video to text', 'podcast transcript', 'voice note to text', 'dictation'],
+    action: 'Transcribe', actionIcon: 'lucide:captions',
+    source: { drop: { accept: 'audio/*, video/*, .mp3, .wav, .m4a, .aac, .ogg, .opus, .flac, .mp4, .webm, .mov', title: 'Drop audio or video here or click to browse', sub: 'MP3, WAV, M4A, OGG, FLAC, MP4, WebM — up to 200 MB' }, html: AUDIO_SRC, after: `
+                <div class="att-model">
+                  <label class="mk-field mk-grow"><span>Model <small>(downloaded once, then cached)</small></span><select id="opt-model" class="select-clean">
+                    <option value="onnx-community/whisper-tiny" data-mb="41" selected>Tiny · 41 MB · fastest, good for clear speech</option>
+                    <option value="onnx-community/whisper-base" data-mb="77">Base · 77 MB · better accuracy, 99 languages</option>
+                    <option value="onnx-community/whisper-small" data-mb="249">Small · 249 MB · best accuracy (desktop)</option></select></label>
+                  <label class="mk-field"><span>Language</span><select id="opt-lang" class="select-clean">
+                    <option value="" selected>Auto-detect</option><option value="english">English</option><option value="hindi">Hindi</option><option value="spanish">Spanish</option><option value="french">French</option><option value="german">German</option><option value="portuguese">Portuguese</option><option value="italian">Italian</option><option value="japanese">Japanese</option><option value="korean">Korean</option><option value="chinese">Chinese</option><option value="arabic">Arabic</option><option value="russian">Russian</option><option value="turkish">Turkish</option><option value="indonesian">Indonesian</option><option value="dutch">Dutch</option><option value="polish">Polish</option><option value="tamil">Tamil</option><option value="telugu">Telugu</option><option value="bengali">Bengali</option><option value="marathi">Marathi</option><option value="gujarati">Gujarati</option><option value="urdu">Urdu</option><option value="vietnamese">Vietnamese</option><option value="thai">Thai</option></select></label>
+                </div>
+                <p class="web-muted att-note" id="att-note"></p>` },
+    output: { label: 'Transcript', icon: 'lucide:captions', empty: 'The transcript appears here as it is recognised', html: `
+                  <textarea id="output-text" class="textarea-clean att-out" readonly spellcheck="false" aria-label="Transcript" placeholder=""></textarea>` },
+    settingsSummary: 'Timestamps · TXT',
+    settings: check('opt-ts', 'Show timestamps in the transcript', true)
+      + select('opt-fmt', 'Download as', [['txt', 'Plain text (.txt)', 1], ['srt', 'Subtitles (.srt)'], ['vtt', 'Web subtitles (.vtt)'], ['json', 'Segments with times (.json)']])
+      + select('opt-task', 'Output language', [['transcribe', 'Same as the speech', 1], ['translate', 'Translate to English']])
+      + check('opt-gpu', 'Use the GPU when available (WebGPU)', true),
+    guide: [['Drop the recording', 'Any audio or video your browser can play — voice notes, meetings, podcasts, lectures. The speech track is decoded on your device.'], ['Pick a model and language', 'Tiny is quick and fine for clear speech; Base and Small are more accurate and handle accents and 99 languages. Leave the language on auto-detect unless you know it.'], ['Transcribe and export', 'Click <strong>Transcribe</strong>. The first run downloads the model once; text streams in as it is recognised. Copy it, or download TXT, SRT, VTT or JSON.']],
+    faq: [['Is my recording uploaded anywhere?', 'No. OpenAI’s Whisper model runs inside your browser with Transformers.js (WebGPU or WebAssembly). The audio never leaves your device; only the model file is downloaded — from Hugging Face, once — and cached by the browser.'],
+      ['How accurate is it?', 'Tiny is roughly what a phone’s offline dictation gives you; Base is noticeably better with accents and background noise; Small approaches cloud services on clear recordings. Names, jargon and heavy crosstalk are where all three slip — proof-read before publishing.'],
+      ['How long does it take?', 'Roughly real time to 3× faster than real time with Tiny on a laptop, slower with Small or on phones. A 30-minute podcast with Base takes about 10–20 minutes on a modern laptop with WebGPU. Keep the tab open.'],
+      ['Which languages work?', 'All 99 Whisper languages, including Hindi, Tamil, Telugu, Bengali, Marathi, Gujarati and Urdu. <em>Translate to English</em> gives an English transcript of speech in any of them.'],
+      ['Can I get subtitles for a video?', 'Yes — drop the video file itself, then download as SRT or VTT. Burn them in with the Video Subtitle Burner, or upload the SRT next to the video on YouTube.'],
+      ['Why is the first run slow to start?', 'The model (41–249 MB) is downloaded and compiled the first time. After that it loads from the browser cache in a few seconds. If the download stalls, check an ad-blocker is not blocking huggingface.co.']]
   }
 ];

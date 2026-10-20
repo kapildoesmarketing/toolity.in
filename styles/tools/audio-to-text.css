@@ -1,0 +1,6 @@
+/* Audio to Text — one-offs. Field styles come from main.css (.mk-field). */
+.att-model { display: flex; flex-wrap: wrap; gap: 0.5rem 0.75rem; margin-top: 0.6rem; align-items: flex-end; }
+.att-note { margin: 0.4rem 0 0; font-size: 0.78rem; }
+.att-out { width: 100%; height: 100%; min-height: 260px; resize: vertical; font-size: 0.92rem; line-height: 1.55; padding: 0.85rem 1rem; display: none; }
+.att-out.is-shown { display: block; }
+.media-canvas-viewport:has(.att-out.is-shown) { height: auto; min-height: 280px; align-items: stretch; }

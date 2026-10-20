@@ -15,6 +15,8 @@ try {
   // green-screen fixture: solid green with a red square in the middle (for the chroma-key path)
   if (!fs.existsSync('scratch/green.mp4')) execSync(`ffmpeg -loglevel error -y -f lavfi -i "color=c=0x00ff00:size=320x240:rate=25,drawbox=x=110:y=70:w=100:h=100:color=red:t=fill" -t 2 -c:v libx264 -pix_fmt yuv420p scratch/green.mp4`);
 } catch (e) { console.log('ffmpeg fixture skipped:', e.message.split('\n')[0]); }
+// speech fixture for Audio to Text (public-domain JFK clip used by the Transformers.js docs)
+if (!fs.existsSync('scratch/jfk.wav')) { try { execSync('curl -sL -o scratch/jfk.wav https://huggingface.co/datasets/Xenova/transformers.js-docs/resolve/main/jfk.wav'); } catch (e) { console.log('jfk fixture skipped'); } }
 
 const HELPERS = `
   const tick = (ms = 200) => new Promise(r => setTimeout(r, ms));
@@ -148,6 +150,28 @@ const CASES = [
     const m = await videoMeta(T.S.out); A(m && m.w === 1280 && m.h === 720, 'video 1280×720: ' + JSON.stringify(m)); A(m && m.dur > 1.6 && m.dur < 3.5, 'duration ≈ 2 s: ' + (m && m.dur));
     A($('output-video').classList.contains('is-shown') && !$('viz').classList.contains('is-shown'), 'video shown');
     $('btn-reset').click(); await tick(); A(!T.S.out && !$('viz').classList.contains('is-shown') && $('av-title').value === '', 'reset');`],
+  ['media/audio-to-text/', `
+    const T = window.__att.T, F = window.__att.fmt;
+    A(/41 MB/.test($('att-note').textContent), 'size note: ' + $('att-note').textContent);
+    // format helpers on synthetic segments (no model needed)
+    window.__att.segs.list = [{ start: 0, end: 1.5, text: ' Hello there.' }, { start: 1.5, end: 3.25, text: ' Second line' }]; window.__att.segs.text = ' Hello there. Second line';
+    A(F.srt().startsWith('1\\n00:00:00,000 --> 00:00:01,500\\nHello there.') && /2\\n00:00:01,500 --> 00:00:03,250/.test(F.srt()), 'srt: ' + JSON.stringify(F.srt().slice(0, 60)));
+    A(F.vtt().startsWith('WEBVTT\\n\\n00:00:00.000 --> 00:00:01.500'), 'vtt header'); A(JSON.parse(F.json()).segments[1].end === 3.25, 'json'); set('opt-ts', false); A(F.txt() === 'Hello there. Second line', 'plain txt'); set('opt-ts', true); A(/^\\[0:00\\] Hello there\\./.test(F.txt()), 'timestamped txt: ' + F.txt().slice(0, 30));
+    window.__att.segs.list = []; window.__att.segs.text = '';
+    // decode a 65-minute buffer? too big — test the 60-min validation with a short buffer by stubbing duration is not possible; load a 2 s tone and check UI wiring
+    await loadAudio(T, buffer(2, t => 0.3 * Math.sin(2 * Math.PI * 300 * t))); A(!$('btn-compress').disabled, 'primary enabled');
+    if (${process.env.SKIP_MODEL ? 'true' : 'false'}) { f.push('SKIPPED model run (SKIP_MODEL=1)'); } else {
+      // real run with whisper-tiny on WASM against the JFK sample (public domain) — asserts actual recognition
+      $('btn-reset').click(); await tick(300);
+      feed(new File([await (await fetch('/scratch/jfk.wav')).arrayBuffer()], 'jfk.wav', { type: 'audio/wav' })); A(await waitFor(() => T.S.buf && T.S.buf.duration > 5), 'jfk decoded');
+      set('opt-gpu', false); set('opt-lang', 'english'); await go(T, 300000);
+      A($('input-error').hidden, 'no error: ' + $('input-error').textContent); A($('output-text').classList.contains('is-shown'), 'transcript area shown');
+      const txt = window.__att.segs.text.toLowerCase(); A(/country/.test(txt) && /ask/.test(txt), 'recognised JFK: ' + JSON.stringify(txt.slice(0, 120)));
+      A(window.__att.segs.list.length >= 1 && window.__att.segs.list[0].end > 0, 'segments with timestamps: ' + JSON.stringify(window.__att.segs.list[0]));
+      A(/words/.test($('output-badge').textContent) && T.S.out && T.S.out.type === 'text/plain', 'badge + blob: ' + $('output-badge').textContent);
+      set('opt-fmt', 'srt'); A(/-->/.test(F.srt()), 'srt from real segments');
+    }
+    $('btn-reset').click(); await tick(); A($('output-text').value === '' && !T.S.out, 'reset');`],
 ];
 
 (async () => {
