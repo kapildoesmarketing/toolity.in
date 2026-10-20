@@ -6,7 +6,7 @@
 const fs = require('fs'), path = require('path');
 const GAMES = require('./cfg_game_tools.js');
 const only = process.argv[2];
-const MAIN_V = '5.1', CSS_V = '6.5';
+const MAIN_V = '5.2', CSS_V = '6.5';
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const jsonStr = (s) => JSON.stringify(String(s).replace(/<[^>]+>/g, ''));
 

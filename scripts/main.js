@@ -1648,6 +1648,78 @@
         tags: ['excel to google sheets formula', 'google sheets to excel formula', 'formula converter', 'libreoffice formula', 'semicolon to comma formula', 'a1 to r1c1', 'arrayformula excel', 'textjoin vs join', 'spreadsheet function equivalents', 'formula compatibility']
       },
       {
+        id: 'button-grid',
+        title: 'Button Grid Widget',
+        category: 'Widgets',
+        url: 'widgets/button-grid/',
+        icon: 'lucide:layout-grid',
+        tags: ['button widget', 'notion buttons', 'link buttons', 'dashboard buttons', 'notion dashboard widget', 'quick links widget', 'start page', 'icon buttons', 'embed', 'notion']
+      },
+      {
+        id: 'calculator',
+        title: 'Mini Calculator Widget',
+        category: 'Widgets',
+        url: 'widgets/calculator/',
+        icon: 'lucide:calculator',
+        tags: ['calculator widget', 'notion calculator', 'embed calculator', 'tip calculator widget', 'bill splitter', 'mini calculator', 'dashboard calculator', 'notion widget', 'embed']
+      },
+      {
+        id: 'world-clocks',
+        title: 'World Clocks Widget',
+        category: 'Widgets',
+        url: 'widgets/world-clocks/',
+        icon: 'lucide:globe',
+        tags: ['world clock widget', 'notion world clock', 'time zone widget', 'team time zones', 'remote team clock', 'multiple clocks', 'working hours overlap', 'embed clock', 'notion widget', 'time zones']
+      },
+      {
+        id: 'weather',
+        title: 'Weather Widget',
+        category: 'Widgets',
+        url: 'widgets/weather/',
+        icon: 'lucide:cloud-sun',
+        tags: ['weather widget', 'notion weather widget', 'embed weather', 'weather forecast widget', 'free weather widget', 'open-meteo', 'weather for website', 'dashboard weather', 'notion widget', 'no api key']
+      },
+      {
+        id: 'nonogram',
+        title: 'Nonogram',
+        category: 'Games',
+        url: 'games/nonogram/',
+        icon: 'lucide:grid-2x2-check',
+        tags: ['nonogram', 'picross', 'griddler', 'hanjie', 'picture logic puzzle', 'nonogram online', 'nonogram generator', 'image to nonogram', 'logic puzzle', 'paint by numbers']
+      },
+      {
+        id: 'number-formats-converter',
+        title: 'Number Formats Converter',
+        category: 'Data',
+        url: 'data/number-formats-converter/',
+        icon: 'lucide:hash',
+        tags: ['number to words', 'number to words indian rupees', 'amount in words', 'lakh crore converter', 'indian number system converter', 'words to number', 'roman numerals converter', 'number to hindi words', 'scientific notation converter', 'ordinal number converter', 'cheque amount in words']
+      },
+      {
+        id: 'tag-detector',
+        title: 'Tag Detector',
+        category: 'Labs',
+        url: 'labs/tag-detector/',
+        icon: 'lucide:radar',
+        tags: ['tag detector', 'tracking tag scanner', 'what tags are on a website', 'gtm detector', 'ga4 detector', 'meta pixel checker', 'facebook pixel detector', 'tag audit', 'tracking pixel finder', 'google tag manager container scanner', 'website tracker checker']
+      },
+      {
+        id: 'consent-mode-checker',
+        title: 'Consent Mode Checker',
+        category: 'Labs',
+        url: 'labs/consent-mode-checker/',
+        icon: 'lucide:shield-check',
+        tags: ['consent mode checker', 'google consent mode v2', 'consent mode v2 checker', 'ad_user_data ad_personalization', 'gtag consent default', 'consent mode audit', 'cmp detector', 'cookie banner checker', 'gdpr google ads', 'consent mode test']
+      },
+      {
+        id: 'ambient-focus-room',
+        title: 'Ambient Focus Room',
+        category: 'Labs',
+        url: 'labs/ambient-focus-room/',
+        icon: 'lucide:coffee',
+        tags: ['focus room', 'study with me', 'ambient sounds for focus', 'rain sounds', 'brown noise', 'pomodoro with sounds', 'deep work timer', 'virtual study room', 'white noise generator', 'focus music alternative', 'fullscreen timer']
+      },
+      {
         id: 'cat-widgets',
         title: 'Widgets',
         category: 'Category',
