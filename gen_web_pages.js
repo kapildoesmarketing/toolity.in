@@ -307,7 +307,7 @@ ${faqHtml}
   <script src="/scripts/main.js?v=${MAIN_V}"></script>
   <script src="/scripts/tool-common.js?v=1.2"></script>
 ${libs}  <script src="/scripts/web-common.js?v=1.2"></script>
-  <script src="/${CAT}/${t.slug}/${t.slug}.js?v=1.0"></script>
+  <script src="/${CAT}/${t.slug}/${t.slug}.js?v=${t.jsV || '1.0'}"></script>
 </body>
 </html>
 `;

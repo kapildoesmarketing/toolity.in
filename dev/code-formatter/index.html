@@ -81,6 +81,7 @@
           { "@type": "Question", "name": "Is minified JavaScript safe to use?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — Terser only applies transformations that keep behaviour identical. Turn off “Shorten variable names” if other scripts call your functions by name, and leave console calls in while debugging." } },
           { "@type": "Question", "name": "What does HTML minify remove?", "acceptedAnswer": { "@type": "Answer", "text": "Comments and the whitespace between block-level tags (div, p, li, table…). Spaces between inline elements are kept so text doesn’t run together, and the contents of &lt;pre&gt;, &lt;textarea&gt;, &lt;script&gt; and &lt;style&gt; are left exactly as they are." } },
           { "@type": "Question", "name": "Why can’t I minify TypeScript, SCSS or Markdown?", "acceptedAnswer": { "@type": "Answer", "text": "They are source formats that get compiled first — minify the compiled JavaScript or CSS instead. Beautify works for all of them." } },
+          { "@type": "Question", "name": "Which SQL dialects are supported?", "acceptedAnswer": { "@type": "Answer", "text": "Standard SQL plus MySQL, MariaDB, PostgreSQL, SQLite, DuckDB, BigQuery, SQL Server (T-SQL), Oracle PL/SQL, Snowflake, Redshift, Spark, Hive, Trino/Presto, Db2, SingleStore, TiDB and Couchbase N1QL. Pick the dialect in Settings so vendor-specific keywords and quoting are understood, choose UPPERCASE, lowercase or as-typed keywords, and use Minify to collapse a query to one line." } },
           { "@type": "Question", "name": "Why do I see “Loading formatter…”?", "acceptedAnswer": { "@type": "Answer", "text": "Each formatter downloads once, the first time you use that language (Prettier’s TypeScript support is the biggest at about 1 MB). After that it is cached by your browser and formatting is instant." } },
           { "@type": "Question", "name": "Is my code uploaded anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. Formatting and minifying run in JavaScript inside your browser tab. The formatter libraries are downloaded once from a CDN; your code never leaves the page." } }
         ]
@@ -227,9 +228,12 @@
               <div class="control-item"><input type="checkbox" id="opt-semi" checked><label for="opt-semi">Semicolons (JS / TS)</label></div>
               <div class="control-item">
                 <label for="opt-dialect">SQL dialect</label>
-                <select id="opt-dialect" class="select-clean"><option value="sql" selected>Standard SQL</option><option value="mysql">MySQL / MariaDB</option><option value="postgresql">PostgreSQL</option><option value="sqlite">SQLite</option><option value="bigquery">BigQuery</option><option value="tsql">SQL Server (T-SQL)</option><option value="plsql">Oracle PL/SQL</option><option value="snowflake">Snowflake</option></select>
+                <select id="opt-dialect" class="select-clean"><option value="sql" selected>Standard SQL</option><option value="mysql">MySQL</option><option value="mariadb">MariaDB</option><option value="postgresql">PostgreSQL</option><option value="sqlite">SQLite</option><option value="duckdb">DuckDB</option><option value="bigquery">BigQuery</option><option value="tsql">SQL Server (T-SQL)</option><option value="plsql">Oracle PL/SQL</option><option value="snowflake">Snowflake</option><option value="redshift">Amazon Redshift</option><option value="spark">Spark SQL</option><option value="hive">Hive</option><option value="trino">Trino / Presto</option><option value="db2">IBM Db2</option><option value="singlestoredb">SingleStore</option><option value="tidb">TiDB</option><option value="n1ql">Couchbase N1QL</option></select>
               </div>
-              <div class="control-item"><input type="checkbox" id="opt-upper" checked><label for="opt-upper">Uppercase SQL keywords</label></div>
+              <div class="control-item">
+                <label for="opt-keycase">SQL keyword case</label>
+                <select id="opt-keycase" class="select-clean"><option value="upper" selected>UPPERCASE</option><option value="lower">lowercase</option><option value="preserve">Keep as typed</option></select>
+              </div>
               <div class="control-item"><input type="checkbox" id="opt-mangle" checked><label for="opt-mangle">Shorten variable names when minifying JS</label></div>
               <div class="control-item"><input type="checkbox" id="opt-console"><label for="opt-console">Remove console.* calls when minifying JS</label></div>
             </div>
@@ -287,6 +291,10 @@
               <p>They are source formats that get compiled first — minify the compiled JavaScript or CSS instead. Beautify works for all of them.</p>
             </details>
             <details class="faq-item">
+              <summary>Which SQL dialects are supported?</summary>
+              <p>Standard SQL plus MySQL, MariaDB, PostgreSQL, SQLite, DuckDB, BigQuery, SQL Server (T-SQL), Oracle PL/SQL, Snowflake, Redshift, Spark, Hive, Trino/Presto, Db2, SingleStore, TiDB and Couchbase N1QL. Pick the dialect in Settings so vendor-specific keywords and quoting are understood, choose UPPERCASE, lowercase or as-typed keywords, and use Minify to collapse a query to one line.</p>
+            </details>
+            <details class="faq-item">
               <summary>Why do I see “Loading formatter…”?</summary>
               <p>Each formatter downloads once, the first time you use that language (Prettier’s TypeScript support is the biggest at about 1 MB). After that it is cached by your browser and formatting is instant.</p>
             </details>
@@ -309,6 +317,6 @@
   <script src="/scripts/main.js?v=4.9"></script>
   <script src="/scripts/tool-common.js?v=1.2"></script>
   <script src="/scripts/web-common.js?v=1.2"></script>
-  <script src="/dev/code-formatter/code-formatter.js?v=1.0"></script>
+  <script src="/dev/code-formatter/code-formatter.js?v=1.1"></script>
 </body>
 </html>

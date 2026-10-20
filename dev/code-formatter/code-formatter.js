@@ -104,7 +104,7 @@
       }
       if (lang === 'json') { try { return { lang, out: JSON.stringify(JSON.parse(j.code), null, ind) + '\n' }; } catch (e) { const p = /position (\d+)/.exec(e.message); throw new Error(`JSON error${p ? ' at ' + lineCol(j.code, +p[1]) : ''}: ${e.message.replace(/ in JSON at position \d+.*$/, '')}`); } }
       if (lang === 'xml') return { lang, out: beautifyXml(j.code, ind) };
-      if (lang === 'sql') { const m = await esm(CDN + 'sql-formatter@15.9.0/+esm', 'sql-formatter'); return { lang, out: m.format(j.code, { language: j.dialect, tabWidth: j.indent === 'tab' ? 2 : +j.indent, useTabs: j.indent === 'tab', keywordCase: j.upper ? 'upper' : 'preserve' }) + '\n' }; }
+      if (lang === 'sql') { const m = await esm(CDN + 'sql-formatter@15.9.0/+esm', 'sql-formatter'); return { lang, out: m.format(j.code, { language: j.dialect, tabWidth: j.indent === 'tab' ? 2 : +j.indent, useTabs: j.indent === 'tab', keywordCase: j.keycase || 'upper', dataTypeCase: j.keycase || 'upper', functionCase: j.keycase || 'upper', expressionWidth: +j.width }) + '\n' }; }
       const [prettier, ...plugins] = await Promise.all([esm(PRETTIER + 'standalone.mjs', 'Prettier'), ...PLUGINS[lang].map((p) => esm(`${PRETTIER}plugins/${p}.mjs`, 'Prettier'))]);
       const out = await prettier.format(j.code, { parser: PARSER[lang], plugins: plugins.map((m) => m.default || m), tabWidth: j.indent === 'tab' ? 2 : +j.indent, useTabs: j.indent === 'tab', printWidth: +j.width, singleQuote: j.single, semi: j.semi });
       return { lang, out };
@@ -112,7 +112,7 @@
   }
 
   const bytes = (s) => new TextEncoder().encode(s).length;
-  const job = (val, pill) => ({ code: val('text-input'), lang: val('opt-lang'), mode: pill('seg-mode') || 'beautify', indent: val('opt-indent'), width: val('opt-width'), single: val('opt-single'), semi: val('opt-semi'), dialect: val('opt-dialect'), upper: val('opt-upper'), mangle: val('opt-mangle'), dropConsole: val('opt-console') });
+  const job = (val, pill) => ({ code: val('text-input'), lang: val('opt-lang'), mode: pill('seg-mode') || 'beautify', indent: val('opt-indent'), width: val('opt-width'), single: val('opt-single'), semi: val('opt-semi'), dialect: val('opt-dialect'), keycase: val('opt-keycase'), mangle: val('opt-mangle'), dropConsole: val('opt-console') });
   let cache = { key: null }, pending = null;
 
   mount({

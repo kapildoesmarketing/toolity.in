@@ -43,6 +43,14 @@ const PDF_HELPERS = `
 `;
 
 const CASES = [
+  ['dev/code-formatter/', `
+    const out = () => $('output-text').textContent;
+    set('opt-lang', 'sql'); set('opt-dialect', 'postgresql'); set('text-input', "select a.id, count(*) as n from users a join orders o on o.uid=a.id where a.created_at > now() - interval '7 days' group by a.id having count(*) > 2 order by n desc");
+    A(await waitFor(() => /SELECT\\n/.test(out()), 30000), 'sql beautified upper: ' + out().slice(0, 80)); A(/\\nFROM\\n/.test(out()) && /\\n  JOIN /.test(out()), 'clauses on own lines');
+    set('opt-keycase', 'lower'); A(await waitFor(() => /^select\\n/.test(out()), 10000), 'lowercase keywords: ' + out().slice(0, 40)); A(/count\\(\\*\\)/.test(out()), 'function lowercase');
+    set('opt-dialect', 'duckdb'); set('opt-keycase', 'upper'); A(await waitFor(() => /^SELECT\\n/.test(out()), 10000), 'duckdb dialect formats');
+    document.querySelector('#seg-mode [data-value=minify]').click(); A(await waitFor(() => !/\\n/.test(out().trim()) && out().length > 50, 10000), 'minified to one line: ' + out().slice(0, 60));
+    A(/−\\d+%/.test($('output-badge').textContent), 'size badge: ' + $('output-badge').textContent);`],
   ['docs/pdf-repair/', PDF_HELPERS + `
     const good = await (await sixPages()).save({ useObjectStreams: false });
     // corrupt: drop the xref table + trailer (the classic "file didn't finish downloading" damage) and sprinkle junk before the header
