@@ -151,5 +151,25 @@
     return rows.filter((r) => r.length > 1 || r[0] !== '');
   }
 
-  window.Toolity = { copyText, copyBlob, downloadBlob, formatBytes, formatTime, bindDropzone, setBusy, bindSegmented, bindDropdown, bindShortcuts, toast, sniffDelim, parseCsv };
+  /**
+   * Designed by Kapil Pidhwani (a11y audit F10): one way to flag a field error so AT hears it.
+   * setFieldError(input, 'Message') marks the field invalid and points it at a helper <p>; setFieldError(input, '') clears.
+   * The helper element is created next to the input the first time and reused after.
+   */
+  function setFieldError(input, msg) {
+    if (!input) return;
+    let help = input.nextElementSibling;
+    if (!help || !help.classList.contains('field-error')) {
+      help = document.createElement('p');
+      help.className = 'field-error';
+      help.id = (input.id || 'field') + '-error';
+      input.after(help);
+    }
+    help.textContent = msg || '';
+    help.hidden = !msg;
+    input.setAttribute('aria-invalid', msg ? 'true' : 'false');
+    if (msg) input.setAttribute('aria-describedby', help.id); else input.removeAttribute('aria-describedby');
+  }
+
+  window.Toolity = { setFieldError, copyText, copyBlob, downloadBlob, formatBytes, formatTime, bindDropzone, setBusy, bindSegmented, bindDropdown, bindShortcuts, toast, sniffDelim, parseCsv };
 })();

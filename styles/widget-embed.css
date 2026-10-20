@@ -275,3 +275,6 @@ html, body {
 .w-laps:empty { display: none; }
 .w-cs { font-variant-numeric: tabular-nums; }
 .w-timer[data-phase="break"] .w-sub, .w-timer[data-phase="long"] .w-sub { color: var(--accent); font-weight: 600; }
+
+/* a11y audit F9: embeds have no visible chrome; give AT a heading */
+.visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }

@@ -183,7 +183,7 @@ ${faqLd}
 <body>
   <div data-include="/components/header.html"></div>
 
-  <main>
+  <main id="main">
     <!-- ═══════════ 1. HERO ═══════════ -->
     <section class="page-hero">
       <div class="container">
@@ -406,7 +406,7 @@ ${w.faq.map(([q, a]) => `            <details class="faq-item">
   <div data-include="/components/footer.html"></div>
 
   <script src="/scripts/main.js?v=${MAIN_V}"></script>
-  <script src="/scripts/tool-common.js?v=1.1"></script>
+  <script src="/scripts/tool-common.js?v=1.2"></script>
   <script src="/scripts/widget-common.js?v=${WC_V}"></script>
   <script src="/scripts/widgets/${w.slug}.js?v=1.0"></script>
 </body>
@@ -429,7 +429,8 @@ const embed = (w) => `<!DOCTYPE html>
 </head>
 
 <body>
-  <main class="w-stage" id="widget-root" role="region" aria-label="${esc(w.short)}"></main>
+  <header class="visually-hidden"><h1>${esc(w.short)}</h1></header>
+  <main class="w-stage" id="widget-root" aria-label="${esc(w.short)}"></main>
   <script src="/scripts/widget-common.js?v=${WC_V}"></script>
   <script src="/scripts/widgets/${w.slug}.js?v=1.0"></script>
 </body>

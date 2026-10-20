@@ -13,7 +13,7 @@
 .cb-chips { gap: 0.3rem; }
 .cb-chip { min-width: 2.1rem; height: 2rem; padding: 0 0.45rem; border: 1px solid var(--border); border-radius: var(--radius-pill); background: var(--bg); color: var(--text-secondary); font: inherit; font-size: 0.76rem; cursor: pointer; transition: background 0.12s ease, color 0.12s ease, border-color 0.12s ease; }
 .cb-chip:hover { border-color: var(--brand); }
-.cb-chip[aria-pressed="true"] { background: var(--brand); border-color: var(--brand); color: #fff; font-weight: 600; }
+.cb-chip[aria-pressed="true"] { background: var(--brand-ink); border-color: var(--brand-ink); color: var(--text-inverse); font-weight: 600; }
 .cb-headline { display: flex; flex-direction: column; gap: 0.4rem; padding: 0.9rem 1rem; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); }
 .cb-headline strong { font-size: 1.15rem; line-height: 1.35; color: var(--text-primary); overflow-wrap: anywhere; }
 .cb-headline code { font-family: var(--font-mono); font-size: 0.86rem; color: var(--text-secondary); }

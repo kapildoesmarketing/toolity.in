@@ -42,11 +42,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="preload" href="/styles/main.css?v=6.2" as="style">
+  <link rel="preload" href="/styles/main.css?v=6.3" as="style">
   <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
   <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 
-  <link rel="stylesheet" href="/styles/main.css?v=6.2">
+  <link rel="stylesheet" href="/styles/main.css?v=6.3">
   <link rel="stylesheet" href="/styles/tools/2048.css?v=1.0">
 
   <!-- Structured data: VideoGame + BreadcrumbList + FAQPage -->
@@ -94,7 +94,7 @@
 <body>
   <div data-include="/components/header.html"></div>
 
-  <main>
+  <main id="main">
     <!-- ═══════════ 1. HERO ═══════════ -->
     <section class="page-hero">
       <div class="container">
@@ -157,7 +157,7 @@
               </div>
               <div class="pane-content g2048-stage-wrap">
                 <div class="g2048-stage" id="stage">
-                  <div class="g2048-board" id="board" role="grid" aria-label="2048 board" tabindex="0"></div>
+                  <div class="g2048-board" id="board" role="application" aria-label="2048 board. Use arrow keys or W A S D to move tiles; score is announced above." tabindex="0"></div>
                   <div class="g2048-overlay" id="overlay" hidden>
                     <strong id="overlay-title">Game over</strong>
                     <span id="overlay-text">Space or New game to try again</span>
@@ -277,8 +277,8 @@
 
   <div data-include="/components/footer.html"></div>
 
-  <script src="/scripts/main.js?v=4.7"></script>
-  <script src="/scripts/tool-common.js?v=1.1"></script>
+  <script src="/scripts/main.js?v=4.8"></script>
+  <script src="/scripts/tool-common.js?v=1.2"></script>
   <script src="/games/2048/2048.js?v=1.0"></script>
 </body>
 </html>

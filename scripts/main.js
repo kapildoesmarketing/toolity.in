@@ -1891,6 +1891,8 @@
   function initHeroWaves() {
     const canvas = document.getElementById('hero-waves-canvas');
     if (!canvas) return;
+    // Designed by Kapil Pidhwani: the hero waves deliberately ignore prefers-reduced-motion (product call, 20 Oct 2026) —
+    // it is slow ambient canvas motion with no parallax/flash. Everything else on the site still honours the setting.
 
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
@@ -1900,6 +1902,8 @@
     let dpr = 1;
     let animId = null;
     let isVisible = true;
+    let refW = 900;
+    let ampK = 1;
 
     // Harmonic wave parameters matching Breathe mode in inspiration
     // [yc, a (base amplitude), fm (frequency), sp (speed), hue, sat, darkLit, darkOp, lightHue, lightSat, lightLit, lightOp]
@@ -1935,6 +1939,12 @@
       canvas.width = Math.round(W * dpr);
       canvas.height = Math.round(H * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      // Designed by Kapil Pidhwani: wavelength is anchored to a 900px reference instead of the viewport, so a phone shows
+      // a slice of the same calm wave rather than the whole wave squeezed 3x. Amplitude eases down with sqrt(W/900) so the
+      // slope (amp / wavelength) stays roughly equal to desktop. Ceiling: phones narrower than ~320px get slightly flatter waves.
+      refW = Math.max(W, 900);
+      ampK = Math.min(1, Math.sqrt(W / 900));
     }
 
     window.addEventListener('resize', resize, { passive: true });
@@ -1980,12 +1990,12 @@
 
       // 3. Layered Wave Ribbon Fills (Balanced Polyline Baseline Closure)
       waveLayers.forEach(([yc, a, fm, sp, hue, sat, darkLit, darkOp, lHue, lSat, lLit, lOp], i) => {
-        const amp = a * (0.62 + 0.38 * bs);
+        const amp = a * ampK * (0.62 + 0.38 * bs);
         const yB = H * yc;
 
         ctx.beginPath();
         for (let x = 0; x <= W; x += 3) {
-          const nx = x / W;
+          const nx = x / refW;
           const ph = time * sp;
           const y =
             yB +
@@ -2012,12 +2022,12 @@
       // 4. Synth Crest Accent Lines
       synthLines.forEach(([yc, a, fm, sp, op, w], li) => {
         const yB = H * yc;
-        const amp = H * a * (0.52 + 0.48 * bs);
+        const amp = H * a * ampK * (0.52 + 0.48 * bs);
         const ph = time * sp;
 
         ctx.beginPath();
         for (let x = 0; x <= W; x += 3) {
-          const nx = x / W;
+          const nx = x / refW;
           const y =
             yB +
             Math.sin(nx * Math.PI * 2 * fm + ph * 6 + li * 0.6) * amp +
@@ -2164,20 +2174,29 @@
 
     const menuIcon = document.getElementById('mobile-menu-icon');
 
+    // a11y F7: native `inert` keeps Tab inside the drawer (no trap code); focus moves in on open and back out on close
+    const inertTargets = () => document.querySelectorAll('main, footer, .site-header');
+
     function openMenu() {
       drawer.classList.add('open');
       backdrop.classList.add('open');
       toggleBtn.setAttribute('aria-expanded', 'true');
       if (menuIcon) menuIcon.setAttribute('icon', 'lucide:x');
       document.body.style.overflow = 'hidden';
+      inertTargets().forEach((el) => { if (!el.contains(toggleBtn)) el.inert = true; });
+      const first = drawer.querySelector('input, a, button');
+      if (first) first.focus();
     }
 
     function closeMenu() {
+      const wasOpen = drawer.classList.contains('open');
       drawer.classList.remove('open');
       backdrop.classList.remove('open');
       toggleBtn.setAttribute('aria-expanded', 'false');
       if (menuIcon) menuIcon.setAttribute('icon', 'lucide:search');
       document.body.style.overflow = '';
+      inertTargets().forEach((el) => { el.inert = false; });
+      if (wasOpen && drawer.contains(document.activeElement)) toggleBtn.focus();
     }
 
     function toggleMenu() {

@@ -10,7 +10,7 @@
   /* Typography (Charcoal System) */
   --text-primary: #17191C;
   --text-secondary: #62666B;
-  --text-muted: #92969B;
+  --text-muted: #6B7075;      /* was #92969B (2.97:1) — 5.0:1 on white, 4.66:1 on surface (a11y audit F1) */
   --text-inverse: #FFFFFF;
 
   /* Borders & Hairlines */
@@ -19,7 +19,10 @@
 
   /* Brand / Signal (Orange Highlighter ~2%) */
   --brand: #F4511E;
-  --brand-hover: #D84315;
+  --brand-hover: #C63D0F;
+  --brand-ink: #C63D0F;       /* brand used AS TEXT on light surfaces: 5.15:1 white, 4.8:1 surface, 4.67:1 soft. Fills/borders/icons keep --brand */
+  --success-ink: #047857;     /* status text: 5.0:1 on white (was #10B981 = 2.4:1) */
+  --danger-ink: #B91C1C;      /* status text: 5.9:1 on white (was #EF4444 = 3.8:1) */
   --brand-soft: #FFF1EB;
   --brand-cream: #FFF4E8;
   --brand-peach: #FFD1B8;
@@ -62,7 +65,7 @@
   /* Typography (Charcoal / Off-White System) */
   --text-primary: #F5F5F2;
   --text-secondary: #A5A7AA;
-  --text-muted: #73767A;
+  --text-muted: #808387;      /* was #73767A (4.0:1 on surface) — 5.1:1 bg, 4.8:1 surface, 4.5:1 elevated (a11y audit F1) */
   --text-inverse: #0D0D0D;
 
   /* Borders & Hairlines */
@@ -72,6 +75,9 @@
   /* Brand / Signal (Elevated Contrast) */
   --brand: #FF6A2A;
   --brand-hover: #FF7A3D;
+  --brand-ink: #FF6A2A;       /* dark: --brand already 5.59:1 on bg */
+  --success-ink: #34D399;
+  --danger-ink: #F87171;
   --brand-soft: #32170F;
   --brand-cream: #2A1D16;
   --brand-peach: #4A281E;
@@ -300,7 +306,7 @@ body {
 
 .nav-link.active,
 .nav-link.active:visited {
-  color: var(--brand);
+  color: var(--brand-ink);
   font-weight: 600;
   background: transparent;
   border: none;
@@ -907,7 +913,7 @@ body {
 
 /* Inline links in prose (Privacy, Terms, Credits…) */
 .prose-card a:not(.btn-pill) {
-  color: var(--brand);
+  color: var(--brand-ink);
   text-decoration: none;
   font-weight: 500;
 }
@@ -1073,7 +1079,7 @@ body {
 /* ⌘K hint — fades out as soon as the user is in the field */
 .nav-search .minimal-search-actions::after {
   content: '⌘K';
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   font-weight: 500;
   line-height: 1;
   padding: 0.2rem 0.4rem;
@@ -1318,7 +1324,7 @@ body {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--brand);
+  color: var(--brand-ink);
   margin-bottom: 0.5rem;
 }
 
@@ -1584,7 +1590,7 @@ body {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--brand);
+  color: var(--brand-ink);
   margin-bottom: 0.75rem;
 }
 
@@ -2108,14 +2114,14 @@ body {
 }
 
 .btn-toolbar-sm.btn-brand-sm {
-  background: var(--brand);
-  color: #FFFFFF;
-  border-color: var(--brand);
+  background: var(--brand-ink);
+  color: var(--text-inverse);
+  border-color: var(--brand-ink);
 }
 
 .btn-toolbar-sm.btn-brand-sm:hover {
-  background: var(--brand-hover);
-  border-color: var(--brand-hover);
+  background: color-mix(in srgb, var(--brand-ink) 88%, #000);
+  border-color: color-mix(in srgb, var(--brand-ink) 88%, #000);
 }
 
 /* Floating Dropdown Action Menu (Top-Right Universal Pattern) */
@@ -3164,12 +3170,12 @@ body {
 }
 
 .quality-tag-badge {
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   font-weight: 700;
   padding: 1px 5px;
   border-radius: var(--radius-xs);
-  background: var(--brand);
-  color: #ffffff;
+  background: var(--brand-ink);
+  color: var(--text-inverse);
   font-family: var(--font-mono);
 }
 
@@ -3361,7 +3367,7 @@ body {
     color: var(--text-secondary);
     text-decoration: none;
     font-family: inherit;
-    font-size: 0.65rem;
+    font-size: 0.75rem;
     font-weight: 500;
     border-radius: var(--radius-pill);
     cursor: pointer;
@@ -3827,7 +3833,7 @@ body {
 .shortcuts-table th { background: var(--surface-elevated); font-weight: 600; color: var(--text-secondary); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; }
 .shortcuts-table tr:last-child td { border-bottom: none; }
 .kbd-chip { display: inline-block; padding: 0.15rem 0.45rem; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 0.75rem; font-weight: 600; color: var(--text-primary); background: var(--surface-elevated); border: 1px solid var(--border); border-radius: 4px; box-shadow: 0 1px 0 var(--border); }
-.icon-success { color: #10B981; }
+.icon-success { color: var(--success-ink); }
 .icon-brand { color: var(--brand); }
 
 /* ==========================================================================
@@ -3875,7 +3881,7 @@ body {
 }
 
 .step-item.is-current { color: var(--text-primary); font-weight: 600; }
-.step-item.is-current .step-dot { background: var(--brand); border-color: var(--brand); color: #fff; }
+.step-item.is-current .step-dot { background: var(--brand-ink); border-color: var(--brand-ink); color: var(--text-inverse); }
 .step-item.is-done .step-dot { background: var(--text-primary); border-color: var(--text-primary); color: var(--background); }
 
 /* Colour swatch radio grid */
@@ -3957,7 +3963,7 @@ body {
   border-radius: var(--radius-pill);
   background: rgba(0, 0, 0, 0.55);
   color: #fff;
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -4075,7 +4081,7 @@ body {
 .vdt-grid[hidden] { display: none; }
 .vdt-thumb { position: relative; margin: 0; border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; background: #000; cursor: pointer; aspect-ratio: 16 / 9; }
 .vdt-thumb img { width: 100%; height: 100%; object-fit: contain; display: block; }
-.vdt-thumb figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 0.1rem 0.3rem; font-size: 0.66rem; font-family: var(--font-mono); color: #fff; background: rgba(0, 0, 0, 0.55); }
+.vdt-thumb figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 0.1rem 0.3rem; font-size: 0.75rem; font-family: var(--font-mono); color: #fff; background: rgba(0, 0, 0, 0.55); }
 
 /* ==========================================================================
    CROP OVERLAY (shared by GIF, Video and Image Cropper) — viewport px projected from source px by JS
@@ -4354,18 +4360,37 @@ html::-webkit-scrollbar-corner, body *::-webkit-scrollbar-corner { background: t
 .tools-index-filter:focus-visible { outline: 2px solid var(--brand); outline-offset: 1px; }
 .tools-index-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
 .tools-index-chip { padding: 0.35rem 0.85rem; border: 1px solid var(--border); border-radius: var(--radius-pill); background: var(--surface); color: var(--text-secondary); font: inherit; font-size: 0.82rem; cursor: pointer; }
-.tools-index-chip[aria-pressed="true"] { border-color: var(--brand); color: var(--brand); background: color-mix(in srgb, var(--brand) 10%, var(--surface)); }
+.tools-index-chip[aria-pressed="true"] { border-color: var(--brand); color: var(--brand-ink); background: color-mix(in srgb, var(--brand) 6%, var(--background)); }
 .tools-index-chip:focus-visible { outline: 2px solid var(--brand); outline-offset: 1px; }
 .tools-index-count { font-size: 0.82rem; color: var(--text-muted); margin: 0; }
 .tools-index-group + .tools-index-group { margin-top: 1.75rem; }
-.tools-index-letter { font-size: 1rem; font-weight: 600; color: var(--brand); border-bottom: 1px solid var(--border); padding-bottom: 0.4rem; margin: 0 0 0.6rem; }
+.tools-index-letter { font-size: 1rem; font-weight: 600; color: var(--brand-ink); border-bottom: 1px solid var(--border); padding-bottom: 0.4rem; margin: 0 0 0.6rem; }
 .tools-index-list { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 0.5rem; }
 /* Designed by Kapil Pidhwani: Option A pill rows — border + icon box make each entry read as one clickable unit;
    category sits next to the title (not margin-left:auto) so it can't be mistaken for a separate column. */
 .prose-card .tools-index-list a { display: flex; align-items: center; gap: 0.6rem; min-width: 0; padding: 0.45rem 0.75rem 0.45rem 0.5rem; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--surface); color: var(--text-primary); font-weight: 500; font-size: 0.9rem; line-height: 1.3; transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease; }
 .prose-card .tools-index-list a:hover,
-.prose-card .tools-index-list a:focus-visible { border-color: var(--brand); color: var(--brand); transform: translateY(-1px); text-decoration: none; }
-.tools-index-list a iconify-icon { flex-shrink: 0; width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; border-radius: var(--radius-sm); color: var(--brand); background: color-mix(in srgb, var(--brand) 12%, transparent); }
-.tools-index-cat { flex-shrink: 0; margin-left: 0.1rem; padding: 0.1rem 0.5rem; border-radius: var(--radius-pill); background: var(--surface-elevated); font-size: 0.68rem; font-weight: 500; color: var(--text-muted); }
+.prose-card .tools-index-list a:focus-visible { border-color: var(--brand-ink); color: var(--brand-ink); transform: translateY(-1px); text-decoration: none; }
+.tools-index-list a iconify-icon { flex-shrink: 0; width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; border-radius: var(--radius-sm); color: var(--brand-ink); background: color-mix(in srgb, var(--brand) 12%, transparent); }
+.tools-index-cat { flex-shrink: 0; margin-left: 0.1rem; padding: 0.1rem 0.5rem; border-radius: var(--radius-pill); background: var(--surface-elevated); font-size: 0.75rem; font-weight: 500; color: var(--text-muted); }
 .is-filtered-by-cat .tools-index-cat { display: none; }
 .prose-card.prose-card-wide { max-width: none; }
+
+/* ==========================================================================
+   Accessibility baseline (audit 20 Oct 2026: F3 skip link, F5 reduced motion, F6 focus)
+   ========================================================================== */
+/* Designed by Kapil Pidhwani: visually hidden until focused; first tabbable element on every page */
+.skip-link { position: absolute; left: 1rem; top: -100px; z-index: 10000; padding: 0.6rem 1rem; border-radius: var(--radius-sm); background: var(--brand-ink); color: #fff; font-weight: 600; text-decoration: none; box-shadow: var(--shadow-md); transition: top 0.15s ease; }
+.skip-link:focus { top: 0.75rem; outline: 2px solid #fff; outline-offset: 2px; }
+main[id="main"] { scroll-margin-top: var(--header-height); }
+
+/* One ring for everything keyboard-focusable; component rules above may still refine it */
+:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+
+/* Ceiling: kills ALL motion, including progress bars' smoothing. Upgrade path: per-component opt-in with --motion-ok. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+/* Field-level error text wired by Toolity.setFieldError (F10) */
+.field-error { margin: 0.35rem 0 0; font-size: 0.8rem; color: var(--brand-ink); }
+.field-error[hidden] { display: none; }

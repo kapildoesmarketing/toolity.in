@@ -180,7 +180,7 @@ ${faqLd}
 <body>
   <div data-include="/components/header.html"></div>
 
-  <main>
+  <main id="main">
     <!-- ═══════════ 1. HERO ═══════════ -->
     <section class="page-hero">
       <div class="container">
@@ -305,7 +305,7 @@ ${faqHtml}
   <div data-include="/components/footer.html"></div>
 
   <script src="/scripts/main.js?v=${MAIN_V}"></script>
-  <script src="/scripts/tool-common.js?v=1.1"></script>
+  <script src="/scripts/tool-common.js?v=1.2"></script>
 ${libs}  <script src="/scripts/web-common.js?v=1.2"></script>
   <script src="/${CAT}/${t.slug}/${t.slug}.js?v=1.0"></script>
 </body>

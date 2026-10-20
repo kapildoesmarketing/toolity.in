@@ -553,7 +553,7 @@ function generateQR() {
     qrRenderTarget.appendChild(previewCanvas);
 
     qrMatrixInfo.textContent = `Version ${qr.typeNumber} (${qr.getModuleCount()}x${qr.getModuleCount()}) • Ready to Scan`;
-    qrMatrixInfo.style.color = '#10B981';
+    qrMatrixInfo.style.color = 'var(--success-ink)';
 
   } catch (err) {
     console.error(err);
@@ -563,7 +563,7 @@ function generateQR() {
         Content is too large for the selected error correction level.
       </div>`;
     qrMatrixInfo.textContent = 'Payload Overflow';
-    qrMatrixInfo.style.color = '#EF4444';
+    qrMatrixInfo.style.color = 'var(--danger-ink)';
   }
 }
 
