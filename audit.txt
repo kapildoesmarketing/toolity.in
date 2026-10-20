@@ -1,207 +1,153 @@
-Toolity.in — Accessibility Audit
-================================
-Date: 20 Oct 2026 · Audited at commit f51626c · Fixes applied same day (see "Re-audit" at the end)
-Target: WCAG 2.2 Level AA (as promised on /accessibility/)
+Toolity.in — SEO Audit
+======================
+Date: 20 Oct 2026 · Commit: f8974d0 · Host: GitHub Pages (static, no server headers/redirect control)
+Scope: all 188 pages on disk (183 indexable + 4 noindexed widget embeds + 404), static HTML as a crawler fetches it,
+plus rendered DOM via headless Chrome where JS matters. External guidance referenced: Google Search Central
+(JavaScript SEO, sitemaps, SoftwareApplication structured data), Open Graph / platform card requirements,
+web.dev Core Web Vitals. Numbers below come from scripts, not estimates.
 
 Method
 ------
-1. Automated: axe-core 4.10.2 (wcag2a/aa, wcag21a/aa, wcag22aa, best-practice) run in headless Chrome
-   at 1280×900, light theme, on 15 representative pages:
-   / · /tools/ · /media/ · /media/image-compressor/ · /docs/images-to-pdf/ · /labs/qr-code-generator/ ·
-   /dev/code-formatter/ · /data/csv-viewer-editor/ · /games/2048/ · /widgets/countdown/ ·
-   /widgets/countdown/embed/ · /blog/ · /404.html · /accessibility/ · /contact/
-2. Static sweep of all 193 HTML files + main.css + main.js (lang, landmarks, headings, alt, labels,
-   tabindex, iframe titles, focus styles, reduced motion, ARIA patterns).
-3. Contrast maths on the design tokens for both themes.
-4. Manual code review of the shared pieces every page inherits: header, footer, search, mobile drawer,
-   toast, dropzones, tool-page template.
-Not covered: screen-reader walkthroughs, 142 tool pages not in the sample, the 4 widget embeds beyond
-countdown, dark theme under axe (token maths done instead), zoom/reflow at 400%.
+1. Static sweep (python, every index.html): title, description, canonical, robots meta, H1, JSON-LD types + parse,
+   og/twitter tags, word count inside <main>, <a href> count, image attributes, sitemap membership.
+2. Rendered vs static comparison (headless Chrome, --dump-dom) on / and a tool page.
+3. Payload inspection: main.css / main.js raw + gzip, third-party scripts, fonts, icon runtime.
+4. Manual review of robots.txt, sitemap.xml, llms.txt, deploy workflow, hub pages, blog, home.
 
 
 Scorecard
 ---------
-  Area                              Status      Notes
-  ────────────────────────────────  ──────────  ─────────────────────────────────────────────────────
-  Document language                 PASS        193/193 pages have <html lang="en">
-  Images alt text                   PASS        0 <img> without alt
-  iframe titles                     PASS        0 untitled iframes
-  Positive tabindex / autofocus     PASS        none
-  target=_blank without rel         PASS        none
-  Main landmark                     PASS        190/190 full pages (3 misses are partials)
-  Heading h1                        PASS*       all full pages; widget embeds have none (acceptable)
-  Icon-only buttons named           PASS        header/footer/template: all have aria-label
-  Dropzones keyboard-operable       PASS        tabindex=0 + role=button + Enter/Space in tool-common.js (81 uses)
-  Mobile drawer                     PASS        aria-expanded, Esc closes, backdrop click closes
-  Games keyboard                    PASS        arrows/WASD handled in game JS; focus ring on cells
-  Touch targets                     PASS        --touch: 44px applied under (pointer: coarse)
-  Colour contrast (light theme)     FAIL        373 axe nodes across 15 pages — ONE root cause, see F1
-  Colour contrast (dark theme)      PASS        all tokens ≥ 4.0:1 (muted 4.26, brand 5.59)
-  Status messages (toast)           FAIL        no role=status / aria-live — see F2
-  Bypass blocks (skip link)         FAIL        present on 1/193 pages — see F3
-  Heading order (footer)            FAIL        h4 after h2 on every page — see F4
-  Reduced motion                    PARTIAL     3 blocks in main.css; 0/125 tool CSS files; hero canvas ignores it — F5
-  Focus visibility                  PARTIAL     explicit :focus-visible on ~10 components; rest rely on UA default — F6
-  Drawer focus management           PARTIAL     focus not moved into drawer, not trapped, not returned — F7
-  2048 ARIA grid                    FAIL        role=grid without row children — F8
-  Countdown embed                   MINOR       role=region on <main>, no h1, no <main> landmark — F9
-  Form error semantics              GAP         0 uses of aria-invalid / aria-describedby site-wide — F10
+  Area                                  Status    Evidence
+  ────────────────────────────────────  ────────  ───────────────────────────────────────────────────────────────
+  Titles unique, ≤60ch, keyword-first   PASS      0 missing · 0 duplicates · 0 over 60ch · 168/188 start "Free Online …"
+  Meta descriptions unique              PASS      0 duplicates · present on every indexable page
+  Meta description length               WARN      147/184 are over 160 chars (166–282) — Google truncates ~155–160
+  Canonicals                            PASS      every page self-canonical (embeds → parent widget, correct)
+  H1                                    PASS      exactly one on every page, 0 pages where H1 == title (good, not duplicated)
+  robots.txt / sitemap                  PASS      183 URLs = 183 indexable pages, 0 orphans either way, Disallow /templates/
+  Sitemap lastmod                       WARN      only 3 distinct dates for 183 URLs (bulk-stamped) — see F6
+  Structured data validity              PASS      0 JSON-LD parse errors; WebApplication 154, VideoGame 6, FAQPage 161, BreadcrumbList 160
+  Structured data coverage              WARN      24 pages have no JSON-LD (all 7 hubs, legal pages, /tools/); home has no WebSite/SearchAction
+  Internal linking (static HTML)        FAIL      median 2 <a href> per page; home 1, tool page 2 → rendered 47 / 50 — see F1
+  Open Graph image                      FAIL      og:image is a 1.2 KB SVG on 171 pages — not rendered by FB/LinkedIn/WhatsApp/X — F2
+  Twitter card                          WARN      summary_large_image on 160, summary on 11, missing on 17
+  Core Web Vitals risk                  WARN      129 KB CSS + 96 KB JS (25 KB each gz) + GTM + iconify CDN + Google Fonts on every page — F4
+  Images                                PASS      66 <img>, 60 with width/height, all have alt; webp logo preloaded
+  Thin / placeholder pages              WARN      /blog/ is a placeholder ("Post title", 88 words) yet indexed and in sitemap — F7
+  /tools/ A–Z page                      WARN      36 words, 2 links in HTML; 160 tool links exist only after JS — F1b
+  AI / agent discoverability            PASS+     llms.txt (206 lines), WebMCP registration, security.txt — ahead of most sites
+  Legacy / noise                        INFO      <meta name="keywords"> on 28 pages (ignored by Google; harmless, delete)
+  Mobile                                PASS      viewport meta everywhere, responsive-check.js in repo
 
 
 Findings (ordered by impact × reach)
 ------------------------------------
 
-F1  [serious · every page]  --text-muted and --brand fail 4.5:1 on light backgrounds    WCAG 1.4.3
-    --text-muted #92969B on #FFFFFF = 2.97:1, on --surface #F7F7F5 = 2.77:1
-    --brand      #F4511E on #FFFFFF = 3.48:1, on --surface          = 3.24:1
-    White text on --brand (primary buttons) = 3.48:1
-    Where it bites (axe counts in the 15-page sample):
-      .tools-index-cat 160× (new today) · .section-eyebrow 5×/page · .pane-badge · .brand-tld ".in" ·
-      .footer-copy + .footer-legal links · .form-helper / .form-label-desc · .video-drop-subtitle ·
-      table .th · .tools-index-chip (active) · .nav-link (active) · .btn-primary-signal · .editorial-brand-badge
-    Most of these are ALSO small text (10.9–13 px) so the 3:1 large-text exemption never applies.
-    Fix (tokens, not components — one change fixes ~90%):
-      light --text-muted  #92969B → #6B7075  (4.9:1 on white, 4.6:1 on surface)
-      light --text-secondary is fine (5.78:1) — leave.
-      --brand as TEXT on light: use a darker ink variant, e.g. --brand-ink #C63D0F (4.9:1 on white) for
-        eyebrows, chips, active nav link, badges, links; keep #F4511E for fills, borders, icons, focus rings.
-      White-on-brand buttons: either --brand-ink fill for text buttons, or bump button text to ≥ 18.66px bold
-        (large-text rule, 3:1 is then enough). The darker fill is the smaller change.
-    Dark theme needs nothing.
-    Verify: re-run axe on /tools/ and /media/image-compressor/ — color-contrast should drop to ~0.
+F1  [high · every page]  Site navigation and footer exist only after JavaScript runs
+    header.html / footer.html are fetched by main.js (data-include) and injected client-side. In the HTML a crawler
+    downloads, a tool page has 2 internal links and the home page has 1 (the logo). After rendering: 50 and 47.
+    Why it matters:
+      - Googlebot does render JS, but rendering is a separate, deferred queue; link discovery and PageRank flow from
+        the raw HTML happen first. 183 pages whose only static links are breadcrumbs = a very shallow link graph.
+      - Bing, DuckDuckGo, and essentially all AI crawlers (GPTBot, ClaudeBot, PerplexityBot, Applebot-Extended) do
+        NOT execute JS. To them the footer "Popular tools" block and the nav don't exist, and /tools/ is empty.
+      - The hub pages (/media/ 68 links, /labs/ 32…) are static and carry the site today. Everything else leans on them.
+    Fix (keeps the single-source-of-truth you have now): inline the partials at build time.
+      The deploy workflow already runs on push; add one step before upload that replaces
+      <div data-include="/components/header.html"></div> with the file contents (sed/python, ~15 lines), same for
+      footer and tool-cta. main.js's include loader stays as a no-op fallback for local dev. Zero runtime change,
+      ~2 KB more HTML per page, +45 crawlable links per page.
+      Alternative if you'd rather not touch the workflow: a wire step that bakes them into the 190 files (rule 54).
 
-F2  [serious · every page]  Toast is not announced                                         WCAG 4.1.3
-    components/footer.html: <div id="tool-toast" class="tool-toast"> has no role / aria-live.
-    "Copied", "Downloaded", "Error: …" never reach screen-reader users.
-    Fix: add role="status" aria-live="polite" (and aria-atomic="true") to #tool-toast. 1 line, 1 file.
+F1b [high · /tools/]  The A–Z index renders from the JS registry
+    Already noted in the code comment ("ceiling"). It is the one page that links to all 160 tools and it ships with
+    2 links + a <noscript> pointing at sitemap.xml. Bake the list at build time from REGISTRY (same step as F1,
+    node -e script, ~20 lines); keep the JS filter on top of the baked list.
 
-F3  [moderate · 192 pages]  No skip link                                                    WCAG 2.4.1
-    Only /labs/pomodoro-timer/ has one. Keyboard users tab through logo + 8 nav links + search + theme on
-    every page before reaching the tool. Landmarks exist, so AT users can bypass; sighted keyboard users can't.
-    Fix: in components/header.html add as first child
-      <a href="#main" class="skip-link">Skip to content</a>
-    give <main> id="main" in templates/tool-page.html + blog-post.html (then re-gen pages, or sed the 190
-    existing <main> tags), and a .skip-link style that is visually hidden until :focus. ~8 lines total.
+F2  [high · every share]  og:image is an SVG
+    /assets/og-image.svg (1.2 KB, 1200×630) on 171 pages. Facebook, LinkedIn, WhatsApp, X, Slack, iMessage do not
+    render SVG previews — shares show no image. twitter:card=summary_large_image then falls back to a blank card.
+    Fix: export a 1200×630 PNG (or JPG < 300 KB) once, swap the 171 references, add og:image:width/height and
+    og:image:alt. Better: per-tool PNGs are overkill for 160 tools — one brand card + the tool name is fine;
+    if you want per-tool cards later, the existing OG Image Generator tool can batch them.
 
-F4  [moderate · every page]  Footer heading order h2 → h4                                   WCAG 1.3.1 (best-practice)
-    components/footer.html uses <h4 class="footer-heading"> under pages whose last heading is h2.
-    Fix: change the 3–4 <h4> to <h2> (or <h3>), keep the class for styling. No visual change.
+F3  [medium · 147 pages]  Meta descriptions too long
+    166–282 chars; SERPs cut at ~155–160 so the call-to-action tail ("…files never leave your device") is lost on
+    most. Fix: trim to ≤155 with the privacy hook in the first sentence. A script can flag length; wording is manual.
+    Low priority vs F1/F2 — Google rewrites descriptions ~70% of the time anyway.
 
-F5  [moderate · site-wide]  prefers-reduced-motion is partial                                WCAG 2.3.3 (AAA) / best-practice
-    main.css handles body, hero buttons and empty-state icons only. Not handled:
-      - hero waves canvas (initHeroWaves) animates regardless of the OS setting
-      - the 3 tool CSS files with @keyframes / animation:
-      - transforms on hover (translateY / scale) across .btn-icon-pill, cards, result items, the new nav search width transition
-    Fix: one global rule at the end of main.css
-      @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; } }
-    plus `if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;` at the top of initHeroWaves.
+F4  [medium · every page]  Core Web Vitals risk from shared payload + third parties
+    Every page loads: GTM (sync in <head>, then its container), iconify-icon runtime from code.iconify.design
+    (defer, but icons pop in → CLS on 8–30 icons per page), Google Fonts CSS (render-blocking, 5 weights),
+    main.css 129 KB raw / 25 KB gz, main.js 96 KB / 24 KB gz. The header is injected after load → the fixed header
+    and page content shift once (CLS) unless the placeholder reserves height.
+    Concrete, cheap wins:
+      a. Reserve header height: [data-include*="header"] { min-height: var(--header-height) } (1 line, kills the shift).
+      b. Self-host Inter as 2 variable-font woff2 files + <link rel=preload as=font>; drop 300 weight if unused.
+         Removes a third-party DNS+TLS round-trip from the critical path.
+      c. Icons: 2058 of 2062 uses are lucide. Inline an SVG sprite for the ~40 icons the header/footer/templates use
+         and keep iconify only for tool bodies — or set width/height on <iconify-icon> (already done) + a CSS
+         `iconify-icon { display:inline-block; width:1em; height:1em }` fallback so empty custom elements reserve space.
+      d. GTM: move the snippet to after <body> start or load it on first interaction/idle. Measure first — it's the
+         single largest third-party cost.
+    Verify with PageSpeed Insights on 3 URLs (/, /media/image-compressor/, /games/2048/) before and after.
+    GitHub Pages already serves gzip/brotli and long cache for hashed URLs; the ?v= scheme is fine.
 
-F6  [moderate · site-wide]  Focus visibility relies on browser defaults                      WCAG 2.4.7 / 2.4.11
-    Explicit :focus-visible styles exist for ~10 components. Everything else (nav links, footer links, chips,
-    .btn-pill, .btn-icon-pill, segmented controls, selects) shows the UA ring, which on a white/frosted surface
-    is thin and sometimes clipped by border-radius / overflow:hidden parents. Six `outline: none` rules exist
-    (.minimal-search-input, .select-clean, .pane-editor, .textarea-clean, two .dragover) — the first four are
-    inputs whose wrapper shows focus-within, OK; verify .pane-editor and .select-clean actually have a wrapper ring.
-    Fix: one global rule
-      :focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; border-radius: inherit; }
-    then delete the per-component copies that are identical.
+F5  [medium · 24 pages]  Structured data gaps
+    - Home: Organization only. Add WebSite with potentialAction SearchAction (target https://toolity.in/tools/?q={q}
+      — the A–Z filter already reads the query; wire it to read ?q= as well, 2 lines) and sameAs for the socials.
+    - 7 hub pages (/media/ /docs/ /labs/ /dev/ /data/ /games/ /widgets/) and /tools/: add CollectionPage +
+      ItemList of the tools on the page, and BreadcrumbList. The hubs are your strongest pages; give them schema.
+    - WebApplication on tools: valid, but Google's software rich result needs aggregateRating or review — you don't
+      have ratings, so no rich result today; that's fine and honest. Don't fabricate ratings.
+    - FAQPage: Google now shows FAQ rich results only for authoritative gov/health sites; keep the markup (it still
+      helps understanding and AI answers) but don't expect SERP accordions.
 
-F7  [moderate · mobile]  Drawer focus management                                             WCAG 2.4.3 / 2.1.2
-    openMenu() sets aria-expanded and locks scroll but: focus stays on the hamburger, Tab moves behind the
-    overlay, focus is not returned to the trigger on close. Esc works.
-    Fix (~6 lines): on open → `drawer.querySelector('input,a,button').focus()`; set `main.inert = true` and
-    `footer.inert = true` (native, no trap code); on close → remove inert, `toggleBtn.focus()`.
+F6  [low · sitemap]  lastmod is bulk-stamped
+    58 URLs 2026-10-05, 29 on 10-06, 20 on 10-18 … Google uses lastmod only if it is consistently truthful and
+    ignores priority/changefreq. Fix: generate lastmod from `git log -1 --format=%cI -- <dir>/index.html` in the
+    wire scripts (one-liner per URL). No change in rank, but faster recrawl of pages you actually changed.
 
-F8  [critical by axe, low reach · /games/2048/]  role="grid" with no rows                    WCAG 1.3.1
-    #board is role=grid but children are plain tiles. Screen readers announce an empty grid.
-    Fix: either drop role=grid and use role="application" aria-label + an aria-live="polite" score/last-move
-    region (simplest; moves are keyboard-driven anyway), or wrap tiles in role=row / role=gridcell.
+F7  [low · 1 page]  /blog/ is a placeholder that is indexed
+    "Post title", 88 words, in sitemap, Blog schema. Either publish the first post or add
+    <meta name="robots" content="noindex,follow"> and drop it from the sitemap until there is content.
+    Footer links to it from every page, so it also leaks a little link equity to nothing.
 
-F9  [minor · widget embeds]  /widgets/*/embed/                                               best-practice
-    <main role="region"> (role not allowed on main; drop it), no h1, no landmark (axe sees the role override).
-    Embeds are intentionally chrome-less; an sr-only <h1> with the widget name and removing role="region" is enough.
+F8  [low · cosmetic]  Titles for legal/company pages are short (18–29ch) and mix two separators
+    "— Toolity.in" on 5 pages, "| Toolity" on 182. Normalise to "| Toolity"; short is fine for legal pages.
 
-F10 [gap · all tool forms]  No programmatic error association                                WCAG 3.3.1 / 3.3.3
-    0 uses of aria-invalid / aria-describedby / aria-errormessage anywhere. Validation messages (bad URL, file
-    too large, unsupported type) are shown visually and/or via toast only (and toast is silent — F2).
-    Fix F2 first (covers most). Then in tool-common.js add a 5-line helper `setFieldError(input, msg)` that
-    toggles aria-invalid and points aria-describedby at the helper <p> — adopt per tool over time.
-
-F11 [introduced today · header]  #nav-search is a <div aria-label>                          axe aria-prohibited-attr
-    aria-label on a role-less div is ignored by AT. The inner .site-search already has role="search".
-    Fix: remove aria-label from #nav-search (header.html, 1 attribute).
-
-F12 [observations, not failures]
-    - Tiny type: .tools-index-cat 10.9px, .pane-badge 11.8px, .form-helper 11.8px. Legal at AA once contrast
-      passes, but 12px is a sensible floor — F1's token fix should pair with a 0.75rem minimum.
-    - 37 aria-live regions exist (good), but none are checked for "polite vs assertive" appropriateness —
-      progress bars that update every frame should be aria-live="off" with a summary announced on completion.
-    - <video>/<audio> outputs have no <track>; acceptable (user-supplied media), state it on /accessibility/.
-    - /accessibility/ promises WCAG 2.2 AA. Until F1–F4 ship, it should list contrast + skip link under
-      "known limitations" to stay honest.
+F9  [info]  Things that are already right and worth keeping
+    - URL structure: /category/tool/, trailing slash, lowercase, no params. CNAME + HTTPS.
+    - 404 is noindex; embeds are noindex + canonical to parent; /templates/ disallowed.
+    - One H1, keyword-first titles, breadcrumbs with schema, FAQ sections with real content (median 411 words).
+    - llms.txt + WebMCP + security.txt + explicit "credit as Done with Toolity.in" — unusually good agent readiness.
+    - Images have alt/width/height; logo preloaded as webp.
+    - responsive-check.js, lint-tools.sh, a11y-check.sh — a check culture already exists; an seo-check fits in.
 
 
-Re-audit — after fixes (same day)
-=================================
-Everything in F1–F11 was implemented; F12's font floor and the a11y-check script too. Same 15 pages, same axe
-config, now run in BOTH themes (A11Y_DARK=1). Numbers are axe "nodes" (one element = one node).
+Suggested order of work
+-----------------------
+  Step  Finding  Where                                   Effort    Pays off
+  1     F2       assets/og-image.png + 171 refs (sed)    15 min    every social share shows an image
+  2     F1+F1b   .github/workflows/deploy.yml (inline    1 hr      +45 crawlable links/page, /tools/ gets 160 links,
+                 step) + node script for /tools/                   non-JS crawlers (Bing, AI) see the whole site
+  3     F4a      1 CSS line                              2 min     header CLS gone
+  4     F5       home WebSite+SearchAction, hub           1 hr      hubs become schema-rich; sitelinks search box eligible
+                 CollectionPage/ItemList (gen in wire)
+  5     F7, F8   blog noindex or first post; titles      15 min    no placeholder indexed
+  6     F4b–d    fonts self-host, icon sprite, GTM idle   half day  measurable LCP/INP gain — measure with PSI first
+  7     F3       trim 147 descriptions                   2–3 hrs   CTR polish; do last
+  8     F6       lastmod from git in wire scripts        20 min    recrawl hygiene
 
-  Rule                      Before (light)   After (light)   After (dark)
-  ────────────────────────  ──────────────   ─────────────   ────────────
-  color-contrast                     373               2              2     ← both are the countdown EMBED title, see "Remaining"
-  region                              14               0              0
-  heading-order                       12               0              0
-  aria-required-children               1               0              0
-  aria-allowed-role                    1               0              0
-  landmark-one-main                    1               0              0
-  page-has-heading-one                 1               0              0
-  aria-prohibited-attr (incomplete)   14               0              0
-  serious/critical total             374               2              2
+Verification after steps 1–4
+  - curl -s https://toolity.in/media/image-compressor/ | grep -c '<a ' → should be ≥ 45 (today: 2)
+  - curl -s https://toolity.in/tools/ | grep -c 'href="/' → ≥ 160 (today: 2)
+  - Share a URL in WhatsApp / LinkedIn post composer → image renders
+  - Rich Results Test on / and /media/ → WebSite + CollectionPage detected, 0 errors
+  - PSI mobile on / before/after → CLS < 0.1, LCP < 2.5 s
+  - Search Console: Pages report "Crawled – currently not indexed" count should fall over 2–4 weeks
 
-What changed (all shared files unless noted → every page inherits it)
-  F1   Tokens: light --text-muted #92969B→#6B7075 (5.0:1), dark #73767A→#808387 (4.8:1 on surface).
-       New --brand-ink (#C63D0F light / #FF6A2A dark) for brand used AS TEXT: eyebrows, badges, active nav link,
-       active chips, A–Z letters, prose links, small brand-filled buttons. --brand-hover light → #C63D0F too.
-       Fills, borders, icons, focus rings keep #F4511E — the brand colour itself is unchanged.
-       Brand-filled small buttons/badges now use --text-inverse (white in light, near-black in dark → 6.8:1).
-       New --success-ink / --danger-ink for status text (QR "Ready to scan" was #10B981 = 2.4:1).
-  F2   #tool-toast: role="status" aria-live="polite" aria-atomic="true".
-  F3   Skip link first in header; <main id="main"> on all 190 pages + both templates + 4 gen_*.js;
-       .skip-link visible only on focus.
-  F4   Footer <h4> → <h2> (class kept, no visual change).
-  F5   Global prefers-reduced-motion rule (animations/transitions → 0.01ms). Hero waves: product decision to
-       ALWAYS animate (slow ambient canvas, no flash/parallax) — they are exempt from the setting. Listed under
-       "Remaining" so /accessibility/ can say so. (First attempt blanked the canvas under reduced motion —
-       caught by the smoke test; GNOME "animations off" maps to prefers-reduced-motion in Chrome.)
-  F6   Global :focus-visible ring (2px --brand, 2px offset).
-  F7   Drawer: focus moves to first control on open, main/footer/header get `inert`, focus returns to the
-       hamburger on close. Verified: expanded → focus in drawer → main inert → Esc → focus back on toggle.
-  F8   2048 board: role="grid" → role="application" with controls in the label; score was already aria-live.
-  F9   Embeds: role="region" removed from <main>; sr-only <header><h1> added outside #widget-root (the widget
-       JS clears the root). widget-embed.css 1.2→1.3. gen_widget_pages.js updated to match.
-  F10  Toolity.setFieldError(input, msg) in tool-common.js (aria-invalid + aria-describedby + .field-error <p>).
-       Helper only; per-tool adoption is still open.
-  F11  aria-label removed from #nav-search (inner block already has role="search").
-  F12  0.65–0.68rem labels → 0.75rem (12px) in main.css.
-  New  scripts/a11y-check.sh — axe sweep, exit 1 on serious/critical; `A11Y_DARK=1` for dark theme;
-       pass page paths as args to target specific pages. Downloads axe once to .a11y/ (gitignored).
-  Bumps: main.css 6.3, main.js 4.8, tool-common.js 1.2, widget-embed.css 1.3, qr-code-generator.js 1.2.
-
-Functional smoke (headless, / /tools/ /games/2048/ /media/image-compressor/, motion on AND off)
-  hero waves drawn · skip link + target · toast role + shows · inline search returns results · ⌘K focuses input ·
-  footer h2 · --brand-ink resolves · A–Z entries render · 2048 moves on ArrowLeft · drawer focus/inert cycle ·
-  lint-tools.sh 0 violations · node --check clean.
-
-Remaining / known limitations (be explicit on /accessibility/)
-  1. Widget EMBED title (.w-title) uses the embedder's `accent` parameter; default F4511E on white = 3.47:1.
-     This is the embedder's colour choice. Options: change the default accent to C63D0F (affects existing embeds
-     that never set one) or document it. Left as-is pending a product call.
-  2. 142 tool pages were not individually scanned. They share the fixed components, but tool-specific CSS/JS
-     may still use raw colours (grep found 41 tool CSS files using --text-muted — now fine — and the QR green
-     was one tool-specific case). Run `bash scripts/a11y-check.sh /path/` when touching a tool.
-  3. F10 adoption: no tool calls setFieldError yet; errors still go via toast (now announced) or visual-only text.
-  4. aria-live hygiene on per-frame progress updates (F12 note) not reviewed.
-  5. Not tested: real screen readers, 400% zoom reflow, Windows High Contrast / forced-colors.
-  6. Hero waves animate even under prefers-reduced-motion (deliberate, 2.3.3 is AAA). They pause off-screen and
-     have no flashing; if a user reports discomfort, the switch is one line in initHeroWaves.
+Suggested scripts/seo-check.sh (same spirit as lint-tools.sh; ~40 lines)
+  fail if: title > 60 · description > 160 or missing · no canonical · duplicate title/description · H1 ≠ 1 ·
+  JSON-LD parse error · indexable page missing from sitemap · sitemap URL missing on disk · og:image not png/jpg ·
+  static <a href="/…"> count < 20 on an indexable page (catches F1 regressions once fixed).

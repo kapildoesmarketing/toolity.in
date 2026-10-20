@@ -1527,6 +1527,54 @@
         tags: ['date', 'calculator', 'days between', 'date difference', 'add days', 'subtract days', 'working days', 'business days', 'holidays', 'age calculator', 'duration', 'weeks', 'countdown', 'iso week']
       },
       {
+        id: 'shape-crop',
+        title: 'Shape Crop',
+        category: 'Media',
+        url: 'media/shape-crop/',
+        icon: 'lucide:circle-dashed',
+        tags: ['shape crop', 'circle crop', 'crop circle', 'round image', 'rounded corners', 'heart crop', 'star crop', 'squircle', 'hexagon', 'profile picture', 'avatar', 'transparent png', 'svg mask', 'cut out', 'photo']
+      },
+      {
+        id: 'video-to-sticker',
+        title: 'Video to Sticker',
+        category: 'Media',
+        url: 'media/video-to-sticker/',
+        icon: 'lucide:sticker',
+        tags: ['video to sticker', 'telegram sticker', 'whatsapp sticker', 'animated sticker', 'webm sticker', 'vp9', 'animated webp', '512x512', 'sticker maker', 'video sticker', 'gif to sticker', 'green screen', 'transparent sticker']
+      },
+      {
+        id: 'chat-mockup',
+        title: 'Chat Mockup',
+        category: 'Media',
+        url: 'media/chat-mockup/',
+        icon: 'lucide:message-square-text',
+        tags: ['chat mockup', 'fake chat', 'whatsapp chat generator', 'imessage generator', 'fake text message', 'instagram dm generator', 'telegram chat', 'discord message generator', 'slack message', 'fake conversation', 'chat screenshot', 'mockup', 'meme']
+      },
+      {
+        id: 'social-post-mockup',
+        title: 'Social Post Mockups',
+        category: 'Media',
+        url: 'media/social-post-mockup/',
+        icon: 'lucide:layout-template',
+        tags: ['tweet generator', 'fake tweet', 'x post mockup', 'instagram post generator', 'instagram story mockup', 'linkedin post generator', 'facebook post mockup', 'threads post', 'social media mockup', 'tweet to image', 'post to image', 'mockup', 'screenshot']
+      },
+      {
+        id: 'audio-visualizer',
+        title: 'Audio Visualizer',
+        category: 'Media',
+        url: 'media/audio-visualizer/',
+        icon: 'lucide:audio-waveform',
+        tags: ['audio visualizer', 'music visualizer', 'audio to video', 'mp3 to mp4', 'podcast video', 'audiogram', 'waveform video', 'spectrum video', 'youtube music video', 'instagram reel audio', 'tiktok audio video', 'cover art video']
+      },
+      {
+        id: 'audio-to-text',
+        title: 'Audio to Text',
+        category: 'Media',
+        url: 'media/audio-to-text/',
+        icon: 'lucide:captions',
+        tags: ['audio to text', 'speech to text', 'transcribe audio', 'mp3 to text', 'voice to text', 'whisper', 'transcription', 'subtitles', 'srt generator', 'vtt', 'video to text', 'podcast transcript', 'voice note to text', 'dictation']
+      },
+      {
         id: 'cat-widgets',
         title: 'Widgets',
         category: 'Category',
