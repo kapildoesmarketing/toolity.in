@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online security.txt Validator | Toolity Labs</title>
+  <link rel="canonical" href="https://toolity.in/labs/security-txt-validator/">
+  <meta name="description" content="Free online security.txt validator: fetch a site’s /.well-known/security.txt (and the legacy /security.txt) or paste it and check it against RFC 9116 — Contact and Expires required, expiry in the future and within a year, HTTPS URLs for Policy / Acknowledgments / Hiring / Encryption, Canonical matching the fetched URL, valid Preferred-Languages tags, no repeated single-value fields, PGP signature detection and text/plain content type. Runs in your browser.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online security.txt Validator | Toolity Labs">
+  <meta property="og:description" content="Free online security.txt validator: fetch a site’s /.well-known/security.txt (and the legacy /security.txt) or paste it and check it against RFC 9116 — Contact and Expires required, expiry in the future and within a year, HTTPS URLs for Policy / Acknowledgments / Hiring / Encryption, Canonical matching the fetched URL, valid Preferred-Languages tags, no repeated single-value fields, PGP signature detection and text/plain content type. Runs in your browser.">
+  <meta property="og:url" content="https://toolity.in/labs/security-txt-validator/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=6.5" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=6.5">
+  <link rel="stylesheet" href="/styles/tools/security-txt-validator.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "security.txt Validator",
+        "url": "https://toolity.in/labs/security-txt-validator/",
+        "description": "Free online security.txt validator: fetch a site’s /.well-known/security.txt (and the legacy /security.txt) or paste it and check it against RFC 9116 — Contact and Expires required, expiry in the future and within a year, HTTPS URLs for Policy / Acknowledgments / Hiring / Encryption, Canonical matching the fetched URL, valid Preferred-Languages tags, no repeated single-value fields, PGP signature detection and text/plain content type. Runs in your browser.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Labs", "item": "https://toolity.in/labs/" },
+          { "@type": "ListItem", "position": 3, "name": "security.txt Validator", "item": "https://toolity.in/labs/security-txt-validator/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "What is security.txt and do I need one?", "acceptedAnswer": { "@type": "Answer", "text": "A small text file (RFC 9116, 2022) at /.well-known/security.txt that tells security researchers how to report a vulnerability to you. Scanners, bug-bounty platforms and government CERTs look for it; several national guidelines (NCSC-NL, CISA BOD 20-01) require it for public bodies. It takes two lines — Contact and Expires — to be valid." } },
+          { "@type": "Question", "name": "Why must Expires be less than a year away?", "acceptedAnswer": { "@type": "Answer", "text": "The RFC recommends it: the field exists so stale contact details are noticed. Scanners and this tool flag an expiry more than 365 days out as a warning and a past date as an error (the file “must not be used” once expired). Set a calendar reminder and bump it yearly." } },
+          { "@type": "Question", "name": "Is the legacy /security.txt location still valid?", "acceptedAnswer": { "@type": "Answer", "text": "No. Early drafts allowed the root, and the RFC says the root “may” be used only as a redirect to /.well-known/security.txt. If the tool finds a file only at the root, it reports a failure; if both exist and differ, it reports the mismatch." } },
+          { "@type": "Question", "name": "Should I sign the file with PGP?", "acceptedAnswer": { "@type": "Answer", "text": "Optional but recommended when you publish an Encryption key: a cleartext signature (-----BEGIN PGP SIGNED MESSAGE-----) proves the contact details were not tampered with. The tool detects a signature and checks the Canonical field, which the RFC requires in signed files; it does not verify the signature itself." } },
+          { "@type": "Question", "name": "What content type should the server send?", "acceptedAnswer": { "@type": "Answer", "text": "text/plain; charset=utf-8. The tool shows the content type it received; HTML (a CMS catching the path and serving a page) is the most common mistake and is reported as an error." } },
+          { "@type": "Question", "name": "Why does fetching sometimes fail — and what is the relay?", "acceptedAnswer": { "@type": "Answer", "text": "Browsers block JavaScript from reading other websites directly (CORS). The tool first tries a direct request; when the site forbids it, the URL only is sent to a public read-only relay (allorigins.win, then codetabs.com) that fetches the page and returns its HTML. The relay sees the URL you typed, nothing else — Toolity has no server and keeps no record. If the relay is busy or the site blocks bots, paste the page source instead: that path is 100% local." } },
+          { "@type": "Question", "name": "Is my input sent anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. Everything is computed by JavaScript in your browser tab. Nothing is uploaded, logged or stored by Toolity." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main id="main">
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/labs/" class="breadcrumb-link">Labs</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">security.txt Validator</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Labs</span>
+            <h1 class="page-title">security.txt Validator</h1>
+            <p class="page-desc">Check a security.txt the way researchers and scanners read it — every RFC 9116 rule, the expiry maths, the legacy-location trap — and get the corrected file back.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="stacked" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge web-status-badge" id="status-badge">Enter a site URL or paste security.txt</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result" aria-label="Copy result" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <div class="dropdown-menu-wrapper" id="download-dropdown-wrap">
+                <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download result" aria-label="Download result" aria-haspopup="true" disabled>
+                  <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                  <span>Download</span>
+                  <iconify-icon icon="lucide:chevron-down" class="dropdown-arrow" width="13" height="13"></iconify-icon>
+                </button>
+                <div class="dropdown-popup" role="menu">
+                  <button type="button" class="dropdown-item" data-format="md" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:file-text" width="14" height="14"></iconify-icon>
+                      <span>Report (Markdown)</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="fixed" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:file-check" width="14" height="14"></iconify-icon>
+                      <span>Corrected security.txt</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="json" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:braces" width="14" height="14"></iconify-icon>
+                      <span>Report (JSON)</span>
+                    </div>
+                  </button>
+                </div>
+              </div>
+              <button type="button" class="btn-toolbar-sm" id="btn-open" title="Open result in a new tab" aria-label="Open result in a new tab" disabled>
+                <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
+                <span>Open</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>security.txt</span>
+                <span class="pane-badge" id="input-badge">—</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content web-form">
+                <div class="web-file-row">
+                  <button type="button" class="btn-toolbar-sm" id="btn-file" title="Open a file from your device" aria-label="Open a file from your device">
+                    <iconify-icon icon="lucide:folder-open" width="14" height="14"></iconify-icon>
+                    <span>Open file</span>
+                  </button>
+                  <input type="file" id="file-input" accept=".txt" hidden>
+                  <span class="web-muted" id="file-name">or drop a file here</span>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="url-input"><span>Site or file URL</span><span class="form-label-desc">fetches /.well-known/security.txt and checks the legacy /security.txt</span></label>
+                  <input type="url" id="url-input" class="input-clean" placeholder="https://example.com" spellcheck="false" autocomplete="off" autocapitalize="off" inputmode="url">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="text-input"><span>Or paste security.txt</span><span class="form-label-desc">Works offline · overrides the URL</span></label>
+                  <textarea id="text-input" class="textarea-clean" rows="6" placeholder="Contact: mailto:security@example.com&#10;Expires: 2027-06-30T00:00:00.000Z&#10;Policy: https://example.com/security-policy&#10;Preferred-Languages: en, de" spellcheck="false" autocapitalize="off" data-file-target></textarea>
+                </div>
+                <button type="button" id="btn-run" class="btn-toolbar-sm btn-brand-sm btn-primary-action">
+                  <iconify-icon icon="lucide:shield-check" width="16" height="16"></iconify-icon>
+                  <span>Validate</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Validation</span>
+                <span class="pane-badge" id="output-badge">—</span>
+              </div>
+              <div class="pane-content web-output-pane">
+                <div class="pane-empty" id="output-empty">
+                  <iconify-icon icon="lucide:shield-check"></iconify-icon>
+                  <span>Field-by-field results and the corrected file appear here</span>
+                </div>
+                <div class="web-output" id="output-content" hidden>
+                  <div class="web-grid-2" id="st-stats"></div>
+                  <div class="web-table-wrap"><table class="web-table st-table" id="st-table"><thead><tr><th>Check</th><th>Result</th><th>Detail</th></tr></thead><tbody></tbody></table></div>
+                  <div id="st-fields"></div>
+                  <details class="td-more"><summary>Corrected security.txt</summary><pre class="web-code" id="st-fixed"></pre></details>
+                  <details class="td-more"><summary>File as fetched</summary><pre class="web-code" id="st-raw"></pre></details>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">Checks legacy /security.txt too</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item"><input type="checkbox" id="opt-legacy" checked><label for="opt-legacy">Also request the legacy /security.txt location</label></div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Use security.txt Validator in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Fetch or paste</h3>
+              <p class="step-desc">Enter the site — the tool fetches <code>/.well-known/security.txt</code>, the only location RFC 9116 defines, and also tries the legacy <code>/security.txt</code> to warn if that is the only copy. Or paste the file. Press <strong>Validate</strong>.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Read the checklist</h3>
+              <p class="step-desc">Every rule in RFC 9116 gets a row: <code>Contact</code> present and a valid <code>mailto:</code>, <code>https:</code> or <code>tel:</code> URI; <code>Expires</code> present, in the future and less than a year away; <code>Canonical</code> matching where the file was served from; <code>Policy</code>, <code>Acknowledgments</code>, <code>Hiring</code>, <code>Encryption</code> on HTTPS; <code>Preferred-Languages</code> as BCP 47 tags and listed once; unknown fields; line endings; a PGP cleartext signature if present; and the content type the server used.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Publish the corrected file</h3>
+              <p class="step-desc">Open <strong>Corrected security.txt</strong> — the same fields, normalised, with a fresh one-year <code>Expires</code> if yours is missing or stale — and upload it to <code>/.well-known/security.txt</code>, served as <code>text/plain; charset=utf-8</code>. If you sign it, re-sign after editing.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">security.txt Validator — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>What is security.txt and do I need one?</summary>
+              <p>A small text file (RFC 9116, 2022) at <code>/.well-known/security.txt</code> that tells security researchers how to report a vulnerability to you. Scanners, bug-bounty platforms and government CERTs look for it; several national guidelines (NCSC-NL, CISA BOD 20-01) require it for public bodies. It takes two lines — <code>Contact</code> and <code>Expires</code> — to be valid.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why must Expires be less than a year away?</summary>
+              <p>The RFC recommends it: the field exists so stale contact details are noticed. Scanners and this tool flag an expiry more than 365 days out as a warning and a past date as an error (the file “must not be used” once expired). Set a calendar reminder and bump it yearly.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is the legacy /security.txt location still valid?</summary>
+              <p>No. Early drafts allowed the root, and the RFC says the root “may” be used only as a redirect to <code>/.well-known/security.txt</code>. If the tool finds a file only at the root, it reports a failure; if both exist and differ, it reports the mismatch.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Should I sign the file with PGP?</summary>
+              <p>Optional but recommended when you publish an <code>Encryption</code> key: a cleartext signature (<code>-----BEGIN PGP SIGNED MESSAGE-----</code>) proves the contact details were not tampered with. The tool detects a signature and checks the <code>Canonical</code> field, which the RFC requires in signed files; it does not verify the signature itself.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What content type should the server send?</summary>
+              <p><code>text/plain; charset=utf-8</code>. The tool shows the content type it received; HTML (a CMS catching the path and serving a page) is the most common mistake and is reported as an error.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why does fetching sometimes fail — and what is the relay?</summary>
+              <p>Browsers block JavaScript from reading other websites directly (CORS). The tool first tries a direct request; when the site forbids it, the <em>URL only</em> is sent to a public read-only relay (allorigins.win, then codetabs.com) that fetches the page and returns its HTML. The relay sees the URL you typed, nothing else — Toolity has no server and keeps no record. If the relay is busy or the site blocks bots, paste the page source instead: that path is 100% local.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is my input sent anywhere?</summary>
+              <p>No. Everything is computed by JavaScript in your browser tab. Nothing is uploaded, logged or stored by Toolity.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="labs"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=5.2"></script>
+  <script src="/scripts/tool-common.js?v=1.2"></script>
+  <script src="/scripts/wellknown-common.js?v=1.0"></script>
+  <script src="/scripts/web-common.js?v=1.2"></script>
+  <script src="/labs/security-txt-validator/security-txt-validator.js?v=1.0"></script>
+</body>
+</html>

@@ -158,6 +158,32 @@ const CASES = [
     set('ad-pubid', 'pub-0000000000000000'); await tick(500); A(/NOT in this ads.txt/.test($('ad-pub').textContent) && /missing/.test($('status-badge').textContent), 'pub id missing: ' + $('status-badge').textContent);
     set('text-input', FIX); await tick(500); A($('ad-table').querySelectorAll('tbody tr').length === 8 && /invalid line/.test($('status-badge').textContent) === false || /missing/.test($('status-badge').textContent), 'paste overrides: ' + $('status-badge').textContent);
     $('btn-reset').click(); await tick(200); A(!$('output-empty').hidden && $('ad-table').querySelector('tbody').innerHTML === '' && $('ad-pubid').value === '', 'reset');
+  `],
+  ['labs/security-txt-validator/', `
+    for (let i = 0; i < 80 && !(window.__st && window.ToolityWellKnown && window.ToolityWebTool); i++) await tick(100);
+    const T = window.ToolityWebTool, S = window.__st, O = location.origin;
+    const BAD = 'Contact: security@example.com\\nContact: http://example.com/report\\nPreferred-Languages: en, xx-toolong1234\\nPreferred-Languages: de\\nCanonical: http://example.com/.well-known/security.txt\\nPolicy: https://example.com/policy\\nFoo: bar\\n  indented: line\\n';
+    const p = S.parse(BAD), rows = S.check(p, { url: 'https://example.com/.well-known/security.txt', via: 'pasted' }), by = {}; rows.forEach(r => { by[r.name] = r; });
+    A(p.fields.length === 7 && p.issues.some(i => /starts with whitespace/.test(i.msg)), 'parse: ' + p.fields.length + ' ' + JSON.stringify(p.issues));
+    A(by['Contact values'].status === 'fail' && /security@example.com/.test(by['Contact values'].detail) && by['Contact over HTTPS'].status === 'fail', 'contact checks: ' + JSON.stringify(by['Contact values']));
+    A(by['Expires present'].status === 'fail' && by['Preferred-Languages'].status === 'fail' && /more than once/.test(by['Preferred-Languages'].detail) && by['Canonical URLs'].status === 'fail' && by['Unknown fields'].status === 'warn' && /Foo/.test(by['Unknown fields'].detail) && by['Policy'].status === 'pass', 'rules: ' + rows.map(r => r.name + '=' + r.status).join(','));
+    const fx = S.fixed(p, { url: 'https://example.com/.well-known/security.txt' }); A(/^Contact: mailto:security@example.com\\n/.test(fx) && /Expires: \\d{4}-\\d{2}-\\d{2}T/.test(fx) && /Preferred-Languages: en, de\\n/.test(fx) && !/Foo/.test(fx) && !/http:\\/\\/example.com\\/\\.well-known/.test(fx), 'fixed: ' + fx);
+    const far = new Date(Date.now() + 700 * 864e5).toISOString(), past = new Date(Date.now() - 864e5).toISOString();
+    const r2 = S.check(S.parse('Contact: mailto:a@b.co\\nExpires: ' + far + '\\n'), {}); A(r2.find(r => r.name === 'Expires within a year').status === 'warn', 'far expiry warn');
+    const r3 = S.check(S.parse('Contact: mailto:a@b.co\\nExpires: ' + past + '\\n'), {}); A(r3.find(r => r.name === 'Expires in the future').status === 'fail', 'past expiry fail');
+    const r4 = S.check(S.parse('Contact: mailto:a@b.co\\nExpires: 2027-01-01\\n'), {}); A(r4.find(r => r.name === 'Expires format').status === 'fail', 'date-only expiry fail');
+    const SIG = '-----BEGIN PGP SIGNED MESSAGE-----\\nHash: SHA256\\n\\nContact: mailto:sec@x.test\\nExpires: ' + new Date(Date.now() + 100 * 864e5).toISOString() + '\\n- -- dash escaped comment\\n-----BEGIN PGP SIGNATURE-----\\nabc\\n-----END PGP SIGNATURE-----\\n';
+    const ps = S.parse(SIG); A(ps.signed && ps.fields.length === 2, 'pgp unwrap: ' + JSON.stringify(ps.fields)); const rs = S.check(ps, {}); A(rs.find(r => r.name === 'Canonical').status === 'fail' && rs.find(r => r.name === 'PGP signature').status === 'pass', 'signed needs Canonical');
+    const ok = S.check(S.parse('Contact: mailto:a@b.co\\nExpires: ' + new Date(Date.now() + 200 * 864e5).toISOString() + '\\nCanonical: https://b.co/.well-known/security.txt\\n'), { url: 'https://b.co/.well-known/security.txt', via: 'direct', status: 200, type: 'text/plain; charset=utf-8', legacy: { state: 'none' } });
+    A(ok.every(r => r.status !== 'fail' && r.status !== 'warn'), 'clean file passes: ' + ok.filter(r => r.status === 'fail' || r.status === 'warn').map(r => r.name + ':' + r.detail).join('|'));
+    // live: this site's own file (same-origin)
+    set('url-input', O); await tick(300); $('btn-run').click(); A(await waitFor(() => T.S.out || !$('input-error').hidden, 15000) && T.S.out, 'live: ' + $('input-error').textContent);
+    const L = S.last; A(L.p.fields.length === 5 && L.ctx.legacy && L.ctx.legacy.state === 'none', 'live parse: ' + JSON.stringify(L.ctx.legacy) + ' ' + L.p.fields.length);
+    const lb = {}; L.rows.forEach(r => { lb[r.name] = r; }); A(lb['Expires within a year'].status === 'pass' && lb['Canonical matches location'].status === 'warn' && lb['Served as text/plain'].status === 'pass' && lb['Legacy /security.txt'].status === 'pass' && lb['Served over HTTPS'].status === 'info', 'live rows: ' + L.rows.map(r => r.name + '=' + r.status).join(','));
+    A($('st-table').querySelectorAll('tbody tr').length === L.rows.length && /5 fields/.test($('output-badge').textContent) && /warning/.test($('status-badge').textContent) && /^Contact: mailto:hello@toolity.in/.test($('st-fixed').textContent), 'render: ' + [$('st-table').querySelectorAll('tbody tr').length, L.rows.length, $('output-badge').textContent, $('status-badge').textContent, $('st-fixed').textContent.slice(0, 40)].join(' | '));
+    A(/\\| Expires within a year \\| PASS/.test(T.S.out.text), 'markdown');
+    set('text-input', BAD); await tick(500); A(/violation/.test($('status-badge').textContent) && $('st-table').querySelector('tr.is-fail'), 'paste overrides: ' + $('status-badge').textContent);
+    $('btn-reset').click(); await tick(200); A(!$('output-empty').hidden && $('st-table').querySelector('tbody').innerHTML === '' && $('opt-legacy').checked, 'reset');
   `]
 ];
 
