@@ -12,6 +12,67 @@ const opts = (list, sel) => list.map(([v, l]) => `<option value="${v}"${v === se
 
 module.exports = [
   {
+    slug: 'spreadsheet-formula-converter', name: 'Spreadsheet Formula Converter', icon: 'lucide:sigma', section: 'Converters', split: '50/50', css: true,
+    desc: 'Free online spreadsheet formula converter between Excel, Google Sheets and LibreOffice Calc: renames functions (JOIN ↔ TEXTJOIN, SPLIT ↔ TEXTSPLIT, REGEXMATCH ↔ REGEXTEST, FLATTEN ↔ TOCOL…), swaps comma/semicolon separators and decimal marks, fixes sheet references and array constants, converts A1 ↔ R1C1, and reports every function that has no equivalent. Runs in your browser.',
+    lead: 'Paste a formula from Excel, Google Sheets or LibreOffice and get it rewritten for another — functions renamed, separators and references fixed, and an honest report of what has no equivalent.',
+    cardDesc: 'Excel ↔ Google Sheets ↔ LibreOffice: rename functions, fix separators & refs, A1 ↔ R1C1, compatibility report.',
+    tags: ['excel to google sheets formula', 'google sheets to excel formula', 'formula converter', 'libreoffice formula', 'semicolon to comma formula', 'a1 to r1c1', 'arrayformula excel', 'textjoin vs join', 'spreadsheet function equivalents', 'formula compatibility'],
+    idle: 'Paste a formula to convert', sourceLabel: 'Formula', outputLabel: 'Converted', outputIcon: 'lucide:sigma', outputEmpty: 'The converted formula and its compatibility report appear here',
+    downloads: [['txt', 'Converted formulas (.txt)', 'lucide:file-text'], ['csv', 'Compatibility report (.csv)', 'lucide:file-spreadsheet']],
+    sourceHtml: `
+                <div class="web-convert-row">
+                  <div class="form-group">
+                    <label class="form-label" for="opt-from"><span>From</span></label>
+                    <select id="opt-from" class="select-clean">${opts([['sheets', 'Google Sheets'], ['excel', 'Microsoft Excel'], ['libre', 'LibreOffice Calc']], 'sheets')}</select>
+                  </div>
+                  <button type="button" class="web-row-btn" id="btn-swap" title="Swap direction" aria-label="Swap direction"><iconify-icon icon="lucide:arrow-left-right" width="16" height="16"></iconify-icon></button>
+                  <div class="form-group">
+                    <label class="form-label" for="opt-to"><span>To</span></label>
+                    <select id="opt-to" class="select-clean">${opts([['sheets', 'Google Sheets'], ['excel', 'Microsoft Excel'], ['libre', 'LibreOffice Calc']], 'excel')}</select>
+                  </div>
+                </div>
+                <div class="form-group form-group-grow">
+                  <label class="form-label" for="text-input"><span>Formulas</span><span class="form-label-desc" id="input-count">one per line for batch</span></label>
+                  <textarea id="text-input" class="textarea-clean" rows="9" placeholder="=ARRAYFORMULA(IF(A2:A=&quot;&quot;,,JOIN(&quot;, &quot;,SPLIT(B2:B,&quot;;&quot;))))&#10;=QUERY(Data!A:D,&quot;select A, sum(D) where C='Paid' group by A&quot;,1)&#10;=TEXTJOIN(&quot;, &quot;;TRUE;'My Sheet'!B2:B20)" spellcheck="false" autocapitalize="off" data-file-target></textarea>
+                </div>
+                <div class="web-file-row">
+                  <button type="button" class="btn-toolbar-sm" id="btn-sample"><iconify-icon icon="lucide:sparkles" width="14" height="14"></iconify-icon><span>Try examples</span></button>
+                  <span class="web-muted">Separators (, vs ;) are auto-detected from the input.</span>
+                </div>`,
+    outputHtml: `
+                  <pre class="web-code sf-out" id="output-text" aria-live="polite"></pre>
+                  <div class="web-tags sf-tags" id="sf-tags"></div>
+                  <div class="web-table-wrap"><table class="web-table sf-report" id="sf-report"><thead><tr><th>Function</th><th>In target</th><th>Note</th></tr></thead><tbody></tbody></table></div>`,
+    settingsSummary: 'Auto-detect separators · keep references',
+    settings: `
+              <div class="control-item">
+                <label for="opt-src-locale">Input separators</label>
+                <select id="opt-src-locale" class="select-clean">${opts([['auto', 'Auto-detect'], ['en', 'Comma arguments, dot decimal (US/UK/IN)'], ['eu', 'Semicolon arguments, comma decimal (EU)']], 'auto')}</select>
+              </div>
+              <div class="control-item">
+                <label for="opt-dst-locale">Output separators</label>
+                <select id="opt-dst-locale" class="select-clean">${opts([['en', 'Comma arguments, dot decimal (US/UK/IN)'], ['eu', 'Semicolon arguments, comma decimal (EU)']], 'en')}</select>
+              </div>
+              <div class="control-item">
+                <label for="opt-refs">Cell references</label>
+                <select id="opt-refs" class="select-clean">${opts([['keep', 'Keep as written'], ['r1c1', 'Convert A1 → R1C1'], ['a1', 'Convert R1C1 → A1'], ['abs', 'Make all absolute ($A$1)'], ['rel', 'Make all relative (A1)']], 'keep')}</select>
+              </div>
+              <div class="control-item">
+                <label for="opt-cell">Formula lives in cell (for R1C1)</label>
+                <input type="text" id="opt-cell" class="input-clean" value="A1" maxlength="8" autocomplete="off">
+              </div>
+              <div class="control-item"><input type="checkbox" id="opt-upper" checked><label for="opt-upper">Uppercase function names</label></div>`,
+    guide: [['Pick the direction', 'Choose where the formula comes from and where it is going — Google Sheets, Excel or LibreOffice Calc. Paste one formula, or many (one per line) to convert a whole column of them.'],
+      ['Read the result', 'Functions are renamed and arguments reordered where the apps differ (<code>JOIN</code> → <code>TEXTJOIN</code>, <code>SPLIT</code> → <code>TEXTSPLIT</code>, <code>REGEXMATCH</code> → <code>REGEXTEST</code>…), separators and decimal marks follow your output locale, sheet references and array constants use the target syntax.'],
+      ['Check the report', 'Every function used is listed with ✅ same, ⚠ renamed/rewritten or ❌ no equivalent plus the closest alternative — so you know exactly what still needs a human before the sheet goes live.']],
+    faq: [['Does it convert QUERY, IMPORTRANGE or ARRAYFORMULA?', 'Not magically. <code>ARRAYFORMULA</code> is unwrapped for Excel (dynamic arrays spill on their own) and LibreOffice (enter it as an array formula). <code>QUERY</code>, <code>IMPORTRANGE</code>, <code>GOOGLEFINANCE</code> and friends have no Excel/Calc equivalent; they are flagged ❌ with the nearest alternative (FILTER/SORT, Power Query, STOCKHISTORY) rather than silently broken.'],
+      ['Why are separators different between apps?', 'They are not — they differ by <em>locale</em>. US/UK/India installs use a comma between arguments and a dot decimal; most European locales use a semicolon and a comma decimal. Array constants change too (<code>{1,2;3,4}</code> vs <code>{1\\2;3\\4}</code>, and <code>{1;2|3;4}</code> in Calc). Set the output locale to match the machine the sheet will open on.'],
+      ['What about functions only in new versions?', 'XLOOKUP, LET, LAMBDA, FILTER, UNIQUE, VSTACK and the text-split family exist in Excel 365 and modern Sheets; LibreOffice gained XLOOKUP, FILTER, SORT, UNIQUE, SEQUENCE and LET in 24.8. The report says “Excel 365 only” or “Calc 24.8+” so you can decide whether that is fine for your users.'],
+      ['How does A1 → R1C1 work?', 'R1C1 is relative to the cell that holds the formula, so enter that cell in Settings. <code>B2</code> seen from <code>A1</code> becomes <code>R[1]C[1]</code>; <code>$B$2</code> becomes <code>R2C2</code>. Whole columns and rows convert too.'],
+      ['Are LibreOffice sheet references handled?', 'Yes. Calc writes <code>$Sheet1.A1</code> and <code>$\'My Sheet\'.A1</code> where Excel and Sheets write <code>Sheet1!A1</code> and <code>\'My Sheet\'!A1</code>; both directions are converted, as is <code>REGEX</code> ↔ the REGEXMATCH/EXTRACT/REPLACE family.'],
+      PRIVACY_FAQ]
+  },
+  {
     slug: 'json-converter', name: 'JSON Converter', icon: 'lucide:braces', section: 'Converters',
     desc: 'Free online JSON converter: convert between JSON, CSV, YAML, TOML, XML, query strings and Markdown tables, or generate TypeScript interfaces and Zod schemas from JSON. Live, in your browser — nothing uploaded.',
     lead: 'Paste JSON, CSV, YAML, TOML, XML or a query string — get it back in any other format, or as TypeScript and Zod types.',

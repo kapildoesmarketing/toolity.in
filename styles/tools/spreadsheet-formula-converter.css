@@ -1,0 +1,12 @@
+/* Spreadsheet Formula Converter — output block + report colours. */
+.sf-out { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 0.84rem; max-height: 260px; overflow: auto; }
+.sf-tags { margin: 0.6rem 0; }
+.sf-tags:empty { display: none; }
+.sf-report td { font-family: var(--font-family); }
+.sf-report td:first-child code { font-family: var(--font-mono); font-weight: 600; }
+.sf-report th { width: auto; }
+.sf-report th:nth-child(2), .sf-report td:nth-child(2) { white-space: nowrap; width: 7.5rem; }
+.sf-report tr.is-no td { background: rgba(220, 38, 38, 0.06); }
+.sf-report tr.is-renamed td { background: rgba(202, 138, 4, 0.08); }
+.sf-report tr.is-ver td { background: rgba(37, 99, 235, 0.06); }
+.web-convert-row .web-row-btn { align-self: end; margin-bottom: 1px; }

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Spreadsheet Formula Converter | Toolity Data</title>
+  <link rel="canonical" href="https://toolity.in/data/spreadsheet-formula-converter/">
+  <meta name="description" content="Free online spreadsheet formula converter between Excel, Google Sheets and LibreOffice Calc: renames functions (JOIN ↔ TEXTJOIN, SPLIT ↔ TEXTSPLIT, REGEXMATCH ↔ REGEXTEST, FLATTEN ↔ TOCOL…), swaps comma/semicolon separators and decimal marks, fixes sheet references and array constants, converts A1 ↔ R1C1, and reports every function that has no equivalent. Runs in your browser.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Spreadsheet Formula Converter | Toolity Data">
+  <meta property="og:description" content="Free online spreadsheet formula converter between Excel, Google Sheets and LibreOffice Calc: renames functions (JOIN ↔ TEXTJOIN, SPLIT ↔ TEXTSPLIT, REGEXMATCH ↔ REGEXTEST, FLATTEN ↔ TOCOL…), swaps comma/semicolon separators and decimal marks, fixes sheet references and array constants, converts A1 ↔ R1C1, and reports every function that has no equivalent. Runs in your browser.">
+  <meta property="og:url" content="https://toolity.in/data/spreadsheet-formula-converter/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=6.4" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=6.4">
+  <link rel="stylesheet" href="/styles/tools/spreadsheet-formula-converter.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Spreadsheet Formula Converter",
+        "url": "https://toolity.in/data/spreadsheet-formula-converter/",
+        "description": "Free online spreadsheet formula converter between Excel, Google Sheets and LibreOffice Calc: renames functions (JOIN ↔ TEXTJOIN, SPLIT ↔ TEXTSPLIT, REGEXMATCH ↔ REGEXTEST, FLATTEN ↔ TOCOL…), swaps comma/semicolon separators and decimal marks, fixes sheet references and array constants, converts A1 ↔ R1C1, and reports every function that has no equivalent. Runs in your browser.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Data", "item": "https://toolity.in/data/" },
+          { "@type": "ListItem", "position": 3, "name": "Spreadsheet Formula Converter", "item": "https://toolity.in/data/spreadsheet-formula-converter/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Does it convert QUERY, IMPORTRANGE or ARRAYFORMULA?", "acceptedAnswer": { "@type": "Answer", "text": "Not magically. ARRAYFORMULA is unwrapped for Excel (dynamic arrays spill on their own) and LibreOffice (enter it as an array formula). QUERY, IMPORTRANGE, GOOGLEFINANCE and friends have no Excel/Calc equivalent; they are flagged ❌ with the nearest alternative (FILTER/SORT, Power Query, STOCKHISTORY) rather than silently broken." } },
+          { "@type": "Question", "name": "Why are separators different between apps?", "acceptedAnswer": { "@type": "Answer", "text": "They are not — they differ by locale. US/UK/India installs use a comma between arguments and a dot decimal; most European locales use a semicolon and a comma decimal. Array constants change too ({1,2;3,4} vs {1\\2;3\\4}, and {1;2|3;4} in Calc). Set the output locale to match the machine the sheet will open on." } },
+          { "@type": "Question", "name": "What about functions only in new versions?", "acceptedAnswer": { "@type": "Answer", "text": "XLOOKUP, LET, LAMBDA, FILTER, UNIQUE, VSTACK and the text-split family exist in Excel 365 and modern Sheets; LibreOffice gained XLOOKUP, FILTER, SORT, UNIQUE, SEQUENCE and LET in 24.8. The report says “Excel 365 only” or “Calc 24.8+” so you can decide whether that is fine for your users." } },
+          { "@type": "Question", "name": "How does A1 → R1C1 work?", "acceptedAnswer": { "@type": "Answer", "text": "R1C1 is relative to the cell that holds the formula, so enter that cell in Settings. B2 seen from A1 becomes R[1]C[1]; $B$2 becomes R2C2. Whole columns and rows convert too." } },
+          { "@type": "Question", "name": "Are LibreOffice sheet references handled?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Calc writes $Sheet1.A1 and $'My Sheet'.A1 where Excel and Sheets write Sheet1!A1 and 'My Sheet'!A1; both directions are converted, as is REGEX ↔ the REGEXMATCH/EXTRACT/REPLACE family." } },
+          { "@type": "Question", "name": "Is my data uploaded anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. Parsing and converting happen in JavaScript inside your browser tab. Your text and files are never sent to Toolity or anyone else." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main id="main">
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/data/" class="breadcrumb-link">Data</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Spreadsheet Formula Converter</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Data</span>
+            <h1 class="page-title">Spreadsheet Formula Converter</h1>
+            <p class="page-desc">Paste a formula from Excel, Google Sheets or LibreOffice and get it rewritten for another — functions renamed, separators and references fixed, and an honest report of what has no equivalent.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" data-split="50/50" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge web-status-badge" id="status-badge">Paste a formula to convert</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result" aria-label="Copy result" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <div class="dropdown-menu-wrapper" id="download-dropdown-wrap">
+                <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download result" aria-label="Download result" aria-haspopup="true" disabled>
+                  <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                  <span>Download</span>
+                  <iconify-icon icon="lucide:chevron-down" class="dropdown-arrow" width="13" height="13"></iconify-icon>
+                </button>
+                <div class="dropdown-popup" role="menu">
+                  <button type="button" class="dropdown-item" data-format="txt" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:file-text" width="14" height="14"></iconify-icon>
+                      <span>Converted formulas (.txt)</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="csv" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:file-spreadsheet" width="14" height="14"></iconify-icon>
+                      <span>Compatibility report (.csv)</span>
+                    </div>
+                  </button>
+                </div>
+              </div>
+              <button type="button" class="btn-toolbar-sm" id="btn-open" title="Open result in a new tab" aria-label="Open result in a new tab" disabled>
+                <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
+                <span>Open</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Formula</span>
+                <span class="pane-badge" id="input-badge">—</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content web-form">
+                <div class="web-convert-row">
+                  <div class="form-group">
+                    <label class="form-label" for="opt-from"><span>From</span></label>
+                    <select id="opt-from" class="select-clean"><option value="sheets" selected>Google Sheets</option><option value="excel">Microsoft Excel</option><option value="libre">LibreOffice Calc</option></select>
+                  </div>
+                  <button type="button" class="web-row-btn" id="btn-swap" title="Swap direction" aria-label="Swap direction"><iconify-icon icon="lucide:arrow-left-right" width="16" height="16"></iconify-icon></button>
+                  <div class="form-group">
+                    <label class="form-label" for="opt-to"><span>To</span></label>
+                    <select id="opt-to" class="select-clean"><option value="sheets">Google Sheets</option><option value="excel" selected>Microsoft Excel</option><option value="libre">LibreOffice Calc</option></select>
+                  </div>
+                </div>
+                <div class="form-group form-group-grow">
+                  <label class="form-label" for="text-input"><span>Formulas</span><span class="form-label-desc" id="input-count">one per line for batch</span></label>
+                  <textarea id="text-input" class="textarea-clean" rows="9" placeholder="=ARRAYFORMULA(IF(A2:A=&quot;&quot;,,JOIN(&quot;, &quot;,SPLIT(B2:B,&quot;;&quot;))))&#10;=QUERY(Data!A:D,&quot;select A, sum(D) where C='Paid' group by A&quot;,1)&#10;=TEXTJOIN(&quot;, &quot;;TRUE;'My Sheet'!B2:B20)" spellcheck="false" autocapitalize="off" data-file-target></textarea>
+                </div>
+                <div class="web-file-row">
+                  <button type="button" class="btn-toolbar-sm" id="btn-sample"><iconify-icon icon="lucide:sparkles" width="14" height="14"></iconify-icon><span>Try examples</span></button>
+                  <span class="web-muted">Separators (, vs ;) are auto-detected from the input.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Converted</span>
+                <span class="pane-badge" id="output-badge">—</span>
+              </div>
+              <div class="pane-content web-output-pane">
+                <div class="pane-empty" id="output-empty">
+                  <iconify-icon icon="lucide:sigma"></iconify-icon>
+                  <span>The converted formula and its compatibility report appear here</span>
+                </div>
+                <div class="web-output" id="output-content" hidden>
+                  <pre class="web-code sf-out" id="output-text" aria-live="polite"></pre>
+                  <div class="web-tags sf-tags" id="sf-tags"></div>
+                  <div class="web-table-wrap"><table class="web-table sf-report" id="sf-report"><thead><tr><th>Function</th><th>In target</th><th>Note</th></tr></thead><tbody></tbody></table></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">Auto-detect separators · keep references</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item">
+                <label for="opt-src-locale">Input separators</label>
+                <select id="opt-src-locale" class="select-clean"><option value="auto" selected>Auto-detect</option><option value="en">Comma arguments, dot decimal (US/UK/IN)</option><option value="eu">Semicolon arguments, comma decimal (EU)</option></select>
+              </div>
+              <div class="control-item">
+                <label for="opt-dst-locale">Output separators</label>
+                <select id="opt-dst-locale" class="select-clean"><option value="en" selected>Comma arguments, dot decimal (US/UK/IN)</option><option value="eu">Semicolon arguments, comma decimal (EU)</option></select>
+              </div>
+              <div class="control-item">
+                <label for="opt-refs">Cell references</label>
+                <select id="opt-refs" class="select-clean"><option value="keep" selected>Keep as written</option><option value="r1c1">Convert A1 → R1C1</option><option value="a1">Convert R1C1 → A1</option><option value="abs">Make all absolute ($A$1)</option><option value="rel">Make all relative (A1)</option></select>
+              </div>
+              <div class="control-item">
+                <label for="opt-cell">Formula lives in cell (for R1C1)</label>
+                <input type="text" id="opt-cell" class="input-clean" value="A1" maxlength="8" autocomplete="off">
+              </div>
+              <div class="control-item"><input type="checkbox" id="opt-upper" checked><label for="opt-upper">Uppercase function names</label></div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Use Spreadsheet Formula Converter in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Pick the direction</h3>
+              <p class="step-desc">Choose where the formula comes from and where it is going — Google Sheets, Excel or LibreOffice Calc. Paste one formula, or many (one per line) to convert a whole column of them.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Read the result</h3>
+              <p class="step-desc">Functions are renamed and arguments reordered where the apps differ (<code>JOIN</code> → <code>TEXTJOIN</code>, <code>SPLIT</code> → <code>TEXTSPLIT</code>, <code>REGEXMATCH</code> → <code>REGEXTEST</code>…), separators and decimal marks follow your output locale, sheet references and array constants use the target syntax.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Check the report</h3>
+              <p class="step-desc">Every function used is listed with ✅ same, ⚠ renamed/rewritten or ❌ no equivalent plus the closest alternative — so you know exactly what still needs a human before the sheet goes live.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Spreadsheet Formula Converter — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Does it convert QUERY, IMPORTRANGE or ARRAYFORMULA?</summary>
+              <p>Not magically. <code>ARRAYFORMULA</code> is unwrapped for Excel (dynamic arrays spill on their own) and LibreOffice (enter it as an array formula). <code>QUERY</code>, <code>IMPORTRANGE</code>, <code>GOOGLEFINANCE</code> and friends have no Excel/Calc equivalent; they are flagged ❌ with the nearest alternative (FILTER/SORT, Power Query, STOCKHISTORY) rather than silently broken.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why are separators different between apps?</summary>
+              <p>They are not — they differ by <em>locale</em>. US/UK/India installs use a comma between arguments and a dot decimal; most European locales use a semicolon and a comma decimal. Array constants change too (<code>{1,2;3,4}</code> vs <code>{1\2;3\4}</code>, and <code>{1;2|3;4}</code> in Calc). Set the output locale to match the machine the sheet will open on.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What about functions only in new versions?</summary>
+              <p>XLOOKUP, LET, LAMBDA, FILTER, UNIQUE, VSTACK and the text-split family exist in Excel 365 and modern Sheets; LibreOffice gained XLOOKUP, FILTER, SORT, UNIQUE, SEQUENCE and LET in 24.8. The report says “Excel 365 only” or “Calc 24.8+” so you can decide whether that is fine for your users.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How does A1 → R1C1 work?</summary>
+              <p>R1C1 is relative to the cell that holds the formula, so enter that cell in Settings. <code>B2</code> seen from <code>A1</code> becomes <code>R[1]C[1]</code>; <code>$B$2</code> becomes <code>R2C2</code>. Whole columns and rows convert too.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Are LibreOffice sheet references handled?</summary>
+              <p>Yes. Calc writes <code>$Sheet1.A1</code> and <code>$'My Sheet'.A1</code> where Excel and Sheets write <code>Sheet1!A1</code> and <code>'My Sheet'!A1</code>; both directions are converted, as is <code>REGEX</code> ↔ the REGEXMATCH/EXTRACT/REPLACE family.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is my data uploaded anywhere?</summary>
+              <p>No. Parsing and converting happen in JavaScript inside your browser tab. Your text and files are never sent to Toolity or anyone else.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="data"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=5.0"></script>
+  <script src="/scripts/tool-common.js?v=1.2"></script>
+  <script src="/scripts/web-common.js?v=1.2"></script>
+  <script src="/data/spreadsheet-formula-converter/spreadsheet-formula-converter.js?v=1.0"></script>
+</body>
+</html>

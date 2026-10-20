@@ -43,6 +43,30 @@ const PDF_HELPERS = `
 `;
 
 const CASES = [
+  ['data/spreadsheet-formula-converter/', `
+    for (let i = 0; i < 80 && !(window.__sf && window.ToolityWebTool); i++) await tick(100);
+    const F = window.__sf, T = window.ToolityWebTool, O = (x) => Object.assign({ from: 'sheets', to: 'excel', srcLoc: 'auto', dstLoc: 'en', refs: 'keep', cell: 'A1', upper: true }, x);
+    let r = F.convert('=JOIN(", ",SPLIT(B2,";"))', O()); A(r.out === '=TEXTJOIN(", ",TRUE,TEXTSPLIT(B2,";"))', 'JOIN/SPLIT → TEXTJOIN/TEXTSPLIT with string commas intact: ' + r.out);
+    A(r.report.find(x => x.name === 'JOIN').status === 'renamed' && r.report.find(x => x.name === 'SPLIT').status === 'renamed', 'report marks renames');
+    r = F.convert('=ARRAYFORMULA(IF(A2:A="",,B2:B*1.5))', O()); A(r.out === '=IF(A2:A="",,B2:B*1.5)', 'ARRAYFORMULA unwrapped: ' + r.out);
+    r = F.convert('=QUERY(Data!A:D,"select A",1)', O()); A(r.report[0].status === 'no' && /FILTER/.test(r.report[0].note) && /^=QUERY\\(Data!A:D/.test(r.out), 'QUERY flagged, left intact');
+    r = F.convert('=SUMIFS(\\'Q3 Sales\\'!D:D,\\'Q3 Sales\\'!A:A,A2,B2,">="&DATE(2026,7,1))', O({ to: 'libre', dstLoc: 'eu' })); A(r.out === "=SUMIFS($'Q3 Sales'.D:D;$'Q3 Sales'.A:A;A2;B2;\\">=\\"&DATE(2026;7;1))", 'sheet refs + eu separators for Calc: ' + r.out);
+    r = F.convert('=TEXTJOIN(", ";TRUE;$Data.B2:B20)+1,5', O({ from: 'libre', to: 'excel', dstLoc: 'en' })); A(r.out === '=TEXTJOIN(", ",TRUE,Data!B2:B20)+1.5' && r.notes.some(n => /Separators changed/.test(n)), 'libre eu → excel en incl. decimal comma: ' + r.out);
+    r = F.convert('=REGEXMATCH(C2,"^INV")', O({ to: 'libre' })); A(r.out === '=NOT(ISNA(REGEX(C2,"^INV")))', 'REGEXMATCH → Calc REGEX idiom: ' + r.out);
+    r = F.convert('=REGEX(A1;"\\\\d+";"";"g")', O({ from: 'libre', to: 'sheets' })); A(r.out === '=REGEXREPLACE(A1,"\\\\d+","")', 'Calc REGEX g → REGEXREPLACE: ' + r.out);
+    r = F.convert('={1,2;3,4}', O({ to: 'libre' })); A(r.out === '={1;2|3;4}', 'array constant to Calc: ' + r.out);
+    r = F.convert('={1,2;3,4}', O({ to: 'excel', dstLoc: 'eu' })); A(r.out === '={1\\\\2;3\\\\4}', 'array constant EU: ' + r.out);
+    r = F.convert('=XLOOKUP(A2,B:B,C:C)&FLATTEN(D2:F2)', O({ to: 'excel' })); A(r.out === '=XLOOKUP(A2,B:B,C:C)&TOCOL(D2:F2)' && r.report.find(x => x.name === 'XLOOKUP').status === 'ver', 'version-gated + FLATTEN→TOCOL: ' + r.out);
+    A(F.a1ToR1C1('B2', 'A1') === 'R[1]C[1]' && F.a1ToR1C1('$B$2', 'C5') === 'R2C2' && F.a1ToR1C1('A:A', 'C1') === 'C[-2]' && F.a1ToR1C1('B2:D4', 'B2') === 'RC:R[2]C[2]', 'A1→R1C1: ' + [F.a1ToR1C1('B2', 'A1'), F.a1ToR1C1('$B$2', 'C5'), F.a1ToR1C1('A:A', 'C1'), F.a1ToR1C1('B2:D4', 'B2')]);
+    A(F.r1c1ToA1('R[1]C[1]', 'A1') === 'B2' && F.r1c1ToA1('R2C2', 'Z9') === '$B$2' && F.r1c1ToA1('RC', 'D4') === 'D4', 'R1C1→A1: ' + [F.r1c1ToA1('R[1]C[1]', 'A1'), F.r1c1ToA1('R2C2', 'Z9'), F.r1c1ToA1('RC', 'D4')]);
+    r = F.convert('=SUM(B2:B9)*$C$1', O({ refs: 'r1c1', cell: 'B10' })); A(r.out === '=SUM(R[-8]C:R[-1]C)*R1C3', 'refs option r1c1: ' + r.out);
+    r = F.convert('=COUNTUNIQUE(A2:A100)', O()); A(r.out === '=ROWS(UNIQUE(TOCOL(A2:A100)))', 'COUNTUNIQUE rewrite: ' + r.out);
+    A(F.detectLocale('=SUM(A1;B1)') === 'eu' && F.detectLocale('=SUM(A1,B1)') === 'en' && F.detectLocale('=IF(A1;"a,b";1,5)') === 'eu', 'locale detection');
+    $('btn-sample').click(); A(await waitFor(() => T.S.out && $('sf-report').querySelectorAll('tbody tr').length > 5, 10000), 'sample converts');
+    A($('sf-report').querySelector('tr.is-no') && /missing/.test($('output-badge').textContent) && /6 formulas/.test($('input-count').textContent), 'report rows + badge: ' + $('output-badge').textContent);
+    $('btn-swap').click(); await tick(400); A($('opt-from').value === 'excel' && $('opt-to').value === 'sheets' && /Excel → Google Sheets/.test($('input-count').textContent), 'swap direction');
+    set('opt-to', 'excel'); await tick(300); A(/Pick two different apps/.test($('status-badge').textContent), 'same app guard');
+    const csv = await T.T.download('csv'); A(/^function,status,note/.test(csv.text) && csv.text.trim().split('\\n').length > 3, 'csv report: ' + csv.text.split('\\n').length);`],
   ['labs/responsive-breakpoint-previewer/', `
     for (let i = 0; i < 80 && !(window.__rb && window.ToolityWebTool); i++) await tick(100);
     const R = window.__rb, T = window.ToolityWebTool;
