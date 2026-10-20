@@ -16,6 +16,7 @@ const RUNTIME = {
   gif: '  <script src="/scripts/gif-common.js?v=1.0"></script>\n',
   video: '  <script src="/scripts/video-common.js?v=1.1"></script>\n',
   image: '  <script src="/scripts/image-common.js?v=1.0"></script>\n',
+  mockup: '  <script src="/scripts/mockup-common.js?v=1.0"></script>\n',
 };
 const LIBS = { jszip: '  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js" defer></script>\n', 'webp-anim': '  <script src="/scripts/webp-anim.js?v=1.0"></script>\n' };
 
@@ -123,7 +124,7 @@ function page(t) {
   <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 
   <link rel="stylesheet" href="/styles/main.css?v=${CSS_V}">
-${t.css ? `  <link rel="stylesheet" href="/styles/tools/${t.slug}.css?v=1.0">\n` : ''}
+${t.css ? `  <link rel="stylesheet" href="/styles/tools/${t.cssFile || t.slug}.css?v=1.0">\n` : ''}
   <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
   <script type="application/ld+json">
   {

@@ -4394,3 +4394,33 @@ main[id="main"] { scroll-margin-top: var(--header-height); }
 /* Field-level error text wired by Toolity.setFieldError (F10) */
 .field-error { margin: 0.35rem 0 0; font-size: 0.8rem; color: var(--brand-ink); }
 .field-error[hidden] { display: none; }
+
+/* ==========================================================================
+   Mockup editor form (Chat Mockup · Social Post Mockups) — page-only; the preview/export CSS is styles/tools/mockup.css
+   ========================================================================== */
+.mk-form { display: flex; flex-direction: column; gap: 0.6rem; width: 100%; }
+.mk-row { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: flex-end; }
+.mk-field { display: flex; flex-direction: column; gap: 0.2rem; font-size: 0.74rem; color: var(--text-secondary); min-width: 0; }
+.mk-field > span { font-weight: 500; }
+.mk-field small { font-weight: 400; color: var(--text-muted); }
+.mk-grow { flex: 1 1 120px; }
+.mk-file input { font-size: 0.75rem; max-width: 150px; }
+.mk-short { max-width: 5rem; }
+.mk-msgs-head { display: flex; justify-content: space-between; align-items: center; margin-top: 0.3rem; font-size: 0.8rem; font-weight: 600; color: var(--text-primary); }
+.mk-msg-list { display: flex; flex-direction: column; gap: 0.5rem; max-height: 420px; overflow: auto; padding-right: 2px; }
+.mk-msg-row { border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.45rem; display: flex; flex-direction: column; gap: 0.35rem; background: var(--surface); }
+.mk-msg-top { display: flex; gap: 0.3rem; flex-wrap: wrap; align-items: center; }
+.mk-msg-top .select-clean, .mk-msg-top .input-clean { font-size: 0.76rem; padding: 0.25rem 0.4rem; }
+.mk-side { width: 5.2rem; } .mk-type { width: 6.6rem; } .mk-time { width: 4.2rem; } .mk-status { width: 6.2rem; } .mk-react { width: 6.4rem; }
+.mk-msg-ops { margin-left: auto; display: flex; gap: 0.2rem; }
+.mk-msg-ops .btn-toolbar-sm { padding: 0.15rem 0.45rem; }
+.mk-text { width: 100%; font-size: 0.86rem; resize: vertical; min-height: 2.4em; }
+.mk-stage { display: none; width: 390px; max-width: 100%; margin: 0 auto; }
+.mk-stage.is-shown { display: block; }
+.media-canvas-viewport:has(.mk-stage.is-shown) { align-items: flex-start; overflow: auto; }
+
+
+.mk-field[hidden], .mk-img[hidden], .mk-voice[hidden] { display: none; }
+.media-canvas-viewport .mk-form input[type="file"] { display: block; }
+.media-canvas-viewport:has(.mk-form), .media-canvas-viewport:has(.mk-stage.is-shown) { height: auto; min-height: 280px; align-items: flex-start; justify-content: flex-start; overflow: visible; padding: 0.75rem; }
+.media-canvas-viewport:has(.mk-stage.is-shown) { justify-content: center; background: var(--surface); }

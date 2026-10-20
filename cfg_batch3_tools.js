@@ -72,5 +72,58 @@ module.exports = [
       ['Can the background be transparent?', 'For WhatsApp and static stickers, yes — record against a green or blue screen and turn on <em>Transparent background</em>; the key colour is sampled from the corners. Telegram video stickers are encoded by the browser’s VP9 recorder, which cannot carry an alpha channel, so they stay opaque.'],
       ['My clip is longer than 3 seconds — what happens?', 'With <em>Speed up to fit</em> on (default) the selected range is played faster so it lands at exactly 3 s (Telegram) or 10 s (WhatsApp). Turn it off to be told to trim instead.'],
       ['Why does encoding take as long as the clip?', 'The browser’s MediaRecorder encodes in real time, and if the first result is over the size cap it is re-encoded at a lower bitrate — a 3 s sticker takes 3–9 s. Keep the tab visible while it runs.']]
+  },
+
+  /* ═══════════ 3. CHAT MOCKUP ═══════════ */
+  {
+    slug: 'chat-mockup', name: 'Chat Mockup', icon: 'lucide:message-square-text', section: 'Image Tools', runtime: 'mockup', css: true, cssFile: 'mockup', actionEnabled: true, split: '45/55', idle: 'Live preview',
+    desc: 'Free online chat mockup generator: create realistic fake WhatsApp, iMessage, Instagram DM, Telegram, Messenger, Discord, Slack and Google Messages conversations with avatars, read receipts, reactions, images and voice notes — exported as a sharp PNG, made in your browser.',
+    lead: 'Build a realistic WhatsApp, iMessage, Instagram, Telegram, Messenger, Discord, Slack or Android chat — bubbles, ticks, reactions, voice notes and images — and export it as a crisp PNG.',
+    cardDesc: 'Fake WhatsApp, iMessage, Instagram, Telegram, Discord or Slack chats as PNG.',
+    tags: ['chat mockup', 'fake chat', 'whatsapp chat generator', 'imessage generator', 'fake text message', 'instagram dm generator', 'telegram chat', 'discord message generator', 'slack message', 'fake conversation', 'chat screenshot', 'mockup', 'meme'],
+    action: 'Export PNG', actionIcon: 'lucide:image-down', copyTitle: 'Copy PNG to clipboard', downloadTitle: 'Download PNG',
+    source: { label: 'Conversation', badge: 'Edit on the left', html: `
+                  <div class="mk-form" id="mk-form">
+                    <div class="mk-row">
+                      <label class="mk-field mk-grow"><span>App</span><select id="opt-platform" class="select-clean">
+                        <option value="whatsapp" selected>WhatsApp</option><option value="imessage">iMessage</option><option value="instagram">Instagram DM</option><option value="telegram">Telegram</option><option value="messenger">Messenger</option><option value="android">Google Messages</option><option value="discord">Discord</option><option value="slack">Slack</option></select></label>
+                      <label class="mk-field"><span>Theme</span><select id="opt-theme" class="select-clean"><option value="light" selected>Light</option><option value="dark">Dark</option></select></label>
+                    </div>
+                    <div class="mk-row">
+                      <label class="mk-field mk-grow"><span>Contact name</span><input type="text" id="ct-name" class="input-clean" placeholder="e.g. Priya" maxlength="40"></label>
+                      <label class="mk-field mk-grow"><span>Status line</span><input type="text" id="ct-status" class="input-clean" placeholder="online · last seen · typing…" maxlength="40"></label>
+                      <label class="mk-field mk-file"><span>Avatar</span><input type="file" id="ct-avatar" accept="image/*" data-image="contact" aria-label="Contact avatar"></label>
+                    </div>
+                    <div class="mk-row">
+                      <label class="mk-field mk-grow"><span>Your name <small>(Discord / Slack)</small></span><input type="text" id="me-name" class="input-clean" placeholder="You" maxlength="40"></label>
+                      <label class="mk-field mk-file"><span>Your avatar</span><input type="file" id="me-avatar" accept="image/*" data-image="me" aria-label="Your avatar"></label>
+                    </div>
+                    <div class="mk-msgs-head"><span>Messages</span><button type="button" class="btn-toolbar-sm" id="btn-add-msg"><iconify-icon icon="lucide:plus" width="14" height="14"></iconify-icon><span>Add message</span></button></div>
+                    <div id="msg-list" class="mk-msg-list" role="list" aria-label="Messages"></div>
+                  </div>` },
+    output: { label: 'Preview', badge: 'Live', icon: 'lucide:smartphone', empty: 'The chat preview appears here', html: `
+                  <div id="mockup-stage" class="mk-stage"></div>` },
+    settingsSummary: 'Status bar · 2×',
+    settings: check('opt-statusbar', 'Show phone status bar', true)
+      + ctl(`
+                <label for="opt-time">Clock</label>
+                <input type="text" id="opt-time" class="input-clean mk-short" value="9:41" maxlength="5" aria-label="Status bar clock">`)
+      + range('opt-battery', 'Battery', 1, 100, 1, 86, '86%')
+      + check('opt-frame', 'Phone frame with rounded corners', true)
+      + check('opt-header', 'Show chat header', true)
+      + check('opt-composer', 'Show message box at the bottom', true)
+      + ctl(`
+                <label for="opt-divider">Date divider</label>
+                <input type="text" id="opt-divider" class="input-clean" placeholder="Today" maxlength="24">`)
+      + check('opt-typing', 'Typing indicator at the end', false)
+      + select('opt-scale', 'Export resolution', [['1', '1× (390 px wide)'], ['2', '2× (780 px — sharp on phones)', 1], ['3', '3× (1170 px — print / 4K)']])
+      + check('opt-credit', 'Show “Made with Toolity.in” credit', true),
+    guide: [['Pick the app and the people', 'Choose WhatsApp, iMessage, Instagram, Telegram, Messenger, Google Messages, Discord or Slack. Type the contact’s name and status and drop in avatars if you want them.'], ['Write the messages', 'Add a message per line of the conversation: who sent it, the text (emoji work), the time, delivered/read ticks, a reaction — or switch a message to an image or a voice note.'], ['Export the PNG', 'The preview updates as you type. Click <strong>Export PNG</strong> for a 2× or 3× image, then download it or copy it straight into a document or post.']],
+    faq: [['Is any of this sent to a server?', 'No. The chat is rendered as HTML in your tab and converted to a PNG on a canvas in the page. Names, messages and avatars never leave your device.'],
+      ['How close is it to the real apps?', 'Colours, bubble shapes, ticks, timestamps, the status bar and the composer follow each app’s current design, using the system UI font like the apps do. It is a mockup for presentations, tutorials, memes and UX work — not a tool for deceiving people; please label fabricated screenshots as such.'],
+      ['Can I add photos and voice notes?', 'Yes — change a message’s type to <em>Image</em> and upload a picture, or to <em>Voice note</em> and set a duration; it draws a waveform bubble like the real apps.'],
+      ['Which platforms show read receipts?', 'WhatsApp and Telegram show grey/blue double ticks, Google Messages shows “Delivered / Read”, iMessage shows “Delivered” or “Read” under your last bubble, Messenger and Instagram show the seen avatar. Discord and Slack have no receipts, so the option is hidden there.'],
+      ['Why is the export sharp but the text size looks different from my phone?', 'The mockup is laid out at 390 CSS px (an iPhone-class width) and exported at 2× or 3× so it is crisp. Your phone may use a larger system text size; the proportions match the default setting.'],
+      ['Can I remove the Toolity credit?', 'Yes — untick <em>Show “Made with Toolity.in” credit</em> under Settings before exporting.']]
   }
 ];

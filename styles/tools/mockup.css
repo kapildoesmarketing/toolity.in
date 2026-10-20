@@ -1,0 +1,109 @@
+/* Mockup family stylesheet — shared by Chat Mockup and Social Post Mockups (loaded on the page AND inlined into the PNG export).
+   Designed by Kapil Pidhwani: one file instead of two ≤120-line one-offs because the export must embed exactly what the preview uses.
+   No filters / backdrop-filter / external URLs here — they break foreignObject rasterisation. Platform looks = CSS variables.
+   Editor-form rules (.mk-form, .mk-msg-row …) live in main.css: page-only, shared by both tools. */
+
+/* ── mockup root ── */
+.mk { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji"; font-size: 15px; line-height: 1.3; width: 100%; box-sizing: border-box; display: flex; flex-direction: column; background: var(--bg); color: var(--fg); min-height: 420px; position: relative; }
+.mk *, .mk *::before, .mk *::after { box-sizing: border-box; }
+.mk.framed { border-radius: 38px; overflow: hidden; border: 1px solid rgba(0, 0, 0, 0.12); }
+.mk-credit { font-size: 10px; color: var(--meta); opacity: 0.75; text-align: right; padding: 4px 14px 6px; background: var(--bg); }
+.mk-avatar { border-radius: 50%; object-fit: cover; flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; color: #fff; font-weight: 600; letter-spacing: 0.02em; }
+.mk-link { color: var(--link); }
+.mk-ph { opacity: 0.45; }
+
+/* status bar */
+.mk-statusbar { display: flex; justify-content: space-between; align-items: center; height: 44px; padding: 10px 22px 0; font-weight: 600; font-size: 15px; background: var(--hdr); color: var(--hdr-fg); }
+.mk-sb-right { display: inline-flex; align-items: center; gap: 5px; }
+.mk-batt { width: 25px; height: 12px; border: 1.5px solid currentColor; border-radius: 4px; padding: 1.5px; display: inline-flex; opacity: 0.9; position: relative; }
+.mk-batt::after { content: ''; position: absolute; right: -4px; top: 3px; width: 2px; height: 4px; background: currentColor; border-radius: 0 1px 1px 0; }
+.mk-batt i { display: block; height: 100%; background: currentColor; border-radius: 1.5px; }
+.mk-batt i.is-low { background: #ff3b30; }
+
+/* header */
+.mk-header { display: flex; align-items: center; gap: 10px; min-height: 56px; padding: 6px 12px; background: var(--hdr); color: var(--hdr-fg); border-bottom: 1px solid var(--hairline); }
+.mk-back { font-size: 32px; line-height: 1; margin-top: -4px; color: var(--accent); }
+.mk-hname { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+.mk-hname b { font-weight: 600; font-size: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mk-status { font-size: 12px; color: var(--meta); }
+.mk-hicons { display: inline-flex; gap: 18px; color: var(--accent); }
+.mk-dot { width: 9px; height: 9px; border-radius: 50%; background: #2bac76; display: inline-block; margin: 0 6px 0 10px; }
+.mk-hash { font-size: 22px; color: var(--meta); }
+
+/* body + bubbles */
+.mk-body { flex: 1; padding: 10px 12px 14px; display: flex; flex-direction: column; gap: 2px; background: var(--body); }
+.mk-divider { text-align: center; margin: 4px 0 8px; }
+.mk-divider span { font-size: 12px; color: var(--meta); background: var(--divider); padding: 4px 10px; border-radius: 8px; }
+.mk-m { display: flex; align-items: flex-end; gap: 6px; max-width: 100%; }
+.mk-m.me { justify-content: flex-end; }
+.mk-m.first { margin-top: 8px; }
+.mk-b { position: relative; max-width: 76%; padding: 7px 10px 6px; border-radius: var(--r); background: var(--them); color: var(--them-fg); box-shadow: var(--shadow); word-wrap: break-word; overflow-wrap: anywhere; }
+.mk-m.me .mk-b { background: var(--me); color: var(--me-fg); }
+.mk-m.them.first .mk-b { border-top-left-radius: var(--r-tail); }
+.mk-m.me.first .mk-b { border-top-right-radius: var(--r-tail); }
+.mk-txt { white-space: pre-wrap; }
+.mk-meta { float: right; margin: 6px -2px -4px 8px; font-size: 11px; color: var(--meta); display: inline-flex; align-items: center; gap: 3px; line-height: 1; }
+.mk-m.me .mk-meta { color: var(--me-meta); }
+.mk-tick { color: currentColor; opacity: 0.85; }
+.mk-tick.is-read { color: var(--read); opacity: 1; }
+.mk-react { position: absolute; bottom: -12px; right: 6px; background: var(--react-bg); border: 1px solid var(--hairline); border-radius: 12px; padding: 1px 5px; font-size: 13px; line-height: 1.25; }
+.mk-m.me .mk-react { right: auto; left: 6px; }
+.mk-m:has(.mk-react) { margin-bottom: 12px; }
+.mk-label { width: 100%; text-align: right; font-size: 11px; color: var(--meta); margin-top: 2px; padding-right: 4px; }
+.mk-seen { display: inline-flex; margin-left: 2px; }
+.mk-bav, .mk-bav-spacer { width: 24px; flex-shrink: 0; }
+.mk-pic { display: block; max-width: 240px; max-height: 300px; border-radius: 12px; margin: -3px -6px 2px; }
+.mk-pic-empty { width: 200px; height: 130px; display: flex; align-items: center; justify-content: center; background: rgba(0, 0, 0, 0.08); color: var(--meta); font-size: 12px; }
+.mk-voice { display: inline-flex; align-items: center; gap: 8px; min-width: 200px; }
+.mk-play { font-size: 14px; opacity: 0.85; }
+.mk-wave { display: inline-flex; align-items: center; gap: 2px; height: 20px; }
+.mk-wave i { width: 2.5px; border-radius: 2px; background: currentColor; opacity: 0.6; display: block; }
+.mk-dur { font-size: 12px; opacity: 0.8; }
+.mk-typing { display: inline-flex; gap: 4px; padding: 10px 12px; }
+.mk-typing i, .mk-l-typing i { width: 7px; height: 7px; border-radius: 50%; background: var(--meta); display: inline-block; opacity: 0.6; }
+.mk-typing i:nth-child(2), .mk-l-typing i:nth-child(2) { opacity: 0.8; } .mk-typing i:nth-child(3), .mk-l-typing i:nth-child(3) { opacity: 1; }
+
+/* composer */
+.mk-composer { display: flex; align-items: center; gap: 10px; padding: 8px 12px 10px; background: var(--hdr); color: var(--meta); border-top: 1px solid var(--hairline); }
+.mk-plus { font-size: 26px; line-height: 1; color: var(--accent); }
+.mk-input { flex: 1; border: 1px solid var(--hairline); border-radius: 20px; padding: 8px 14px; background: var(--input); font-size: 15px; }
+.mk-mic { color: var(--accent); display: inline-flex; }
+
+/* linear (Discord / Slack) */
+.mk-l { display: flex; gap: 12px; padding: 2px 4px; margin-top: 12px; }
+.mk-l.cont { margin-top: 0; padding-left: 4px; }
+.mk-l.cont .mk-l-time { width: 40px; font-size: 10px; opacity: 0; text-align: right; padding-top: 4px; flex-shrink: 0; }
+.mk-l-av { width: 40px; height: 40px; border-radius: var(--av-r); }
+.mk-l-body { flex: 1; min-width: 0; }
+.mk-l-head { display: flex; align-items: baseline; gap: 8px; }
+.mk-l-head b { font-size: 15px; font-weight: 600; }
+.mk-l-time { font-size: 11.5px; color: var(--meta); }
+.mk-l-text { font-size: 15px; white-space: pre-wrap; }
+.mk-l-react { display: inline-flex; margin-top: 4px; font-size: 13px; padding: 2px 7px; border-radius: 8px; background: var(--react-bg); border: 1px solid var(--hairline); }
+.mk-l-typing { font-size: 12px; color: var(--meta); padding: 8px 4px 0; }
+
+/* ── platform palettes ── */
+.p-whatsapp { --bg: #efeae2; --body: #efeae2; --fg: #111b21; --hdr: #f0f2f5; --hdr-fg: #111b21; --hairline: #d1d7db; --accent: #008069; --them: #fff; --them-fg: #111b21; --me: #d9fdd3; --me-fg: #111b21; --meta: #667781; --me-meta: #667781; --read: #53bdeb; --r: 10px; --r-tail: 2px; --shadow: 0 1px 0.5px rgba(11, 20, 26, 0.13); --divider: #fff; --input: #fff; --react-bg: #fff; --link: #027eb5; }
+.p-whatsapp.dark { --bg: #0b141a; --body: #0b141a; --fg: #e9edef; --hdr: #202c33; --hdr-fg: #e9edef; --hairline: #2a3942; --accent: #00a884; --them: #202c33; --them-fg: #e9edef; --me: #005c4b; --me-fg: #e9edef; --meta: #8696a0; --me-meta: #99beb7; --read: #53bdeb; --divider: #182229; --input: #2a3942; --react-bg: #233138; --link: #53bdeb; }
+.p-imessage { --bg: #fff; --body: #fff; --fg: #000; --hdr: #f6f6f6; --hdr-fg: #000; --hairline: #d8d8dc; --accent: #007aff; --them: #e9e9eb; --them-fg: #000; --me: #1982fc; --me-fg: #fff; --meta: #8a8a8e; --me-meta: rgba(255, 255, 255, 0.75); --read: #fff; --r: 20px; --r-tail: 20px; --shadow: none; --divider: transparent; --input: #fff; --react-bg: #e9e9eb; --link: #0a60ff; font-size: 16px; }
+.p-imessage.dark { --bg: #000; --body: #000; --fg: #fff; --hdr: #1c1c1e; --hdr-fg: #fff; --hairline: #3a3a3c; --accent: #0a84ff; --them: #26252a; --them-fg: #fff; --me: #0a84ff; --me-fg: #fff; --meta: #8d8d93; --input: #1c1c1e; --react-bg: #26252a; --link: #409cff; }
+.p-imessage .mk-m.me .mk-meta, .p-imessage .mk-m.them .mk-meta, .p-instagram .mk-meta, .p-messenger .mk-meta, .p-android .mk-m.me .mk-meta { display: none; }
+.p-imessage .mk-m.me.last .mk-b { border-bottom-right-radius: 4px; } .p-imessage .mk-m.them.last .mk-b { border-bottom-left-radius: 4px; }
+.p-instagram { --bg: #fff; --body: #fff; --fg: #000; --hdr: #fff; --hdr-fg: #000; --hairline: #dbdbdb; --accent: #000; --them: #efefef; --them-fg: #000; --me: #3797f0; --me-fg: #fff; --meta: #737373; --me-meta: #fff; --read: #fff; --r: 22px; --r-tail: 22px; --shadow: none; --divider: transparent; --input: #fff; --react-bg: #fff; --link: #00376b; }
+.p-instagram.dark { --bg: #000; --body: #000; --fg: #f5f5f5; --hdr: #000; --hdr-fg: #f5f5f5; --hairline: #262626; --accent: #f5f5f5; --them: #262626; --them-fg: #f5f5f5; --me: #3797f0; --meta: #a8a8a8; --input: #000; --react-bg: #262626; --link: #e0f1ff; }
+.p-instagram .mk-m.them.last .mk-b { border-bottom-left-radius: 4px; } .p-instagram .mk-m.me.last .mk-b { border-bottom-right-radius: 4px; }
+.p-telegram { --bg: #dfe7ee; --body: #dfe7ee; --fg: #000; --hdr: #fff; --hdr-fg: #000; --hairline: #e0e0e0; --accent: #3390ec; --them: #fff; --them-fg: #000; --me: #effdde; --me-fg: #000; --meta: #a1aab3; --me-meta: #62ac55; --read: #62ac55; --r: 14px; --r-tail: 4px; --shadow: 0 1px 2px rgba(16, 35, 47, 0.15); --divider: rgba(255, 255, 255, 0.85); --input: #fff; --react-bg: #fff; --link: #3390ec; }
+.p-telegram.dark { --bg: #0f0f0f; --body: #0f0f0f; --fg: #fff; --hdr: #212121; --hdr-fg: #fff; --hairline: #2c2c2c; --accent: #8774e1; --them: #212121; --them-fg: #fff; --me: #766ac8; --me-fg: #fff; --meta: #aaa; --me-meta: rgba(255, 255, 255, 0.7); --read: #fff; --divider: rgba(0, 0, 0, 0.4); --input: #2c2c2c; --react-bg: #2c2c2c; --link: #8774e1; }
+.p-messenger { --bg: #fff; --body: #fff; --fg: #050505; --hdr: #fff; --hdr-fg: #050505; --hairline: #e4e6eb; --accent: #0084ff; --them: #f0f0f0; --them-fg: #050505; --me: #0084ff; --me-fg: #fff; --meta: #65676b; --me-meta: #fff; --read: #fff; --r: 18px; --r-tail: 18px; --shadow: none; --divider: transparent; --input: #f0f2f5; --react-bg: #fff; --link: #fff; }
+.p-messenger.dark { --bg: #000; --body: #000; --fg: #e4e6eb; --hdr: #000; --hdr-fg: #e4e6eb; --hairline: #2f3031; --accent: #0084ff; --them: #303030; --them-fg: #e4e6eb; --meta: #b0b3b8; --input: #3a3b3c; --react-bg: #303030; }
+.p-messenger .mk-m.them.last .mk-b { border-bottom-left-radius: 4px; } .p-messenger .mk-m.me.last .mk-b { border-bottom-right-radius: 4px; }
+.p-android { --bg: #fff; --body: #fff; --fg: #1f1f1f; --hdr: #fff; --hdr-fg: #1f1f1f; --hairline: #e3e3e3; --accent: #0b57d0; --them: #f0f4f9; --them-fg: #1f1f1f; --me: #d3e3fd; --me-fg: #041e49; --meta: #444746; --me-meta: #444746; --read: #0b57d0; --r: 20px; --r-tail: 20px; --shadow: none; --divider: transparent; --input: #f0f4f9; --react-bg: #fff; --link: #0b57d0; }
+.p-android.dark { --bg: #131314; --body: #131314; --fg: #e3e3e3; --hdr: #131314; --hdr-fg: #e3e3e3; --hairline: #444746; --accent: #a8c7fa; --them: #2d2f31; --them-fg: #e3e3e3; --me: #004a77; --me-fg: #c2e7ff; --meta: #c4c7c5; --me-meta: #c4c7c5; --input: #2d2f31; --react-bg: #2d2f31; --link: #a8c7fa; }
+.p-android .mk-m.them.last .mk-b { border-bottom-left-radius: 4px; } .p-android .mk-m.me.last .mk-b { border-bottom-right-radius: 4px; }
+.p-discord { --bg: #313338; --body: #313338; --fg: #dbdee1; --hdr: #313338; --hdr-fg: #f2f3f5; --hairline: #26272b; --accent: #dbdee1; --meta: #949ba4; --react-bg: #2b2d31; --input: #383a40; --av-r: 50%; --link: #00a8fc; --divider: transparent; font-size: 16px; }
+.p-discord.light { --bg: #fff; --body: #fff; --fg: #313338; --hdr: #fff; --hdr-fg: #060607; --hairline: #e3e5e8; --accent: #313338; --meta: #5c5e66; --react-bg: #f2f3f5; --input: #ebedef; }
+.p-discord .mk-input { border-radius: 8px; }
+.p-slack { --bg: #fff; --body: #fff; --fg: #1d1c1d; --hdr: #fff; --hdr-fg: #1d1c1d; --hairline: #dddddd; --accent: #1d1c1d; --meta: #616061; --react-bg: #f8f8f8; --input: #fff; --av-r: 6px; --link: #1264a3; --divider: transparent; }
+.p-slack.dark { --bg: #1a1d21; --body: #1a1d21; --fg: #d1d2d3; --hdr: #1a1d21; --hdr-fg: #d1d2d3; --hairline: #35373b; --accent: #d1d2d3; --meta: #ababad; --react-bg: #222529; --input: #222529; }
+.p-slack .mk-input { border-radius: 8px; border-color: #868686; }
+.p-slack .mk-l-head b { font-weight: 700; }

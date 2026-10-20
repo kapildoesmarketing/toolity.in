@@ -79,6 +79,38 @@ const CASES = [
     feed(new File([await (await fetch('/scratch/green.mp4')).arrayBuffer()], 'green.mp4', { type: 'video/mp4' })); A(await waitFor(() => T.S.file && T.S.dur > 1.5), 'green load'); await tick(400);
     set('opt-platform', 'static'); set('opt-chroma', true); await go(T, 20000);
     let p = await pixel(T.S.out, 4, 4); A(p[3] === 0, 'keyed corner transparent: ' + p); p = await pixel(T.S.out, 256, 256); A(p[0] > 180 && p[1] < 90 && p[3] > 200, 'centre red kept: ' + p);`],
+  ['media/chat-mockup/', `
+    A(await waitFor(() => window.__cm, 8000), 'mount'); const api = window.__cm.api, list = window.__cm.list;
+    A($('mockup-stage').classList.contains('is-shown') && $('mockup-stage').querySelector('.mk.p-whatsapp'), 'live preview rendered: ' + $('mockup-stage').innerHTML.slice(0, 80));
+    A(list.children.length === 2, 'two seed rows');
+    set('ct-name', 'Priya'); const rows = () => [...list.children];
+    rows()[0].querySelector('.mk-text').value = 'Hey 👋'; rows()[0].querySelector('.mk-text').dispatchEvent(new Event('input', { bubbles: true }));
+    rows()[1].querySelector('.mk-text').value = 'Hi! https://toolity.in #tools'; rows()[1].querySelector('.mk-text').dispatchEvent(new Event('input', { bubbles: true }));
+    rows()[1].querySelector('.mk-react').value = '❤️'; rows()[1].querySelector('.mk-react').dispatchEvent(new Event('change', { bubbles: true }));
+    await tick(400); const st = $('mockup-stage');
+    A(st.querySelectorAll('.mk-m').length === 2 && st.querySelector('.mk-m.them .mk-txt').textContent.includes('Hey'), 'bubbles render');
+    A(st.querySelector('.mk-m.me .mk-tick.is-read'), 'whatsapp read ticks'); A(st.querySelector('.mk-m.me .mk-react').textContent === '❤️', 'reaction'); A(st.querySelectorAll('.mk-link').length === 2, 'linkify url + hashtag: ' + st.querySelectorAll('.mk-link').length);
+    A(st.querySelector('.mk-header b').textContent === 'Priya' && st.querySelector('.mk-statusbar') && st.querySelector('.mk-credit'), 'header/statusbar/credit');
+    // add a voice note, reorder, delete
+    $('btn-add-msg').click(); await tick(200); A(rows().length === 3 && rows()[2].querySelector('.mk-side').value === 'them', 'add alternates sender');
+    set(rows()[2].querySelector('.mk-type').id || (rows()[2].querySelector('.mk-type').id = 'tmp-type'), 'voice'); await tick(300); A(st.querySelector('.mk-voice .mk-wave') && st.querySelector('.mk-dur').textContent === '0:14', 'voice bubble');
+    rows()[2].querySelector('.mk-up').click(); await tick(300); A(rows()[1].querySelector('.mk-type').value === 'voice', 'move up');
+    rows()[1].querySelector('.mk-del').click(); await tick(300); A(rows().length === 2 && !st.querySelector('.mk-voice'), 'delete');
+    // platforms
+    set('opt-platform', 'imessage'); await tick(300); A(st.querySelector('.mk.p-imessage') && st.querySelector('.mk-label') && /Read/.test(st.querySelector('.mk-label').textContent), 'imessage Read label');
+    set('opt-platform', 'discord'); await tick(300); A(st.querySelector('.mk.p-discord .mk-l') && rows()[1].querySelector('.mk-status').hidden, 'discord linear + status hidden');
+    set('opt-platform', 'slack'); set('opt-theme', 'dark'); await tick(300); A(st.querySelector('.mk.p-slack.dark .mk-l-head b'), 'slack dark');
+    set('opt-platform', 'telegram'); set('opt-typing', true); set('opt-divider', 'Today'); await tick(300); A(st.querySelector('.mk-typing') && st.querySelector('.mk-divider span').textContent === 'Today', 'typing + divider');
+    set('opt-credit', false); await tick(300); A(!st.querySelector('.mk-credit'), 'credit removable'); set('opt-credit', true);
+    // export @2x → PNG 780 wide, non-white pixel in a bubble
+    set('opt-platform', 'whatsapp'); set('opt-theme', 'light'); await tick(300); await go(api, 30000);
+    A(api.S.out && api.S.out.type === 'image/png' && api.S.outW === 780, 'png 2x: ' + (api.S.out && api.S.out.type) + ' ' + api.S.outW);
+    const img = await imgOf(api.S.out); A(img.naturalHeight > 600, 'export height ' + img.naturalHeight);
+    const c = document.createElement('canvas'); c.width = img.naturalWidth; c.height = img.naturalHeight; const g = c.getContext('2d'); g.drawImage(img, 0, 0);
+    const me = st.querySelector('.mk-m.me .mk-b').getBoundingClientRect(), root = st.firstElementChild.getBoundingClientRect(); const px = g.getImageData(Math.round((me.left - root.left + 10) * 2), Math.round((me.top - root.top + 10) * 2), 1, 1).data;
+    A(px[1] > 230 && px[0] > 200 && px[2] < 230, 'me bubble is WhatsApp green in the PNG: ' + [...px]);
+    set('opt-scale', '3'); await tick(300); await go(api, 30000); A(api.S.outW === 1170, '3x width ' + api.S.outW);
+    $('btn-reset').click(); await tick(300); A(list.children.length === 2 && $('ct-name').value === '' && $('opt-platform').value === 'whatsapp' && st.classList.contains('is-shown'), 'reset reseeds + still previews');`],
 ];
 
 (async () => {
