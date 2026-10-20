@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Responsive Breakpoint Previewer | Toolity Labs</title>
+  <link rel="canonical" href="https://toolity.in/labs/responsive-breakpoint-previewer/">
+  <meta name="description" content="Free online responsive design tester: paste HTML/CSS or a page URL and see it rendered side by side at phone, tablet and desktop widths (320 to 1440 px, plus custom), scaled to fit, with synced scrolling, landscape toggle and dark-scheme preview. Runs in your browser — nothing uploaded.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Responsive Breakpoint Previewer | Toolity Labs">
+  <meta property="og:description" content="Free online responsive design tester: paste HTML/CSS or a page URL and see it rendered side by side at phone, tablet and desktop widths (320 to 1440 px, plus custom), scaled to fit, with synced scrolling, landscape toggle and dark-scheme preview. Runs in your browser — nothing uploaded.">
+  <meta property="og:url" content="https://toolity.in/labs/responsive-breakpoint-previewer/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=6.4" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=6.4">
+  <link rel="stylesheet" href="/styles/tools/responsive-breakpoint-previewer.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Responsive Breakpoint Previewer",
+        "url": "https://toolity.in/labs/responsive-breakpoint-previewer/",
+        "description": "Free online responsive design tester: paste HTML/CSS or a page URL and see it rendered side by side at phone, tablet and desktop widths (320 to 1440 px, plus custom), scaled to fit, with synced scrolling, landscape toggle and dark-scheme preview. Runs in your browser — nothing uploaded.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Labs", "item": "https://toolity.in/labs/" },
+          { "@type": "ListItem", "position": 3, "name": "Responsive Breakpoint Previewer", "item": "https://toolity.in/labs/responsive-breakpoint-previewer/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Why can’t it show a live third-party site in an iframe?", "acceptedAnswer": { "@type": "Answer", "text": "Most sites send X-Frame-Options or a CSP frame-ancestors header that forbids embedding, so a live iframe would simply be blank. Instead the tool fetches the HTML (directly or via a public read-only relay, see Privacy) and renders that snapshot with a &lt;base href&gt; so assets load. Pages behind logins or heavy client-side apps may render partially — paste the rendered DOM from DevTools in that case." } },
+          { "@type": "Question", "name": "Are the widths real viewports?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Each iframe is laid out at the exact CSS pixel width (and height) you see, so media queries, container queries and vw units behave as on a device of that size; only the visual scale is reduced to fit the grid. Device pixel ratio and touch events are not simulated." } },
+          { "@type": "Question", "name": "Which widths are included?", "acceptedAnswer": { "@type": "Answer", "text": "320 (small phones), 375 and 390 (iPhone), 414 (large phones), 768 and 820 (tablets), 1024 (small laptop), 1280 and 1440 (desktop). Add any custom width between 200 and 3000 px." } },
+          { "@type": "Question", "name": "Is pasted HTML safe to run?", "acceptedAnswer": { "@type": "Answer", "text": "Pasted pages run in a sandboxed iframe without access to this page, cookies or storage. Untick “Allow scripts” for a pure layout check with JavaScript disabled." } },
+          { "@type": "Question", "name": "Can I take screenshots?", "acceptedAnswer": { "@type": "Answer", "text": "Use the ⤢ button to open a frame at full size, then your browser or OS screenshot tool. Cross-origin content inside the frames prevents the page from exporting a PNG directly." } },
+          { "@type": "Question", "name": "Is my input sent anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. Everything is computed by JavaScript in your browser tab. Nothing is uploaded, logged or stored by Toolity." } },
+          { "@type": "Question", "name": "Why does fetching sometimes fail — and what is the relay?", "acceptedAnswer": { "@type": "Answer", "text": "Browsers block JavaScript from reading other websites directly (CORS). The tool first tries a direct request; when the site forbids it, the URL only is sent to a public read-only relay (allorigins.win, then codetabs.com) that fetches the page and returns its HTML. The relay sees the URL you typed, nothing else — Toolity has no server and keeps no record. If the relay is busy or the site blocks bots, paste the page source instead: that path is 100% local." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main id="main">
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/labs/" class="breadcrumb-link">Labs</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Responsive Breakpoint Previewer</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Labs</span>
+            <h1 class="page-title">Responsive Breakpoint Previewer</h1>
+            <p class="page-desc">See one page at every breakpoint at once — paste HTML or a URL and compare 320, 375, 768, 1024 and 1440 px side by side.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="stacked" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge web-status-badge" id="status-badge">Paste HTML or enter a URL</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result" aria-label="Copy result" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download result" aria-label="Download result" disabled>
+                <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                <span>Download</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-open" title="Open result in a new tab" aria-label="Open result in a new tab" disabled>
+                <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
+                <span>Open</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Page</span>
+                <span class="pane-badge" id="input-badge">—</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content web-form">
+                <div class="form-group">
+                  <label class="form-label" for="url-input"><span>Page URL</span></label>
+                  <input type="url" id="url-input" class="input-clean" placeholder="https://example.com" spellcheck="false" autocomplete="off" autocapitalize="off" inputmode="url">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="html-input"><span>Or paste HTML (CSS and scripts inline)</span><span class="form-label-desc">Overrides the URL · drop an .html file here</span></label>
+                  <textarea id="html-input" class="textarea-clean" rows="7" placeholder="&lt;!doctype html&gt;&lt;style&gt;.card{display:grid;grid-template-columns:1fr 1fr}@media(max-width:600px){.card{grid-template-columns:1fr}}&lt;/style&gt;…" spellcheck="false" autocapitalize="off" data-file-target></textarea>
+                </div>
+                <div class="web-file-row rb-row">
+                  <button type="button" class="btn-toolbar-sm" id="btn-sample"><iconify-icon icon="lucide:sparkles" width="14" height="14"></iconify-icon><span>Load a sample layout</span></button>
+                  <span class="web-muted">Tip: paste only the parts you are testing — a component, a hero, a form.</span>
+                </div>
+                <button type="button" id="btn-run" class="btn-toolbar-sm btn-brand-sm btn-primary-action">
+                  <iconify-icon icon="lucide:scan-eye" width="16" height="16"></iconify-icon>
+                  <span>Preview</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Breakpoints</span>
+                <span class="pane-badge" id="output-badge">—</span>
+              </div>
+              <div class="pane-content web-output-pane">
+                <div class="pane-empty" id="output-empty">
+                  <iconify-icon icon="lucide:monitor-smartphone"></iconify-icon>
+                  <span>Device frames appear here — paste HTML or fetch a URL</span>
+                </div>
+                <div class="web-output" id="output-content" hidden>
+                  <div class="rb-toolbar">
+                    <div class="rb-chips" id="rb-chips" role="group" aria-label="Widths to show"></div>
+                    <label class="rb-custom"><span class="web-muted">Custom</span><input type="number" id="opt-custom" class="input-clean" min="200" max="3000" step="1" placeholder="px" inputmode="numeric"></label>
+                  </div>
+                  <div class="rb-frames" id="rb-frames"></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">Portrait · light · synced scroll</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item"><input type="checkbox" id="opt-landscape"><label for="opt-landscape">Landscape (swap width and height)</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-dark"><label for="opt-dark">Preview with prefers-color-scheme: dark</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-sync" checked><label for="opt-sync">Synced scrolling across frames</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-scripts" checked><label for="opt-scripts">Allow scripts in pasted HTML (sandboxed)</label></div>
+              <div class="control-item">
+                <label for="opt-height">Frame height</label>
+                <select id="opt-height" class="select-clean"><option value="640">640 px</option><option value="800" selected>800 px</option><option value="1000">1000 px</option><option value="1400">1400 px</option></select>
+              </div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Use Responsive Breakpoint Previewer in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Give it a page</h3>
+              <p class="step-desc">Paste HTML (with inline CSS/JS) or an .html file — or enter a URL and press <strong>Preview</strong>; the page is fetched and rendered with its original base URL so images and stylesheets resolve. If a site blocks fetching, paste its source instead.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Compare widths</h3>
+              <p class="step-desc">Each frame is a real viewport at the exact pixel width shown, scaled down to fit. Toggle widths with the chips, add a custom one, switch to landscape or dark scheme, and scroll one frame to scroll them all.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Fix and repeat</h3>
+              <p class="step-desc">Edit the HTML on the left and the frames re-render live. Press the ⤢ button on any frame to open it full size in a new tab for a closer look.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Responsive Breakpoint Previewer — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Why can’t it show a live third-party site in an iframe?</summary>
+              <p>Most sites send <code>X-Frame-Options</code> or a CSP <code>frame-ancestors</code> header that forbids embedding, so a live iframe would simply be blank. Instead the tool fetches the HTML (directly or via a public read-only relay, see Privacy) and renders that snapshot with a <code>&lt;base href&gt;</code> so assets load. Pages behind logins or heavy client-side apps may render partially — paste the rendered DOM from DevTools in that case.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Are the widths real viewports?</summary>
+              <p>Yes. Each iframe is laid out at the exact CSS pixel width (and height) you see, so media queries, container queries and <code>vw</code> units behave as on a device of that size; only the visual scale is reduced to fit the grid. Device pixel ratio and touch events are not simulated.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Which widths are included?</summary>
+              <p>320 (small phones), 375 and 390 (iPhone), 414 (large phones), 768 and 820 (tablets), 1024 (small laptop), 1280 and 1440 (desktop). Add any custom width between 200 and 3000 px.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is pasted HTML safe to run?</summary>
+              <p>Pasted pages run in a sandboxed iframe without access to this page, cookies or storage. Untick “Allow scripts” for a pure layout check with JavaScript disabled.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can I take screenshots?</summary>
+              <p>Use the ⤢ button to open a frame at full size, then your browser or OS screenshot tool. Cross-origin content inside the frames prevents the page from exporting a PNG directly.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is my input sent anywhere?</summary>
+              <p>No. Everything is computed by JavaScript in your browser tab. Nothing is uploaded, logged or stored by Toolity.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why does fetching sometimes fail — and what is the relay?</summary>
+              <p>Browsers block JavaScript from reading other websites directly (CORS). The tool first tries a direct request; when the site forbids it, the <em>URL only</em> is sent to a public read-only relay (allorigins.win, then codetabs.com) that fetches the page and returns its HTML. The relay sees the URL you typed, nothing else — Toolity has no server and keeps no record. If the relay is busy or the site blocks bots, paste the page source instead: that path is 100% local.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="labs"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=5.0"></script>
+  <script src="/scripts/tool-common.js?v=1.2"></script>
+  <script src="/scripts/web-common.js?v=1.2"></script>
+  <script src="/labs/responsive-breakpoint-previewer/responsive-breakpoint-previewer.js?v=1.0"></script>
+</body>
+</html>

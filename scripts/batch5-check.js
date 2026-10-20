@@ -43,6 +43,22 @@ const PDF_HELPERS = `
 `;
 
 const CASES = [
+  ['labs/responsive-breakpoint-previewer/', `
+    for (let i = 0; i < 80 && !(window.__rb && window.ToolityWebTool); i++) await tick(100);
+    const R = window.__rb, T = window.ToolityWebTool;
+    A($('rb-chips').querySelectorAll('.rb-chip').length === 9 && $('rb-chips').querySelectorAll('.rb-chip.is-on').length === 4, 'chips rendered, 4 on by default');
+    const d = R.prepareDoc({ html: '<p>hi</p>', baseUrl: 'https://example.com/x/' }, true); A(/<base href="https:\\/\\/example.com\\/x\\/">/.test(d) && /color-scheme:dark/.test(d) && /<html>/.test(d), 'prepareDoc wraps + injects: ' + d.slice(0, 120));
+    $('btn-sample').click(); A(await waitFor(() => $('rb-frames').querySelectorAll('iframe').length === 4, 10000), 'sample → 4 frames');
+    const ws = [...$('rb-frames').querySelectorAll('iframe')].map(f => +f.getAttribute('width')); A(JSON.stringify(ws) === '[375,768,1024,1440]', 'frame widths: ' + ws);
+    const scales = [...$('rb-frames').querySelectorAll('iframe')].map(f => f.style.transform); A(scales.every(s => /scale\\(/.test(s)) && new Set(scales).size === 1, 'one shared scale: ' + scales[0]);
+    await tick(800); const cols = (f) => { try { return getComputedStyle(f.contentDocument.querySelector('.cards')).gridTemplateColumns.split(' ').length; } catch (e) { return -1; } };
+    const fr = [...$('rb-frames').querySelectorAll('iframe')]; A(cols(fr[0]) === 1 && cols(fr[1]) === 2 && cols(fr[3]) === 3, 'media queries apply per width: ' + fr.map(cols));
+    $('rb-chips').querySelector('[data-w="320"]').click(); await tick(300); A($('rb-frames').querySelectorAll('iframe').length === 5 && +$('rb-frames').querySelector('iframe').getAttribute('width') === 320, 'chip adds 320 first');
+    set('opt-custom', 600); $('opt-custom').dispatchEvent(new Event('change', { bubbles: true })); await tick(300); A($('rb-chips').querySelector('[data-w="600"]') && [...$('rb-frames').querySelectorAll('iframe')].some(f => +f.getAttribute('width') === 600), 'custom width added');
+    set('opt-landscape', true); await tick(900); const f0 = $('rb-frames').querySelector('iframe'); A(+f0.getAttribute('width') === 800 && +f0.getAttribute('height') === 320, 'landscape swaps: ' + f0.getAttribute('width') + 'x' + f0.getAttribute('height'));
+    set('opt-landscape', false); set('opt-dark', true); await tick(900); A(/color-scheme:dark/.test($('rb-frames').querySelector('iframe').srcdoc), 'dark scheme injected');
+    A(T.S.out && T.S.out.ext === 'html' && /Pasted HTML/.test($('status-badge').textContent), 'status: ' + $('status-badge').textContent);
+    $('btn-reset').click(); await tick(300); A($('rb-frames').children.length === 0 && $('rb-chips').querySelectorAll('.rb-chip').length === 9, 'reset clears frames and custom chips');`],
   ['labs/accessibility-contrast-matrix/', `
     for (let i = 0; i < 80 && !(window.__cm && window.ToolityWebTool); i++) await tick(100);
     const M = window.__cm, T = window.ToolityWebTool;

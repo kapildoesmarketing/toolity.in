@@ -207,6 +207,49 @@ const HW_FONTS = [['caveat', 'Caveat', 30], ['homemade-apple', 'Homemade Apple',
 const SCHEMA_TYPES = [['Organization', 'Organization'], ['LocalBusiness', 'Local Business'], ['Person', 'Person'], ['WebSite', 'Website (+ search box)'], ['Article', 'Article / Blog post'], ['Product', 'Product (+ offer, rating)'], ['FAQPage', 'FAQ page'], ['HowTo', 'How-to'], ['Event', 'Event'], ['BreadcrumbList', 'Breadcrumbs'], ['Recipe', 'Recipe'], ['VideoObject', 'Video'], ['JobPosting', 'Job posting']];
 const HANDY_TOOLS = [
   {
+    slug: 'responsive-breakpoint-previewer', name: 'Responsive Breakpoint Previewer', icon: 'lucide:monitor-smartphone', section: 'Web Utilities', layout: 'stacked', css: true,
+    action: 'Preview', actionIcon: 'lucide:scan-eye',
+    desc: 'Free online responsive design tester: paste HTML/CSS or a page URL and see it rendered side by side at phone, tablet and desktop widths (320 to 1440 px, plus custom), scaled to fit, with synced scrolling, landscape toggle and dark-scheme preview. Runs in your browser — nothing uploaded.',
+    lead: 'See one page at every breakpoint at once — paste HTML or a URL and compare 320, 375, 768, 1024 and 1440 px side by side.',
+    cardDesc: 'Paste HTML or a URL; see it at 320–1440 px side by side, synced scroll, dark scheme.',
+    tags: ['responsive design tester', 'breakpoint previewer', 'test website on different screen sizes', 'mobile preview', 'responsive checker', 'media query tester', 'viewport tester', 'multi device preview', 'screen size simulator', 'html preview responsive'],
+    idle: 'Paste HTML or enter a URL', sourceLabel: 'Page', outputLabel: 'Breakpoints', outputIcon: 'lucide:monitor-smartphone', outputEmpty: 'Device frames appear here — paste HTML or fetch a URL',
+    sourceHtml: URL_INPUT('https://example.com') + `
+                <div class="form-group">
+                  <label class="form-label" for="html-input"><span>Or paste HTML (CSS and scripts inline)</span><span class="form-label-desc">Overrides the URL · drop an .html file here</span></label>
+                  <textarea id="html-input" class="textarea-clean" rows="7" placeholder="&lt;!doctype html&gt;&lt;style&gt;.card{display:grid;grid-template-columns:1fr 1fr}@media(max-width:600px){.card{grid-template-columns:1fr}}&lt;/style&gt;…" spellcheck="false" autocapitalize="off" data-file-target></textarea>
+                </div>
+                <div class="web-file-row rb-row">
+                  <button type="button" class="btn-toolbar-sm" id="btn-sample"><iconify-icon icon="lucide:sparkles" width="14" height="14"></iconify-icon><span>Load a sample layout</span></button>
+                  <span class="web-muted">Tip: paste only the parts you are testing — a component, a hero, a form.</span>
+                </div>`,
+    outputHtml: `
+                  <div class="rb-toolbar">
+                    <div class="rb-chips" id="rb-chips" role="group" aria-label="Widths to show"></div>
+                    <label class="rb-custom"><span class="web-muted">Custom</span><input type="number" id="opt-custom" class="input-clean" min="200" max="3000" step="1" placeholder="px" inputmode="numeric"></label>
+                  </div>
+                  <div class="rb-frames" id="rb-frames"></div>`,
+    settingsSummary: 'Portrait · light · synced scroll',
+    settings: `
+              <div class="control-item"><input type="checkbox" id="opt-landscape"><label for="opt-landscape">Landscape (swap width and height)</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-dark"><label for="opt-dark">Preview with prefers-color-scheme: dark</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-sync" checked><label for="opt-sync">Synced scrolling across frames</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-scripts" checked><label for="opt-scripts">Allow scripts in pasted HTML (sandboxed)</label></div>
+              <div class="control-item">
+                <label for="opt-height">Frame height</label>
+                <select id="opt-height" class="select-clean"><option value="640">640 px</option><option value="800" selected>800 px</option><option value="1000">1000 px</option><option value="1400">1400 px</option></select>
+              </div>`,
+    guide: [['Give it a page', 'Paste HTML (with inline CSS/JS) or an .html file — or enter a URL and press <strong>Preview</strong>; the page is fetched and rendered with its original base URL so images and stylesheets resolve. If a site blocks fetching, paste its source instead.'],
+      ['Compare widths', 'Each frame is a real viewport at the exact pixel width shown, scaled down to fit. Toggle widths with the chips, add a custom one, switch to landscape or dark scheme, and scroll one frame to scroll them all.'],
+      ['Fix and repeat', 'Edit the HTML on the left and the frames re-render live. Press the ⤢ button on any frame to open it full size in a new tab for a closer look.']],
+    faq: [['Why can’t it show a live third-party site in an iframe?', 'Most sites send <code>X-Frame-Options</code> or a CSP <code>frame-ancestors</code> header that forbids embedding, so a live iframe would simply be blank. Instead the tool fetches the HTML (directly or via a public read-only relay, see Privacy) and renders that snapshot with a <code>&lt;base href&gt;</code> so assets load. Pages behind logins or heavy client-side apps may render partially — paste the rendered DOM from DevTools in that case.'],
+      ['Are the widths real viewports?', 'Yes. Each iframe is laid out at the exact CSS pixel width (and height) you see, so media queries, container queries and <code>vw</code> units behave as on a device of that size; only the visual scale is reduced to fit the grid. Device pixel ratio and touch events are not simulated.'],
+      ['Which widths are included?', '320 (small phones), 375 and 390 (iPhone), 414 (large phones), 768 and 820 (tablets), 1024 (small laptop), 1280 and 1440 (desktop). Add any custom width between 200 and 3000 px.'],
+      ['Is pasted HTML safe to run?', 'Pasted pages run in a sandboxed iframe without access to this page, cookies or storage. Untick “Allow scripts” for a pure layout check with JavaScript disabled.'],
+      ['Can I take screenshots?', 'Use the ⤢ button to open a frame at full size, then your browser or OS screenshot tool. Cross-origin content inside the frames prevents the page from exporting a PNG directly.'],
+      PRIVACY_FAQ, RELAY_FAQ]
+  },
+  {
     slug: 'accessibility-contrast-matrix', name: 'Accessibility Contrast Matrix', icon: 'lucide:grid-3x3', section: 'Web Utilities', split: '40/60', css: true, libs: ['color'],
     desc: 'Free online colour palette contrast matrix: paste up to 12 colours (hex list or CSS variables) and see every pair’s WCAG contrast ratio in one grid — AA / AAA pass-fail for normal text, large text and UI components, with a one-click nearest passing colour for failing pairs. Export CSV, Markdown or PNG. Runs in your browser.',
     lead: 'Paste your palette, get every colour pair’s WCAG ratio in one grid — AA/AAA at a glance, plus a suggested fix for any pair that fails.',
