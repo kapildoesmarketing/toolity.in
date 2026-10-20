@@ -207,6 +207,48 @@ const HW_FONTS = [['caveat', 'Caveat', 30], ['homemade-apple', 'Homemade Apple',
 const SCHEMA_TYPES = [['Organization', 'Organization'], ['LocalBusiness', 'Local Business'], ['Person', 'Person'], ['WebSite', 'Website (+ search box)'], ['Article', 'Article / Blog post'], ['Product', 'Product (+ offer, rating)'], ['FAQPage', 'FAQ page'], ['HowTo', 'How-to'], ['Event', 'Event'], ['BreadcrumbList', 'Breadcrumbs'], ['Recipe', 'Recipe'], ['VideoObject', 'Video'], ['JobPosting', 'Job posting']];
 const HANDY_TOOLS = [
   {
+    slug: 'accessibility-contrast-matrix', name: 'Accessibility Contrast Matrix', icon: 'lucide:grid-3x3', section: 'Web Utilities', split: '40/60', css: true, libs: ['color'],
+    desc: 'Free online colour palette contrast matrix: paste up to 12 colours (hex list or CSS variables) and see every pair’s WCAG contrast ratio in one grid — AA / AAA pass-fail for normal text, large text and UI components, with a one-click nearest passing colour for failing pairs. Export CSV, Markdown or PNG. Runs in your browser.',
+    lead: 'Paste your palette, get every colour pair’s WCAG ratio in one grid — AA/AAA at a glance, plus a suggested fix for any pair that fails.',
+    cardDesc: 'Whole-palette WCAG grid: every pair’s ratio, AA/AAA flags, nearest passing fix.',
+    tags: ['contrast matrix', 'palette contrast checker', 'wcag palette', 'color combinations accessibility', 'contrast grid', 'design system contrast', 'aa aaa matrix', 'accessible color palette', 'color pair contrast', 'wcag 2 contrast'],
+    idle: 'Paste at least two colours', sourceLabel: 'Palette', outputLabel: 'Contrast grid', outputIcon: 'lucide:grid-3x3', outputEmpty: 'Every pair in your palette will be rated here',
+    downloads: [['csv', 'CSV (all pairs)', 'lucide:file-spreadsheet'], ['md', 'Markdown table', 'lucide:file-text'], ['png', 'PNG of the grid', 'lucide:image']],
+    sourceHtml: `
+                <div class="form-group form-group-grow">
+                  <label class="form-label" for="text-input"><span>Colours</span><span class="form-label-desc" id="input-count">hex, rgb(), hsl(), CSS variables or “name: #hex” — one per line or comma-separated</span></label>
+                  <textarea id="text-input" class="textarea-clean" rows="9" placeholder="--brand: #F4511E&#10;--ink: #17191C&#10;--paper: #FFFFFF&#10;--muted: #6B7076&#10;#0F766E" spellcheck="false" autocapitalize="off" data-file-target></textarea>
+                </div>
+                <div class="web-file-row">
+                  <button type="button" class="btn-toolbar-sm" id="btn-sample"><iconify-icon icon="lucide:palette" width="14" height="14"></iconify-icon><span>Try a sample palette</span></button>
+                  <input type="color" id="opt-add" class="cm-add" value="#2563eb" aria-label="Pick a colour to add" title="Pick a colour to add">
+                  <button type="button" class="btn-toolbar-sm" id="btn-add"><iconify-icon icon="lucide:plus" width="14" height="14"></iconify-icon><span>Add picked</span></button>
+                </div>
+                <div class="web-swatches cm-swatches" id="cm-swatches" aria-label="Parsed colours"></div>`,
+    outputHtml: `
+                  <div class="web-grid-2" id="cm-stats"></div>
+                  <div class="web-table-wrap cm-grid-wrap"><table class="cm-grid" id="cm-grid" aria-describedby="cm-legend"></table></div>
+                  <p class="web-muted" id="cm-legend">Rows are text, columns are background. Click any failing cell for the nearest passing colour.</p>
+                  <div class="cm-fix" id="cm-fix" hidden></div>`,
+    settingsSummary: 'Normal text · AA 4.5:1',
+    settings: `
+              <div class="control-item">
+                <label for="opt-level">Judge against</label>
+                <select id="opt-level" class="select-clean"><option value="aa" selected>AA normal text — 4.5:1</option><option value="aa-large">AA large text / UI — 3:1</option><option value="aaa">AAA normal text — 7:1</option><option value="aaa-large">AAA large text — 4.5:1</option></select>
+              </div>
+              <div class="control-item"><input type="checkbox" id="opt-half" checked><label for="opt-half">Hide the mirrored half (the ratio is the same either way round)</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-names" checked><label for="opt-names">Show colour names in headers</label></div>`,
+    guide: [['Paste the palette', 'Drop in hex codes, <code>rgb()</code>/<code>hsl()</code>, a block of CSS custom properties or <code>name: #hex</code> lines — up to 12 colours. Names are picked up from variable names so the grid reads like your design system.'],
+      ['Read the grid', 'Each cell is the WCAG 2 contrast ratio of the row colour as text on the column colour as background. Green passes the level you chose, amber passes only for large text, red fails. The summary counts usable pairs.'],
+      ['Fix what fails', 'Click a failing cell: the tool nudges the text colour’s lightness until the pair passes and shows the new hex with the ratio, ready to copy. Export the whole matrix as CSV, Markdown (for docs) or PNG (for a design review).']],
+    faq: [['Which formula is used?', 'WCAG 2.x relative luminance contrast — the same numbers browsers’ DevTools and Lighthouse report. Semi-transparent colours are composited on white before measuring. APCA (WCAG 3 draft) is not included yet.'],
+      ['What do AA and AAA mean here?', 'AA needs 4.5:1 for normal text and 3:1 for large text (≥ 24 px, or ≥ 19 px bold) and UI components such as borders and icons. AAA raises that to 7:1 and 4.5:1. Pick the level you are designing for in Settings and the grid recolours.'],
+      ['Why is the diagonal empty?', 'A colour on itself has a ratio of 1:1 and is never usable. The lower-left half mirrors the upper-right because the ratio does not depend on which colour is the text — hide it in Settings for a cleaner grid.'],
+      ['How is the suggested fix chosen?', 'It keeps the hue and saturation of the text colour and moves only its lightness — toward white on dark backgrounds, toward black on light ones — stopping at the first value that reaches the target. That keeps the fix recognisably “your” colour.'],
+      ['Can I check more than 12 colours?', 'The grid grows quadratically (12 colours = 66 pairs), which is already a lot to read. Split larger palettes into neutrals, brand and semantic groups and run each.'],
+      PRIVACY_FAQ]
+  },
+  {
     slug: 'keyboard-shortcut-cheat-sheet-maker', name: 'Keyboard Shortcut Cheat-Sheet Maker', icon: 'lucide:keyboard', section: 'Web Utilities', split: '40/60', css: true,
     desc: 'Free online keyboard shortcut cheat sheet maker: type shortcuts one per line, group them with headings, switch between Mac and Windows symbols, pick a theme and columns, then export a printable PDF, PNG, Markdown table or HTML. Presets for VS Code, Gmail, Figma and Chrome. Runs in your browser.',
     lead: 'Type shortcuts one per line, get a clean printable cheat sheet — Mac or Windows symbols, themes, columns — as PDF, PNG or Markdown.',

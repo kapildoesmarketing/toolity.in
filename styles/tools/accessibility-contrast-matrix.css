@@ -1,0 +1,27 @@
+/* Accessibility Contrast Matrix — grid, cells, fix panel. Also inlined into the PNG export. */
+.cm-add { width: 44px; height: 44px; padding: 2px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); cursor: pointer; }
+.cm-swatches:empty { display: none; }
+.cm-grid-wrap { max-height: none; overflow: auto; }
+.cm-grid { border-collapse: separate; border-spacing: 3px; font-size: 0.78rem; table-layout: auto; min-width: 100%; }
+.cm-grid th { padding: 0.3rem 0.4rem; font-weight: 600; color: var(--text-secondary); text-align: left; white-space: nowrap; vertical-align: bottom; max-width: 7rem; overflow: hidden; text-overflow: ellipsis; background: transparent; border: 0; }
+.cm-grid thead th { vertical-align: bottom; }
+.cm-grid th span { display: inline-block; vertical-align: middle; max-width: 6rem; overflow: hidden; text-overflow: ellipsis; }
+.cm-corner { font-weight: 400; font-size: 0.68rem; color: var(--text-muted); }
+.cm-sw { display: inline-block; width: 14px; height: 14px; border-radius: 4px; border: 1px solid rgba(0, 0, 0, 0.15); vertical-align: middle; margin-right: 0.35rem; }
+.cm-cell { padding: 0; border-radius: 6px; border: 1px solid rgba(0, 0, 0, 0.08); min-width: 56px; }
+.cm-cell.is-void { background: transparent; border-color: transparent; }
+.cm-cell-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; width: 100%; min-width: 56px; min-height: 48px; padding: 0.3rem 0.4rem; border: 0; background: none; color: inherit; font: inherit; cursor: pointer; border-radius: 6px; }
+.cm-cell-btn b { font-weight: 700; font-variant-numeric: tabular-nums; }
+.cm-cell-btn i { font-style: normal; font-size: 0.66rem; opacity: 0.85; }
+.cm-cell.is-pass { box-shadow: inset 0 0 0 2px #16a34a; }
+.cm-cell.is-large { box-shadow: inset 0 0 0 2px #d97706; }
+.cm-cell.is-fail { box-shadow: inset 0 0 0 2px #dc2626; }
+.cm-cell.is-fail .cm-cell-btn { text-decoration: line-through; text-decoration-thickness: 1px; }
+.cm-cell-btn:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+.cm-fix { margin-top: 0.75rem; padding: 0.75rem 0.9rem; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); font-size: 0.85rem; }
+.cm-fix p { margin: 0 0 0.5rem; }
+.cm-fix-opts { display: flex; flex-direction: column; gap: 0.4rem; }
+.cm-fix-opt { display: flex; align-items: center; gap: 0.6rem; min-height: 44px; padding: 0.35rem 0.6rem; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--bg, #fff); color: var(--text-primary); font: inherit; text-align: left; cursor: pointer; }
+.cm-fix-opt:hover { border-color: var(--brand); }
+.cm-fix-opt code { font-family: var(--font-mono); }
+.cm-fix-demo { margin-left: auto; padding: 0.2rem 0.55rem; border-radius: 6px; font-weight: 700; }

@@ -43,6 +43,25 @@ const PDF_HELPERS = `
 `;
 
 const CASES = [
+  ['labs/accessibility-contrast-matrix/', `
+    for (let i = 0; i < 80 && !(window.__cm && window.ToolityWebTool); i++) await tick(100);
+    const M = window.__cm, T = window.ToolityWebTool;
+    const pal = M.parsePalette('--brand: #F4511E;\\n--ink:#17191C\\n#fff, rgb(0,0,0)\\n--brand-dup: #f4511e\\nnonsense line');
+    A(pal.length === 4 && pal[0].name === 'brand' && pal[1].name === 'ink' && pal[2].hex === '#FFFFFF' && pal[3].hex === '#000000', 'palette parse + names + dedupe: ' + JSON.stringify(pal.map(p => [p.name, p.hex])));
+    set('text-input', '--ink: #000000\\n--paper: #FFFFFF\\n--brand: #F4511E\\n--muted: #999999'); A(await waitFor(() => T.S.out && M.P.length === 4, 10000), 'grid built');
+    A(Math.abs(M.R[0][1] - 21) < 0.01, 'black/white = 21:1: ' + M.R[0][1]);
+    const cells = $('cm-grid').querySelectorAll('td[data-i]'); A(cells.length === 6, 'upper half only by default: ' + cells.length);
+    A($('cm-grid').querySelector('td[data-i="0"][data-j="1"]').classList.contains('is-pass') && $('cm-grid').querySelector('td[data-i="1"][data-j="3"]').classList.contains('is-fail'), 'pass/fail classes (white on #999 fails)');
+    A(/\\/6 pass/.test($('output-badge').textContent) && /Pairs/.test($('cm-stats').textContent), 'summary: ' + $('output-badge').textContent);
+    set('opt-half', false); await tick(300); A($('cm-grid').querySelectorAll('td[data-i]').length === 12, 'both directions → 12 cells');
+    set('opt-level', 'aaa'); await tick(300); A($('cm-grid').querySelector('td[data-i="0"][data-j="2"]').classList.contains('is-fail') || $('cm-grid').querySelector('td[data-i="0"][data-j="2"]').classList.contains('is-large'), 'AAA tightens brand-on-black');
+    set('opt-level', 'aa'); await tick(300);
+    $('cm-grid').querySelector('td[data-i="1"][data-j="3"] button').click(); await tick(50); A(!$('cm-fix').hidden && $('cm-fix').querySelectorAll('.cm-fix-opt').length >= 1, 'fix panel with options');
+    const f = M.fix({ r: 255, g: 255, b: 255, a: 1 }, { r: 153, g: 153, b: 153, a: 1 }, 4.5); A(f && window.ToolityColor.contrast(f, { r: 153, g: 153, b: 153, a: 1 }) >= 4.5, 'fix reaches target');
+    A(/\\| \\*\\*ink\\*\\* \\|/.test(T.S.out.text) && /21\\.00 ✅/.test(T.S.out.text), 'markdown export: ' + T.S.out.text.split('\\n')[2]);
+    const d = await T.T.download('csv'); A(/^text,text_hex/.test(d.text) && d.text.split('\\n').length === 8, 'csv rows: ' + d.text.split('\\n').length);
+    const png = await T.T.download('png'); A(png.blob && png.blob.size > 3000, 'png export ' + png.blob.size);
+    $('btn-sample').click(); await tick(400); A(M.P.length === 8 && M.P[0].name === 'brand', 'sample palette loads');`],
   ['labs/keyboard-shortcut-cheat-sheet-maker/', `
     for (let i = 0; i < 80 && !(window.__ks && window.ToolityWebTool); i++) await tick(100);
     const K = window.__ks, T = window.ToolityWebTool;
