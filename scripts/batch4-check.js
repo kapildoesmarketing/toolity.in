@@ -43,6 +43,26 @@ const PDF_HELPERS = `
 `;
 
 const CASES = [
+  ['labs/chronometer-lap-timer/', `
+    for (let i = 0; i < 80 && !window.__chrono; i++) await tick(100);
+    const C = window.__chrono; A(C, 'mounted'); A(C.fmt(3723456, 3) === '01:02:03.456' && C.fmt(5000, 2) === '00:05.00', 'fmt: ' + C.fmt(3723456, 3));
+    localStorage.removeItem('toolity_chrono'); C.reset(true);
+    document.dispatchEvent(new KeyboardEvent('keydown', { code: 'Space', key: ' ', bubbles: true })); await tick(250); A(C.S.startAt > 0, 'space starts'); A(/Running/.test($('status-badge').textContent), 'status running');
+    A(JSON.parse(localStorage.getItem('toolity_chrono')).startAt > 0, 'running state persisted');
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'l', bubbles: true })); await tick(220); $('btn-lap').click(); await tick(50);
+    A(C.S.laps.length === 2 && C.S.laps[1].t > C.S.laps[0].t && C.S.laps[1].lap >= 200, 'two laps with increasing split: ' + JSON.stringify(C.S.laps));
+    A($('lap-body').children.length === 2 && !$('output-content').hidden && /2 laps/.test($('output-badge').textContent), 'lap table rendered');
+    A(/Best/.test($('lap-stats').textContent) && $('lap-body').querySelector('tr.is-best') && $('lap-body').querySelector('tr.is-worst'), 'best/worst highlighted');
+    $('btn-start').click(); const e1 = C.elapsed(); await tick(300); A(!C.S.startAt && C.elapsed() === e1, 'pause freezes elapsed'); A(/Paused/.test($('status-badge').textContent), 'status paused');
+    set('opt-newest', true); A($('lap-body').firstElementChild.firstElementChild.textContent === '2', 'newest first');
+    $('btn-copy').click(); $('btn-clear').click(); await tick(100); A(C.S.laps.length === 0 && C.elapsed() === 0 && $('output-content').hidden, 'reset clears');
+    // countdown
+    document.querySelector('#seg-mode [data-value=countdown]').click(); await tick(100); A(!$('chrono-set').hidden, 'duration inputs shown');
+    set('opt-h', 0); set('opt-m', 0); set('opt-s', 1); A(C.S.target === 1000, 'target 1s: ' + C.S.target); A(/00:01/.test($('chrono-main').textContent), 'face shows target: ' + $('chrono-main').textContent);
+    $('btn-start').click(); await tick(300); A(C.S.startAt > 0 && $('btn-lap').disabled, 'countdown running, lap disabled');
+    A(await waitFor(() => C.S.done, 3000), 'countdown finished'); A(/Time/.test($('status-badge').textContent) && /00:00/.test($('chrono-main').textContent), 'time up: ' + $('status-badge').textContent);
+    $('chrono-presets').querySelector('[data-preset="300"]').click(); await tick(50); A(+$('opt-m').value === 5 && C.S.target === 300000, 'preset 5 min');
+    $('btn-reset').click(); await tick(100); A(C.elapsed() === 0 && !C.S.done, 'toolbar reset');`],
   ['docs/zip-maker-extractor/', `
     for (let i = 0; i < 80 && !(window.JSZip && window.__zip && window.ToolityWebTool); i++) await tick(100);
     const Z = window.__zip, T = window.ToolityWebTool, txt = 'hello world '.repeat(200);

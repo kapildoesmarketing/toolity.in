@@ -1093,6 +1093,60 @@ module.exports = [
     guide: [['Shape it', 'Pick a style, then drag Points, Randomness and Smoothness — or hit <strong>Randomise</strong> for a new seed. The preview stays in view while you scroll the controls. Presets give you a styled starting point.'], ['Colour and move it', 'Choose a solid, linear or radial fill, a background (or transparent) and a movement: morph, float, spin or pulse. Layers, blur, grain and shadow live in Settings.'], ['Export', 'Copy the SVG or CSS, or use Download for SVG, animated SVG, PNG up to 4×, WebP, JPG, a looping GIF or a WebM/MP4 video. Copy share link saves the design in a URL.']],
     faq: [['Which export should I use?', '<strong>SVG</strong> for websites and design tools (Figma, Illustrator) — tiny and sharp at any size. <strong>Animated SVG</strong> plays by itself in any browser via an &lt;img&gt; tag. <strong>CSS</strong> gives a clip-path you can put on any element. <strong>PNG/WebP</strong> for slides and social posts, <strong>GIF</strong> for chats and email, <strong>WebM/MP4</strong> for video editors and reels.'], ['Do the animations loop seamlessly?', 'Yes. Every movement is built on one loop of the length you set, so the last frame flows straight back into the first — in the animated SVG, the GIF and the video alike.'], ['Why does the video take as long as the loop?', 'Browsers record video in real time, so a 6-second loop takes about 6 seconds to export. Keep the tab visible while it records. GIFs are rendered frame by frame instead and are usually quicker.'], ['Will blur and grain look the same everywhere?', 'In browsers, yes. Design tools sometimes render SVG filters (blur, grain, shadow) differently or ignore them; export a PNG if you need an exact match there. Safari before version 18 shows the live preview without blur, but the SVG export keeps it.'], ['Can I come back to a design later?', 'Yes — every setting is saved in the page link. Use <strong>Copy share link</strong> and open it any time; nothing is stored on a server.'], PRIVACY_FAQ]
   },
+  {
+    slug: 'chronometer-lap-timer', name: 'Chronometer & Lap Timer', icon: 'lucide:timer', section: 'Experiments', split: '40/60', css: true,
+    desc: 'Free online chronometer and lap timer: a precise stopwatch with laps and splits, fastest/slowest highlighting, keyboard shortcuts, a countdown mode with chime, fullscreen display and CSV export. Keeps running across reloads — in your browser.',
+    lead: 'A precise stopwatch with laps, splits and a countdown mode. Space starts, L laps, R resets — and it keeps counting if you reload.',
+    cardDesc: 'Stopwatch with laps & splits, countdown mode, shortcuts, fullscreen, CSV export.',
+    tags: ['stopwatch online', 'lap timer', 'chronometer', 'online timer', 'split timer', 'countdown timer', 'stopwatch with laps', 'precise stopwatch', 'timer fullscreen', 'interval timer'],
+    idle: 'Ready · Space to start', sourceLabel: 'Timer', outputLabel: 'Laps', outputIcon: 'lucide:flag', outputEmpty: 'Press Lap (L) while running — each lap, split and delta lands here',
+    sourceHtml: `
+                <div class="form-group">
+                  <span class="form-label"><span>Mode</span></span>
+                  <div class="segmented-group segmented-group-pill" id="seg-mode" role="group" aria-label="Mode">
+                    <button type="button" class="seg-pill active" data-value="stopwatch">Stopwatch</button>
+                    <button type="button" class="seg-pill" data-value="countdown">Countdown</button>
+                  </div>
+                </div>
+                <div class="chrono-face" id="chrono-face" role="timer" aria-live="off" aria-atomic="true">
+                  <span class="chrono-main" id="chrono-main">00:00<small>.00</small></span>
+                  <span class="chrono-sub" id="chrono-sub"></span>
+                </div>
+                <div class="chrono-set" id="chrono-set" hidden>
+                  <label class="chrono-set-field"><span>h</span><input type="number" id="opt-h" class="input-clean" min="0" max="99" value="0" inputmode="numeric"></label>
+                  <label class="chrono-set-field"><span>min</span><input type="number" id="opt-m" class="input-clean" min="0" max="59" value="5" inputmode="numeric"></label>
+                  <label class="chrono-set-field"><span>sec</span><input type="number" id="opt-s" class="input-clean" min="0" max="59" value="0" inputmode="numeric"></label>
+                </div>
+                <div class="chrono-presets" id="chrono-presets" hidden>
+                  <button type="button" class="btn-toolbar-sm" data-preset="60">1 min</button><button type="button" class="btn-toolbar-sm" data-preset="180">3 min</button><button type="button" class="btn-toolbar-sm" data-preset="300">5 min</button><button type="button" class="btn-toolbar-sm" data-preset="600">10 min</button><button type="button" class="btn-toolbar-sm" data-preset="1500">25 min</button>
+                </div>
+                <div class="chrono-controls">
+                  <button type="button" class="btn-toolbar-sm btn-brand-sm chrono-btn" id="btn-start" title="Start / pause (Space)"><iconify-icon icon="lucide:play" width="18" height="18"></iconify-icon><span>Start</span></button>
+                  <button type="button" class="btn-toolbar-sm chrono-btn" id="btn-lap" title="Lap (L)" disabled><iconify-icon icon="lucide:flag" width="18" height="18"></iconify-icon><span>Lap</span></button>
+                  <button type="button" class="btn-toolbar-sm chrono-btn" id="btn-clear" title="Reset timer (R)" disabled><iconify-icon icon="lucide:rotate-ccw" width="18" height="18"></iconify-icon><span>Reset</span></button>
+                </div>
+                <p class="web-muted chrono-keys"><kbd>Space</kbd> start / pause · <kbd>L</kbd> lap · <kbd>R</kbd> reset · <kbd>F</kbd> fullscreen</p>`,
+    outputHtml: `
+                  <div class="web-grid-2" id="lap-stats"></div>
+                  <div class="web-table-wrap chrono-table-wrap"><table class="web-table chrono-table" id="lap-table"><thead><tr><th>#</th><th>Lap</th><th>Split</th><th>Δ best</th></tr></thead><tbody id="lap-body"></tbody></table></div>`,
+    settingsSummary: 'Hundredths · chime on',
+    settings: `
+              <div class="control-item">
+                <label for="opt-precision">Display precision</label>
+                <select id="opt-precision" class="select-clean"><option value="2" selected>Hundredths (0.01 s)</option><option value="3">Milliseconds (0.001 s)</option><option value="1">Tenths (0.1 s)</option></select>
+              </div>
+              <div class="control-item"><input type="checkbox" id="opt-sound" checked><label for="opt-sound">Chime when the countdown ends</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-newest"><label for="opt-newest">Newest lap first</label></div>`,
+    guide: [['Start', 'Press <strong>Start</strong> or hit <kbd>Space</kbd>. The clock is timestamp-based, so it stays accurate in background tabs and even survives a page reload.'],
+      ['Lap', 'Press <strong>Lap</strong> or <kbd>L</kbd> at each checkpoint. Every row shows the lap time, the running split and the gap to your best lap; fastest and slowest are highlighted and the stats update live.'],
+      ['Export or count down', 'Copy the laps as text or download them as CSV. Switch to <strong>Countdown</strong>, type a duration or tap a preset, and a chime plays when it reaches zero. <kbd>F</kbd> goes fullscreen for a wall display.']],
+    faq: [['How accurate is it?', 'Each tick is computed from the system clock (Date.now()) rather than by counting intervals, so drift is zero — the display is only ever as late as the frame it is painted in (≈16 ms) and the stored lap times are exact to the millisecond.'],
+      ['Does it keep running if I close the tab?', 'Yes. The start timestamp and laps are saved in your browser’s local storage, so reopening the page shows the correct elapsed time. Clearing site data resets it.'],
+      ['Can I use it on a phone?', 'Yes — the controls are large touch targets and the display scales to the screen. Add the page to your home screen for a one-tap stopwatch. Note that mobile browsers pause JavaScript in background tabs, but because the clock is timestamp-based the time is still right when you return.'],
+      ['What does “Δ best” mean?', 'The difference between that lap and your fastest lap so far, so you can see at a glance how consistent your intervals are. The average, best and worst lap appear above the table.'],
+      ['Does the countdown chime need permission?', 'No — it uses the Web Audio API, which only needs you to have interacted with the page (pressing Start counts). Turn the chime off in Settings if you prefer silence.'],
+      PRIVACY_FAQ]
+  },
   ...GEN_TOOLS,
   ...SEO_TOOLS,
   ...HANDY_TOOLS
