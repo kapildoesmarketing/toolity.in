@@ -150,16 +150,16 @@ const CASES = [
     const pic = [1,1,1, 1,0,0, 1,0,1], { rows, cols } = N.cluesFor(pic, 3, 3), r = N.solve(rows, cols, 3, 3); A(r.state === 'solved' && r.g.every((v, i) => (v === 1) === !!pic[i]), 'solver solves a 3×3: ' + r.state);
     const amb = [1,0, 0,1], ca = N.cluesFor(amb, 2, 2); A(N.solve(ca.rows, ca.cols, 2, 2).state === 'stuck', 'ambiguous checkerboard is stuck (needs guess)');
     const g = N.generate(10, 10, 0.45); A(g && g.pic.length === 100 && N.solve(g.rows, g.cols, 10, 10).state === 'solved', 'generated 10×10 is logic-solvable');
-    A(N.S.W === 10 && $('board').children.length === 100 && $('ng-rows').children.length === 10 && $('ng-cols').children.length === 10, 'board built');
+    A(N.S.W === 10 && $('board').querySelectorAll('.ng-cell').length === 100 && $('ng-rows').children.length === 10 && $('ng-cols').children.length === 10, 'board built');
     const S = N.S; const first = S.pic.findIndex(v => v === 1), empty = S.pic.findIndex(v => v === 0);
-    $('board').children[first].dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, button: 0, pointerId: 1 })); $('board').dispatchEvent(new PointerEvent('pointerup', { bubbles: true, pointerId: 1 })); await tick(50);
-    A(S.cells[first] === 1 && $('board').children[first].classList.contains('is-fill') && !$('btn-undo').disabled, 'pointer fill + undo enabled');
+    $('board').querySelectorAll('.ng-cell')[first].dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, button: 0, pointerId: 1 })); $('board').dispatchEvent(new PointerEvent('pointerup', { bubbles: true, pointerId: 1 })); await tick(50);
+    A(S.cells[first] === 1 && $('board').querySelectorAll('.ng-cell')[first].classList.contains('is-fill') && !$('btn-undo').disabled, 'pointer fill + undo enabled');
     $('btn-undo').click(); A(S.cells[first] === 0, 'undo');
-    $('btn-cross').click(); $('board').children[empty].dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, button: 0, pointerId: 2 })); $('board').dispatchEvent(new PointerEvent('pointerup', { bubbles: true, pointerId: 2 })); A(S.cells[empty] === 2, 'cross mode marks X');
+    $('btn-cross').click(); $('board').querySelectorAll('.ng-cell')[empty].dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, button: 0, pointerId: 2 })); $('board').dispatchEvent(new PointerEvent('pointerup', { bubbles: true, pointerId: 2 })); A(S.cells[empty] === 2, 'cross mode marks X');
     set('opt-mistakes', true); N.setCell(empty, 1); A(S.bad && S.bad.has(empty), 'mistake highlighted'); N.setCell(empty, 0); set('opt-mistakes', false);
     S.pic.forEach((v, i) => { if (v) N.setCell(i, 1); }); await tick(100); A(S.done && /Solved/.test($('status-badge').textContent) && !$('overlay').hidden && $('board').classList.contains('is-solved'), 'win detected');
     A(/^\\d+:\\d\\d$/.test($('best-val').textContent), 'best time saved: ' + $('best-val').textContent);
-    document.querySelector('#seg-mode [data-value="5"]').click(); await tick(300); A(S.W === 5 && $('board').children.length === 25 && !S.done, 'mode 5×5 regenerates');
+    document.querySelector('#seg-mode [data-value="5"]').click(); await tick(300); A(S.W === 5 && $('board').querySelectorAll('.ng-cell').length === 25 && !S.done, 'mode 5×5 regenerates');
     // image mode: draw a simple shape on a canvas → File → fromImage
     const c = document.createElement('canvas'); c.width = 40; c.height = 40; const x = c.getContext('2d'); x.fillStyle = '#fff'; x.fillRect(0, 0, 40, 40); x.fillStyle = '#000'; x.fillRect(8, 8, 24, 24); x.clearRect(16, 16, 8, 8);
     const img = new Image(); img.src = c.toDataURL(); await new Promise(r => img.onload = r); const p = N.fromImage(img, 10, 10); A(p && p.pic.filter(Boolean).length > 20 && N.solve(p.rows, p.cols, 10, 10).state === 'solved', 'image → solvable puzzle: ' + (p && p.pic.filter(Boolean).length));`],

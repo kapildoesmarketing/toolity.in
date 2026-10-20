@@ -72,15 +72,15 @@
   function build() {
     const board = $('board'), rows = $('ng-rows'), cols = $('ng-cols'), wrap = $('ng-wrap');
     wrap.style.setProperty('--w', S.W); wrap.style.setProperty('--h', S.H); wrap.style.setProperty('--cl', Math.max(...S.cols.map((c) => c.length))); wrap.style.setProperty('--rl', Math.max(...S.rows.map((c) => c.length)));
-    board.innerHTML = ''; board.style.gridTemplateColumns = `repeat(${S.W}, 1fr)`;
-    for (let i = 0; i < S.W * S.H; i++) { const b = document.createElement('button'); b.type = 'button'; b.className = 'ng-cell'; b.dataset.i = i; b.setAttribute('role', 'gridcell'); b.setAttribute('aria-label', `Row ${Math.floor(i / S.W) + 1} column ${(i % S.W) + 1}`); if ((i % S.W) % 5 === 4 && i % S.W !== S.W - 1) b.classList.add('is-v5'); if (Math.floor(i / S.W) % 5 === 4 && Math.floor(i / S.W) !== S.H - 1) b.classList.add('is-h5'); board.appendChild(b); }
+    board.innerHTML = ''; board.style.gridTemplateColumns = `repeat(${S.W}, 1fr)`; let rowEl = null;
+    for (let i = 0; i < S.W * S.H; i++) { if (i % S.W === 0) { rowEl = document.createElement('div'); rowEl.className = 'ng-row'; rowEl.setAttribute('role', 'row'); board.appendChild(rowEl); } const b = document.createElement('button'); b.type = 'button'; b.className = 'ng-cell'; b.dataset.i = i; b.setAttribute('role', 'gridcell'); b.setAttribute('aria-rowindex', Math.floor(i / S.W) + 1); b.setAttribute('aria-colindex', (i % S.W) + 1); b.setAttribute('aria-label', `Row ${Math.floor(i / S.W) + 1} column ${(i % S.W) + 1}`); if ((i % S.W) % 5 === 4 && i % S.W !== S.W - 1) b.classList.add('is-v5'); if (Math.floor(i / S.W) % 5 === 4 && Math.floor(i / S.W) !== S.H - 1) b.classList.add('is-h5'); rowEl.appendChild(b); }
     cols.innerHTML = S.cols.map((c, i) => `<div class="ng-clue ng-clue-col" data-c="${i}">${c.map((n) => `<span>${n}</span>`).join('')}</div>`).join('');
     rows.innerHTML = S.rows.map((c, i) => `<div class="ng-clue ng-clue-row" data-r="${i}">${c.map((n) => `<span>${n}</span>`).join('')}</div>`).join('');
     paint();
   }
   function paint() {
-    const cells = $('board').children;
-    for (let i = 0; i < cells.length; i++) { const el = cells[i]; el.classList.toggle('is-fill', S.cells[i] === 1); el.classList.toggle('is-x', S.cells[i] === 2); el.classList.toggle('is-sel', i === S.sel); el.classList.toggle('is-bad', !!S.bad && S.bad.has(i)); el.setAttribute('aria-pressed', S.cells[i] === 1); }
+    const cells = $('board').querySelectorAll('.ng-cell');
+    for (let i = 0; i < cells.length; i++) { const el = cells[i]; el.classList.toggle('is-fill', S.cells[i] === 1); el.classList.toggle('is-x', S.cells[i] === 2); el.classList.toggle('is-sel', i === S.sel); el.classList.toggle('is-bad', !!S.bad && S.bad.has(i)); el.setAttribute('aria-label', `Row ${Math.floor(i / S.W) + 1} column ${(i % S.W) + 1}: ${S.cells[i] === 1 ? 'filled' : S.cells[i] === 2 ? 'crossed' : 'empty'}`); }
     for (let r = 0; r < S.H; r++) $('ng-rows').children[r].classList.toggle('is-done', lineDone(S.rows[r], S.cells.slice(r * S.W, r * S.W + S.W)));
     for (let c = 0; c < S.W; c++) { const line = []; for (let r = 0; r < S.H; r++) line.push(S.cells[r * S.W + c]); $('ng-cols').children[c].classList.toggle('is-done', lineDone(S.cols[c], line)); }
     $('left-val').textContent = left();
