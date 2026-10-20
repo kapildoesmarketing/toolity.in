@@ -43,6 +43,26 @@ const PDF_HELPERS = `
 `;
 
 const CASES = [
+  ['labs/ambient-focus-room/#scene=ocean&focus=50&rain=0.5', `
+    for (let i = 0; i < 80 && !window.__afr; i++) await tick(100);
+    const R = window.__afr; localStorage.removeItem('toolity_focus_room');
+    A(R.S.scene === 'ocean' && R.S.focus === 50 && R.S.levels.rain === 0.5 && $('afr-room').classList.contains('scene-ocean') && $('afr-timer').textContent === '50:00' && +$('snd-rain').value === 0.5, 'hash restores scene/focus/levels: ' + $('afr-timer').textContent);
+    R.setFocus(1); A($('afr-timer').textContent === '01:00' && $('opt-custom').value === '1', 'custom focus');
+    document.dispatchEvent(new KeyboardEvent('keydown', { code: 'Space', key: ' ', bubbles: true })); await tick(300); A(R.S.endAt > 0 && /Focusing/.test($('status-badge').textContent) && /Pause/.test($('btn-start').textContent), 'space starts');
+    A(R.ctx && R.chans.rain && Math.abs(R.chans.rain.gain.gain.value - 0.3) < 0.2 && Object.keys(R.BUILD).length === 6, 'audio graph built with rain level: ' + (R.chans.rain && R.chans.rain.gain.gain.value));
+    set('snd-fire', 0.8); await tick(400); A(R.S.levels.fire === 0.8 && R.chans.fire.gain.gain.value > 0.2 && /fire=0.8/.test(location.hash), 'slider → level, gain, hash');
+    $('btn-mute').click(); await tick(300); A($('btn-mute').getAttribute('aria-pressed') === 'true' && R.S.muted, 'mute toggles'); $('btn-mute').click();
+    R.pause(); const l = $('afr-timer').textContent; await tick(300); A(!R.S.endAt && $('afr-timer').textContent === l && /Resume/.test($('btn-start').textContent), 'pause freezes');
+    set('opt-break', '5'); R.finish(); await tick(100); A(R.S.log.length === 1 && R.S.log[0].mins === 1 && R.S.phase === 'break' && $('afr-timer').textContent === '05:00' && R.S.endAt > 0, 'finish logs session, auto-starts break: ' + R.S.phase);
+    A(!$('output-content').hidden && /1 min/.test($('afr-log').textContent) && /Sessions today/.test($('afr-stats').textContent), 'log rendered');
+    $('btn-skip').click(); A(R.S.phase === 'focus' && $('afr-timer').textContent === '01:00', 'skip back to focus');
+    $('afr-task-input').value = 'Ship it'; $('btn-task-add').click(); $('afr-task-input').value = 'Second'; $('btn-task-add').click(); $('afr-task-input').value = 'Third'; $('btn-task-add').click(); $('afr-task-input').value = 'Fourth'; $('btn-task-add').click();
+    A(R.S.tasks.length === 3 && $('afr-task-list').children.length === 3 && $('afr-task-form').hidden, 'three tasks max, form hides');
+    $('afr-task-list').querySelector('input').click(); await tick(50); A(R.S.tasks[0].done && $('afr-task-list').querySelector('.afr-task').classList.contains('is-done'), 'task done');
+    $('afr-task-list').querySelector('[data-x]').click(); A(R.S.tasks.length === 2 && !$('afr-task-form').hidden, 'task removed');
+    $('btn-hide').click(); A($('afr-room').classList.contains('is-zen'), 'zen mode'); $('btn-hide').click();
+    document.querySelector('[data-scene=night]').click(); A(R.S.scene === 'night' && /scene=night/.test(R.share()) && /focus=1/.test(R.share()), 'scene + share link: ' + R.share());
+    A(JSON.parse(localStorage.getItem('toolity_focus_room')).scene === 'night', 'persisted');`],
   ['data/number-formats-converter/', `
     for (let i = 0; i < 80 && !(window.__nf && window.ToolityWebTool); i++) await tick(100);
     const F = window.__nf, T = window.ToolityWebTool;

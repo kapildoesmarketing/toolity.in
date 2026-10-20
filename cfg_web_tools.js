@@ -207,6 +207,71 @@ const HW_FONTS = [['caveat', 'Caveat', 30], ['homemade-apple', 'Homemade Apple',
 const SCHEMA_TYPES = [['Organization', 'Organization'], ['LocalBusiness', 'Local Business'], ['Person', 'Person'], ['WebSite', 'Website (+ search box)'], ['Article', 'Article / Blog post'], ['Product', 'Product (+ offer, rating)'], ['FAQPage', 'FAQ page'], ['HowTo', 'How-to'], ['Event', 'Event'], ['BreadcrumbList', 'Breadcrumbs'], ['Recipe', 'Recipe'], ['VideoObject', 'Video'], ['JobPosting', 'Job posting']];
 const HANDY_TOOLS = [
   {
+    slug: 'ambient-focus-room', name: 'Ambient Focus Room', icon: 'lucide:coffee', section: 'Experiments', layout: 'stacked', css: true,
+    desc: 'Free online focus room: a calm fullscreen page with a focus timer (25/50/90 or custom), a mixer of ambient sounds generated on-device (rain, brown noise, wind, fire, stream, café), a tiny task list, soft scenes and a clock. Shareable setup link, keyboard shortcuts, no account, nothing uploaded.',
+    lead: 'A quiet place to work: a focus timer, rain and fire you can mix, a three-item task list and a scene that slowly drifts — fullscreen, offline, shareable.',
+    cardDesc: 'Focus timer + on-device ambient sound mixer + tiny task list in one calm fullscreen room.',
+    tags: ['focus room', 'study with me', 'ambient sounds for focus', 'rain sounds', 'brown noise', 'pomodoro with sounds', 'deep work timer', 'virtual study room', 'white noise generator', 'focus music alternative', 'fullscreen timer'],
+    idle: 'Press Space to start a focus session', sourceLabel: 'Room', outputLabel: 'Today', outputIcon: 'lucide:coffee', outputEmpty: 'Your focus sessions today will be logged here',
+    sourceHtml: `
+                <div class="afr-room scene-dawn" id="afr-room">
+                  <div class="afr-sky" aria-hidden="true"></div>
+                  <div class="afr-top">
+                    <div class="afr-clock" id="afr-clock" aria-live="off">--:--</div>
+                    <div class="afr-top-btns">
+                      <button type="button" class="afr-icon" id="btn-mute" title="Mute / unmute sounds (M)" aria-pressed="false"><iconify-icon icon="lucide:volume-2" width="18" height="18"></iconify-icon></button>
+                      <button type="button" class="afr-icon" id="btn-hide" title="Hide controls (H)" aria-pressed="false"><iconify-icon icon="lucide:eye-off" width="18" height="18"></iconify-icon></button>
+                      <button type="button" class="afr-icon" id="btn-full" title="Fullscreen (F)"><iconify-icon icon="lucide:maximize-2" width="18" height="18"></iconify-icon></button>
+                    </div>
+                  </div>
+                  <div class="afr-center">
+                    <div class="afr-phase" id="afr-phase">Focus</div>
+                    <div class="afr-timer" id="afr-timer" role="timer" aria-live="off">25:00</div>
+                    <div class="afr-presets" id="afr-presets" role="group" aria-label="Focus length">
+                      <button type="button" class="afr-pill is-on" data-min="25">25</button><button type="button" class="afr-pill" data-min="50">50</button><button type="button" class="afr-pill" data-min="90">90</button><label class="afr-pill afr-custom"><span class="visually-hidden">Custom minutes</span><input type="number" id="opt-custom" min="1" max="240" placeholder="min" inputmode="numeric"></label>
+                    </div>
+                    <div class="afr-controls">
+                      <button type="button" class="btn-toolbar-sm btn-brand-sm afr-big" id="btn-start"><iconify-icon icon="lucide:play" width="18" height="18"></iconify-icon><span>Start</span></button>
+                      <button type="button" class="btn-toolbar-sm afr-big" id="btn-skip" title="Skip to break / focus"><iconify-icon icon="lucide:skip-forward" width="18" height="18"></iconify-icon><span>Skip</span></button>
+                    </div>
+                    <p class="afr-quote" id="afr-quote"></p>
+                  </div>
+                  <div class="afr-bottom">
+                    <div class="afr-mixer" id="afr-mixer" role="group" aria-label="Ambient sounds">
+                      <label class="afr-ch"><iconify-icon icon="lucide:cloud-rain" width="18" height="18"></iconify-icon><span>Rain</span><input type="range" id="snd-rain" min="0" max="1" step="0.02" value="0" aria-label="Rain volume"></label>
+                      <label class="afr-ch"><iconify-icon icon="lucide:waves" width="18" height="18"></iconify-icon><span>Brown noise</span><input type="range" id="snd-brown" min="0" max="1" step="0.02" value="0" aria-label="Brown noise volume"></label>
+                      <label class="afr-ch"><iconify-icon icon="lucide:wind" width="18" height="18"></iconify-icon><span>Wind</span><input type="range" id="snd-wind" min="0" max="1" step="0.02" value="0" aria-label="Wind volume"></label>
+                      <label class="afr-ch"><iconify-icon icon="lucide:flame" width="18" height="18"></iconify-icon><span>Fire</span><input type="range" id="snd-fire" min="0" max="1" step="0.02" value="0" aria-label="Fire volume"></label>
+                      <label class="afr-ch"><iconify-icon icon="lucide:droplets" width="18" height="18"></iconify-icon><span>Stream</span><input type="range" id="snd-stream" min="0" max="1" step="0.02" value="0" aria-label="Stream volume"></label>
+                      <label class="afr-ch"><iconify-icon icon="lucide:coffee" width="18" height="18"></iconify-icon><span>Café</span><input type="range" id="snd-cafe" min="0" max="1" step="0.02" value="0" aria-label="Café volume"></label>
+                    </div>
+                    <div class="afr-tasks">
+                      <form class="afr-task-form" id="afr-task-form"><input type="text" id="afr-task-input" class="input-clean" placeholder="What are you working on? (max 3)" maxlength="80" autocomplete="off"><button type="button" class="btn-toolbar-sm" id="btn-task-add" aria-label="Add task"><iconify-icon icon="lucide:plus" width="14" height="14"></iconify-icon></button></form>
+                      <ul class="afr-task-list" id="afr-task-list"></ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="afr-scenes" id="afr-scenes" role="group" aria-label="Scene">
+                  <button type="button" class="afr-scene is-on" data-scene="dawn" title="Dawn"></button><button type="button" class="afr-scene" data-scene="forest" title="Forest"></button><button type="button" class="afr-scene" data-scene="ocean" title="Ocean"></button><button type="button" class="afr-scene" data-scene="night" title="Night"></button><button type="button" class="afr-scene" data-scene="ember" title="Ember"></button><button type="button" class="afr-scene" data-scene="mono" title="Monochrome"></button>
+                </div>`,
+    outputHtml: `
+                  <div class="web-grid-2" id="afr-stats"></div>
+                  <ul class="web-list" id="afr-log"></ul>`,
+    settingsSummary: '5-min breaks · chime on · clock on',
+    settings: `
+              <div class="control-item">
+                <label for="opt-break">Break length</label>
+                <select id="opt-break" class="select-clean"><option value="0">No break</option><option value="5" selected>5 minutes</option><option value="10">10 minutes</option><option value="15">15 minutes</option></select>
+              </div>
+              <div class="control-item"><input type="checkbox" id="opt-autobreak" checked><label for="opt-autobreak">Start the break automatically</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-chime" checked><label for="opt-chime">Chime when a phase ends</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-clock" checked><label for="opt-clock">Show the clock</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-quotes" checked><label for="opt-quotes">Show a quiet quote</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-fade"><label for="opt-fade">Fade sounds out during breaks</label></div>`,
+    guide: [['Set the room', 'Pick a scene, slide a few sounds up — rain with a little fire is the classic — and type the one to three things you are working on. Press <kbd>F</kbd> for fullscreen and <kbd>H</kbd> to hide everything but the timer.'], ['Focus', 'Choose 25, 50, 90 or your own minutes and press <strong>Start</strong> (or <kbd>Space</kbd>). The timer keeps exact time even in a background tab; a soft chime marks the end and the break starts on its own if you let it.'], ['Keep the setup', 'Press <strong>Copy</strong> to copy a link with your scene, sounds and focus length — open it tomorrow or send it to a study partner. Today’s sessions are logged below the room.']],
+    faq: [['Where do the sounds come from?', 'They are synthesised live in your browser with the Web Audio API — filtered noise shaped into rain, wind, a crackling fire, a stream and a café murmur, plus true brown noise. No audio files are downloaded, so it works offline and there are no licences to worry about.'], ['Does the timer keep running in a background tab?', 'Yes. It is based on timestamps, not tick counting, so when you come back the remaining time is exact. The chime plays even if the tab is in the background on desktop browsers; mobile browsers may delay it.'], ['Can I use this as a “study with me” room with friends?', 'Share the setup link so everyone has the same scene, sounds and focus length. Sessions are not synchronised between people — it is a shared recipe, not a shared clock.'], ['Why does my browser ask me to interact before sound plays?', 'Browsers block audio until you click or press a key on the page. Press Start or any slider once and the mixer wakes up.'], ['Is my task list saved?', 'In your browser only (localStorage), together with today’s session count. Reset clears it. Nothing is sent anywhere.'], PRIVACY_FAQ]
+  },
+  {
     slug: 'responsive-breakpoint-previewer', name: 'Responsive Breakpoint Previewer', icon: 'lucide:monitor-smartphone', section: 'Web Utilities', layout: 'stacked', css: true,
     action: 'Preview', actionIcon: 'lucide:scan-eye',
     desc: 'Free online responsive design tester: paste HTML/CSS or a page URL and see it rendered side by side at phone, tablet and desktop widths (320 to 1440 px, plus custom), scaled to fit, with synced scrolling, landscape toggle and dark-scheme preview. Runs in your browser — nothing uploaded.',

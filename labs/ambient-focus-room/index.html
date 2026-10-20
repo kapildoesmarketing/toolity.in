@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Ambient Focus Room | Toolity Labs</title>
+  <link rel="canonical" href="https://toolity.in/labs/ambient-focus-room/">
+  <meta name="description" content="Free online focus room: a calm fullscreen page with a focus timer (25/50/90 or custom), a mixer of ambient sounds generated on-device (rain, brown noise, wind, fire, stream, café), a tiny task list, soft scenes and a clock. Shareable setup link, keyboard shortcuts, no account, nothing uploaded.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Ambient Focus Room | Toolity Labs">
+  <meta property="og:description" content="Free online focus room: a calm fullscreen page with a focus timer (25/50/90 or custom), a mixer of ambient sounds generated on-device (rain, brown noise, wind, fire, stream, café), a tiny task list, soft scenes and a clock. Shareable setup link, keyboard shortcuts, no account, nothing uploaded.">
+  <meta property="og:url" content="https://toolity.in/labs/ambient-focus-room/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=6.5" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=6.5">
+  <link rel="stylesheet" href="/styles/tools/ambient-focus-room.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Ambient Focus Room",
+        "url": "https://toolity.in/labs/ambient-focus-room/",
+        "description": "Free online focus room: a calm fullscreen page with a focus timer (25/50/90 or custom), a mixer of ambient sounds generated on-device (rain, brown noise, wind, fire, stream, café), a tiny task list, soft scenes and a clock. Shareable setup link, keyboard shortcuts, no account, nothing uploaded.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Labs", "item": "https://toolity.in/labs/" },
+          { "@type": "ListItem", "position": 3, "name": "Ambient Focus Room", "item": "https://toolity.in/labs/ambient-focus-room/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Where do the sounds come from?", "acceptedAnswer": { "@type": "Answer", "text": "They are synthesised live in your browser with the Web Audio API — filtered noise shaped into rain, wind, a crackling fire, a stream and a café murmur, plus true brown noise. No audio files are downloaded, so it works offline and there are no licences to worry about." } },
+          { "@type": "Question", "name": "Does the timer keep running in a background tab?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. It is based on timestamps, not tick counting, so when you come back the remaining time is exact. The chime plays even if the tab is in the background on desktop browsers; mobile browsers may delay it." } },
+          { "@type": "Question", "name": "Can I use this as a “study with me” room with friends?", "acceptedAnswer": { "@type": "Answer", "text": "Share the setup link so everyone has the same scene, sounds and focus length. Sessions are not synchronised between people — it is a shared recipe, not a shared clock." } },
+          { "@type": "Question", "name": "Why does my browser ask me to interact before sound plays?", "acceptedAnswer": { "@type": "Answer", "text": "Browsers block audio until you click or press a key on the page. Press Start or any slider once and the mixer wakes up." } },
+          { "@type": "Question", "name": "Is my task list saved?", "acceptedAnswer": { "@type": "Answer", "text": "In your browser only (localStorage), together with today’s session count. Reset clears it. Nothing is sent anywhere." } },
+          { "@type": "Question", "name": "Is my input sent anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. Everything is computed by JavaScript in your browser tab. Nothing is uploaded, logged or stored by Toolity." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main id="main">
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/labs/" class="breadcrumb-link">Labs</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Ambient Focus Room</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Labs</span>
+            <h1 class="page-title">Ambient Focus Room</h1>
+            <p class="page-desc">A quiet place to work: a focus timer, rain and fire you can mix, a three-item task list and a scene that slowly drifts — fullscreen, offline, shareable.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="stacked" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge web-status-badge" id="status-badge">Press Space to start a focus session</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result" aria-label="Copy result" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download result" aria-label="Download result" disabled>
+                <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                <span>Download</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-open" title="Open result in a new tab" aria-label="Open result in a new tab" disabled>
+                <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
+                <span>Open</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Room</span>
+                <span class="pane-badge" id="input-badge">—</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content web-form">
+                <div class="afr-room scene-dawn" id="afr-room">
+                  <div class="afr-sky" aria-hidden="true"></div>
+                  <div class="afr-top">
+                    <div class="afr-clock" id="afr-clock" aria-live="off">--:--</div>
+                    <div class="afr-top-btns">
+                      <button type="button" class="afr-icon" id="btn-mute" title="Mute / unmute sounds (M)" aria-pressed="false"><iconify-icon icon="lucide:volume-2" width="18" height="18"></iconify-icon></button>
+                      <button type="button" class="afr-icon" id="btn-hide" title="Hide controls (H)" aria-pressed="false"><iconify-icon icon="lucide:eye-off" width="18" height="18"></iconify-icon></button>
+                      <button type="button" class="afr-icon" id="btn-full" title="Fullscreen (F)"><iconify-icon icon="lucide:maximize-2" width="18" height="18"></iconify-icon></button>
+                    </div>
+                  </div>
+                  <div class="afr-center">
+                    <div class="afr-phase" id="afr-phase">Focus</div>
+                    <div class="afr-timer" id="afr-timer" role="timer" aria-live="off">25:00</div>
+                    <div class="afr-presets" id="afr-presets" role="group" aria-label="Focus length">
+                      <button type="button" class="afr-pill is-on" data-min="25">25</button><button type="button" class="afr-pill" data-min="50">50</button><button type="button" class="afr-pill" data-min="90">90</button><label class="afr-pill afr-custom"><span class="visually-hidden">Custom minutes</span><input type="number" id="opt-custom" min="1" max="240" placeholder="min" inputmode="numeric"></label>
+                    </div>
+                    <div class="afr-controls">
+                      <button type="button" class="btn-toolbar-sm btn-brand-sm afr-big" id="btn-start"><iconify-icon icon="lucide:play" width="18" height="18"></iconify-icon><span>Start</span></button>
+                      <button type="button" class="btn-toolbar-sm afr-big" id="btn-skip" title="Skip to break / focus"><iconify-icon icon="lucide:skip-forward" width="18" height="18"></iconify-icon><span>Skip</span></button>
+                    </div>
+                    <p class="afr-quote" id="afr-quote"></p>
+                  </div>
+                  <div class="afr-bottom">
+                    <div class="afr-mixer" id="afr-mixer" role="group" aria-label="Ambient sounds">
+                      <label class="afr-ch"><iconify-icon icon="lucide:cloud-rain" width="18" height="18"></iconify-icon><span>Rain</span><input type="range" id="snd-rain" min="0" max="1" step="0.02" value="0" aria-label="Rain volume"></label>
+                      <label class="afr-ch"><iconify-icon icon="lucide:waves" width="18" height="18"></iconify-icon><span>Brown noise</span><input type="range" id="snd-brown" min="0" max="1" step="0.02" value="0" aria-label="Brown noise volume"></label>
+                      <label class="afr-ch"><iconify-icon icon="lucide:wind" width="18" height="18"></iconify-icon><span>Wind</span><input type="range" id="snd-wind" min="0" max="1" step="0.02" value="0" aria-label="Wind volume"></label>
+                      <label class="afr-ch"><iconify-icon icon="lucide:flame" width="18" height="18"></iconify-icon><span>Fire</span><input type="range" id="snd-fire" min="0" max="1" step="0.02" value="0" aria-label="Fire volume"></label>
+                      <label class="afr-ch"><iconify-icon icon="lucide:droplets" width="18" height="18"></iconify-icon><span>Stream</span><input type="range" id="snd-stream" min="0" max="1" step="0.02" value="0" aria-label="Stream volume"></label>
+                      <label class="afr-ch"><iconify-icon icon="lucide:coffee" width="18" height="18"></iconify-icon><span>Café</span><input type="range" id="snd-cafe" min="0" max="1" step="0.02" value="0" aria-label="Café volume"></label>
+                    </div>
+                    <div class="afr-tasks">
+                      <form class="afr-task-form" id="afr-task-form"><input type="text" id="afr-task-input" class="input-clean" placeholder="What are you working on? (max 3)" maxlength="80" autocomplete="off"><button type="button" class="btn-toolbar-sm" id="btn-task-add" aria-label="Add task"><iconify-icon icon="lucide:plus" width="14" height="14"></iconify-icon></button></form>
+                      <ul class="afr-task-list" id="afr-task-list"></ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="afr-scenes" id="afr-scenes" role="group" aria-label="Scene">
+                  <button type="button" class="afr-scene is-on" data-scene="dawn" title="Dawn"></button><button type="button" class="afr-scene" data-scene="forest" title="Forest"></button><button type="button" class="afr-scene" data-scene="ocean" title="Ocean"></button><button type="button" class="afr-scene" data-scene="night" title="Night"></button><button type="button" class="afr-scene" data-scene="ember" title="Ember"></button><button type="button" class="afr-scene" data-scene="mono" title="Monochrome"></button>
+                </div>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Today</span>
+                <span class="pane-badge" id="output-badge">—</span>
+              </div>
+              <div class="pane-content web-output-pane">
+                <div class="pane-empty" id="output-empty">
+                  <iconify-icon icon="lucide:coffee"></iconify-icon>
+                  <span>Your focus sessions today will be logged here</span>
+                </div>
+                <div class="web-output" id="output-content" hidden>
+                  <div class="web-grid-2" id="afr-stats"></div>
+                  <ul class="web-list" id="afr-log"></ul>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">5-min breaks · chime on · clock on</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item">
+                <label for="opt-break">Break length</label>
+                <select id="opt-break" class="select-clean"><option value="0">No break</option><option value="5" selected>5 minutes</option><option value="10">10 minutes</option><option value="15">15 minutes</option></select>
+              </div>
+              <div class="control-item"><input type="checkbox" id="opt-autobreak" checked><label for="opt-autobreak">Start the break automatically</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-chime" checked><label for="opt-chime">Chime when a phase ends</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-clock" checked><label for="opt-clock">Show the clock</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-quotes" checked><label for="opt-quotes">Show a quiet quote</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-fade"><label for="opt-fade">Fade sounds out during breaks</label></div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Use Ambient Focus Room in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Set the room</h3>
+              <p class="step-desc">Pick a scene, slide a few sounds up — rain with a little fire is the classic — and type the one to three things you are working on. Press <kbd>F</kbd> for fullscreen and <kbd>H</kbd> to hide everything but the timer.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Focus</h3>
+              <p class="step-desc">Choose 25, 50, 90 or your own minutes and press <strong>Start</strong> (or <kbd>Space</kbd>). The timer keeps exact time even in a background tab; a soft chime marks the end and the break starts on its own if you let it.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Keep the setup</h3>
+              <p class="step-desc">Press <strong>Copy</strong> to copy a link with your scene, sounds and focus length — open it tomorrow or send it to a study partner. Today’s sessions are logged below the room.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Ambient Focus Room — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Where do the sounds come from?</summary>
+              <p>They are synthesised live in your browser with the Web Audio API — filtered noise shaped into rain, wind, a crackling fire, a stream and a café murmur, plus true brown noise. No audio files are downloaded, so it works offline and there are no licences to worry about.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Does the timer keep running in a background tab?</summary>
+              <p>Yes. It is based on timestamps, not tick counting, so when you come back the remaining time is exact. The chime plays even if the tab is in the background on desktop browsers; mobile browsers may delay it.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can I use this as a “study with me” room with friends?</summary>
+              <p>Share the setup link so everyone has the same scene, sounds and focus length. Sessions are not synchronised between people — it is a shared recipe, not a shared clock.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why does my browser ask me to interact before sound plays?</summary>
+              <p>Browsers block audio until you click or press a key on the page. Press Start or any slider once and the mixer wakes up.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is my task list saved?</summary>
+              <p>In your browser only (localStorage), together with today’s session count. Reset clears it. Nothing is sent anywhere.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is my input sent anywhere?</summary>
+              <p>No. Everything is computed by JavaScript in your browser tab. Nothing is uploaded, logged or stored by Toolity.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="labs"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=5.1"></script>
+  <script src="/scripts/tool-common.js?v=1.2"></script>
+  <script src="/scripts/web-common.js?v=1.2"></script>
+  <script src="/labs/ambient-focus-room/ambient-focus-room.js?v=1.0"></script>
+</body>
+</html>
