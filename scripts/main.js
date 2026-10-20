@@ -173,6 +173,7 @@
 
     // /tools/ A–Z index (no-op on every other page)
     initToolsIndex();
+    initBlogPost();
 
     // Designed by Kapil Pidhwani: any <button data-copy="text"> copies its value (Contact, Press). One delegated listener.
     document.addEventListener('click', (e) => {
@@ -1615,6 +1616,38 @@
         tags: ['chat bubble', 'speech bubble', 'message widget', 'testimonial widget', 'quote widget', 'imessage bubble', 'whatsapp bubble', 'notion widget', 'embed', 'chat ui', 'fake text message', 'notion chat']
       },
       {
+        id: 'responsive-breakpoint-previewer',
+        title: 'Responsive Breakpoint Previewer',
+        category: 'Labs',
+        url: 'labs/responsive-breakpoint-previewer/',
+        icon: 'lucide:monitor-smartphone',
+        tags: ['responsive design tester', 'breakpoint previewer', 'test website on different screen sizes', 'mobile preview', 'responsive checker', 'media query tester', 'viewport tester', 'multi device preview', 'screen size simulator', 'html preview responsive']
+      },
+      {
+        id: 'accessibility-contrast-matrix',
+        title: 'Accessibility Contrast Matrix',
+        category: 'Labs',
+        url: 'labs/accessibility-contrast-matrix/',
+        icon: 'lucide:grid-3x3',
+        tags: ['contrast matrix', 'palette contrast checker', 'wcag palette', 'color combinations accessibility', 'contrast grid', 'design system contrast', 'aa aaa matrix', 'accessible color palette', 'color pair contrast', 'wcag 2 contrast']
+      },
+      {
+        id: 'keyboard-shortcut-cheat-sheet-maker',
+        title: 'Keyboard Shortcut Cheat-Sheet Maker',
+        category: 'Labs',
+        url: 'labs/keyboard-shortcut-cheat-sheet-maker/',
+        icon: 'lucide:keyboard',
+        tags: ['keyboard shortcut cheat sheet', 'cheat sheet maker', 'shortcut cheat sheet generator', 'printable shortcuts', 'keycap generator', 'hotkey list', 'vs code shortcuts pdf', 'mac keyboard symbols', 'shortcut poster', 'notion shortcut table']
+      },
+      {
+        id: 'spreadsheet-formula-converter',
+        title: 'Spreadsheet Formula Converter',
+        category: 'Data',
+        url: 'data/spreadsheet-formula-converter/',
+        icon: 'lucide:sigma',
+        tags: ['excel to google sheets formula', 'google sheets to excel formula', 'formula converter', 'libreoffice formula', 'semicolon to comma formula', 'a1 to r1c1', 'arrayformula excel', 'textjoin vs join', 'spreadsheet function equivalents', 'formula compatibility']
+      },
+      {
         id: 'cat-widgets',
         title: 'Widgets',
         category: 'Category',
@@ -2403,6 +2436,27 @@
    * appears automatically. Ceiling: links exist only after JS runs (Google renders JS; <noscript> points to
    * /sitemap.xml). Upgrade path if indexing suffers: a 20-line script that bakes this list into the HTML.
    */
+  /**
+   * Designed by Kapil Pidhwani: blog post helpers — builds the "On this page" list from the article's h2s (ids are
+   * generated from the heading text, so authors never maintain anchors) and highlights the section in view.
+   * Ceiling: h2 only; nested h3 navigation is deliberately out (posts stay scannable).
+   */
+  function initBlogPost() {
+    const toc = document.getElementById('blog-toc'), article = document.querySelector('article.prose-card');
+    if (!toc || !article) return;
+    const slug = (t) => t.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60), esc = (t) => t.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    const heads = [...article.querySelectorAll('h2.prose-heading')].filter((h) => !h.closest('.blog-faq, .blog-related, .blog-takeaways'));
+    if (heads.length < 3) { toc.hidden = true; return; }
+    const used = new Set();
+    heads.forEach((h) => { if (!h.id) { let id = slug(h.textContent) || 'section', n = 2; while (used.has(id) || document.getElementById(id)) id = `${slug(h.textContent)}-${n++}`; h.id = id; } used.add(h.id); });
+    toc.innerHTML = `<p class="blog-toc-title">On this page</p><ol class="blog-toc-list">${heads.map((h) => `<li><a href="#${h.id}">${esc(h.textContent.trim())}</a></li>`).join('')}</ol>`;
+    if ('IntersectionObserver' in window) {
+      const links = new Map(heads.map((h) => [h.id, toc.querySelector(`a[href="#${h.id}"]`)]));
+      const io = new IntersectionObserver((entries) => { entries.forEach((e) => { if (e.isIntersecting) { links.forEach((a) => a.classList.remove('is-active')); links.get(e.target.id).classList.add('is-active'); } }); }, { rootMargin: '-15% 0px -70% 0px' });
+      heads.forEach((h) => io.observe(h));
+    }
+  }
+
   function initToolsIndex() {
     const root = document.getElementById('tools-index');
     if (!root || !window.ToolityRegistry) return;

@@ -2,10 +2,15 @@
 <!--
   Designed by Kapil Pidhwani: Toolity blog post template. No build step — copy, fill, publish.
   1. Copy this file to /blog/<post-slug>/index.html  (slug: lowercase-with-dashes).
-  2. Replace every {{PLACEHOLDER}} (title, description, slug, dates, reading time, body).
-  3. Add a card for the post at the TOP of <ul class="blog-list"> in /blog/index.html (snippet is in a comment there).
-  4. Add the URL to /sitemap.xml (next to /blog/) and to the Optional list in /llms.txt.
-  5. Delete this comment block (it must stay below <!DOCTYPE html> — a comment above it triggers quirks mode).
+  2. Replace every {{PLACEHOLDER}} (title, description, slug, dates, reading time, keywords, body). Delete blocks you don't need
+     (takeaways, table, tool cards, FAQ, related) — keep the FAQ if you write one, its JSON-LD lives in <head> too.
+  3. OG image: node gen_og_image.js <post-slug> "<title>" "<kicker e.g. Privacy · 9 min read>"  → /blog/<post-slug>/og.png
+  4. Add a card for the post at the TOP of <ul class="blog-list"> in /blog/index.html (snippet is in a comment there).
+  5. Add the URL to /sitemap.xml (next to /blog/) and to the Optional list in /llms.txt.
+  6. The "On this page" box fills itself from the h2.prose-heading elements (main.js) — write ≥ 3 sections or it hides.
+  7. Check: bash scripts/a11y-check.sh (if present) · ALL=1 node scripts/responsive-check.js blog/<post-slug> · validate JSON-LD.
+  8. Delete this comment block (it must stay below <!DOCTYPE html> — a comment above it triggers quirks mode).
+  Reference post: /blog/are-free-online-file-converters-safe/ — copy its structure and tone.
 -->
 <html lang="en">
 
@@ -30,15 +35,27 @@
   <link rel="canonical" href="https://toolity.in/blog/{{post-slug}}/">
 
   <!-- SEO & Metadata -->
-  <meta name="description" content="{{One or two sentences, max ~155 characters.}}">
+  <meta name="description" content="{{One or two sentences, max ~155 characters, primary keyword early.}}">
   <meta name="author" content="Kapil Pidhwani">
+  <meta name="keywords" content="{{primary keyword, secondary keyword, long-tail}}">
   <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Toolity.in">
   <meta property="og:url" content="https://toolity.in/blog/{{post-slug}}/">
-  <meta property="og:title" content="{{POST TITLE}} | Toolity Blog">
-  <meta property="og:description" content="{{One or two sentences, max ~155 characters.}}">
-  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta property="og:title" content="{{POST TITLE}}">
+  <meta property="og:description" content="{{Share-friendly one-liner.}}">
+  <meta property="og:image" content="https://toolity.in/blog/{{post-slug}}/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="{{POST TITLE}} — Toolity Blog">
   <meta property="article:published_time" content="{{YYYY-MM-DD}}">
-  <meta name="twitter:card" content="summary">
+  <meta property="article:modified_time" content="{{YYYY-MM-DD}}">
+  <meta property="article:author" content="Kapil Pidhwani">
+  <meta property="article:section" content="{{Category}}">
+  <meta property="article:tag" content="{{tag}}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{Short title ≤ 70 chars}}">
+  <meta name="twitter:description" content="{{Share-friendly one-liner.}}">
+  <meta name="twitter:image" content="https://toolity.in/blog/{{post-slug}}/og.png">
   <!-- Favicons -->
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
@@ -51,14 +68,21 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Preload Critical Assets -->
-  <link rel="preload" href="/styles/main.css?v=6.4" as="style">
+  <link rel="preload" href="/styles/main.css?v=6.5" as="style">
   <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
 
   <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 
-  <link rel="stylesheet" href="/styles/main.css?v=6.4">
+  <link rel="stylesheet" href="/styles/main.css?v=6.5">
   <script type="application/ld+json">
-  {"@context": "https://schema.org", "@type": "BlogPosting", "headline": "{{POST TITLE}}", "description": "{{One or two sentences.}}", "datePublished": "{{YYYY-MM-DD}}", "dateModified": "{{YYYY-MM-DD}}", "author": {"@type": "Person", "name": "Kapil Pidhwani"}, "publisher": {"@type": "Organization", "name": "Toolity", "url": "https://toolity.in", "logo": {"@type": "ImageObject", "url": "https://toolity.in/assets/favicons/android-chrome-512x512.png"}}, "mainEntityOfPage": "https://toolity.in/blog/{{post-slug}}/"}
+  {"@context": "https://schema.org", "@graph": [
+    {"@type": "BlogPosting", "@id": "https://toolity.in/blog/{{post-slug}}/#article", "headline": "{{POST TITLE}}", "description": "{{One or two sentences.}}", "image": "https://toolity.in/blog/{{post-slug}}/og.png", "datePublished": "{{YYYY-MM-DD}}", "dateModified": "{{YYYY-MM-DD}}", "wordCount": {{N}}, "keywords": "{{primary keyword, secondary keyword}}", "articleSection": "{{Category}}", "inLanguage": "en", "author": {"@type": "Person", "name": "Kapil Pidhwani", "url": "https://www.linkedin.com/company/toolity-in"}, "publisher": {"@type": "Organization", "name": "Toolity", "url": "https://toolity.in", "logo": {"@type": "ImageObject", "url": "https://toolity.in/assets/favicons/android-chrome-512x512.png"}}, "mainEntityOfPage": "https://toolity.in/blog/{{post-slug}}/"},
+    {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/"}, {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://toolity.in/blog/"}, {"@type": "ListItem", "position": 3, "name": "{{Short title}}"}]},
+    {"@type": "FAQPage", "mainEntity": [
+      {"@type": "Question", "name": "{{Question 1 — mirror the FAQ block in the body}}", "acceptedAnswer": {"@type": "Answer", "text": "{{Plain-text answer.}}"}},
+      {"@type": "Question", "name": "{{Question 2}}", "acceptedAnswer": {"@type": "Answer", "text": "{{Plain-text answer.}}"}}
+    ]}
+  ]}
   </script>
 </head>
 
@@ -76,48 +100,114 @@
           <span class="breadcrumb-current">{{Short title}}</span>
         </div>
         <h1 class="content-page-title">{{POST TITLE}}</h1>
-        <p class="content-page-desc">{{One-line summary shown under the title.}}</p>
+        <p class="content-page-desc">{{Two-sentence standfirst: the problem, and the promise of the article. Primary keyword appears naturally.}}</p>
         <p class="blog-meta"><time datetime="{{YYYY-MM-DD}}">{{DD Month YYYY}}</time> · Kapil Pidhwani · {{N}} min read</p>
+        <div class="blog-tags"><span>{{Tag}}</span><span>{{Tag}}</span></div>
       </div>
     </section>
 
     <div class="container prose-container">
-      <article class="prose-card">
-        <div class="prose-section">
-          <h2 class="prose-heading">{{Section heading}}</h2>
-          <p class="prose-text">{{Paragraph. Link tools like <a href="/media/image-compressor/">Image Compressor</a>.}}</p>
-          <ul class="prose-list">
-            <li>{{List item}}</li>
-          </ul>
-        </div>
+      <div class="blog-layout">
+        <nav class="blog-toc" id="blog-toc" aria-label="On this page"></nav>
+        <article class="prose-card">
+          <aside class="blog-takeaways" aria-labelledby="takeaways-title">
+            <h2 id="takeaways-title"><iconify-icon icon="lucide:zap" width="16" height="16"></iconify-icon>Key takeaways</h2>
+            <ul>
+              <li>{{Takeaway with the <strong>one phrase</strong> you want quoted.}}</li>
+              <li>{{Takeaway — can link to a section: <a href="#section-id">like this</a> (ids are generated from h2 text).}}</li>
+              <li>{{Takeaway}}</li>
+            </ul>
+          </aside>
 
-        <div class="prose-section">
-          <h2 class="prose-heading">{{Next section}}</h2>
-          <p class="prose-text">{{Paragraph.}}</p>
-          <div class="prose-callout">
-            <iconify-icon icon="lucide:lightbulb" width="20" height="20"></iconify-icon>
-            <div class="prose-callout-text"><strong>Tip:</strong> {{Optional callout.}}</div>
+          <div class="prose-section">
+            <h2 class="prose-heading">{{Section heading — ≥ 3 sections so the “On this page” box appears}}</h2>
+            <p class="prose-text">{{Open with the reader’s situation, not the topic. Link tools in context like <a href="/media/image-compressor/">Image Compressor</a>.}}</p>
+            <ul class="prose-list">
+              <li><strong>{{Lead-in.}}</strong> {{List item}}</li>
+            </ul>
+            <blockquote class="prose-quote">{{One quotable sentence per article, maximum.}}<cite>{{Optional attribution}}</cite></blockquote>
           </div>
-        </div>
 
-        <div class="prose-cta-row">
-          <a href="/blog/" class="btn-pill btn-secondary-neutral">
-            <iconify-icon icon="lucide:arrow-left" width="18" height="18"></iconify-icon>
-            All posts
-          </a>
-          <a href="/tools/" class="btn-pill btn-primary-signal">
-            <iconify-icon icon="lucide:wrench" width="18" height="18"></iconify-icon>
-            Explore the tools
-          </a>
-        </div>
-      </article>
+          <div class="prose-section">
+            <h2 class="prose-heading">{{Comparison section}}</h2>
+            <p class="prose-text">{{Paragraph.}}</p>
+            <h3 class="prose-subheading">{{Sub-heading (h3 — not in the TOC)}}</h3>
+            <div class="prose-table-wrap">
+              <table class="prose-table">
+                <thead><tr><th>{{Question}}</th><th>{{Option A}}</th><th>{{Option B}}</th></tr></thead>
+                <tbody>
+                  <tr><td>{{Row}}</td><td class="is-bad">{{Weak}}</td><td class="is-good">{{Strong}}</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="prose-section">
+            <h2 class="prose-heading">{{Checklist section}}</h2>
+            <ul class="prose-check">
+              <li><strong>{{Step name.}}</strong> {{What to do and what you will see.}}</li>
+            </ul>
+            <div class="prose-callout">
+              <iconify-icon icon="lucide:lightbulb" width="20" height="20"></iconify-icon>
+              <div class="prose-callout-text"><strong>Tip:</strong> {{Optional callout.}}</div>
+            </div>
+          </div>
+
+          <div class="prose-section">
+            <h2 class="prose-heading">{{Use-case section — tools as situations, not promotions}}</h2>
+            <div class="prose-tool-cards">
+              <a class="prose-tool-card" href="/docs/{{slug}}/"><iconify-icon icon="lucide:{{icon}}" width="20" height="20"></iconify-icon><b>{{Situation, e.g. “Merging a signed contract with its annexes”}}</b><span>{{Two sentences: the file, the stakes, what the tool does locally.}}</span><em>{{Tool name}} →</em></a>
+            </div>
+          </div>
+
+          <div class="prose-section blog-faq">
+            <h2 class="prose-heading">Frequently asked questions</h2>
+            <div class="faq-list">
+              <details class="faq-item"><summary>{{Question 1 — a real search query}}</summary><p>{{Answer — same text as the FAQPage JSON-LD in head.}}</p></details>
+              <details class="faq-item"><summary>{{Question 2}}</summary><p>{{Answer}}</p></details>
+            </div>
+          </div>
+
+          <div class="blog-share" aria-label="Share this article">
+            <span>Share:</span>
+            <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Ftoolity.in%2Fblog%2F{{post-slug}}%2F" target="_blank" rel="noopener"><iconify-icon icon="lucide:linkedin" width="15" height="15"></iconify-icon>LinkedIn</a>
+            <a href="https://twitter.com/intent/tweet?text={{URL-encoded title}}&amp;url=https%3A%2F%2Ftoolity.in%2Fblog%2F{{post-slug}}%2F" target="_blank" rel="noopener"><iconify-icon icon="lucide:twitter" width="15" height="15"></iconify-icon>X</a>
+            <a href="https://www.reddit.com/submit?url=https%3A%2F%2Ftoolity.in%2Fblog%2F{{post-slug}}%2F&amp;title={{URL-encoded title}}" target="_blank" rel="noopener"><iconify-icon icon="lucide:message-square" width="15" height="15"></iconify-icon>Reddit</a>
+            <a href="mailto:?subject={{URL-encoded title}}&amp;body=https%3A%2F%2Ftoolity.in%2Fblog%2F{{post-slug}}%2F"><iconify-icon icon="lucide:mail" width="15" height="15"></iconify-icon>Email</a>
+          </div>
+
+          <div class="blog-author">
+            <img src="/assets/Toolity.in Wink.webp" alt="" width="56" height="56" loading="lazy">
+            <b>Kapil Pidhwani</b>
+            <span>Builds Toolity — 170+ free tools that run entirely in your browser. Writes about privacy, the web platform and making useful things small. <a href="https://www.linkedin.com/company/toolity-in" target="_blank" rel="noopener">LinkedIn</a> · <a href="/contact/">Contact</a></span>
+          </div>
+
+          <div class="blog-related">
+            <h2>Related tools</h2>
+            <div class="prose-tool-cards">
+              <a class="prose-tool-card" href="/docs/{{slug}}/"><iconify-icon icon="lucide:{{icon}}" width="20" height="20"></iconify-icon><b>{{Tool}}</b><span>{{One line.}}</span></a>
+            </div>
+          </div>
+
+          <div class="prose-cta-row">
+            <a href="/blog/" class="btn-pill btn-secondary-neutral">
+              <iconify-icon icon="lucide:arrow-left" width="18" height="18"></iconify-icon>
+              All posts
+            </a>
+            <a href="/tools/" class="btn-pill btn-primary-signal">
+              <iconify-icon icon="lucide:wrench" width="18" height="18"></iconify-icon>
+              Explore the tools
+            </a>
+          </div>
+        </article>
+      </div>
     </div>
   </main>
 
   <!-- Global Multi-Column Footer -->
   <div data-include="/components/footer.html"></div>
 
-  <script src="/scripts/main.js?v=5.0"></script>
+  <script src="/scripts/main.js?v=5.1"></script>
 </body>
 
 </html>
