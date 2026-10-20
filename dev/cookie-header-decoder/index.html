@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Cookie Header Decoder | Toolity Dev</title>
+  <link rel="canonical" href="https://toolity.in/dev/cookie-header-decoder/">
+  <meta name="description" content="Free online cookie header decoder: paste Set-Cookie or Cookie headers, a whole response header block or a document.cookie string and get every cookie broken down — name, value (URL-, Base64- and JWT-decoded), Domain, Path, Expires / Max-Age as a real date, Secure, HttpOnly, SameSite, Partitioned, Priority — with RFC 6265bis checks: __Host- / __Secure- prefix rules, SameSite=None without Secure, 4 KB limit, 400-day cap, missing HttpOnly on session cookies. Runs in your browser.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Cookie Header Decoder | Toolity Dev">
+  <meta property="og:description" content="Free online cookie header decoder: paste Set-Cookie or Cookie headers, a whole response header block or a document.cookie string and get every cookie broken down — name, value (URL-, Base64- and JWT-decoded), Domain, Path, Expires / Max-Age as a real date, Secure, HttpOnly, SameSite, Partitioned, Priority — with RFC 6265bis checks: __Host- / __Secure- prefix rules, SameSite=None without Secure, 4 KB limit, 400-day cap, missing HttpOnly on session cookies. Runs in your browser.">
+  <meta property="og:url" content="https://toolity.in/dev/cookie-header-decoder/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=6.5" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=6.5">
+  <link rel="stylesheet" href="/styles/tools/cookie-header-decoder.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Cookie Header Decoder",
+        "url": "https://toolity.in/dev/cookie-header-decoder/",
+        "description": "Free online cookie header decoder: paste Set-Cookie or Cookie headers, a whole response header block or a document.cookie string and get every cookie broken down — name, value (URL-, Base64- and JWT-decoded), Domain, Path, Expires / Max-Age as a real date, Secure, HttpOnly, SameSite, Partitioned, Priority — with RFC 6265bis checks: __Host- / __Secure- prefix rules, SameSite=None without Secure, 4 KB limit, 400-day cap, missing HttpOnly on session cookies. Runs in your browser.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Dev", "item": "https://toolity.in/dev/" },
+          { "@type": "ListItem", "position": 3, "name": "Cookie Header Decoder", "item": "https://toolity.in/dev/cookie-header-decoder/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Which rules does it check?", "acceptedAnswer": { "@type": "Answer", "text": "The ones browsers actually enforce (RFC 6265bis, Chrome / Firefox / Safari behaviour as of 2026): SameSite=None requires Secure; __Host- needs Secure, Path=/ and no Domain; __Secure- needs Secure; name + value over 4096 bytes is dropped; expiry beyond 400 days is clamped by Chrome; invalid characters in names or values; Partitioned without Secure; a Domain with a scheme or port; a past expiry (which deletes the cookie); missing HttpOnly on session-looking cookies; duplicate names; and whether the cookie is even sent in a cross-site context." } },
+          { "@type": "Question", "name": "How are values decoded?", "acceptedAnswer": { "@type": "Answer", "text": "If the value is percent-encoded it is URL-decoded. If it looks like a JWT (three Base64url parts whose header is JSON with an alg) the header and payload are shown as JSON, with exp / iat turned into dates. Otherwise, if it is valid Base64 and decodes to readable text or JSON, that is shown. Signatures are not verified here — use the JWT Builder &amp; Verifier for that." } },
+          { "@type": "Question", "name": "What is the difference between Expires and Max-Age?", "acceptedAnswer": { "@type": "Answer", "text": "Max-Age is a number of seconds from now and wins when both are present; Expires is an absolute HTTP date. Neither means a session cookie — deleted when the browser closes (Chrome may restore it with “continue where you left off”). A value of Max-Age=0 or an Expires in the past is how servers delete a cookie." } },
+          { "@type": "Question", "name": "What does Partitioned mean?", "acceptedAnswer": { "@type": "Answer", "text": "CHIPS (Cookies Having Independent Partitioned State): a third-party cookie that is stored per top-level site, so the embed on site A cannot see what it set on site B. Chrome requires Secure and expects SameSite=None with it; it is the supported way for embedded widgets to keep state now that unpartitioned third-party cookies are being phased out." } },
+          { "@type": "Question", "name": "Can I paste a HAR file?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — open a .har export with the file button; every set-cookie response header and cookie request header in it is extracted, labelled with its URL." } },
+          { "@type": "Question", "name": "Is my code uploaded anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. Formatting and minifying run in JavaScript inside your browser tab. The formatter libraries are downloaded once from a CDN; your code never leaves the page." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main id="main">
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/dev/" class="breadcrumb-link">Dev</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Cookie Header Decoder</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Dev</span>
+            <h1 class="page-title">Cookie Header Decoder</h1>
+            <p class="page-desc">Paste a Set-Cookie header, a Cookie header or the whole response — every cookie decoded, every attribute explained, every browser rejection flagged before it bites.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="split" data-split="40/60" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge web-status-badge" id="status-badge">Paste a Set-Cookie or Cookie header</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result" aria-label="Copy result" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <div class="dropdown-menu-wrapper" id="download-dropdown-wrap">
+                <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download result" aria-label="Download result" aria-haspopup="true" disabled>
+                  <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                  <span>Download</span>
+                  <iconify-icon icon="lucide:chevron-down" class="dropdown-arrow" width="13" height="13"></iconify-icon>
+                </button>
+                <div class="dropdown-popup" role="menu">
+                  <button type="button" class="dropdown-item" data-format="md" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:file-text" width="14" height="14"></iconify-icon>
+                      <span>Report (Markdown)</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="json" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:braces" width="14" height="14"></iconify-icon>
+                      <span>Cookies (JSON)</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="csv" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:file-spreadsheet" width="14" height="14"></iconify-icon>
+                      <span>Cookies (CSV)</span>
+                    </div>
+                  </button>
+                </div>
+              </div>
+              <button type="button" class="btn-toolbar-sm" id="btn-open" title="Open result in a new tab" aria-label="Open result in a new tab" disabled>
+                <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
+                <span>Open</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Headers</span>
+                <span class="pane-badge" id="input-badge">—</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content web-form">
+                <div class="web-file-row">
+                  <button type="button" class="btn-toolbar-sm" id="btn-file" title="Open a file from your device" aria-label="Open a file from your device">
+                    <iconify-icon icon="lucide:folder-open" width="14" height="14"></iconify-icon>
+                    <span>Open file</span>
+                  </button>
+                  <input type="file" id="file-input" accept=".txt,.har,.log,.http,.headers" hidden>
+                  <span class="web-muted" id="file-name">or drop a file here</span>
+                </div>
+                <div class="form-group form-group-grow">
+                  <label class="form-label" for="text-input"><span>Set-Cookie / Cookie headers</span><span class="form-label-desc">or paste the whole response header block</span></label>
+                  <textarea id="text-input" class="textarea-clean ck-input" rows="12" placeholder="Set-Cookie: session=eyJhbGciOi…; Path=/; Secure; HttpOnly; SameSite=Lax; Max-Age=3600&#10;Set-Cookie: __Host-csrf=abc123; Path=/; Secure&#10;Cookie: a=1; theme=dark&#10;&#10;— or a document.cookie string: a=1; b=hello%20world" spellcheck="false" autocapitalize="off" autocomplete="off" data-file-target></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Cookies</span>
+                <span class="pane-badge" id="output-badge">—</span>
+              </div>
+              <div class="pane-content web-output-pane">
+                <div class="pane-empty" id="output-empty">
+                  <iconify-icon icon="lucide:cookie"></iconify-icon>
+                  <span>Decoded cookies, attributes and warnings appear here</span>
+                </div>
+                <div class="web-output" id="output-content" hidden>
+                  <div class="web-grid-2" id="ck-stats"></div>
+                  <div class="web-tags" id="ck-issues"></div>
+                  <div class="web-list" id="ck-list"></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2c. Settings -->
+          <details class="tool-settings-accordion">
+            <summary class="tool-settings-summary">
+              <div class="tool-settings-summary-left">
+                <iconify-icon icon="lucide:sliders-horizontal" width="15" height="15"></iconify-icon>
+                <span>Settings</span>
+                <span class="pane-badge" id="settings-summary">Same-site request · https page · decode values</span>
+              </div>
+              <iconify-icon class="tool-settings-chevron" icon="lucide:chevron-down" width="16" height="16"></iconify-icon>
+            </summary>
+            <div class="tool-settings-panel">
+              <div class="control-item">
+                <label for="opt-context">Judge for</label>
+                <select id="opt-context" class="select-clean"><option value="same" selected>Same-site request (first-party)</option><option value="cross">Cross-site request (embedded / third-party)</option></select>
+              </div>
+              <div class="control-item"><input type="checkbox" id="opt-https" checked><label for="opt-https">The page is served over HTTPS</label></div>
+              <div class="control-item"><input type="checkbox" id="opt-decode" checked><label for="opt-decode">Decode values (URL, Base64, JWT)</label></div>
+            </div>
+          </details>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Use Cookie Header Decoder in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Paste headers</h3>
+              <p class="step-desc">Copy the response headers from DevTools → Network → Headers (or <code>curl -I</code>) and paste them. <code>Set-Cookie:</code> and <code>Cookie:</code> lines are picked out automatically; bare lines are treated as a Set-Cookie when they carry attributes, otherwise as a <code>document.cookie</code> string.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Read each cookie</h3>
+              <p class="step-desc">Every cookie gets a card: name, raw value, the decoded value when it is URL-encoded, Base64 or a JWT, size, and each attribute as a chip — Domain, Path, when it expires (and how long from now), Secure, HttpOnly, SameSite, Partitioned, Priority. Warnings explain exactly what a browser will do with the cookie and why.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Fix and export</h3>
+              <p class="step-desc">Change <strong>Judge for</strong> in settings to see how the same cookies behave in a cross-site (embedded) request. Copy the Markdown report or download JSON / CSV for a ticket.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Cookie Header Decoder — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Which rules does it check?</summary>
+              <p>The ones browsers actually enforce (RFC 6265bis, Chrome / Firefox / Safari behaviour as of 2026): <code>SameSite=None</code> requires <code>Secure</code>; <code>__Host-</code> needs Secure, <code>Path=/</code> and no Domain; <code>__Secure-</code> needs Secure; name + value over 4096 bytes is dropped; expiry beyond 400 days is clamped by Chrome; invalid characters in names or values; <code>Partitioned</code> without Secure; a Domain with a scheme or port; a past expiry (which deletes the cookie); missing <code>HttpOnly</code> on session-looking cookies; duplicate names; and whether the cookie is even sent in a cross-site context.</p>
+            </details>
+            <details class="faq-item">
+              <summary>How are values decoded?</summary>
+              <p>If the value is percent-encoded it is URL-decoded. If it looks like a JWT (three Base64url parts whose header is JSON with an <code>alg</code>) the header and payload are shown as JSON, with <code>exp</code> / <code>iat</code> turned into dates. Otherwise, if it is valid Base64 and decodes to readable text or JSON, that is shown. Signatures are not verified here — use the <a href="/dev/jwt-builder-verifier/">JWT Builder &amp; Verifier</a> for that.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What is the difference between Expires and Max-Age?</summary>
+              <p><code>Max-Age</code> is a number of seconds from now and wins when both are present; <code>Expires</code> is an absolute HTTP date. Neither means a session cookie — deleted when the browser closes (Chrome may restore it with “continue where you left off”). A value of <code>Max-Age=0</code> or an <code>Expires</code> in the past is how servers delete a cookie.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What does Partitioned mean?</summary>
+              <p>CHIPS (Cookies Having Independent Partitioned State): a third-party cookie that is stored per top-level site, so the embed on site A cannot see what it set on site B. Chrome requires <code>Secure</code> and expects <code>SameSite=None</code> with it; it is the supported way for embedded widgets to keep state now that unpartitioned third-party cookies are being phased out.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can I paste a HAR file?</summary>
+              <p>Yes — open a <code>.har</code> export with the file button; every <code>set-cookie</code> response header and <code>cookie</code> request header in it is extracted, labelled with its URL.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is my code uploaded anywhere?</summary>
+              <p>No. Formatting and minifying run in JavaScript inside your browser tab. The formatter libraries are downloaded once from a CDN; your code never leaves the page.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="dev"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=5.2"></script>
+  <script src="/scripts/tool-common.js?v=1.2"></script>
+  <script src="/scripts/web-common.js?v=1.2"></script>
+  <script src="/dev/cookie-header-decoder/cookie-header-decoder.js?v=1.0"></script>
+</body>
+</html>

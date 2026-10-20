@@ -1,0 +1,22 @@
+/* Cookie Header Decoder — per-cookie cards. Shared chips/tables come from main.css. */
+.ck-input { font-family: var(--font-mono); font-size: 0.84rem; }
+.ck-card { padding: 0.75rem 0.85rem; border: 1px solid var(--border); border-left-width: 4px; border-radius: var(--radius-sm); background: var(--surface); display: flex; flex-direction: column; gap: 0.5rem; min-width: 0; }
+.ck-card.is-pass { border-left-color: #16a34a; }
+.ck-card.is-warn { border-left-color: #ca8a04; }
+.ck-card.is-fail { border-left-color: #dc2626; }
+.ck-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.25rem 0.75rem; }
+.ck-name { margin: 0; font-family: var(--font-mono); font-size: 0.95rem; font-weight: 700; color: var(--text-primary); overflow-wrap: anywhere; }
+.ck-val code { display: block; font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-secondary); overflow-wrap: anywhere; max-height: 6.5em; overflow: auto; }
+.ck-attrs .web-tag b { font-weight: 600; color: var(--text-primary); margin-left: 0.3rem; }
+.ck-chip-off { opacity: 0.55; text-decoration: line-through; }
+.ck-chip-expiry { color: var(--text-primary); }
+.ck-dec summary { cursor: pointer; font-size: 0.78rem; font-weight: 600; color: var(--text-secondary); min-height: 28px; display: flex; align-items: center; }
+.ck-dec .web-code { margin-top: 0.35rem; font-size: 0.76rem; max-height: 260px; }
+.ck-issues { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 0.3rem; font-size: 0.8rem; }
+.ck-issues li { padding-left: 1.3rem; position: relative; color: var(--text-secondary); overflow-wrap: anywhere; }
+.ck-issues li::before { content: 'ℹ'; position: absolute; left: 0; top: 0; font-weight: 700; color: var(--text-muted); }
+.ck-issues li.is-warn::before { content: '⚠'; color: #a16207; }
+.ck-issues li.is-fail::before { content: '✕'; color: #b91c1c; }
+.ck-issues li.is-fail { color: var(--text-primary); }
+[data-theme="dark"] .ck-issues li.is-warn::before { color: #facc15; }
+[data-theme="dark"] .ck-issues li.is-fail::before { color: #f87171; }
