@@ -1,0 +1,21 @@
+/* Consent Mode Checker — score ring, checklist colours. */
+.td-opts { display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; }
+.cm-score { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.9rem; }
+.cm-score:empty { display: none; }
+.cmc-ring { width: 84px; height: 84px; border-radius: 50%; display: flex; align-items: baseline; justify-content: center; flex-shrink: 0; border: 5px solid var(--border); font-variant-numeric: tabular-nums; }
+.cmc-ring b { font-size: 1.7rem; font-weight: 700; line-height: 84px; }
+.cmc-ring span { font-size: 0.72rem; color: var(--text-muted); }
+.cmc-ring.is-good { border-color: #16a34a; } .cmc-ring.is-mid { border-color: #d97706; } .cmc-ring.is-bad { border-color: #dc2626; }
+.cmc-sum { display: flex; flex-direction: column; gap: 0.2rem; min-width: 0; }
+.cmc-sum strong { font-size: 1.05rem; }
+.cmc-table th { width: 30%; font-weight: 600; color: var(--text-primary); }
+.cmc-table td { font-family: var(--font-family); }
+.cmc-table th:nth-child(2), .cmc-table td:nth-child(2) { width: 6.5rem; white-space: nowrap; }
+.cmc-table tr.is-fail td { background: rgba(220, 38, 38, 0.06); }
+.cmc-table tr.is-warn td { background: rgba(202, 138, 4, 0.08); }
+.cmc-table tr.is-pass td:nth-child(2) { color: #15803d; }
+.cmc-fix { margin-top: 0.3rem; font-size: 0.82rem; color: var(--text-secondary); }
+.td-more { margin-top: 0.9rem; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.5rem 0.85rem; }
+.td-more summary { cursor: pointer; font-size: 0.86rem; font-weight: 600; color: var(--text-secondary); min-height: 32px; display: flex; align-items: center; }
+.td-more > :not(summary) { margin-top: 0.6rem; }
+.td-more .web-code { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 0.78rem; max-height: 360px; overflow: auto; }

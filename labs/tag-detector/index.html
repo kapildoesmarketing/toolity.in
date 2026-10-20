@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Tag Detector | Toolity Labs</title>
+  <link rel="canonical" href="https://toolity.in/labs/tag-detector/">
+  <meta name="description" content="Free online website tag detector: scan any URL (or paste HTML) for 60+ analytics, advertising, heatmap, chat and consent tags — Google Tag Manager, GA4, Google Ads, Meta Pixel, TikTok, LinkedIn, Clarity, Hotjar and more — with their IDs, where they load (head, body, inside GTM), duplicates and hard-coded tags outside GTM. Also reads the GTM container itself.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Tag Detector | Toolity Labs">
+  <meta property="og:description" content="Free online website tag detector: scan any URL (or paste HTML) for 60+ analytics, advertising, heatmap, chat and consent tags — Google Tag Manager, GA4, Google Ads, Meta Pixel, TikTok, LinkedIn, Clarity, Hotjar and more — with their IDs, where they load (head, body, inside GTM), duplicates and hard-coded tags outside GTM. Also reads the GTM container itself.">
+  <meta property="og:url" content="https://toolity.in/labs/tag-detector/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=6.5" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=6.5">
+  <link rel="stylesheet" href="/styles/tools/tag-detector.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Tag Detector",
+        "url": "https://toolity.in/labs/tag-detector/",
+        "description": "Free online website tag detector: scan any URL (or paste HTML) for 60+ analytics, advertising, heatmap, chat and consent tags — Google Tag Manager, GA4, Google Ads, Meta Pixel, TikTok, LinkedIn, Clarity, Hotjar and more — with their IDs, where they load (head, body, inside GTM), duplicates and hard-coded tags outside GTM. Also reads the GTM container itself.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Labs", "item": "https://toolity.in/labs/" },
+          { "@type": "ListItem", "position": 3, "name": "Tag Detector", "item": "https://toolity.in/labs/tag-detector/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "How is this different from other tag detectors?", "acceptedAnswer": { "@type": "Answer", "text": "Most tools only grep the HTML. This one also fetches the GTM container JavaScript and the page’s own scripts, extracts measurement and pixel IDs, and tells you whether each tag is hard-coded or fired through GTM — the questions an audit actually asks. And it runs in your browser." } },
+          { "@type": "Question", "name": "Why might a tag be missing from the results?", "acceptedAnswer": { "@type": "Answer", "text": "Static scanning cannot see tags that are injected only after cookie consent, loaded by server-side GTM, or added by scripts that themselves load other scripts at runtime. Tags on pages behind a login are also out of reach. Treat the result as “what a first visitor’s browser receives”." } },
+          { "@type": "Question", "name": "Can I scan a competitor?", "acceptedAnswer": { "@type": "Answer", "text": "The tool reads only what any visitor’s browser downloads — public HTML and scripts. Use it responsibly and respect site terms." } },
+          { "@type": "Question", "name": "What do the placement labels mean?", "acceptedAnswer": { "@type": "Answer", "text": "head / body: hard-coded in the page. via GTM: found only inside the container, i.e. managed through Tag Manager. script: found inside a first-party JavaScript file. noscript: the fallback pixel image/iframe." } },
+          { "@type": "Question", "name": "Does it detect Consent Mode?", "acceptedAnswer": { "@type": "Answer", "text": "It flags whether a consent default exists and which CMP is present; for the full Consent Mode v2 checklist use the companion Consent Mode Checker." } },
+          { "@type": "Question", "name": "Is my input sent anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. Everything is computed by JavaScript in your browser tab. Nothing is uploaded, logged or stored by Toolity." } },
+          { "@type": "Question", "name": "Why does fetching sometimes fail — and what is the relay?", "acceptedAnswer": { "@type": "Answer", "text": "Browsers block JavaScript from reading other websites directly (CORS). The tool first tries a direct request; when the site forbids it, the URL only is sent to a public read-only relay (allorigins.win, then codetabs.com) that fetches the page and returns its HTML. The relay sees the URL you typed, nothing else — Toolity has no server and keeps no record. If the relay is busy or the site blocks bots, paste the page source instead: that path is 100% local." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main id="main">
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/labs/" class="breadcrumb-link">Labs</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Tag Detector</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Labs</span>
+            <h1 class="page-title">Tag Detector</h1>
+            <p class="page-desc">See every tracking tag on a page — including the ones fired from inside Google Tag Manager — with IDs, placement, duplicates and what to fix.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="stacked" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge web-status-badge" id="status-badge">Enter a URL or paste HTML</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result" aria-label="Copy result" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <div class="dropdown-menu-wrapper" id="download-dropdown-wrap">
+                <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download result" aria-label="Download result" aria-haspopup="true" disabled>
+                  <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                  <span>Download</span>
+                  <iconify-icon icon="lucide:chevron-down" class="dropdown-arrow" width="13" height="13"></iconify-icon>
+                </button>
+                <div class="dropdown-popup" role="menu">
+                  <button type="button" class="dropdown-item" data-format="md" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:file-text" width="14" height="14"></iconify-icon>
+                      <span>Report (Markdown)</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="json" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:braces" width="14" height="14"></iconify-icon>
+                      <span>Report (JSON)</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="csv" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:file-spreadsheet" width="14" height="14"></iconify-icon>
+                      <span>Tags (CSV)</span>
+                    </div>
+                  </button>
+                </div>
+              </div>
+              <button type="button" class="btn-toolbar-sm" id="btn-open" title="Open result in a new tab" aria-label="Open result in a new tab" disabled>
+                <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
+                <span>Open</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Page</span>
+                <span class="pane-badge" id="input-badge">—</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content web-form">
+                <div class="form-group">
+                  <label class="form-label" for="url-input"><span>Page URL</span></label>
+                  <input type="url" id="url-input" class="input-clean" placeholder="https://example.com" spellcheck="false" autocomplete="off" autocapitalize="off" inputmode="url">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="html-input"><span>Or paste the page's HTML</span><span class="form-label-desc">Works offline · overrides the URL</span></label>
+                  <textarea id="html-input" class="textarea-clean" rows="6" placeholder="&lt;head&gt;…&lt;/head&gt; — view-source, select all, paste" spellcheck="false"></textarea>
+                </div>
+                <div class="web-checks td-opts">
+                  <div class="control-item"><input type="checkbox" id="opt-gtm" checked><label for="opt-gtm">Also read the GTM container(s) — finds tags fired via GTM</label></div>
+                  <div class="control-item"><input type="checkbox" id="opt-scripts" checked><label for="opt-scripts">Also read first-party scripts (up to 10)</label></div>
+                </div>
+                <button type="button" id="btn-run" class="btn-toolbar-sm btn-brand-sm btn-primary-action">
+                  <iconify-icon icon="lucide:radar" width="16" height="16"></iconify-icon>
+                  <span>Scan</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Tags found</span>
+                <span class="pane-badge" id="output-badge">—</span>
+              </div>
+              <div class="pane-content web-output-pane">
+                <div class="pane-empty" id="output-empty">
+                  <iconify-icon icon="lucide:radar"></iconify-icon>
+                  <span>Detected tags, IDs and placement appear here</span>
+                </div>
+                <div class="web-output" id="output-content" hidden>
+                  <div class="web-grid-2" id="td-stats"></div>
+                  <div class="web-tags" id="td-issues"></div>
+                  <div id="td-groups"></div>
+                  <details class="td-more"><summary>Not detected (common tags)</summary><div class="web-tags" id="td-missing"></div></details>
+                  <details class="td-more"><summary>Third-party hosts & scripts</summary><div id="td-hosts"></div></details>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Use Tag Detector in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Scan a page</h3>
+              <p class="step-desc">Enter the URL and press <strong>Scan</strong>. The HTML is fetched (directly or through a public relay), and by default the page’s Google Tag Manager container and up to ten first-party scripts are read too, so tags set up <em>inside</em> GTM are found — most detectors stop at the HTML.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Read the report</h3>
+              <p class="step-desc">Tags are grouped by purpose with their IDs (GTM-…, G-…, AW-…, pixel IDs), where they load — head, body, via GTM, in a script — and whether external scripts are async. Issues call out duplicate IDs, hard-coded tags that should live in GTM, legacy Universal Analytics and missing consent management.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Export</h3>
+              <p class="step-desc">Download the report as Markdown for a client, JSON for a pipeline or CSV for a spreadsheet; Copy copies the Markdown.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Tag Detector — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>How is this different from other tag detectors?</summary>
+              <p>Most tools only grep the HTML. This one also fetches the GTM container JavaScript and the page’s own scripts, extracts measurement and pixel IDs, and tells you whether each tag is hard-coded or fired through GTM — the questions an audit actually asks. And it runs in your browser.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why might a tag be missing from the results?</summary>
+              <p>Static scanning cannot see tags that are injected only after cookie consent, loaded by server-side GTM, or added by scripts that themselves load other scripts at runtime. Tags on pages behind a login are also out of reach. Treat the result as “what a first visitor’s browser receives”.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Can I scan a competitor?</summary>
+              <p>The tool reads only what any visitor’s browser downloads — public HTML and scripts. Use it responsibly and respect site terms.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What do the placement labels mean?</summary>
+              <p><strong>head</strong> / <strong>body</strong>: hard-coded in the page. <strong>via GTM</strong>: found only inside the container, i.e. managed through Tag Manager. <strong>script</strong>: found inside a first-party JavaScript file. <strong>noscript</strong>: the fallback pixel image/iframe.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Does it detect Consent Mode?</summary>
+              <p>It flags whether a consent default exists and which CMP is present; for the full Consent Mode v2 checklist use the companion <a href="/labs/consent-mode-checker/">Consent Mode Checker</a>.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is my input sent anywhere?</summary>
+              <p>No. Everything is computed by JavaScript in your browser tab. Nothing is uploaded, logged or stored by Toolity.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why does fetching sometimes fail — and what is the relay?</summary>
+              <p>Browsers block JavaScript from reading other websites directly (CORS). The tool first tries a direct request; when the site forbids it, the <em>URL only</em> is sent to a public read-only relay (allorigins.win, then codetabs.com) that fetches the page and returns its HTML. The relay sees the URL you typed, nothing else — Toolity has no server and keeps no record. If the relay is busy or the site blocks bots, paste the page source instead: that path is 100% local.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="labs"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=5.2"></script>
+  <script src="/scripts/tool-common.js?v=1.2"></script>
+  <script src="/scripts/tagscan-common.js?v=1.0"></script>
+  <script src="/scripts/web-common.js?v=1.2"></script>
+  <script src="/labs/tag-detector/tag-detector.js?v=1.0"></script>
+</body>
+</html>

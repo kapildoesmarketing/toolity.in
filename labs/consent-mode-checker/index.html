@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W5SC3TGR');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Theme Preload Initialization (Zero Flash) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('toolity_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Free Online Consent Mode Checker | Toolity Labs</title>
+  <link rel="canonical" href="https://toolity.in/labs/consent-mode-checker/">
+  <meta name="description" content="Free online Google Consent Mode v2 checker: scan a URL or paste HTML to verify the consent default exists, uses v2 parameters (ad_user_data, ad_personalization), sets all seven storage types, fires before gtag/GTM loads, uses regions, wait_for_update, ads_data_redaction and url_passthrough, and which CMP is installed — with a scored checklist and a corrected snippet you can paste.">
+  <meta name="author" content="Kapil Pidhwani">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolity.in">
+  <meta property="og:title" content="Free Online Consent Mode Checker | Toolity Labs">
+  <meta property="og:description" content="Free online Google Consent Mode v2 checker: scan a URL or paste HTML to verify the consent default exists, uses v2 parameters (ad_user_data, ad_personalization), sets all seven storage types, fires before gtag/GTM loads, uses regions, wait_for_update, ads_data_redaction and url_passthrough, and which CMP is installed — with a scored checklist and a corrected snippet you can paste.">
+  <meta property="og:url" content="https://toolity.in/labs/consent-mode-checker/">
+  <meta property="og:image" content="https://toolity.in/assets/og-image.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+
+  <!-- Fonts & critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/styles/main.css?v=6.5" as="style">
+  <link rel="preload" href="/assets/Toolity.in%20Logo.webp" as="image" type="image/webp">
+  <script defer src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/main.css?v=6.5">
+  <link rel="stylesheet" href="/styles/tools/consent-mode-checker.css?v=1.0">
+
+  <!-- Structured data: WebApplication + BreadcrumbList + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Consent Mode Checker",
+        "url": "https://toolity.in/labs/consent-mode-checker/",
+        "description": "Free online Google Consent Mode v2 checker: scan a URL or paste HTML to verify the consent default exists, uses v2 parameters (ad_user_data, ad_personalization), sets all seven storage types, fires before gtag/GTM loads, uses regions, wait_for_update, ads_data_redaction and url_passthrough, and which CMP is installed — with a scored checklist and a corrected snippet you can paste.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Kapil Pidhwani" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolity.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Labs", "item": "https://toolity.in/labs/" },
+          { "@type": "ListItem", "position": 3, "name": "Consent Mode Checker", "item": "https://toolity.in/labs/consent-mode-checker/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "What changed with Consent Mode v2?", "acceptedAnswer": { "@type": "Answer", "text": "Since March 2024 Google requires two extra parameters for EEA traffic — ad_user_data and ad_personalization — alongside ad_storage and analytics_storage. Without them Google Ads stops building audiences and measuring conversions for EU users, and Google Analytics loses modelled data." } },
+          { "@type": "Question", "name": "Why must the default fire before the tag loads?", "acceptedAnswer": { "@type": "Answer", "text": "The default tells Google tags how to behave before they send anything. If gtag.js or gtm.js loads first, the first hits go out with full storage — a compliance gap and a reason Google’s own diagnostics flag the setup. The checker compares the position of both in your HTML." } },
+          { "@type": "Question", "name": "My CMP sets consent inside GTM — will this detect it?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, when “read the GTM container” is on: the container is fetched and scanned for consent-initialisation templates and default calls. If the CMP injects the default purely at runtime from its own script, the checker reports the CMP and notes that it could not see the default statically." } },
+          { "@type": "Question", "name": "What score is “good enough”?", "acceptedAnswer": { "@type": "Answer", "text": "All Fail items fixed and at most cosmetic Warns. The score weights the things that lose data: v2 parameters, default-before-tag, and denied defaults for the EEA count most." } },
+          { "@type": "Question", "name": "Does Basic vs Advanced Consent Mode matter here?", "acceptedAnswer": { "@type": "Answer", "text": "In Basic mode tags are blocked entirely until consent, so no default is strictly required; in Advanced mode the default is essential. The checker assumes Advanced when Google tags are present in the HTML without a blocking CMP, and says so." } },
+          { "@type": "Question", "name": "Is my input sent anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. Everything is computed by JavaScript in your browser tab. Nothing is uploaded, logged or stored by Toolity." } },
+          { "@type": "Question", "name": "Why does fetching sometimes fail — and what is the relay?", "acceptedAnswer": { "@type": "Answer", "text": "Browsers block JavaScript from reading other websites directly (CORS). The tool first tries a direct request; when the site forbids it, the URL only is sent to a public read-only relay (allorigins.win, then codetabs.com) that fetches the page and returns its HTML. The relay sees the URL you typed, nothing else — Toolity has no server and keeps no record. If the relay is busy or the site blocks bots, paste the page source instead: that path is 100% local." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div data-include="/components/header.html"></div>
+
+  <main id="main">
+    <!-- ═══════════ 1. HERO ═══════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="/labs/" class="breadcrumb-link">Labs</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">Consent Mode Checker</span>
+        </nav>
+        <div class="page-title-row">
+          <div class="page-header-content">
+            <span class="section-eyebrow">Labs</span>
+            <h1 class="page-title">Consent Mode Checker</h1>
+            <p class="page-desc">Check a site’s Google Consent Mode v2 setup the way Google will: default before the tag, v2 parameters, all storage types, regions, CMP — scored, explained, with the fix snippet ready.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2. WORKSPACE ═══════════ -->
+    <section class="section-wrapper tool-section">
+      <div class="container">
+
+        <div class="tool-workspace-card" data-layout="stacked" id="tool-card">
+
+          <!-- 2a. Toolbar -->
+          <div class="tool-actions-toolbar">
+            <div class="toolbar-group">
+              <span class="pane-badge web-status-badge" id="status-badge">Enter a URL or paste HTML</span>
+            </div>
+            <div class="toolbar-group">
+              <button type="button" class="btn-toolbar-sm" id="btn-reset" title="Reset all inputs and settings" aria-label="Reset all inputs and settings">
+                <iconify-icon icon="lucide:rotate-ccw" width="14" height="14"></iconify-icon>
+                <span>Reset</span>
+              </button>
+              <button type="button" class="btn-toolbar-sm" id="btn-copy" title="Copy result" aria-label="Copy result" disabled>
+                <iconify-icon icon="lucide:copy" width="14" height="14"></iconify-icon>
+                <span>Copy</span>
+              </button>
+              <div class="dropdown-menu-wrapper" id="download-dropdown-wrap">
+                <button type="button" class="btn-toolbar-sm btn-brand-sm" id="btn-download" title="Download result" aria-label="Download result" aria-haspopup="true" disabled>
+                  <iconify-icon icon="lucide:download" width="14" height="14"></iconify-icon>
+                  <span>Download</span>
+                  <iconify-icon icon="lucide:chevron-down" class="dropdown-arrow" width="13" height="13"></iconify-icon>
+                </button>
+                <div class="dropdown-popup" role="menu">
+                  <button type="button" class="dropdown-item" data-format="md" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:file-text" width="14" height="14"></iconify-icon>
+                      <span>Report (Markdown)</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="json" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:braces" width="14" height="14"></iconify-icon>
+                      <span>Report (JSON)</span>
+                    </div>
+                  </button>
+                  <button type="button" class="dropdown-item" data-format="snippet" role="menuitem">
+                    <div class="dropdown-item-left">
+                      <iconify-icon icon="lucide:code" width="14" height="14"></iconify-icon>
+                      <span>Fixed snippet (.html)</span>
+                    </div>
+                  </button>
+                </div>
+              </div>
+              <button type="button" class="btn-toolbar-sm" id="btn-open" title="Open result in a new tab" aria-label="Open result in a new tab" disabled>
+                <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
+                <span>Open</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2b. Panes -->
+          <div class="split-pane-grid">
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Page</span>
+                <span class="pane-badge" id="input-badge">—</span>
+              </div>
+              <div class="pane-error" id="input-error" role="alert" hidden>
+                <iconify-icon icon="lucide:alert-circle" width="14" height="14"></iconify-icon>
+                <span></span>
+              </div>
+              <div class="pane-content web-form">
+                <div class="form-group">
+                  <label class="form-label" for="url-input"><span>Page URL</span></label>
+                  <input type="url" id="url-input" class="input-clean" placeholder="https://example.com" spellcheck="false" autocomplete="off" autocapitalize="off" inputmode="url">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="html-input"><span>Or paste the page's HTML</span><span class="form-label-desc">Works offline · overrides the URL</span></label>
+                  <textarea id="html-input" class="textarea-clean" rows="6" placeholder="&lt;head&gt;…&lt;/head&gt; — view-source, select all, paste" spellcheck="false"></textarea>
+                </div>
+                <div class="web-checks td-opts">
+                  <div class="control-item"><input type="checkbox" id="opt-gtm" checked><label for="opt-gtm">Also read the GTM container(s) — detects consent set inside GTM</label></div>
+                  <div class="control-item"><input type="checkbox" id="opt-eea" checked><label for="opt-eea">Judge defaults for EEA/UK visitors (denied by default expected)</label></div>
+                </div>
+                <button type="button" id="btn-run" class="btn-toolbar-sm btn-brand-sm btn-primary-action">
+                  <iconify-icon icon="lucide:shield-check" width="16" height="16"></iconify-icon>
+                  <span>Check</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="tool-pane">
+              <div class="pane-header">
+                <span>Consent Mode report</span>
+                <span class="pane-badge" id="output-badge">—</span>
+              </div>
+              <div class="pane-content web-output-pane">
+                <div class="pane-empty" id="output-empty">
+                  <iconify-icon icon="lucide:shield-check"></iconify-icon>
+                  <span>The scored checklist and fix snippet appear here</span>
+                </div>
+                <div class="web-output" id="output-content" hidden>
+                  <div class="cm-score" id="cmc-score"></div>
+                  <div class="web-table-wrap"><table class="web-table cmc-table" id="cmc-table"><thead><tr><th>Check</th><th>Result</th><th>Detail &amp; fix</th></tr></thead><tbody></tbody></table></div>
+                  <details class="td-more" open><summary>Detected consent defaults</summary><pre class="web-code" id="cmc-defaults"></pre></details>
+                  <details class="td-more"><summary>Suggested default snippet</summary><pre class="web-code" id="cmc-snippet"></pre></details>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- ═══════════ 3. GUIDE (exactly 3 steps) ═══════════ -->
+        <section class="guide-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="section-heading-sm">How to Use Consent Mode Checker in 3 Steps</h2>
+          </div>
+          <div class="guide-steps-grid">
+            <div class="guide-step-card">
+              <div class="step-num-badge">1</div>
+              <h3 class="step-title">Check a page</h3>
+              <p class="step-desc">Enter the URL (or paste the HTML) and press <strong>Check</strong>. The page, and by default its GTM container, are read for <code>gtag('consent', 'default', …)</code> calls, consent-initialisation tags, a CMP and the Google tags that depend on them.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">2</div>
+              <h3 class="step-title">Read the checklist</h3>
+              <p class="step-desc">Twelve checks, each Pass / Warn / Fail with the exact fix: v2 parameters, all seven storage types, denied-by-default for the EEA, region arrays, <code>wait_for_update</code>, default <em>before</em> the GTM/gtag loader, <code>ads_data_redaction</code>, <code>url_passthrough</code>, CMP present, TCF API, and Google tags firing without any consent signal.</p>
+            </div>
+            <div class="guide-step-card">
+              <div class="step-num-badge">3</div>
+              <h3 class="step-title">Fix it</h3>
+              <p class="step-desc">Copy the suggested default snippet — generated from what you already have, with missing keys filled in — and place it above your GTM or gtag snippet. Re-run to confirm.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ 5. FAQ ═══════════ -->
+        <section class="faq-section">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-heading-sm">Consent Mode Checker — Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>What changed with Consent Mode v2?</summary>
+              <p>Since March 2024 Google requires two extra parameters for EEA traffic — <code>ad_user_data</code> and <code>ad_personalization</code> — alongside <code>ad_storage</code> and <code>analytics_storage</code>. Without them Google Ads stops building audiences and measuring conversions for EU users, and Google Analytics loses modelled data.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why must the default fire before the tag loads?</summary>
+              <p>The default tells Google tags how to behave <em>before</em> they send anything. If gtag.js or gtm.js loads first, the first hits go out with full storage — a compliance gap and a reason Google’s own diagnostics flag the setup. The checker compares the position of both in your HTML.</p>
+            </details>
+            <details class="faq-item">
+              <summary>My CMP sets consent inside GTM — will this detect it?</summary>
+              <p>Yes, when “read the GTM container” is on: the container is fetched and scanned for consent-initialisation templates and default calls. If the CMP injects the default purely at runtime from its own script, the checker reports the CMP and notes that it could not see the default statically.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What score is “good enough”?</summary>
+              <p>All Fail items fixed and at most cosmetic Warns. The score weights the things that lose data: v2 parameters, default-before-tag, and denied defaults for the EEA count most.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Does Basic vs Advanced Consent Mode matter here?</summary>
+              <p>In Basic mode tags are blocked entirely until consent, so no default is strictly required; in Advanced mode the default is essential. The checker assumes Advanced when Google tags are present in the HTML without a blocking CMP, and says so.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Is my input sent anywhere?</summary>
+              <p>No. Everything is computed by JavaScript in your browser tab. Nothing is uploaded, logged or stored by Toolity.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Why does fetching sometimes fail — and what is the relay?</summary>
+              <p>Browsers block JavaScript from reading other websites directly (CORS). The tool first tries a direct request; when the site forbids it, the <em>URL only</em> is sent to a public read-only relay (allorigins.win, then codetabs.com) that fetches the page and returns its HTML. The relay sees the URL you typed, nothing else — Toolity has no server and keeps no record. If the relay is busy or the site blocks bots, paste the page source instead: that path is 100% local.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ═══════════ 6. CATEGORY CTA ═══════════ -->
+        <div data-include="/components/tool-cta.html" data-category="labs"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div data-include="/components/footer.html"></div>
+
+  <script src="/scripts/main.js?v=5.2"></script>
+  <script src="/scripts/tool-common.js?v=1.2"></script>
+  <script src="/scripts/tagscan-common.js?v=1.0"></script>
+  <script src="/scripts/web-common.js?v=1.2"></script>
+  <script src="/labs/consent-mode-checker/consent-mode-checker.js?v=1.0"></script>
+</body>
+</html>

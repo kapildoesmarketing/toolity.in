@@ -43,6 +43,58 @@ const PDF_HELPERS = `
 `;
 
 const CASES = [
+  ['labs/tag-detector/', `
+    for (let i = 0; i < 80 && !(window.__td && window.ToolityTagScan && window.ToolityWebTool); i++) await tick(100);
+    const T = window.ToolityWebTool, S = window.ToolityTagScan, FIX = \`<!doctype html><html><head><title>Fixture shop</title>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{ad_storage:'denied',analytics_storage:'denied',wait_for_update:500,region:['AT','DE']});gtag('consent','default',{ad_storage:'granted',analytics_storage:'granted'});</script>
+<script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="abc"></script>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-ABC123');</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ABCDEF1234"></script><script>gtag('js',new Date());gtag('config','G-ABCDEF1234');gtag('config','G-ZZZZZZ9999');gtag('config','AW-123456789');</script>
+<script src="https://www.google-analytics.com/analytics.js"></script>
+<script>(function(h,o,t,j,a,r){h.hj=h.hj||function(){};h._hjSettings={hjid:1234567,hjsv:6};})(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');</script>
+<script>!function(f,b,e,v,n,t,s){}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','123456789012345');fbq('track','PageView');</script>
+</head><body><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-ABC123"></iframe></noscript>
+<script src="https://www.clarity.ms/tag/abcdef1234"></script><script src="/assets/app.js"></script><script src="https://static.ads-twitter.com/uwt.js"></script></body></html>\`;
+    const r = await S.scan(FIX, 'https://shop.example/', {}); const by = Object.fromEntries(r.tags.map(t => [t.id, t]));
+    A(r.gtmIds.join() === 'GTM-ABC123' && by.gtm && by.ga4 && by.gads && by.ua && by.hotjar && by.meta && by.clarity && by.twitter, 'signatures: ' + r.tags.map(t => t.id).join(','));
+    A(JSON.stringify(by.ga4.ids) === '["G-ABCDEF1234","G-ZZZZZZ9999"]' && by.gads.ids[0] === 'AW-123456789' && by.meta.ids[0] === '123456789012345' && by.hotjar.ids[0] === '1234567' && by.clarity.ids[0] === 'abcdef1234', 'ids extracted: ' + JSON.stringify([by.ga4.ids, by.meta.ids, by.hotjar.ids, by.clarity.ids]));
+    A(by.ga4.where.head && !by.ga4.where.gtm && by.clarity.where.body && by.gtm.where.noscript && by.ua.asyncOk === false && by.ga4.asyncOk === true, 'placement + async: ' + JSON.stringify(by.ua.where) + by.ua.asyncOk);
+    A(r.cmp.length === 1 && r.cmp[0].id === 'cookiebot' && r.consent.present && r.consent.defaults.length === 2 && !r.consent.v2 && r.consent.merged.wait_for_update === 500 && r.consent.defaults[0].obj.region.join() === 'AT,DE', 'cmp + consent parse: ' + JSON.stringify(r.consent.merged));
+    A(r.consent.firstDefaultPos < r.consent.firstLoaderPos && r.stats.thirdParty.includes('static.ads-twitter.com') && r.title === 'Fixture shop', 'order + hosts');
+    const iss = window.__td.issues(r); A(iss.some(i => /2 GA4/.test(i[1])) && iss.some(i => /Universal Analytics/.test(i[1])) && iss.some(i => /hard-coded outside GTM/.test(i[1])) && iss.some(i => /Render-blocking/.test(i[1])), 'issues: ' + iss.map(i => i[1].slice(0, 30)).join(' | '));
+    set('html-input', FIX); set('opt-gtm', false); set('opt-scripts', false); $('btn-run').click(); A(await waitFor(() => T.S.out && /tags$/.test($('output-badge').textContent), 15000), 'pasted scan renders: ' + $('output-badge').textContent);
+    A($('td-groups').querySelectorAll('tr').length >= 9 && /Google Analytics 4/.test($('td-groups').textContent) && /Cookiebot/.test($('td-groups').textContent) && /TikTok Pixel/.test($('td-missing').textContent), 'tables + missing list');
+    A(/\\| Google Analytics 4 \\| Analytics \\| G-ABCDEF1234, G-ZZZZZZ9999 \\| head \\|/.test(T.S.out.text), 'markdown row: ' + T.S.out.text.split('\\n').find(l => /^\\| Google Analytics 4/.test(l)));
+    const j = JSON.parse((await T.T.download('json')).text); A(j.tags.length === r.tags.length && j.gtm[0] === 'GTM-ABC123', 'json export');
+    // live: our own site through the same-origin fetch, reading the real GTM container (CORS-open)
+    set('html-input', ''); set('url-input', location.origin + '/'); set('opt-gtm', true); $('btn-run').click(); A(await waitFor(() => T.S.out && window.__td.last && window.__td.last.url !== 'pasted HTML', 40000), 'live scan of toolity');
+    const L = window.__td.last; A(L.gtmIds.includes('GTM-W5SC3TGR') && L.stats.fetched.gtm.includes('GTM-W5SC3TGR') && L.tags.some(t => t.id === 'ga4' && t.where.gtm && t.ids.length), 'GTM container fetched: GA4 found via GTM: ' + L.tags.filter(t => t.where.gtm).map(t => t.id + ':' + t.ids));
+    A(!L.tags.some(t => t.id === 'dv360') && !L.cmp.length && !L.consent.present, 'no false positives from the GTM runtime library (dv360/TrustArc/consent): ' + JSON.stringify([L.cmp, L.consent.present]));`],
+  ['labs/consent-mode-checker/', `
+    for (let i = 0; i < 80 && !(window.__cmc && window.ToolityTagScan && window.ToolityWebTool); i++) await tick(100);
+    const T = window.ToolityWebTool, S = window.ToolityTagScan, C = window.__cmc, FIX = \`<!doctype html><html><head><title>Fixture shop</title>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{ad_storage:'denied',analytics_storage:'denied',wait_for_update:500,region:['AT','DE']});gtag('consent','default',{ad_storage:'granted',analytics_storage:'granted'});</script>
+<script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="abc"></script>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-ABC123');</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ABCDEF1234"></script><script>gtag('js',new Date());gtag('config','G-ABCDEF1234');gtag('config','G-ZZZZZZ9999');gtag('config','AW-123456789');</script>
+<script src="https://www.google-analytics.com/analytics.js"></script>
+<script>(function(h,o,t,j,a,r){h.hj=h.hj||function(){};h._hjSettings={hjid:1234567,hjsv:6};})(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');</script>
+<script>!function(f,b,e,v,n,t,s){}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','123456789012345');fbq('track','PageView');</script>
+</head><body><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-ABC123"></iframe></noscript>
+<script src="https://www.clarity.ms/tag/abcdef1234"></script><script src="/assets/app.js"></script><script src="https://static.ads-twitter.com/uwt.js"></script></body></html>\`;
+    const r = await S.scan(FIX, 'https://shop.example/', {}); const list = C.checks(r, true), get = (id) => list.find(c => c.id === id);
+    A(get('present').status === 'pass' && get('v2').status === 'fail' && get('all7').status === 'fail' && get('order').status === 'pass' && get('cmp').status === 'pass' && get('wait').status === 'pass' && get('region').status === 'pass', 'graded checks: ' + list.map(c => c.id + ':' + c.status).join(' '));
+    A(get('denied').status === 'warn' && /granted/.test(get('denied').detail), 'granted regional default → warn: ' + get('denied').detail);
+    const s = C.score(list); A(s > 30 && s < 80, 'score mid-range: ' + s);
+    const snip = C.snippet(r); A(/ad_user_data: 'denied'/.test(snip) && /wait_for_update: 500/.test(snip) && /ads_data_redaction/.test(snip), 'snippet fills gaps');
+    const bad = FIX.replace(/<script>window.dataLayer[\\s\\S]*?<\\/script>\\n/, '') .replace('</head>', "<script>gtag('consent','default',{ad_storage:'denied',analytics_storage:'denied',ad_user_data:'denied',ad_personalization:'denied'});</script></head>");
+    const r2 = await S.scan(bad, 'https://shop.example/', {}); const l2 = C.checks(r2, true); A(l2.find(c => c.id === 'order').status === 'fail' && l2.find(c => c.id === 'v2').status === 'pass' && l2.find(c => c.id === 'all7').status === 'warn', 'loader-before-default → order fail; v2 pass: ' + l2.map(c => c.id + ':' + c.status).join(' '));
+    const none = '<html><head><script async src="https://www.googletagmanager.com/gtag/js?id=G-ABCDEF1234"></script></head><body></body></html>'; const l3 = C.checks(await S.scan(none, 'https://x.example/', {}), true);
+    A(l3.find(c => c.id === 'present').status === 'fail' && l3.find(c => c.id === 'cmp').status === 'fail' && l3.find(c => c.id === 'google').status === 'fail' && C.score(l3) < 25, 'bare GA4 fails hard: ' + C.score(l3));
+    set('html-input', FIX); set('opt-gtm', false); $('btn-run').click(); A(await waitFor(() => T.S.out && /\\/100/.test($('output-badge').textContent), 15000), 'renders: ' + $('output-badge').textContent);
+    A($('cmc-table').querySelectorAll('tbody tr').length === list.length && $('cmc-table').querySelector('tr.is-fail') && /ad_storage/.test($('cmc-defaults').textContent) && /gtag\\('consent', 'default'/.test($('cmc-snippet').textContent), 'table, defaults, snippet rendered');
+    A(/Score: \\*\\*\\d+\\/100\\*\\*/.test(T.S.out.text) && /Fix:/.test(T.S.out.text), 'markdown report');
+    const sn = await T.T.download('snippet'); A(/<script>/.test(sn.text) && sn.ext === 'html', 'snippet download');`],
   ['labs/ambient-focus-room/#scene=ocean&focus=50&rain=0.5', `
     for (let i = 0; i < 80 && !window.__afr; i++) await tick(100);
     const R = window.__afr; localStorage.removeItem('toolity_focus_room');

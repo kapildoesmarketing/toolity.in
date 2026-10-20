@@ -1,0 +1,15 @@
+/* Tag Detector — grouped tables, placement chips. */
+.td-opts { display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; }
+.td-cat { margin: 1rem 0 0.4rem; font-size: 0.86rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-secondary); }
+.td-cat .web-muted { font-weight: 400; text-transform: none; letter-spacing: 0; }
+.td-table th { width: 34%; font-weight: 600; color: var(--text-primary); }
+.td-table td { font-family: var(--font-family); }
+.td-table code { font-family: var(--font-mono); font-size: 0.78rem; background: var(--surface); border: 1px solid var(--border); border-radius: 4px; padding: 0.05rem 0.35rem; margin-right: 0.25rem; }
+.td-where { font-size: 0.8rem; color: var(--text-secondary); }
+.td-where.is-gtm { color: #15803d; font-weight: 600; }
+[data-theme="dark"] .td-where.is-gtm { color: #4ade80; }
+.td-more { margin-top: 0.9rem; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.5rem 0.85rem; }
+.td-more summary { cursor: pointer; font-size: 0.86rem; font-weight: 600; color: var(--text-secondary); min-height: 32px; display: flex; align-items: center; }
+.td-more > :not(summary) { margin-top: 0.6rem; }
+#td-issues:empty, #td-stats:empty { display: none; }
+#td-issues { margin: 0.75rem 0; }
